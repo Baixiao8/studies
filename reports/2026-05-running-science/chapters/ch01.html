@@ -15,100 +15,119 @@
     <p>那个清晨记录下来的曲线,在三十年后仍是所有跑步生物力学教科书的开头一页。它显示:走路时,身体重心的势能与动能像理想钟摆一样反向交换;而跑步时,两者同步起伏——身体在中支撑期不是被举高,而是被压低,像一只压缩中的弹簧。<em>同样的两条腿,在不同速度下变成了不同的物理对象</em>。这一章讲的就是这个相变里所有的细节。</p>
   </div>
 
-  <!-- 章首导览图:一眼看懂"步态周期"是什么 -->
+  <!-- 章首一图速览:横向时间条版本 -->
   <div class="svg-frame">
-    <svg viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+    <svg viewBox="0 0 1080 300" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
       <!-- 标题 -->
-      <text x="540" y="28" text-anchor="middle" fill="#d4a548" font-size="12" letter-spacing="0.22em">本章一图速览 · 步态周期</text>
+      <text x="540" y="28" text-anchor="middle" fill="#d4a548" font-size="12" letter-spacing="0.2em">一个步态周期 = 8 件事 · 全部发生在 0.7 秒里</text>
 
-      <!-- 主时间环 -->
-      <circle cx="540" cy="195" r="120" fill="none" stroke="#3d3d36" stroke-width="1"/>
+      <!-- ─── 主时间条 ─── -->
+      <!-- 支撑相色块 (0-40%) -->
+      <rect x="60" y="80" width="392" height="48" fill="#b54848" fill-opacity="0.22" stroke="#b54848" stroke-width="1.2"/>
+      <text x="256" y="71" text-anchor="middle" fill="#d57979" font-size="11.5" font-weight="700" letter-spacing="0.16em">支撑相 STANCE · 40%</text>
+      <text x="256" y="115" text-anchor="middle" fill="#a39e8d" font-size="10">脚在地 · 承担冲击 + 推进</text>
 
-      <!-- 支撑相弧(0-40%) - 红色填充 -->
-      <path d="M 540,75 A 120,120 0 0,1 654.3,236.5 L 540,195 Z" fill="#b54848" fill-opacity="0.16" stroke="#b54848" stroke-width="1.5"/>
+      <!-- 摆动相色块 (40-100%) -->
+      <rect x="452" y="80" width="588" height="48" fill="#c47f17" fill-opacity="0.18" stroke="#c47f17" stroke-width="1.2"/>
+      <text x="746" y="71" text-anchor="middle" fill="#e0a25a" font-size="11.5" font-weight="700" letter-spacing="0.16em">摆动相 SWING · 60%</text>
+      <text x="746" y="115" text-anchor="middle" fill="#a39e8d" font-size="10">脚在空 · 前抛 + 回收</text>
 
-      <!-- 摆动相弧(40-100%) - 橙色填充 -->
-      <path d="M 654.3,236.5 A 120,120 0 1,1 540,75 L 540,195 Z" fill="#c47f17" fill-opacity="0.12" stroke="#c47f17" stroke-width="1.5"/>
+      <!-- 腾空相高亮(40-52% 和 88-100%) -->
+      <rect x="452" y="80" width="80" height="48" fill="#d4a548" fill-opacity="0.18"/>
+      <rect x="960" y="80" width="80" height="48" fill="#d4a548" fill-opacity="0.18"/>
+      <text x="492" y="106" text-anchor="middle" fill="#d4a548" font-size="10" font-weight="600">两脚离地</text>
+      <text x="1000" y="106" text-anchor="middle" fill="#d4a548" font-size="10" font-weight="600">两脚离地</text>
 
-      <!-- 中心标签 -->
-      <text x="540" y="186" text-anchor="middle" fill="#e8e4d8" font-size="13" font-weight="600">一个步态周期</text>
-      <text x="540" y="207" text-anchor="middle" fill="#d4a548" font-size="22" font-weight="700">≈ 0.7 秒</text>
-      <text x="540" y="225" text-anchor="middle" fill="#a39e8d" font-size="10">180 spm 步频时</text>
+      <!-- 0% 到 100% 刻度线 -->
+      <line x1="60" y1="138" x2="1040" y2="138" stroke="#3d3d36" stroke-width="1"/>
+      <g font-size="9" fill="#6a665a" text-anchor="middle">
+        <text x="60" y="152">0%</text>
+        <text x="256" y="152">20</text>
+        <text x="452" y="152">40</text>
+        <text x="540" y="152">50</text>
+        <text x="746" y="152">70</text>
+        <text x="942" y="152">90</text>
+        <text x="1040" y="152">100%</text>
+      </g>
 
-      <!-- 7 个事件标记点(沿圆周) -->
-      <!-- IC 0% (顶部) -->
-      <circle cx="540" cy="75" r="6" fill="#d4a548" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="540" y="58" text-anchor="middle" fill="#e8e4d8" font-size="10" font-weight="600">① 触地</text>
-      <text x="540" y="46" text-anchor="middle" fill="#a39e8d" font-size="9">0%</text>
+      <!-- ─── 8 个事件标记(从左到右按时间顺序) ─── -->
+      <!-- ① 触地 0% -->
+      <line x1="60" y1="128" x2="60" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="60" cy="180" r="7" fill="#d57979" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="60" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">1</text>
+      <text x="60" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">触地</text>
+      <text x="60" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">0%</text>
+      <text x="60" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">脚刚落地</text>
 
-      <!-- LR 5% -->
-      <circle cx="577.6" cy="79.7" r="5" fill="#b54848" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="603" y="73" fill="#d57979" font-size="10" font-weight="600">② 负重</text>
-      <text x="603" y="86" fill="#a39e8d" font-size="9">5%</text>
+      <!-- ② 负重 5% -->
+      <line x1="109" y1="128" x2="109" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="109" cy="180" r="7" fill="#d57979" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="109" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">2</text>
+      <text x="109" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">负重</text>
+      <text x="109" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">5%</text>
+      <text x="109" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">膝弯吸冲击</text>
 
-      <!-- MS 20% -->
-      <circle cx="634.3" cy="135.7" r="5" fill="#b54848" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="664" y="135" fill="#d57979" font-size="10" font-weight="600">③ 中支撑</text>
-      <text x="664" y="148" fill="#a39e8d" font-size="9">20%</text>
+      <!-- ③ 中支撑 20% -->
+      <line x1="256" y1="128" x2="256" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="256" cy="180" r="7" fill="#d57979" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="256" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">3</text>
+      <text x="256" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">中支撑</text>
+      <text x="256" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">20%</text>
+      <text x="256" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">弹簧压到底</text>
 
-      <!-- TS 34% -->
-      <circle cx="654.3" cy="207" r="5" fill="#b54848" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="678" y="208" fill="#d57979" font-size="10" font-weight="600">④ 终末支撑</text>
-      <text x="678" y="221" fill="#a39e8d" font-size="9">34%</text>
+      <!-- ④ 终末支撑 34% -->
+      <line x1="393" y1="128" x2="393" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="393" cy="180" r="7" fill="#d57979" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="393" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">4</text>
+      <text x="393" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">终末支撑</text>
+      <text x="393" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">34%</text>
+      <text x="393" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">弹簧回弹中</text>
 
-      <!-- PS 40% (推离) -->
-      <circle cx="654.3" cy="236.5" r="7" fill="#d4a548" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="678" y="252" fill="#e0a25a" font-size="10" font-weight="600">⑤ 推离</text>
-      <text x="678" y="265" fill="#a39e8d" font-size="9">40%</text>
+      <!-- ⑤ 推离 40% -->
+      <line x1="452" y1="128" x2="452" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="452" cy="180" r="8" fill="#d4a548" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="452" y="184" text-anchor="middle" fill="#0e0e0c" font-size="8" font-weight="700">5</text>
+      <text x="452" y="205" text-anchor="middle" fill="#d4a548" font-size="11" font-weight="700">推离</text>
+      <text x="452" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">40%</text>
+      <text x="452" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">弹射出去</text>
 
-      <!-- ISw 50% -->
-      <circle cx="540" cy="315" r="5" fill="#c47f17" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="540" y="338" text-anchor="middle" fill="#e0a25a" font-size="10" font-weight="600">⑥ 早摆动</text>
+      <!-- ⑥ 早摆动 50% -->
+      <line x1="540" y1="128" x2="540" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="540" cy="180" r="7" fill="#c47f17" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="540" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">6</text>
+      <text x="540" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">早摆动</text>
+      <text x="540" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">50%</text>
+      <text x="540" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">收腿收得快</text>
 
-      <!-- MSw 70% -->
-      <circle cx="425.7" cy="236.5" r="5" fill="#c47f17" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="402" y="251" text-anchor="end" fill="#e0a25a" font-size="10" font-weight="600">⑦ 中摆动</text>
-      <text x="402" y="264" text-anchor="end" fill="#a39e8d" font-size="9">70%</text>
+      <!-- ⑦ 中摆动 70% -->
+      <line x1="746" y1="128" x2="746" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="746" cy="180" r="7" fill="#c47f17" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="746" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">7</text>
+      <text x="746" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">中摆动</text>
+      <text x="746" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">70%</text>
+      <text x="746" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">大腿前甩到顶</text>
 
-      <!-- TSw 90% -->
-      <circle cx="445.7" cy="115.7" r="5" fill="#c47f17" stroke="#0e0e0c" stroke-width="2"/>
-      <text x="416" y="115" text-anchor="end" fill="#e0a25a" font-size="10" font-weight="600">⑧ 末摆动</text>
-      <text x="416" y="128" text-anchor="end" fill="#a39e8d" font-size="9">90%</text>
+      <!-- ⑧ 末摆动 90% -->
+      <line x1="942" y1="128" x2="942" y2="180" stroke="#3d3d36" stroke-width="0.6"/>
+      <circle cx="942" cy="180" r="7" fill="#c47f17" stroke="#0e0e0c" stroke-width="2"/>
+      <text x="942" y="184" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">8</text>
+      <text x="942" y="205" text-anchor="middle" fill="#e8e4d8" font-size="11" font-weight="700">末摆动</text>
+      <text x="942" y="220" text-anchor="middle" fill="#a39e8d" font-size="9">90%</text>
+      <text x="942" y="240" text-anchor="middle" fill="#a39e8d" font-size="9">腘绳肌刹车</text>
 
-      <!-- 左侧图例 · 支撑相 -->
-      <rect x="70" y="80" width="14" height="14" fill="#b54848" fill-opacity="0.5" stroke="#b54848"/>
-      <text x="92" y="91" fill="#e8e4d8" font-size="11" font-weight="600">支撑相 STANCE</text>
-      <text x="92" y="106" fill="#a39e8d" font-size="9.5">脚在地 · 占 40%</text>
-      <text x="92" y="118" fill="#a39e8d" font-size="9.5">承担冲击 + 推进</text>
+      <!-- 关键瞬间标注(下方) -->
+      <text x="60" y="275" fill="#d57979" font-size="9.5" font-weight="600">⚡ ①-②:50ms 内冲击峰 = 2-3 倍体重 · 大多数伤病的起点</text>
+      <text x="60" y="290" fill="#e0a25a" font-size="9.5" font-weight="600">⚡ ⑤:跟腱弹性回弹 · 推进力 35%+ 来自这一瞬间</text>
+      <text x="700" y="275" fill="#d57979" font-size="9.5" font-weight="600">⚡ ⑧:腘绳肌离心刹车 · 冲刺时拉伤峰值瞬间</text>
 
-      <!-- 左侧图例 · 摆动相 -->
-      <rect x="70" y="155" width="14" height="14" fill="#c47f17" fill-opacity="0.4" stroke="#c47f17"/>
-      <text x="92" y="166" fill="#e8e4d8" font-size="11" font-weight="600">摆动相 SWING</text>
-      <text x="92" y="181" fill="#a39e8d" font-size="9.5">脚在空 · 占 60%</text>
-      <text x="92" y="193" fill="#a39e8d" font-size="9.5">前抛 + 回收</text>
-
-      <!-- 左侧图例 · 腾空 -->
-      <circle cx="77" cy="230" r="6" fill="#d4a548"/>
-      <text x="92" y="234" fill="#e8e4d8" font-size="11" font-weight="600">腾空相 FLIGHT</text>
-      <text x="92" y="249" fill="#a39e8d" font-size="9.5">两脚都离地</text>
-      <text x="92" y="261" fill="#a39e8d" font-size="9.5">出现 2 次/周期</text>
-
-      <!-- 右侧关键洞察 -->
-      <line x1="850" y1="80" x2="850" y2="290" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="3,3"/>
-      <text x="870" y="95" fill="#d4a548" font-size="11" font-weight="600" letter-spacing="0.1em">为什么重要?</text>
-      <text x="870" y="120" fill="#e8e4d8" font-size="10.5" font-weight="600">⚡ 着地后 50ms</text>
-      <text x="870" y="134" fill="#a39e8d" font-size="9.5">冲击峰 = 2-3 倍体重</text>
-      <text x="870" y="146" fill="#a39e8d" font-size="9.5">大多数伤病的力学起点</text>
-
-      <text x="870" y="175" fill="#e8e4d8" font-size="10.5" font-weight="600">⚡ 推离瞬间</text>
-      <text x="870" y="189" fill="#a39e8d" font-size="9.5">跟腱回弹 · 弹性能释放</text>
-      <text x="870" y="201" fill="#a39e8d" font-size="9.5">推进力 35%+ 来自这里</text>
-
-      <text x="870" y="230" fill="#e8e4d8" font-size="10.5" font-weight="600">⚡ 末摆动</text>
-      <text x="870" y="244" fill="#a39e8d" font-size="9.5">腘绳肌离心减速</text>
-      <text x="870" y="256" fill="#a39e8d" font-size="9.5">冲刺时拉伤峰值瞬间</text>
+      <!-- 时间标注(右上) -->
+      <g transform="translate(990, 38)">
+        <rect x="-100" y="-25" width="100" height="28" fill="#1e1e1a" stroke="#d4a548" stroke-width="1"/>
+        <text x="-50" y="-9" text-anchor="middle" fill="#d4a548" font-size="13" font-weight="700">≈ 0.7 秒</text>
+        <text x="-50" y="2" text-anchor="middle" fill="#a39e8d" font-size="8">180 spm 步频</text>
+      </g>
     </svg>
-    <div class="svg-caption">FIG 0 · 章首一图速览 · 0.7 秒里发生的 8 件事</div>
+    <div class="svg-caption">FIG 0 · 章首一图速览 · 从左到右就是 0.7 秒的时间流</div>
   </div>
 
   <h3><span class="pre">1.1</span>从走路到跑步——一次步态的相变</h3>
