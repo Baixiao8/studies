@@ -77,57 +77,20 @@
     letter-spacing: 0.06em;
   }
 
-  /* ─── Masthead 报头 ─── */
-  .masthead {
+  /* ─── 极简报头(无 STUDIES 大字 logo) ─── */
+  .masthead-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0 10px;
+    margin-bottom: 32px;
     border-top: 1px solid var(--line);
     border-bottom: 3px double var(--line);
-    padding: 16px 0 14px;
-    margin-bottom: 28px;
-  }
-  .masthead-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .masthead-top .left,
-  .masthead-top .right {
     font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--ink-faint);
-    text-transform: uppercase;
-  }
-  .masthead-title {
-    font-family: "Inter Tight", sans-serif;
-    font-weight: 900;
-    font-size: 88px;
-    text-align: center;
-    color: var(--ink);
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-    margin: 6px 0 4px;
-  }
-  .masthead-tag {
-    text-align: center;
-    font-style: italic;
-    font-size: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     color: var(--ink-mid);
-    letter-spacing: -0.005em;
-    margin-bottom: 12px;
-  }
-  .masthead-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    border-top: 1px solid var(--line-soft);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    color: var(--ink-faint);
     text-transform: uppercase;
   }
 
@@ -628,7 +591,6 @@
   /* ─── Responsive ─── */
   @media (max-width: 900px) {
     .page { padding: 20px 16px 40px; }
-    .masthead-title { font-size: 56px; }
     .lead-title { font-size: 48px; }
     .lead-subtitle { font-size: 19px; }
     .lead-lede { font-size: 15px; }
@@ -657,17 +619,17 @@
     .cta-bar a:last-child { border-bottom: none; }
   }
   @media (max-width: 520px) {
-    .masthead-title { font-size: 42px; }
     .lead-title { font-size: 36px; }
     .lead-subtitle { font-size: 16px; }
     .chapter-grid { grid-template-columns: 1fr; }
     .chapter-item { border-right: none !important; }
     .archive { grid-template-columns: 1fr; }
     .archive-item { border-right: none !important; }
-    .masthead-top, .masthead-bottom {
+    .masthead-mini {
       flex-direction: column;
       gap: 4px;
       text-align: center;
+      font-size: 10px;
     }
   }
 </style>
@@ -676,18 +638,10 @@
 
 <main class="page">
 
-  <!-- ═══════════ MASTHEAD 报头 ═══════════ -->
-  <header class="masthead">
-    <div class="masthead-top">
-      <div class="left">第 01 期</div>
-      <div class="right">2026 年 5 月 22 日 · 星期五</div>
-    </div>
-    <h1 class="masthead-title">STUDIES</h1>
-    <p class="masthead-tag">—— 值得反复研究的对象 ——</p>
-    <div class="masthead-bottom">
-      <div>白笑 · 独立出版</div>
-      <div>baixiao8.github.io / studies</div>
-    </div>
+  <!-- ═══════════ 极简报头(去掉 STUDIES 大字装饰) ═══════════ -->
+  <header class="masthead-mini">
+    <div>白笑研究报告库 · 第 01 期</div>
+    <div>2026 年 5 月 22 日</div>
   </header>
 
   <!-- ═══════════ LEAD STORY 头条 ═══════════ -->
