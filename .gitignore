@@ -37,9 +37,9 @@ config.local.*
 # 旧版本归档 · 强烈建议排除(含个人训练数据 + COROS MCP 工具 + 旧版报告)
 _legacy/
 
-# Build 中间产物 / 单文件 embed 版(体积大,GitHub Pages 用 index.html 即可)
-# 单文件版用于本地预览或微信分享,不推线上
+# 旧版本:之前用过的 index.embed.html(现在 build 默认就是 inline,index.html 即自包含版)
 reports/*/index.embed.html
+reports/*/index.v1.html
 
 # Local 本地 HTTP 服务器日志
 /tmp/http_server.log

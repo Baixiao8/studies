@@ -193,10 +193,16 @@ def inject_chapter_enhancements(html: str, recap_data: dict) -> str:
 
 # ─── 主流程 ────────────────────────────────────────────────
 
-def build_report(report_dir: Path, embed: bool = False):
+def build_report(report_dir: Path, external: bool = False):
+    """
+    默认行为: inline 全部 CSS/JS/glossary 进 index.html (推荐,无外部依赖)
+    external=True: 用 <link>/<script> 引用 _shared/ 下的文件 (调试用)
+    """
     parts_dir = report_dir / 'parts'
     chapters_dir = report_dir / 'chapters'
     shared_dir = report_dir.parent.parent / '_shared'
+    # 默认 inline,只在 --external 时不 inline
+    embed = not external
 
     # 加载 recap 数据(如果存在)
     recap_file = parts_dir / '_recaps.json'
@@ -235,32 +241,32 @@ def build_report(report_dir: Path, embed: bool = False):
         footer,
     ])
 
-    # ─── EMBED 模式 · 把所有外部资源内联进 HTML ───
+    # ─── INLINE 模式 (默认) · 把所有外部资源内联进 HTML ───
     if embed:
-        print('\n[build] EMBED 模式 · 把 CSS/JS/glossary 内联进 HTML')
-        # 1) 内联 style.css
+        print('\n[build] INLINE 模式 · 把 CSS/JS/glossary 内联进单文件 HTML (默认)')
+        # 1) 内联 style.css · 用 lambda 避免 CSS 里的 \22 被当 backreference
         css = (shared_dir / 'style.css').read_text(encoding='utf-8')
-        final = final.replace(
-            '<link rel="stylesheet" href="../../_shared/style.css">',
-            f'<style>\n{css}\n</style>'
+        css_block = f'<style>\n{css}\n</style>'
+        final = re.sub(
+            r'<link rel="stylesheet" href="\.\./\.\./_shared/style\.css[^"]*">',
+            lambda m: css_block,
+            final
         )
-        # 2) 内联 progress.js / mini-toc.js / tooltip.js
+        # 2) 内联 progress.js / mini-toc.js / tooltip.js · 同样用 lambda
         for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js']:
             js = (shared_dir / js_name).read_text(encoding='utf-8')
-            final = final.replace(
-                f'<script src="../../_shared/{js_name}" defer></script>',
-                f'<script>\n{js}\n</script>'
+            js_block = f'<script>\n{js}\n</script>'
+            final = re.sub(
+                r'<script src="\.\./\.\./_shared/' + re.escape(js_name) + r'[^"]*" defer></script>',
+                lambda m, jb=js_block: jb,
+                final
             )
-        # 3) 内联 glossary.json(tooltip.js 用 fetch 加载,改成 window.GLOSSARY)
+        # 3) 内联 glossary.json (tooltip.js fetch → window.__EMBEDDED_GLOSSARY__)
         glossary = (shared_dir / 'glossary.json').read_text(encoding='utf-8')
-        # 在 <body> 之后插入 window.GLOSSARY
         gloss_inject = f'\n<script>window.__EMBEDDED_GLOSSARY__ = {glossary};</script>\n'
         final = final.replace('<body>\n', '<body>\n' + gloss_inject)
 
-        output = report_dir / 'index.embed.html'
-    else:
-        output = report_dir / 'index.html'
-
+    output = report_dir / 'index.html'
     output.write_text(final, encoding='utf-8')
 
     print(f'\n[build] 装配完成')
@@ -272,9 +278,10 @@ def build_report(report_dir: Path, embed: bool = False):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('用法: python3 build.py <report_dir> [--embed]')
+        print('用法: python3 build.py <report_dir> [--external]')
+        print('  默认 (推荐):内联全部资源 → 单文件 index.html (~750 KB)')
+        print('  --external :用 <link>/<script> 引用 _shared/ (调试用)')
         print('例如: python3 _shared/build.py reports/2026-05-running-science')
-        print('     python3 _shared/build.py reports/2026-05-running-science --embed')
         sys.exit(1)
 
     report_dir = Path(sys.argv[1]).resolve()
@@ -282,5 +289,5 @@ if __name__ == '__main__':
         print(f'错误: {report_dir} 不是目录')
         sys.exit(1)
 
-    embed = '--embed' in sys.argv
-    build_report(report_dir, embed=embed)
+    external = '--external' in sys.argv
+    build_report(report_dir, external=external)
