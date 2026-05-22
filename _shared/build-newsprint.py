@@ -63,6 +63,16 @@ def remap_svg_colors(html: str) -> str:
     return html
 
 
+def fix_asset_paths(html: str) -> str:
+    """从 chapters/ 装配到根目录预览页,assets/ 路径要加前缀"""
+    # ch01.html 用 src="assets/..."(相对于装配后的 reports/.../index.html)
+    # preview-newsprint-ch1.html 在仓库根目录,需要完整路径
+    return html.replace(
+        'src="assets/',
+        'src="reports/2026-05-running-science/assets/'
+    )
+
+
 def extract_section_content(html: str) -> tuple:
     """从 <section>...</section> 里提取内容 (返回 inner HTML)"""
     m = re.search(r'<section[^>]*>(.*?)</section>', html, re.DOTALL)
@@ -81,6 +91,9 @@ def render_newsprint_page(chapter_html: str, chapter_num: str, chapter_title: st
 
     # 2. SVG 颜色反色
     inner = remap_svg_colors(inner)
+
+    # 2.5. 修正图片路径(根目录预览页需要完整路径)
+    inner = fix_asset_paths(inner)
 
     # 3. 去掉原 section-tag/section-h/section-sub (我们用 Newsprint 风格重新做标题区)
     # 实际上保留原 .section-tag/.section-h/.section-sub,但 CSS 改成 Newsprint 浅色样式

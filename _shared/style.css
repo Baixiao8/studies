@@ -820,6 +820,26 @@ svg text { font-family: var(--ff-mono); }
   margin-left: 4px; opacity: 0.85;
 }
 
+/* ─── Chapter Hero · AI 生成的章节封面插画 ────────────────── */
+.chapter-hero {
+  margin: 0 0 36px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+.chapter-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: cover;
+}
+@media (max-width: 600px) {
+  .chapter-hero { margin: 0 0 24px; }
+  .chapter-hero img { max-height: 280px; }
+}
+
 /* ─── Term (术语,带虚线下划线,触发 tooltip) ──────────────── */
 .term {
   color: var(--ink);
