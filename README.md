@@ -1,15 +1,18 @@
-# 运动健康 · 深度研究报告库
+# Studies · 深度研究报告库
 
-> 一个持续扩张的运动科学研究报告项目。每份报告都是<strong>知识性视角</strong>下对某个具体主题的深度解构——不是手册,不是清单,是研究对象式的全景调查。
+> 一个持续扩张的研究报告项目,从运动科学起步。每份报告都是 **知识性视角** 下对某个具体主题的深度解构——不是手册,不是清单,是研究对象式的全景调查。
+>
+> 🌐 **公开访问:** https://baixiao8.github.io/studies/
+> 📦 **仓库:** https://github.com/Baixiao8/studies
 
 ---
 
 ## 报告列表
 
-| 报告 | 主题 | 状态 | 字数 | 阅读时间 | 链接 |
+| # | 主题 | 字数 | 阅读时间 | 公开链接 | 源文件 |
 |---|---|---|---|---|---|
-| **2026-05** | 运动学之内 · 跑步的科学解构 | v2 已发布 | ~150K | 4.3h | [reports/2026-05-running-science/index.html](reports/2026-05-running-science/index.html) |
-| 2026-06 | (待定) | 规划中 | — | — | — |
+| **2026-05** | 运动学之内 · 跑步的科学解构 | ~150K | 4.3h | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-running-science/) | [reports/2026-05-running-science/](reports/2026-05-running-science/index.html) |
+| 2026-06 | (规划中) | — | — | — | — |
 
 ---
 
@@ -74,13 +77,17 @@ open reports/2026-XX-<slug>/index.html
 
 ---
 
-## 部署到线上
+## 部署状态
 
-详见 [DEPLOY.md](DEPLOY.md)。推荐方案:
+✅ **已部署到 GitHub Pages** · 每次 `git push` 后 1-2 分钟自动重新发布
 
-1. **GitHub 仓库 + GitHub Pages**:免费、自动、永久链接
-2. 部署后每份报告都拥有 `https://<user>.github.io/<repo>/reports/<slug>/index.html` 的固定地址
-3. **飞书云文档维护索引页**:把这个 README 的报告列表同步到飞书,作为日常入口
+- 仓库:https://github.com/Baixiao8/studies
+- 站点根:https://baixiao8.github.io/studies/
+- 跑步报告:https://baixiao8.github.io/studies/reports/2026-05-running-science/
+
+每份新报告 push 后,公开链接是 `https://baixiao8.github.io/studies/reports/<slug>/`。
+
+完整部署指南见 [DEPLOY.md](DEPLOY.md)。
 
 ---
 
