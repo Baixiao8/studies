@@ -148,13 +148,30 @@ def upgrade_final_note_to_recap(html: str, recap_data: dict, chapter_id: str) ->
     return html
 
 
+def wrap_tables_for_mobile(html: str) -> str:
+    """给所有 <table> 自动包 <div class="table-wrap"> 让小屏可横向滚动"""
+    # 已经在 .table-wrap 里的 table 跳过(避免重复包)
+    def wrap(m):
+        full = m.group(0)
+        # 检查 table 前 80 字符是否已经有 table-wrap
+        start = m.start()
+        prefix = html[max(0, start-80):start]
+        if 'class="table-wrap"' in prefix:
+            return full
+        return f'<div class="table-wrap">{full}</div>'
+    return re.sub(r'<table[\s\S]*?</table>', wrap, html)
+
+
 def inject_chapter_enhancements(html: str, recap_data: dict) -> str:
-    """处理单个章节 HTML:加 ID、reading-meta、chapter-toc、5 分钟回顾"""
+    """处理单个章节 HTML:加 ID、reading-meta、chapter-toc、5 分钟回顾、table wrap"""
     # 找到 section id
     sec_match = re.search(r'<section[^>]*\bid="(s\d+)"', html)
     if not sec_match:
         return html
     section_id = sec_match.group(1)
+
+    # 0) 给所有 table 包 .table-wrap (移动端横向滚动)
+    html = wrap_tables_for_mobile(html)
 
     # 1) 给 h3 加 id
     html = ensure_h3_ids(html, section_id)

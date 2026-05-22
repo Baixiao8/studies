@@ -1089,3 +1089,227 @@ footer .colophon h4 {
   .compare-2 .divider { width: 100%; height: 1px; }
   .chapter-toc ol { grid-template-columns: 1fr; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+ * MOBILE OPTIMIZATION · 移动端深度优化
+ * 适用于手机阅读 (优先级 > 桌面)
+ * ═══════════════════════════════════════════════════════════ */
+
+/* ─── 表格容器 · 横向滚动 (build.py 自动包 .table-wrap) ── */
+.table-wrap {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 24px 0;
+  border-radius: 4px;
+  /* 滚动提示阴影:右侧渐变暗示有更多内容 */
+  background:
+    linear-gradient(to right, var(--bg-deep) 0%, transparent 20px),
+    linear-gradient(to right, transparent calc(100% - 20px), var(--bg-deep) 100%);
+  background-attachment: local, local;
+  background-repeat: no-repeat;
+}
+.table-wrap table { margin: 0; min-width: 540px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+
+/* ─── SVG 容器 · 小屏横向滚动 ────────────────────────── */
+@media (max-width: 768px) {
+  .svg-frame {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 18px 16px;
+  }
+  .svg-frame svg { min-width: 600px; }
+  .svg-frame::-webkit-scrollbar { height: 4px; }
+  .svg-frame::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+  .svg-caption { margin-top: 16px; padding-bottom: 4px; font-size: 9.5px; }
+}
+
+/* ─── 中等小屏 600px (主流手机) ──────────────────────── */
+@media (max-width: 600px) {
+  .container { padding: 0 16px; }
+
+  /* Hero · 缩字号,去掉部分动画装饰 */
+  .hero { padding: 56px 0 44px; }
+  .hero::before { width: 350px; height: 350px; }
+  .hero::after { width: 400px; height: 400px; }
+  .hero-badge { font-size: 10px; padding: 5px 10px; margin-bottom: 22px; }
+  .hero h1 { font-size: 44px; line-height: 1.0; }
+  .hero h1 .small { font-size: 21px; margin-top: 10px; }
+  .hero .lede { font-size: 16.5px; margin: 24px 0 28px; line-height: 1.65; }
+  .hero-meta { grid-template-columns: 1fr 1fr; gap: 14px; padding: 20px 0; margin: 24px 0; }
+  .hero-meta .item .label { font-size: 9.5px; letter-spacing: 0.18em; margin-bottom: 6px; }
+  .hero-meta .item .value { font-size: 26px; }
+  .hero-meta .item .sub { font-size: 11.5px; }
+
+  /* Hero TOC */
+  .hero-toc-section { margin-top: 36px; }
+  .hero-toc-label { font-size: 9.5px; margin-bottom: 14px; }
+  .hero-toc-part { margin-bottom: 22px; }
+  .hero-toc-part .part-title { font-size: 18px; margin-bottom: 10px; }
+  .hero-toc .card { padding: 14px 16px; min-height: 96px; }
+  .hero-toc .card .num { font-size: 10px; }
+  .hero-toc .card .title { font-size: 15.5px; }
+  .hero-toc .card .en { font-size: 11px; }
+  .hero-toc .card .desc { font-size: 12.5px; line-height: 1.5; }
+
+  /* Section */
+  section { padding: 52px 0; }
+  .section-tag { font-size: 10px; letter-spacing: 0.16em; margin-bottom: 10px; }
+  .section-tag .num { padding: 2px 7px; margin-right: 10px; }
+  .section-h { font-size: 28px; line-height: 1.15; letter-spacing: -0.018em; }
+  .section-h .en { font-size: 15.5px; }
+  .section-sub { font-size: 14.5px; line-height: 1.65; margin-bottom: 24px; }
+
+  /* Body typography */
+  p { font-size: 15px; line-height: 1.72; margin: 8px 0 14px; }
+  p.lead { font-size: 16px; line-height: 1.65; margin-bottom: 20px; }
+  ul li, ol li { font-size: 14.5px; line-height: 1.7; }
+  h3 { font-size: 22px; margin: 40px 0 12px; letter-spacing: -0.01em; }
+  h3 .pre { font-size: 10.5px; margin-right: 10px; }
+  h4 { font-size: 16px; margin: 22px 0 8px; }
+
+  /* TLDR · 衬线大字适当缩 */
+  .tldr { padding: 20px 22px; margin: 24px 0 32px; }
+  .tldr .label { font-size: 9.5px; margin-bottom: 10px; }
+  .tldr p { font-size: 19px; line-height: 1.5; }
+
+  /* Callout */
+  .callout { padding: 18px 20px; margin: 22px 0; }
+  .callout .label { font-size: 9.5px; margin-bottom: 10px; }
+  .callout p { font-size: 14.5px; line-height: 1.68; }
+  .callout.story p { font-size: 15px; line-height: 1.6; }
+
+  /* Chapter recap */
+  .chapter-recap { padding: 22px 22px; margin: 40px 0 16px; }
+  .chapter-recap .label { font-size: 9.5px; margin-bottom: 12px; }
+  .chapter-recap h4 { font-size: 19px; margin: 0 0 12px; }
+  .chapter-recap ol { padding-left: 22px; }
+  .chapter-recap ol li { font-size: 14px; padding: 7px 0 7px 12px; line-height: 1.62; }
+  .chapter-recap ol li::before { left: -20px; font-size: 10px; }
+
+  /* Number strip */
+  .number-strip { grid-template-columns: 1fr 1fr; }
+  .number-strip .item { padding: 18px 18px; }
+  .number-strip .num { font-size: 28px; }
+  .number-strip .label { font-size: 9.5px; letter-spacing: 0.16em; }
+  .number-strip .sub { font-size: 12px; }
+
+  /* Reading meta */
+  .reading-meta {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    font-size: 9.5px;
+    padding: 8px 0;
+    margin: 16px 0 22px;
+  }
+
+  /* Cards */
+  .card { padding: 18px 20px; }
+  .card h4 { font-size: 15px; }
+  .card .big { font-size: 34px; }
+  .card .desc { font-size: 12.5px; }
+  .grid-2, .grid-3, .grid-4 { gap: 14px; }
+
+  /* Metric card */
+  .metric-card { padding: 14px 16px; }
+  .metric-card .m-label { font-size: 9.5px; }
+  .metric-card .m-value { font-size: 30px; }
+  .metric-card .m-desc { font-size: 12.5px; }
+
+  /* Chapter TOC */
+  .chapter-toc { padding: 16px 18px; margin-bottom: 28px; }
+  .chapter-toc .label { font-size: 9.5px; margin-bottom: 10px; }
+  .chapter-toc ol { gap: 4px; }
+  .chapter-toc li { padding: 6px 0; font-size: 13px; line-height: 1.45; }
+  .chapter-toc li a { gap: 8px; padding: 8px 4px; min-height: 32px; }
+  .chapter-toc li .num { font-size: 10.5px; min-width: 26px; }
+
+  /* Sticky nav · 加大触摸区 */
+  .nav-inner { padding: 12px 14px; gap: 2px; }
+  .nav-inner a { padding: 10px 11px; font-size: 11px; min-height: 40px; display: flex; align-items: center; }
+  .nav-inner .part-divider { font-size: 11px; padding: 10px 12px 10px 6px; }
+
+  /* Antithesis index */
+  .antithesis-list { gap: 12px; }
+  .antithesis-list .anti-item { padding: 18px 20px; }
+  .antithesis-list .anti-item .anti-chapter { font-size: 9.5px; margin-bottom: 6px; }
+  .antithesis-list .anti-item .anti-title { font-size: 17.5px; line-height: 1.25; margin-bottom: 8px; }
+  .antithesis-list .anti-item .anti-desc { font-size: 13.5px; line-height: 1.62; }
+
+  /* Footer */
+  footer { padding: 48px 0 64px; }
+  footer .lede { font-size: 19px; margin-bottom: 36px; line-height: 1.45; }
+  footer .colophon { font-size: 13px; padding-top: 32px; }
+  footer .colophon p { font-size: 13px; }
+  footer .colophon h4 { font-size: 9.5px; margin: 24px 0 10px; }
+
+  /* Tooltip · 移动端简化定位 */
+  .term-tooltip {
+    max-width: calc(100vw - 32px);
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+  .term-tooltip .tt-name { font-size: 10.5px; }
+  .term-tooltip .tt-cn { font-size: 13.5px; }
+  .term-tooltip .tt-def { font-size: 12px; }
+
+  /* Drop cap 小屏关闭 */
+  .drop-cap::first-letter {
+    font-size: 48px;
+    margin: 4px 8px 0 0;
+  }
+
+  /* Compare 2 */
+  .compare-2 .col { padding: 16px 18px; }
+  .compare-2 .col h5 { font-size: 9.5px; margin-bottom: 10px; }
+
+  /* Status list */
+  .status-list li { font-size: 14px; padding: 6px 0 6px 28px; }
+
+  /* Section background tint (减弱) */
+  .hero::before, .hero::after { opacity: 0.6; }
+}
+
+/* ─── 超小屏 400px (iPhone Mini / SE) ────────────────── */
+@media (max-width: 400px) {
+  .container { padding: 0 14px; }
+  .hero h1 { font-size: 36px; }
+  .hero h1 .small { font-size: 18px; }
+  .section-h { font-size: 24px; }
+  .tldr p { font-size: 17px; }
+  .hero-meta { grid-template-columns: 1fr; gap: 12px; }
+  .hero-meta .item { padding: 8px 0; }
+  .hero-meta .item .value { font-size: 24px; }
+  .number-strip { grid-template-columns: 1fr; }
+  .number-strip .item {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .number-strip .item:last-child { border-bottom: none; }
+  .number-strip .item:nth-child(2) { border-bottom: 1px solid var(--line); }
+  p, ul li, ol li { font-size: 14.5px; }
+  h3 { font-size: 20px; }
+  .callout { padding: 16px 18px; }
+  .callout p { font-size: 14px; }
+  .callout.story p { font-size: 14.5px; }
+  .chapter-recap { padding: 18px 20px; }
+  .chapter-recap h4 { font-size: 17.5px; }
+}
+
+/* ─── Tap target ≥ 44px (Apple HIG / WCAG) ──────────── */
+@media (max-width: 768px) {
+  /* 所有链接/按钮的触摸目标至少 44x44px */
+  a:not(.term):not(.ref) {
+    -webkit-tap-highlight-color: rgba(212, 165, 72, 0.2);
+  }
+  .nav-inner a { min-height: 40px; }
+  .hero-toc .card { min-height: 96px; }
+  .chapter-toc li a { min-height: 36px; }
+}
+
+/* ─── 移动端关闭 Hero 背景渐变(性能) ───────────────── */
+@media (max-width: 480px) {
+  .hero::before, .hero::after { display: none; }
+}
