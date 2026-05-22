@@ -305,7 +305,7 @@ h4 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(14,14,12,0.94);
+  background: rgba(240, 235, 221, 0.94);  /* Newsprint 米黄半透明 */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
@@ -723,14 +723,15 @@ svg text { font-family: var(--ff-mono); }
   border: 1px solid transparent;
   white-space: nowrap;
 }
-.chip.easy      { background: rgba(74, 144, 200, 0.18);  color: #8fb8df; }
-.chip.tempo     { background: rgba(110, 168, 110, 0.18); color: #a3cca3; }
-.chip.interval  { background: rgba(200, 80, 80, 0.18);   color: #e09b9b; }
-.chip.long      { background: rgba(90, 168, 168, 0.18);  color: #94cdcd; }
-.chip.race      { background: rgba(160, 50, 50, 0.22);   color: #e89090; }
-.chip.strength  { background: rgba(150, 150, 90, 0.18);  color: #c8c89a; }
-.chip.recovery  { background: rgba(120, 140, 145, 0.18); color: #aac0c5; }
-.chip.mp        { background: rgba(212, 165, 72, 0.18);  color: #d4a548; }
+/* Newsprint 浅色背景下,chip 文字必须用深色 */
+.chip.easy      { background: rgba(31, 58, 95, 0.10);   color: #1f3a5f; border-color: rgba(31, 58, 95, 0.3); }
+.chip.tempo     { background: rgba(74, 107, 58, 0.10);  color: #4a6b3a; border-color: rgba(74, 107, 58, 0.3); }
+.chip.interval  { background: rgba(168, 66, 59, 0.10);  color: #a8423b; border-color: rgba(168, 66, 59, 0.3); }
+.chip.long      { background: rgba(58, 107, 92, 0.10);  color: #3a6b5c; border-color: rgba(58, 107, 92, 0.3); }
+.chip.race      { background: rgba(168, 66, 59, 0.14);  color: #a8423b; border-color: rgba(168, 66, 59, 0.4); }
+.chip.strength  { background: rgba(122, 82, 48, 0.10);  color: #7a5230; border-color: rgba(122, 82, 48, 0.3); }
+.chip.recovery  { background: rgba(58, 107, 92, 0.10);  color: #3a6b5c; border-color: rgba(58, 107, 92, 0.3); }
+.chip.mp        { background: rgba(168, 66, 59, 0.12);  color: #a8423b; border-color: rgba(168, 66, 59, 0.35); }
 
 /* ─── Status List ────────────────────────────────────────── */
 .status-list { list-style: none; padding-left: 0; margin: 18px 0; }
@@ -747,7 +748,7 @@ svg text { font-family: var(--ff-mono); }
 }
 .status-list li.do::before    { content: '\2713'; color: #6ea86e; }
 .status-list li.dont::before  { content: '\2717'; color: #c85050; }
-.status-list li.warn::before  { content: '\26A0'; color: #d4a548; }
+.status-list li.warn::before  { content: '\26A0'; color: #a8423b; }
 
 /* ─── Metric Cards ───────────────────────────────────────── */
 .metric-grid {
@@ -969,7 +970,7 @@ footer .colophon h4 {
   width: 220px;
   max-height: calc(100vh - 160px);
   overflow-y: auto;
-  background: rgba(30, 30, 26, 0.92);
+  background: rgba(235, 229, 211, 0.95);  /* Newsprint 浅纸张半透明 */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--line);
@@ -1048,7 +1049,7 @@ footer .colophon h4 {
 .term-tooltip {
   position: absolute;
   z-index: 200;
-  background: #1a1a17;
+  background: #ebe5d3;  /* Newsprint 浅纸张 */
   border: 1px solid var(--line-strong);
   border-radius: 6px;
   padding: 14px 16px;
