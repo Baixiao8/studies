@@ -49,6 +49,7 @@
 
   <h3><span class="pre">10.1</span>应激-恢复-超量恢复:训练的基本物理学</h3>
   <p class="lead">所有训练适应理论的起点,是 Hans Selye 在 1950 年代提出的<em>一般适应综合征</em> (GAS, General Adaptation Syndrome)。Selye 不是跑步学者,他研究的是大鼠对各种应激源(寒冷、毒物、剥夺睡眠)的统一反应模式。他发现身体面对任何应激,都按同样的三相反应:警报期 → 抵抗期 → 衰竭期。</p>
+  <p class="plain">原理:GAS 一般适应综合征 = 身体对任何应激的统一三相反应(警报 → 抵抗 → 衰竭)。<strong>翻译:</strong>训练就是"故意把自己打碎一点点,让身体修得比原来强一点点"。打碎得不够 = 没刺激,打碎得太狠 = 进入衰竭期反伤身。<em>放在跑步场景:</em>一节真正的质量课跑完应该当晚很疲、第二天腿酸但能走路;如果是"第二天还想再跑一节同样强度"——你刺激不够;"第三天还爬不下楼"——刺激过头了。</p>
 
   <p>把这个模型挪到训练里,就形成了今天我们熟悉的"应激-恢复-超量恢复-回归基线" (stimulus-recovery-supercompensation-decline) 四相循环:</p>
 
@@ -100,6 +101,7 @@
     <div class="svg-caption">FIG 10.1 · 单次训练的"刺激-恢复-超量恢复-衰退"四相曲线(基于 Selye GAS 与 Yakovlev 经典模型)</div>
   </div>
 
+  <p class="plain">原理:supercompensation 超量恢复 = 训练后身体不只回到原水平,而是"修过头一点点"形成新的基线。窗口约 48-96 小时。<strong>翻译:</strong>就像修房子被风刮塌一面墙,工人不仅重砌还多加一层钢筋——身体也这样,既然要修就修得比原来抗造一点。<em>放在跑步场景:</em>一节阈值课周三跑,周日 LSD 状态最好(72h 窗口);如果错过窗口拖到下周三再跑,等于又从基线起步,白浪费了"加层钢筋"的机会。这就是为什么"每周固定 2 次质量课"比"想跑就跑"进步快。</p>
   <p>这条曲线告诉我们四件关键事:</p>
   <ol>
     <li><strong>训练当下表现是下降的,不是上升的</strong>——你跑完一节质量课后做体能测试,数据更差不是退步,是疲劳还在</li>
@@ -154,6 +156,7 @@
   <h4>TSS (Training Stress Score, Coggan)</h4>
   <p>2003 年 Andrew Coggan 在自行车功率训练里提出 TSS,后来 Stryd 跑步功率计把它移植到跑步:</p>
   <p class="mono">TSS = (时长 × NP² / FTP²) × 100</p>
+  <p class="plain">原理:TSS = 训练负荷的单一数字,1 小时 @ 阈值 = 100 TSS。<strong>翻译:</strong>把"今天跑了 10 公里"这种说法标准化成"今天产生了 85 TSS"——可以加可以比可以画曲线。<em>放在跑步场景:</em>同样 60 分钟,Z2 慢跑约 40 TSS,阈值跑约 90 TSS,VO2max 间歇约 100+ TSS。业余跑者周累计 350-500 TSS 是常见区间;超过 700 + Monotony 高 = 进入伤病雷区。Strava/Coros/Garmin 都自动算。</p>
   <p>其中 NP 是 normalized power(归一化功率),FTP 是 functional threshold power(功能性阈值功率)。约定:1 小时 @ FTP = 100 TSS。</p>
   <p>跑步语境下,可用 rTSS(基于配速)或 hrTSS(基于心率)。</p>
   <ul>
@@ -178,6 +181,7 @@
     <li><strong>ATL (Acute Training Load)</strong> = 过去 7 天 TSS 的指数加权平均 ≈ 你的"短期疲劳"</li>
     <li><strong>TSB (Training Stress Balance)</strong> = CTL - ATL ≈ 你的"形态" (form)</li>
   </ul>
+  <p class="plain">原理:CTL = 过去 42 天平均 TSS · ATL = 过去 7 天平均 TSS · TSB = CTL − ATL。<strong>翻译:</strong>CTL 是你的"银行存款"(累积健身),ATL 是你的"信用卡欠款"(短期疲劳),TSB 是净资产。<em>放在跑步场景:</em>赛前看 TSB——业余 +5 到 +15 是清新备赛区;+20 以上 = 减太狠开始脱训;−10 以下 = 还带疲劳上赛道。intervals.icu 接 Strava 就能免费看这三条曲线,比凭感觉判断准 10 倍。</p>
 
   <p>这三个数字给了你一张连续的、可读的训练全景图。它们的解读规则:</p>
 
@@ -196,6 +200,13 @@
 
   <h4>CTL 涨速的安全区间</h4>
   <p>经验法则:CTL 每周涨幅不超过 5-7 TSS/周。超过 10 TSS/周通常意味着伤病或 NFOR 风险升高。从 35 涨到 80 TSS 这种"业余跑者野心"的过程,理想用 9-13 周完成,而不是 4-6 周。</p>
+
+  <div class="callout ops">
+    <div class="label">读完这节·这周你能做的 3 件事</div>
+    <p><strong>① 测:</strong>把 Strava / Garmin / Coros 接到 intervals.icu(免费),打开 Fitness 页,记录本周末三个数字:CTL = ?、ATL = ?、TSB = ?。先有基线,后续才能看变化。</p>
+    <p><strong>② 改:</strong>设定下周 CTL 涨幅目标 ≤ 5 TSS。如果当前 CTL = 50,下周末目标 ≤ 55——这意味着周总 TSS 350-380。超过就是踩雷区。</p>
+    <p><strong>③ 看:</strong>每周日晚做一次"PMC 体检":TSB 落在哪个区?−30 以下立刻减量;−10 到 +5 正常;+15 以上 = 该加点强度。比凭"今天感觉怎么样"准确 10 倍。</p>
+  </div>
 
   <div class="svg-frame">
     <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
@@ -297,6 +308,7 @@
     <li><strong>金字塔 (Pyramidal)</strong>:Z1 ≈ 70% / Z2 ≈ 20% / Z3 ≈ 10%——从低到高递减</li>
     <li><strong>阈值 (Threshold)</strong>:Z1 ≈ 50% / Z2 ≈ 40% / Z3 ≈ 10%——中间为主</li>
   </ul>
+  <p class="plain">原理:80/20 极化训练 = 80% 时间在 LT1 以下(真慢)+ 20% 时间在 LT2 以上(真快),中间灰区刻意避开。<strong>翻译:</strong>训练就两档:要么慢到能边跑边聊整句话,要么快到只能蹦短词。"半快不慢"那一档不仅没用,反而拖垮你。<em>放在跑步场景:</em>多数业余跑者实际是 50/40/10——50% 慢、40% 中速灰区、10% 间歇,看起来跑量大其实没收益。改成 80/20 后短期成绩可能持平,但 6-8 周后阈值配速会松动 5-10 秒/km。</p>
 
   <h4>精英观察:Seiler 在挪威国家队 / 肯尼亚跑者中的发现</h4>
   <p>Seiler 团队从 2000 年代开始用心率监测和乳酸采血追踪挪威越野滑雪国家队、肯尼亚长跑组,反复观察到精英的训练分布是<em>极化</em>——超过 80% 时间在 LT1 以下,只有 15-20% 时间在 LT2 以上,而 LT1 到 LT2 之间的"中间地带"反而被有意避开。</p>
@@ -394,6 +406,13 @@
   <p>对刚开始训练的新手或刚从伤病归来的人,Seiler 推荐先维持 90/10 甚至 95/5 几个月,等基础有氧建好,再渐进引入高强度,最终稳定到 80/20。直接 80/20 对很多人来说高强度比例已经过高。</p>
 
   <div class="callout ops">
+    <div class="label">读完这节·这周你能做的 3 件事</div>
+    <p><strong>① 测:</strong>打开最近 4 周的训练日志,把每节课标记 Z1-Z5(按 HR),算时间占比。多数业余跑者会看到 50/40/10 而不是 80/20——你的灰区在哪里就是改造重点。</p>
+    <p><strong>② 改:</strong>下周开始 Z1 跑严格用心率上限锁住——LT1 心率(粗略 = 70-75% HRmax)。如果跑表显示要超,主动走 30 秒或换到柏油路边坡。前 2-3 周会"慢得不甘心",这是正常的。</p>
+    <p><strong>③ 看:</strong>4 周后再算一次时间分布。目标:Z1 时间占 75% 以上 + Z4/Z5 占 15-20% + Z3 灰区压到 5% 以内。同时观察阈值课 RPE——如果以前 4×8 min 跑得很苦,这时可能轻松 1-2 个台阶,就是 80/20 在起效。</p>
+  </div>
+
+  <div class="callout ops">
     <div class="label">实操 / 如何确认你的 Zone 1 配速</div>
     <p>三个验证方式,任意一个不达标就是太快了:</p>
     <p><strong>1. 鼻呼吸测试</strong>:Z1 配速下应能全程鼻呼吸不憋气,只用嘴呼吸的就是 Z2+</p>
@@ -419,6 +438,7 @@
     </tbody>
   </table>
 
+  <p class="plain">原理:力量训练让 RE(跑步经济性)提升 4-8%、5K 成绩 +2-4%,机制不是肌肉变大而是神经驱动 + 肌腱刚度。<strong>翻译:</strong>力量训练对跑者不是"练肌肉",是"调神经":同样一个步子让你的神经更聪明地招募更少肌纤维,以及让肌腱变得像更弹的弹簧。<em>放在跑步场景:</em>5×4 @ 85% 1RM 深蹲、3×6 单腿罗马尼亚硬拉、3×5 跳箱——每周 2 次,8 周后同样配速下心率降 3-5 bpm,这就是"省油"。最重要的是体重不变粗,衣服尺码不动。</p>
   <h4>机制:不是更大的肌肉,是更聪明的神经</h4>
   <p>力量训练对跑步的提升机制不在"肌肉量"——业余跑者关心的"练完会不会变粗"在重磅低组数(3-6RM)模式下不成立,因为 mTOR-肌肥大通路在这个剂量下基本不被激活。真正的变化在:</p>
   <ul>
@@ -457,6 +477,13 @@
     <li>核心稳定 5-10 min:plank 系列、bird dog、side plank</li>
   </ul>
   <p>总时长 60-75 分钟,每周 2 次,放在轻松跑日或单独日(不与高强度跑撞同日)。</p>
+
+  <div class="callout ops">
+    <div class="label">读完这节·这周你能做的 3 件事</div>
+    <p><strong>① 测:</strong>本周做一次"单腿测试三件套":单腿深蹲(下蹲到大腿平行)、单腿罗马尼亚硬拉(脚不晃)、calf raise 单脚 25 次(慢离心 3 秒)。任何一项无法完成 = 你的弱点在那里,先补。</p>
+    <p><strong>② 改:</strong>下周日历上画两个 60 分钟力量训练时段,雷打不动。最低有效菜单:深蹲 5×4 @ 85% 1RM、硬拉 4×4、引体 / 划船 3×6、北欧腘绳 3×6、跳箱 4×5。完整版第 10.9 节有。</p>
+    <p><strong>③ 看:</strong>6-8 周后跑同一段 Z2 路线,记录平均心率和配速。同配速 HR 下降 3-5 bpm = RE 进步,这就是 "4-8% 经济性提升" 在你身上的兑现。如果没动,检查力量训练是否做到了重磅(3-6RM,不是 12-15RM 那种轻负荷)。</p>
+  </div>
 
   <h4>"撞日"问题——干扰效应 (Interference Effect)</h4>
   <p>1980 年 Hickson 首次提出:同时练耐力和力量会减弱力量收益。原理涉及 AMPK(耐力激活,抑制 mTOR) vs mTOR(力量激活,促进合成)的分子层面拮抗。实操对策:</p>
@@ -562,6 +589,7 @@
     <li><strong>LH-TL (Live High - Train Low)</strong>:住高练低。1997 年 Levine & Stray-Gundersen 提出的"黄金组合"——住在 2200-2500m,训练降到 1200m。被反复证实最有效</li>
     <li><strong>LL-TH</strong>:住低练高。模拟低氧。效果弱</li>
   </ul>
+  <p class="plain">原理:LH-TL 高住低练 = 住在 2200-2500m(刺激 EPO 造红细胞)+ 训练降到 1200m(保住绝对配速质量)。<strong>翻译:</strong>晚上"装穷"让身体多造工人(红细胞),白天"装富"让工人正常上工——两头通吃。<em>放在跑步场景:</em>没条件真去高原可以租低氧帐篷,每晚睡 8-10h @ 模拟 2500m,4 周后红细胞质量 +1-5%、Hbmass 上升,海平面 5K 成绩 +1-2%。但只对约 70% 人有效(responders),且回平原后窗口期只有 2-4 周——所以多数业余跑者还是把这笔钱花在力量训练和睡眠上更划算。</p>
 
   <h4>生理适应轨迹</h4>
   <ul>
@@ -608,6 +636,7 @@
   <h3><span class="pre">10.15</span>减量 (Taper)——比赛前的最后一课</h3>
   <p class="lead">减量 (taper) 是比赛准备的最后阶段,大致 1-3 周,目的是让 ATL 大幅下降而 CTL 只小幅下降,从而让 TSB 进入 +5 到 +25 的"形态峰"区间。Mujika 在 2003 年的综述里给出了至今仍是金科玉律的原则。</p>
 
+  <p class="plain">原理:taper 减量 = 赛前 2-3 周量降 40-60%、强度保持、频率几乎不动。让 ATL 掉而 CTL 只小掉,TSB 从 −20 抬到 +15。<strong>翻译:</strong>训练像往气球里打气(健身)同时也开了一个小漏(疲劳),减量就是停止打气但漏不堵——疲劳泄得快,健身留得久,差值最大。<em>放在跑步场景:</em>马拉松 3 周减量做对了,3:30 跑者能跑出 3:25-3:27;做错了(赛前 1 周还在堆量 / 或者反过来直接停跑)就跑成 3:35。Mujika 综述显示正确减量带来 1-3% 表现提升——这在马拉松上是 2-5 分钟,半马 1-3 分钟。</p>
   <h4>Mujika 减量四原则</h4>
   <ol>
     <li><strong>训练量减少 40-60%</strong>:这是减量的主战场</li>
@@ -629,6 +658,38 @@
   <h4>过度减量 = 脱训 (Detraining)</h4>
   <p>1 周减量减太狠(比如直接停跑)会让 CTL 也开始下降,神经-肌肉协调性变差。这就是为什么"赛前 1 周完全休息"的老派建议是错的——身体会"忘记"高强度。</p>
 
+  <div class="callout you">
+    <div class="label">放在你身上 · 你 12 周备半马的 CTL/ATL/TSB 数字剧本</div>
+    <p>你 32 岁、当前半马 PB 1:50、目标 1:42、起步 CTL = 35(平时每周跑 3-4 次约 200 TSS)。下面是 W1-W12 的<em>三条数字</em>怎么走——每周日晚打开 intervals.icu 看一眼,你应该看到的画面:</p>
+    <table>
+      <thead>
+        <tr><th>周</th><th>阶段</th><th>周 TSS</th><th>CTL → </th><th>ATL → </th><th>TSB</th><th>这周关键课</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>W1</td><td>基础</td><td>220</td><td>35 → 38</td><td>32</td><td>+6</td><td>3×Z2(45min)+ 1 LSD(75min)+ 2 力量</td></tr>
+        <tr><td>W2</td><td>基础</td><td>250</td><td>38 → 42</td><td>36</td><td>+6</td><td>4×Z2 + 1 LSD(90min)+ 2 力量</td></tr>
+        <tr><td>W3</td><td>基础</td><td>280</td><td>42 → 46</td><td>40</td><td>+6</td><td>+第一节短间歇 6×400m + LSD 100min</td></tr>
+        <tr><td>W4</td><td>恢复周</td><td>180</td><td>46 → 44</td><td>26</td><td>+18</td><td>主动减量,只跑 Z1-Z2;TSB 抬上来准备建造期</td></tr>
+        <tr><td>W5</td><td>建造</td><td>340</td><td>44 → 49</td><td>49</td><td>0</td><td>+ Tempo 3×8 min + 间歇 5×3 min + LSD 110 min</td></tr>
+        <tr><td>W6</td><td>建造</td><td>380</td><td>49 → 54</td><td>54</td><td>−5</td><td>+ Tempo 4×8 min + 间歇 6×3 min + LSD 120min</td></tr>
+        <tr><td>W7</td><td>建造</td><td>420</td><td>54 → 60</td><td>60</td><td>−6</td><td>峰值刺激 + 长间歇 4×5 min;开始感觉腿沉</td></tr>
+        <tr><td>W8</td><td>恢复周</td><td>240</td><td>60 → 58</td><td>34</td><td>+24</td><td>关键 deload,腿明显轻;一次测 5K 看 PB 趋势</td></tr>
+        <tr><td>W9</td><td>专项</td><td>400</td><td>58 → 62</td><td>57</td><td>+5</td><td>+ 半马模拟 8 km @ 目标配速 + 间歇 5×3 min</td></tr>
+        <tr><td>W10</td><td>专项</td><td>430</td><td>62 → 66</td><td>61</td><td>+5</td><td>峰值周:LSD 内嵌 10 km @ HMP + 短间歇</td></tr>
+        <tr><td>W11</td><td>减量</td><td>280</td><td>66 → 64</td><td>40</td><td>+24</td><td>量降 35%,强度保 1 次 Tempo + 1 次 5×3 min</td></tr>
+        <tr><td>W12</td><td>赛周</td><td>180+ 比赛</td><td>64 → 61</td><td>29</td><td>+35</td><td>赛前 3 天只做 25 min Z2 + 4×100m strides;比赛日 TSB ≈ +20-25 = 形态峰</td></tr>
+      </tbody>
+    </table>
+    <p><strong>怎么读这张表:</strong></p>
+    <ul>
+      <li><em>CTL 涨速</em>:每周 +3 到 +6 TSS,W7 临界(+6);超过就是踩雷</li>
+      <li><em>TSB 节奏</em>:建造期长期 0 到 −6(在累积),恢复周抬到 +18-24(吸收),赛周抬到 +25-35(发挥)</li>
+      <li><em>恢复周不可省</em>:W4 和 W8 看似"浪费",其实是让 W5-W7 和 W9-W10 的高量能扛住的关键</li>
+      <li><em>没必要每周更高</em>:W10 之后量不再涨,任务变成"把 CTL 装进 TSB 形态"</li>
+    </ul>
+    <p><strong>常见出错点</strong>:① 跳过 W4 / W8 恢复周(因为"感觉还行")→ W6 或 W10 崩;② W11-W12 还跑大量(怕"练少了不行")→ 赛日 TSB 仍是负数,带疲劳上场;③ 减量周完全停跑 → TSB 飙到 +40,神经退化,赛日反而"找不到节奏"。这三个错误占业余跑者赛前失常的 80%。</p>
+  </div>
+
   <h3><span class="pre">10.16</span>周期化 (Periodization)——结构化的多月计划</h3>
   <p class="lead">周期化是把训练目标分解成嵌套的时间块。1960 年代苏联 Matveyev 提出经典线性周期化模型,后来 Issurin 提出阻塞周期化、Tudor Bompa 写成训练学教科书,变成了所有体育项目的通用工具。</p>
 
@@ -642,14 +703,14 @@
   <h4>经典线性周期化(马拉松)</h4>
   <table>
     <thead>
-      <tr><th>阶段</th><th>时长</th><th>主目标</th><th>训练特征</th></tr>
+      <tr><th>阶段</th><th>时长</th><th>主目标</th><th>训练特征</th><th>本周怎么做</th></tr>
     </thead>
     <tbody>
-      <tr><td>过渡期 (Transition)</td><td>2-4 周</td><td>恢复 + 多样化</td><td>低量、低强度、其他运动</td></tr>
-      <tr><td>基础期 (Base)</td><td>6-12 周</td><td>有氧基础 + 力量</td><td>LSD + 力量为主,高强度极少</td></tr>
-      <tr><td>建造期 (Build)</td><td>4-8 周</td><td>LT2 + VO2max</td><td>阈值跑 + 间歇 + LSD 并行</td></tr>
-      <tr><td>比赛专项期 (Specific)</td><td>4-6 周</td><td>马拉松配速 (MP)</td><td>MP 长跑、模拟赛、专项</td></tr>
-      <tr><td>减量期 (Taper)</td><td>2-3 周</td><td>形态优化</td><td>量降强度保</td></tr>
+      <tr><td>过渡期 (Transition)</td><td>2-4 周</td><td>恢复 + 多样化</td><td>低量、低强度、其他运动</td><td>跑 3 次 Z1 + 2 次骑车/游泳;主动让 CTL 掉 10-15;关注睡眠和力量基线</td></tr>
+      <tr><td>基础期 (Base)</td><td>6-12 周</td><td>有氧基础 + 力量</td><td>LSD + 力量为主,高强度极少</td><td>4-5 次 Z1-Z2 跑 + 1 次周末 LSD(75-150 min)+ 2 次力量训练;CTL 每周涨 ≤5 TSS</td></tr>
+      <tr><td>建造期 (Build)</td><td>4-8 周</td><td>LT2 + VO2max</td><td>阈值跑 + 间歇 + LSD 并行</td><td>3-4 次 Z2 + 1 次 Tempo + 1 次 VO2max 间歇 + 1 次 LSD;力量降到 1-2 次维持</td></tr>
+      <tr><td>比赛专项期 (Specific)</td><td>4-6 周</td><td>马拉松配速 (MP)</td><td>MP 长跑、模拟赛、专项</td><td>1 次 LSD 中后段加 MP 配速 8-15 km;1 次 Tempo;1 次模拟赛或赛前预演;力量减半</td></tr>
+      <tr><td>减量期 (Taper)</td><td>2-3 周</td><td>形态优化</td><td>量降强度保</td><td>第 1 周量 70%、第 2 周 50%、第 3 周 30%;每周保留 1 次短间歇 + 1 次 3-5 km MP;TSB 抬到 +5 到 +15</td></tr>
     </tbody>
   </table>
 
@@ -792,6 +853,68 @@
   <div class="callout you">
     <div class="label">你 / 训练是一门概率工程</div>
     <p>没有"完美训练计划"。所有计划都是<em>对你过去未知的样本</em>给出的<em>概率最优解</em>。你能做的不是"找最好的计划",而是把<strong>监测频率</strong>提高:每周记录、每月评估、每季调整。表现不是被"砸"出来的,是被反复迭代调出来的。<br><br>跑得久的人都明白一件事——<strong>训练的最大障碍不是身体,是耐心</strong>。能在 16 周备赛里坚持每周 1 个真正的 LSD、1 个真正的阈值、1 个真正的休息日、不被冲动改计划的人,几乎都拿到了自己阶段性的最佳表现。这不是天赋,是<em>过程的纪律</em>。</p>
+  </div>
+
+  <div class="callout protocol">
+    <div class="label">PROTOCOL · 本章关键操作清单</div>
+
+    <h4>协议 1 · CTL 自测与 PMC 监测(intervals.icu 免费版)</h4>
+    <ol>
+      <li><strong>测什么:</strong> 每周三个数字:CTL(健身)、ATL(疲劳)、TSB(形态)= CTL − ATL</li>
+      <li><strong>工具:</strong> Strava / Garmin / Coros 跑表 → intervals.icu 免费账号(支持中文)。授权后自动同步,无需手算 TSS</li>
+      <li><strong>步骤:</strong> ① 注册 intervals.icu → ② 连接 Strava/Garmin → ③ 等 1-2 周让历史数据回填 → ④ 进 Fitness 页面 → ⑤ 设手机周日晚提醒,记录三个数字到训练日志</li>
+      <li><strong>频率:</strong> 每周 1 次(周日晚),每 4 周做一次趋势复盘</li>
+      <li><strong>判读:</strong> CTL 涨速 ≤ 5-7 TSS/周 = 安全 / 8-10 = 警戒 / ≥10 持续 2 周 = 高伤病风险。TSB:&lt; −30 必须减量;−10 到 +5 正常;+5 到 +15 备赛形态峰;&gt; +25 已脱训</li>
+    </ol>
+    <div class="stop">连续 2 周 TSB &lt; −25 且 HRV 同期下降 ≥ 10% → 立刻减量 50% + 多睡 1 小时 + 排查是否 NFOR;同时出现晨脉异常 / 反复感冒 / 心境抑郁 → 暂停结构化训练,见运动医学医生</div>
+
+    <h4>协议 2 · 12 周半马训练骨架(目标 1:50 → 1:40)</h4>
+    <ol>
+      <li><strong>测什么:</strong> 12 周后能否把半马成绩从当前水平降 5-8 分钟,以及力量/RE/LT2 三项基线全部上移</li>
+      <li><strong>工具:</strong> 心率带(光学腕表 Z1-Z2 不准)+ 跑表 + 一对哑铃或杠铃 + intervals.icu</li>
+      <li><strong>步骤(每周固定):</strong>
+        <ul>
+          <li><strong>周一:</strong>休息或散步 30 min</li>
+          <li><strong>周二:</strong>Tempo 课(10 wu + 主项见下 + 10 cd)</li>
+          <li><strong>周三:</strong>Easy 跑 50 min Z2 + 力量训练 30-45 min</li>
+          <li><strong>周四:</strong>休息</li>
+          <li><strong>周五:</strong>VO2max 间歇课(10 wu + 主项 + 10 cd)</li>
+          <li><strong>周六:</strong>Easy 跑 30-40 min Z1 + 4×100 m strides</li>
+          <li><strong>周日:</strong>LSD 75-150 min Z2,W7-W10 中后段加 8-15 km HMP</li>
+        </ul>
+      </li>
+      <li><strong>主项进度:</strong>
+        <ul>
+          <li>W1-W4 基础:Tempo 3×6 min @ T,间歇 5×3 min Z5;LSD 75-100 min</li>
+          <li>W5-W8 建造:Tempo 4×8 min @ T,间歇 6×3 min Z5;LSD 100-130 min</li>
+          <li>W9-W10 专项:Tempo 内嵌 6 km HMP,间歇 5×4 min;LSD 130-150 min 中段 10 km HMP</li>
+          <li>W11-W12 减量:量降 50%,强度课减半但不取消</li>
+        </ul>
+      </li>
+      <li><strong>频率:</strong> 周训练 5-6 次,总时长 6-8 小时,周 TSS 250-450(随阶段涨)</li>
+      <li><strong>判读:</strong> W4 末 5K 测速比基线快 30-60 秒 + W8 末 10 km 测速比基线快 90-150 秒 + 力量训练每 3 周加 2.5-5 kg = 进度正常。任一不达标 → 排查睡眠 / 营养 / 是否真在 Z1 跑慢</li>
+    </ol>
+    <div class="stop">出现以下任一立即减量 50% 持续 1-2 周:① 同配速 Z2 心率比 2 周前高 &gt; 5 bpm;② 晨脉连续 4 天高于个人基线 ≥ 7 bpm;③ 任何局灶疼痛 &gt; 3/10;④ 1 个月内 ≥ 2 次感冒;⑤ HRV 连续 7 天低于基线 10%+</div>
+
+    <h4>协议 3 · Taper 14 天版(马拉松/半马通用)</h4>
+    <ol>
+      <li><strong>测什么:</strong> 赛日 TSB 落在 +5 到 +20、CTL 较 2 周前掉 ≤ 5、强度课配速能维持原水平</li>
+      <li><strong>工具:</strong> intervals.icu(看 TSB 曲线)+ 跑表 + 训练日志</li>
+      <li><strong>步骤:</strong>
+        <ul>
+          <li><strong>赛前 D14:</strong>正常训练最后一天,跑量峰值的 100%(参考周)</li>
+          <li><strong>赛前 D13-D7(第 2 周减量):</strong>量降到 70%。保留:1 次 Tempo 3×8 min + 1 次 VO2max 5×3 min + 1 次 LSD 缩到 70-80 min。其他全部 Z1-Z2 短跑</li>
+          <li><strong>赛前 D6-D3(赛周前段):</strong>量降到 50-40%。保留 1 次 3×1 km @ MP/HMP + 1 次 30 min Easy</li>
+          <li><strong>赛前 D2:</strong>25 min Z2 + 4-6×100 m strides(神经激活,非疲劳)</li>
+          <li><strong>赛前 D1:</strong>15-20 min Easy + 2×30 s 加速;不要"试一下比赛配速"</li>
+          <li><strong>赛日:</strong>20 min 热身 + 几个 strides;比赛前 3-4 h 进碳水餐;赛前 15 min 一支胶</li>
+        </ul>
+      </li>
+      <li><strong>频率:</strong> 一年用 2-3 次,围绕 A 级目标赛</li>
+      <li><strong>判读:</strong> D2-D1 出现"腿发轻、想跑得快"的感觉 = 减量到位;如果还是腿沉 = 减得不够或基础疲劳过深;如果"完全没感觉了、找不到比赛感"= 减太狠,赛日做长热身找节奏</li>
+    </ol>
+    <div class="stop">减量期出现任一立刻就医或推迟比赛:① 任何新发生的局灶骨痛(警惕应力骨折);② 持续胸闷 / 心律不齐;③ 38°C+ 发烧;④ 严重失眠 &gt; 5 天连续。带病/带未愈伤参赛是赛后 OTS 和长期伤病的最强通路</div>
+
   </div>
 
 </div>
