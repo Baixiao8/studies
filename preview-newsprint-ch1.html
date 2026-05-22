@@ -984,7 +984,218 @@
 
   <p><strong>⑦ Mid-Swing (MSw, 55–85%)</strong>——中摆动。大腿继续前抛,小腿在前抛过程中由于惯性"鞭打"展开。此时髋屈曲达到峰值约 30–35°。</p>
 
-  <p><strong>⑧ Terminal Swing (TSw, 85–100%)</strong>——终末摆动。腘绳肌组离心收缩,主动减速前摆的小腿,把它"收回"到身体下方,准备触地。<strong>这个阶段腘绳肌承受峰值张力,是跑步中腘绳肌拉伤最常见的瞬间</strong>——特别是冲刺中。</p>
+<p><strong>⑧ Terminal Swing (TSw, 85–100%)</strong>——终末摆动。腘绳肌组离心收缩,主动减速前摆的小腿,把它"收回"到身体下方,准备触地。<strong>这个阶段腘绳肌承受峰值张力,是跑步中腘绳肌拉伤最常见的瞬间</strong>——特别是冲刺中。</p>
+
+  <!-- 步态 8 事件姿态分镜 -->
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="540" y="22" text-anchor="middle" fill="#a8423b" font-size="11" letter-spacing="0.2em">姿态分镜 · 一个步态周期里身体在做什么</text>
+
+      <!-- 地面线 -->
+      <line x1="40" y1="195" x2="1040" y2="195" stroke="#c4bca4" stroke-width="1"/>
+
+      <!-- 支撑相背景(0-40%) -->
+      <rect x="40" y="40" width="490" height="155" fill="#a8423b" fill-opacity="0.05"/>
+      <text x="285" y="55" text-anchor="middle" fill="#a8423b" font-size="9.5" letter-spacing="0.18em" font-weight="600">STANCE · 支撑相 40%</text>
+
+      <!-- 摆动相背景(40-100%) -->
+      <rect x="530" y="40" width="510" height="155" fill="#7a5230" fill-opacity="0.04"/>
+      <text x="785" y="55" text-anchor="middle" fill="#7a5230" font-size="9.5" letter-spacing="0.18em" font-weight="600">SWING · 摆动相 60%</text>
+
+      <!-- 跑者简笔通用样式 -->
+      <!-- 红色 = 主腿(右腿,跟踪对象),灰色 = 对侧腿,黄色脚 = 触地点 -->
+
+      <!-- ① IC 触地 0% -->
+      <g transform="translate(95, 100)">
+        <!-- 头 -->
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <!-- 躯干 (微前倾) -->
+        <line x1="0" y1="5" x2="3" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <!-- 右臂 (后摆) -->
+        <line x1="1" y1="13" x2="-9" y2="22" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-9" y1="22" x2="-13" y2="34" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 左臂 (前摆) -->
+        <line x1="2" y1="13" x2="13" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="13" y1="20" x2="16" y2="34" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿(主腿,着地)·红色 -->
+        <line x1="3" y1="32" x2="4" y2="55" stroke="#a8423b" stroke-width="2"/>
+        <line x1="4" y1="55" x2="6" y2="80" stroke="#a8423b" stroke-width="2"/>
+        <line x1="6" y1="80" x2="14" y2="83" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿(后摆) -->
+        <line x1="3" y1="32" x2="-8" y2="48" stroke="#888888" stroke-width="2"/>
+        <line x1="-8" y1="48" x2="-2" y2="65" stroke="#888888" stroke-width="2"/>
+      </g>
+      <text x="95" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">① 触地</text>
+      <text x="95" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">IC · 0%</text>
+      <text x="95" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">脚刚落地</text>
+
+      <!-- ② LR 负重 5% -->
+      <g transform="translate(215, 105)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="4" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="1" y1="13" x2="-8" y2="24" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-8" y1="24" x2="-13" y2="35" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="3" y1="13" x2="12" y2="22" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="12" y1="22" x2="14" y2="34" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿屈曲承重 -->
+        <line x1="4" y1="32" x2="-2" y2="55" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-2" y1="55" x2="6" y2="75" stroke="#a8423b" stroke-width="2"/>
+        <line x1="6" y1="75" x2="14" y2="78" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿向前摆 -->
+        <line x1="4" y1="32" x2="-3" y2="44" stroke="#888888" stroke-width="2"/>
+        <line x1="-3" y1="44" x2="6" y2="58" stroke="#888888" stroke-width="2"/>
+        <!-- 冲击波 -->
+        <text x="20" y="80" fill="#a8423b" font-size="9" font-weight="700">⚡</text>
+      </g>
+      <text x="215" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">② 负重</text>
+      <text x="215" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">LR · 5%</text>
+      <text x="215" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">膝弯吸冲击</text>
+
+      <!-- ③ MS 中支撑 20% -->
+      <g transform="translate(335, 100)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="2" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="1" y1="14" x2="-9" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-9" y1="20" x2="-13" y2="32" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="2" y1="14" x2="13" y2="22" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="13" y1="22" x2="14" y2="35" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿单脚支撑(垂直) -->
+        <line x1="2" y1="32" x2="0" y2="55" stroke="#a8423b" stroke-width="2"/>
+        <line x1="0" y1="55" x2="3" y2="80" stroke="#a8423b" stroke-width="2"/>
+        <line x1="3" y1="80" x2="12" y2="83" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿前摆中 -->
+        <line x1="2" y1="32" x2="10" y2="46" stroke="#888888" stroke-width="2"/>
+        <line x1="10" y1="46" x2="14" y2="62" stroke="#888888" stroke-width="2"/>
+      </g>
+      <text x="335" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">③ 中支撑</text>
+      <text x="335" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">MS · 20%</text>
+      <text x="335" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">弹簧压到底</text>
+
+      <!-- ④ TS 终末支撑 34% -->
+      <g transform="translate(455, 102)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="-3" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="-1" y1="14" x2="-12" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-12" y1="20" x2="-17" y2="30" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="0" y1="14" x2="10" y2="18" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="10" y1="18" x2="14" y2="30" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿在身后伸展 -->
+        <line x1="-3" y1="32" x2="-8" y2="58" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-8" y1="58" x2="-4" y2="80" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-4" y1="80" x2="4" y2="83" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿前抛 -->
+        <line x1="-3" y1="32" x2="10" y2="40" stroke="#888888" stroke-width="2"/>
+        <line x1="10" y1="40" x2="18" y2="58" stroke="#888888" stroke-width="2"/>
+      </g>
+      <text x="455" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">④ 终末支撑</text>
+      <text x="455" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">TS · 34%</text>
+      <text x="455" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">弹簧回弹中</text>
+
+      <!-- ⑤ PS/TO 推离 40% -->
+      <g transform="translate(575, 100)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="-2" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="14" x2="-12" y2="18" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-12" y1="18" x2="-18" y2="28" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="1" y1="14" x2="11" y2="16" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="11" y1="16" x2="16" y2="28" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿推离(脚尖蹬地) -->
+        <line x1="-2" y1="32" x2="-10" y2="55" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-10" y1="55" x2="-12" y2="78" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-12" y1="78" x2="-6" y2="80" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿已在前 -->
+        <line x1="-2" y1="32" x2="12" y2="44" stroke="#888888" stroke-width="2"/>
+        <line x1="12" y1="44" x2="20" y2="60" stroke="#888888" stroke-width="2"/>
+        <!-- 弹射箭头 -->
+        <path d="M -6,90 L 6,90" stroke="#a8423b" stroke-width="2" marker-end="url(#arrowup)"/>
+      </g>
+      <text x="575" y="220" text-anchor="middle" fill="#a8423b" font-size="11" font-weight="700">⑤ 推离</text>
+      <text x="575" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">PS · 40%</text>
+      <text x="575" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">弹射出去</text>
+
+      <!-- ⑥ ISw 早摆动 50% (双脚在空中) -->
+      <g transform="translate(695, 95)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="0" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="14" x2="-10" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-10" y1="20" x2="-15" y2="32" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="0" y1="14" x2="12" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="12" y1="20" x2="14" y2="33" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿屈膝收回 -->
+        <line x1="0" y1="32" x2="-6" y2="48" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-6" y1="48" x2="-2" y2="62" stroke="#a8423b" stroke-width="2"/>
+        <line x1="-2" y1="62" x2="3" y2="64" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿(也在空中或刚要触地) -->
+        <line x1="0" y1="32" x2="14" y2="44" stroke="#888888" stroke-width="2"/>
+        <line x1="14" y1="44" x2="18" y2="62" stroke="#888888" stroke-width="2"/>
+        <!-- 腾空提示线 -->
+        <line x1="-15" y1="92" x2="22" y2="92" stroke="#a8423b" stroke-width="0.6" stroke-dasharray="2,2"/>
+      </g>
+      <text x="695" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">⑥ 早摆动</text>
+      <text x="695" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">ISw · 50%</text>
+      <text x="695" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">收腿收得快</text>
+
+      <!-- ⑦ MSw 中摆动 70% (前摆最高) -->
+      <g transform="translate(815, 98)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="2" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="1" y1="14" x2="-10" y2="22" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-10" y1="22" x2="-12" y2="35" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="2" y1="14" x2="12" y2="22" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="12" y1="22" x2="15" y2="35" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿前抛达峰值(大腿水平) -->
+        <line x1="2" y1="32" x2="20" y2="42" stroke="#a8423b" stroke-width="2"/>
+        <line x1="20" y1="42" x2="14" y2="62" stroke="#a8423b" stroke-width="2"/>
+        <line x1="14" y1="62" x2="22" y2="64" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿(对侧支撑) -->
+        <line x1="2" y1="32" x2="-2" y2="55" stroke="#888888" stroke-width="2"/>
+        <line x1="-2" y1="55" x2="-4" y2="80" stroke="#888888" stroke-width="2"/>
+      </g>
+      <text x="815" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">⑦ 中摆动</text>
+      <text x="815" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">MSw · 70%</text>
+      <text x="815" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">大腿前甩到顶</text>
+
+      <!-- ⑧ TSw 末摆动 90% (准备触地) -->
+      <g transform="translate(935, 100)">
+        <circle cx="0" cy="0" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="0" y1="5" x2="2" y2="32" stroke="#1a1a1a" stroke-width="1.5"/>
+        <line x1="1" y1="14" x2="-9" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="-9" y1="20" x2="-12" y2="34" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="2" y1="14" x2="12" y2="20" stroke="#1a1a1a" stroke-width="1.3"/>
+        <line x1="12" y1="20" x2="15" y2="34" stroke="#1a1a1a" stroke-width="1.3"/>
+        <!-- 右腿小腿前伸,准备触地 -->
+        <line x1="2" y1="32" x2="14" y2="50" stroke="#a8423b" stroke-width="2"/>
+        <line x1="14" y1="50" x2="20" y2="78" stroke="#a8423b" stroke-width="2"/>
+        <line x1="20" y1="78" x2="28" y2="80" stroke="#a8423b" stroke-width="2.5"/>
+        <!-- 左腿(已支撑) -->
+        <line x1="2" y1="32" x2="-2" y2="58" stroke="#888888" stroke-width="2"/>
+        <line x1="-2" y1="58" x2="-4" y2="80" stroke="#888888" stroke-width="2"/>
+        <!-- 减速箭头 -->
+        <text x="28" y="68" fill="#a8423b" font-size="9" font-weight="700">↓</text>
+      </g>
+      <text x="935" y="220" text-anchor="middle" fill="#1a1a1a" font-size="11" font-weight="700">⑧ 末摆动</text>
+      <text x="935" y="234" text-anchor="middle" fill="#4a4a4a" font-size="9.5">TSw · 90%</text>
+      <text x="935" y="252" text-anchor="middle" fill="#4a4a4a" font-size="9">腘绳肌刹车</text>
+
+      <!-- 箭头标记定义 -->
+      <defs>
+        <marker id="arrowup" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <path d="M 0,0 L 6,3 L 0,6 Z" fill="#a8423b"/>
+        </marker>
+      </defs>
+
+      <!-- 底部图例 -->
+      <g transform="translate(40, 268)">
+        <line x1="0" y1="0" x2="20" y2="0" stroke="#a8423b" stroke-width="2"/>
+        <text x="26" y="3" fill="#4a4a4a" font-size="9">主腿(右腿)</text>
+        <line x1="120" y1="0" x2="140" y2="0" stroke="#888888" stroke-width="2"/>
+        <text x="146" y="3" fill="#4a4a4a" font-size="9">对侧腿</text>
+        <circle cx="220" cy="0" r="3" fill="#a8423b"/>
+        <text x="228" y="3" fill="#4a4a4a" font-size="9">触地点</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 1.2 · 八个事件 · 八个姿态 · 一个 0.7 秒里发生的全部</div>
+  </div>
 
   <div class="callout note">
     <div class="label">术语对齐 / Stance vs Support, Swing vs Recovery</div>
@@ -1161,6 +1372,124 @@
 
   <h3><span class="pre">1.7</span>着地策略——RFS / MFS / FFS 的力学差异</h3>
   <p class="lead">触地的那一瞬间,脚的哪一部分先碰地,称为<em>着地模式</em> (foot strike pattern)。这是 2010 年 Lieberman 在 Nature 上著名"赤足跑"论文之后最被反复争论的话题。讲清楚事实而非阵营:</p>
+
+  <!-- 三种着地策略可视化 -->
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="540" y="24" text-anchor="middle" fill="#a8423b" font-size="11" letter-spacing="0.22em">三种着地策略 · 脚的角度 + 受力曲线</text>
+
+      <!-- ══════════ RFS 后跟着地 (左) ══════════ -->
+      <text x="180" y="60" text-anchor="middle" fill="#1a1a1a" font-size="15" font-weight="700">后跟着地 RFS</text>
+      <text x="180" y="78" text-anchor="middle" fill="#4a4a4a" font-size="10.5">业余 75–90%</text>
+
+      <!-- 地面 -->
+      <line x1="60" y1="180" x2="300" y2="180" stroke="#c4bca4" stroke-width="1"/>
+
+      <!-- 脚侧视图(后跟先着地,脚尖上翘) -->
+      <g transform="translate(120, 130)">
+        <!-- 小腿(进入脚部) -->
+        <line x1="40" y1="0" x2="20" y2="40" stroke="#1a1a1a" stroke-width="2.5"/>
+        <!-- 脚部:后跟着地,前掌抬起 -->
+        <path d="M 15,42 L 25,52 L 90,38 L 95,30 L 80,28 Z" fill="#ebe5d3" stroke="#a8423b" stroke-width="2"/>
+        <!-- 脚跟与地面接触点(标黄) -->
+        <circle cx="20" cy="52" r="4" fill="#a8423b"/>
+        <!-- 角度示意 -->
+        <path d="M 95,30 L 110,35" stroke="#a8423b" stroke-width="1" stroke-dasharray="2,2"/>
+        <line x1="95" y1="30" x2="105" y2="30" stroke="#c4bca4" stroke-width="0.5"/>
+        <text x="112" y="34" fill="#a8423b" font-size="10" font-weight="700">+15°</text>
+        <text x="112" y="46" fill="#4a4a4a" font-size="8.5">FSA</text>
+      </g>
+
+      <!-- GRF 受力曲线(双峰) -->
+      <text x="180" y="225" text-anchor="middle" fill="#4a4a4a" font-size="10">受力曲线(垂直 GRF)</text>
+      <g transform="translate(60, 235)">
+        <line x1="0" y1="100" x2="240" y2="100" stroke="#c4bca4" stroke-width="0.6"/>
+        <line x1="0" y1="20" x2="0" y2="100" stroke="#c4bca4" stroke-width="0.6"/>
+        <!-- 双峰曲线 (冲击峰 + 主峰) -->
+        <path d="M 0,100 L 18,30 L 35,50 L 70,28 L 130,40 L 200,90 L 240,100" fill="none" stroke="#a8423b" stroke-width="2"/>
+        <text x="20" y="22" fill="#a8423b" font-size="9" font-weight="700">冲击峰</text>
+        <text x="20" y="34" fill="#4a4a4a" font-size="8.5">1.7 BW</text>
+        <text x="75" y="22" fill="#a8423b" font-size="9" font-weight="700">主峰</text>
+        <text x="75" y="34" fill="#4a4a4a" font-size="8.5">2.7 BW</text>
+      </g>
+
+      <!-- 关键标签 -->
+      <g transform="translate(60, 350)">
+        <text x="0" y="0" fill="#a8423b" font-size="9.5" font-weight="600">⚠ 冲击峰高</text>
+        <text x="0" y="14" fill="#4a4a4a" font-size="9">膝/胫骨负荷大</text>
+      </g>
+
+      <!-- 分隔线 -->
+      <line x1="360" y1="50" x2="360" y2="370" stroke="#c4bca4" stroke-width="0.5" stroke-dasharray="3,4"/>
+
+      <!-- ══════════ MFS 中足着地 (中) ══════════ -->
+      <text x="540" y="60" text-anchor="middle" fill="#1a1a1a" font-size="15" font-weight="700">中足着地 MFS</text>
+      <text x="540" y="78" text-anchor="middle" fill="#4a4a4a" font-size="10.5">精英常见</text>
+
+      <line x1="420" y1="180" x2="660" y2="180" stroke="#c4bca4" stroke-width="1"/>
+
+      <!-- 脚侧视:平贴着地 -->
+      <g transform="translate(480, 138)">
+        <line x1="40" y1="0" x2="35" y2="40" stroke="#1a1a1a" stroke-width="2.5"/>
+        <path d="M 20,42 L 25,52 L 90,52 L 95,42 L 80,40 Z" fill="#ebe5d3" stroke="#94cdcd" stroke-width="2"/>
+        <!-- 脚平贴,多个着地点 -->
+        <circle cx="55" cy="52" r="4" fill="#a8423b"/>
+        <!-- FSA -->
+        <line x1="95" y1="42" x2="105" y2="42" stroke="#c4bca4" stroke-width="0.5"/>
+        <text x="112" y="46" fill="#94cdcd" font-size="10" font-weight="700">+3°</text>
+      </g>
+
+      <text x="540" y="225" text-anchor="middle" fill="#4a4a4a" font-size="10">受力曲线(垂直 GRF)</text>
+      <g transform="translate(420, 235)">
+        <line x1="0" y1="100" x2="240" y2="100" stroke="#c4bca4" stroke-width="0.6"/>
+        <line x1="0" y1="20" x2="0" y2="100" stroke="#c4bca4" stroke-width="0.6"/>
+        <!-- 单峰平滑(冲击峰弱) -->
+        <path d="M 0,100 Q 20,75 35,55 Q 70,32 130,45 Q 200,90 240,100" fill="none" stroke="#94cdcd" stroke-width="2"/>
+        <text x="55" y="34" fill="#94cdcd" font-size="9" font-weight="700">单峰平滑</text>
+        <text x="55" y="46" fill="#4a4a4a" font-size="8.5">2.5 BW</text>
+      </g>
+
+      <g transform="translate(420, 350)">
+        <text x="0" y="0" fill="#94cdcd" font-size="9.5" font-weight="600">✓ 冲击平滑</text>
+        <text x="0" y="14" fill="#4a4a4a" font-size="9">中等综合负荷</text>
+      </g>
+
+      <line x1="720" y1="50" x2="720" y2="370" stroke="#c4bca4" stroke-width="0.5" stroke-dasharray="3,4"/>
+
+      <!-- ══════════ FFS 前掌着地 (右) ══════════ -->
+      <text x="900" y="60" text-anchor="middle" fill="#1a1a1a" font-size="15" font-weight="700">前掌着地 FFS</text>
+      <text x="900" y="78" text-anchor="middle" fill="#4a4a4a" font-size="10.5">赤足/短跑/部分精英</text>
+
+      <line x1="780" y1="180" x2="1020" y2="180" stroke="#c4bca4" stroke-width="1"/>
+
+      <!-- 脚侧视:前掌着地,后跟悬空 -->
+      <g transform="translate(840, 130)">
+        <line x1="35" y1="0" x2="50" y2="42" stroke="#1a1a1a" stroke-width="2.5"/>
+        <path d="M 30,42 L 20,32 L 90,38 L 95,50 L 85,52 Z" fill="#ebe5d3" stroke="#4a6b3a" stroke-width="2"/>
+        <!-- 前掌着地点 -->
+        <circle cx="85" cy="52" r="4" fill="#a8423b"/>
+        <!-- FSA 负值 -->
+        <line x1="20" y1="32" x2="10" y2="35" stroke="#4a6b3a" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="-6" y="38" fill="#4a6b3a" font-size="10" font-weight="700">-10°</text>
+      </g>
+
+      <text x="900" y="225" text-anchor="middle" fill="#4a4a4a" font-size="10">受力曲线(垂直 GRF)</text>
+      <g transform="translate(780, 235)">
+        <line x1="0" y1="100" x2="240" y2="100" stroke="#c4bca4" stroke-width="0.6"/>
+        <line x1="0" y1="20" x2="0" y2="100" stroke="#c4bca4" stroke-width="0.6"/>
+        <!-- 单峰早 -->
+        <path d="M 0,100 Q 15,80 30,55 Q 60,30 110,42 Q 180,90 240,100" fill="none" stroke="#4a6b3a" stroke-width="2"/>
+        <text x="40" y="22" fill="#4a6b3a" font-size="9" font-weight="700">无冲击峰</text>
+        <text x="40" y="34" fill="#4a4a4a" font-size="8.5">2.4 BW</text>
+      </g>
+
+      <g transform="translate(780, 350)">
+        <text x="0" y="0" fill="#4a6b3a" font-size="9.5" font-weight="600">⚠ 跟腱负荷大</text>
+        <text x="0" y="14" fill="#4a4a4a" font-size="9">小腿易紧张/跟腱炎</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 1.5 · 三种着地的角度、受力曲线、风险点对照</div>
+  </div>
 
   <h4>三种模式的定义</h4>
   <p><strong>后跟着地 (Rearfoot Strike, RFS)</strong>——脚后跟先着地,触地角度 (foot strike angle, FSA) > +8°(脚尖上翘)。约 75–90% 的业余跑者属于此类,穿厚跟跑鞋会进一步放大这个比例。</p>
