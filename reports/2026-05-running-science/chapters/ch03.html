@@ -1,0 +1,771 @@
+<section id="s3" style="border-top: 4px solid var(--c-strength);">
+  <div class="container">
+    <div class="section-tag"><span class="num">03</span>LOWER-LIMB KINETIC CHAIN</div>
+    <h1 class="section-h">下肢发力链解剖 <span class="en">The Force-Producing Architecture</span></h1>
+    <p class="section-sub">从地面反力进入足底的那一瞬间，能量沿肌腱-肌肉链向上、向前传导，最终在推离地面时释放。读懂这条链，就是读懂跑步本身。</p>
+
+    <div class="tldr">
+      <div class="label">TL;DR</div>
+      <p>跑步不是"腿在动"，而是 <strong>一条从足底到躯干的发力链</strong> 在每一步都做着同样的事：着地时把冲击转成弹性势能，推离时把弹性势能转成前进动量。链上任何一节弱，全链效率塌方。<em>臀肌、比目鱼肌、足底固有肌</em> —— 业余跑者的三个"沉睡英雄"。</p>
+    </div>
+
+    <h3><span class="pre">3.1</span>发力链的物理学骨架</h3>
+    <p class="lead">从生物力学角度看，跑步是一个 <em>串联弹簧 + 串联马达</em> 的混合系统。每一次着地，地面反力 <em>GRF</em> 经过六个关节、四级肌腱、二十多块主要肌肉的传递，才能转化为身体的水平推进。</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>着地链 · Landing Chain</h4>
+        <p>方向：<em>足 → 踝 → 膝 → 髋 → 骨盆 → 脊柱</em>。地面反力 (GRF) 沿这条线向上传导，每一节关节通过 <strong>离心收缩</strong> 吸收冲击。地面反力峰值约为体重的 <strong>2.5–3 倍</strong>，跖屈肌群和股四头肌承担主要缓冲。</p>
+      </div>
+      <div class="card">
+        <h4>推离链 · Propulsive Chain</h4>
+        <p>方向反向：<em>髋伸 → 膝伸 → 踝跖屈 → 趾屈</em>。臀大肌是这条链的"发动机"，能量从近端向远端释放，最终经过跟腱-足弓系统把弹性势能转化为水平推进。臀大肌峰值激活集中在 <strong>支撑相后 50%</strong>。</p>
+      </div>
+    </div>
+
+    <div class="callout sharp">
+      <div class="label">反共识</div>
+      <p><strong>"跑步靠大腿"是最离谱的肌群误解。</strong> 跑步的真正发动机是 <em>臀大肌</em>（推进）+ <em>比目鱼肌</em>（弹性 + 推离）+ <em>足底固有肌</em>（足弓硬度）。股四头肌主要做的是<em>离心刹车</em>，不是发力。一个能踢腿 70 kg 但臀肌无法激活的人，跑 5 km 配速可能比一个臀肌强健的瘦子还慢。</p>
+    </div>
+
+    <div class="number-strip">
+      <div class="item">
+        <div class="label">GRF · 垂直地反力</div>
+        <div class="num">2.5-3×</div>
+        <div class="sub">体重，每一步</div>
+      </div>
+      <div class="item">
+        <div class="label">支撑相时长</div>
+        <div class="num">180-250</div>
+        <div class="sub">毫秒（精英 vs 业余）</div>
+      </div>
+      <div class="item">
+        <div class="label">弹性能贡献</div>
+        <div class="num">~50%</div>
+        <div class="sub">来自跟腱 + 足弓</div>
+      </div>
+      <div class="item">
+        <div class="label">单腿支撑次数</div>
+        <div class="num">~1500</div>
+        <div class="sub">每公里 × 2 腿</div>
+      </div>
+    </div>
+
+    <h3><span class="pre">3.2</span>下肢肌群地图</h3>
+    <p class="lead">下面这张图按"主要参与跑步的功能肌群"为轴，标注每块肌肉在 <em>步态周期</em> 中的角色。颜色 = 主要功能：金 = 推进，绿 = 稳定，红 = 减速 / 离心。</p>
+
+    <div class="svg-frame">
+      <svg viewBox="0 0 800 460" width="100%" style="display:block">
+        <defs>
+          <linearGradient id="g-glute" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d4a548" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#d4a548" stop-opacity="0.25"/>
+          </linearGradient>
+          <linearGradient id="g-ham" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#b54848" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#b54848" stop-opacity="0.2"/>
+          </linearGradient>
+          <linearGradient id="g-quad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6a8b3d" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#6a8b3d" stop-opacity="0.2"/>
+          </linearGradient>
+          <linearGradient id="g-soleus" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4a6fa5" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#4a6fa5" stop-opacity="0.25"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 人形轮廓 -->
+        <g fill="none" stroke="var(--ink-faint)" stroke-width="0.7">
+          <!-- 头 -->
+          <ellipse cx="220" cy="50" rx="18" ry="22"/>
+          <!-- 躯干 -->
+          <path d="M 200,72 L 195,170 L 250,170 L 245,72 Z"/>
+          <!-- 髋部 -->
+          <path d="M 195,170 L 180,210 L 265,210 L 250,170 Z"/>
+          <!-- 大腿 -->
+          <path d="M 188,210 L 175,330 L 215,335 L 220,212 Z"/>
+          <path d="M 225,212 L 230,335 L 268,330 L 257,210 Z"/>
+          <!-- 小腿 -->
+          <path d="M 178,335 L 168,430 L 205,432 L 215,338 Z"/>
+          <path d="M 230,338 L 240,432 L 277,430 L 267,335 Z"/>
+          <!-- 足 -->
+          <path d="M 168,430 L 158,448 L 218,448 L 205,432 Z"/>
+          <path d="M 240,432 L 227,448 L 287,448 L 277,430 Z"/>
+        </g>
+
+        <!-- 髋部肌群（后视/侧视） -->
+        <ellipse cx="223" cy="195" rx="42" ry="26" fill="url(#g-glute)"/>
+        <text x="270" y="195" font-size="10" fill="#d4a548">臀大肌 Gluteus Maximus</text>
+        <line x1="252" y1="195" x2="265" y2="195" stroke="#d4a548" stroke-width="0.5"/>
+
+        <ellipse cx="195" cy="183" rx="14" ry="9" fill="#d4a548" opacity="0.55"/>
+        <text x="60" y="183" font-size="9.5" fill="#d4a548">臀中肌 G. Medius</text>
+        <line x1="120" y1="183" x2="183" y2="183" stroke="#d4a548" stroke-width="0.5"/>
+
+        <!-- 大腿前 股四头 -->
+        <ellipse cx="200" cy="265" rx="14" ry="48" fill="url(#g-quad)"/>
+        <ellipse cx="244" cy="265" rx="14" ry="48" fill="url(#g-quad)"/>
+        <text x="60" y="260" font-size="9.5" fill="#6a8b3d">股四头肌 Quadriceps</text>
+        <text x="60" y="272" font-size="8.5" fill="var(--ink-faint)">(直/内/外/中)</text>
+        <line x1="120" y1="262" x2="190" y2="262" stroke="#6a8b3d" stroke-width="0.5"/>
+
+        <!-- 大腿后 腘绳 -->
+        <ellipse cx="223" cy="270" rx="20" ry="55" fill="url(#g-ham)"/>
+        <text x="320" y="260" font-size="10" fill="#e09b9b">腘绳肌 Hamstrings</text>
+        <text x="320" y="272" font-size="8.5" fill="var(--ink-faint)">(股二头/半腱/半膜)</text>
+        <line x1="245" y1="270" x2="318" y2="265" stroke="#b54848" stroke-width="0.5"/>
+
+        <!-- 内收肌 -->
+        <ellipse cx="223" cy="235" rx="11" ry="22" fill="#9c4bb5" opacity="0.45"/>
+        <text x="320" y="225" font-size="9.5" fill="#c084d8">内收肌群 Adductors</text>
+        <line x1="234" y1="232" x2="318" y2="227" stroke="#9c4bb5" stroke-width="0.5"/>
+
+        <!-- 小腿 腓肠肌 -->
+        <ellipse cx="192" cy="365" rx="13" ry="28" fill="#4a6fa5" opacity="0.6"/>
+        <ellipse cx="253" cy="365" rx="13" ry="28" fill="#4a6fa5" opacity="0.6"/>
+        <text x="60" y="365" font-size="10" fill="#8fb8df">腓肠肌 Gastrocnemius</text>
+        <line x1="120" y1="365" x2="178" y2="365" stroke="#4a6fa5" stroke-width="0.5"/>
+
+        <!-- 比目鱼肌 -->
+        <ellipse cx="223" cy="380" rx="32" ry="20" fill="url(#g-soleus)"/>
+        <text x="320" y="380" font-size="11" fill="#94cdcd" font-weight="600">比目鱼肌 Soleus</text>
+        <text x="320" y="392" font-size="8.5" fill="var(--ink-faint)">长跑主力 · 80% 慢肌</text>
+        <line x1="256" y1="380" x2="318" y2="383" stroke="#3d8b6e" stroke-width="0.5"/>
+
+        <!-- 胫前肌 -->
+        <ellipse cx="220" cy="370" rx="6" ry="22" fill="#c47f17" opacity="0.5"/>
+        <text x="60" y="408" font-size="9.5" fill="#c47f17">胫骨前肌 Tibialis Anterior</text>
+        <line x1="150" y1="408" x2="212" y2="385" stroke="#c47f17" stroke-width="0.5"/>
+
+        <!-- 足底筋膜 -->
+        <path d="M 165,442 Q 188,438 215,445" fill="none" stroke="#d4a548" stroke-width="1.4" opacity="0.7"/>
+        <text x="60" y="448" font-size="9.5" fill="#d4a548">足底筋膜 + 足弓</text>
+        <line x1="145" y1="448" x2="165" y2="445" stroke="#d4a548" stroke-width="0.5"/>
+
+        <!-- 跟腱 -->
+        <line x1="223" y1="408" x2="223" y2="436" stroke="#94cdcd" stroke-width="1.6"/>
+        <text x="320" y="425" font-size="9.5" fill="#94cdcd">跟腱 Achilles</text>
+        <line x1="234" y1="425" x2="318" y2="425" stroke="#3d8b6e" stroke-width="0.5"/>
+
+        <!-- 标注框：图例 -->
+        <g transform="translate(530, 50)">
+          <rect x="0" y="0" width="220" height="160" fill="var(--bg-card)" stroke="var(--line)" stroke-width="0.5" rx="2"/>
+          <text x="12" y="20" font-size="10" fill="var(--accent)" font-weight="600" letter-spacing="0.05em">FUNCTIONAL ROLES</text>
+          <rect x="12" y="32" width="14" height="9" fill="#d4a548" opacity="0.6"/>
+          <text x="32" y="40" font-size="9.5" fill="var(--ink)">推进 · 主发动机</text>
+          <rect x="12" y="48" width="14" height="9" fill="#b54848" opacity="0.55"/>
+          <text x="32" y="56" font-size="9.5" fill="var(--ink)">离心减速 · 摆动末端</text>
+          <rect x="12" y="64" width="14" height="9" fill="#6a8b3d" opacity="0.55"/>
+          <text x="32" y="72" font-size="9.5" fill="var(--ink)">膝伸 · 着地缓冲</text>
+          <rect x="12" y="80" width="14" height="9" fill="#4a6fa5" opacity="0.6"/>
+          <text x="32" y="88" font-size="9.5" fill="var(--ink)">跖屈 · 弹性储能</text>
+          <rect x="12" y="96" width="14" height="9" fill="#9c4bb5" opacity="0.45"/>
+          <text x="32" y="104" font-size="9.5" fill="var(--ink)">稳定 · 跨步线控制</text>
+          <rect x="12" y="112" width="14" height="9" fill="#c47f17" opacity="0.5"/>
+          <text x="32" y="120" font-size="9.5" fill="var(--ink)">背屈 · 摆动相</text>
+          <text x="12" y="142" font-size="8.5" fill="var(--ink-faint)" font-style="italic">侧视示意 · 非解剖精准比例</text>
+        </g>
+      </svg>
+      <div class="svg-caption">LOWER-LIMB MUSCULATURE · KEY RUNNING DRIVERS (LATERAL VIEW)</div>
+    </div>
+
+    <h3><span class="pre">3.3</span>髋部：推进引擎室</h3>
+    <p class="lead">髋部肌群是跑步的真正"发动机"。骨盆是这条链中最大的杠杆点 —— 髋伸的力臂长、力矩大，每一次推离都由它在主控。但业余跑者中 <em>"臀肌沉睡 gluteal amnesia"</em> 普遍存在：长期久坐导致髋伸肌神经募集效率下降，臀大肌"在那但用不上"。</p>
+
+    <div class="metric-grid">
+      <div class="metric-card strength">
+        <div class="m-label">GLUTEUS MAXIMUS</div>
+        <div class="m-value">髋伸 + 外旋</div>
+        <div class="m-desc">推离期主肌。峰值激活集中在 <em>支撑相后 50%</em>，全身最大的单块肌肉，截面积 ~50 cm²。</div>
+      </div>
+      <div class="metric-card strength">
+        <div class="m-label">GLUTEUS MEDIUS</div>
+        <div class="m-value">外展 + 骨盆稳定</div>
+        <div class="m-desc">单腿支撑期防止骨盆向对侧下沉（<em>Trendelenburg 征</em>）。弱化 = 膝内扣，跑者膝主因之一。</div>
+      </div>
+      <div class="metric-card strength">
+        <div class="m-label">GLUTEUS MINIMUS</div>
+        <div class="m-value">外展 + 内旋</div>
+        <div class="m-desc">辅助中肌，深层稳定。常被忽略但对单腿姿态控制至关重要。</div>
+      </div>
+      <div class="metric-card strength">
+        <div class="m-label">ILIOPSOAS</div>
+        <div class="m-value">髋屈</div>
+        <div class="m-desc">腰大肌 + 髂肌。摆动相主力，决定步频与抬腿高度。久坐人群常缩短紧张。</div>
+      </div>
+      <div class="metric-card strength">
+        <div class="m-label">ADDUCTORS</div>
+        <div class="m-value">内收 + 屈髋</div>
+        <div class="m-desc">长收肌、大收肌、股薄肌。跨步线宽度的稳定器，大收肌后纤维还参与髋伸。</div>
+      </div>
+      <div class="metric-card strength">
+        <div class="m-label">DEEP-6 ROTATORS</div>
+        <div class="m-value">外旋六肌</div>
+        <div class="m-desc">梨状肌、闭孔内/外肌、上/下孖肌、股方肌。微调股骨方向，跑姿对线的"舵手"。</div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="label">机制注释 · 臀肌沉睡</div>
+      <p>所谓 <em>gluteal amnesia</em> 不是"肌肉萎缩"，而是 <strong>神经-肌肉激活模式异常</strong>。久坐导致髋屈肌（髂腰肌）慢性紧张 → 通过"交互抑制 reciprocal inhibition"压制对侧的髋伸肌（臀大肌）募集信号。检测方法：俯卧抬腿，观察启动顺序。健康模式 = 臀大肌先点火，然后腘绳肌。如果先看到腘绳肌发力 + 腰椎过伸，臀肌就是真的"睡着了"。<span class="ref">[Janda 1987]</span></p>
+    </div>
+
+    <h3><span class="pre">3.4</span>大腿前侧：股四头肌 · 离心刹车</h3>
+    <p class="lead">股四头肌有 <em>四个头</em>，但在跑步中它们的角色和大众认知颠倒 —— 它不是"伸膝出力的"，而是 <strong>"在着地时离心控制膝屈"</strong> 的减速器。真正的伸膝推进只发生在推离末段，且很短。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>肌头</th>
+          <th>跨关节</th>
+          <th>主要功能</th>
+          <th>跑步角色</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>股直肌</strong> <em>Rectus Femoris</em></td>
+          <td class="mono-cell">双关节</td>
+          <td>髋屈 + 膝伸</td>
+          <td>摆动相抬腿 + 摆动末端的伸膝（与腘绳肌对抗）。跑者最常拉伤的股四头头。</td>
+        </tr>
+        <tr>
+          <td><strong>股外侧肌</strong> <em>Vastus Lateralis</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>膝伸</td>
+          <td>体积最大。着地时主要的离心承重者，下坡跑此处易过载。</td>
+        </tr>
+        <tr>
+          <td><strong>股内侧肌</strong> <em>Vastus Medialis</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>膝伸 + 髌骨内拉</td>
+          <td>VMO (斜束) 维持髌骨轨迹。弱化 = 髌骨外移 → 髌股关节痛 (PFPS) 。</td>
+        </tr>
+        <tr>
+          <td><strong>股中间肌</strong> <em>Vastus Intermedius</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>膝伸</td>
+          <td>位于股直肌深面，伸膝的"安静主力"，跑步中近乎全程低位激活。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout sharp">
+      <div class="label">反共识</div>
+      <p><strong>下坡跑后的酸痛不是"跑太多"，是"刹太多"。</strong> 下坡时股四头肌做的是 <em>离心收缩 eccentric contraction</em>，肌纤维 Z 线被拉断（micro-trauma），DOMS 延迟性酸痛 24-72h 出现。这种损伤 <em>无法通过有氧训练规避</em>，必须通过 <strong>专项离心训练</strong>（北欧腘绳、慢速下蹲、单腿下台阶）建立耐受性。</p>
+    </div>
+
+    <h3><span class="pre">3.5</span>大腿后侧：腘绳肌 · 摆动减速器</h3>
+    <p class="lead">腘绳肌是跑者最高发的拉伤部位（占耐力跑伤病约 12-15%）。原因不在着地，而在 <em>摆动腿末期</em>：小腿前甩到最高点时，腘绳肌正在做高强度离心收缩 —— 它的工作是 <strong>制动伸膝</strong>，防止小腿过度前甩造成关节囊撕裂。</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>股二头肌 Biceps Femoris</h4>
+        <p>外侧腘绳。长头跨髋膝双关节，短头仅跨膝。长头的双关节性质 + 高比例 II 型纤维 → 它是最易拉伤的腘绳头（占腘绳拉伤约 70%）。</p>
+      </div>
+      <div class="card">
+        <h4>半腱肌 Semitendinosus</h4>
+        <p>内侧腘绳浅层，肌腱长。常被取作前交叉韧带 ACL 重建的移植腱。和半膜肌一起在屈膝 + 内旋小腿。</p>
+      </div>
+      <div class="card">
+        <h4>半膜肌 Semimembranosus</h4>
+        <p>内侧腘绳深层。三头中最厚实的，与坐骨结节附着面大，承担站姿稳定与髋伸大部分负荷。</p>
+      </div>
+      <div class="card">
+        <h4>H : Q 比</h4>
+        <p>腘绳 / 股四头肌力矩比。<em>理想 0.6–0.8</em>。比例低 = 摆动腿减速不足 → 拉伤风险 + 髌前疼。<strong>北欧腘绳 Nordic hamstring</strong> 是循证最强的预防方案，可降伤病率 ~50%。<span class="ref">[Petersen 2011]</span></p>
+      </div>
+    </div>
+
+    <div class="callout ops">
+      <div class="label">操作建议 · 腘绳损伤预防</div>
+      <p><strong>1)</strong> 每周 1–2 次 <em>北欧腘绳</em>（Nordic Curl）3 × 5–8 次；<strong>2)</strong> 单腿罗马尼亚硬拉（SL-RDL）3 × 8/腿，强调"被拉长"位的等长发力；<strong>3)</strong> 间歇训练前增加 100m 渐进加速 strides，避免冷启动直接全速；<strong>4)</strong> 跑后等长收缩 30s × 3，维持长度-张力曲线。</p>
+    </div>
+
+    <h3><span class="pre">3.6</span>小腿：被低估的耐力心脏</h3>
+    <p class="lead">如果说臀大肌是发动机，那 <em>比目鱼肌</em> 就是跑步的耐力心脏。它常常被腓肠肌的视觉风头盖过，但所有的长跑经济性数据都指向它：精英长跑者的比目鱼肌横截面积显著大于大众跑者 (~+20%)，慢肌纤维比例高达 80% 以上。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>肌肉</th>
+          <th>类型</th>
+          <th>纤维构成</th>
+          <th>主要角色</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>腓肠肌</strong> <em>Gastrocnemius</em></td>
+          <td class="mono-cell">双关节</td>
+          <td>I : II ≈ 50:50</td>
+          <td>跨膝 + 跨踝。膝伸位时跖屈力矩最大 → 起跑 / 冲刺主力。SSC 弹性贡献最高。</td>
+        </tr>
+        <tr>
+          <td><strong>比目鱼肌</strong> <em>Soleus</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>I 型 80%+</td>
+          <td>纯跖屈。低速持续输出主力，<em>马拉松配速下产生的踝跖屈力矩 60% 以上来自比目鱼肌</em>。</td>
+        </tr>
+        <tr>
+          <td><strong>胫骨前肌</strong> <em>Tibialis Anterior</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>I : II ≈ 70:30</td>
+          <td>背屈。摆动相防 <em>foot drop</em>，着地瞬间离心控制足放下。胫骨内侧痛 (MTSS) 的关键肌。</td>
+        </tr>
+        <tr>
+          <td><strong>腓骨长 / 短肌</strong> <em>Peroneus</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>I : II ≈ 60:40</td>
+          <td>外翻 + 跖屈。横弓稳定 + 防内翻扭伤。崎岖路面跑者必须强化。</td>
+        </tr>
+        <tr>
+          <td><strong>胫骨后肌</strong> <em>Tibialis Posterior</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>I 型为主</td>
+          <td>内翻 + 内侧纵弓托举。慢性弱化 = 平足、过度旋前 → 跖筋膜痛。</td>
+        </tr>
+        <tr>
+          <td><strong>屈趾 / 屈拇长肌</strong> <em>FDL / FHL</em></td>
+          <td class="mono-cell">单关节</td>
+          <td>I 型为主</td>
+          <td>趾屈，足弓辅助稳定。推离末段助力。FHL 弱化与拇外翻、跖筋膜痛相关。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <div class="label">机制注释 · 比目鱼 vs 腓肠</div>
+      <p>同一动作（跖屈）下两者分工的关键是 <em>膝关节角度</em>：腓肠肌跨膝，膝伸直时长度-张力关系最优、出力最大（蹬地、爆发跳起）；膝屈曲 90° 时腓肠肌松弛，比目鱼肌单独工作（坐姿提踵、慢跑维持时跖屈）。这就是为什么长跑训练应该 <strong>多做坐姿提踵</strong> 而不是站姿提踵 —— 前者孤立打比目鱼肌，后者更多刺激腓肠肌。<span class="ref">[Hébert-Losier 2017]</span></p>
+    </div>
+
+    <h3><span class="pre">3.7</span>足部：天然的弹簧 + 力学传感器</h3>
+    <p class="lead">足部有 <em>26 块骨、33 个关节、100+ 韧带、20+ 块肌肉</em>。在跑步中它要在 <strong>0.2 秒内</strong> 完成两件相反的事：着地时变软吸收冲击（旋前 pronation），推离时变硬释放能量（旋后 supination）。这个"软-硬"转换由 <em>Windlass 机制</em> 主控。</p>
+
+    <div class="svg-frame">
+      <svg viewBox="0 0 800 280" width="100%" style="display:block">
+        <!-- 标题 -->
+        <text x="400" y="22" font-size="11" fill="var(--accent)" text-anchor="middle" letter-spacing="0.1em">WINDLASS MECHANISM · 卷扬机原理</text>
+
+        <!-- 左图：放松态 -->
+        <g transform="translate(50, 60)">
+          <text x="140" y="-10" font-size="10" fill="var(--ink-soft)" text-anchor="middle">① 静态 / 放松</text>
+          <!-- 足部轮廓 -->
+          <path d="M 30,150 Q 35,80 80,75 Q 130,72 180,80 Q 230,90 270,105 L 275,125 L 30,150 Z"
+                fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+          <!-- 跟骨 -->
+          <circle cx="50" cy="125" r="14" fill="var(--bg-card)" stroke="var(--ink-soft)" stroke-width="0.8"/>
+          <text x="50" y="128" font-size="8" fill="var(--ink-soft)" text-anchor="middle">跟骨</text>
+          <!-- 跖骨头 -->
+          <circle cx="245" cy="115" r="8" fill="var(--bg-card)" stroke="var(--ink-soft)" stroke-width="0.8"/>
+          <!-- 足底筋膜 -->
+          <path d="M 50,135 Q 145,145 245,123" fill="none" stroke="#d4a548" stroke-width="1.6"/>
+          <text x="145" y="170" font-size="9" fill="#d4a548" text-anchor="middle">足底筋膜 · 松弛</text>
+          <!-- 弓 -->
+          <path d="M 50,125 Q 145,95 245,115" fill="none" stroke="var(--ink-faint)" stroke-width="0.6" stroke-dasharray="2,3"/>
+        </g>
+
+        <!-- 中间箭头 -->
+        <g transform="translate(340, 130)">
+          <line x1="0" y1="0" x2="40" y2="0" stroke="var(--accent)" stroke-width="0.8"/>
+          <polygon points="40,-4 48,0 40,4" fill="var(--accent)"/>
+          <text x="24" y="-8" font-size="9" fill="var(--ink-faint)" text-anchor="middle">趾背伸</text>
+        </g>
+
+        <!-- 右图：激活态 -->
+        <g transform="translate(440, 60)">
+          <text x="160" y="-10" font-size="10" fill="var(--accent)" text-anchor="middle">② 推离 / Windlass 激活</text>
+          <!-- 足部轮廓（足弓抬高） -->
+          <path d="M 30,150 Q 35,75 80,68 Q 130,55 180,60 Q 230,75 270,88 L 285,100 L 305,80 L 312,90 L 290,108 L 30,150 Z"
+                fill="none" stroke="var(--ink)" stroke-width="1.2"/>
+          <!-- 跟骨 -->
+          <circle cx="50" cy="125" r="14" fill="var(--bg-card)" stroke="var(--ink-soft)" stroke-width="0.8"/>
+          <!-- 跖骨头 -->
+          <circle cx="245" cy="95" r="8" fill="var(--bg-card)" stroke="var(--ink-soft)" stroke-width="0.8"/>
+          <!-- 趾骨（背伸） -->
+          <path d="M 253,95 Q 280,75 305,75" fill="none" stroke="var(--ink)" stroke-width="1.4"/>
+          <circle cx="305" cy="76" r="5" fill="var(--bg-card)" stroke="var(--ink-soft)" stroke-width="0.7"/>
+          <!-- 足底筋膜（拉紧） -->
+          <path d="M 50,135 Q 145,125 245,103 Q 280,90 305,80" fill="none" stroke="#d4a548" stroke-width="2.2"/>
+          <text x="160" y="170" font-size="9" fill="#d4a548" text-anchor="middle">足底筋膜 · 张紧 → 足弓上升</text>
+          <!-- 弓（抬高） -->
+          <path d="M 50,125 Q 145,68 245,95" fill="none" stroke="var(--accent)" stroke-width="0.8" stroke-dasharray="2,3"/>
+          <!-- 力箭头 -->
+          <g transform="translate(145, 50)">
+            <line x1="0" y1="0" x2="0" y2="-22" stroke="var(--c-strength)" stroke-width="1.4"/>
+            <polygon points="-4,-22 0,-30 4,-22" fill="var(--c-strength)"/>
+            <text x="14" y="-12" font-size="9" fill="var(--c-strength)">足弓上升</text>
+          </g>
+        </g>
+
+        <!-- 底部说明 -->
+        <g transform="translate(50, 240)">
+          <text x="0" y="0" font-size="9.5" fill="var(--ink-soft)">推离末段大脚趾背伸 → 足底筋膜被卷绕在第一跖骨头上 → 筋膜缩短拉紧 → 足弓被动抬升 → 足部从柔顺态转为刚性杠杆 → 弹性势能释放为推进力。</text>
+        </g>
+      </svg>
+      <div class="svg-caption">WINDLASS · TOE EXTENSION TIGHTENS PLANTAR FASCIA → ARCH RISES → FOOT BECOMES RIGID LEVER</div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h4>纵弓 Arches</h4>
+        <p>内侧纵弓（高、主弹簧）+ 外侧纵弓（低、稳定）+ 横弓（跖骨头之间）。三弓共同形成"穹顶 dome"结构，<em>没有任何一块肌肉能单独维持足弓</em> —— 它靠骨形态 + 韧带 + 固有肌共同张拉。</p>
+      </div>
+      <div class="card">
+        <h4>足底筋膜 Plantar Fascia</h4>
+        <p>从跟骨内侧粗隆到 5 块跖骨头的厚胶原条带，相当于足弓的"弓弦"。在推离时被动储能可达 <em>~17% 的步态能量</em>。<span class="ref">[Ker 1987]</span></p>
+      </div>
+      <div class="card">
+        <h4>固有足肌 Intrinsic Foot Muscles</h4>
+        <p>四层、约 18 块小肌肉，是足弓的"主动稳定层"。久穿支撑性厚底鞋会弱化它们。<em>足底踩毛巾、单脚平衡训练</em> 可恢复激活。</p>
+      </div>
+    </div>
+
+    <div class="callout sharp">
+      <div class="label">反共识</div>
+      <p><strong>"过度旋前需要矫形鞋垫"是过时教条。</strong> 2010 年后的多篇大规模 RCT（McCulloch、Knapik、Richards）显示，按足弓类型 <em>matched orthotics</em> 并不显著降低跑步伤病率。当代共识倾向：足弓不是"形态问题"而是"功能问题"—— 强化固有足肌、改善踝关节活动度、跑姿干预（步频、足触地模式）比矫形器更可靠。<span class="ref">[Richards 2009; Knapik 2014]</span></p>
+    </div>
+
+    <h3><span class="pre">3.8</span>核心：传力枢纽，不是发力机</h3>
+    <p class="lead">很多人对"核心训练"的理解停留在"练腹肌"。错。在跑步中核心的作用是 <strong>"传递力 + 抗扭转"</strong>，几乎不参与产生推进力。核心强 ≠ 肚子上有六块。它是 <em>腹内压 IAP + 抗回旋 anti-rotation + 抗侧屈</em> 三件事。</p>
+
+    <div class="metric-grid">
+      <div class="metric-card recovery">
+        <div class="m-label">TVA</div>
+        <div class="m-value">腹横肌</div>
+        <div class="m-desc">最深层，水平包绕腹腔。激活产生 <em>腹内压 IAP</em>，给脊柱"充气支柱"般稳定。</div>
+      </div>
+      <div class="metric-card recovery">
+        <div class="m-label">OBLIQUES</div>
+        <div class="m-value">腹内外斜</div>
+        <div class="m-desc">抗回旋主力。跑步时上下肢交替摆动产生的躯干扭矩由它们抵消，避免能量泄漏。</div>
+      </div>
+      <div class="metric-card recovery">
+        <div class="m-label">ERECTOR SPINAE</div>
+        <div class="m-value">竖脊肌</div>
+        <div class="m-desc">脊柱伸展 / 抗屈，维持躯干前倾角度。弱化 = 跑步中段以后含胸驼背 → 呼吸效率下降。</div>
+      </div>
+      <div class="metric-card recovery">
+        <div class="m-label">MULTIFIDUS</div>
+        <div class="m-value">多裂肌</div>
+        <div class="m-desc">深层节段稳定肌，逐节调控椎间微动。下背痛跑者多见多裂肌萎缩。</div>
+      </div>
+      <div class="metric-card recovery">
+        <div class="m-label">DIAPHRAGM</div>
+        <div class="m-value">膈肌</div>
+        <div class="m-desc">既是呼吸主肌又是核心顶盖。腹式呼吸训练同时强化呼吸效率与核心稳定。</div>
+      </div>
+      <div class="metric-card recovery">
+        <div class="m-label">PELVIC FLOOR</div>
+        <div class="m-value">骨盆底肌</div>
+        <div class="m-desc">核心底盖。女性跑者尤其需关注（产后弱化）。与 TVA 协同形成完整"腹腔气球"。</div>
+      </div>
+    </div>
+
+    <div class="callout note">
+      <div class="label">机制注释 · 抗回旋而非回旋</div>
+      <p>"为什么跑者不需要练俄罗斯转体？"因为跑步本身就是高频率的回旋负载（每分钟 170+ 次躯干扭转）。训练应该练的是 <em>抗</em> 这个回旋的能力 —— 包括 Pallof Press、单边负重行走、Dead Bug 等。而 sit-up、roman chair 这类躯干屈曲训练对跑步几乎无价值，还可能加重腰椎压力。</p>
+    </div>
+
+    <h3><span class="pre">3.9</span>肌筋膜链：后侧链是跑步的"主链"</h3>
+    <p class="lead">解剖肌群是一回事，<em>功能链</em> 是另一回事。Thomas Myers 的"解剖列车 Anatomy Trains"理论提出：肌肉不是孤立工作，而是被筋膜连接成几条贯穿全身的链。在跑步中最重要的是 <strong>后侧链 Posterior Chain</strong>。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>功能链</th>
+          <th>组成</th>
+          <th>跑步角色</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>后侧链</strong> Posterior Chain</td>
+          <td>足底筋膜 → 跟腱 → 腓肠 / 比目鱼 → 腘绳 → 臀大 → 竖脊 → 项韧带</td>
+          <td>跑步的主能量链。储能 + 释能 + 推进。<em>所有"跑步专项力量"训练应优先打这条线</em>。</td>
+        </tr>
+        <tr>
+          <td><strong>前侧链</strong> Anterior Chain</td>
+          <td>胫前肌 → 股四头 → 髂腰 → 腹直 → 胸锁乳突</td>
+          <td>摆动相主力 + 着地缓冲。维持前倾跑姿角度。久坐紧张时拉短，需要拉伸释放。</td>
+        </tr>
+        <tr>
+          <td><strong>螺旋链</strong> Spiral Line</td>
+          <td>对侧斜行连接：左肩 → 右髋 → 左膝 → 右足</td>
+          <td>分散躯干旋转能量，让上下肢摆动协调。控制能量从一侧向对侧传导。</td>
+        </tr>
+        <tr>
+          <td><strong>外侧链</strong> Lateral Line</td>
+          <td>腓骨肌 → 髂胫束 → 臀中 → 腰方 → 颈侧</td>
+          <td>单腿支撑期防侧倾。臀中弱 → 髂胫束代偿 → 髂胫束综合征 (ITBS)。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout ops">
+      <div class="label">操作建议 · 后侧链强化套餐</div>
+      <p>每周 2 次，每次 30–40 分钟："罗马尼亚硬拉 5 × 6 + 单腿臀桥 4 × 12/腿 + 北欧腘绳 3 × 6 + 坐姿提踵 4 × 15 + 站姿提踵 4 × 12 + 弓步 3 × 10/腿 + 鸟狗 3 × 8/侧"。这套不要在 long run 同一天做。</p>
+    </div>
+
+    <h3><span class="pre">3.10</span>SSC：肌-腱单元的弹簧逻辑</h3>
+    <p class="lead">如果肌肉是马达，<em>肌腱</em> 就是弹簧。跑步中 <strong>50% 左右的机械能</strong> 来自肌腱被动储能-释放，而非肌肉主动做功。理解这个比例 = 理解为什么跑得越好的人"动作越省力"。</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>SSC · Stretch-Shortening Cycle</h4>
+        <p>拉长-缩短周期。三阶段：① <em>离心拉长</em>（着地相，肌腱储能）→ ② <em>停顿/过渡 amortization</em>（越短越好）→ ③ <em>向心缩短</em>（推离相，能量释放）。SSC 效率越高，每一步消耗越少氧气。</p>
+      </div>
+      <div class="card">
+        <h4>MTU · Muscle-Tendon Unit</h4>
+        <p>肌肉-肌腱串联单元。精英长跑者的特征是 <em>更刚硬的跟腱</em>（弹性模量高）+ <em>更慢拉伸-缩短的肌纤维</em>。这意味着肌腱负责储能-释能、肌肉只做微等长贡献。"看起来没用力"是真的没用力 —— 肌肉等长在工作。</p>
+      </div>
+    </div>
+
+    <div class="callout sharp">
+      <div class="label">反共识</div>
+      <p><strong>"跑姿好不好"的本质，不是抬腿高度或前倾角度，而是 SSC 效率。</strong> 同样配速下两个人，A 跑姿"很难看"但 SSC 利用充分，B "教科书前倾"但肌肉主动做功比例 70%+，A 的跑步经济性会显著优于 B。Plyometric 跳跃训练（深蹲跳、单腿跳、跳箱）刺激 SSC 神经回路的效果，比任何"跑姿矫正"都来得直接。<span class="ref">[Saunders 2006]</span></p>
+    </div>
+
+    <h3><span class="pre">3.11</span>关节力矩贡献：髋、膝、踝的分工</h3>
+    <p class="lead">下面这张图把一个完整步态周期中 <em>髋、膝、踝三关节</em> 在不同阶段的力矩贡献量化。看出谁在何时主控，是判断"力量训练优先级"的客观依据。</p>
+
+    <div class="svg-frame">
+      <svg viewBox="0 0 800 360" width="100%" style="display:block">
+        <!-- 标题 -->
+        <text x="400" y="20" font-size="11" fill="var(--accent)" text-anchor="middle" letter-spacing="0.1em">JOINT MOMENT CONTRIBUTION · 跑步步态各关节力矩</text>
+
+        <!-- 坐标轴 -->
+        <line x1="80" y1="320" x2="760" y2="320" stroke="var(--ink-faint)" stroke-width="0.8"/>
+        <line x1="80" y1="60" x2="80" y2="320" stroke="var(--ink-faint)" stroke-width="0.8"/>
+
+        <!-- Y 轴标签 -->
+        <g font-size="9" fill="var(--ink-soft)">
+          <text x="72" y="323" text-anchor="end">0</text>
+          <text x="72" y="270" text-anchor="end">25</text>
+          <text x="72" y="217" text-anchor="end">50</text>
+          <text x="72" y="164" text-anchor="end">75</text>
+          <text x="72" y="111" text-anchor="end">100%</text>
+        </g>
+        <text x="30" y="190" font-size="10" fill="var(--ink-soft)" text-anchor="middle" transform="rotate(-90,30,190)">关节力矩贡献 %</text>
+
+        <!-- X 轴：步态阶段 -->
+        <g font-size="9.5" fill="var(--ink-soft)" text-anchor="middle">
+          <text x="160" y="340">着地 Initial Contact</text>
+          <text x="300" y="340">中支撑 Midstance</text>
+          <text x="440" y="340">推离 Push-off</text>
+          <text x="580" y="340">摆动早 Early Swing</text>
+          <text x="720" y="340">摆动末 Late Swing</text>
+        </g>
+
+        <!-- 分隔线 -->
+        <g stroke="var(--ink-faint)" stroke-width="0.4" stroke-dasharray="2,3" opacity="0.5">
+          <line x1="220" y1="60" x2="220" y2="320"/>
+          <line x1="360" y1="60" x2="360" y2="320"/>
+          <line x1="500" y1="60" x2="500" y2="320"/>
+          <line x1="640" y1="60" x2="640" y2="320"/>
+        </g>
+
+        <!-- 髋 bars 金色 -->
+        <g fill="#d4a548" opacity="0.85">
+          <rect x="100" y="270" width="20" height="50"/>
+          <rect x="240" y="240" width="20" height="80"/>
+          <rect x="380" y="135" width="20" height="185"/>
+          <rect x="520" y="195" width="20" height="125"/>
+          <rect x="660" y="220" width="20" height="100"/>
+        </g>
+
+        <!-- 膝 bars 绿色 -->
+        <g fill="#6a8b3d" opacity="0.85">
+          <rect x="125" y="158" width="20" height="162"/>
+          <rect x="265" y="180" width="20" height="140"/>
+          <rect x="405" y="240" width="20" height="80"/>
+          <rect x="545" y="225" width="20" height="95"/>
+          <rect x="685" y="158" width="20" height="162"/>
+        </g>
+
+        <!-- 踝 bars 蓝色 -->
+        <g fill="#4a6fa5" opacity="0.85">
+          <rect x="150" y="190" width="20" height="130"/>
+          <rect x="290" y="120" width="20" height="200"/>
+          <rect x="430" y="100" width="20" height="220"/>
+          <rect x="570" y="280" width="20" height="40"/>
+          <rect x="710" y="275" width="20" height="45"/>
+        </g>
+
+        <!-- 图例 -->
+        <g transform="translate(560, 60)">
+          <rect x="0" y="0" width="14" height="9" fill="#d4a548" opacity="0.85"/>
+          <text x="20" y="8" font-size="10" fill="var(--ink)">髋 Hip</text>
+          <rect x="65" y="0" width="14" height="9" fill="#6a8b3d" opacity="0.85"/>
+          <text x="85" y="8" font-size="10" fill="var(--ink)">膝 Knee</text>
+          <rect x="135" y="0" width="14" height="9" fill="#4a6fa5" opacity="0.85"/>
+          <text x="155" y="8" font-size="10" fill="var(--ink)">踝 Ankle</text>
+        </g>
+
+        <!-- 注释 -->
+        <text x="440" y="80" font-size="9" fill="var(--accent)" text-anchor="middle">推离峰：踝 60%+ · 髋 35%</text>
+        <line x1="440" y1="85" x2="440" y2="98" stroke="var(--accent)" stroke-width="0.5"/>
+      </svg>
+      <div class="svg-caption">JOINT MOMENT BY GAIT PHASE · DATA SCHEMATIC ADAPTED FROM NOVACHECK 1998 + DORN 2012</div>
+    </div>
+
+    <p>读图要点：① <strong>推离相（Push-off）</strong> 是踝关节力矩 <em>压倒性主导</em> 的窗口（&gt;60%），这意味着比目鱼 / 腓肠肌的爆发力是马拉松配速的"最后一公里"决定因素；② <strong>髋关节力矩贡献</strong> 在推离前段达峰，正对应臀大肌的发力时序；③ <strong>膝关节力矩</strong> 在中支撑期最高（缓冲），在推离时贡献小于 30% —— 这就是为什么"练大腿"对跑步效率提升有限。</p>
+
+    <h3><span class="pre">3.12</span>单关节肌 vs 双关节肌</h3>
+    <p class="lead">下肢的关键肌肉里，有几块 <em>跨两个关节</em>——股直肌、腓肠肌、腘绳肌（半膜半腱长头）。它们在跑步中扮演特殊角色：<strong>同时调控两个关节</strong>，效率高但代价是<strong>更易拉伤</strong>。</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>双关节肌的优势</h4>
+        <p><em>力矩转移 force transfer</em> —— 比如腓肠肌：膝伸位时它既跖屈又屈膝，这意味着推离时膝伸做的功，有一部分会转化为踝跖屈做的功。这是跑步的"机械传递红利"，单关节肌做不到。</p>
+      </div>
+      <div class="card">
+        <h4>双关节肌的脆弱</h4>
+        <p>必须在 <em>两个关节同时处于不利角度</em> 时发力 —— 例如腘绳肌在摆动末端（髋屈 + 膝伸）做离心，肌长达到最大。同样原理让股直肌在 strides / sprint 中跑出短小动作时易拉伤。</p>
+      </div>
+    </div>
+
+    <h3><span class="pre">3.13</span>足型与旋前过度：解剖与功能的分离</h3>
+    <p class="lead">"高弓 / 平足 / 正常弓"是足部静态形态的分类。"旋前 pronation"和"旋后 supination"是动态足部翻转动作。两者过去常被混淆，但当代证据显示它们 <em>关联性远低于传言</em>。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>类型</th>
+          <th>静态特征</th>
+          <th>动态倾向</th>
+          <th>常见关联</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>高弓</strong> Cavus foot</td>
+          <td>足弓极高、刚性大</td>
+          <td>旋前不足 (under-pronation)</td>
+          <td>缓冲差 → 应力性骨折、髂胫束综合征、跖痛症</td>
+        </tr>
+        <tr>
+          <td><strong>正常弓</strong> Neutral</td>
+          <td>足弓中等高度</td>
+          <td>适度旋前 (10-15°)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>低弓 / 平足</strong> Pes planus</td>
+          <td>足弓塌陷、柔韧大</td>
+          <td>过度旋前 (over-pronation)</td>
+          <td>胫骨内侧痛、跖筋膜炎、膝内扣</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <div class="label">机制注释 · 旋前的真相</div>
+      <p>正常的旋前 (eversion of subtalar joint) 是足部 <em>必须的</em> 缓冲机制 —— 没有旋前你会承受不了地面冲击。"问题"出在 <em>过度旋前</em>（rolling-in 持续到推离）+ 旋前持续时间过长。但即便如此，2010 年后的高质量 RCT 显示，<strong>按足型选鞋反而可能增加伤病率</strong>。当前共识：足型只是一个 weak predictor，跑量、强度递增、训练规划才是主因素。<span class="ref">[Knapik 2014; Nielsen 2014]</span></p>
+    </div>
+
+    <h3><span class="pre">3.14</span>业余跑者的三大"沉睡英雄"</h3>
+    <p class="lead">在我陪过的无数跑者中，反复出现的弱链都是同样的三组：<strong>臀肌、比目鱼肌、足底固有肌</strong>。它们的共同点是 —— 平时不显眼，在跑步专项动作下又关键到几乎决定上限。</p>
+
+    <ul class="status-list">
+      <li class="warn"><strong>臀肌沉睡</strong> · 久坐 8 小时以上人群普遍。表现：跑步时下背酸、骨盆侧倾、推离感不强、髌骨外移。修复优先级：单腿臀桥 + 蚌式 + 后弓步。</li>
+      <li class="warn"><strong>比目鱼肌弱</strong> · 长跑爬升能力的根本瓶颈。表现：30 分钟以上配速崩盘、跟腱炎复发、小腿抽筋。修复：坐姿提踵 4 × 15-20，缓控离心 3s 下放。</li>
+      <li class="warn"><strong>足底固有肌弱</strong> · 现代足部最大问题。表现：足弓晚期塌陷、跖筋膜痛反复、平衡差。修复：短足练习 short foot exercise、毛巾抓握、单腿平衡 30s × 3。</li>
+      <li class="do"><strong>髋外旋灵活</strong> · 跑者良好状态的标志。表现：交叉腿弓步无明显代偿、步态扭矩小。</li>
+      <li class="do"><strong>跟腱-小腿刚性 + 弹性</strong> · 精英长跑者特征。表现：跳绳能持续 5 分钟以上不喘、单腿小幅跳跃自如。</li>
+    </ul>
+
+    <div class="callout you">
+      <div class="label">读者自检 · 5 个 30 秒测试</div>
+      <p><strong>1) 单腿臀桥</strong>（仰卧屈膝，单腿伸直推起）：能维持骨盆水平 30s 还是会侧倾？<br>
+      <strong>2) 单腿提踵</strong>：连续不间断做 25 次还是 10 次就酸？<br>
+      <strong>3) 单腿平衡（闭眼）</strong>：能站 30s 还是 5s 就晃？<br>
+      <strong>4) 北欧腘绳负向</strong>：膝跪地双脚被固定缓慢向前倒，能控制到几度？<br>
+      <strong>5) 仰卧抬腿</strong>（同侧腿伸直抬到 90°）：能保持下背贴地还是腰拱起？<br>
+      <em>三项以上不达标 = 应该优先力量 / 稳定训练 1-2 月再增加跑量。</em></p>
+    </div>
+
+    <div class="callout ops">
+      <div class="label">操作建议 · 跑者最小有效力量包 (MED)</div>
+      <p>每周 2 次、每次 25–30 分钟，<em>不增重</em> 的版本：</p>
+      <ol>
+        <li>单腿臀桥 3 × 12 / 腿（臀大 / 腘绳）</li>
+        <li>侧卧蚌式开合 3 × 15 / 侧（臀中 / 小）</li>
+        <li>坐姿提踵 4 × 20（比目鱼）</li>
+        <li>站姿提踵 3 × 15（腓肠）</li>
+        <li>北欧腘绳 3 × 5（H 链）</li>
+        <li>分腿蹲 3 × 10 / 腿（单侧综合）</li>
+        <li>鸟狗 3 × 10 / 侧（抗回旋）</li>
+        <li>死虫 3 × 12 / 侧（前侧链 + TVA）</li>
+        <li>单腿平衡 30s × 3 / 腿（固有足肌 + 本体感觉）</li>
+      </ol>
+      <p>不要在长跑当日做。每个动作做满后 <em>注意"该不该酸"的肌肉是否酸</em> —— 单腿臀桥做完应该是臀部酸而不是腘绳酸；如果是腘绳酸，说明你的臀肌还没醒。</p>
+    </div>
+
+    <h3><span class="pre">3.15</span>整合：把这章变成你的训练优先级</h3>
+    <p class="lead">读完一整章解剖，最重要的事情不是 <em>记住肌名</em>，而是 <strong>把它们翻译成你的训练时间预算</strong>。</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>优先级</th>
+          <th>对象</th>
+          <th>每周时间</th>
+          <th>训练动作</th>
+          <th>评估指标</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono-cell">P0</td>
+          <td>臀大肌 + 臀中肌</td>
+          <td>30 min</td>
+          <td>单腿臀桥、蚌式、髋外展、后弓步</td>
+          <td>单腿臀桥 30s 无侧倾</td>
+        </tr>
+        <tr>
+          <td class="mono-cell">P0</td>
+          <td>比目鱼肌</td>
+          <td>15 min</td>
+          <td>坐姿提踵慢离心 3s × 20</td>
+          <td>连续单腿提踵 25 次</td>
+        </tr>
+        <tr>
+          <td class="mono-cell">P1</td>
+          <td>腘绳肌（离心）</td>
+          <td>20 min</td>
+          <td>北欧腘绳、单腿罗马尼亚硬拉</td>
+          <td>H : Q ≥ 0.6</td>
+        </tr>
+        <tr>
+          <td class="mono-cell">P1</td>
+          <td>核心抗回旋</td>
+          <td>15 min</td>
+          <td>Pallof Press、Dead Bug、鸟狗</td>
+          <td>30s 单边静态保持稳定</td>
+        </tr>
+        <tr>
+          <td class="mono-cell">P2</td>
+          <td>固有足肌 + 平衡</td>
+          <td>10 min</td>
+          <td>短足练习、单腿闭眼站、毛巾抓握</td>
+          <td>闭眼单腿站 30s</td>
+        </tr>
+        <tr>
+          <td class="mono-cell">P2</td>
+          <td>SSC / 弹跳能力</td>
+          <td>15 min</td>
+          <td>跳绳 3 × 60s、单腿跳、深蹲跳</td>
+          <td>反复跳 60s 心率上升 ≤ 30 bpm</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout ops">
+      <div class="label">最后一句话 · 链的本质</div>
+      <p>跑步发力链的真相是：<strong>能量在每一节关节里都有"损耗"和"传递"两种命运</strong>。所谓"跑步经济性"，无非是把损耗最小化、把传递最大化。这件事不是靠"练得更狠"做到，而是靠 <em>每一节都不要弱</em>。链条只在最弱处断裂。</p>
+    </div>
+
+  </div>
+</section>

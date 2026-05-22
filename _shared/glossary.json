@@ -1,0 +1,452 @@
+{
+  "VO2max": {
+    "cn": "最大摄氧量",
+    "def": "每分钟每公斤体重最大耗氧量,单位 ml/kg/min。耐力天花板,业余 35-60,精英 70-85。决定于 Fick 方程:VO2 = SV × HR × (a-vO2 diff)。",
+    "chapter": "4.7", "anchor": "s4"
+  },
+  "VO₂max": {
+    "cn": "最大摄氧量",
+    "def": "见 VO2max。每分钟每公斤体重最大耗氧量,ml/kg/min。",
+    "chapter": "4.7", "anchor": "s4"
+  },
+  "RE": {
+    "cn": "跑步经济性",
+    "def": "Running Economy。每公里每公斤体重的耗氧量(ml/kg/km),越低越省油。精英 170-200,业余 220-250。力量训练可提升 4-8%。",
+    "chapter": "4.10", "anchor": "s4"
+  },
+  "LT1": {
+    "cn": "有氧阈/第一乳酸阈",
+    "def": "Lactate Threshold 1。血乳酸首次脱离基线的强度,~2 mmol/L,对应能讲整句话的最高强度。80/20 训练里 Z1-Z2 的上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "LT2": {
+    "cn": "乳酸阈",
+    "def": "Lactate Threshold 2 / AT。血乳酸约 4 mmol/L,能维持 1 小时全力的最高配速,接近半马配速。比 VO2max 更强预测耐力表现。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "AeT": {
+    "cn": "有氧阈",
+    "def": "Aerobic Threshold,等同 LT1/VT1。能讲整句话的最高强度,~75% HRmax,80/20 训练里 Z2 上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "AT": {
+    "cn": "无氧阈",
+    "def": "Anaerobic Threshold,等同 LT2/VT2/RCP。血乳酸 4 mmol/L 切点,约 1 小时全力可维持。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "VT1": {
+    "cn": "第一通气阈",
+    "def": "Ventilatory Threshold 1。通气量首次非线性上升,等同 LT1/AeT。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "VT2": {
+    "cn": "第二通气阈",
+    "def": "Ventilatory Threshold 2 / RCP。通气量第二次跃升,等同 LT2/AT。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "RCP": {
+    "cn": "呼吸补偿点",
+    "def": "Respiratory Compensation Point。通气量与 VCO2 同步骤升的点,等同 VT2/LT2。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "RER": {
+    "cn": "呼吸交换率",
+    "def": "Respiratory Exchange Ratio = VCO2/VO2。反映底物利用:0.7 纯脂肪,1.0 纯糖。",
+    "chapter": "4.6", "anchor": "s4"
+  },
+  "CV": {
+    "cn": "临界速度",
+    "def": "Critical Velocity。理论上可'无限'维持的最高速度,实际约 30-50 分钟,接近 5K 配速。比 LT2 略快 2-5%。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "CP": {
+    "cn": "临界功率",
+    "def": "Critical Power。功率-时间双曲线 (P-CP)×t = W' 中的 CP,理论可持续上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "W'": {
+    "cn": "W prime",
+    "def": "Anaerobic Work Capacity。高于 CP 时可消耗的有限'无氧储备',约 15-25 kJ。耗尽即力竭。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "ATP": {
+    "cn": "三磷酸腺苷",
+    "def": "Adenosine Triphosphate。肌肉收缩的唯一直接能量货币。全身储约 80g,最大强度下 3-5 秒耗尽,必须持续重合成。",
+    "chapter": "4.1", "anchor": "s4"
+  },
+  "PCr": {
+    "cn": "磷酸肌酸",
+    "def": "Phosphocreatine。骨骼肌储 400-500g,通过肌酸激酶催化 PCr+ADP→Cr+ATP 提供 0-10 秒爆发功率。",
+    "chapter": "4.2", "anchor": "s4"
+  },
+  "GRF": {
+    "cn": "地面反作用力",
+    "def": "Ground Reaction Force。脚触地时地面给身体的反作用力,分三个分量:垂直(最大,2-3 BW)、前后向(制动+推进)、内外侧(稳定)。",
+    "chapter": "2.1", "anchor": "s2"
+  },
+  "SLIP": {
+    "cn": "弹簧-质量模型",
+    "def": "Spring-Loaded Inverted Pendulum。跑步力学模型,腿被建模为弹簧,身体重心为质量。腿刚度约 10-30 kN/m。",
+    "chapter": "1.6", "anchor": "s1"
+  },
+  "SSC": {
+    "cn": "拉长-缩短周期",
+    "def": "Stretch-Shortening Cycle。肌-腱单元先离心拉长储能,再同心收缩释能。跑步中跟腱、足弓的'弹簧'机制依赖此循环。",
+    "chapter": "2.7", "anchor": "s2"
+  },
+  "COM": {
+    "cn": "重心",
+    "def": "Center of Mass。跑步时 COM 沿正弦曲线起伏,垂直振幅 6-10 cm。'垂直比' Vertical Ratio = 垂直振幅/步幅,越低越经济。",
+    "chapter": "1.5", "anchor": "s1"
+  },
+  "GCT": {
+    "cn": "触地时间",
+    "def": "Ground Contact Time。脚触地到推离的时长。精英 < 200 ms,业余 250-300 ms。GCT 短 = 触地更高效。",
+    "chapter": "1.4", "anchor": "s1"
+  },
+  "Cadence": {
+    "cn": "步频",
+    "def": "每分钟步数。精英 180-200 spm,业余 160-180。增加步频 5-10% 可减少 overstride 和膝负荷。",
+    "chapter": "1.4", "anchor": "s1"
+  },
+  "RFS": {
+    "cn": "后跟着地",
+    "def": "Rearfoot Strike。约 75-90% 业余跑者着地模式。冲击峰显著,但跟腱负荷小。",
+    "chapter": "1.7", "anchor": "s1"
+  },
+  "MFS": {
+    "cn": "中足着地",
+    "def": "Midfoot Strike。脚掌中部首先触地,冲击峰小,跟腱-小腿负荷适中。",
+    "chapter": "1.7", "anchor": "s1"
+  },
+  "FFS": {
+    "cn": "前掌着地",
+    "def": "Forefoot Strike。仅 1-10% 精英采用。冲击峰几乎消失,但跟腱与小腿负荷显著上升。",
+    "chapter": "1.7", "anchor": "s1"
+  },
+  "Windlass mechanism": {
+    "cn": "绞盘机制",
+    "def": "脚趾背伸时足底筋膜被拉紧,如同绞盘绞紧,把足弓抬起。这是跑步推离时的弹性储能机制。",
+    "chapter": "2.6", "anchor": "s2"
+  },
+  "Lactate shuttle": {
+    "cn": "乳酸穿梭",
+    "def": "George Brooks 提出。乳酸不是废物,是燃料——通过 MCT1/MCT4 转运蛋白在肌肉间、肌肉-心脏、肌肉-肝间穿梭被氧化或再合成。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "Cori cycle": {
+    "cn": "Cori 循环",
+    "def": "肌肉产生的乳酸经血液到肝脏,通过糖异生合成葡萄糖再回到血液。能量上昂贵但维持长跑后期血糖。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "Crossover": {
+    "cn": "交叉点",
+    "def": "Crossover Concept (Brooks 1994)。强度上升时,糖供能首次超过脂肪的强度点,约 50% VO2max。训练让 crossover 右移 = 脂肪利用增强。",
+    "chapter": "4.6", "anchor": "s4"
+  },
+  "FATmax": {
+    "cn": "最大脂肪氧化点",
+    "def": "脂肪绝对氧化速率峰值出现的强度,约 40-60% VO2max。注意是绝对峰值,相对占比峰值在静息。",
+    "chapter": "4.6", "anchor": "s4"
+  },
+  "IMTG": {
+    "cn": "肌内甘油三酯",
+    "def": "Intramuscular Triglyceride。骨骼肌内的脂滴储存,约 300g,通过 HSL/ATGL 酶动员供能,最大氧化率 ~0.7 g/min。",
+    "chapter": "4.5", "anchor": "s4"
+  },
+  "FFA": {
+    "cn": "游离脂肪酸",
+    "def": "Free Fatty Acid。脂肪组织水解释放,通过血液运至肌肉氧化。最大氧化率约 0.4 g/min。",
+    "chapter": "4.5", "anchor": "s4"
+  },
+  "EPOC": {
+    "cn": "运动后过量氧耗",
+    "def": "Excess Post-exercise Oxygen Consumption。运动后持续高摄氧用于恢复 ATP/PCr、清乳酸、再饱和肌红蛋白、降温。",
+    "chapter": "5.15", "anchor": "s5"
+  },
+  "Fick equation": {
+    "cn": "Fick 方程",
+    "def": "VO2 = Q × (a-vO2 diff) = SV × HR × (a-vO2 diff)。把 VO2max 分解为中央(心)+ 外周(肌肉摄氧)两部分。",
+    "chapter": "4.7", "anchor": "s4"
+  },
+  "Hbmass": {
+    "cn": "血红蛋白质量",
+    "def": "Total Hemoglobin Mass。耐力运动员 Hbmass/体重 ~12 g/kg vs 久坐 9。决定氧运输能力,高原训练核心目标。",
+    "chapter": "5.8", "anchor": "s5"
+  },
+  "SV": {
+    "cn": "每搏量",
+    "def": "Stroke Volume。心脏每跳泵血量。静息 70-100 ml,运动 130-200,精英 200+。HIIT 训练显著扩大。",
+    "chapter": "5.3", "anchor": "s5"
+  },
+  "HRmax": {
+    "cn": "最大心率",
+    "def": "HRmax ≈ 208 - 0.7 × 年龄,个体 ±15 bpm。每年下降 ~0.7 bpm,与训练状态无关。",
+    "chapter": "5.4", "anchor": "s5"
+  },
+  "HRR": {
+    "cn": "心率储备",
+    "def": "Heart Rate Reserve = HRmax - HRrest。Karvonen 法的基础,比单看 HRmax 个体化更强。",
+    "chapter": "5.4", "anchor": "s5"
+  },
+  "LRC": {
+    "cn": "呼吸-步态耦合",
+    "def": "Locomotor-Respiratory Coupling。常见 2:1 或 3:1 模式,精英 3:1/4:1。'右脚出气易岔气'的解剖学根源(肝脏下沉)。",
+    "chapter": "5.11", "anchor": "s5"
+  },
+  "Size principle": {
+    "cn": "大小原则",
+    "def": "Henneman 大小原则。运动单元按神经元大小递增募集——慢肌纤维(小 α 神经元)先,快肌(大)后。",
+    "chapter": "7.4", "anchor": "s7"
+  },
+  "CPG": {
+    "cn": "中央模式发生器",
+    "def": "Central Pattern Generator。脊髓内的节律振荡器,跑步'自动驾驶'的神经基础。大脑只发开始/停止,节律由 CPG 维持。",
+    "chapter": "7.2", "anchor": "s7"
+  },
+  "RPE": {
+    "cn": "感知用力",
+    "def": "Rating of Perceived Exertion。Borg 量表 6-20 或 CR10。反映大脑前扣带皮层整合的内外信号,与代谢标志物高度相关。",
+    "chapter": "7.12", "anchor": "s7"
+  },
+  "Central governor": {
+    "cn": "中枢调节器模型",
+    "def": "Tim Noakes 提出。大脑(ACC 前扣带皮层)整合化学+机械+心理信号,主动下调输出以防真正力竭。挑战传统'灾难性疲劳'模型。",
+    "chapter": "7.10", "anchor": "s7"
+  },
+  "BDNF": {
+    "cn": "脑源性神经营养因子",
+    "def": "Brain-Derived Neurotrophic Factor。跑步显著上调,促进海马体新生神经元(neurogenesis)与突触可塑性。",
+    "chapter": "7.15", "anchor": "s7"
+  },
+  "Endocannabinoids": {
+    "cn": "内源大麻素",
+    "def": "anandamide、2-AG。跑者高潮的真正神经化学基础(不是内啡肽)。Fuss 2015 小鼠实验阻断 CB1 受体即消除跑者高潮。",
+    "chapter": "7.14", "anchor": "s7"
+  },
+  "MU": {
+    "cn": "运动单元",
+    "def": "Motor Unit。1 个 α 神经元 + 它支配的所有肌纤维。小 MU(10-100 纤维)控制 I 型,大 MU(500-2000)控制 II 型。",
+    "chapter": "7.3", "anchor": "s7"
+  },
+  "MTU": {
+    "cn": "肌肉-肌腱单元",
+    "def": "Muscle-Tendon Unit。肌腱(被动弹簧)+ 肌肉(主动马达)的耦合,SSC 储释能的力学单元。",
+    "chapter": "3.9", "anchor": "s3"
+  },
+  "Posterior chain": {
+    "cn": "后侧链",
+    "def": "跟腱 → 腓肠肌 → 腘绳肌 → 臀大肌 → 竖脊肌。跑步推进的主要发力链。后侧链薄弱是业余跑者的通病。",
+    "chapter": "3.8", "anchor": "s3"
+  },
+  "TVA": {
+    "cn": "腹横肌",
+    "def": "Transversus Abdominis。腹腔最深层,提供腹内压和深层稳定,跑步中的力量传递通道,与盆底协同。",
+    "chapter": "3.7", "anchor": "s3"
+  },
+  "ITBS": {
+    "cn": "髂胫束综合征",
+    "def": "Iliotibial Band Syndrome。髂胫束在股骨外侧髁摩擦,外侧膝痛、下坡加重。占跑步伤病 5-15%。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "PFPS": {
+    "cn": "髌股关节疼痛综合征",
+    "def": "Patellofemoral Pain Syndrome / 跑者膝。髌骨轨迹异常,占跑步伤病 20%。髋外展弱+VMO 弱+足旋前是主因。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "MTSS": {
+    "cn": "内侧胫骨应力综合征",
+    "def": "Medial Tibial Stress Syndrome / 胫骨夹痛。胫骨内缘骨膜炎。占跑步伤病 13-20%。跑量陡增和旋前过度是主因。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "DOMS": {
+    "cn": "延迟性肌肉酸痛",
+    "def": "Delayed-Onset Muscle Soreness。离心收缩导致的微撕裂 + Ca²⁺ 紊乱 + 炎症。24-48h 出现,4-7 天消失。非乳酸引起。",
+    "chapter": "6.7", "anchor": "s6"
+  },
+  "OTS": {
+    "cn": "过度训练综合征",
+    "def": "Overtraining Syndrome。表现下降+慢性疲劳+心情低落+睡眠紊乱,>2 月恢复。HRV、晨脉、POMS 量表用于早期监测。",
+    "chapter": "11.7", "anchor": "s11"
+  },
+  "ACWR": {
+    "cn": "急慢性负荷比",
+    "def": "Acute-Chronic Workload Ratio = 7d 负荷 / 28d EMA。sweet spot 0.8-1.3,>1.5 风险显著上升。预防伤病的关键监测指标。",
+    "chapter": "11.4", "anchor": "s11"
+  },
+  "Wolff's law": {
+    "cn": "Wolff 定律",
+    "def": "骨随机械应力刺激重塑。跑者骨密度 > 久坐者(但 < 举重者)。应力骨折的力学根源。",
+    "chapter": "6.9", "anchor": "s6"
+  },
+  "Stress fracture": {
+    "cn": "应力骨折",
+    "def": "累积微损伤 > 修复速率。高发胫骨 50% > 跖骨 20% > 股骨颈、骶骨。女性 LEA + 维 D 缺乏是高危因素。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "Tendinopathy": {
+    "cn": "肌腱病",
+    "def": "肌腱退变性病变(不是'炎')。胶原排列紊乱+蛋白多糖沉积。跟腱、髌腱、足底筋膜常见。离心训练是核心治疗。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "GAS": {
+    "cn": "一般适应综合征",
+    "def": "General Adaptation Syndrome (Selye)。应激→疲劳→恢复→超量恢复→回归基线。训练的理论基础。",
+    "chapter": "10.1", "anchor": "s10"
+  },
+  "CTL": {
+    "cn": "长期负荷",
+    "def": "Chronic Training Load = 42d EMA 训练负荷。'健身水平'指标。",
+    "chapter": "10.3", "anchor": "s10"
+  },
+  "ATL": {
+    "cn": "急性负荷",
+    "def": "Acute Training Load = 7d EMA 训练负荷。'疲劳水平'指标。",
+    "chapter": "10.3", "anchor": "s10"
+  },
+  "TSB": {
+    "cn": "训练应激平衡",
+    "def": "Training Stress Balance = CTL - ATL。'形态'指标。比赛前应在 +5~+25(清新但不丢健身),重训期 -10~-30。",
+    "chapter": "10.3", "anchor": "s10"
+  },
+  "Polarized training": {
+    "cn": "极化训练",
+    "def": "Seiler 提出。80% 低强度(Z1)+ 5% 中(Z2)+ 15% 高强度(Z3)。元分析中比金字塔训练更有效。",
+    "chapter": "10.6", "anchor": "s10"
+  },
+  "Periodization": {
+    "cn": "周期化",
+    "def": "宏周期(年)→ 中周期(4-6 周)→ 微周期(周)。经典:基础→力量→比赛→过渡。",
+    "chapter": "10.16", "anchor": "s10"
+  },
+  "Taper": {
+    "cn": "减量",
+    "def": "比赛前 2-3 周减容量 40-60%、维持强度。表现提升 1-3%。过度减量 = 脱训。",
+    "chapter": "10.15", "anchor": "s10"
+  },
+  "REDs": {
+    "cn": "运动相对能量缺乏",
+    "def": "Relative Energy Deficiency in Sport (IOC 2014)。低 EA(<30 kcal/kg LBM/d)引发月经紊乱、骨密度↓、激素崩溃。男性同样存在。",
+    "chapter": "8.13", "anchor": "s8"
+  },
+  "LEA": {
+    "cn": "低能量可用性",
+    "def": "Low Energy Availability。能量摄入 - 运动消耗 < 30 kcal/kg 去脂体重 / 天。REDs 的核心机制。",
+    "chapter": "8.13", "anchor": "s8"
+  },
+  "Catecholamines": {
+    "cn": "儿茶酚胺",
+    "def": "肾上腺素 + 去甲肾上腺素。起跑时数十倍上升,动员脂肪+糖原+心率。",
+    "chapter": "8.2", "anchor": "s8"
+  },
+  "Cortisol": {
+    "cn": "皮质醇",
+    "def": "应激激素。运动 30+ 分钟显著上升,调动能量、抑制免疫。慢性升高 = 过训信号。",
+    "chapter": "8.2", "anchor": "s8"
+  },
+  "IGF-1": {
+    "cn": "胰岛素样生长因子-1",
+    "def": "Insulin-like Growth Factor 1。GH 下游的主要效应分子,组织修复 + 肌肉生长。过训时下降。",
+    "chapter": "8.3", "anchor": "s8"
+  },
+  "URTI": {
+    "cn": "上呼吸道感染",
+    "def": "Upper Respiratory Tract Infection。运动免疫 J 曲线:中等运动风险下降,极量运动(>96 km/周)风险上升 2-6 倍。",
+    "chapter": "8.9", "anchor": "s8"
+  },
+  "J-curve": {
+    "cn": "J 曲线",
+    "def": "运动剂量 vs 免疫力/死亡率的 U/J 形关系。久坐和极量都比中等差。",
+    "chapter": "8.9", "anchor": "s8"
+  },
+  "Open window": {
+    "cn": "开窗期",
+    "def": "急性极量运动后免疫力短暂下降 3-72 小时,感染风险升高。",
+    "chapter": "8.8", "anchor": "s8"
+  },
+  "Carb loading": {
+    "cn": "糖原储备",
+    "def": "Carbohydrate Loading。赛前 1-3 天 8-12 g/kg 碳水,扩大肌糖原 50-80%。每 g 糖原结合 3g 水,体重短期增 1-2 kg。",
+    "chapter": "9.10", "anchor": "s9"
+  },
+  "MLSS": {
+    "cn": "最大乳酸稳态",
+    "def": "Maximal Lactate Steady State。可维持血乳酸稳态的最高强度,约等于 LT2。30-60 分钟全力上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "ACTN3": {
+    "cn": "α-actinin-3 基因",
+    "def": "编码快肌纤维特异结构蛋白。RR(完整)爆发强,XX(截断)偏耐力。西非种群 RR 高频,精英短跑 RR >99%。",
+    "chapter": "12.17", "anchor": "s12"
+  },
+  "ACE gene": {
+    "cn": "ACE 基因",
+    "def": "Angiotensin-Converting Enzyme I/D 多态。I 等位关联耐力心血管,D 等位关联力量爆发。",
+    "chapter": "12.18", "anchor": "s12"
+  },
+  "Sarcopenia": {
+    "cn": "肌少症",
+    "def": "30+ 岁后肌肉量 -1%/年,60+ 加速至 -1.5%/年。II 型纤维选择性丢失。跑步+力量训练对抗。",
+    "chapter": "6.14", "anchor": "s6"
+  },
+  "PGC-1α": {
+    "cn": "PGC-1α 转录共激活因子",
+    "def": "Peroxisome proliferator-activated receptor gamma coactivator 1-alpha。线粒体生物发生主开关,耐力训练核心适应通路。",
+    "chapter": "6.6", "anchor": "s6"
+  },
+  "mTOR": {
+    "cn": "mTOR 通路",
+    "def": "mechanistic Target of Rapamycin。蛋白合成主调控通路。力量训练 + 蛋白摄入激活,衰老使其对刺激钝化('合成代谢抵抗')。",
+    "chapter": "6.14", "anchor": "s6"
+  },
+  "MCT1": {
+    "cn": "单羧酸转运蛋白 1",
+    "def": "Monocarboxylate Transporter 1。慢肌纤维表达高,主动摄取乳酸进入氧化。训练有素者 MCT1 表达上调,乳酸清除能力增强。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "MCT4": {
+    "cn": "单羧酸转运蛋白 4",
+    "def": "Monocarboxylate Transporter 4。快肌纤维表达高,把乳酸输出到细胞外。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "GLUT4": {
+    "cn": "葡萄糖转运蛋白 4",
+    "def": "Glucose Transporter 4。胰岛素和肌肉收缩诱导,介导骨骼肌摄取葡萄糖。训练显著上调,改善胰岛素敏感性。",
+    "chapter": "8.3", "anchor": "s8"
+  },
+  "Mitochondrial biogenesis": {
+    "cn": "线粒体生物发生",
+    "def": "线粒体数量+体积+嵴密度的增加。PGC-1α 通路驱动,LSD 和阈值训练是主要刺激。慢成分 VO2 上升的细胞学根源。",
+    "chapter": "6.6", "anchor": "s6"
+  },
+  "Beta-alanine": {
+    "cn": "β-丙氨酸",
+    "def": "肌肽前体,提高肌肉缓冲能力。对 1-4 分钟项目(400-1500m)有效证据,剂量 4-6 g/d × 4-6 周。",
+    "chapter": "9.8", "anchor": "s9"
+  },
+  "Nitrate": {
+    "cn": "硝酸盐",
+    "def": "甜菜根汁富含。在口腔细菌还原为亚硝酸盐 → NO,改善线粒体效率,RE 提升 1-3%。剂量 6.4 mmol 赛前 2-3 小时。",
+    "chapter": "9.8", "anchor": "s9"
+  },
+  "HIIT": {
+    "cn": "高强度间歇训练",
+    "def": "High-Intensity Interval Training。短间歇(30/30、Tabata)或长间歇(3-5 min × 4-6)。主要刺激心脏 SV 和 VO2max。",
+    "chapter": "10.10", "anchor": "s10"
+  },
+  "HERITAGE study": {
+    "cn": "HERITAGE 家族研究",
+    "def": "Bouchard 等 99 家庭 481 人的标准 20 周训练研究。VO2max 改善 0-60%,21 个基因位点解释 49% 变异。",
+    "chapter": "12.16", "anchor": "s12"
+  },
+  "TSS": {
+    "cn": "训练应激评分",
+    "def": "Training Stress Score。基于强度与时间量化训练负荷,1 小时 LT2 = 100 TSS。CTL/ATL/TSB 的基础。",
+    "chapter": "10.2", "anchor": "s10"
+  },
+  "Flow state": {
+    "cn": "心流状态",
+    "def": "Csikszentmihalyi 模型。神经标志:前额叶 hypofrontality + 多巴胺/NE + 内啡肽。跑步是诱发心流的理想活动。",
+    "chapter": "7.16", "anchor": "s7"
+  }
+}

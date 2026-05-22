@@ -1,0 +1,678 @@
+<section id="s7" style="border-top: 4px solid var(--c-psych);">
+<div class="container">
+  <div class="section-tag"><span class="num">07</span>NEUROMOTOR · 控制篇 / 第七章</div>
+  <h1 class="section-h">神经系统 从意图到动作 <span class="en">From Intention to Motion</span></h1>
+  <p class="section-sub">跑步看起来是腿在跑,但腿不知道自己在跑。每秒钟有上千个动作电位从脊髓出发,几百个本体感受信号回流到小脑,大脑皮层在背景里做整体调度——而真正决定你"还能撑多久"的,不是肌肉里的乳酸,而是前扣带皮层里那个一直在算账的中枢调节器。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>跑步是大脑授权脊髓的自动驾驶:皮层下命令"开始",中央模式发生器维持节律,小脑实时纠偏,前扣带皮层时刻盯着代谢账本——当账本红线时,它会先于肌肉投降,把你"叫停"。所以疲劳是一场神经经济学,而不是化学崩溃。</p>
+  </div>
+
+  <h3><span class="pre">7.1</span>运动控制层级——从决定到收缩的五层结构</h3>
+  <p class="lead">"我要再跑一公里"这句话从念头到落地,需要穿过五层组织。每一层都有自己的时间常数和功能分工,理解这套层级是理解神经系统所有适应、疲劳、损伤神经机制的前提。</p>
+
+  <p>最高层是<em>大脑皮层</em> (cerebral cortex),负责<strong>意图与决策</strong>。<em>M1 初级运动皮层</em> (primary motor cortex) 位于中央前回,它的每一个皮质柱大致对应身体某一块肌肉的运动神经元池,著名的"运动小人"(motor homunculus) 就长在这里——下肢区在最内侧靠中线,所以跑步的运动指令源头其实分布在左右脑半球的纵裂深处。<em>SMA 辅助运动区</em> (supplementary motor area) 在 M1 前方,专管动作<em>序列</em>规划——它学习"跨步、推离、摆腿"这一连串动作的顺序,不再让你每一步都去想该怎么动。<em>PMC 前运动皮层</em> (premotor cortex) 处理外部视觉与情境驱动的动作,例如躲过路面坑洼或在马拉松集团里调整步幅。<em>顶叶皮层</em> (parietal cortex) 整合空间感和本体觉,告诉你"身体在哪里、地面在哪里"——上一章 (Ch6 营养) 不涉及它,但跑步路况识别完全靠它。</p>
+
+  <p>下面一层是<em>皮质下结构</em> (subcortical structures),负责<strong>选择与调制</strong>。<em>基底节</em> (basal ganglia,主要是壳核 putamen 与苍白球 globus pallidus 的环路) 主管动作的"启动开关"和"自动化"——你不再每一步都告诉脚怎么落地,正是因为基底节已经把整套运动程序烧成了无需意识监管的回路。帕金森病的基底节多巴胺耗竭,导致患者站起来都困难,正是这套启动机制失效的极端写照。<em>丘脑</em> (thalamus) 是所有上下行信号的中转站,M1 通过它接收基底节和小脑的整合输出。<em>小脑</em> (cerebellum) 是<em>误差校正中心</em>——它不直接发起动作,但每一个动作都要经它"事后审核"。小脑接收预测的运动指令(传出拷贝 efference copy)与实际感觉反馈,二者一比对,差值就是<em>预测误差</em> (prediction error)。误差被快速送回皮层,下一步动作就微调一次。这就是为什么小脑损伤的人能"想"出动作,但执行精度全无。</p>
+
+  <p>再往下是<em>脑干</em> (brainstem)。这里的<em>网状结构</em> (reticular formation) 与<em>前庭核</em> (vestibular nuclei) 负责姿势与平衡的本能调控。跑步时身体在三维空间里持续小幅扰动,前庭系统通过半规管和耳石器感知头部加速度,把信号通过前庭脊髓束直接传到颈和躯干的伸肌,维持头部稳定——这就是为什么训练有素的跑者头部几乎不晃动,而新手跑者头部上下点动的幅度可达 5–8 cm。</p>
+
+  <p>最低层是<em>脊髓</em> (spinal cord)。这里有<em>中央模式发生器</em> (Central Pattern Generator, <em>CPG</em>) 与各种<em>反射弧</em>。脊髓不是"被动通道",它是一台完整的自动节律机——下一节专门讲。</p>
+
+  <p>最终输出端是<em>α 运动神经元</em> (α-motor neuron),它的胞体在脊髓前角,轴突穿过脊神经走到肌肉,在<em>神经肌肉接头</em> (neuromuscular junction, NMJ) 通过乙酰胆碱触发肌纤维动作电位。一旦动作电位到达,后面就是 Ch3 讲的肌纤维收缩物理过程——这里只关心"信号怎么到达"。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 背景层框 -->
+      <g>
+        <!-- 大脑皮层 -->
+        <rect x="60" y="50" width="960" height="80" fill="#9c4bb5" fill-opacity="0.10" stroke="#9c4bb5" stroke-opacity="0.5" stroke-width="1"/>
+        <text x="80" y="73" font-size="11" fill="#c89ad8" letter-spacing="0.18em">CORTICAL · 大脑皮层</text>
+        <text x="80" y="88" font-size="9" fill="#a39e8d">意图 · 序列规划 · 空间整合</text>
+        <!-- 子模块 -->
+        <rect x="80" y="100" width="180" height="22" fill="#3d3d36" stroke="#9c4bb5" stroke-opacity="0.45"/>
+        <text x="170" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">M1 初级运动皮层</text>
+        <rect x="270" y="100" width="180" height="22" fill="#3d3d36" stroke="#9c4bb5" stroke-opacity="0.45"/>
+        <text x="360" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">SMA 辅助运动区</text>
+        <rect x="460" y="100" width="180" height="22" fill="#3d3d36" stroke="#9c4bb5" stroke-opacity="0.45"/>
+        <text x="550" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">PMC 前运动皮层</text>
+        <rect x="650" y="100" width="180" height="22" fill="#3d3d36" stroke="#9c4bb5" stroke-opacity="0.45"/>
+        <text x="740" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">Parietal 顶叶</text>
+        <rect x="840" y="100" width="180" height="22" fill="#3d3d36" stroke="#9c4bb5" stroke-opacity="0.45"/>
+        <text x="930" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">ACC 前扣带 (调节)</text>
+      </g>
+      <!-- 皮质下 -->
+      <g>
+        <rect x="60" y="160" width="960" height="80" fill="#4a6fa5" fill-opacity="0.10" stroke="#4a6fa5" stroke-opacity="0.5" stroke-width="1"/>
+        <text x="80" y="183" font-size="11" fill="#8fb8df" letter-spacing="0.18em">SUBCORTICAL · 皮质下</text>
+        <text x="80" y="198" font-size="9" fill="#a39e8d">动作选择 · 自动化 · 误差校正</text>
+        <rect x="100" y="210" width="230" height="22" fill="#3d3d36" stroke="#4a6fa5" stroke-opacity="0.45"/>
+        <text x="215" y="225" font-size="10" fill="#e8e4d8" text-anchor="middle">Basal Ganglia 基底节</text>
+        <rect x="350" y="210" width="230" height="22" fill="#3d3d36" stroke="#4a6fa5" stroke-opacity="0.45"/>
+        <text x="465" y="225" font-size="10" fill="#e8e4d8" text-anchor="middle">Thalamus 丘脑(中继)</text>
+        <rect x="600" y="210" width="320" height="22" fill="#3d3d36" stroke="#4a6fa5" stroke-opacity="0.45"/>
+        <text x="760" y="225" font-size="10" fill="#e8e4d8" text-anchor="middle">Cerebellum 小脑 · 精细协调与误差校正</text>
+      </g>
+      <!-- 脑干 -->
+      <g>
+        <rect x="60" y="270" width="960" height="60" fill="#c47f17" fill-opacity="0.10" stroke="#c47f17" stroke-opacity="0.5" stroke-width="1"/>
+        <text x="80" y="293" font-size="11" fill="#e0a25a" letter-spacing="0.18em">BRAINSTEM · 脑干</text>
+        <text x="80" y="308" font-size="9" fill="#a39e8d">姿势 · 平衡 · 前庭反射</text>
+        <rect x="350" y="300" width="180" height="22" fill="#3d3d36" stroke="#c47f17" stroke-opacity="0.45"/>
+        <text x="440" y="315" font-size="10" fill="#e8e4d8" text-anchor="middle">网状结构 RF</text>
+        <rect x="550" y="300" width="180" height="22" fill="#3d3d36" stroke="#c47f17" stroke-opacity="0.45"/>
+        <text x="640" y="315" font-size="10" fill="#e8e4d8" text-anchor="middle">前庭核 VN</text>
+      </g>
+      <!-- 脊髓 CPG -->
+      <g>
+        <rect x="60" y="350" width="960" height="80" fill="#b54848" fill-opacity="0.10" stroke="#b54848" stroke-opacity="0.5" stroke-width="1"/>
+        <text x="80" y="373" font-size="11" fill="#d57979" letter-spacing="0.18em">SPINAL CORD · 脊髓</text>
+        <text x="80" y="388" font-size="9" fill="#a39e8d">节律生成 · 反射 · 终末执行</text>
+        <rect x="100" y="395" width="380" height="26" fill="#3d3d36" stroke="#b54848" stroke-opacity="0.6"/>
+        <text x="290" y="412" font-size="10" fill="#e8e4d8" text-anchor="middle">CPG 中央模式发生器(屈伸交替振荡)</text>
+        <rect x="500" y="395" width="200" height="26" fill="#3d3d36" stroke="#b54848" stroke-opacity="0.6"/>
+        <text x="600" y="412" font-size="10" fill="#e8e4d8" text-anchor="middle">Reflex Arcs 反射弧</text>
+        <rect x="720" y="395" width="200" height="26" fill="#3d3d36" stroke="#b54848" stroke-opacity="0.6"/>
+        <text x="820" y="412" font-size="10" fill="#e8e4d8" text-anchor="middle">α-motor Neuron 池</text>
+      </g>
+      <!-- 肌肉 -->
+      <g>
+        <rect x="60" y="450" width="960" height="40" fill="#d4a548" fill-opacity="0.12" stroke="#d4a548" stroke-opacity="0.6" stroke-width="1"/>
+        <text x="80" y="475" font-size="11" fill="#d4a548" letter-spacing="0.18em">MUSCLE · 肌肉(NMJ → 动作)</text>
+      </g>
+      <!-- 下行箭头 -->
+      <g stroke="#d4a548" stroke-opacity="0.6" stroke-width="1.5" fill="none" marker-end="url(#arrowDown)">
+        <line x1="170" y1="124" x2="170" y2="207"/>
+        <line x1="290" y1="232" x2="290" y2="298"/>
+        <line x1="440" y1="324" x2="440" y2="392"/>
+        <line x1="820" y1="424" x2="820" y2="448"/>
+      </g>
+      <!-- 上行反馈箭头 -->
+      <g stroke="#9c4bb5" stroke-opacity="0.6" stroke-width="1.2" stroke-dasharray="3,3" fill="none" marker-end="url(#arrowUp)">
+        <line x1="900" y1="448" x2="900" y2="424"/>
+        <line x1="900" y1="392" x2="900" y2="324"/>
+        <line x1="900" y1="298" x2="900" y2="232"/>
+        <line x1="900" y1="207" x2="900" y2="124"/>
+      </g>
+      <!-- 箭头定义 -->
+      <defs>
+        <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+          <path d="M 0 0 L 8 5 L 0 10 z" fill="#d4a548"/>
+        </marker>
+        <marker id="arrowUp" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+          <path d="M 0 0 L 8 5 L 0 10 z" fill="#9c4bb5"/>
+        </marker>
+      </defs>
+      <!-- 旁注 -->
+      <text x="160" y="510" font-size="9" fill="#a39e8d" letter-spacing="0.08em">下行: 运动指令</text>
+      <text x="910" y="510" font-size="9" fill="#c89ad8" letter-spacing="0.08em" text-anchor="end">上行: 本体感觉 / 误差信号</text>
+      <!-- 标题 -->
+      <text x="60" y="35" font-size="12" fill="#d4a548" letter-spacing="0.18em">MOTOR HIERARCHY · 跑步的运动控制五层结构</text>
+    </svg>
+    <div class="svg-caption">FIG 7.1 · 从意图到肌肉:五层控制结构与上行 / 下行信号双向通路</div>
+  </div>
+
+  <h3><span class="pre">7.2</span>中央模式发生器 CPG——脊髓里的节律振荡器</h3>
+  <p class="lead">如果跑步的每一步都需要大脑皮层主动发指令,你不可能边跑边想问题。事实上,周期性的步态节律根本不需要皮层介入——这套节律的源头藏在脊髓本身。</p>
+
+  <p>1900 年前后,英国生理学家 <em>Charles Sherrington</em> 做了一组当时极具争议的实验:他把猫的脑干在中脑水平切断(<em>decerebrate cat</em>,去脑猫),保留脊髓与外周联系完好,把这只"无脑"的猫放在跑步带上。观察到的现象令人震惊——只要给一点电刺激或外周感觉输入,猫四肢仍然会做出协调的迈步动作,屈肌和伸肌按照正常的步态相位交替收缩。这意味着,产生步态节律的核心机制位于脊髓,不需要皮层、不需要小脑、不需要意识。这套机制后来被命名为<em>中央模式发生器</em> (Central Pattern Generator, <em>CPG</em>) <span class="ref">[Sherrington 1910]</span>。</p>
+
+  <p>CPG 的解剖基础是脊髓<em>腰膨大</em> (lumbar enlargement, L1–S2) 内一群相互抑制 + 相互兴奋的中间神经元网络。最简化的"半中心模型" (half-center oscillator) 由两组中间神经元构成:一组激活屈肌、另一组激活伸肌,二者通过抑制性中间神经元 (Renshaw cells 与 Ia inhibitory interneurons) 互相抑制。一边激发时另一边沉默,激发的一边因疲劳性<em>适应</em> (adaptation) 逐渐减弱,抑制随之解除,另一边接管激活——如此循环往复,产生类似 1.5–3 Hz 的节律,与跑步步频高度吻合。</p>
+
+  <p>这套机制对跑步意味着什么?<strong>大脑只发"开始"和"停止"两条指令</strong>,中间的节律完全由脊髓自主维持。皮层负责处理路况、决定配速、应对意外,而稳态运动状态下的"踏步"由 CPG 自动完成。这就解释了一个常被低估的现象:你为什么能<em>边跑边想问题</em>——前额叶在思考时并没有占用 M1 的资源,因为 M1 也只是在"看着"脊髓自己跑。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 跑步不是大脑发出每一步指令</div>
+    <p>新手会觉得跑步需要"用脑控制",所以累得快、姿势僵。其实你越熟练,皮层介入越少——稳态跑步时大脑皮层的运动区代谢需求仅比静息高出约 5–8%,与思考时几乎重叠。<em>真正的"跑神"靠的是 CPG 自动化,不是皮层努力</em>。这也是为什么跑者高潮的"放空感"是真实的神经现象——皮层确实被"卸载"了。</p>
+  </div>
+
+  <p>有趣的是,人类的 CPG 比啮齿动物更<em>受皮层节制</em>——脊髓损伤的人不能像猫那样在跑步机上"自动"迈步,但通过强化训练 + 体重支撑可以一定程度恢复行走,说明 CPG 仍在,只是失去了下行驱动。这是脊髓损伤康复领域<em>移动训练</em> (locomotor training) 的神经学根据。</p>
+
+  <h3><span class="pre">7.3</span>运动单元 motor unit——力量调控的基本单元</h3>
+  <p class="lead">从神经系统看,肌肉不是一整块发力的"组织",而是几百上千个独立可控的<em>运动单元</em>的集合。"力的大小"在神经层面,是<em>多少个运动单元在以多快的频率放电</em>的总和。</p>
+
+  <p><em>运动单元</em> (motor unit, MU) 的定义是:<strong>一个 α 运动神经元 + 它所支配的全部肌纤维</strong>。这是肌肉<em>最小可控制的功能单位</em>——单个神经元放电时,它所支配的所有肌纤维同步收缩;反过来,单条肌纤维不能被部分激活。这就是 Henneman 在 1957 年提出的<em>"全或无"原则</em> (all-or-none principle) 在肌肉层面的体现。</p>
+
+  <p>每一块肌肉里,不同运动单元的<em>神经支配比</em> (innervation ratio) 差异极大。<em>支配比 = 一个神经元控制的肌纤维数</em>。眼外肌每个 MU 仅控制 5–10 条纤维,因此可以做出极精细的眼球微调;而股四头肌、腓肠肌这类大块运动肌,每个 MU 可控制 500–2000 条纤维。跑步主要涉及的下肢肌群,支配比都在大单元范畴。</p>
+
+  <p>更关键的是,同一块肌肉里的 MU 不是同质的。它们大致分为三类,与肌纤维类型一一对应:</p>
+
+  <table>
+    <thead>
+      <tr><th>类型</th><th>纤维类型</th><th>神经元胞体</th><th>每 MU 纤维数</th><th>放电频率</th><th>疲劳性</th><th>跑步角色</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>S (Slow)</td><td>I 型(慢肌)</td><td>小</td><td>10–180</td><td>5–15 Hz</td><td>极抗疲劳</td><td>有氧巡航 · 维持姿势</td></tr>
+      <tr><td>FR (Fast Resistant)</td><td>IIa 型</td><td>中</td><td>300–800</td><td>15–40 Hz</td><td>中抗疲劳</td><td>中高速持续 · 节奏跑</td></tr>
+      <tr><td>FF (Fast Fatigable)</td><td>IIx 型</td><td>大</td><td>500–2000</td><td>30–60+ Hz</td><td>易疲劳</td><td>冲刺 · 末段加速</td></tr>
+    </tbody>
+  </table>
+
+  <p>注意一个核心事实:神经元胞体的<em>大小</em>决定它的电生理特性——胞体越小,膜电阻越高,达到放电阈值所需的输入电流越小。这就是 <em>Henneman 大小原则</em> (size principle) 的物理基础。下一节展开。</p>
+
+  <h3><span class="pre">7.4</span>募集策略——大小原则与频率编码</h3>
+  <p class="lead">大脑要让肌肉产生更大的力,只有两条路:<em>叫更多 MU 出来工作</em>(数量编码),或者<em>让已经在工作的 MU 放电更快</em>(频率编码)。两者是协同的,但有固定的优先级。</p>
+
+  <h4>① 数量编码 (Motor Unit Recruitment) · Henneman Size Principle</h4>
+  <p>当大脑发出运动指令时,脊髓的中间神经元把指令分配到 α 运动神经元池。由于小神经元更易兴奋,<em>小→大</em>的招募顺序几乎是自动的:先 S 单元、再 FR 单元、最后 FF 单元。这就是 <em>Henneman 大小原则</em> <span class="ref">[Henneman 1957]</span>。</p>
+
+  <p>从能量经济性看,这套顺序极其优雅:</p>
+  <ul>
+    <li>低强度运动(慢跑、走路)只需要小单元(I 型纤维)就够,代谢成本低、可以维持几小时。</li>
+    <li>强度上升时(节奏跑、配速跑),FR 单元被招募,IIa 型纤维加入,糖原消耗速率上升。</li>
+    <li>接近最大强度时(冲刺、上坡末段),FF 单元加入,IIx 型大量动员,无氧供能占主导,但只能维持几十秒到几分钟。</li>
+  </ul>
+
+  <p>这套招募顺序也解释了一个跑者熟悉的现象:<em>慢跑后期的肌肉酸感比快跑前几分钟还明显</em>。是因为慢跑只用了小单元,而它们在长时间使用后逐渐疲劳;加速到节奏跑时,FR 单元加入,反而把负担从已疲劳的 S 单元分担出去——所以"加速反而轻松"在某些代谢窗口里是真实的。</p>
+
+  <h4>② 频率编码 (Rate Coding)</h4>
+  <p>单个 MU 的力量输出不是恒定的,它取决于<em>放电频率</em>。低频(5–10 Hz)时每次动作电位之间肌纤维已经完成松弛,产生的是<em>单收缩</em> (twitch);频率上升时,松弛不完全,后一次收缩叠加在前一次未完全松弛的张力上,产生<em>不完全强直</em> (unfused tetanus);频率再升,达到<em>融合强直频率</em> (~50 Hz),所有单收缩叠加成平台,力量达到该 MU 的最大值。</p>
+
+  <p>跑步中绝大部分 MU 工作在 8–35 Hz 区间,即不完全强直状态——这是产生稳定但可调节力量的最经济模式。冲刺时,FF 单元会瞬间冲到 50+ Hz 完全强直,把短时输出推到极限。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">RECRUITMENT ORDER</div>
+      <div class="num">S → FR → FF</div>
+      <div class="sub">小→大单元招募顺序</div>
+    </div>
+    <div class="item">
+      <div class="label">RATE CODING RANGE</div>
+      <div class="num">5–60 Hz</div>
+      <div class="sub">α 神经元放电频率窗口</div>
+    </div>
+    <div class="item">
+      <div class="label">TETANUS FUSION</div>
+      <div class="num">~50 Hz</div>
+      <div class="sub">完全融合强直所需频率</div>
+    </div>
+    <div class="item">
+      <div class="label">INNERVATION RATIO</div>
+      <div class="num">10–2000</div>
+      <div class="sub">每 MU 控制肌纤维数(肌肉间差异)</div>
+    </div>
+  </div>
+
+  <h4>③ 同步化 (Synchronization)</h4>
+  <p>除了"叫多少人"和"叫多快",还有第三种调节:让不同 MU 的放电时刻彼此同步。健康状态下,各 MU 的放电是<em>异步</em>的(asynchronous discharge),这让肌肉产生平滑张力。如果多个 MU 同步放电,力量会出现<em>振荡式峰值</em>——这通常是力量训练适应或疲劳的标志。同步化能提升瞬时力量(对短跑、起跳有意义),但代价是肌肉震颤、控制精度下降。慢跑、马拉松最佳状态恰恰是<em>低同步、高异步</em>——这是为什么疲劳到末段时步频"跳变"、姿势散乱的神经学解释。</p>
+
+  <h3><span class="pre">7.5</span>本体感觉系统——身体对自己的感知</h3>
+  <p class="lead">运动控制不是单向的"皮层下令、肌肉执行"。从外周回到中枢的<em>本体感觉</em> (proprioception) 信号,占据脊髓上行通路的相当比例。如果切断这条回路,你跑步时连脚抬到哪里都不知道。</p>
+
+  <p>跑步中的本体感觉来自四类感受器,各自负责不同维度的信息:</p>
+
+  <h4>① 肌梭 (Muscle Spindle) · 长度与速度</h4>
+  <p>肌梭是嵌在肌纤维之间的微型感受器,由<em>核袋纤维</em> (nuclear bag fibers) 和<em>核链纤维</em> (nuclear chain fibers) 构成,周围缠绕着 Ia 和 II 型感觉神经末梢。Ia 纤维对肌肉<em>长度变化速率</em>敏感,核袋纤维主导;II 纤维对静态<em>长度</em>敏感,核链纤维主导。</p>
+
+  <p>关键之处在于:肌梭有自己的运动神经支配——<em>γ 运动神经元</em>。当肌肉收缩时,梭内纤维也要相应缩短,否则肌梭会"松掉"失去敏感性。这套<em>α-γ 共同激活</em> (α-γ coactivation) 机制保证了无论肌肉处在什么长度,肌梭都保持在最敏感的工作点。</p>
+
+  <h4>② 高尔基腱器官 (Golgi Tendon Organ, GTO) · 张力</h4>
+  <p>GTO 位于肌腱与肌纤维交界处,由 Ib 感觉纤维支配。它感知的不是长度,而是<em>张力</em>——具体说是肌纤维拉扯肌腱的力。在每一步落地时,GTO 把 GRF 转化为神经信号反馈给脊髓,脊髓再通过 Ib 抑制性中间神经元抑制本肌肉的 α 神经元,降低收缩强度。这就是 Ib 反射,也叫<em>反向牵张反射</em> (inverse myotatic reflex) 或<em>张力保护反射</em>。</p>
+
+  <h4>③ 关节囊感受器 · 角度</h4>
+  <p>关节囊与韧带里有<em>Ruffini 终端</em>(慢适应,感知角度位置)和<em>Pacinian 小体</em>(快适应,感知角速度变化)。它们给小脑提供关节实时几何信息——你能在闭眼时知道膝盖弯了多少度,就是这套系统在工作。</p>
+
+  <h4>④ 足底皮肤压力感受器 · 接触</h4>
+  <p>足底分布着大量<em>Meissner 小体</em>(快适应触觉)和<em>Merkel 盘</em>(慢适应压力)。跑步时它们传递地面材质、坡度、不平整度等信息。<strong>这就是为什么穿厚跑鞋"找不到地面感"——足底感受器被衬垫屏蔽了</strong>,大脑只能依靠髋膝踝的关节感受器估算,精度下降。极简鞋(barefoot shoes)的支持者认为这种"感受恢复"能改善步态,但也增加了刚性结构对足部的应力,见 Ch10 装备篇详细讨论。</p>
+
+  <div class="callout note">
+    <div class="label">本体感觉的"暗能力"</div>
+    <p>本体感觉是一项<em>无意识的感觉</em>(unconscious sense)——你不会"听见"肌梭、不会"看见"GTO,但它们每秒钟发送数千次信号到脊髓和小脑。这就是<em>盲跑能力</em>的神经基础:闭着眼睛在跑步带上跑步,只要节奏稳定,你不会摔倒。但是关掉所有本体感觉(理论上的实验,实际可见于严重糖尿病周围神经病变患者),哪怕睁着眼,也无法稳定行走——视觉无法实时补偿位置感的缺失。</p>
+  </div>
+
+  <h3><span class="pre">7.6</span>反射——脊髓自治的应急回路</h3>
+  <p class="lead">反射是不需要大脑参与的<em>预设回路</em>,处理那些"快到来不及思考"的情况。跑步中三类反射最关键。</p>
+
+  <h4>① 牵张反射 (Stretch Reflex) · 单突触</h4>
+  <p>当肌肉被快速拉长时,肌梭 Ia 纤维放电,信号经背根进入脊髓,<em>直接</em>(单突触)激活同肌的 α 神经元,引发收缩。这是最快的反射,延迟仅 20–40 ms。临床的膝跳反射就是叩击髌韧带牵拉股四头肌、激发牵张反射的典型例子。</p>
+
+  <p>跑步中,牵张反射是<em>跟腱储能-反弹机制</em>的神经基础。当脚触地、跟腱被快速拉长,腓肠肌-比目鱼肌的肌梭立刻放电,激活同肌收缩,把跟腱弹性势能 + 主动收缩力叠加输出。这就是<em>SSC 拉长-缩短循环</em>(stretch-shortening cycle) 的神经一翼。</p>
+
+  <h4>② 反向牵张反射 (Inverse Myotatic Reflex) · Ib 抑制</h4>
+  <p>当肌肉张力过大时,GTO 的 Ib 纤维放电,经一个抑制性中间神经元抑制同肌 α 神经元。这是保护反射:防止肌肉或肌腱因过大张力撕裂。它的阈值在普通情况下相当高,只有在极限发力(举重最大重量、冲刺末段、跌倒时本能撑地)时才被触发。</p>
+
+  <p>训练可以提高反向牵张反射的阈值——这也是为什么力量训练后,你能举起原来"举不动"的重量,不是肌肉真的从"不能"变成了"能",而是 Ib 抑制被部分解除。这是力量训练前 2–4 周神经性适应的一部分(下一节)。</p>
+
+  <h4>③ 屈肌反射 (Flexor Withdrawal Reflex) · 多突触</h4>
+  <p>当皮肤或深部组织接收到伤害性刺激(痛觉),信号经 Aδ 和 C 纤维进入脊髓背角,通过多个中间神经元同时激活同侧屈肌、抑制同侧伸肌、激活对侧伸肌(<em>交叉伸肌反射</em>),把受伤的肢体收回、把体重转移到对侧。延迟约 80–120 ms。跑步中踩到尖锐物体的本能"缩腿",就是这套反射在 100 ms 内完成的——比"我感觉痛"的意识觉察还要早 200 ms 以上。</p>
+
+  <h3><span class="pre">7.7</span>力量训练的早期适应——神经先于肌肉</h3>
+  <p class="lead">开始一项新的力量训练,头四周肌肉看起来没怎么变粗,但你能举起的重量已经显著上升。这不是错觉——力量训练的前 4 周里,绝大部分增益来自神经系统,而不是肌肉肥大。</p>
+
+  <p>当受试者开始 8–12 周的抗阻训练,力量增益曲线大致呈现两个阶段:</p>
+  <ul>
+    <li><strong>0–4 周:神经适应主导期</strong>——力量增长 20–40%,但肌肉横截面积几乎无变化或仅微升 1–3%。</li>
+    <li><strong>4 周后:肌肉肥大期</strong>——CSA 开始可测增长(每周约 0.5–1.5%),神经适应仍在继续但增量减小。</li>
+    <li><strong>6–12 周</strong>:神经与肥大双轨贡献。</li>
+  </ul>
+
+  <p>神经适应的具体机制有三:</p>
+
+  <h4>① MUR 上升 (Increased Motor Unit Recruitment)</h4>
+  <p>新手在最大用力收缩 (MVC) 时,能动员的 MU 比例只有 70–85%,剩余 15–30% 处于"保护性沉默"。训练后,大脑学会动员更多 MU,可逼近 95%+。这部分增益不需要肌肉本身变化。</p>
+
+  <h4>② 共激活下降 (Reduced Coactivation)</h4>
+  <p>初学者做关节运动时,主动肌和拮抗肌同时激活——例如膝伸时股四头肌发力,腘绳肌也轻度激活作为"刹车"。这本是稳定性机制,但代价是净力量输出降低。训练后,神经系统学会更精准地<em>放开拮抗肌</em>,主动肌的净力矩输出提高。</p>
+
+  <h4>③ 同步化与频率编码增强</h4>
+  <p>训练后 MU 的放电频率上限提高,同步化程度增加,能在更短时间内达到力量峰值——这是<em>爆发力</em> (rate of force development, RFD) 适应的直接来源。短跑运动员特别依赖这一项。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 跑者也要做力量训练,且收益不是"肌肉变大"</div>
+    <p>很多耐力跑者拒绝力量训练,理由是"我不想变壮"。但<strong>力量训练对跑者的核心收益就在前 4 周的神经适应里,几乎不会产生明显肥大</strong>。强化 MUR、降低共激活、提高 RFD,直接换成跑步表现的指标就是:跑步经济性 RE 改善 4–8%、SSC 弹性回收效率提升、损伤率下降。Beattie 2014 与 Blagrove 2017 的 meta 分析都明确给出耐力跑者每周 2 次中高负荷力量训练的收益。<em>力量训练对跑者的本质是"调神经",不是"长肌肉"</em>。</p>
+  </div>
+
+  <h3><span class="pre">7.8</span>神经-肌肉效率的实验测量——V wave 与 H reflex</h3>
+  <p class="lead">怎么知道"神经驱动"到底增强了多少?生理实验室有一套基于电刺激的标准方法,核心三个指标:M wave、H reflex、V wave。</p>
+
+  <p>实验装置:体表电极放在胫神经 (tibial nerve) 后,刺激后记录比目鱼肌 (soleus) 的肌电反应。给一个亚最大刺激,你会先看到一个稍后到达的<em>H 波</em>,这是肌梭 Ia 纤维被电刺激激活、再单突触触发 α 神经元产生的反射性收缩。增大刺激强度,神经里更多运动轴突也被直接激活,产生一个先到达的<em>M 波</em>(直接刺激)。继续增大到超最大刺激 (supramaximal),M 波幅度饱和,代表所有运动轴突都被激活了——这是肌肉"满负荷"的物理上限。</p>
+
+  <p>在<em>自主用力收缩</em>同时给一个超最大刺激,会出现第三个波——<em>V 波</em>。V 波代表的是:皮层下行驱动的动作电位与电刺激产生的逆向动作电位在轴突上碰撞抵消,只有那些<em>恰好在刺激时刻已经被中枢主动激活</em>的运动神经元会再次产生顺向动作电位、被肌肉记录到。所以 V 波幅度直接反映了<em>皮层下行驱动的强度</em>。</p>
+
+  <p><strong>V/M 比</strong>是评估中枢驱动的关键指标:</p>
+  <ul>
+    <li>V/M ↑:中枢驱动增强,神经适应改善</li>
+    <li>V/M ↓:中枢驱动下降,中枢疲劳或失训</li>
+  </ul>
+
+  <p>多项研究使用 V/M 监测耐力训练适应:6 周的高强度训练后比目鱼肌 V/M 上升 30–50%,马拉松前后 V/M 下降幅度可达 40%(中枢疲劳)。这是中枢疲劳真实存在、且可被量化的最硬证据之一 <span class="ref">[Aagaard 2002]</span>。</p>
+
+  <h3><span class="pre">7.9</span>中枢疲劳 vs 外周疲劳——力竭的两个出口</h3>
+  <p class="lead">"我跑不动了"这句话的物理含义,在不同距离里完全不同。短跑里,你的肌肉真的"用完了";马拉松里,你的肌肉还有余量,是大脑主动把开关关上。</p>
+
+  <h4>外周疲劳 (Peripheral Fatigue)</h4>
+  <p>定义:肌纤维本身或神经肌肉接头层面的力量输出能力下降。机制集中在<em>肌纤维代谢与离子失衡</em>:</p>
+  <ul>
+    <li>无机磷 Pi 累积——抑制肌钙蛋白对 Ca²⁺ 的敏感性</li>
+    <li>H⁺ 累积导致 pH 下降——干扰肌球蛋白 ATP 酶活性(但近期研究质疑该机制的绝对重要性)</li>
+    <li>K⁺ 外溢导致肌膜去极化——T 管动作电位传导减弱</li>
+    <li>SR Ca²⁺ 释放减少——兴奋-收缩耦联失效</li>
+    <li>糖原耗竭——能量供应中断(Ch5、Ch6 涉及)</li>
+  </ul>
+
+  <p>外周疲劳的标志:刺激神经依然引发肌肉收缩,但收缩力下降。也就是肌肉本身"做不到"。100m 短跑末段、800m 力竭、举重最后一次失败,都是典型的外周疲劳。</p>
+
+  <h4>中枢疲劳 (Central Fatigue)</h4>
+  <p>定义:在肌肉本身仍有发力能力的情况下,中枢神经系统主动下调对α 神经元的驱动,导致自主用力输出下降。</p>
+
+  <p>怎么证明它存在?<em>Gandevia 评估法</em>:让受试者做最大自主收缩 (MVC),同时给一个超最大电刺激。如果电刺激能在自主收缩之上再叠加力量(twitch interpolation),说明中枢驱动没到极限——肌肉还能再发力,只是大脑没让它发。这个"叠加力量"称为<em>叠加抽搐</em> (superimposed twitch),它的存在直接证明了中枢疲劳的存在 <span class="ref">[Merton 1954; Gandevia 2001]</span>。</p>
+
+  <p>典型数据:</p>
+  <ul>
+    <li>100m 冲刺后:叠加抽搐 < 5%,即中枢驱动几乎拉满,力竭以外周为主</li>
+    <li>10K 比赛后:叠加抽搐 8–15%,中枢与外周共同贡献</li>
+    <li>马拉松后:叠加抽搐 20–35%,中枢贡献显著超过外周</li>
+    <li>100K 超马后:叠加抽搐可达 40%+,中枢成为限制因素</li>
+  </ul>
+
+  <p><strong>距离越长,中枢疲劳占比越大</strong>。这也解释了一个长期被误读的现象:精英马拉松选手撞墙后并不是"肌肉真的不能动了",他们能在 30 分钟后慢慢走完全程,甚至能在颁奖时跳上领奖台——肌肉余量充足,中枢只是在比赛中"拒绝输出"。</p>
+
+  <h3><span class="pre">7.10</span>中枢调节器 Central Governor——大脑作为安全官</h3>
+  <p class="lead">为什么大脑会"拒绝输出"?Tim Noakes 2001 年提出的<em>中枢调节器模型</em> (Central Governor Model, CGM) 把这件事翻译成了一句话:运动表现是大脑实时调控的输出,不是肌肉的物理极限。</p>
+
+  <p>Noakes 团队观察到几个无法被"灾难性疲劳模型"(catastrophic fatigue,即"肌肉用完了就停")解释的现象:</p>
+  <ul>
+    <li>马拉松末段冲刺——如果真是力竭,末段功率应该单调下降,但精英选手常常能在最后 2 公里加速。</li>
+    <li>胜利冲线时的"最后一棒"——比赛结束前的输出常远超中段稳态。</li>
+    <li>同样配速下,告知"还剩 1 公里" vs "还剩 5 公里",运动员的 RPE 和心率立刻不同。</li>
+    <li>"哀痛门" (psyching out):被告知比赛被取消时,生理参数会瞬间从"濒临力竭"恢复到"轻松"。</li>
+  </ul>
+
+  <p>这些现象指向同一个结论:疲劳不是单一物理量,而是大脑实时整合<em>代谢信号</em>(乳酸、温度、糖原状态)、<em>机械信号</em>(GRF、关节角度、肌张力)、<em>心理信号</em>(动机、目标、剩余距离、对手位置)后产生的<em>有意识感觉</em>,目的是防止身体真正进入<em>灾难性力竭</em>(脱水昏倒、心血管崩溃、横纹肌溶解)。</p>
+
+  <p>解剖学上,这个"调节器"的关键节点是<em>前扣带皮层</em> (anterior cingulate cortex, <em>ACC</em>)——位于额叶下方、胼胝体之上的一块皮层。ACC 大量接收来自外周(温度、化学受体、伤害感受器)、皮层下(基底节、丘脑)、其他皮层(前额叶、岛叶)的信号,把它们整合成一个统一的<em>努力感</em> (perception of effort)。当努力感超过某个阈值,ACC 会下调对 M1 的驱动,降低运动皮层激活水平——你感觉"跑不动了",运动输出自然下降。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 疲劳是大脑的保护机制,不是肌肉力竭</div>
+    <p>"我尽力了"这句话在生理学上几乎从不成立。Marcora 2008 的著名实验:让骑车人骑到他们自认为的"力竭",然后立即给他们一个 5 秒最大功率冲刺测试——结果他们都能输出比力竭前更高的功率。这意味着<strong>力竭的那一刻,肌肉里还有余量</strong>。<em>真正决定你能否继续的,不是化学限制,而是大脑的安全决策</em>。这套模型与传统"灾难性疲劳"模型并不完全对立——外周疲劳的化学信号是中枢调控的重要输入,但中枢始终保留最终决定权。</p>
+  </div>
+
+  <p>这也解释了 EPO、咖啡因、心理预期等"非肌肉"干预对运动表现的显著影响——它们不是改变肌肉的物理能力,而是改变大脑对"还能跑多久"的估计。Noakes 模型在 2000s 引发激烈学术争论,但近 20 年的功能影像和生理学研究越来越支持它的核心论断:运动表现是<em>预测性 + 实时性</em>的脑控制行为,不是肌肉的被动响应 <span class="ref">[Noakes 2001; St Clair Gibson 2006]</span>。</p>
+
+  <h3><span class="pre">7.11</span>心理生物模型——Marcora 的努力感方程</h3>
+  <p class="lead">Samuele Marcora 在 2008 年之后系统提出<em>心理生物模型</em> (psychobiological model),把 Noakes 的"中枢调节"具体化成一个可测量的变量:努力感。</p>
+
+  <p>Marcora 的核心论断:<strong>力竭发生在"努力感等于最大可接受努力"的瞬间</strong>。也就是说,运动停下,不是因为身体不能继续,而是因为继续所需要的"努力感"超过了你愿意忍受的上限。</p>
+
+  <p>努力感的神经底物,Marcora 认为是<em>ACC 活动 / M1 活动 之比</em>——更准确地说,是大脑评估"为了产生这个动作我需要付出的中枢驱动"的内感受信号。这与传统观点(努力感来自肌肉的本体感觉反馈)截然不同。Marcora 的实验设计极其精巧:他用神经肌肉阻断剂阻断肌肉对中枢指令的响应,让受试者做同样动作时需要更大的中枢驱动——结果他们报告的努力感显著上升,即便外周反馈没变。这反向证明了努力感的源头在中枢,不在外周 <span class="ref">[Marcora 2009]</span>。</p>
+
+  <p>心理生物模型的核心方程(概念表达,非精确公式):</p>
+  <div class="callout note">
+    <div class="label">努力感方程(Marcora 概念)</div>
+    <p><em>力竭点 = 努力感 ≥ 最大可接受努力</em></p>
+    <p>努力感 ∝ 中枢驱动需求(产生当前动作所需的皮层激活强度)</p>
+    <p>而非:努力感 ∝ 外周代谢状态</p>
+    <p>训练能干预的不是"肌肉极限",而是<em>提高最大可接受努力的上限</em>(意志训练 / 脑耐力训练 BET)</p>
+  </div>
+
+  <h3><span class="pre">7.12</span>心理疲劳——大脑前先"累了"的代价</h3>
+  <p class="lead">Marcora 团队 2009 年做了一个轰动的实验:让一组人先做 90 分钟的认知任务(高强度持续注意力),另一组看 90 分钟纪录片;然后两组都骑车做<em>时间至力竭</em> (TTE) 测试。结果令人意外。</p>
+
+  <p>认知任务组的 TTE 比对照组<strong>下降 15%</strong>(平均从约 12 分 30 秒缩短到 10 分 40 秒),最大功率、心率、乳酸、VO₂ 等所有生理指标都<em>没有显著差异</em>。但他们报告的 RPE 在每个时点都更高——也就是说,同样的功率"感觉更费劲了" <span class="ref">[Marcora 2009 BMC]</span>。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 标题 -->
+      <text x="60" y="35" font-size="12" fill="#d4a548" letter-spacing="0.18em">MENTAL FATIGUE · 90 分钟认知任务后的运动表现</text>
+      <text x="60" y="52" font-size="9.5" fill="#a39e8d" letter-spacing="0.08em">Marcora 等 2009 BMC · 骑车 TTE 测试 · n=16</text>
+
+      <!-- 左图: TTE 对比柱状图 -->
+      <g transform="translate(60, 100)">
+        <text x="0" y="0" font-size="11" fill="#d4a548" letter-spacing="0.12em">A · 时间至力竭 (TTE)</text>
+        <line x1="40" y1="40" x2="40" y2="300" stroke="#3d3d36" stroke-width="1"/>
+        <line x1="40" y1="300" x2="320" y2="300" stroke="#3d3d36" stroke-width="1"/>
+        <!-- Y 轴 -->
+        <g font-size="9" fill="#a39e8d" text-anchor="end">
+          <text x="35" y="44">800s</text>
+          <text x="35" y="110">600</text>
+          <text x="35" y="175">400</text>
+          <text x="35" y="240">200</text>
+          <text x="35" y="304">0</text>
+        </g>
+        <!-- 对照组柱 -->
+        <rect x="80" y="56" width="80" height="244" fill="#4a6fa5" fill-opacity="0.7" stroke="#4a6fa5"/>
+        <text x="120" y="50" font-size="10" fill="#8fb8df" text-anchor="middle">754 s</text>
+        <text x="120" y="315" font-size="9.5" fill="#a39e8d" text-anchor="middle">对照(纪录片)</text>
+        <!-- 实验组柱 -->
+        <rect x="200" y="92" width="80" height="208" fill="#9c4bb5" fill-opacity="0.75" stroke="#9c4bb5"/>
+        <text x="240" y="86" font-size="10" fill="#c89ad8" text-anchor="middle">640 s</text>
+        <text x="240" y="315" font-size="9.5" fill="#a39e8d" text-anchor="middle">实验(认知任务)</text>
+        <!-- 下降标注 -->
+        <line x1="160" y1="70" x2="200" y2="105" stroke="#d4a548" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="180" y="65" font-size="10" fill="#d4a548" text-anchor="middle">↓15%</text>
+      </g>
+
+      <!-- 中图: RPE 时序对比 -->
+      <g transform="translate(440, 100)">
+        <text x="0" y="0" font-size="11" fill="#d4a548" letter-spacing="0.12em">B · RPE 随时间变化</text>
+        <line x1="40" y1="40" x2="40" y2="280" stroke="#3d3d36" stroke-width="1"/>
+        <line x1="40" y1="280" x2="280" y2="280" stroke="#3d3d36" stroke-width="1"/>
+        <!-- 网格 -->
+        <line x1="40" y1="100" x2="280" y2="100" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="40" y1="160" x2="280" y2="160" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <line x1="40" y1="220" x2="280" y2="220" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+        <!-- Y轴 -->
+        <g font-size="9" fill="#a39e8d" text-anchor="end">
+          <text x="35" y="44">20</text>
+          <text x="35" y="104">17</text>
+          <text x="35" y="164">14</text>
+          <text x="35" y="224">11</text>
+          <text x="35" y="284">8</text>
+        </g>
+        <!-- X 轴 -->
+        <g font-size="9" fill="#a39e8d" text-anchor="middle">
+          <text x="40" y="295">0%</text>
+          <text x="100" y="295">25</text>
+          <text x="160" y="295">50</text>
+          <text x="220" y="295">75</text>
+          <text x="280" y="295">100%</text>
+          <text x="160" y="310" fill="#6a665a" letter-spacing="0.1em">运动进度</text>
+        </g>
+        <!-- 对照组 -->
+        <polyline points="40,220 100,180 160,140 220,100 280,50" fill="none" stroke="#4a6fa5" stroke-width="2"/>
+        <text x="285" y="55" font-size="9" fill="#8fb8df">对照</text>
+        <!-- 实验组 -->
+        <polyline points="40,200 100,150 160,105 220,65 280,40" fill="none" stroke="#9c4bb5" stroke-width="2"/>
+        <text x="285" y="40" font-size="9" fill="#c89ad8">认知后</text>
+      </g>
+
+      <!-- 右图: 生理参数无差异 -->
+      <g transform="translate(780, 100)">
+        <text x="0" y="0" font-size="11" fill="#d4a548" letter-spacing="0.12em">C · 生理参数</text>
+        <text x="0" y="15" font-size="9" fill="#a39e8d">力竭瞬间(两组对比)</text>
+        <g font-size="9.5" fill="#e8e4d8">
+          <text x="0" y="55">HR max</text>
+          <text x="260" y="55" text-anchor="end" fill="#a39e8d">≈ 无差异</text>
+          <text x="0" y="85">VO₂ peak</text>
+          <text x="260" y="85" text-anchor="end" fill="#a39e8d">≈ 无差异</text>
+          <text x="0" y="115">血乳酸</text>
+          <text x="260" y="115" text-anchor="end" fill="#a39e8d">≈ 无差异</text>
+          <text x="0" y="145">最大功率</text>
+          <text x="260" y="145" text-anchor="end" fill="#a39e8d">≈ 无差异</text>
+          <text x="0" y="180" fill="#d4a548">RPE</text>
+          <text x="260" y="180" text-anchor="end" fill="#9c4bb5">↑ 显著升高</text>
+          <text x="0" y="210" fill="#d4a548">TTE</text>
+          <text x="260" y="210" text-anchor="end" fill="#9c4bb5">↓ 15%</text>
+        </g>
+        <line x1="0" y1="225" x2="260" y2="225" stroke="#3d3d36"/>
+        <text x="0" y="250" font-size="9" fill="#a39e8d" letter-spacing="0.05em">结论:疲劳源于</text>
+        <text x="0" y="265" font-size="9" fill="#a39e8d" letter-spacing="0.05em">大脑努力感↑,</text>
+        <text x="0" y="280" font-size="9" fill="#a39e8d" letter-spacing="0.05em">非肌肉/代谢变化</text>
+      </g>
+
+      <text x="60" y="440" font-size="9" fill="#6a665a" letter-spacing="0.08em">FIG 7.2 · 认知任务对耐力表现的影响:典型心理生物模型实验范式</text>
+    </svg>
+    <div class="svg-caption">FIG 7.2 · Marcora 2009:认知疲劳让 TTE 下降 15%,但所有生理参数不变——疲劳的"努力感"机制</div>
+  </div>
+
+  <p>这个实验直接挑战了"疲劳来自肌肉"的传统观点。所有外周指标不变,唯一变的是<em>主观努力感</em>——而努力感的微小上升,提前了"力竭决定"的发生。后续多项研究复制了这一发现,并进一步发现机制可能与 ACC 在长时间认知任务后的<em>腺苷</em> (adenosine) 累积有关:腺苷是 ATP 代谢副产物,会抑制神经元兴奋性。咖啡因之所以能缓解心理疲劳,正是因为它是腺苷受体拮抗剂,占据 A1 / A2A 受体却不激活它,等于"屏蔽"了腺苷的抑制信号。</p>
+
+  <div class="callout ops">
+    <div class="label">操作建议 / 比赛前 48 小时避免高强度脑力工作</div>
+    <p>关键比赛前 1–2 天,刻意降低认知负荷:</p>
+    <ul>
+      <li>减少持续 >2 小时的高强度脑力工作(写代码、写报告、复杂决策)</li>
+      <li>避免高焦虑社交(裁员谈话、家庭矛盾、债务催收)</li>
+      <li>避免长时间屏幕注意力(深度刷剧、长视频会议)</li>
+      <li>比赛当天:轻度认知活动(听音乐、轻松阅读)代替"什么都不干"——完全放空反而让心理预热不足</li>
+      <li>比赛日早上一杯咖啡 (3–6 mg/kg) 阻断腺苷,降低基础努力感</li>
+    </ul>
+    <p>这条建议在过去十年从"心理小贴士"变成了硬数据驱动的训练学常识。</p>
+  </div>
+
+  <h4>脑耐力训练 (Brain Endurance Training, BET)</h4>
+  <p>既然心理疲劳能拖累运动表现,反过来,<em>训练大脑对认知疲劳的耐受</em>就能提升运动耐力。Marcora 团队后续验证:在常规耐力训练前 + 30 分钟认知任务(Stroop test、N-back 等),12 周后受试者 TTE 提升明显高于单纯耐力训练组。这就是 <em>BET</em> 的核心思想——把"意志力"从一种品格特质,转化为可训练的生理变量。</p>
+
+  <p>更精简的应用:训练时<em>不戴耳机</em>、不看手表、不听播客,强迫大脑承担注意力负担,慢慢积累 ACC 的抗疲劳能力。这是为什么真正的"困难训练"应该在<em>没有外部刺激分散注意力</em>的条件下进行——本质是双重训练(身体 + 大脑)。</p>
+
+  <h3><span class="pre">7.13</span>努力感的测量——Borg RPE 与内感受</h3>
+  <p class="lead">努力感虽然是主观体验,但 1962 年瑞典生理学家 Gunnar Borg 设计了一套可量化的量表,至今仍是耐力科学的"金本位"主观指标。</p>
+
+  <p><em>Borg RPE 6–20 量表</em>(Rating of Perceived Exertion)的设计精巧:数字范围 6 到 20,乘以 10 大致等于该努力水平下的心率。6 = 静息("nothing at all"),20 = 极限努力("maximal exertion"),13 = somewhat hard(微喘但能讲完整句子),17 = very hard(几乎说不出话)。</p>
+
+  <p>1982 年 Borg 推出更简洁的 <em>CR10 量表</em>(Category-Ratio 10),0–10 分,带有半级(0.5、1.5 等),更便于初学者使用。运动学研究里常见的"sRPE × 持续分钟 = 训练负荷单位 (TRIMP)"就是基于 CR10。</p>
+
+  <table>
+    <thead>
+      <tr><th>Borg RPE 6–20</th><th>CR10</th><th>状态描述</th><th>训练强度区</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>6–8</td><td>0–1</td><td>静息 / 极轻松,能轻松聊天唱歌</td><td>恢复跑 R</td></tr>
+      <tr><td>9–11</td><td>2–3</td><td>能完整讲句子</td><td>有氧基础 E1</td></tr>
+      <tr><td>12–13</td><td>4</td><td>微喘但能讲长句,马拉松配速感</td><td>有氧基础 E2 / 长距离配速</td></tr>
+      <tr><td>14–15</td><td>5–6</td><td>说话开始受限,节奏跑 / 乳酸阈附近</td><td>节奏跑 T</td></tr>
+      <tr><td>16–17</td><td>7–8</td><td>只能说短词,10K 配速</td><td>VO₂max 间歇 I</td></tr>
+      <tr><td>18–19</td><td>9</td><td>说不出话,5K 末段 / 800m 配速</td><td>无氧间歇 A</td></tr>
+      <tr><td>20</td><td>10</td><td>极限,无法维持 30 秒以上</td><td>冲刺 S</td></tr>
+    </tbody>
+  </table>
+
+  <p>RPE 与代谢标志物 (HR、LA、VO₂、肌氧饱和度) 在稳态强度下相关性极强 (r > 0.85),所以它不是"自我感觉"的随意标签,而是一个精度足够高的内感受信号。这种用感觉做配速决策的能力,在生理学里叫<em>内感受</em> (interoception)——大脑感知身体内部状态(心跳、呼吸、肌肉张力、化学受体)并整合为统一情感体验的能力。岛叶 (insula) 是这套系统的核心枢纽,与 ACC 紧密联结。</p>
+
+  <h3><span class="pre">7.14</span>配速感与"外包"——跑表把感觉拿走了</h3>
+  <p class="lead">精英长跑选手最被低估的能力之一,是<em>无表跑步</em>——不戴 GPS,凭体感跑出精确配速。这种能力在数据时代正在以肉眼可见的速度退化。</p>
+
+  <p>2010 年代之前,马拉松配速主要靠两套机制:① 教练在路边喊里程时间;② 跑者自己根据呼吸、心率感觉、肌肉感受、之前训练里建立的"配速记忆"自校准。Kipchoge 等顶级选手现在仍然主要依赖第二种——他们的训练核心是把"配速 4'00"/km"和"我此刻的感觉"建立精确的双向映射,运动员训练里反复跑同一距离同一目标时间,本质是在<em>校准内感受</em>。</p>
+
+  <p>GPS 跑表的出现让业余跑者"外包"了这项能力。手腕上每秒刷新的实时配速取代了对身体感觉的注意——结果是,当跑表故障、信号丢失、电量耗尽时,跑者完全不知道自己跑多快。这并非纯粹的怀旧:多项研究显示,持续依赖外部反馈会<em>降低内感受敏感性</em>,具体表现为努力感与实际功率的偏差扩大、对疲劳信号的察觉延迟、配速决策的稳定性下降。</p>
+
+  <div class="callout ops">
+    <div class="label">操作建议 / 每周 1 次"裸跑"训练</div>
+    <p>实操方案:每周安排 1 次<em>无表训练</em>(或表盖在身体看不见的位置)。先估自己今天该跑多快(例如"7 公里 5'30"/km"),跑完再看表对比误差。建议从有氧基础跑开始(误差 < ±10 秒/km 算合格),逐步过渡到节奏跑、间歇。3–6 个月后,你会重新拿回那个"内置配速表"——它不仅有用,在比赛失去信号、装备故障时,它可能是决定你能否完赛的关键。</p>
+  </div>
+
+  <h3><span class="pre">7.15</span>跑者高潮——不是内啡肽,是内源大麻素</h3>
+  <p class="lead">关于跑者高潮 (runner's high) 的神经机制,过去半个世纪经历了一次关键的范式革命:从"内啡肽假说"到"内源大麻素假说"。前者基本是错的,后者才是真相。</p>
+
+  <h4>旧说:内啡肽 (endorphins) 假说</h4>
+  <p>1970–80 年代,研究发现长时间跑步后血液中<em>β-内啡肽</em>升高,与吗啡共用 µ 受体,镇痛 + 欣快。媒体广泛传播"跑步释放内啡肽 = 自然的吗啡"。这套说法上了所有跑步杂志,统治了 30 年公众认知。</p>
+
+  <p>问题在于:<strong>β-内啡肽是大分子肽(31 个氨基酸),根本不能穿过血脑屏障</strong>。血液中的内啡肽升高与大脑里的内啡肽水平没有可推断的关系——血液这一条数据完全是误导。后来 Boecker 2008 用 PET 直接测大脑 µ 受体占据率,确实在跑步后看到内啡肽相关变化,但变化幅度与跑者高潮的强度并不严格匹配,且发生的脑区(前额叶、ACC、岛叶)是疼痛调控相关,而不是"欣快感"核心。</p>
+
+  <h4>新说:内源大麻素 (endocannabinoids) 假说</h4>
+  <p>2003 年 Sparling 等人首次测出运动后<em>花生四烯酸乙醇胺</em> (anandamide, AEA) 显著升高;2015 年德国 Fuss 团队用小鼠模型给出了决定性证据:小鼠在跑轮上跑步后表现出抗焦虑 + 镇痛 + 欣快行为(典型的"跑者高潮"),但<strong>当 CB1 大麻素受体被遗传性敲除或药理性阻断时,这些行为全部消失</strong>;反过来阻断 µ 阿片受体则没有影响 <span class="ref">[Fuss et al. 2015 PNAS]</span>。</p>
+
+  <p>内源大麻素是小分子脂质(anandamide、2-AG 等),<em>能穿过血脑屏障</em>,而且跑步中的肌肉撕裂 + 炎症反应直接刺激局部和中枢内源大麻素合成。它与外源大麻 (THC) 共用 CB1 受体,产生类似的放松、欣快、痛觉钝化、时间感扭曲——这正是跑者高潮的现象学。</p>
+
+  <h4>其他参与者</h4>
+  <p>真实的跑者高潮是多神经递质鸡尾酒,不是单一通路:</p>
+  <ul>
+    <li><em>多巴胺</em> (dopamine):奖赏 + 动机,腹侧被盖区 → 伏隔核通路</li>
+    <li><em>GABA</em>:抑制性递质,产生放松感</li>
+    <li><em>5-HT</em> (血清素):情绪稳定 + 抗抑郁</li>
+    <li><em>去甲肾上腺素</em> (NE):觉醒 + 注意力锐化</li>
+    <li><em>BDNF</em>:不是急性传递,但长期上调促进神经可塑性(下一节)</li>
+  </ul>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 跑者高潮不是内啡肽,内啡肽过不了血脑屏障</div>
+    <p>这个错误观念在中文跑步社群里仍然广泛流传,甚至出现在不少正规科普文章里。<em>内啡肽假说在 2015 年 Fuss 团队的实验后已经基本被否决</em>。真正给你跑者高潮的是<strong>内源大麻素</strong>——和大麻共用受体的内生分子。这也解释了跑者高潮的几个特征:轻度时间感扭曲、痛觉钝化、社交开放感增强、对音乐和景色的感受性放大——这些都是 CB1 受体激活的典型现象,与吗啡的"沉醉"完全不同。</p>
+  </div>
+
+  <p>触发跑者高潮的条件:中等偏高强度(60–80% HRmax)+ 持续 ≥30–45 分钟。短跑、低强度散步几乎不触发——前者代谢窗口太短,后者强度不足。这也解释了为什么超马选手描述的"长距离禅意"——那是 4 小时以上 CB1 通路持续激活的延伸效应。</p>
+
+  <h3><span class="pre">7.16</span>跑步与脑健康——BDNF 与海马体新生神经元</h3>
+  <p class="lead">如果说急性跑步带来的是数小时的神经化学红利,那么长期规律跑步带来的是大脑结构层面的可测量变化——海马体增厚、白质完整性提高、皮层厚度增加。</p>
+
+  <h4>BDNF · 大脑的肥料</h4>
+  <p><em>脑源性神经营养因子</em> (Brain-Derived Neurotrophic Factor, BDNF) 是一种小分子蛋白,被誉为"神经元的肥料"。它在大脑里促进:</p>
+  <ul>
+    <li>神经元存活与抗凋亡</li>
+    <li>突触可塑性 (LTP 长时程增强)</li>
+    <li>新生神经元 (neurogenesis,特别是海马齿状回)</li>
+    <li>髓鞘形成 (myelination)</li>
+  </ul>
+
+  <p>急性有氧运动 30–60 分钟后,血清 BDNF 升高 30–200%(因强度、训练水平而异)。慢性训练让基础 BDNF 水平也上调。BDNF 的合成与释放部分由海马体 CA3 区的电活动直接驱动——跑步通过 CPG 振荡器的节律性输入、加上情绪兴奋,激活整个海马-皮层网络,促进 BDNF 表达。这是<em>"运动是天然抗抑郁药"</em>这一现象的分子基础之一。</p>
+
+  <h4>海马体新生神经元</h4>
+  <p>过去几十年最重要的神经科学突破之一,是确认<em>成年哺乳动物海马齿状回</em>仍有新生神经元产生(adult hippocampal neurogenesis, AHN)。van Praag 在 1999 年的实验证明:让小鼠在跑轮上跑步 30 天,海马齿状回新生神经元数量是对照组的<em>2–3 倍</em>。这不是"长大了几个细胞"的问题——这些新生神经元被整合进既有回路,直接改善学习与记忆。</p>
+
+  <p>人类层面,Erickson 等 2011 年的著名研究:120 名 55–80 岁老年人随机分组,实验组每周 3 次有氧步行(强度逐渐提高到 70% HRR、40 min/次),6 个月后<strong>海马体体积增加 ~2%</strong>;对照组(柔韧性训练)海马体仍按预期速度萎缩 ~1.5%。同时实验组的空间记忆任务表现显著优于对照组。两组中,海马体体积变化与血清 BDNF 变化相关 <span class="ref">[Erickson et al. 2011 PNAS]</span>。</p>
+
+  <p>2% 听起来不大,但海马体每年的老化萎缩约 1–2%,这意味着 6 个月的规律运动等于"逆转"了一年的脑老化。对预防阿尔茨海默病、轻度认知障碍、晚年抑郁有可观的潜在收益。</p>
+
+  <h4>默认网络与"跑步顿悟"</h4>
+  <p>稳态跑步还有一个特殊的脑状态:<em>默认网络</em> (Default Mode Network, DMN) 的相对抑制。DMN 是大脑在"无目标思考"时活跃的网络(前内侧前额叶 + 后扣带 + 海马),它管的是自我对话、未来计划、回忆、内省。DMN 过度活跃与抑郁、焦虑、反刍思维 (rumination) 相关。</p>
+
+  <p>跑步时,稳态运动 + CPG 自动化 + 内源大麻素 + 多巴胺,共同把 DMN 从"高速空转"切换到"低功耗背景"——这就是跑步时"想问题不焦虑了"的神经机制。同时,前额叶的执行功能也部分抑制(<em>暂时性前额叶低活动</em>, transient hypofrontality, Dietrich 提出),严格的逻辑思维让位给联想式、跳跃式的思考——这是"跑步顿悟"(运动中突然想通一个长期困扰问题)的脑学基础。</p>
+
+  <h4>跑步对抑郁的临床有效性</h4>
+  <p>Blumenthal 等的 <em>SMILE 研究</em>(Standard Medical Intervention and Long-term Exercise)给出迄今最硬的临床证据:中老年重度抑郁患者随机分到舍曲林(sertraline,标准 SSRI 抗抑郁药)、有氧运动(每周 3 次 35–45 分钟 ≥70% HRmax)、或两者合用三组。16 周后,<strong>三组的抑郁缓解率相当</strong>(运动单独组甚至略胜)。10 个月随访时,运动组的复发率显著低于药物组 <span class="ref">[Blumenthal 2007]</span>。这是临床精神科很少有人愿意正面承认的事实:对中度抑郁,跑步与抗抑郁药效果等同,且没有副作用、停止后复发率更低。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 跑步的脑收益,可能比身体收益更值钱</div>
+    <p>我们谈跑步时通常先想到心血管、体重、肌肉。但从绝对健康收益看,大脑可能是最大受益者。海马体增厚、BDNF 上调、默认网络抑制、5-HT/DA 平衡——这些变化对生活质量(情绪稳定、专注力、记忆、抗焦虑、对抗痴呆)的影响,在 40 岁以后甚至超过了对身体的好处。<em>"运动是抗抑郁药、是认知增强剂"——这不是营销话术,这是临床数据</em>。如果你只能挑跑步的一个理由,挑大脑。</p>
+  </div>
+
+  <h3><span class="pre">7.17</span>心流状态——跑步与最佳体验</h3>
+  <p class="lead">Mihaly Csikszentmihalyi 在 1970s 提出的<em>心流</em> (flow) 概念,描述的是一种"挑战与能力刚好匹配"时的最佳体验——时间感扭曲、自我意识淡出、动作流畅、内在动机充沛。跑步是诱发心流的理想活动。</p>
+
+  <p>Csikszentmihalyi 的心流模型有几个关键条件:</p>
+  <ul>
+    <li><em>清晰的目标</em>——每一步、每一段距离都有明确指向</li>
+    <li><em>即时反馈</em>——身体感觉、地面反馈、配速变化实时可见</li>
+    <li><em>挑战 / 能力平衡</em>——任务难度匹配当前能力上限</li>
+    <li><em>专注 + 控制感</em>——注意力高度聚焦,但不焦虑</li>
+    <li><em>自我意识淡出 + 时间感扭曲</em>——"忘了自己在跑"</li>
+    <li><em>自成目的</em> (autotelic) ——活动本身就是奖励</li>
+  </ul>
+
+  <p>这些条件几乎是为耐力运动量身定做的。跑步的稳态节律 + CPG 自动化提供"控制感",环境的视觉流动提供"反馈",配速选择提供"挑战平衡",而且距离-时间这种维度让"目标清晰"几乎免费。所以跑者比其他运动员更频繁地报告心流体验——尤其在中长距离(8–25 公里)的中段。</p>
+
+  <h4>心流的神经标志</h4>
+  <p>Dietrich 提出的<em>暂时性前额叶低活动</em>假说认为:心流状态下,大脑的前额叶(尤其是负责自我监控、内部对话、批判性思维的背外侧前额叶 DLPFC)活动降低,而 M1、SMA、基底节、小脑活动正常或略升。这就是"自我消失"的神经基础——管"我"的那部分皮层暂时下线。</p>
+
+  <p>同时,中脑边缘多巴胺系统(VTA → 伏隔核 / 前额叶)激活提供奖赏感,内源大麻素提供平静而欣快的底色,去甲肾上腺素提供专注,GABA 提供"安全感"。心流的神经化学,与跑者高潮高度重叠,但更强调认知专注维度。这是为什么跑步中的心流体验,既不同于冥想的"空"也不同于药物的"嗨"——它是身体和大脑同时高效运转、但自我意识淡出的独特状态。</p>
+
+  <h3><span class="pre">7.18</span>认知功能——跑完为什么工作效率高</h3>
+  <p class="lead">"跑完一身轻,大脑特别清醒"——这不是错觉,是有数据支撑的脑科学事实。急性运动后的认知增益已经被几十项研究反复证实。</p>
+
+  <h4>急性效应</h4>
+  <p>20–30 分钟中等强度有氧运动后(60–80% HRmax),即时测试可见:</p>
+  <ul>
+    <li><em>执行功能</em>(抑制控制、工作记忆、认知灵活性)提升 5–15%</li>
+    <li><em>注意力</em>(持续注意、选择性注意)提升</li>
+    <li><em>处理速度</em>(简单 / 复杂反应时间)缩短 10–25 ms</li>
+    <li><em>创造性发散思维</em>提升(Oppezzo 2014 Stanford 研究:站立思考 vs 走路思考,后者发散思维任务成绩提升 60%)</li>
+  </ul>
+
+  <p>机制:急性 BDNF + 多巴胺 + 去甲肾上腺素的 30–120 分钟峰值窗口,加上大脑血流(CBF)增加 10–20% 提供更好的氧 + 葡萄糖供应,加上 DMN 抑制让前额叶执行功能更"干净"。</p>
+
+  <h4>慢性效应</h4>
+  <p>规律有氧训练(>3 月,每周 ≥3 次,中等强度)带来的结构变化:</p>
+  <ul>
+    <li><em>海马体体积</em>+2–3%(Erickson 2011)</li>
+    <li><em>白质完整性</em>(各向异性 FA 值)提升,特别是前部胼胝体</li>
+    <li><em>皮层厚度</em>在多个区域增厚(前额叶、颞叶)</li>
+    <li><em>脑容量</em>整体下降率减缓——50 岁后每年约 0.5–1%,运动者约 0.2–0.5%</li>
+  </ul>
+
+  <div class="callout ops">
+    <div class="label">操作建议 / 把跑步嵌入工作节奏</div>
+    <p>实操原则:</p>
+    <ul>
+      <li>晨跑(30–45 min,中等强度)→ 上午 2–3 小时认知红利窗口,适合深度工作、写作、解题</li>
+      <li>午休短跑(20 min,轻松)→ 下午抗困、专注力反弹</li>
+      <li>傍晚长跑(60–90 min,有氧基础)→ 晚间放松、睡眠质量改善</li>
+      <li><strong>避免</strong>:重要决策 / 创意任务 / 难题前刚跑完大强度间歇(神经驱动透支,反而下降)</li>
+      <li><strong>避免</strong>:午饭后立即跑(消化系统血流被分流)</li>
+    </ul>
+    <p>跑步从来不只是"健康投资",它是<em>对工作日大脑性能的直接投资</em>。这套生产函数在 30+ 知识工作者身上的回报率,常常超过同等时间的所谓"学习时间"。</p>
+  </div>
+
+  <h3><span class="pre">7.19</span>训练对神经系统的可塑性 · 总结</h3>
+  <p class="lead">把这一章的神经适应放在一张表里,有助于看清"跑步训练"在神经系统层面到底改造了什么:</p>
+
+  <table>
+    <thead>
+      <tr><th>时间窗口</th><th>神经层面变化</th><th>可测指标</th><th>对跑步表现的转译</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>单次训练(0–2 h)</td><td>BDNF、多巴胺、内源大麻素急性峰值</td><td>血清 BDNF↑、CBF↑、RPE 下降</td><td>跑者高潮、急性认知红利、情绪改善</td></tr>
+      <tr><td>1–4 周</td><td>MUR 上升、共激活下降、同步化优化</td><td>EMG iEMG↑、V/M 比↑</td><td>力量增长但 CSA 不变,RFD 提升</td></tr>
+      <tr><td>4–12 周</td><td>α-γ 共激活优化、肌梭灵敏度调节</td><td>H 反射调节、关节本体觉精度</td><td>跑姿稳定性提高,损伤率下降</td></tr>
+      <tr><td>3–6 月</td><td>小脑微回路、皮层运动地图重塑</td><td>fMRI 皮层激活模式</td><td>动作自动化,皮层介入降低</td></tr>
+      <tr><td>6–12 月</td><td>海马体新生神经元、白质 FA↑</td><td>MRI 海马体积、DTI 白质</td><td>记忆、执行功能、情绪稳定性提升</td></tr>
+      <tr><td>>1 年</td><td>皮层厚度变化、整体脑萎缩率下降</td><td>结构 MRI、整体脑容量</td><td>认知储备↑,神经退行性疾病风险下降</td></tr>
+    </tbody>
+  </table>
+
+  <div class="status-list">
+    <li class="do"><strong>做</strong> · 把每周 2 次中高负荷力量训练加入跑步计划,主要为了神经适应,不是肌肥大</li>
+    <li class="do"><strong>做</strong> · 每周 1 次"裸跑"训练,关掉 GPS / 音乐,强化内感受与配速感</li>
+    <li class="do"><strong>做</strong> · 关键比赛前 48 小时降低脑力工作强度,比赛日 3–6 mg/kg 咖啡因</li>
+    <li class="do"><strong>做</strong> · 用 Borg RPE / CR10 校准训练强度,与 HR/功率并列使用</li>
+    <li class="dont"><strong>不做</strong> · 不要把"跑者高潮"归因于内啡肽——这是过时科普,误导训练设计</li>
+    <li class="dont"><strong>不做</strong> · 不要把"力竭"当成肌肉极限,你的肌肉永远还有余量,改变的是中枢决策</li>
+    <li class="warn"><strong>注意</strong> · 心理疲劳与生理疲劳同样真实,比赛前持续脑力高负荷会让 TTE 下降 10–15%</li>
+    <li class="warn"><strong>注意</strong> · 力量训练前 4 周的神经适应是黄金期,过早增加负荷会绕过这一阶段直接进入受伤窗口</li>
+  </div>
+
+  <h3><span class="pre">7.20</span>本章数学与机制小结</h3>
+  <div class="callout note">
+    <div class="label">本章核心方程与机制</div>
+    <p><em>力量调节:</em> Force = N(招募 MU 数)× Rate(放电频率)× Synchronization(同步度)</p>
+    <p><em>努力感(Marcora):</em> Effort ∝ 中枢驱动需求(M1 激活),非外周代谢状态;力竭点 = 努力感 ≥ 最大可接受努力</p>
+    <p><em>V/M 比:</em> 中枢驱动强度的可测代理 → 训练适应↑、疲劳↓</p>
+    <p><em>叠加抽搐 (twitch interpolation):</em> 中枢疲劳量化 → 短跑 <5%,马拉松 20–35%,超马 40%+</p>
+    <p><em>Henneman 大小原则:</em> 招募顺序 S → FR → FF,几乎自动,不可逆转</p>
+    <p><em>跑者高潮神经化学:</em> 内源大麻素(anandamide、2-AG)→ CB1 受体 → 镇痛 + 欣快;<strong>非</strong>内啡肽</p>
+    <p><em>慢性脑收益:</em> BDNF↑ → 海马齿状回新生神经元↑ → 海马体积 +2%(6 月) → 记忆 / 抗抑郁 / 抗痴呆</p>
+    <p><em>临床等效:</em> 中度抑郁,有氧运动 ≈ SSRI 抗抑郁药(Blumenthal SMILE 研究)</p>
+    <p>下一章 (Ch8) 会从中枢调节器走出来,回到外周,讨论训练负荷、超量恢复、过度训练综合征——疲劳-恢复-适应的时间动力学。</p>
+  </div>
+
+  <div class="chip">CPG</div>
+  <div class="chip">SIZE PRINCIPLE</div>
+  <div class="chip">CENTRAL GOVERNOR</div>
+  <div class="chip">MARCORA MODEL</div>
+  <div class="chip">RPE</div>
+  <div class="chip">ENDOCANNABINOIDS</div>
+  <div class="chip">BDNF</div>
+  <div class="chip">HIPPOCAMPAL NEUROGENESIS</div>
+  <div class="chip">FLOW</div>
+  <div class="chip">PROPRIOCEPTION</div>
+</div>
+</section>

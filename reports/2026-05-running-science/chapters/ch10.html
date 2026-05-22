@@ -1,0 +1,732 @@
+<section id="s10" style="border-top: 4px solid var(--c-session);">
+<div class="container">
+  <div class="section-tag"><span class="num">10</span>TRAINING ADAPTATION · 适应篇 / 第十章</div>
+  <h1 class="section-h">训练适应的科学 <span class="en">How Bodies Get Better</span></h1>
+  <p class="section-sub">训练之所以让人变强,不是因为"练得多 = 强得多",而是因为身体在被一种特定剂量的应激打碎后,在恢复中重新组装成更适应这种应激的版本。这章讲的是这个"打碎-重组"过程的力学规律——刺激如何被量化、剂量如何被分配、周期如何被堆叠,以及为什么 80% 的跑者把这套规律搞反了。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>提升表现的不是训练本身,是<strong>训练 + 恢复</strong>之间的张力。最强的跑者不是练得最多的,是把"足够的刺激"和"足够的恢复"以最高密度反复堆叠的——而 80% 的业余跑者卡在两者之间的灰区:刺激不够、恢复也不够。</p>
+  </div>
+
+  <h3><span class="pre">10.1</span>应激-恢复-超量恢复:训练的基本物理学</h3>
+  <p class="lead">所有训练适应理论的起点,是 Hans Selye 在 1950 年代提出的<em>一般适应综合征</em> (GAS, General Adaptation Syndrome)。Selye 不是跑步学者,他研究的是大鼠对各种应激源(寒冷、毒物、剥夺睡眠)的统一反应模式。他发现身体面对任何应激,都按同样的三相反应:警报期 → 抵抗期 → 衰竭期。</p>
+
+  <p>把这个模型挪到训练里,就形成了今天我们熟悉的"应激-恢复-超量恢复-回归基线" (stimulus-recovery-supercompensation-decline) 四相循环:</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 340" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 轴 -->
+      <line x1="80" y1="240" x2="1040" y2="240" stroke="#3d3d36" stroke-width="1"/>
+      <line x1="80" y1="40" x2="80" y2="320" stroke="#3d3d36" stroke-width="1"/>
+      <!-- 基线 -->
+      <line x1="80" y1="180" x2="1040" y2="180" stroke="#a39e8d" stroke-width="1" stroke-dasharray="5,5"/>
+      <text x="1050" y="184" fill="#a39e8d" font-size="11" letter-spacing="0.04em">基线</text>
+      <!-- 应激箭头 -->
+      <g stroke="#c47f17" stroke-width="2" fill="none">
+        <line x1="160" y1="60" x2="160" y2="170" marker-end="url(#arr)"/>
+      </g>
+      <text x="160" y="55" text-anchor="middle" fill="#e0a25a" font-size="11" letter-spacing="0.04em">训练刺激</text>
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+          <polygon points="0 0, 6 3, 0 6" fill="#c47f17"/>
+        </marker>
+      </defs>
+      <!-- 表现曲线 -->
+      <path d="M 80 180 L 160 180 L 200 240 Q 280 280 360 240 Q 440 200 520 160 Q 600 130 680 130 Q 760 150 840 175 L 1040 180" fill="none" stroke="#d4a548" stroke-width="2.5"/>
+      <!-- 关键点 -->
+      <circle cx="200" cy="240" r="4" fill="#b54848"/>
+      <text x="220" y="265" fill="#d57979" font-size="11" letter-spacing="0.04em">疲劳谷底 (-)</text>
+      <circle cx="360" cy="240" r="4" fill="#9c4bb5"/>
+      <text x="320" y="290" fill="#c084d8" font-size="11" letter-spacing="0.04em">恢复到基线</text>
+      <circle cx="680" cy="130" r="5" fill="#3d8b6e"/>
+      <text x="650" y="115" fill="#6db8a0" font-size="11" letter-spacing="0.04em">超量恢复峰 (+)</text>
+      <circle cx="960" cy="180" r="4" fill="#a39e8d"/>
+      <text x="940" y="200" fill="#a39e8d" font-size="11" letter-spacing="0.04em">未再刺激 → 回归基线</text>
+      <!-- 阶段标注 -->
+      <g font-size="10" fill="#6a665a" letter-spacing="0.1em" text-anchor="middle">
+        <text x="180" y="320">刺激</text>
+        <text x="280" y="320">疲劳</text>
+        <text x="500" y="320">恢复</text>
+        <text x="680" y="320">超量恢复</text>
+        <text x="880" y="320">衰退</text>
+      </g>
+      <!-- 阶段分隔 -->
+      <g stroke="#6a665a" stroke-width="0.4" stroke-dasharray="2,3">
+        <line x1="240" y1="40" x2="240" y2="310"/>
+        <line x1="360" y1="40" x2="360" y2="310"/>
+        <line x1="600" y1="40" x2="600" y2="310"/>
+        <line x1="760" y1="40" x2="760" y2="310"/>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 10.1 · 单次训练的"刺激-恢复-超量恢复-衰退"四相曲线(基于 Selye GAS 与 Yakovlev 经典模型)</div>
+  </div>
+
+  <p>这条曲线告诉我们四件关键事:</p>
+  <ol>
+    <li><strong>训练当下表现是下降的,不是上升的</strong>——你跑完一节质量课后做体能测试,数据更差不是退步,是疲劳还在</li>
+    <li><strong>恢复需要时间</strong>——回到基线 24-48h,达到超量恢复 48-96h,这个时长决定了训练频率</li>
+    <li><strong>超量恢复有时间窗</strong>——错过这个窗口再来下一次刺激,只能从基线起跑,白浪费了一次超量</li>
+    <li><strong>不再刺激就回归</strong>——这就是训练记忆的衰退,没有持续训练的"维持效应"</li>
+  </ol>
+
+  <h4>这个模型的局限</h4>
+  <p>Selye-Yakovlev 模型给了我们一个直观的概念框架,但它实操起来太粗糙。真实的训练不是单一刺激,是数十次刺激互相叠加;不同生理系统的"超量恢复"时间常数不一样(肌糖原 24h、肌纤维微损伤 48-72h、神经系统 48-96h、激素轴 7-14 天、骨重塑 4-12 周);不同训练强度的"疲劳衰减速度"和"健身留存速度"也不同。所以更精细的模型出现了——下一节的 Banister 模型。</p>
+
+  <h3><span class="pre">10.2</span>Banister 健身-疲劳模型 (Fitness-Fatigue)</h3>
+  <p class="lead">1975 年 Eric Banister 提出一个改写整个训练学的数学模型:任何一次训练课同时产生<em>健身效应</em>(小但持久)和<em>疲劳效应</em>(大但短暂),当下表现是两者之差。</p>
+
+  <p>用公式表达:</p>
+  <ul>
+    <li>p(t) = p₀ + k₁ · 健身(t) - k₂ · 疲劳(t)</li>
+    <li>健身(t) = Σ TL(τ) · e^(-(t-τ)/τ₁) 其中 τ₁ ≈ 45 天</li>
+    <li>疲劳(t) = Σ TL(τ) · e^(-(t-τ)/τ₂) 其中 τ₂ ≈ 15 天</li>
+  </ul>
+
+  <p>翻译成人话:每次训练既加"健身分"也加"疲劳分",疲劳分加得更猛(系数 k₂ 大于 k₁,大约 2:1 到 3:1),但疲劳分衰退也更快(τ₂ 短)。当前表现 = 累积健身 - 当前疲劳。</p>
+
+  <p>这个模型的重要洞察:</p>
+  <ul>
+    <li>同样一次训练课,赛前 1 周做和赛前 3 周做完全不同——前者加疲劳大于加健身,反而拉低表现</li>
+    <li>大训练量积累 4-8 周再减量,是因为健身衰减慢(τ=45d)而疲劳衰减快(τ=15d),减量期疲劳掉得快、健身留得久,差值最大化</li>
+    <li>休假 2 周不可怕——疲劳掉光、健身只损失一半,回归后短期甚至会表现更好(但 4 周以上则两者都掉,得不偿失)</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">概念 / "形态" (Form) = 健身 - 疲劳</div>
+    <p>这是公路车与铁人三项最早引入的训练语言,后来 TrainingPeaks 等平台把它做成可视化指标,推广到跑步圈。<em>形态</em>不是 fitness 高低,是 fitness 减去 fatigue 后的"可发挥度"——赛前要的就是形态高,不是单纯 fitness 高。</p>
+  </div>
+
+  <h3><span class="pre">10.3</span>训练负荷度量——量、强度、频率与 TSS</h3>
+  <p class="lead">要建任何训练模型,先要能数化训练负荷。这是过去 30 年运动科学最实用的工程化成果:把"我今天跑了 10 公里"这种语义信息变成"我今天产生了 85 TSS"这种可加和、可比较、可建模的数字。</p>
+
+  <h4>三个基础维度</h4>
+  <ul>
+    <li><strong>量 (Volume)</strong>:公里数或时间</li>
+    <li><strong>强度 (Intensity)</strong>:配速、心率、功率、RPE</li>
+    <li><strong>频率 (Frequency)</strong>:周训练次数</li>
+  </ul>
+  <p>三者乘积大致就是"总训练量"。但量和强度的关系是非线性的——10 公里 4'00"/km 和 10 公里 6'00"/km 都是"10 公里",生理代价相差数倍。所以需要一个加权的复合指标。</p>
+
+  <h4>TRIMP (Training Impulse, Banister)</h4>
+  <p>最早的复合负荷指标,1975 年 Banister 提出:</p>
+  <p class="mono">TRIMP = 时间(min) × 心率储备(%) × 加权因子</p>
+  <p>加权因子使高心率区间负荷更重(指数加权)。问题:依赖准确的最大心率和静息心率,且不能处理间歇训练的高低峰。</p>
+
+  <h4>TSS (Training Stress Score, Coggan)</h4>
+  <p>2003 年 Andrew Coggan 在自行车功率训练里提出 TSS,后来 Stryd 跑步功率计把它移植到跑步:</p>
+  <p class="mono">TSS = (时长 × NP² / FTP²) × 100</p>
+  <p>其中 NP 是 normalized power(归一化功率),FTP 是 functional threshold power(功能性阈值功率)。约定:1 小时 @ FTP = 100 TSS。</p>
+  <p>跑步语境下,可用 rTSS(基于配速)或 hrTSS(基于心率)。</p>
+  <ul>
+    <li>1 小时轻松跑(Z2):30-40 rTSS</li>
+    <li>1 小时节奏跑(Z3):60-80 rTSS</li>
+    <li>1 小时阈值跑(Z4):85-100 rTSS</li>
+    <li>10K 比赛配速:90-105 rTSS</li>
+    <li>3 小时马拉松比赛:200-250 rTSS</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">概念 / 同一次跑,三种负荷</div>
+    <p>1 小时 8 公里(配速 7'30"/km)的"轻松跑",换算成不同指标:跑量 8 km,时间 60 min,心率平均 145(60% HRR),rTSS 约 38。如果换成 1 小时 13 公里 4'30"/km 的"阈值跑",跑量 13 km,时间相同 60 min,心率平均 175(85% HRR),rTSS 约 95。<strong>时间相同、跑量差 60%、生理负荷差 150%</strong>。这就是为什么单看"跑量"严重低估了高强度训练的应激。</p>
+  </div>
+
+  <h3><span class="pre">10.4</span>PMC——CTL / ATL / TSB 三角</h3>
+  <p class="lead">把 Banister 模型和 TSS 工具结合,就有了今天耐力训练最流行的可视化:<em>表现管理图</em> (PMC, Performance Management Chart)。三个数字定义你的当前训练状态。</p>
+
+  <h4>三个指标</h4>
+  <ul>
+    <li><strong>CTL (Chronic Training Load)</strong> = 过去 42 天 TSS 的指数加权平均 ≈ 你的"健身水平"</li>
+    <li><strong>ATL (Acute Training Load)</strong> = 过去 7 天 TSS 的指数加权平均 ≈ 你的"短期疲劳"</li>
+    <li><strong>TSB (Training Stress Balance)</strong> = CTL - ATL ≈ 你的"形态" (form)</li>
+  </ul>
+
+  <p>这三个数字给了你一张连续的、可读的训练全景图。它们的解读规则:</p>
+
+  <table>
+    <thead>
+      <tr><th>TSB 区间</th><th>状态</th><th>表现潜力</th><th>建议用途</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>+25 以上</td><td>过度新鲜</td><td>下降(已脱训)</td><td>休假返回期</td></tr>
+      <tr><td>+5 ~ +25</td><td>清新备赛</td><td>峰值</td><td>比赛日 / 减量末期</td></tr>
+      <tr><td>-10 ~ +5</td><td>稳定平衡</td><td>正常</td><td>普通训练日</td></tr>
+      <tr><td>-30 ~ -10</td><td>有效负荷</td><td>训练期内下降</td><td>积累期(可持续 4-8 周)</td></tr>
+      <tr><td>-30 以下</td><td>深度疲劳</td><td>显著下降</td><td>短期爆量后必须减量</td></tr>
+    </tbody>
+  </table>
+
+  <h4>CTL 涨速的安全区间</h4>
+  <p>经验法则:CTL 每周涨幅不超过 5-7 TSS/周。超过 10 TSS/周通常意味着伤病或 NFOR 风险升高。从 35 涨到 80 TSS 这种"业余跑者野心"的过程,理想用 9-13 周完成,而不是 4-6 周。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 轴 -->
+      <line x1="80" y1="320" x2="1040" y2="320" stroke="#3d3d36" stroke-width="1"/>
+      <line x1="80" y1="40" x2="80" y2="320" stroke="#3d3d36" stroke-width="1"/>
+      <!-- 0 基线 -->
+      <line x1="80" y1="230" x2="1040" y2="230" stroke="#a39e8d" stroke-width="0.6" stroke-dasharray="4,4"/>
+      <text x="1050" y="234" fill="#a39e8d" font-size="10" letter-spacing="0.04em">TSB=0</text>
+      <!-- X 轴 -->
+      <g font-size="10" fill="#6a665a" letter-spacing="0.08em">
+        <text x="80" y="340" text-anchor="middle">W1</text>
+        <text x="200" y="340" text-anchor="middle">W3</text>
+        <text x="320" y="340" text-anchor="middle">W5</text>
+        <text x="440" y="340" text-anchor="middle">W7</text>
+        <text x="560" y="340" text-anchor="middle">W9</text>
+        <text x="680" y="340" text-anchor="middle">W11</text>
+        <text x="800" y="340" text-anchor="middle">W13</text>
+        <text x="900" y="340" text-anchor="middle">W15</text>
+        <text x="1000" y="340" text-anchor="middle">RACE</text>
+      </g>
+      <text x="560" y="365" text-anchor="middle" fill="#a39e8d" font-size="11" letter-spacing="0.1em">16-WEEK MARATHON BUILD</text>
+      <!-- Y -->
+      <g font-size="10" fill="#6a665a" letter-spacing="0.08em">
+        <text x="72" y="320" text-anchor="end">0</text>
+        <text x="72" y="275" text-anchor="end">20</text>
+        <text x="72" y="230" text-anchor="end">40</text>
+        <text x="72" y="185" text-anchor="end">60</text>
+        <text x="72" y="140" text-anchor="end">80</text>
+        <text x="72" y="95" text-anchor="end">100</text>
+        <text x="72" y="50" text-anchor="end">120</text>
+      </g>
+      <text x="40" y="180" text-anchor="middle" fill="#a39e8d" font-size="11" letter-spacing="0.1em" transform="rotate(-90, 40, 180)">TSS / DAY</text>
+      <!-- CTL 曲线 - 长期稳步上升,赛前减量微降 -->
+      <path d="M 80 245 L 200 215 L 320 190 L 440 160 L 560 130 L 680 110 L 800 105 L 880 115 L 1000 125" fill="none" stroke="#3d8b6e" stroke-width="2.5"/>
+      <text x="780" y="100" fill="#6db8a0" font-size="11" letter-spacing="0.04em">CTL (健身)</text>
+      <!-- ATL 曲线 - 波动大,赛前减量降 -->
+      <path d="M 80 270 L 130 200 L 180 240 L 230 180 L 280 215 L 320 150 L 380 180 L 440 135 L 500 175 L 560 105 L 620 145 L 680 90 L 740 120 L 800 130 L 860 175 L 920 215 L 1000 245" fill="none" stroke="#c47f17" stroke-width="2"/>
+      <text x="490" y="78" fill="#e0a25a" font-size="11" letter-spacing="0.04em">ATL (疲劳)</text>
+      <!-- TSB 曲线 - CTL - ATL,赛前正向回升 -->
+      <path d="M 80 250 L 130 275 L 180 240 L 230 270 L 280 245 L 320 280 L 380 250 L 440 280 L 500 245 L 560 285 L 620 250 L 680 290 L 740 270 L 800 260 L 860 245 L 920 220 L 1000 200" fill="none" stroke="#9c4bb5" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="180" y="295" fill="#c084d8" font-size="11" letter-spacing="0.04em">TSB (形态)</text>
+      <!-- 阶段分区 -->
+      <g stroke="#d4a548" stroke-width="0.4" stroke-dasharray="2,4">
+        <line x1="320" y1="40" x2="320" y2="320"/>
+        <line x1="680" y1="40" x2="680" y2="320"/>
+        <line x1="860" y1="40" x2="860" y2="320"/>
+      </g>
+      <text x="200" y="55" text-anchor="middle" fill="#a39e8d" font-size="9" letter-spacing="0.1em">基础期</text>
+      <text x="500" y="55" text-anchor="middle" fill="#a39e8d" font-size="9" letter-spacing="0.1em">建造期</text>
+      <text x="770" y="55" text-anchor="middle" fill="#a39e8d" font-size="9" letter-spacing="0.1em">比赛专项期</text>
+      <text x="930" y="55" text-anchor="middle" fill="#a39e8d" font-size="9" letter-spacing="0.1em">减量</text>
+      <!-- 比赛日标 -->
+      <circle cx="1000" cy="125" r="5" fill="#c93f3f"/>
+      <text x="990" y="115" fill="#e89090" font-size="11" letter-spacing="0.04em" text-anchor="end">CTL 高</text>
+      <text x="990" y="215" fill="#e89090" font-size="11" letter-spacing="0.04em" text-anchor="end">TSB +15 ~ +20</text>
+    </svg>
+    <div class="svg-caption">FIG 10.2 · 典型 16 周马拉松备赛的 CTL/ATL/TSB 轨迹(理想模型 · TrainingPeaks PMC 风格)</div>
+  </div>
+
+  <h3><span class="pre">10.5</span>训练区间——5 区与 3 区两种语言</h3>
+  <p class="lead">把训练强度切片,是为了让"刺激"的剂量可控。今天耐力训练界并存两套主流分区:商业平台常用的 5 区系统(基于 HRmax)、和 Stephen Seiler 提出的更"原教旨"的 3 区系统(基于代谢拐点)。</p>
+
+  <h4>5 区系统(Karvonen / Joe Friel 风格)</h4>
+  <p>基于 HRmax 百分比划分:</p>
+  <table>
+    <thead>
+      <tr><th>区</th><th>%HRmax</th><th>RPE</th><th>主要用途</th><th>对应跑步类型</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Z1 恢复</td><td>50-60%</td><td>1-2</td><td>主动恢复、热身、收尾</td><td><span class="chip recovery">recovery</span></td></tr>
+      <tr><td>Z2 有氧基础</td><td>60-75%</td><td>3-4</td><td>线粒体、毛细血管、脂肪利用</td><td><span class="chip easy">easy</span> <span class="chip long">long</span></td></tr>
+      <tr><td>Z3 节奏</td><td>75-85%</td><td>5-6</td><td>有氧上限、马拉松配速</td><td><span class="chip tempo">tempo</span> <span class="chip mp">MP</span></td></tr>
+      <tr><td>Z4 阈值</td><td>85-92%</td><td>7-8</td><td>LT2、半马配速</td><td><span class="chip tempo">threshold</span></td></tr>
+      <tr><td>Z5 VO2max</td><td>92-100%</td><td>9-10</td><td>VO2max、最大心输出量</td><td><span class="chip interval">interval</span></td></tr>
+    </tbody>
+  </table>
+
+  <h4>3 区系统(Seiler / 学术派)</h4>
+  <p>基于乳酸两个拐点(VT1/LT1 和 VT2/LT2)划分:</p>
+  <ul>
+    <li><strong>Zone 1</strong>:低于 LT1(乳酸 ≤ 2 mmol/L),可以鼻呼吸、长时间稳定</li>
+    <li><strong>Zone 2</strong>:LT1 与 LT2 之间(2-4 mmol/L),"灰区"</li>
+    <li><strong>Zone 3</strong>:高于 LT2(>4 mmol/L),不能稳态</li>
+  </ul>
+  <p>3 区系统对应的 5 区系统:Seiler Z1 ≈ 5 区的 Z1+Z2;Seiler Z2 ≈ 5 区的 Z3;Seiler Z3 ≈ 5 区的 Z4+Z5。所以 Seiler 的"80% 在 Z1"翻译成 5 区语言是"80% 在 Z1+Z2"。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 80/20 的"80"被普遍误读</div>
+    <p>很多业余跑者听说"80/20"就以为是"80% 跑得慢一点",于是把 Z2-Z3 当作"慢跑"——心率 160 上下、配速半马 +20s/km。<strong>这不是 80,这是 100% 的灰区</strong>。Seiler 的"80" 严格指 Zone 1(LT1 以下,鼻呼吸,聊天无障碍,RPE ≤ 3)。<strong>大多数业余跑者所谓的"轻松跑"实际上是 Z2-Z3 之间的灰区</strong>——既得不到 Z1 的纯有氧适应,也得不到 Z4 的阈值适应,只能换来慢性疲劳累积。</p>
+  </div>
+
+  <h3><span class="pre">10.6</span>极化训练 vs 金字塔 vs 阈值——三种强度分布</h3>
+  <p class="lead">在确定了"区"之后,下一个问题是:不同区的训练量应该如何分布?这个问题在过去 20 年的运动科学里有清晰的答案——精英耐力运动员的训练时间分布并不平均,而是呈现出三种典型模式。</p>
+
+  <h4>三种分布模式</h4>
+  <ul>
+    <li><strong>极化 (Polarized)</strong>:Z1 ≈ 80% / Z2 ≈ 5% / Z3 ≈ 15%(3 区系统)——两头多、中间几乎为零</li>
+    <li><strong>金字塔 (Pyramidal)</strong>:Z1 ≈ 70% / Z2 ≈ 20% / Z3 ≈ 10%——从低到高递减</li>
+    <li><strong>阈值 (Threshold)</strong>:Z1 ≈ 50% / Z2 ≈ 40% / Z3 ≈ 10%——中间为主</li>
+  </ul>
+
+  <h4>精英观察:Seiler 在挪威国家队 / 肯尼亚跑者中的发现</h4>
+  <p>Seiler 团队从 2000 年代开始用心率监测和乳酸采血追踪挪威越野滑雪国家队、肯尼亚长跑组,反复观察到精英的训练分布是<em>极化</em>——超过 80% 时间在 LT1 以下,只有 15-20% 时间在 LT2 以上,而 LT1 到 LT2 之间的"中间地带"反而被有意避开。</p>
+
+  <h4>业余研究:Stöggl & Sperlich 2014 经典实验</h4>
+  <p>把 48 名训练有素的耐力运动员随机分到四组,匹配总训练量,9 周训练:</p>
+  <ul>
+    <li>极化组:VO2max +11.7%,TT 表现 +5.1%</li>
+    <li>阈值组:VO2max +4.8%,TT 表现 +2.4%</li>
+    <li>高量低强组:VO2max +4.6%,TT 表现 +2.0%</li>
+    <li>HIIT 组:VO2max +4.9%,TT 表现 +3.5%</li>
+  </ul>
+  <p>极化组在 VO2max 和比赛表现两个指标上都明显优于其他三组。后续 meta 分析(Rosenblat 2020、Treff 2019)在不同人群确认了这个结论:极化 > 阈值/金字塔。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 三个柱状对比 -->
+      <g>
+        <!-- 极化 -->
+        <g transform="translate(120, 60)">
+          <text x="120" y="-12" text-anchor="middle" fill="#3d8b6e" font-size="14" letter-spacing="0.05em" font-weight="700">极化 POLARIZED</text>
+          <!-- Z1 -->
+          <rect x="0" y="0" width="240" height="200" fill="#3d8b6e" fill-opacity="0.18" stroke="#3d8b6e" stroke-width="1"/>
+          <text x="120" y="105" text-anchor="middle" fill="#6db8a0" font-size="22" font-weight="700">80%</text>
+          <text x="120" y="125" text-anchor="middle" fill="#6db8a0" font-size="11" letter-spacing="0.08em">ZONE 1</text>
+          <!-- Z2 -->
+          <rect x="0" y="200" width="240" height="20" fill="#c47f17" fill-opacity="0.15" stroke="#c47f17" stroke-width="1"/>
+          <text x="120" y="214" text-anchor="middle" fill="#e0a25a" font-size="10" letter-spacing="0.05em">Z2 · 5%</text>
+          <!-- Z3 -->
+          <rect x="0" y="220" width="240" height="50" fill="#b54848" fill-opacity="0.18" stroke="#b54848" stroke-width="1"/>
+          <text x="120" y="250" text-anchor="middle" fill="#d57979" font-size="13" font-weight="700">15%</text>
+          <text x="120" y="265" text-anchor="middle" fill="#d57979" font-size="10" letter-spacing="0.05em">ZONE 3</text>
+          <text x="120" y="295" text-anchor="middle" fill="#a39e8d" font-size="10" letter-spacing="0.05em">高效精英模式</text>
+        </g>
+        <!-- 金字塔 -->
+        <g transform="translate(420, 60)">
+          <text x="120" y="-12" text-anchor="middle" fill="#d4a548" font-size="14" letter-spacing="0.05em" font-weight="700">金字塔 PYRAMIDAL</text>
+          <!-- Z1 -->
+          <rect x="0" y="0" width="240" height="180" fill="#3d8b6e" fill-opacity="0.18" stroke="#3d8b6e" stroke-width="1"/>
+          <text x="120" y="95" text-anchor="middle" fill="#6db8a0" font-size="22" font-weight="700">70%</text>
+          <text x="120" y="115" text-anchor="middle" fill="#6db8a0" font-size="11" letter-spacing="0.08em">ZONE 1</text>
+          <!-- Z2 -->
+          <rect x="0" y="180" width="240" height="60" fill="#c47f17" fill-opacity="0.20" stroke="#c47f17" stroke-width="1"/>
+          <text x="120" y="216" text-anchor="middle" fill="#e0a25a" font-size="16" font-weight="700">20%</text>
+          <!-- Z3 -->
+          <rect x="0" y="240" width="240" height="30" fill="#b54848" fill-opacity="0.18" stroke="#b54848" stroke-width="1"/>
+          <text x="120" y="260" text-anchor="middle" fill="#d57979" font-size="12" font-weight="700">10%</text>
+          <text x="120" y="295" text-anchor="middle" fill="#a39e8d" font-size="10" letter-spacing="0.05em">中等效率 · 业余主流</text>
+        </g>
+        <!-- 阈值 -->
+        <g transform="translate(720, 60)">
+          <text x="120" y="-12" text-anchor="middle" fill="#b54848" font-size="14" letter-spacing="0.05em" font-weight="700">阈值 THRESHOLD</text>
+          <!-- Z1 -->
+          <rect x="0" y="0" width="240" height="130" fill="#3d8b6e" fill-opacity="0.18" stroke="#3d8b6e" stroke-width="1"/>
+          <text x="120" y="70" text-anchor="middle" fill="#6db8a0" font-size="22" font-weight="700">50%</text>
+          <text x="120" y="90" text-anchor="middle" fill="#6db8a0" font-size="11" letter-spacing="0.08em">ZONE 1</text>
+          <!-- Z2 -->
+          <rect x="0" y="130" width="240" height="120" fill="#c47f17" fill-opacity="0.25" stroke="#c47f17" stroke-width="1"/>
+          <text x="120" y="190" text-anchor="middle" fill="#e0a25a" font-size="20" font-weight="700">40%</text>
+          <text x="120" y="210" text-anchor="middle" fill="#e0a25a" font-size="11" letter-spacing="0.05em">ZONE 2 (灰区)</text>
+          <!-- Z3 -->
+          <rect x="0" y="250" width="240" height="20" fill="#b54848" fill-opacity="0.18" stroke="#b54848" stroke-width="1"/>
+          <text x="120" y="264" text-anchor="middle" fill="#d57979" font-size="10" font-weight="700">10%</text>
+          <text x="120" y="295" text-anchor="middle" fill="#a39e8d" font-size="10" letter-spacing="0.05em">低效 · 易过训</text>
+        </g>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 10.3 · 三种训练强度分布对比(3 区系统 · Stöggl & Sperlich 2014 + Seiler 综述)</div>
+  </div>
+
+  <h4>金字塔 vs 极化的微妙差别</h4>
+  <p>近年争议在精英耐力运动员身上其实是<em>金字塔</em>而非极化(Casado et al. 2022 重测肯尼亚长跑训练日志,中等强度比例其实接近 20%,不是 Seiler 早期报告的 5%)。所以现在共识更倾向于:</p>
+  <ul>
+    <li><strong>对业余跑者</strong>:极化和金字塔都比阈值好(避免灰区是关键)</li>
+    <li><strong>对精英</strong>:金字塔可能更现实,但仍然 80%+ 在 LT1 以下</li>
+    <li><strong>对马拉松专项</strong>:金字塔略有优势,因为 MP(马拉松配速)正好落在 Z2 区,需要积累</li>
+  </ul>
+
+  <h3><span class="pre">10.7</span>80/20 法则的实操细节</h3>
+  <p class="lead">"80% 慢、20% 快"是 Seiler 法则的口语化版本,Matt Fitzgerald 在 2014 年的同名书中推广。但实操中有几个常见误区需要澄清。</p>
+
+  <h4>是时间 80%,不是公里 80%</h4>
+  <p>80/20 指的是<em>训练时间</em>的分布,不是<em>训练公里</em>。这两者差距很大——同样 1 小时,Z1 可以跑 7-9 公里,Z4 可以跑 12-14 公里,Z5 间歇课算上间歇可能只跑 6-8 公里。所以按公里算的"80/20"会高估高强度比例。</p>
+
+  <h4>整个周期还是单次训练?</h4>
+  <p>80/20 是<em>周/月平均</em>,不是每次训练。比如一周 6 次训练:</p>
+  <ul>
+    <li>4 次 Z1 轻松跑(每次 60 min) = 240 min Z1</li>
+    <li>1 次 Z3-Z4 阈值课(60 min,含 30 min @ Z4) = 30 min Z1 + 30 min Z4</li>
+    <li>1 次 Z5 间歇课(60 min,含 6 × 3 min Z5 间歇) = 42 min Z1 + 18 min Z5</li>
+  </ul>
+  <p>总计:312 min Z1 + 30 min Z4 + 18 min Z5 = 84% / 8% / 5% = 84/16 分布。完全符合 80/20 法则。</p>
+
+  <h4>新手的"先 90/10 再 80/20"</h4>
+  <p>对刚开始训练的新手或刚从伤病归来的人,Seiler 推荐先维持 90/10 甚至 95/5 几个月,等基础有氧建好,再渐进引入高强度,最终稳定到 80/20。直接 80/20 对很多人来说高强度比例已经过高。</p>
+
+  <div class="callout ops">
+    <div class="label">实操 / 如何确认你的 Zone 1 配速</div>
+    <p>三个验证方式,任意一个不达标就是太快了:</p>
+    <p><strong>1. 鼻呼吸测试</strong>:Z1 配速下应能全程鼻呼吸不憋气,只用嘴呼吸的就是 Z2+</p>
+    <p><strong>2. 聊天测试</strong>:能完整说完 30 字的句子,不需要中间换气,就是 Z1</p>
+    <p><strong>3. 心率上限</strong>:Z1 上限约为 LT1 配速对应的心率,业余约 75% HRmax 或 70% HRR</p>
+    <p>更精确做法:在跑步机上递增配速 + 测乳酸,找到乳酸首次开始上升的拐点,那就是 LT1。这是 Z1 的天花板。</p>
+  </div>
+
+  <h3><span class="pre">10.8</span>力量训练让跑步更快——量化收益</h3>
+  <p class="lead">"跑步运动员不需要练力量"——这是 1990 年代以前的主流观点,2014 年 Beattie 等的 meta 分析和 2018 年 Blagrove 等的复测把它彻底推翻。今天的共识是:每周 2 次力量训练能让 5K 表现提升 2-4%、跑步经济性提升 4-8%,且不增加额外肌肉量。</p>
+
+  <h4>关键证据汇总</h4>
+  <table>
+    <thead>
+      <tr><th>研究</th><th>对象</th><th>干预</th><th>结果</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Paavolainen 1999</td><td>训练有素跑者</td><td>常规跑训 + 增强式 9 周</td><td>5K 表现 +3.1%,经济性显著改善</td></tr>
+      <tr><td>Mikkola 2007</td><td>青少年跑者</td><td>跑训 + 重型力量 8 周</td><td>3K 表现 +3.5%</td></tr>
+      <tr><td>Beattie 2014 (meta)</td><td>13 项研究汇总</td><td>各类力量训练 6-20 周</td><td>RE 平均提升 8.6%</td></tr>
+      <tr><td>Blagrove 2018 (meta)</td><td>22 项研究</td><td>重磅 + 增强式</td><td>3-5K 表现提升 1.7-3.7%</td></tr>
+      <tr><td>Berryman 2018</td><td>训练有素</td><td>增强式 8 周</td><td>3K 表现 +3.9%,RE +6.7%</td></tr>
+    </tbody>
+  </table>
+
+  <h4>机制:不是更大的肌肉,是更聪明的神经</h4>
+  <p>力量训练对跑步的提升机制不在"肌肉量"——业余跑者关心的"练完会不会变粗"在重磅低组数(3-6RM)模式下不成立,因为 mTOR-肌肥大通路在这个剂量下基本不被激活。真正的变化在:</p>
+  <ul>
+    <li><em>神经驱动</em>:运动单位募集效率上升,同样力量下募集更少肌纤维 → 经济性</li>
+    <li><em>肌腱刚度</em>:跟腱 + 髌腱 stiffness 上升 10-30%,弹性回弹效率上升</li>
+    <li><em>肌纤维类型转换</em>:IIx → IIa 转换,提升耐力</li>
+    <li><em>跑步姿态稳定性</em>:核心和臀部力量减少能量泄漏</li>
+    <li><em>抗疲劳能力</em>:比赛后段配速保持能力</li>
+  </ul>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 力量训练让你跑得更快(不是更慢)</div>
+    <p>"跑步选手不能练杠铃,会变重"——这是 1980-90 年代的训练学教条,被 30 年的研究反复证伪。重磅 3-6RM 不增加肌肉量但显著提升神经驱动,跑步经济性提升 4-8%。<strong>所有严肃跑者每周都应该有 2 次力量训练</strong>——不是"如果有时间就做",是和长跑、间歇同等优先级的必修项。</p>
+  </div>
+
+  <h3><span class="pre">10.9</span>力量训练四大类型——哪个对跑步最有用?</h3>
+
+  <table>
+    <thead>
+      <tr><th>类型</th><th>典型动作</th><th>剂量</th><th>主要效益</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>最大力量 (Maximal Strength)</td><td>深蹲、硬拉、卧推、引体</td><td>3-6 RM × 3-5 组,组间 3-5 min</td><td>神经驱动、肌腱刚度、整体力量基础</td></tr>
+      <tr><td>爆发力 (Power)</td><td>跳箱、抛球、push press</td><td>30-60% 1RM × 高速度 3-5 reps</td><td>力速曲线、起跑、冲刺</td></tr>
+      <tr><td>增强式 (Plyometric)</td><td>跳绳、单腿跳、跨步跳、跳箱</td><td>30-100 次接触 / 课</td><td>SSC 弹性、跟腱刚度、地面反作用力</td></tr>
+      <tr><td>专项力量 (Specific Strength)</td><td>单腿硬拉、跨步、step-up</td><td>8-12 RM × 3 组</td><td>跑步姿态稳定、单侧力量、髋伸力量</td></tr>
+    </tbody>
+  </table>
+
+  <h4>对跑步最关键的两类:重磅力量 + 增强式</h4>
+  <p>研究反复显示这两类组合最有效。一个典型的"跑者力量训练日"可能是:</p>
+  <ul>
+    <li>热身 10 min:动态拉伸 + 慢跑</li>
+    <li>力量主项 30 min:深蹲 5×4 @ 85% 1RM、硬拉 4×4 @ 85%、卧推 3×6、引体 3×AMRAP</li>
+    <li>增强式 15 min:跳箱 4×5、跨步跳 4×10m、单腿跳 3×8/侧</li>
+    <li>核心稳定 5-10 min:plank 系列、bird dog、side plank</li>
+  </ul>
+  <p>总时长 60-75 分钟,每周 2 次,放在轻松跑日或单独日(不与高强度跑撞同日)。</p>
+
+  <h4>"撞日"问题——干扰效应 (Interference Effect)</h4>
+  <p>1980 年 Hickson 首次提出:同时练耐力和力量会减弱力量收益。原理涉及 AMPK(耐力激活,抑制 mTOR) vs mTOR(力量激活,促进合成)的分子层面拮抗。实操对策:</p>
+  <ul>
+    <li>力量和高强度跑步训练间隔至少 6 小时,理想 24 小时</li>
+    <li>如果同日做,先力量后跑步,且跑步是 Z1-Z2</li>
+    <li>避免"早晨阈值跑 + 傍晚重磅深蹲"这种最差组合</li>
+  </ul>
+
+  <div class="callout ops">
+    <div class="label">实操 / 跑者最低有效力量训练剂量</div>
+    <p>没时间健身房?也别完全放弃,以下是<strong>30 分钟版极简方案</strong>,每周 2 次,做完比不做收益至少 70%:</p>
+    <p>1. 高脚杯深蹲 4×8 @ 中重</p>
+    <p>2. 单腿罗马尼亚硬拉 3×8/侧</p>
+    <p>3. 单腿跳箱 3×5/侧</p>
+    <p>4. Calf raises 单腿 3×15/侧(慢离心 3 秒)</p>
+    <p>5. Plank 1 min × 3 + side plank 30s × 3/侧</p>
+    <p>器材:一对哑铃 + 跳箱。在家可完成。</p>
+  </div>
+
+  <h3><span class="pre">10.10</span>HIIT——高强度间歇的剂量学</h3>
+  <p class="lead">间歇训练 (interval training) 不是新发明——1930 年代捷克跑者 Emil Zátopek 用过,1950 年代瑞典学者 Per-Olof Åstrand 系统化,2000 年代 Izumi Tabata 的"20s/10s"火出圈。今天 HIIT 在跑步圈是 VO2max 提升和阈值上移的核心工具。</p>
+
+  <h4>四种主流间歇格式</h4>
+  <table>
+    <thead>
+      <tr><th>格式</th><th>结构</th><th>目标系统</th><th>每周剂量</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>短间歇</td><td>30s on / 30s off × 20-30,or 45/15 × 15-20</td><td>VO2max + 神经募集</td><td>1 次</td></tr>
+      <tr><td>Tabata</td><td>20s on / 10s off × 8</td><td>无氧 + VO2max</td><td>1 次</td></tr>
+      <tr><td>中间歇</td><td>1-2 min × 6-10,RI 2 min</td><td>VO2max</td><td>1 次</td></tr>
+      <tr><td>长间歇</td><td>3-5 min × 4-6,RI 3 min</td><td>VO2max 时间累积</td><td>1 次</td></tr>
+      <tr><td>巡航间歇 (cruise)</td><td>1000m × 5-8 @ LT2,RI 60s</td><td>LT2</td><td>1 次</td></tr>
+    </tbody>
+  </table>
+
+  <h4>VO2max 刺激窗口</h4>
+  <p>Billat 等的研究表明:要刺激 VO2max,需要让心率/摄氧量在 ≥90% VO2max 维持累积时间 8-15 分钟。这就是为什么 "30/30 × 20" 这种格式最有效——每次 30s 都接近 VO2max 但又不会因恢复期太长而错过窗口。</p>
+
+  <h4>业余跑者的剂量建议</h4>
+  <ul>
+    <li>初级(跑龄 <1 年):每周 1 次中间歇,谨慎引入</li>
+    <li>中级(1-3 年):每周 1 次短间歇 + 1 次阈值课</li>
+    <li>高级(3 年+):每周 1 次 VO2max + 1 次阈值,赛前 6-8 周可增加 1 次专项配速</li>
+  </ul>
+  <p>过量 HIIT 是业余通病——3 次/周高强度课 + 3 次"中等强度跑"是 OTS 的最佳配方。</p>
+
+  <h3><span class="pre">10.11</span>节奏跑 / 阈值跑——被低估的中坚力量</h3>
+  <p class="lead">阈值跑 (threshold run, T-pace) 是 Jack Daniels 系统的核心,也是过去 30 年马拉松训练里最被反复验证的"性价比最高的一节课"。</p>
+
+  <h4>什么是阈值配速</h4>
+  <p>阈值配速 ≈ LT2 配速 ≈ 一小时全力比赛配速。换算法:</p>
+  <ul>
+    <li>10K 比赛配速 + 10-15 s/km ≈ 阈值配速</li>
+    <li>半马比赛配速 - 5-10 s/km ≈ 阈值配速</li>
+    <li>30 分钟最大努力跑的平均配速 ≈ 阈值配速</li>
+  </ul>
+
+  <h4>训练剂量</h4>
+  <ul>
+    <li>持续型:20-40 分钟连续 @ T-pace</li>
+    <li>分段型:2 × 15 min @ T-pace,RI 3 min(更易完成,且总量大)</li>
+    <li>巡航型:5-8 × 1000-1600m @ T-pace,RI 60s</li>
+  </ul>
+  <p>每周 1 次,持续 6-10 周,LT2 配速可提升 5-10 s/km——相当于半马 PB 提升 2-5 分钟。</p>
+
+  <h4>为什么 LT2 比 VO2max 对马拉松更重要</h4>
+  <p>马拉松配速通常对应 80-90% LT2(精英)或 70-85% LT2(业余)。所以马拉松表现的天花板由 LT2 决定,而非 VO2max。VO2max 像"发动机功率上限",LT2 像"巡航油耗效率"——马拉松更看后者。</p>
+
+  <h3><span class="pre">10.12</span>长距离慢跑 LSD——基础的基础</h3>
+  <p class="lead">LSD (long slow distance) 在 1960 年代被 Joe Henderson 在《Runner's World》推广,后来成为所有耐力训练系统的基石。即便是极化训练或 80/20,LSD 都是那"80"里最重要的一节。</p>
+
+  <h4>LSD 的关键参数</h4>
+  <ul>
+    <li>时长:75-180 分钟,不少于 75 分钟</li>
+    <li>配速:Z1-Z2 低端,约马拉松配速 + 45-90 s/km</li>
+    <li>频率:每周 1 次</li>
+    <li>关键指标:跑完不疲惫到次日不能训练</li>
+  </ul>
+
+  <h4>LSD 的特异适应</h4>
+  <ol>
+    <li><strong>线粒体生物合成</strong>:线粒体数量和功能上升,长时间运动唯一刺激</li>
+    <li><strong>毛细血管密度</strong>:Type I 肌纤维毛细血管 +20-50%</li>
+    <li><strong>脂肪利用率</strong>:同等强度下脂肪供能比例上升,节省糖原</li>
+    <li><strong>心室扩张</strong>:左心室容积上升(eccentric hypertrophy),搏出量上升</li>
+    <li><strong>骨骼/肌腱适应</strong>:长时间慢跑产生足够刺激让结缔组织重塑(强度课的反复冲击容易过载)</li>
+    <li><strong>心理</strong>:长时间单调跑步训练耐心和抗无聊能力</li>
+  </ol>
+
+  <div class="callout note">
+    <div class="label">概念 / "时长 > 公里"</div>
+    <p>LSD 的核心是<strong>时长</strong>而非<strong>公里</strong>。一个慢跑者 2 小时跑 14 公里,和一个快跑者 2 小时跑 22 公里,两人获得的有氧基础适应是接近的——因为限速因素是"在 Z1 维持的累积时间",而非"覆盖的距离"。这就是为什么业余慢跑者不需要追"长跑里程",追"长跑时长"就够了。</p>
+  </div>
+
+  <h3><span class="pre">10.13</span>高原训练——红细胞游戏</h3>
+  <p class="lead">在 1968 年墨西哥城奥运会(海拔 2240m)之后,高原训练成为耐力运动员的常规工具。半个世纪后,我们对它的科学已经清晰:有效、但因人而异、且窗口期短。</p>
+
+  <h4>三种主要范式</h4>
+  <ul>
+    <li><strong>LH-TH (Live High - Train High)</strong>:住高练高。刺激最强但训练质量受限(高原绝对配速降低)</li>
+    <li><strong>LH-TL (Live High - Train Low)</strong>:住高练低。1997 年 Levine & Stray-Gundersen 提出的"黄金组合"——住在 2200-2500m,训练降到 1200m。被反复证实最有效</li>
+    <li><strong>LL-TH</strong>:住低练高。模拟低氧。效果弱</li>
+  </ul>
+
+  <h4>生理适应轨迹</h4>
+  <ul>
+    <li>0-72h:急性高原反应,EPO 释放,但红细胞质量尚未变化,运动耐受下降</li>
+    <li>1-2 周:EPO 峰值,网织红细胞上升,适应初步</li>
+    <li>2-4 周:红细胞质量提升 1-5%,血红蛋白浓度上升</li>
+    <li>3-4 周后返回平原:返低后 1-3 周表现峰值,4 周后红细胞优势衰退</li>
+  </ul>
+
+  <h4>个体响应差异</h4>
+  <p>Chapman 等(1998)发现高原训练的响应有显著个体差异:"响应者" (responders) 红细胞质量提升 5% 以上,"非响应者" (non-responders) 几乎无变化。机制还不完全清楚,可能与基线 EPO 受体敏感性、铁储备、训练状态等多因素相关。</p>
+
+  <h4>模拟高原 / IHE</h4>
+  <p>对没有真高原可去的跑者,有三种替代:</p>
+  <ul>
+    <li>低氧帐篷:夜间睡眠环境氧浓度降至 15-16%(模拟 2500m)</li>
+    <li>低氧训练室:跑步机在低氧环境下训练</li>
+    <li>IHE (Intermittent Hypoxic Exposure):短时高强度低氧呼吸,效果弱</li>
+  </ul>
+
+  <h3><span class="pre">10.14</span>单调性 (Monotony) 与应变 (Strain)——隐形过训风险</h3>
+  <p class="lead">Foster 1998 提出两个被低估的过训风险指标:训练单调性和训练应变。它们让我们解释为什么同样总训练量,有些人没事有些人受伤了。</p>
+
+  <h4>定义</h4>
+  <ul>
+    <li><strong>Monotony</strong> = 周内日训练负荷的均值 / 标准差</li>
+    <li><strong>Strain</strong> = 周总负荷 × Monotony</li>
+  </ul>
+
+  <h4>解读</h4>
+  <p>Monotony 高(>2.0)意味着每天训练负荷差不多,身体没有真正"休息日"。Strain 高(>6000)是过训和伤病的强预测因子。</p>
+  <p>举例:</p>
+  <ul>
+    <li>跑者 A:每天 70 TSS × 7 天 = 周 490 TSS,Monotony = 70/0 = 极高,Strain 爆表 → 高风险</li>
+    <li>跑者 B:周 1 天 150 TSS、3 天 50 TSS、2 天 30 TSS、1 天休息 = 周 360 TSS,Monotony 约 1.5,Strain 约 540 → 低风险</li>
+  </ul>
+  <p>跑者 B 总量更少但更安全,因为有真正的低负荷日。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / "每天跑"不如"高低交替"</div>
+    <p>很多业余跑者觉得"每天都跑 8 公里"是好习惯——稳定、坚持、看起来量也合理。但从 monotony 指标看,这是<strong>风险最高的训练模式之一</strong>:负荷波动接近零,身体没有任何深度恢复窗口。<strong>更聪明的方式是高低分离</strong>:质量课大、轻松课小、每周有一天完全休息。表面"不连续",但身体能用这种节奏堆出更高的训练总量而不崩。</p>
+  </div>
+
+  <h3><span class="pre">10.15</span>减量 (Taper)——比赛前的最后一课</h3>
+  <p class="lead">减量 (taper) 是比赛准备的最后阶段,大致 1-3 周,目的是让 ATL 大幅下降而 CTL 只小幅下降,从而让 TSB 进入 +5 到 +25 的"形态峰"区间。Mujika 在 2003 年的综述里给出了至今仍是金科玉律的原则。</p>
+
+  <h4>Mujika 减量四原则</h4>
+  <ol>
+    <li><strong>训练量减少 40-60%</strong>:这是减量的主战场</li>
+    <li><strong>训练强度<em>维持</em>不变</strong>:这是减量最容易出错的地方——强度不能降,否则脱训</li>
+    <li><strong>训练频率减少 0-30%</strong>:略减或不减,保持神经-肌肉刺激</li>
+    <li><strong>持续 7-21 天</strong>:1 周减量适合短距离(5K-10K),2-3 周适合马拉松</li>
+  </ol>
+
+  <h4>典型马拉松 3 周减量</h4>
+  <ul>
+    <li>赛前 3 周:跑量降至平时的 70%,强度课保留 2 次</li>
+    <li>赛前 2 周:跑量降至 50%,强度课 1-2 次但单次量减半</li>
+    <li>赛前 1 周:跑量 30-40%,强度课 1 次短量(如 3 × 1000m @ MP),最后 3 天只做 20-30 min 轻松跑 + 几个加速</li>
+  </ul>
+
+  <h4>减量带来的提升</h4>
+  <p>Mujika 综述:正确减量带来 1-3% 的表现提升。马拉松层面,3 小时 PB 跑者提升 2-5 分钟。这是一个不小的差距——很多业余跑者跑炸大半源于不会减量。</p>
+
+  <h4>过度减量 = 脱训 (Detraining)</h4>
+  <p>1 周减量减太狠(比如直接停跑)会让 CTL 也开始下降,神经-肌肉协调性变差。这就是为什么"赛前 1 周完全休息"的老派建议是错的——身体会"忘记"高强度。</p>
+
+  <h3><span class="pre">10.16</span>周期化 (Periodization)——结构化的多月计划</h3>
+  <p class="lead">周期化是把训练目标分解成嵌套的时间块。1960 年代苏联 Matveyev 提出经典线性周期化模型,后来 Issurin 提出阻塞周期化、Tudor Bompa 写成训练学教科书,变成了所有体育项目的通用工具。</p>
+
+  <h4>周期化的三层时间尺度</h4>
+  <ul>
+    <li><strong>宏周期 (Macrocycle)</strong>:6-12 个月,围绕一两场目标比赛</li>
+    <li><strong>中周期 (Mesocycle)</strong>:3-6 周,完成一个具体训练目标(基础、力量、专项、减量)</li>
+    <li><strong>微周期 (Microcycle)</strong>:7-10 天,通常一周,完成具体训练任务</li>
+  </ul>
+
+  <h4>经典线性周期化(马拉松)</h4>
+  <table>
+    <thead>
+      <tr><th>阶段</th><th>时长</th><th>主目标</th><th>训练特征</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>过渡期 (Transition)</td><td>2-4 周</td><td>恢复 + 多样化</td><td>低量、低强度、其他运动</td></tr>
+      <tr><td>基础期 (Base)</td><td>6-12 周</td><td>有氧基础 + 力量</td><td>LSD + 力量为主,高强度极少</td></tr>
+      <tr><td>建造期 (Build)</td><td>4-8 周</td><td>LT2 + VO2max</td><td>阈值跑 + 间歇 + LSD 并行</td></tr>
+      <tr><td>比赛专项期 (Specific)</td><td>4-6 周</td><td>马拉松配速 (MP)</td><td>MP 长跑、模拟赛、专项</td></tr>
+      <tr><td>减量期 (Taper)</td><td>2-3 周</td><td>形态优化</td><td>量降强度保</td></tr>
+    </tbody>
+  </table>
+
+  <h4>反向周期化 (Reverse Periodization)</h4>
+  <p>近年部分教练(Brad Hudson 等)推广反向模型:先速度后量。原理是<em>速度容易丢、有氧基础保留长</em>。基础期反而练较短的速度耐力(800m-1600m 间歇),建造期延长间歇时间,最后专项期堆积里程。对短距离(5K-10K)效果好,对马拉松仍有争议。</p>
+
+  <h4>阻塞周期化 (Block Periodization, Issurin)</h4>
+  <p>把一个训练块(3-4 周)集中刺激一个生理系统(如纯 VO2max 块),下一块换另一个系统。优点是单系统刺激更深,缺点是其他系统轻微衰退。适合精英,业余慎用。</p>
+
+  <h3><span class="pre">10.17</span>遗传与个体响应——HERITAGE 研究的震撼</h3>
+  <p class="lead">在 1995-2003 年,HERITAGE Family Study 让 481 名受试者完成<em>完全相同的 20 周训练</em>(三次 / 周,渐进强度)。结果让所有训练学教科书都重写了一段:同样的训练,个体响应差异巨大,从 0 提升到 +60% 都有。</p>
+
+  <h4>关键发现</h4>
+  <ul>
+    <li>VO2max 改善的均值约 +17%,但范围 0 到 +60%</li>
+    <li>约 15% 受试者是"高响应者" (high responders):VO2max +30% 以上</li>
+    <li>约 15-20% 是"低响应者" / "非响应者" (low/non-responders):VO2max 改善 ≤5%</li>
+    <li>响应度有强遗传性——同家庭成员的响应度相关性比随机配对高 50-60%</li>
+  </ul>
+
+  <h4>非响应者的对策</h4>
+  <p>Bonafiglia 等(2016)和 Ross 等(2015)发现:在第一种训练里"非响应者"的人,换不同刺激(更高强度、更长时间、不同模式)后大多会变成响应者。所以"非响应者"不是"训练无效",而是"<em>这个具体刺激</em>对你无效"。</p>
+
+  <div class="callout you">
+    <div class="label">你 / 不要拿自己跟教科书均值比</div>
+    <p>如果你练了 12 周 VO2max 没什么变化,不一定是你练错了。HERITAGE 告诉我们,大约 1/5 的人对中等剂量耐力训练的响应非常弱。<strong>解法不是放弃,是换刺激</strong>:加大量、加大强度、换运动模式、加长训练历史、调整营养和睡眠。"我练得多但不进步"几乎从来不是基因 100% 决定,而是没找到自己的响应频率。</p>
+  </div>
+
+  <h3><span class="pre">10.18</span>业余跑者最常见的训练失误模式</h3>
+
+  <div class="status-list">
+    <ul>
+      <li class="dont"><strong>太快太多</strong> · 平时跑得太快(Z2-Z3 灰区),周末长跑也快——所谓"中速长跑"是业余通病</li>
+      <li class="dont"><strong>不会真慢</strong> · Z1 配速感觉"太慢、没成就感"于是不跑;只有用心率监控才能跑出真正的轻松跑</li>
+      <li class="dont"><strong>不练力量</strong> · 把每周可用时间全砸在跑里,跑量越大越易伤</li>
+      <li class="dont"><strong>跑量增长过快</strong> · 一周 30 km 突然跳到 50 km,违反 10% 原则</li>
+      <li class="dont"><strong>缺少 LSD</strong> · 周长跑只有 12-15 km,达不到刺激线粒体的时长</li>
+      <li class="dont"><strong>无 PMC / 无 TSS</strong> · 凭感觉训练,无量化负荷监测,问题暴发才后悔</li>
+      <li class="dont"><strong>赛前不减量</strong> · 比赛前一周仍跑大量,带着疲劳上赛道</li>
+      <li class="dont"><strong>不休息日</strong> · 每天都跑,Monotony 高、Strain 高、伤病等着</li>
+      <li class="dont"><strong>不睡觉</strong> · 训练能控制,睡眠靠运气,这是过训的最快通路</li>
+      <li class="dont"><strong>追求 PB 不顾基础</strong> · 不愿意花 6 个月练基础,只想直接练 5K PB</li>
+      <li class="dont"><strong>无视个体差异</strong> · 抄别人的训练计划而不个体化</li>
+      <li class="dont"><strong>"不进步就加量"</strong> · 应该减强度或换刺激,反而堆更多公里</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">10.19</span>脱训 (Detraining) 与再训化</h3>
+  <p class="lead">所有训练适应都会衰退,这是热力学第二定律级别的事实。问题是衰退多快、能不能"召回"。</p>
+
+  <h4>停训后的时间线</h4>
+  <ul>
+    <li>1 周:几乎无变化,可能短暂表现下降(疲劳掉了但还没积新疲劳)</li>
+    <li>2 周:VO2max 下降 4-7%,血浆量回缩,心搏量下降</li>
+    <li>4 周:VO2max 下降 10-15%,毛细血管开始减少,线粒体酶活性下降</li>
+    <li>8 周:VO2max 下降 15-20%,Type I 肌纤维比例下降,血液回归非训练态</li>
+    <li>6 个月+:基本回到训练前水平</li>
+  </ul>
+
+  <h4>训练记忆 (Muscle Memory)</h4>
+  <p>但有趣的是,曾经训练过的人重新训练后恢复速度远快于初学者。机制可能在<em>肌纤维核的保留</em>(Bruusgaard 2010 提出 "myonuclear permanence"):训练时招募的卫星细胞融入肌纤维形成新肌核,这些肌核在停训后被保留(虽然纤维体积缩小),再训练时蛋白合成能力立刻爆发。</p>
+  <p>实操含义:跑了 5 年后停训 1 年,回归后 8-12 周能恢复 80% 的训练水平,远比第一次练快。</p>
+
+  <h3><span class="pre">10.20</span>运动量 vs 全因死亡率——U 型还是单调?</h3>
+  <p class="lead">这章最后一个问题不是关于表现,而是关于健康:跑多少最长寿?这是过去 20 年流行病学最热的争论之一。</p>
+
+  <h4>Lee 等 (2014) Copenhagen City Heart Study</h4>
+  <p>追踪 1098 名跑者 + 3950 名非跑者 12 年:</p>
+  <ul>
+    <li>每周 1-2.4 小时慢跑:全因死亡风险 -71%(vs 久坐)</li>
+    <li>每周 2.5-4 小时跑步:风险 -54%</li>
+    <li>每周 >4 小时高强度跑步:风险与久坐相近</li>
+  </ul>
+  <p>这就是"U 型曲线"——少跑比不跑好得多,但跑太多反而失去优势。Lee 把这叫"reverse J 形"。</p>
+
+  <h4>反驳观点:Lavie 团队 (2018)</h4>
+  <p>2018 年大型 meta 分析(Schnohr et al.)再次确认 U 型;但 Lavie 团队复检后认为"非线性但单调递增"——即使跑得多,死亡风险仍比久坐低,只是边际收益减少。</p>
+
+  <h4>2022-2023 最新数据(Liu 等大队列)</h4>
+  <p>最新分析显示:即便最高跑量组(每周 >75 km)死亡风险仍比久坐低 25-40%,但比中等跑量组(20-40 km)略高 5-15%。所以更准确说法是:</p>
+  <ul>
+    <li><strong>跑步对长寿绝对有益</strong>——任何剂量都比久坐好</li>
+    <li><strong>边际收益递减</strong>——周 75-150 分钟中等强度是"性价比"最高的剂量</li>
+    <li><strong>极量是否真有害</strong>仍有争议——可能与心血管亚临床损伤(心肌纤维化、房颤)相关,但需要更长队列追踪</li>
+  </ul>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / "中等运动 > 极量运动" 在长寿层面成立</div>
+    <p>这件事很多严肃跑者不愿意接受:对追求 PB 的人来说,周 60-100 km 几乎是"基本盘";但对追求长寿的人来说,这个剂量已经超过最优区间。<strong>表现最大化和健康最大化不是同一个剂量</strong>。这不是"应该少跑",而是要诚实:严肃训练的人有义务承认自己换取的是表现而非寿命的边际优化。每周 30-50 km 中等强度,可能是 80% 业余跑者最理性的"健康剂量"——比赛、PB 是额外的、自选的体验。</p>
+  </div>
+
+  <h3><span class="pre">10.21</span>整章关键 takeaways</h3>
+
+  <div class="status-list">
+    <ul>
+      <li class="do"><strong>训练 = 应激 + 恢复 + 超量恢复</strong>——三者缺一不可,业余通病是少了"恢复"</li>
+      <li class="do"><strong>用 PMC (CTL/ATL/TSB) 管理训练负荷</strong>——而不是凭感觉</li>
+      <li class="do"><strong>80% 时间在 LT1 以下</strong>(真正的轻松跑),不是 80% 跑量在中等强度</li>
+      <li class="do"><strong>力量训练每周 2 次</strong>——5K 表现 +2-4%、经济性 +4-8%、抗伤病</li>
+      <li class="do"><strong>每周 1 节阈值课 + 1 节 VO2max 课</strong>——业余 95% 的"高强度"需求</li>
+      <li class="do"><strong>每周 1 节 LSD</strong>(75-180 min)——线粒体、毛细血管、心室扩张的唯一刺激</li>
+      <li class="do"><strong>赛前 2-3 周减量,量减 50% 强度保</strong>——表现 +1-3%</li>
+      <li class="warn">CTL 每周涨速 ≤5-7 TSS,跑量每周涨 ≤10%</li>
+      <li class="warn">Monotony >2.0、Strain >6000 是过训预警</li>
+      <li class="warn">不要拿自己跟训练学均值比——HERITAGE 显示个体响应差 0-60%</li>
+      <li class="dont">不要"每天跑同样的量"——高低交替更安全也更有效</li>
+      <li class="dont">不要因为"没进步"就加量,先排查强度分布、恢复、营养</li>
+      <li class="dont">不要把"训练表现"和"健康寿命"画等号——边际收益递减后两者分道扬镳</li>
+    </ul>
+  </div>
+
+  <div class="callout you">
+    <div class="label">你 / 训练是一门概率工程</div>
+    <p>没有"完美训练计划"。所有计划都是<em>对你过去未知的样本</em>给出的<em>概率最优解</em>。你能做的不是"找最好的计划",而是把<strong>监测频率</strong>提高:每周记录、每月评估、每季调整。表现不是被"砸"出来的,是被反复迭代调出来的。<br><br>跑得久的人都明白一件事——<strong>训练的最大障碍不是身体,是耐心</strong>。能在 16 周备赛里坚持每周 1 个真正的 LSD、1 个真正的阈值、1 个真正的休息日、不被冲动改计划的人,几乎都拿到了自己阶段性的最佳表现。这不是天赋,是<em>过程的纪律</em>。</p>
+  </div>
+
+</div>
+</section>

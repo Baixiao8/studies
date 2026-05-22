@@ -1,0 +1,45 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build artifacts (intermediate, not the final index.html)
+reports/*/build/
+reports/*/dist/
+reports/*/_temp/
+
+# Local config (不要把本地密钥提交)
+.env
+.env.local
+*.key
+config.local.*
+
+# Claude Code 本地配置和缓存(可能含 API 配置/权限设置,不公开)
+.claude/
+
+# 旧版本归档 · 强烈建议排除(含个人训练数据 + COROS MCP 工具 + 旧版报告)
+_legacy/
+
+# Build 中间产物 / 单文件 embed 版(体积大,GitHub Pages 用 index.html 即可)
+# 单文件版用于本地预览或微信分享,不推线上
+reports/*/index.embed.html
+
+# Local 本地 HTTP 服务器日志
+/tmp/http_server.log
