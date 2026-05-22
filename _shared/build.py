@@ -252,18 +252,24 @@ def build_report(report_dir: Path, external: bool = False):
             lambda m: css_block,
             final
         )
-        # 2) 内联 progress.js / mini-toc.js / tooltip.js · 同样用 lambda
+        # 2) 内联 progress.js / mini-toc.js / tooltip.js
+        #    关键:JS 注释/字符串里如果包含 </script>,inline 后浏览器会提前关
+        #    脚本块,触发 SyntaxError。必须先转义 </script> 为 <\/script>。
         for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js']:
             js = (shared_dir / js_name).read_text(encoding='utf-8')
-            js_block = f'<script>\n{js}\n</script>'
+            # 转义 </script> · 大小写不敏感(防 </SCRIPT> 等变体)
+            js_safe = re.sub(r'</(script)>', r'<\\/\1>', js, flags=re.IGNORECASE)
+            js_block = f'<script>\n{js_safe}\n</script>'
             final = re.sub(
                 r'<script src="\.\./\.\./_shared/' + re.escape(js_name) + r'[^"]*" defer></script>',
                 lambda m, jb=js_block: jb,
                 final
             )
         # 3) 内联 glossary.json (tooltip.js fetch → window.__EMBEDDED_GLOSSARY__)
+        #    词典 JSON 里也可能有 </script>,虽然概率低,但保险起见也转义
         glossary = (shared_dir / 'glossary.json').read_text(encoding='utf-8')
-        gloss_inject = f'\n<script>window.__EMBEDDED_GLOSSARY__ = {glossary};</script>\n'
+        glossary_safe = re.sub(r'</(script)>', r'<\\/\1>', glossary, flags=re.IGNORECASE)
+        gloss_inject = f'\n<script>window.__EMBEDDED_GLOSSARY__ = {glossary_safe};</script>\n'
         final = final.replace('<body>\n', '<body>\n' + gloss_inject)
 
     output = report_dir / 'index.html'
