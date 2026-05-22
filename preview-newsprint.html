@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studies · The Inside Locomotion Times</title>
+<meta name="description" content="Newsprint 风格预览 · 报纸头版排版">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #f0ebdd;          /* 泛黄纸张 */
+    --paper-soft: #ebe5d3;
+    --paper-deep: #e1d9bf;
+    --ink: #1a1a1a;            /* 标题黑 */
+    --ink-soft: #2c2c2c;       /* 正文黑 */
+    --ink-mid: #4a4a4a;        /* 描述灰 */
+    --ink-tertiary: #6e6e6e;
+    --ink-faint: #888888;      /* 日期灰 */
+    --line: #1a1a1a;
+    --line-soft: #c4bca4;      /* 浅分隔线 */
+    --red: #a8423b;            /* 报刊 logo 红 */
+    --blue: #1f3a5f;           /* 报刊外联蓝 */
+  }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink-soft);
+    /* 正文用苹方,标题在 .headline 类里覆盖为无衬线大字 */
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                 -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* 添加纸张纹理(可选,极淡) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.012) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.012) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 32px 28px 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── Headline 字体类 (无衬线粗体,按用户修正) ─── */
+  .headline {
+    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont,
+                 "PingFang SC", "Helvetica Neue", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .headline-italic {
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+  .mono {
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── Masthead 报头 ─── */
+  .masthead {
+    border-top: 1px solid var(--line);
+    border-bottom: 3px double var(--line);
+    padding: 16px 0 14px;
+    margin-bottom: 28px;
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .masthead-top .left,
+  .masthead-top .right {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .masthead-title {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 900;
+    font-size: 88px;
+    text-align: center;
+    color: var(--ink);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin: 6px 0 4px;
+  }
+  .masthead-tag {
+    text-align: center;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-mid);
+    letter-spacing: -0.005em;
+    margin-bottom: 12px;
+  }
+  .masthead-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid var(--line-soft);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* ─── Section divider ─── */
+  .section-divider {
+    border: 0;
+    border-top: 3px double var(--line);
+    margin: 36px 0 24px;
+    position: relative;
+  }
+  .section-divider::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--paper);
+    padding: 0 18px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* ─── Lead Story 头条 ─── */
+  .lead {
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .lead-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .lead-eyebrow .kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+  .lead-eyebrow .byline {
+    flex: 1;
+    text-align: right;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .lead-title {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .lead-title .em { font-style: italic; font-weight: 700; }
+  .lead-subtitle {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--ink-mid);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .lead-lede {
+    font-size: 17px;
+    line-height: 1.62;
+    color: var(--ink-soft);
+    max-width: 760px;
+    margin-bottom: 22px;
+  }
+  .lead-lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+  .lead-lede strong { color: var(--red); font-weight: 700; }
+
+  /* Continue reading 链接 (报纸风,下划线文字) */
+  .continue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4px;
+    text-transform: uppercase;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .continue-link:hover {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+  .continue-link .arrow { font-size: 14px; }
+
+  /* ─── Stats Strip 数据带 (4 列) ─── */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .stats-strip .stat {
+    padding: 22px 24px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .stats-strip .stat:last-child { border-right: none; }
+  .stats-strip .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .stats-strip .value {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    font-feature-settings: "tnum";
+  }
+  .stats-strip .value .unit {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink-faint);
+    margin-left: 4px;
+    letter-spacing: 0;
+  }
+  .stats-strip .sub {
+    font-size: 12px;
+    color: var(--ink-tertiary);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* ─── Section Header 大标题 ─── */
+  .section-header {
+    margin-bottom: 24px;
+  }
+  .section-header .kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    margin-bottom: 8px;
+  }
+  .section-header h2 .em { font-style: italic; }
+  .section-header p {
+    font-size: 15px;
+    color: var(--ink-mid);
+    max-width: 720px;
+    line-height: 1.55;
+  }
+
+  /* ─── Chapter Map 章节地图 ─── */
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 3px double var(--line);
+    border-bottom: 3px double var(--line);
+  }
+  .chapter-item {
+    padding: 22px 24px;
+    border-right: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+  .chapter-item:hover { background: rgba(0,0,0,0.025); }
+  .chapter-item:nth-child(3n) { border-right: none; }
+  .chapter-item:nth-last-child(-n+3) { border-bottom: none; }
+  .chapter-item .ch-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .chapter-item .ch-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .chapter-item .ch-discipline {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 2px 7px;
+    border: 1px solid var(--ink);
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .chapter-item .ch-discipline.red    { border-color: var(--red); color: var(--red); }
+  .chapter-item .ch-discipline.blue   { border-color: var(--blue); color: var(--blue); }
+  .chapter-item .ch-discipline.green  { border-color: #4a6b3a; color: #4a6b3a; }
+  .chapter-item .ch-discipline.brown  { border-color: #7a5230; color: #7a5230; }
+  .chapter-item .ch-discipline.purple { border-color: #5c3a6b; color: #5c3a6b; }
+  .chapter-item .ch-title {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .chapter-item .ch-en {
+    font-style: italic;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+  .chapter-item .ch-desc {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  /* ─── Editorial · 反共识专栏 (3 列卡片) ─── */
+  .editorial {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .editorial-item {
+    padding: 24px 26px;
+    border-right: 1px solid var(--line-soft);
+    text-decoration: none;
+    color: inherit;
+  }
+  .editorial-item:last-child { border-right: none; }
+  .editorial-item .ed-kicker {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 4px;
+  }
+  .editorial-item h3 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .editorial-item p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink-mid);
+    margin-bottom: 14px;
+  }
+  .editorial-item p strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .editorial-item .ed-source {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 10px;
+  }
+
+  /* ─── The Archive · 故事档案 (4 列时间线) ─── */
+  .archive {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .archive-item {
+    padding: 18px 20px;
+    border-right: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .archive-item:nth-child(4n) { border-right: none; }
+  .archive-item:nth-last-child(-n+4) { border-bottom: none; }
+  .archive-item .a-year {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .archive-item .a-where {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .archive-item .a-who {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .archive-item .a-what {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-mid);
+  }
+
+  /* ─── From the Editors · 编辑准则 ─── */
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 3px double var(--line);
+  }
+  .principle-row {
+    display: flex;
+    gap: 16px;
+    padding: 18px 26px;
+    border-bottom: 1px solid var(--line-soft);
+    border-right: 1px solid var(--line-soft);
+    align-items: flex-start;
+  }
+  .principle-row:nth-child(2n) { border-right: none; }
+  .principle-row:nth-last-child(-n+2) { border-bottom: none; }
+  .principle-row .p-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    min-width: 36px;
+    padding-top: 2px;
+  }
+  .principle-row .p-body {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .principle-row .p-body strong {
+    color: var(--ink);
+    font-weight: 700;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  /* ─── Persona Card (放在你身上) ─── */
+  .persona {
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    padding: 28px 32px;
+    margin: 28px 0;
+  }
+  .persona-title {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .persona-sub {
+    font-style: italic;
+    color: var(--ink-mid);
+    font-size: 14px;
+    margin-bottom: 18px;
+  }
+  .persona-list {
+    columns: 2;
+    column-gap: 32px;
+    list-style: none;
+    padding: 0;
+  }
+  .persona-list li {
+    padding: 8px 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line-soft);
+    break-inside: avoid;
+  }
+  .persona-list li::before {
+    content: "—— ";
+    color: var(--ink-faint);
+  }
+
+  /* ─── CTA Bar 底部行动栏 ─── */
+  .cta-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 3px double var(--line);
+    border-bottom: 3px double var(--line);
+    margin: 36px 0 28px;
+  }
+  .cta-bar a {
+    padding: 28px 32px;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: background 0.15s ease;
+  }
+  .cta-bar a:last-child { border-right: none; }
+  .cta-bar a:hover { background: rgba(0,0,0,0.04); }
+  .cta-bar .cta-text {
+    flex: 1;
+  }
+  .cta-bar .cta-kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .cta-bar .cta-title {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin-bottom: 4px;
+  }
+  .cta-bar .cta-sub {
+    font-size: 12.5px;
+    color: var(--ink-tertiary);
+  }
+  .cta-bar .cta-arrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 24px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ─── Colophon 报刊版权信息 ─── */
+  .colophon {
+    text-align: center;
+    padding: 28px 0 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  .colophon a { color: var(--ink-mid); text-decoration: underline; }
+  .colophon a:hover { color: var(--red); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .page { padding: 20px 16px 40px; }
+    .masthead-title { font-size: 56px; }
+    .lead-title { font-size: 48px; }
+    .lead-subtitle { font-size: 19px; }
+    .lead-lede { font-size: 15px; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stats-strip .stat:nth-child(2) { border-right: none; }
+    .stats-strip .stat:nth-child(1),
+    .stats-strip .stat:nth-child(2) { border-bottom: 1px solid var(--line-soft); }
+    .stats-strip .value { font-size: 34px; }
+    .section-header h2 { font-size: 30px; }
+    .chapter-grid { grid-template-columns: repeat(2, 1fr); }
+    .chapter-item:nth-child(3n) { border-right: 1px solid var(--line-soft); }
+    .chapter-item:nth-child(2n) { border-right: none; }
+    .chapter-item:nth-last-child(-n+3) { border-bottom: 1px solid var(--line-soft); }
+    .chapter-item:nth-last-child(-n+2) { border-bottom: none; }
+    .editorial { grid-template-columns: 1fr; }
+    .editorial-item { border-right: none; border-bottom: 1px solid var(--line-soft); }
+    .editorial-item:last-child { border-bottom: none; }
+    .archive { grid-template-columns: repeat(2, 1fr); }
+    .archive-item:nth-child(4n) { border-right: 1px solid var(--line-soft); }
+    .archive-item:nth-child(2n) { border-right: none; }
+    .principles { grid-template-columns: 1fr; }
+    .principle-row { border-right: none; }
+    .persona-list { columns: 1; }
+    .cta-bar { grid-template-columns: 1fr; }
+    .cta-bar a { border-right: none; border-bottom: 1px solid var(--line); }
+    .cta-bar a:last-child { border-bottom: none; }
+  }
+  @media (max-width: 520px) {
+    .masthead-title { font-size: 42px; }
+    .lead-title { font-size: 36px; }
+    .lead-subtitle { font-size: 16px; }
+    .chapter-grid { grid-template-columns: 1fr; }
+    .chapter-item { border-right: none !important; }
+    .archive { grid-template-columns: 1fr; }
+    .archive-item { border-right: none !important; }
+    .masthead-top, .masthead-bottom {
+      flex-direction: column;
+      gap: 4px;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- ═══════════ MASTHEAD 报头 ═══════════ -->
+  <header class="masthead">
+    <div class="masthead-top">
+      <div class="left">Vol. 1 · Issue 01</div>
+      <div class="right">Friday, May 22, 2026</div>
+    </div>
+    <h1 class="masthead-title">STUDIES</h1>
+    <p class="masthead-tag">— Things Worth Thinking Deeply About —</p>
+    <div class="masthead-bottom">
+      <div>白笑 Press · Independent Edition</div>
+      <div>baixiao8.github.io / studies</div>
+    </div>
+  </header>
+
+  <!-- ═══════════ LEAD STORY 头条 ═══════════ -->
+  <article class="lead">
+    <div class="lead-eyebrow">
+      <span class="kicker">★ Featured Report · 跑步科学</span>
+      <span class="byline">By 白笑 · Filed in Running Science · 100,134 字 · 阅读约 4.8 小时</span>
+    </div>
+    <h2 class="lead-title">
+      Inside Locomotion<br>
+      <span class="em">跑步的科学解构.</span>
+    </h2>
+    <p class="lead-subtitle">用人体运动学视角拆解跑步——从一步着地的 0.7 秒力学剧场,到三大供能系统的接力,到下肢发力链的精密协奏。</p>
+    <p class="lead-lede">这不是一本训练手册,是一份<em>知识性视角下的研究对象式调查</em>。<strong>12 章 · 12 个截面 · 1 个完整系统</strong>。从米兰 1976 的力台实验,到伯克利 1985 的乳酸真相,到维也纳 2019 的破二挑战——每一章都从一个真实科学故事开篇,讲透一个被反复验证的命题。</p>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/" target="_blank" class="continue-link">
+      Continue Reading <span class="arrow">▸</span>
+    </a>
+  </article>
+
+  <!-- ═══════════ STATS STRIP ═══════════ -->
+  <div class="stats-strip">
+    <div class="stat">
+      <div class="label">Chapters</div>
+      <div class="value">12<span class="unit">/3 parts</span></div>
+      <div class="sub">力学篇 · 生理篇 · 整合篇</div>
+    </div>
+    <div class="stat">
+      <div class="label">Depth</div>
+      <div class="value">100K<span class="unit">words</span></div>
+      <div class="sub">学术深度 · 循证密度</div>
+    </div>
+    <div class="stat">
+      <div class="label">Diagrams</div>
+      <div class="value">30+<span class="unit">SVG</span></div>
+      <div class="sub">原创矢量图</div>
+    </div>
+    <div class="stat">
+      <div class="label">Reading</div>
+      <div class="value">4.8<span class="unit">hrs</span></div>
+      <div class="sub">深度阅读约 5 小时</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SECTION I · 章节地图 ═══════════ -->
+  <hr class="section-divider" data-label="Section I · The Map">
+
+  <div class="section-header">
+    <div class="kicker">▼ Chapter Map · 章节地图</div>
+    <h2>12 个截面,3 大部分</h2>
+    <p>力学篇还原"跑步是什么",生理篇还原"身体怎么响应",整合篇还原"如何把这些命题用到自己身上"。</p>
+  </div>
+
+  <div class="chapter-grid">
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s1" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 01 — Kinematics</span>
+        <span class="ch-discipline red">Mechanics</span>
+      </div>
+      <div class="ch-title">步态周期的精密解构</div>
+      <div class="ch-en">The Anatomy of a Stride</div>
+      <div class="ch-desc">七相位时序、三平面关节运动学、SLIP 弹簧质量模型、着地策略对比。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s2" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 02 — Kinetics</span>
+        <span class="ch-discipline red">Mechanics</span>
+      </div>
+      <div class="ch-title">力的语言 GRF 与关节力矩</div>
+      <div class="ch-en">The Forces Beneath</div>
+      <div class="ch-desc">地面反作用力三分量、冲击峰与负载率、关节功率、弹性储能、跑步经济性。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s3" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 03 — Anatomy</span>
+        <span class="ch-discipline green">Body</span>
+      </div>
+      <div class="ch-title">下肢发力链 从髋到足</div>
+      <div class="ch-en">The Posterior Chain</div>
+      <div class="ch-desc">髋大腿小腿足部核心、后侧链协奏、SSC 拉长缩短周期。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s4" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 04 — Bioenergetics</span>
+        <span class="ch-discipline blue">Physio</span>
+      </div>
+      <div class="ch-title">能量引擎 三大供能系统</div>
+      <div class="ch-en">The Engine Room</div>
+      <div class="ch-desc">磷酸原/糖酵解/有氧氧化的耦合接力,乳酸真相,底物 crossover。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s5" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 05 — Cardiopulmonary</span>
+        <span class="ch-discipline blue">Physio</span>
+      </div>
+      <div class="ch-title">心肺系统 氧的输送链</div>
+      <div class="ch-en">The Oxygen Pipeline</div>
+      <div class="ch-desc">每搏量与心输出量、运动员心脏的离心性肥大、Fick 方程、中央 vs 外周。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s6" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 06 — Musculoskeletal</span>
+        <span class="ch-discipline green">Body</span>
+      </div>
+      <div class="ch-title">肌骨适应 组织级别的改变</div>
+      <div class="ch-en">Tissue-Level Transformation</div>
+      <div class="ch-desc">肌纤维类型与转化、肌腱时间错配、Wolff 定律、跑步与膝关节循证反驳。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s7" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 07 — Neuromotor</span>
+        <span class="ch-discipline purple">Neuro</span>
+      </div>
+      <div class="ch-title">神经系统 从意图到动作</div>
+      <div class="ch-en">From Intention to Motion</div>
+      <div class="ch-desc">运动控制层级、CPG、中枢调节器模型、跑者高潮、BDNF 与海马体。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s8" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 08 — Endocrine</span>
+        <span class="ch-discipline brown">System</span>
+      </div>
+      <div class="ch-title">内分泌 免疫 热生理</div>
+      <div class="ch-en">Hormones, Defense, Heat</div>
+      <div class="ch-desc">急性激素响应、URTI 的 J 曲线、REDs 相对能量缺乏、热适应窗口。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s9" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 09 — Nutrition</span>
+        <span class="ch-discipline brown">Fuel</span>
+      </div>
+      <div class="ch-title">营养经济学</div>
+      <div class="ch-en">Fueling the Engine</div>
+      <div class="ch-desc">能量需求量化、双糖补给、铁与维 D、补剂 GRADE 分级、撞墙机制。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s10" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 10 — Adaptation</span>
+        <span class="ch-discipline brown">Training</span>
+      </div>
+      <div class="ch-title">训练适应</div>
+      <div class="ch-en">Stimulus to Progress</div>
+      <div class="ch-desc">GAS 应激模型、CTL/ATL/TSB、80/20 极化训练、力量训练对 RE 的提升。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s11" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 11 — Injury</span>
+        <span class="ch-discipline red">Risk</span>
+      </div>
+      <div class="ch-title">伤病机制与防护</div>
+      <div class="ch-en">When Tissue Says No</div>
+      <div class="ch-desc">ACWR 急慢性负荷比、八大跑步伤病的生物力学根源、过度训练综合征。</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s12" target="_blank" class="chapter-item">
+      <div class="ch-meta">
+        <span class="ch-num">Ch. 12 — Limits</span>
+        <span class="ch-discipline red">Limits</span>
+      </div>
+      <div class="ch-title">个体差异与表现极限</div>
+      <div class="ch-en">The Edge of Human</div>
+      <div class="ch-desc">年龄衰退、男女超长距反转、ACTN3 基因、马拉松破二三角模型。</div>
+    </a>
+  </div>
+
+  <!-- ═══════════ SECTION II · 反共识专栏 ═══════════ -->
+  <hr class="section-divider" data-label="Section II · Editorial">
+
+  <div class="section-header">
+    <div class="kicker">▼ Editorial · 反共识专栏</div>
+    <h2>30 条反共识 · <span class="em">三条精选</span></h2>
+    <p>每一章都至少有 2-3 个被流传已久但已被研究推翻的"常识"。这里挑出三条最锋利的。</p>
+  </div>
+
+  <div class="editorial">
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s4" target="_blank" class="editorial-item">
+      <span class="ed-kicker">✕ 反共识 No. 04</span>
+      <h3>乳酸不是疲劳元凶,它是燃料</h3>
+      <p>George Brooks 用同位素示踪证实:乳酸是糖酵解中间产物,通过 MCT1/MCT4 转运在肌肉间、肌肉-心脏、肌肉-肝间穿梭。<strong>心肌摄取乳酸为燃料的占比 25-40%</strong>。真正引起疲劳的是 H⁺ 浓度上升和中枢神经下调输出。</p>
+      <div class="ed-source">详见 Ch. 04 · Bioenergetics</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s6" target="_blank" class="editorial-item">
+      <span class="ed-kicker">✕ 反共识 No. 17</span>
+      <h3>跑步不伤膝盖,反而保护</h3>
+      <p>Alentorn-Geli 2017 系统综述:业余跑者膝关节炎发病率 <strong>3.5% vs 久坐者 10.2%</strong>——跑者反而低 3 倍。软骨需要循环载荷保持健康,久坐才是软骨真正的敌人。OA 风险只在精英级累积量后才上升。</p>
+      <div class="ed-source">详见 Ch. 06 · Musculoskeletal</div>
+    </a>
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s12" target="_blank" class="editorial-item">
+      <span class="ed-kicker">✕ 反共识 No. 28</span>
+      <h3>表现最大化 ≠ 健康最大化</h3>
+      <p>追 PB 的剂量(80–120 km/周)和追长寿的剂量(30–50 km/周)<strong>是两条不同的曲线</strong>。许多业余跑者把"破三"当默认目标,但本质上这是用边际健康换取边际表现——你需要先确认追求的是哪一条路径。</p>
+      <div class="ed-source">详见 Ch. 12 · Limits</div>
+    </a>
+  </div>
+
+  <!-- ═══════════ SECTION III · 故事档案 ═══════════ -->
+  <hr class="section-divider" data-label="Section III · The Archive">
+
+  <div class="section-header">
+    <div class="kicker">▼ The Archive · 故事档案</div>
+    <h2>12 个真实科学故事</h2>
+    <p>每一章用一个真实实验场景开篇,把抽象的科学还原成"那一天某个人做了什么"。</p>
+  </div>
+
+  <div class="archive">
+    <div class="archive-item"><div class="a-year">1936</div><div class="a-where">Montréal</div><div class="a-who">Hans Selye</div><div class="a-what">Nature 短文定义"应激"</div></div>
+    <div class="archive-item"><div class="a-year">1966</div><div class="a-where">Dallas</div><div class="a-who">Bengt Saltin</div><div class="a-what">床上 20 天 VO₂max −27%</div></div>
+    <div class="archive-item"><div class="a-year">1976</div><div class="a-where">Milano</div><div class="a-who">Cavagna</div><div class="a-what">力台揭示走 vs 跑差异</div></div>
+    <div class="archive-item"><div class="a-year">1985</div><div class="a-where">Berkeley</div><div class="a-who">George Brooks</div><div class="a-what">同位素推翻乳酸错说</div></div>
+    <div class="archive-item"><div class="a-year">1986</div><div class="a-where">Austin</div><div class="a-who">Edward Coyle</div><div class="a-what">糖水实验催生补给产业</div></div>
+    <div class="archive-item"><div class="a-year">1992</div><div class="a-where">Oslo</div><div class="a-who">Bjørn Dæhlie</div><div class="a-what">VO₂max 96 史上最高</div></div>
+    <div class="archive-item"><div class="a-year">1997</div><div class="a-where">Cape Town</div><div class="a-who">Tim Noakes</div><div class="a-what">中枢调节器反叛主流</div></div>
+    <div class="archive-item"><div class="a-year">2003</div><div class="a-where">Norway</div><div class="a-who">Stephen Seiler</div><div class="a-what">精英 80/20 分布发现</div></div>
+    <div class="archive-item"><div class="a-year">2004</div><div class="a-where">Harvard</div><div class="a-who">Lieberman</div><div class="a-what">"Born to Run" 演化解剖</div></div>
+    <div class="archive-item"><div class="a-year">2010</div><div class="a-where">Kenya</div><div class="a-who">Lieberman</div><div class="a-what">Kalenjin 赤脚无冲击峰</div></div>
+    <div class="archive-item"><div class="a-year">2014</div><div class="a-where">Brisbane</div><div class="a-who">Tim Gabbett</div><div class="a-what">ACWR 推翻"跑量=伤"</div></div>
+    <div class="archive-item"><div class="a-year">2019</div><div class="a-where">Vienna</div><div class="a-who">Eliud Kipchoge</div><div class="a-what">INEOS 1:59:40 破二</div></div>
+  </div>
+
+  <!-- ═══════════ SECTION IV · 角色化场景 ═══════════ -->
+  <div class="persona">
+    <div class="persona-title">放在你身上 · 19 个角色化场景</div>
+    <div class="persona-sub">每个抽象机制都配了一份"如果你是 X 跑者,这意味着..."的具体场景诊断。</div>
+    <ul class="persona-list">
+      <li>4:30/km 业余跑者的步频步幅诊断</li>
+      <li>70 kg 跑者着地瞬间的力学剖面</li>
+      <li>跑后第二天酸痛的发力链报告</li>
+      <li>70 kg 4 小时撞墙的代谢剖面</li>
+      <li>一年训练的心血管适应剖面</li>
+      <li>跑量陡增后跟腱酸的时间错配</li>
+      <li>工作累后晚训低产的神经学</li>
+      <li>女跑者月经紊乱的 REDs 红旗</li>
+      <li>100 K 超马 12 小时的补给剖面</li>
+      <li>4 小时马拉松跑者一周计划解构</li>
+      <li>跟腱炎 8 周回归跑步阶段表</li>
+      <li>45 岁跑者的衰退账本与 healthspan</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════ FROM THE EDITORS · 编辑准则 ═══════════ -->
+  <hr class="section-divider" data-label="From the Editors">
+
+  <div class="section-header">
+    <div class="kicker">▼ Editorial Principles · 编辑准则</div>
+    <h2>八条铁律</h2>
+    <p>这是我们做研究报告的方法论——固化下来防止下一份报告偷懒。</p>
+  </div>
+
+  <div class="principles">
+    <div class="principle-row">
+      <span class="p-num">01</span>
+      <div class="p-body"><strong>研究对象式,不是手册式</strong> 回答"为什么",不回答"怎么做"。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">02</span>
+      <div class="p-body"><strong>密度优先于流畅</strong> 每 800 字至少一个视觉锚点。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">03</span>
+      <div class="p-body"><strong>反共识标注</strong> 主动找被推翻的"常识",红色 ✕ 标出。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">04</span>
+      <div class="p-body"><strong>循证而非传说</strong> 引用 [Author Year],可追溯。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">05</span>
+      <div class="p-body"><strong>多学科交叉</strong> 力学 × 生理 × 神经 × 进化。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">06</span>
+      <div class="p-body"><strong>可视化驱动</strong> SVG 矢量图把抽象关系空间化。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">07</span>
+      <div class="p-body"><strong>故事钩子开篇</strong> 每章一段真实历史场景做引入。</div>
+    </div>
+    <div class="principle-row">
+      <span class="p-num">08</span>
+      <div class="p-body"><strong>角色化注解落地</strong> "放在你身上" 把命题翻译到具体身份。</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ CTA BAR ═══════════ -->
+  <div class="cta-bar">
+    <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/" target="_blank">
+      <div class="cta-text">
+        <div class="cta-kicker">▸ Open the Report</div>
+        <div class="cta-title">打开完整报告(暗色版)</div>
+        <div class="cta-sub">深色背景 · 苹方衬线 · 5 小时深度阅读</div>
+      </div>
+      <div class="cta-arrow">→</div>
+    </a>
+    <a href="https://github.com/Baixiao8/studies" target="_blank">
+      <div class="cta-text">
+        <div class="cta-kicker">▸ Source on GitHub</div>
+        <div class="cta-title">查看 GitHub 仓库</div>
+        <div class="cta-sub">Baixiao8/studies · 开源 · v2.0</div>
+      </div>
+      <div class="cta-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- ═══════════ COLOPHON ═══════════ -->
+  <div class="colophon">
+    Studies · The Inside Locomotion Times · Friday, May 22, 2026<br>
+    Vol. 1 · Issue 01 · Baixiao Press, Independent Edition<br>
+    <a href="https://baixiao8.github.io/studies/">baixiao8.github.io/studies</a>
+  </div>
+
+</main>
+
+</body>
+</html>
