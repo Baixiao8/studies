@@ -6,39 +6,39 @@
  * Owner: 白笑 / 报告项目通用基础
  * ========================================================= */
 
-/* ─── Design Tokens ──────────────────────────────────────── */
+/* ─── Design Tokens · Newsprint 浅色版 ─────────────────── */
 :root {
-  /* 背景层 */
-  --bg: #0e0e0c;
-  --bg-soft: #1a1a17;
-  --bg-card: #1e1e1a;
-  --bg-deep: #161613;
+  /* 背景层 · 米黄纸张系列 */
+  --bg: #f0ebdd;
+  --bg-soft: #ebe5d3;
+  --bg-card: #ebe5d3;
+  --bg-deep: #e1d9bf;
 
-  /* 分隔线 */
-  --line: #2e2e29;
-  --line-strong: #3d3d36;
+  /* 分隔线 · 浅纸张色 + 黑实线 */
+  --line: #c4bca4;
+  --line-strong: #1a1a1a;
 
-  /* 文字三层 */
-  --ink: #e8e4d8;
-  --ink-soft: #a39e8d;
-  --ink-faint: #6a665a;
+  /* 文字三层 · 标题黑 / 正文灰 / 日期灰 */
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #888888;
 
-  /* 金色主强调 */
-  --accent: #d4a548;
-  --accent-soft: #8a6f3a;
-  --accent-deep: #5e4d28;
+  /* 报刊红主强调 (替代金色) */
+  --accent: #a8423b;
+  --accent-soft: #7a3530;
+  --accent-deep: #5a2520;
 
-  /* 学科色板 (各报告按主题选用) */
-  --c-physio: #4a6fa5;      /* 生理 蓝 */
-  --c-theory: #b54848;      /* 力学/理论 红 */
-  --c-session: #c47f17;     /* 训练/课表 橙 */
-  --c-strength: #6a8b3d;    /* 力量/解剖 绿 */
-  --c-nutrition: #d97a3c;   /* 营养 暖橙 */
-  --c-recovery: #3d8b6e;    /* 恢复/免疫 青绿 */
-  --c-psych: #9c4bb5;       /* 神经/心理 紫 */
-  --c-injury: #b56565;      /* 伤病 粉红 */
-  --c-race: #c93f3f;        /* 比赛/极限 正红 */
-  --c-post: #5a7fa5;        /* 赛后/反思 蓝 */
+  /* 学科色板 · 印刷低饱和版本 */
+  --c-physio: #1f3a5f;       /* 生理 深蓝 */
+  --c-theory: #a8423b;       /* 力学 报刊红 */
+  --c-session: #7a5230;      /* 训练 印刷棕 */
+  --c-strength: #4a6b3a;     /* 解剖 深绿 */
+  --c-nutrition: #7a5230;    /* 营养 印刷棕 */
+  --c-recovery: #3a6b5c;     /* 恢复 深青 */
+  --c-psych: #5c3a6b;        /* 神经 深紫 */
+  --c-injury: #a8423b;       /* 伤病 红 */
+  --c-race: #a8423b;         /* 极限 红 */
+  --c-post: #1f3a5f;         /* 赛后 深蓝 */
 
   /* 间距 (8px 基线) */
   --space-1: 8px;
@@ -64,9 +64,9 @@
   --lh-normal: 1.6;
   --lh-relaxed: 1.78;
 
-  /* 字体栈 */
+  /* 字体栈 · 报刊风:标题改无衬线粗体,正文苹方 */
   --ff-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans SC", sans-serif;
-  --ff-serif: "Cormorant Garamond", "Noto Serif SC", serif;
+  --ff-serif: "Inter Tight", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
   --ff-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
 
   /* 容器宽度 */

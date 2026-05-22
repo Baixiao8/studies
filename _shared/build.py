@@ -29,6 +29,46 @@ from html.parser import HTMLParser
 CHARS_PER_MINUTE_CN = 350  # 中文阅读速度参考
 
 
+# ─── SVG 颜色反色映射(暗色 → Newsprint 浅色) ────────────────
+SVG_COLOR_MAP = {
+    # 暗色背景下的米白线条/文字 → 浅色背景下的深灰墨色
+    '#e8e4d8': '#1a1a1a',      # 主文字米白 → 标题黑
+    '#a39e8d': '#4a4a4a',      # 软米白(次级文字) → 描述灰
+    '#6a665a': '#888888',      # 暗米白 → 日期灰
+    '#3d3d36': '#c4bca4',      # 暗分隔线 → 浅纸张分隔线
+    '#2e2e29': '#d4cdb5',      # 更暗分隔线
+    '#1e1e1a': '#ebe5d3',      # 卡片深底 → 软纸张色
+
+    # 强调色:金色 → 报刊红
+    '#d4a548': '#a8423b',
+    '#8a6f3a': '#7a3530',
+
+    # 学科色调整为印刷低饱和版
+    '#b54848': '#a8423b',
+    '#d57979': '#a8423b',
+    '#c47f17': '#7a5230',
+    '#e0a25a': '#7a5230',
+    '#4a6fa5': '#1f3a5f',
+    '#8fb8df': '#1f3a5f',
+    '#6a8b3d': '#4a6b3a',
+    '#a3cca3': '#4a6b3a',
+    '#9c4bb5': '#5c3a6b',
+    '#c084d8': '#5c3a6b',
+    '#3d8b6e': '#3a6b5c',
+    '#6db8a0': '#3a6b5c',
+    '#d97a3c': '#7a5230',
+    '#b56565': '#a8423b',
+    '#c93f3f': '#a8423b',
+}
+
+
+def remap_svg_colors(html: str) -> str:
+    """章节 HTML 里的 SVG 颜色批量反色为 Newsprint 浅色版"""
+    for old, new in SVG_COLOR_MAP.items():
+        html = html.replace(old, new)
+    return html
+
+
 # ─── 工具函数 ──────────────────────────────────────────────
 
 def count_chinese_chars(html: str) -> int:
@@ -169,6 +209,9 @@ def inject_chapter_enhancements(html: str, recap_data: dict) -> str:
     if not sec_match:
         return html
     section_id = sec_match.group(1)
+
+    # -1) SVG 颜色反色:把暗色版 SVG 颜色批量映射成 Newsprint 浅色
+    html = remap_svg_colors(html)
 
     # 0) 给所有 table 包 .table-wrap (移动端横向滚动)
     html = wrap_tables_for_mobile(html)
