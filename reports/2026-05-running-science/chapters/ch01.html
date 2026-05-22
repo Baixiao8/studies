@@ -1,9 +1,34 @@
 <section id="s1" style="border-top: 4px solid var(--c-theory);">
 <div class="container">
-  <!-- 章节封面 · AI 生成插画 -->
+  <!-- 章节封面 · AI 生成插画 + HTML 数据标注 -->
   <figure class="chapter-hero">
     <img src="assets/ch1-hero-v1.jpg" alt="跑者侧面剪影 · 推离瞬间 · 关节标注示意" loading="lazy">
+    <figcaption>FIG 0 · 跑步推离瞬间 · 关键关节的实时状态</figcaption>
   </figure>
+
+  <!-- 关节数据卡片 · 与 hero 图配套,前端文本补足信息密度 -->
+  <div class="hero-keypoints">
+    <div class="kp">
+      <span class="kp-tag">▸ 髋</span>
+      <span class="kp-value">伸展 <em>−10°</em></span>
+      <p class="kp-desc">推离时髋伸到峰值 · 臀大肌主推进 · 推进力 35% 来自这里</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 踝</span>
+      <span class="kp-value">跖屈 <em>−20°</em></span>
+      <p class="kp-desc">跟腱弹性回弹 · 角速度 600°/s · 弹簧能量在 100 ms 内储释</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 前膝</span>
+      <span class="kp-value">屈曲 <em>~90°</em></span>
+      <p class="kp-desc">摆动期前膝高抬 · 缩短腿转动惯量 · 跑得越快收得越高</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 肩 · 肘</span>
+      <span class="kp-value">摆臂 <em>~90°</em></span>
+      <p class="kp-desc">反平衡躯干旋转 · 守恒角动量 · 节省约 3% 跑步能量</p>
+    </div>
+  </div>
 
   <div class="section-tag"><span class="num">01</span>KINEMATICS · 力学篇 / 第一章</div>
   <h1 class="section-h">步态周期的精密解构 <span class="en">The Anatomy of a Stride</span></h1>
