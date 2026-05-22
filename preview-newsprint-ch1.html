@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>步态周期的精密解构 · Newsprint 试点 · 跑步的科学解构</title>
+<meta name="description" content="Newsprint 浅色版试点 · 第 01 章">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #f0ebdd;          /* 泛黄纸张 */
+    --paper-soft: #ebe5d3;
+    --paper-deep: #e1d9bf;
+    --ink: #1a1a1a;            /* 标题黑 */
+    --ink-soft: #2c2c2c;       /* 正文 */
+    --ink-mid: #4a4a4a;        /* 描述 */
+    --ink-tertiary: #6e6e6e;
+    --ink-faint: #888888;      /* 日期灰 */
+    --line: #1a1a1a;
+    --line-soft: #c4bca4;      /* 浅分隔线 */
+    --red: #a8423b;            /* 报刊红 */
+    --blue: #1f3a5f;
+    --green: #4a6b3a;
+    --brown: #7a5230;
+    --purple: #5c3a6b;
+    --teal: #3a6b5c;
+
+    /* callout 颜色 */
+    --c-sharp-bg: rgba(168, 66, 59, 0.06);
+    --c-sharp-line: var(--red);
+    --c-ops-bg: rgba(58, 107, 92, 0.06);
+    --c-ops-line: var(--teal);
+    --c-you-bg: rgba(92, 58, 107, 0.06);
+    --c-you-line: var(--purple);
+    --c-note-bg: rgba(60, 60, 60, 0.04);
+    --c-note-line: var(--ink-faint);
+    --c-story-bg: rgba(122, 82, 48, 0.07);
+    --c-story-line: var(--brown);
+
+    /* 学科色(印刷低饱和版) */
+    --c-theory: #a8423b;       /* 力学红 */
+    --c-physio: #1f3a5f;       /* 生理蓝 */
+    --c-strength: #4a6b3a;     /* 力量/解剖绿 */
+    --c-session: #7a5230;      /* 训练橙→棕 */
+    --c-nutrition: #7a5230;
+    --c-recovery: #3a6b5c;
+    --c-psych: #5c3a6b;
+    --c-injury: #a8423b;
+    --c-race: #a8423b;
+    --accent: var(--red);
+    --accent-soft: #7a3530;
+    --ink: var(--ink);
+    --ink-soft: var(--ink-mid);
+    --ink-faint: var(--ink-faint);
+    --bg: var(--paper);
+    --bg-card: var(--paper-soft);
+    --bg-deep: var(--paper-deep);
+    --bg-soft: var(--paper-soft);
+    --line-strong: var(--ink);
+  }
+
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                 -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.72;
+    min-height: 100vh;
+  }
+
+  /* 纸张纹理 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.012) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.012) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 880px;          /* 比首页窄,优化长文阅读宽度 */
+    margin: 0 auto;
+    padding: 24px 28px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── 简化报头 ─── */
+  .masthead {
+    border-top: 1px solid var(--line);
+    border-bottom: 3px double var(--line);
+    padding: 10px 0 8px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .masthead-left a {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .masthead-left a:hover { color: var(--red); }
+
+  /* ─── 章节标题区(替代原 section-tag/section-h/section-sub) ─── */
+  .container { }
+
+  .section-tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-tag .num {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3px 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .section-h {
+    font-family: "Inter Tight", -apple-system, "PingFang SC", sans-serif;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .section-h .en {
+    display: block;
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-mid);
+    margin-top: 8px;
+    letter-spacing: -0.012em;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  /* ─── 子标题 ─── */
+  h3 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 48px 0 14px;
+    padding-top: 28px;
+    border-top: 3px double var(--line);
+  }
+  h3 .pre {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--red);
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+  h4 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+    margin: 28px 0 10px;
+  }
+
+  /* ─── 正文 ─── */
+  p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+  p.lead {
+    font-size: 18px;
+    color: var(--ink-mid);
+    line-height: 1.68;
+    margin-bottom: 22px;
+  }
+  strong { color: var(--ink); font-weight: 700; }
+  em { color: var(--ink); font-style: italic; }
+  ul, ol { margin: 0 0 18px 22px; }
+  ul li, ol li { font-size: 15.5px; line-height: 1.72; margin: 6px 0; color: var(--ink-soft); }
+  ul li::marker { color: var(--ink-faint); }
+  ol li::marker { color: var(--red); font-family: "JetBrains Mono", monospace; font-weight: 700; }
+
+  /* ─── TLDR ─── */
+  .tldr {
+    margin: 28px 0;
+    padding: 22px 26px;
+    background: var(--paper-soft);
+    border-left: 3px solid var(--ink);
+    border-right: 1px solid var(--line-soft);
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .tldr .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .tldr p {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.45;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  /* ─── Callout 系列 ─── */
+  .callout {
+    margin: 24px 0;
+    padding: 18px 22px;
+    background: var(--paper-soft);
+    border-left: 3px solid var(--ink-faint);
+    position: relative;
+  }
+  .callout .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .callout p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 6px 0;
+  }
+
+  .callout.sharp { background: var(--c-sharp-bg); border-left-color: var(--red); }
+  .callout.sharp .label { color: var(--red); }
+  .callout.sharp .label::before { content: "✕"; }
+
+  .callout.ops { background: var(--c-ops-bg); border-left-color: var(--teal); }
+  .callout.ops .label { color: var(--teal); }
+  .callout.ops .label::before { content: "✓"; }
+
+  .callout.you { background: var(--c-you-bg); border-left-color: var(--purple); }
+  .callout.you .label { color: var(--purple); }
+  .callout.you .label::before { content: "◐"; }
+
+  .callout.note { background: var(--c-note-bg); border-left-color: var(--ink-faint); }
+  .callout.note .label::before { content: "i"; font-style: italic; }
+
+  .callout.story { background: var(--c-story-bg); border-left-color: var(--brown); }
+  .callout.story .label { color: var(--brown); }
+  .callout.story .label::before { content: "◆"; }
+  .callout.story p {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ─── Number Strip ─── */
+  .number-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .number-strip .item {
+    padding: 18px 16px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .number-strip .item:last-child { border-right: none; }
+  .number-strip .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .number-strip .num {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+    font-feature-settings: "tnum";
+  }
+  .number-strip .sub {
+    font-size: 12px;
+    color: var(--ink-tertiary);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* ─── SVG 矢量图 ─── */
+  .svg-frame {
+    margin: 32px 0;
+    padding: 20px;
+    background: var(--paper-soft);
+    border: 1px solid var(--line-soft);
+    overflow-x: auto;
+  }
+  .svg-frame svg { display: block; width: 100%; min-width: 540px; }
+  .svg-caption {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-faint);
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line-soft);
+  }
+  svg text { font-family: "JetBrains Mono", monospace; }
+
+  /* ─── 表格 ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14.5px;
+    border-top: 3px double var(--line);
+    border-bottom: 3px double var(--line);
+  }
+  th {
+    text-align: left;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-soft);
+    text-transform: uppercase;
+  }
+  td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-size: 14px;
+  }
+  td.mono-cell { font-family: "JetBrains Mono", monospace; font-size: 13px; color: var(--red); }
+
+  /* ─── Card / Grid ─── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .card {
+    padding: 18px 20px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .grid-2 .card:nth-child(2n), .grid-3 .card:nth-child(3n), .grid-4 .card:nth-child(4n) { border-right: none; }
+  .card h4 { font-size: 15px; color: var(--red); margin: 0 0 10px; }
+  .card p { font-size: 13.5px; line-height: 1.6; margin: 4px 0; }
+  .card .big {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--ink);
+    margin: 8px 0 6px;
+    letter-spacing: -0.025em;
+  }
+  .card .unit { font-size: 13px; color: var(--ink-faint); font-family: "JetBrains Mono", monospace; }
+  .card .desc { font-size: 13px; color: var(--ink-tertiary); line-height: 1.55; }
+
+  /* ─── Chip / Term ─── */
+  .chip {
+    display: inline-block;
+    padding: 2px 7px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: var(--paper-soft);
+    color: var(--ink);
+    border: 1px solid var(--line-soft);
+    line-height: 1.5;
+    vertical-align: baseline;
+  }
+  .term {
+    color: var(--ink);
+    border-bottom: 1px dashed var(--ink-faint);
+    cursor: help;
+  }
+  .mono { font-family: "JetBrains Mono", monospace; font-size: 0.9em; color: var(--ink-mid); }
+  .ref { font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--ink-faint); letter-spacing: 0.04em; }
+
+  /* ─── Status list ─── */
+  .status-list { list-style: none; padding: 0; margin: 18px 0; }
+  .status-list li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .status-list li:last-child { border-bottom: none; }
+  .status-list li::before {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .status-list li.do::before { content: "✓"; color: var(--teal); }
+  .status-list li.dont::before { content: "✕"; color: var(--red); }
+  .status-list li.warn::before { content: "!"; color: var(--brown); }
+
+  /* ─── Chapter recap ─── */
+  .chapter-recap {
+    margin: 48px 0 24px;
+    padding: 28px 32px;
+    background: var(--paper-soft);
+    border-top: 3px double var(--line);
+    border-bottom: 3px double var(--line);
+  }
+  .chapter-recap .label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chapter-recap .label::before { content: "★"; }
+  .chapter-recap h4 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.018em;
+    margin: 0 0 14px;
+  }
+  .chapter-recap ol {
+    list-style: none;
+    counter-reset: recap;
+    padding: 0;
+    margin: 0;
+  }
+  .chapter-recap ol li {
+    counter-increment: recap;
+    padding: 8px 0 8px 28px;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .chapter-recap ol li:last-child { border-bottom: none; }
+  .chapter-recap ol li::before {
+    content: counter(recap, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  /* ─── Reading meta ─── */
+  .reading-meta {
+    display: flex;
+    gap: 22px;
+    padding: 10px 0;
+    margin: 14px 0 28px;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .reading-meta .meta-item { display: flex; align-items: center; gap: 6px; }
+
+  /* ─── Compare 2 ─── */
+  .compare-2 {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin: 24px 0;
+    border: 1px solid var(--line);
+  }
+  .compare-2 .col { padding: 16px 18px; }
+  .compare-2 .col.primary { background: var(--paper-soft); }
+  .compare-2 .divider { width: 1px; background: var(--line-soft); }
+
+  /* ─── Footer ─── */
+  .footer {
+    margin-top: 56px;
+    padding: 24px 0 8px;
+    border-top: 3px double var(--line);
+    text-align: center;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  .footer a { color: var(--ink-mid); text-decoration: underline; }
+  .footer a:hover { color: var(--red); }
+
+  /* ─── 试点条幅 ─── */
+  .trial-banner {
+    background: var(--red);
+    color: var(--paper);
+    padding: 14px 28px;
+    margin: -24px -28px 28px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .trial-banner a { color: var(--paper); text-decoration: underline; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 720px) {
+    .page { padding: 16px 18px 60px; }
+    .trial-banner { margin: -16px -18px 24px; padding: 12px 18px; font-size: 9.5px; letter-spacing: 0.14em; }
+    .section-h { font-size: 36px; }
+    .section-h .en { font-size: 16px; }
+    .section-sub { font-size: 14.5px; }
+    p { font-size: 15.5px; line-height: 1.78; }
+    p.lead { font-size: 16.5px; }
+    h3 { font-size: 22px; margin: 40px 0 12px; padding-top: 24px; }
+    h4 { font-size: 17px; }
+    .tldr { padding: 18px 20px; }
+    .tldr p { font-size: 18px; }
+    .callout { padding: 16px 18px; }
+    .number-strip { grid-template-columns: 1fr 1fr; }
+    .number-strip .item:nth-child(2) { border-right: none; }
+    .number-strip .item:nth-child(1),
+    .number-strip .item:nth-child(2) { border-bottom: 1px solid var(--line-soft); }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .card { border-right: none; border-bottom: 1px solid var(--line-soft); }
+    .card:last-child { border-bottom: none; }
+    .chapter-recap { padding: 22px 22px; margin: 40px 0 20px; }
+    .chapter-recap h4 { font-size: 19px; }
+    .masthead { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <div class="trial-banner">
+    📰 试点版 · Newsprint 浅色风格 · <a href="https://baixiao8.github.io/studies/reports/2026-05-running-science/#s1" target="_blank">对照暗色版</a>
+  </div>
+
+  <!-- 简化报头 -->
+  <header class="masthead">
+    <div class="masthead-left">
+      <a href="https://baixiao8.github.io/studies/preview-newsprint.html">← STUDIES 首页</a>
+    </div>
+    <div>跑步的科学解构 · 第 01 章 · 试点</div>
+  </header>
+
+  <!-- 章节内容(从原 ch01.html 抽取) -->
+  
+<div class="container">
+  <div class="section-tag"><span class="num">01</span>KINEMATICS · 力学篇 / 第一章</div>
+  <h1 class="section-h">步态周期的精密解构 <span class="en">The Anatomy of a Stride</span></h1>
+  <p class="section-sub">每一步跑步都是一场约 0.7 秒内完成的力学剧场——七个相位首尾衔接,三个关节在三平面同步舞蹈,身体重心沿正弦曲线起伏。理解这套时序,才能读懂之后所有的能量、损伤与表现命题。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>跑步不是"快走",它是一次相变——双脚同时离地的腾空相出现的那一刻,人体从倒立摆切换成了弹簧。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 米兰 · 1976</div>
+    <p>1976 年米兰大学的某个清晨,生理学家 Giovanni Cavagna 把一台力台 (force platform) 嵌进了实验室地面。受试者按口令走、慢跑、加速跑过这块嵌入式钢板——它能以毫秒级精度记录每一步的三向地面反作用力。Cavagna 当时正试图回答一个看似简单的问题:走和跑,在能量学上是同一件事吗?</p>
+    <p>那个清晨记录下来的曲线,在三十年后仍是所有跑步生物力学教科书的开头一页。它显示:走路时,身体重心的势能与动能像理想钟摆一样反向交换;而跑步时,两者同步起伏——身体在中支撑期不是被举高,而是被压低,像一只压缩中的弹簧。<em>同样的两条腿,在不同速度下变成了不同的物理对象</em>。这一章讲的就是这个相变里所有的细节。</p>
+  </div>
+
+  <h3><span class="pre">1.1</span>从走路到跑步——一次步态的相变</h3>
+  <p class="lead">在所有连续可变化的运动状态里,从走到跑并不是一个量的过渡,而是一次拓扑结构的跃迁。配速从 7'30"/km 加快到 6'00"/km 的某个临界点,身体内部的两台机器悄悄完成了切换——之前那台叫"倒立摆",之后那台叫"弹簧-质量"。</p>
+
+  <h4>走路:钟摆式的能量交换</h4>
+  <p>走路的力学本质,是<em>钟摆式能量交换</em>:在每一步的迈出过程中,身体重心(center of mass,COM)以支撑腿髋关节为枢轴,沿一段近似圆弧的轨迹划过。</p>
+  <p>当 COM 处在弧线最高点(中支撑期 midstance)时,势能最大、动能最小;当它回落到两腿之间(双支撑期)时,动能最大、势能最小。两者像理想钟摆一样反向交换。</p>
+  <p>Cavagna 在 1976 年用力台和运动捕捉证实:走路时大约 <strong>60–70% 的机械功可以通过势能-动能转换无偿"借还"</strong>,真正需要肌肉代谢供给的只是剩下的 30–40%。这就是为什么"散步消耗能量少"——大多数能量根本不来自代谢,来自重力。</p>
+
+  <h4>跑步:弹簧式的能量储释</h4>
+  <p>跑步则完全不同。COM 在中支撑期处于<em>最低点</em>而不是最高点——身体此刻像一只压缩的弹簧,腿在被动屈曲、跟腱和足底筋膜被牵拉储存弹性势能。然后在推离 (push-off) 阶段弹簧反向回弹,把 COM 抛向空中。</p>
+  <p>势能与动能在同一相位<strong>同步变化</strong>,而不是反向交换。能量的暂存场所是<em>肌腱与韧带的弹性结构</em>,而不是钟摆的几何高度差——这是从走到跑最根本的力学切换。</p>
+
+  <p>这个相变的标志性事件,是<em>双支撑期</em>(double support phase)的消失与<em>腾空期</em>(flight phase)的出现。走路任何瞬间总有至少一脚触地,占周期 20–25% 的时间双脚同时贴地;跑步则相反,在每一步的开头和结尾各有一段约 10–15% 的两脚同时离地。配速变化时,这个切换不是渐变的——存在一个清晰的速度阈值,大约在 2.0–2.3 m/s (约 7'15"–8'20"/km),低于它人类倾向走、高于它倾向跑,中间地带能量代价骤增,身体会主动避开。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">DOUBLE SUPPORT</div>
+      <div class="num">20–25%</div>
+      <div class="sub">走路双支撑相占周期</div>
+    </div>
+    <div class="item">
+      <div class="label">FLIGHT PHASE</div>
+      <div class="num">10–15%</div>
+      <div class="sub">跑步单次腾空相占周期</div>
+    </div>
+    <div class="item">
+      <div class="label">WALK→RUN</div>
+      <div class="num">2.1 m/s</div>
+      <div class="sub">步态转换临界速度(约 8 km/h)</div>
+    </div>
+    <div class="item">
+      <div class="label">PHASE SPLIT</div>
+      <div class="num">40 / 60</div>
+      <div class="sub">跑步支撑/摆动相比例(走路反之)</div>
+    </div>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 走 ≠ 慢跑</div>
+    <p>把走路当成"慢速的跑步",在生物力学上是错的。走和跑的<em>支撑/摆动相比例正好颠倒</em>:走路支撑相占 60%、摆动 40%;跑步支撑 40%、摆动 60%。所以"走路热身"对跑姿肌群没有真正的预激活意义,真正的过渡是<em>动态拉伸 + 跑步专项动作</em>(高抬腿、跨步跳),这才是从"摆"切回"弹"的开关。</p>
+  </div>
+
+  <h3><span class="pre">1.2</span>完整步态周期——七个相位的精密时序</h3>
+  <p class="lead">国际公认的跑步步态周期 (gait cycle) 划分,通常从一侧脚 (惯例右脚) 初触地起,到同侧脚再次触地结束,记为 0% → 100%。这之间被精密地切成七个连续事件,每个事件都有自己的力学目标与肌肉激活模式。</p>
+
+  <p>支撑期 (stance phase) 通常占整个周期的 35–45%,在 5K 配速以下占 40% 上下,800m 冲刺速度可压缩到 22%;摆动期 (swing phase) 占 55–65%。注意,这与走路完全相反——走路的 60/40 比例意味着腿大部分时间在"撑",而跑步的 40/60 意味着腿大部分时间在"飞"。</p>
+
+  <p>以下是按支撑相 / 摆动相分层的七事件结构。这套术语源自 Perry 等人对走路步态周期的经典划分,在跑步研究中被延展和压缩:</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 背景刻度 -->
+      <line x1="60" y1="60" x2="1040" y2="60" stroke="#c4bca4" stroke-width="1"/>
+      <line x1="60" y1="320" x2="1040" y2="320" stroke="#c4bca4" stroke-width="1"/>
+      <!-- 0-100% 刻度 -->
+      <g font-size="10" fill="#888888" letter-spacing="0.08em">
+        <text x="60" y="345" text-anchor="middle">0%</text>
+        <text x="158" y="345" text-anchor="middle">10</text>
+        <text x="256" y="345" text-anchor="middle">20</text>
+        <text x="354" y="345" text-anchor="middle">30</text>
+        <text x="452" y="345" text-anchor="middle">40</text>
+        <text x="550" y="345" text-anchor="middle">50</text>
+        <text x="648" y="345" text-anchor="middle">60</text>
+        <text x="746" y="345" text-anchor="middle">70</text>
+        <text x="844" y="345" text-anchor="middle">80</text>
+        <text x="942" y="345" text-anchor="middle">90</text>
+        <text x="1040" y="345" text-anchor="middle">100%</text>
+      </g>
+      <!-- 支撑相背景块 (0-40%) -->
+      <rect x="60" y="100" width="392" height="100" fill="#a8423b" fill-opacity="0.16" stroke="#a8423b" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="256" y="93" text-anchor="middle" fill="#a8423b" font-size="11" letter-spacing="0.18em">STANCE 40%</text>
+      <!-- 摆动相背景块 (40-100%) -->
+      <rect x="452" y="100" width="588" height="100" fill="#7a5230" fill-opacity="0.14" stroke="#7a5230" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="746" y="93" text-anchor="middle" fill="#7a5230" font-size="11" letter-spacing="0.18em">SWING 60%</text>
+      <!-- 腾空相标记 (40-50% & 90-100%) -->
+      <rect x="452" y="100" width="98" height="100" fill="#a8423b" fill-opacity="0.18"/>
+      <rect x="942" y="100" width="98" height="100" fill="#a8423b" fill-opacity="0.18"/>
+      <text x="501" y="155" text-anchor="middle" fill="#a8423b" font-size="9.5" letter-spacing="0.1em">FLIGHT</text>
+      <text x="991" y="155" text-anchor="middle" fill="#a8423b" font-size="9.5" letter-spacing="0.1em">FLIGHT</text>
+      <!-- 事件标记线 -->
+      <g stroke="#4a4a4a" stroke-width="0.8" stroke-dasharray="2,3">
+        <line x1="60" y1="100" x2="60" y2="240"/>
+        <line x1="119" y1="100" x2="119" y2="240"/>
+        <line x1="256" y1="100" x2="256" y2="240"/>
+        <line x1="393" y1="100" x2="393" y2="240"/>
+        <line x1="452" y1="100" x2="452" y2="240"/>
+        <line x1="550" y1="100" x2="550" y2="240"/>
+        <line x1="746" y1="100" x2="746" y2="240"/>
+        <line x1="942" y1="100" x2="942" y2="240"/>
+      </g>
+      <!-- 事件名 -->
+      <g font-size="9.5" fill="#1a1a1a" text-anchor="middle">
+        <text x="60" y="220">IC</text>
+        <text x="60" y="234">0%</text>
+        <text x="119" y="220">LR</text>
+        <text x="119" y="234">5%</text>
+        <text x="256" y="220">MS</text>
+        <text x="256" y="234">20%</text>
+        <text x="393" y="220">TS</text>
+        <text x="393" y="234">34%</text>
+        <text x="452" y="220">PS/TO</text>
+        <text x="452" y="234">40%</text>
+        <text x="550" y="220">ISw</text>
+        <text x="550" y="234">50%</text>
+        <text x="746" y="220">MSw</text>
+        <text x="746" y="234">70%</text>
+        <text x="942" y="220">TSw</text>
+        <text x="942" y="234">90%</text>
+      </g>
+      <!-- 全称 -->
+      <g font-size="8.5" fill="#4a4a4a" text-anchor="middle">
+        <text x="60" y="262">Initial</text>
+        <text x="60" y="273">Contact</text>
+        <text x="119" y="262">Loading</text>
+        <text x="119" y="273">Response</text>
+        <text x="256" y="262">Mid-</text>
+        <text x="256" y="273">stance</text>
+        <text x="393" y="262">Terminal</text>
+        <text x="393" y="273">Stance</text>
+        <text x="452" y="262">Pre-Swing</text>
+        <text x="452" y="273">Toe-Off</text>
+        <text x="550" y="262">Initial</text>
+        <text x="550" y="273">Swing</text>
+        <text x="746" y="262">Mid-</text>
+        <text x="746" y="273">Swing</text>
+        <text x="942" y="262">Terminal</text>
+        <text x="942" y="273">Swing</text>
+      </g>
+      <!-- 标题 -->
+      <text x="60" y="35" font-size="12" fill="#a8423b" letter-spacing="0.18em">GAIT CYCLE · 跑步步态周期七事件</text>
+      <text x="60" y="52" font-size="9.5" fill="#4a4a4a" letter-spacing="0.1em">右脚 IC 起 → 右脚 IC 止 · 一侧周期 ≈ 0.65–0.75 s @ 180 spm</text>
+    </svg>
+    <div class="svg-caption">FIG 1.1 · 步态周期的相位结构 · 支撑相收缩、腾空相出现</div>
+  </div>
+
+  <h4>支撑相 (Stance Phase, 0–40%)</h4>
+  <p><strong>① Initial Contact (IC, 0%)</strong>——初触地。一只脚的某一部分(取决于着地策略,详见 1.5)触及地面的瞬间。这是步态周期的"零点钟",决定接下来 200 ms 内冲击力如何穿过身体。膝关节此时屈曲约 5–10°,踝处于轻微背屈或中立位,髋伸约 20° 左右。</p>
+
+  <p><strong>② Loading Response (LR, 0–10%)</strong>——负重反应,又称<em>吸收期</em>。整个体重在 50 ms 内被加载到这条腿上,膝关节迅速屈曲到 35–45° 以缓冲冲击。这是<em>离心收缩</em> (eccentric) 的高密度阶段:股四头肌、腓肠肌、臀大肌都在被拉长的同时产生张力,把垂直方向上几吨级的冲量"接住"。<strong>这段时间是软骨、跟腱、跖筋膜承受应力的最高峰</strong>——大多数跑步损伤的力学根源都在这 50 ms 里。</p>
+
+  <p><strong>③ Midstance (MS, 10–25%)</strong>——中支撑期。COM 通过支撑腿正上方,腿被压缩到最短,膝屈曲达到峰值,踝背屈到 10–15°。在弹簧-质量模型里,这是弹簧最大压缩的瞬间,储存的弹性势能即将释放。</p>
+
+  <p><strong>④ Terminal Stance (TS, 25–35%)</strong>——终末支撑。COM 越过支撑腿前方,腿开始延伸,踝从背屈快速切换到跖屈,跟腱弹性回弹。髋关节伸展,准备进入推离。</p>
+
+  <p><strong>⑤ Pre-Swing / Toe-Off (PS, 35–40%)</strong>——预摆动 / 离地。脚趾推离地面,踝完成跖屈到 -20° 左右。<em>这是跑步唯一存在正向地面反作用力推进分量的瞬间</em>。如果上一阶段的弹性回弹被时序很好地匹配,几乎不需要额外消耗代谢能。</p>
+
+  <h4>摆动相 (Swing Phase, 40–100%)</h4>
+  <p><strong>⑥ Initial Swing (ISw, 40–55%)</strong>——早摆动。腿离地后,髋屈曲、膝迅速屈曲到 90–110°(高速跑可达 130°),通过缩短腿的转动惯量 (moment of inertia ∝ 长度²) 来降低摆动所需扭矩。这就是为什么跑得越快的人膝盖收得越高——这是<em>钟摆惯量优化</em>,不是表演性动作。</p>
+
+  <p><strong>⑦ Mid-Swing (MSw, 55–85%)</strong>——中摆动。大腿继续前抛,小腿在前抛过程中由于惯性"鞭打"展开。此时髋屈曲达到峰值约 30–35°。</p>
+
+  <p><strong>⑧ Terminal Swing (TSw, 85–100%)</strong>——终末摆动。腘绳肌组离心收缩,主动减速前摆的小腿,把它"收回"到身体下方,准备触地。<strong>这个阶段腘绳肌承受峰值张力,是跑步中腘绳肌拉伤最常见的瞬间</strong>——特别是冲刺中。</p>
+
+  <div class="callout note">
+    <div class="label">术语对齐 / Stance vs Support, Swing vs Recovery</div>
+    <p>不同教材里,支撑期会写成 stance phase / support phase / contact phase,本质都指脚在地的那段时间;摆动期写成 swing / recovery / aerial phase。"腾空相"在跑步语境特指<em>两脚同时离地</em>的瞬间,在一个步态周期里出现两次:推离后到对侧 IC 之间一次,以及对侧推离后到本侧 IC 之间一次。</p>
+  </div>
+
+  <h3><span class="pre">1.3</span>关节运动学——三平面的协同角度</h3>
+  <p class="lead">跑步从来不是矢状面 (sagittal plane) 内的二维事件。下肢三关节在三个解剖平面同时旋转,任何一个平面的失控都会反映为另两个平面的代偿和损伤。下面把<em>髋、膝、踝</em>三个关节在矢状面的标志性角度先讲透,然后扩展到冠状面 (frontal) 与水平面 (transverse)。</p>
+
+  <h4>髋关节 (Hip) · 矢状面</h4>
+  <p>髋关节运动学是<em>钟摆 + 推进</em>双重角色。触地瞬间髋屈曲约 30°,负重反应中保持屈曲位以稳定骨盆;中支撑期髋开始伸展,在推离瞬间达到<em>峰值髋伸 -10° ~ -15°</em>(伸展为负值)。这个 -10° 的伸展是推进力的几何来源——髋伸时髂腰肌被预拉伸,准备摆动相的爆发屈曲。</p>
+
+  <p>业余跑者最常见的力学错误,是<em>髋伸不足</em>(insufficient hip extension)。久坐导致的髂腰肌紧张让骨盆前倾,跑步中髋只能伸到 0° 或微伸,推进力不足以靠髋驱动,身体就改用小腿"扒地"代偿——这是足底筋膜炎和跟腱炎的力学起点之一。</p>
+
+  <h4>膝关节 (Knee) · 矢状面</h4>
+  <p>膝关节是<em>冲击吸收的主战场</em>。触地瞬间屈曲约 5–15°(后跟着地者偏伸,前掌着地者偏屈),负重反应中迅速屈曲到 40–50° 峰值,然后中支撑期开始伸展,推离时仍保持 15–20° 微屈(从不完全锁直)。摆动相早期屈曲到 90–110° 峰值,中摆动后开始展开,触地前主动减速。</p>
+
+  <p>膝的负重反应屈曲不是"被动塌陷",而是<em>主动的离心控制</em>。股四头肌在膝屈曲过程中长度增加但持续产生张力,把竖向冲击转化为肌肉拉伸势能,再在中支撑后通过弹性回弹释放。如果股四力量不足,膝屈曲幅度会过大(>55°),或者反过来过小(<35°),都会增加髌股关节应力——前者增加髌韧带牵拉,后者增加髌股关节面接触压力。</p>
+
+  <h4>踝关节 (Ankle) · 矢状面</h4>
+  <p>踝是<em>跑步弹簧系统的主开关</em>。触地角度因着地策略而异:后跟着地者触地时踝<em>背屈 5–10°</em>(脚尖朝上,跟先着地),前掌着地者触地时踝<em>跖屈 5–20°</em>(脚趾在前)。负重反应中踝快速背屈到 10–15° 峰值(中支撑期),这是跟腱被拉长储能的时刻;然后跖屈反弹,推离瞬间达到 -20° ~ -25° 的最大跖屈,把储存的弹性能释放为前进推力。</p>
+
+  <p>整个支撑期踝关节角速度可超过 600°/s,跟腱内的应变能在 100 ms 内完成"储-放"循环。这是任何当下的肌肉收缩机器都难以匹敌的能量密度——后面 Ch2 会专门拆解。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 坐标轴 -->
+      <line x1="80" y1="50" x2="80" y2="320" stroke="#c4bca4" stroke-width="1"/>
+      <line x1="80" y1="185" x2="1040" y2="185" stroke="#c4bca4" stroke-width="0.8" stroke-dasharray="2,4"/>
+      <line x1="80" y1="320" x2="1040" y2="320" stroke="#c4bca4" stroke-width="1"/>
+      <!-- 支撑相阴影 (0-40%) -->
+      <rect x="80" y="50" width="384" height="270" fill="#a8423b" fill-opacity="0.06"/>
+      <!-- Y 轴标签 -->
+      <g font-size="10" fill="#4a4a4a" text-anchor="end">
+        <text x="73" y="58">+50°</text>
+        <text x="73" y="123">+25°</text>
+        <text x="73" y="189">0°</text>
+        <text x="73" y="255">-15°</text>
+        <text x="73" y="323">-30°</text>
+      </g>
+      <!-- X 轴标签 -->
+      <g font-size="10" fill="#4a4a4a" text-anchor="middle">
+        <text x="80" y="340">0%</text>
+        <text x="272" y="340">20</text>
+        <text x="464" y="340">40 · TO</text>
+        <text x="656" y="340">60</text>
+        <text x="848" y="340">80</text>
+        <text x="1040" y="340">100%</text>
+        <text x="560" y="365" fill="#888888" letter-spacing="0.16em">GAIT CYCLE</text>
+      </g>
+      <!-- 髋: 触地 30° 屈 → 推离 -10° 伸 → 摆动峰 35° 屈 -->
+      <path d="M 80 130 Q 200 150 280 175 T 464 235 Q 560 235 640 195 T 880 90 Q 960 95 1040 130"
+            fill="none" stroke="#1f3a5f" stroke-width="2.5"/>
+      <text x="1050" y="135" font-size="11" fill="#1f3a5f">HIP</text>
+      <!-- 膝: 触地 10° → LR 峰值 45° → 推离 20° → 摆动峰 105° -->
+      <path d="M 80 175 Q 150 100 200 90 Q 280 95 340 130 Q 420 165 464 165 Q 540 100 640 20 L 750 5 Q 880 50 950 130 Q 1000 165 1040 175"
+            fill="none" stroke="#a8423b" stroke-width="2.5"/>
+      <text x="1050" y="180" font-size="11" fill="#a8423b">KNEE</text>
+      <!-- 踝: 触地 -5° (跖屈,后跟) → 中支撑 15° 背屈 → 推离 -25° -->
+      <path d="M 80 200 Q 130 195 180 175 Q 240 145 300 130 Q 400 130 464 280 Q 540 230 640 200 Q 760 195 880 195 Q 960 195 1040 200"
+            fill="none" stroke="#7a5230" stroke-width="2.5"/>
+      <text x="1050" y="205" font-size="11" fill="#7a5230">ANKLE</text>
+      <!-- 关键事件标 -->
+      <g font-size="9" fill="#a8423b" text-anchor="middle">
+        <line x1="200" y1="50" x2="200" y2="320" stroke="#a8423b" stroke-opacity="0.25" stroke-dasharray="2,3"/>
+        <text x="200" y="44">LR peak</text>
+        <line x1="464" y1="50" x2="464" y2="320" stroke="#a8423b" stroke-opacity="0.25" stroke-dasharray="2,3"/>
+        <text x="464" y="44">Toe-Off</text>
+        <line x1="750" y1="50" x2="750" y2="320" stroke="#a8423b" stroke-opacity="0.25" stroke-dasharray="2,3"/>
+        <text x="750" y="44">Knee MAX</text>
+      </g>
+      <!-- 标题 -->
+      <text x="80" y="30" font-size="12" fill="#a8423b" letter-spacing="0.18em">JOINT KINEMATICS · 三关节矢状面角度</text>
+      <!-- 图例 -->
+      <g font-size="9" fill="#4a4a4a">
+        <text x="90" y="70">屈曲(+) / 伸展(-) · 踝以背屈为(+)、跖屈为(-)</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 1.2 · 髋 / 膝 / 踝矢状面角度随步态周期变化曲线(典型业余跑者中速跑)</div>
+  </div>
+
+  <h4>冠状面 (Frontal Plane) · 骨盆下垂与髋内收</h4>
+  <p>冠状面运动学是<em>稳定性</em>的指标,也是损伤研究的热点。最关键的两个度量:</p>
+  <p><strong>髋内收 (hip adduction)</strong>——支撑相中,大腿相对骨盆向内倾倒的角度。健康跑者峰值在 10–15°,内收过度 (>18°) 意味着臀中肌力量不足或激活时序紊乱,身体重心向支撑腿外侧偏移。</p>
+  <p><strong>对侧骨盆下垂 (contralateral pelvic drop, Trendelenburg sign)</strong>——支撑相中,非支撑侧骨盆相对水平面的下降角度。正常 <5°,如果 >8° 称为<em>Trendelenburg 步态</em>,是髂胫束综合征、膝前侧疼痛、跟腱病变的高危信号。</p>
+
+  <p>这两个指标本质上是同一件事的两面:臀中肌(以及深层的小臀肌、髋外旋肌群)不能在单腿支撑时把骨盆"端平",代偿就发生在膝盖的内扣 (knee valgus) 和足的过度内旋 (overpronation) 上——这就是为什么膝痛的源头常在臀部。</p>
+
+  <h4>水平面 (Transverse Plane) · 旋转</h4>
+  <p>水平面旋转最容易被肉眼忽视,但能量学上很关键。骨盆每一步绕垂直轴旋转约 ±5–8°,胸廓反向旋转 ±7–10°——两者反向,以保持<em>角动量守恒</em>。这就是上肢摆动的力学动机:手臂的反向摆动平衡下肢的转动惯量,如果不让手臂摆,胸廓就必须更激烈地反旋,代谢成本上升约 3–13%(Arellano & Kram 2014 经典实验)。</p>
+
+  <h3><span class="pre">1.4</span>时空参数——速度的两个分解</h3>
+  <p class="lead">跑步速度可以写成一个简单的乘积:<em>速度 = 步频 × 步幅 / 2</em>(单脚一周期跨两步)。但精英与业余的差别从不只在"跑得快",而在于这两个因子的分配方式。</p>
+
+  <h4>步频 (Cadence, SPM)</h4>
+  <p>步频 (steps per minute) 是单位时间内的总触地次数。精英长距离跑者无论速度高低,通常稳定在 180–200 spm 区间,马拉松世界顶尖男选手平均 185–190 spm,女子 180–195 spm。业余跑者多数在 160–175 spm,这意味着每步要"跨"得更远,从而单步在地时间更长、垂直振幅更大、单步冲击峰更高。</p>
+
+  <p>步频不是恒等量——它会随速度上升,但弹性很小:精英跑者从 5 m/s 加速到 6 m/s,步频只上升 5–8 spm,大部分速度增益来自<em>步幅</em>;业余跑者反过来,步频更敏感,因为他们的步幅已经接近力学极限,只能靠提高节奏。</p>
+
+  <h4>步幅 (Stride Length)</h4>
+  <p>一个完整步态周期内 COM 前进的距离,精英马拉松男子约 1.6–1.8 m,女子 1.4–1.6 m,业余跑者通常 1.0–1.3 m。注意区分:<em>step length</em> = 一脚 IC 到对侧脚 IC 的距离,约等于步幅的一半;<em>stride length</em> = 同侧脚两次 IC 距离 = 一个完整周期。</p>
+
+  <p>步幅的上限不是腿长,而是<em>力量产生速度</em>。短跑生物力学研究表明:加快步频几乎不需要额外肌肉力量,但每延长 10 cm 步幅,推离阶段地面反作用力必须按比例上升。这就是为什么"加大步幅"在没有相应力量基础时是低效甚至损伤诱因。</p>
+
+  <h4>触地时间 (Ground Contact Time, GCT)</h4>
+  <p>从一脚 IC 到同脚 toe-off 的持续时间。精英长跑选手 GCT 通常 < 200 ms,有时 < 180 ms;业余跑者 220–280 ms 居多;走路 GCT 约 600 ms。<em>GCT 短意味着力学传递快</em>,但要求腿刚度高、跟腱储能效率高——这是天赋(肌腱劲度)与训练(神经肌肉适应)的复合产物。</p>
+
+  <p><em>GCT 不对称 (GCT balance / asymmetry)</em>——左右脚 GCT 的差值占总值的百分比,正常 < 1%,>2% 提示一侧代偿(伤病恢复期或动力链不均)。Garmin、Stryd、Coros 等设备已经能给出这个指标,但解读需要结合主观感受——并不是越平衡越好,有时是损伤后的<em>过度对称</em>(symmetrical compensation),反而抑制了原本不痛侧的发力。</p>
+
+  <h4>占空比 (Duty Factor, DF)</h4>
+  <p>DF = GCT / 完整步态周期。走路 DF > 0.5(始终有腿在地),跑步 DF < 0.5(有腾空期),Usain Bolt 在 100m 巅峰时 DF 仅 0.22——也就是说他 78% 的时间在空中。马拉松业余跑者 DF 约 0.32–0.40,精英约 0.27–0.32。<em>低 DF 意味着每步腿"接管"全部冲量的时间更短</em>,平均 GRF 必须更高,要求更强的肌腱-肌肉协同。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">CADENCE · ELITE</div>
+      <div class="num">180–200</div>
+      <div class="sub">spm 步频(稳定区间)</div>
+    </div>
+    <div class="item">
+      <div class="label">GCT · ELITE</div>
+      <div class="num">170–200</div>
+      <div class="sub">ms 触地时间</div>
+    </div>
+    <div class="item">
+      <div class="label">STRIDE · MARATHON</div>
+      <div class="num">1.6–1.8</div>
+      <div class="sub">m/cycle 步幅(男精英)</div>
+    </div>
+    <div class="item">
+      <div class="label">DUTY FACTOR</div>
+      <div class="num">0.27–0.32</div>
+      <div class="sub">精英长跑 (走路 >0.5)</div>
+    </div>
+  </div>
+
+  <div class="callout you">
+    <div class="label">放在你身上 · 4:30/km 业余跑者的实例</div>
+    <p>假设你现在配速 4:30/km,身高 175 cm,体重 70 kg。你跑表显示步频 168 spm,GCT 265 ms,VO 9.5 cm。<em>这意味着什么</em>?</p>
+    <p>从精英标准看,你的步频偏低 12–18 spm(精英在 180–200)。步频低导致单步在地时间长(GCT 偏长 60+ ms)+ 单步要"跨"更远(步幅长 = 着地点远离重心 = overstride = 制动冲量↑)+ 垂直振幅大(VO 9.5 cm 略高于精英的 6–9)。<em>这三个指标其实是同一件事的三种说法</em>——你的"节拍"太慢了,身体被迫用"大跨步 + 高跳跃"来补速度。</p>
+    <p><strong>怎么改</strong>:不要试图同时改 GCT 和 VO——它们是<em>果</em>。直接把步频提升 5–10%(目标 178–185 spm),用节拍器或跑表 cadence alert 强制约束,跑 4–6 周。其余两个指标会自动跟随下降:GCT 通常降到 230–245 ms,VO 降到 7.5–8.5 cm。整体跑步经济性提升 2–4%,膝盖 / 髋部累积载荷可降 10–20%——这是单一干预里 ROI 最高的一项。</p>
+  </div>
+
+  <h3><span class="pre">1.5</span>重心轨迹——COM 的正弦波</h3>
+  <p class="lead">如果在跑步时把一个 LED 灯绑在腰椎 L4–L5 之间(近似 COM 位置),用高速摄影从侧面拍摄,你会看到一条近似正弦的曲线。这条曲线的几个数学量,直接决定跑步经济性。</p>
+
+  <p><strong>垂直振幅 (vertical oscillation, VO)</strong>——COM 在一个步态周期内从最低点到最高点的距离。精英跑者通常 6–9 cm,业余多数 9–12 cm。每多 1 cm 的振幅,理论上意味着每步多做约 7–10 J 的克服重力做功(对 70 kg 体重)。</p>
+
+  <p><strong>垂直比 (vertical ratio)</strong>——垂直振幅除以步幅,反映的是"每前进 1 cm 上下颠几 mm"。精英 < 5%,业余 7–10%。这个指标比单纯的 VO 更有意义,因为它把速度归一化掉了——跑得越快步幅越大,绝对 VO 会涨,但 vertical ratio 应当保持稳定甚至下降。</p>
+
+  <p><strong>波形</strong>——COM 的水平速度也在每步内振荡:支撑期前半 (LR + early MS) 减速,后半 (TS + PS) 加速。<em>水平速度变化幅度 ΔV 越小,跑者越"平顺"</em>。精英 ΔV 约 ±0.1–0.15 m/s,业余可达 ±0.3 m/s,后者意味着每一步都在反复刹车和加速,代谢成本陡增。</p>
+
+  <p>从振幅的几何约束反推,精英跑者并不是"跑得轻盈"——他们是在严格控制 COM 不要往上跳。这与直觉相反:很多业余跑者以为"轻盈"意味着"高抬腿、弹跳感",但真正的高效跑步是 COM 几乎沿水平线滑行,腿在身体下方做小幅伸缩。这个意象更像<em>滑轮上的弹簧</em>,而不像兔子跳。</p>
+
+  <h3><span class="pre">1.6</span>力学模型——倒立摆 vs 弹簧质量</h3>
+  <p class="lead">理解跑步力学,最经济的工具是两个简化模型。它们都做了大胆的近似,但抓住了能量传递的核心。</p>
+
+  <h4>倒立摆模型 (Inverted Pendulum Model · IPM)</h4>
+  <p>把人体简化成一根质量集中在顶端 (代表 COM) 的刚性杆,以脚为支点绕髋画弧。这是 Cavagna 在 1976 年用于<em>走路</em>的模型,数学量上得到的能量恢复率约 65%——也就是说,走路 65% 的能量可以靠势能-动能的钟摆交换免费循环,剩下 35% 才是代谢真正的支出。</p>
+
+  <p>用这个模型解释跑步会立刻碰壁:跑步时 COM 在中支撑期不是<em>最高</em>而是<em>最低</em>,势能与动能<em>同步变化</em>而不是反向交换。换言之,跑步不存在钟摆式的免费能量循环,IPM 模型完全失效。</p>
+
+  <h4>弹簧-质量模型 (Spring-Mass Model · SLIP)</h4>
+  <p>SLIP = Spring-Loaded Inverted Pendulum,即"加了弹簧的倒立摆"。把腿建模成一根有刚度 (stiffness) k 的弹簧,顶端挂着 COM 质量 m。触地时弹簧被压缩,储能;推离时回弹,释放能量。McMahon & Cheng 在 1990 年用这个模型成功预测了人和袋鼠在不同速度下的<em>腿刚度、垂直振幅、触地时间、自选步频</em>等几乎所有时空参数。SLIP 已经成为跑步运动学的标准基础模型。</p>
+
+  <p>SLIP 模型下,腿刚度 (leg stiffness) k = F_peak / ΔL,其中 F_peak 是 GRF 峰值,ΔL 是腿的最大压缩量(触地长度减去中支撑长度)。人类跑步时 k 大约 10–30 kN/m(精英靠近上限),袋鼠跳跃时 k 可达 60 kN/m。这个值不是固定的:同一个跑者在变换地面硬度(草地 vs 跑道)、改变着地策略、变速时,大脑会主动调节 k 来维持<em>总刚度</em>(腿刚度 + 地面表观刚度)的近似恒定——这就是为什么你能在不同地面上自适应跑步,而不需要每次重新学习。</p>
+
+  <h4>垂直刚度 (Vertical Stiffness) k_vert</h4>
+  <p>另一个常用度量是垂直刚度 k_vert = F_peak / Δy,其中 Δy 是 COM 垂直位移。k_vert 通常比 k_leg 更高,在 25–60 kN/m,因为腿不是完全竖直压缩。k_vert 越高,跑者越"硬",GCT 越短,但软组织应力越大。增龄性下降和疲劳都会让 k_vert 下降——这是衡量"还能不能再跑一程"的实用指标。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 弹得越高 ≠ 跑得越好</div>
+    <p>很多业余教练强调"弹性",鼓励学员"像踩弹簧一样跳起来"。但 SLIP 模型告诉我们:跑步的弹簧是<em>水平方向的</em>——腿在压缩储能时,主要是把<em>向下的动量</em>反向变成<em>向前的推进</em>,垂直振幅是副产品而不是目标。把"弹"理解成"跳",会让 vertical ratio 飙升,GCT 反而拉长。<strong>真正的弹是"压扁",不是"弹高"</strong>。</p>
+  </div>
+
+  <h3><span class="pre">1.7</span>着地策略——RFS / MFS / FFS 的力学差异</h3>
+  <p class="lead">触地的那一瞬间,脚的哪一部分先碰地,称为<em>着地模式</em> (foot strike pattern)。这是 2010 年 Lieberman 在 Nature 上著名"赤足跑"论文之后最被反复争论的话题。讲清楚事实而非阵营:</p>
+
+  <h4>三种模式的定义</h4>
+  <p><strong>后跟着地 (Rearfoot Strike, RFS)</strong>——脚后跟先着地,触地角度 (foot strike angle, FSA) > +8°(脚尖上翘)。约 75–90% 的业余跑者属于此类,穿厚跟跑鞋会进一步放大这个比例。</p>
+  <p><strong>中足着地 (Midfoot Strike, MFS)</strong>——前掌与后跟几乎同时触地,FSA 介于 -1.6° 到 +8° 之间。常见于配速较快的训练或精英长跑选手。</p>
+  <p><strong>前掌着地 (Forefoot Strike, FFS)</strong>——跖球部 (ball of foot) 先着地,FSA < -1.6°(脚尖下倾)。这是赤足跑者、短跑运动员、部分东非长跑精英的常见模式。在精英马拉松选手中 FFS 比例约 30–40%(明显高于业余的 1–10%),但即使是顶级选手中 RFS 也并不罕见(Kipchoge 在不同比赛中曾被分析为 MFS 或 mild RFS)。</p>
+
+  <h4>力学差异(只列证据明确的)</h4>
+  <table>
+    <thead>
+      <tr><th>指标</th><th>RFS 后跟</th><th>MFS 中足</th><th>FFS 前掌</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>FSA 角度</td><td>+8° ~ +30°</td><td>-1.6° ~ +8°</td><td>-20° ~ -1.6°</td></tr>
+      <tr><td>冲击峰 (Impact Peak)</td><td><strong>明显</strong>(1.5–1.8 BW)</td><td>较弱或不明显</td><td>几乎无</td></tr>
+      <tr><td>负载率 VLR</td><td><strong>高</strong>(60–100 BW/s)</td><td>中(40–70)</td><td>低(30–50)</td></tr>
+      <tr><td>主动峰 Active Peak</td><td>2.5–3.0 BW</td><td>2.4–2.9</td><td>2.3–2.8</td></tr>
+      <tr><td>踝跖屈力矩</td><td>较低</td><td>中</td><td><strong>高</strong></td></tr>
+      <tr><td>跟腱负荷</td><td>低–中</td><td>中</td><td><strong>高</strong></td></tr>
+      <tr><td>膝伸力矩(峰值)</td><td><strong>高</strong></td><td>中</td><td>较低</td></tr>
+      <tr><td>胫骨应力</td><td>胫骨前(应力骨折)</td><td>中</td><td>胫骨后(后肌腱)</td></tr>
+      <tr><td>GCT(同速度)</td><td>较长</td><td>中</td><td>较短</td></tr>
+      <tr><td>跑步经济性 RE</td><td>≈</td><td>≈</td><td>≈(无显著差异)</td></tr>
+    </tbody>
+  </table>
+
+  <p>核心结论:<em>没有任何一种着地模式在"经济性"或"损伤率"上有压倒性优势</em>。RFS 把冲量塞给膝和胫骨(应力骨折、髌股痛),FFS 把冲量塞给踝和小腿(跟腱炎、跖骨疲劳骨折)。把损伤从一处搬到另一处,而不是消除它——这是 2014 年 Hamill & Gruber 等人系统综述的结论,后来被多份 meta 分析重复确认。</p>
+
+  <h4>速度依赖性</h4>
+  <p>FSA 不是一个人的"标签",它是<em>速度的函数</em>。同一名跑者在马拉松配速 (E 强度) 通常是 RFS 或 mild MFS,在 5K 配速可能变成 MFS,在 400m 间歇变成 FFS。这是因为速度上升时步幅延长,身体不得不让脚尽快着地以缩短"刹车"——而最快的着地方式是前掌先触。</p>
+
+  <div class="callout ops">
+    <div class="label">操作建议 / 是否要改着地模式</div>
+    <p>给业余跑者的实操原则:<strong>不要主动"改"着地模式</strong>。如果你有反复出现的膝痛或胫骨骨膜应力,可以通过<em>提高步频 5–10%</em>(160→172, 175→185) 间接缩短步幅,这会让 FSA 自然向中足靠拢,无需刻意做动作。直接"改 FFS"几乎必然导致跟腱或腓肠肌过载——你的踝跖屈肌群没有同时被训练好。改造速度上限:每 4–6 周提 3–5 spm,允许 12 个月以上的过渡期。</p>
+  </div>
+
+  <h3><span class="pre">1.8</span>跑姿稳定性——动力链的薄弱环节</h3>
+  <p class="lead">支撑相的几个 10–50 ms 内,身体要稳住整条动力链不让能量"漏掉"。常见的失稳信号在临床和实验室都已经被反复确认。</p>
+
+  <p><strong>① 对侧骨盆下垂 (Contralateral Pelvic Drop)</strong>——非支撑侧骨盆下沉 >5°。原因:臀中肌力量不足或激活延迟。后果:髋内收增加、膝外翻、足过度内旋。损伤映射:髂胫束综合征、髌骨外侧轨迹问题、跟腱内侧负荷增加。</p>
+
+  <p><strong>② 膝外翻 (Dynamic Knee Valgus)</strong>——支撑相中膝盖向身体中线塌陷,股骨内旋 + 胫骨外旋。在 LR 期就开始,中支撑达峰值。这是<em>多关节代偿</em>:臀中肌弱 + 内收肌紧 + 髋外旋肌弱 + 足过度内旋,几乎都可能引发它。</p>
+
+  <p><strong>③ 过度内旋 (Overpronation)</strong>——足在 LR 期向内旋转的角度过大(>15° 距下关节内旋)。注意:正常跑步本来就有 5–10° 内旋,这是吸收冲击的机制,不需要消除。"过度"是个临床判断,不是绝对量。</p>
+
+  <p><strong>④ 躯干前倾不足 / 过度</strong>——理想躯干相对垂直线前倾 5–10°,前倾过少 (≤2°) 跑得"后坐"、推进受限;前倾过多 (>15°) 重心被甩在腿前方,腰椎和臀肌负荷上升。</p>
+
+  <p><strong>⑤ 着地点过远 (Overstride)</strong>——脚触地点距离 COM 水平投影 >15 cm。Overstride 是<em>制动冲量</em>的几何来源,后果是每一步都在踩刹车。检测:从侧面看,触地瞬间小腿应近似垂直(胫骨角 -2° 至 +5°),小腿前伸超过 10° 就是 overstride。</p>
+
+  <h3><span class="pre">1.9</span>上肢摆动——角动量守恒的代价</h3>
+  <p class="lead">很多跑者把"手臂摆动"当成节奏伴奏。它其实是一个隐藏的力学支点——没有它,你跑得会更累。</p>
+
+  <p>身体在跑步中维持<em>沿垂直轴的总角动量 ≈ 0</em>(否则会原地转圈)。下肢每一步都在产生不为零的角动量(右腿前摆产生顺时针,左腿前摆产生逆时针),如果不让上肢反向摆动来抵消,胸廓必须主动反旋,这就需要竖脊肌、腹斜肌做额外的离心-向心交替工作。</p>
+
+  <p>2014 年 Arellano & Kram 在 J Exp Biol 的经典实验对比了四种跑姿:正常摆臂、双手抱头、双手背后、双手胸前,在跑步机上测耗氧。结果:相对正常摆臂,抱头多耗 3%,胸前多耗 9%,背后多耗 13% 的代谢能。手臂摆动节省的能量,大于手臂本身摆动的代谢成本——它是<em>净能量节约器</em>。</p>
+
+  <p>实操要点:</p>
+  <ul>
+    <li>手臂前后摆,不要横摆过中线(横摆增加水平面角动量,加剧躯干扭转)</li>
+    <li>肘屈约 90°,与髋部摆动反相</li>
+    <li>肩部放松,不要耸肩——耸肩浪费颈背肌群代谢</li>
+    <li>手不要握拳——握拳激活前臂屈肌增加上肢代谢约 1%</li>
+  </ul>
+
+  <h3><span class="pre">1.10</span>跑步效率随速度的 U 形曲线</h3>
+  <p class="lead">效率在生理学上有两个相关但不同的定义:经济性 (running economy) 和效率 (efficiency)。前者是耗氧速率,后者是机械功 / 代谢功。本节聚焦运动学层面的"自选配速"现象。</p>
+
+  <p>当跑者被允许自由选择配速时,他们倾向选定一个让单位距离能耗 (kcal/km) 最低的速度。这个<em>最经济配速</em> (energetically optimal speed) 通常在 4.0–5.0 m/s (约 3'20"–4'10"/km) 之间,因人而异。低于这个速度时,腾空相缩短不充分、肌腱储能效率下降;高于这个速度,空气阻力、机械成本快速上升。横轴是速度、纵轴是 ml O₂/kg/km,曲线呈现<em>U 形</em>,最低点就是最经济配速。</p>
+
+  <p>有意思的是,人类的<em>自选步频</em>也是同样的 U 形——给定速度下,主动加 10 spm 或减 10 spm,代谢成本都会上升,但增加比减少更明显。这是<em>大脑自适应优化</em>的结果。但有一个例外:业余跑者的自选步频普遍偏低,这不是大脑在"最优化",而是缺乏弹性肌腱适应、肌肉力量不足、动力链稳定性差导致大脑找到的局部最优,而非全局最优。<strong>训练让你的最优解向更高步频迁移</strong>。</p>
+
+  <div class="callout note">
+    <div class="label">本章数学模型小结</div>
+    <p><em>步态周期:</em> T = 60 / SPM × 2 秒/单脚周期(180 spm → T ≈ 0.67 s,支撑 ~270 ms,腾空 ~70 ms)</p>
+    <p><em>速度:</em> v = (步频 × 步幅) / 2 = SPM × SL / 120 (m/s)</p>
+    <p><em>占空比:</em> DF = GCT / T,跑步 DF<0.5,DF→0 是冲刺极限</p>
+    <p><em>腿刚度:</em> k_leg = F_peak / ΔL_leg,人类典型 10–30 kN/m</p>
+    <p><em>垂直刚度:</em> k_vert = F_peak / Δy_COM,典型 25–60 kN/m</p>
+    <p><em>关节角度:</em> 髋 -10° → +35°(伸-屈),膝 5° → 110°(伸-屈),踝 -25° → +15°(跖-背)</p>
+    <p>这一组方程定义了"跑步"作为一个数学对象。下一章 (Ch2),我们把"力"装进这套几何里。</p>
+  </div>
+</div>
+
+
+  <!-- 试点反馈区 -->
+  <div class="callout note" style="margin-top: 56px;">
+    <div class="label">试点 · 反馈点</div>
+    <p>这是 Newsprint 浅色风格在长文阅读场景下的试点。如果你读完这章感觉<em>不疲劳、字号舒适、节奏好</em>,那我们可以把全 12 章迁移到这个风格。如果有任何不适(刺眼/小/拥挤/对比度问题),告诉我具体哪里。</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    白笑研究报告库 · 第 01 期 · 2026 年 5 月 22 日<br>
+    Newsprint 风格试点 · 第 01 章<br>
+    <a href="https://baixiao8.github.io/studies/">baixiao8.github.io / studies</a>
+  </div>
+
+</main>
+
+</body>
+</html>
