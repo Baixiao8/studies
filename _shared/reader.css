@@ -670,9 +670,11 @@
   margin-left: 6px;
 }
 
-/* ─── 移动端响应式 ───────────────────────────────────────────── */
+/* ============================================================ */
+/* 移动端 · 单行控制条 + 二级 Sheet 重新设计(v5.1)              */
+/* ============================================================ */
 @media (max-width: 768px) {
-  /* 触发按钮:挪到底部居中 + 缩小一点 */
+  /* 触发按钮:缩小,避让 Safari nav */
   .reader-trigger {
     bottom: 18px;
     right: 18px;
@@ -681,16 +683,38 @@
   }
   .reader-trigger .reader-trigger-label { display: none; }
 
-  /* 控制条:移到底部 */
-  .reader-overlay.open { flex-direction: column-reverse; }
+  /* Overlay:flex 列布局,内容区在上,控制条在下,sheet 浮层在上 */
+  .reader-overlay.open { flex-direction: column; }
+
+  /* 内容区先占主空间,paddingBottom 留给底部控制条 */
+  .reader-content {
+    flex: 1;
+    padding: 16px 18px 90px;
+  }
+  .reader-content h2 { font-size: calc(var(--r-font-size) * 1.5); }
+  .reader-content h3 { font-size: calc(var(--r-font-size) * 1.25); margin-top: 32px; }
+
+  /* 字号自适应小一档 */
+  .reader-overlay[data-size="S"] { --r-font-size: 16px; }
+  .reader-overlay[data-size="M"] { --r-font-size: 18px; }
+  .reader-overlay[data-size="L"] { --r-font-size: 21px; }
+  .reader-overlay[data-size="XL"] { --r-font-size: 25px; }
+
+  /* 控制条:底部固定 + 单行 + 紧凑 */
   .reader-controls {
-    position: sticky;
+    position: fixed;
     top: auto;
+    left: 0;
+    right: 0;
     bottom: 0;
     border-bottom: none;
     border-top: 1px solid var(--r-line-soft);
-    padding: 12px 14px max(12px, env(safe-area-inset-bottom));
+    padding: 8px 12px max(8px, env(safe-area-inset-bottom));
     gap: 4px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    overflow: visible;
+    z-index: 50;
   }
   .reader-controls .group {
     gap: 3px;
@@ -702,37 +726,29 @@
   }
   .reader-controls button,
   .reader-controls .reader-select-wrap {
-    padding: 8px 10px;
+    padding: 7px 9px;
     font-size: 12px;
-    min-height: 40px;
+    min-height: 38px;
   }
   .reader-controls .reader-play {
-    width: 48px;
-    height: 48px;
-    font-size: 18px;
-  }
-  .reader-controls .reader-close {
-    margin-left: auto;
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
   }
 
-  /* 控制条分两行(主操作 + 设置) */
-  .reader-controls {
-    flex-wrap: wrap;
-    justify-content: center;
+  /* 移动端 · 默认隐藏二级控件(只显示 prev/play/next + speed + ⚙ + ✕) */
+  .reader-controls .mobile-secondary,
+  .reader-controls .reader-theme-group,
+  .reader-controls .reader-select-wrap.voice-select-wrap,
+  .reader-controls .reader-sleep-group,
+  .reader-controls .reader-font-group,
+  .reader-controls .reader-chapter-wrap,
+  .reader-controls .reader-lh-btn {
+    display: none !important;
   }
 
-  /* 字号自适应小一档 */
-  .reader-overlay[data-size="S"] { --r-font-size: 16px; }
-  .reader-overlay[data-size="M"] { --r-font-size: 18px; }
-  .reader-overlay[data-size="L"] { --r-font-size: 21px; }
-  .reader-overlay[data-size="XL"] { --r-font-size: 25px; }
-
-  /* 内容区移除大边距 */
-  .reader-content {
-    padding: 28px 18px 30px;
-  }
-  .reader-content h2 { font-size: calc(var(--r-font-size) * 1.5); }
-  .reader-content h3 { font-size: calc(var(--r-font-size) * 1.25); margin-top: 36px; }
+  /* 移动端 · 显示 ⚙ 设置按钮 */
+  .reader-settings-btn { display: flex !important; }
 
   /* Mini player */
   .reader-mini {
@@ -742,18 +758,174 @@
     transform: none;
     min-width: 0;
   }
-
-  /* 触发按钮在 mini player 显示时让位 */
   .reader-mini.open ~ .reader-trigger {
     bottom: calc(80px + env(safe-area-inset-bottom));
   }
 }
 
-/* ─── 极小屏(<420px) ──────────────────────────────────────────── */
+/* 桌面端 · 默认隐藏 ⚙ 按钮(那是移动端入口) */
+.reader-settings-btn { display: none; }
+
+/* ─── 设置 Sheet(移动端二级菜单 / 从底部弹起)─────────────── */
+.reader-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  background: var(--r-bg);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.18);
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(.22,.61,.36,1);
+  padding: 8px 0 max(20px, env(safe-area-inset-bottom));
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.reader-sheet.open { transform: translateY(0); }
+.reader-sheet .sheet-handle {
+  width: 38px;
+  height: 4px;
+  background: var(--r-ink-faint);
+  border-radius: 4px;
+  margin: 0 auto 18px;
+  opacity: 0.6;
+}
+.reader-sheet .sheet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--r-line-soft);
+  font-size: 14px;
+}
+.reader-sheet .sheet-row:last-child { border-bottom: none; }
+.reader-sheet .sheet-row-label {
+  font-weight: 500;
+  color: var(--r-ink);
+  font-size: 14.5px;
+}
+.reader-sheet .sheet-row-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reader-sheet .sheet-pill {
+  background: var(--r-btn-bg);
+  color: var(--r-ink);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  cursor: pointer;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reader-sheet .sheet-pill.active {
+  background: var(--r-accent);
+  color: var(--r-bg);
+}
+.reader-sheet select {
+  background: var(--r-btn-bg);
+  color: var(--r-ink);
+  border: none;
+  padding: 10px 36px 10px 14px;
+  border-radius: 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  min-width: 130px;
+}
+.reader-sheet .sheet-row-control .sheet-pills {
+  display: flex;
+  gap: 6px;
+}
+.reader-sheet .sheet-row-control .theme-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.reader-sheet .sheet-row-control .theme-circle.active {
+  border-color: var(--r-accent);
+  box-shadow: 0 0 0 2px var(--r-bg), 0 0 0 4px var(--r-accent);
+}
+.reader-sheet .sheet-row-control .theme-circle[data-t="paper"] { background: #f0ebdd; border-color: #c4bca4; }
+.reader-sheet .sheet-row-control .theme-circle[data-t="dark"] { background: #1f1f1b; }
+.reader-sheet .sheet-row-control .theme-circle[data-t="green"] { background: #1c2e1f; }
+
+/* Sheet 遮罩 */
+.reader-sheet-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 89;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s;
+}
+.reader-sheet-mask.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─── iOS 提示 · 从 4 行横幅改为 Toast 单行 ────────────────────── */
+.reader-overlay .reader-ios-warning {
+  display: none;
+}
+.reader-ios-toast {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  z-index: 70;
+  background: rgba(31, 31, 27, 0.92);
+  color: #f0ebdd;
+  padding: 10px 16px;
+  border-radius: 22px;
+  font-size: 12.5px;
+  font-family: "PingFang SC", sans-serif;
+  max-width: calc(100vw - 32px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform 0.32s cubic-bezier(.22,.61,.36,1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+.reader-ios-toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+.reader-ios-toast .close-x {
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: inherit;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── 极小屏(<420px) · 进一步压缩 ─────────────────────────── */
 @media (max-width: 420px) {
-  .reader-controls .reader-section-label,
-  .reader-controls .reader-rate-label { display: none; }
-  .reader-controls button { padding: 8px 8px; }
+  .reader-controls button { padding: 7px 7px; }
+  .reader-controls .reader-play { width: 40px; height: 40px; }
+  .reader-controls .reader-select-wrap select { padding: 7px 24px 7px 10px; font-size: 12px; }
 }
 
 /* ─── Reader 打开时隐藏页面原内容滚动 ──────────────────────── */

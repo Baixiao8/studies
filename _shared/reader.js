@@ -377,9 +377,15 @@
   Reader.prototype._init = function () {
     this._injectTrigger();
     this._bindShortcuts();
-    this._estimateListenTime();
     this._setupMediaSession();
     this._handleHashSegmentNav();
+    // 听书时长估算:遍历 12 章字数有开销,异步到 idle 时间,不阻塞首屏交互
+    var self = this;
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(function () { self._estimateListenTime(); }, { timeout: 3000 });
+    } else {
+      setTimeout(function () { self._estimateListenTime(); }, 800);
+    }
   };
 
   /* ─── 触发按钮 ────────────────────────────────────────────── */
@@ -449,44 +455,126 @@
   };
 
   /* ─── 打开 / 关闭 ──────────────────────────────────────────── */
+  // 渐进式打开:① 立即骨架 paint ② 下一帧算 chunks ③ 再下一帧填内容
+  // 用户感知"瞬间响应",实际重活分摊到 3 帧(每帧 16ms 内不阻塞)
   Reader.prototype.open = function (opts) {
     if (this.isOpen) return;
+    var self = this;
+    this.scrollLockTop = window.scrollY;
     var chapter = (opts && opts.chapter) || this._detectVisibleChapter();
     if (!chapter) return;
-    this.chunks = extractChunks(chapter);
-    this.allChunks = this._buildAllChunks();
-    if (this.chunks.length === 0) {
-      console.warn('[Reader] 当前章节无可读段落');
-      return;
-    }
-    this._renderOverlay(chapter);
-    this._applyConfig();
-    this._hideMini();
-    this.scrollLockTop = window.scrollY;
+
+    // ① 立即:锁滚动 + 显示空骨架(用户感知瞬间响应)
     document.body.classList.add('reader-open');
     document.body.style.top = -this.scrollLockTop + 'px';
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
+    this._renderSkeleton();
     this.isOpen = true;
+    this._hideMini();
 
-    // 从上次位置恢复
-    var prog = getProgress();
-    if (prog && prog.chunkId) {
-      var idx = this.chunks.findIndex(function (c) { return c.id === prog.chunkId; });
-      if (idx >= 0) this._scrollToChunk(idx, false);
-    }
+    // ② 下一帧:计算 chunks + 起始段(让骨架先 paint)
+    requestAnimationFrame(function () {
+      // extractChunks 给原节点加 data-reader-id —— 必须在 _detectVisibleChunkIdx 之前
+      self.chunks = extractChunks(chapter);
+      self.allChunks = null;
+      if (self.chunks.length === 0) {
+        console.warn('[Reader] 当前章节无可读段落');
+        self.close();
+        return;
+      }
+
+      // 计算起始段落 · 优先级:opts.startId > 视口可视段 > localStorage > 0
+      var startIdx = -1;
+      if (opts && opts.startId) {
+        startIdx = self.chunks.findIndex(function (c) { return c.id === opts.startId; });
+      }
+      if (startIdx < 0) {
+        startIdx = self._detectVisibleChunkIdx(chapter);
+      }
+      if (startIdx < 0) {
+        var prog = getProgress();
+        if (prog && prog.chapter === chapter.id && (Date.now() - prog.ts) < 86400000) {
+          startIdx = self.chunks.findIndex(function (c) { return c.id === prog.chunkId; });
+        }
+      }
+      if (startIdx < 0) startIdx = 0;
+      self.currentIdx = startIdx;
+
+      // ③ 再下一帧:填充内容 + 高亮(让 chunks 算完 paint 一次再做重活)
+      requestAnimationFrame(function () {
+        self._renderOverlay(chapter);
+        self._applyConfig();
+        requestAnimationFrame(function () {
+          self._highlightChunk(startIdx);
+        });
+      });
+    });
   };
 
+  // 立即显示骨架(空 overlay + 控制条)给用户"已响应"反馈
+  Reader.prototype._renderSkeleton = function () {
+    if (this.overlay) return;
+    var overlay = el('div', {
+      class: 'reader-overlay',
+      'data-theme': this.config.theme,
+      'data-size': this.config.fontSize,
+      'data-lh': this.config.lineHeight
+    });
+    // 极简骨架:控制条占位 + 转圈
+    overlay.appendChild(el('div', {
+      class: 'reader-controls',
+      style: { height: '56px' }
+    }));
+    overlay.appendChild(el('div', {
+      class: 'reader-content',
+      style: { textAlign: 'center', paddingTop: '120px', opacity: '0.5' }
+    }, '正在加载...'));
+    document.body.appendChild(overlay);
+    this.overlay = overlay;
+    requestAnimationFrame(function () { overlay.classList.add('open'); });
+  };
+
+  // 检测原始页面视口内最居中的可读段落
+  // 注意:必须在 extractChunks() 之后调用(node 才有 data-reader-id)
+  Reader.prototype._detectVisibleChunkIdx = function (chapter) {
+    var vh = window.innerHeight;
+    var center = vh / 2;
+    var best = -1;
+    var bestDist = Infinity;
+    for (var i = 0; i < this.chunks.length; i++) {
+      var node = this.chunks[i].node;
+      if (!node || !node.getBoundingClientRect) continue;
+      var r = node.getBoundingClientRect();
+      // 完全在视口外的跳过
+      if (r.bottom < 0 || r.top > vh) continue;
+      // 太小的元素跳过(如空段)
+      if (r.height < 4) continue;
+      var nodeCenter = r.top + r.height / 2;
+      var dist = Math.abs(nodeCenter - center);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    }
+    return best;
+  };
+
+  // 跨章 chunks · lazy 构建(仅 _onChapterEnd 需要时调用)
   Reader.prototype._buildAllChunks = function () {
+    if (this.allChunks) return this.allChunks;
     var all = [];
     $$('.chapter').forEach(function (ch) {
       all = all.concat(extractChunks(ch));
     });
+    this.allChunks = all;
     return all;
   };
 
   Reader.prototype.close = function () {
     if (!this.isOpen) return;
+    // 关 sheet
+    this._closeSheet();
     // 暂停 TTS,但保留进度(可能用 mini player)
     var wasPlaying = this.isPlaying;
     if (this.tts) this.tts.pause();
@@ -520,13 +608,9 @@
     var content = el('div', { class: 'reader-content' });
     var inner = el('div', { class: 'reader-content-inner' });
 
-    // iOS 锁屏提示
+    // iOS 锁屏提示:第一次显示 toast,5 秒后自动消失,用户关闭后永久不再
     if (isIOS()) {
-      inner.appendChild(el('div', { class: 'reader-ios-warning' }, [
-        document.createTextNode('iOS 提示:屏幕锁定 30 秒后系统可能自动暂停朗读。'),
-        document.createElement('br'),
-        document.createTextNode('建议保持屏幕亮,或将设备「自动锁定」设置为更长。'),
-      ]));
+      this._showIOSToastIfNeeded();
     }
 
     // 克隆章节内容到 overlay
@@ -808,27 +892,262 @@
         sleepMenu.classList.remove('open');
       }
     });
-    var sleepWrap = el('div', { style: { position: 'relative' } }, [sleepBtn, sleepMenu]);
+    var sleepWrap = el('div', {
+      class: 'reader-sleep-group',
+      style: { position: 'relative' }
+    }, [sleepBtn, sleepMenu]);
+
+    // 设置按钮(移动端入口,桌面隐藏)
+    var settingsBtn = btn('⚙', function () { self._toggleSheet(); }, {
+      title: '更多设置', class: 'reader-settings-btn'
+    });
 
     // 关闭按钮
     var closeBtn = btn('✕', function () { self.close(); }, {
       title: '关闭 (ESC)', class: 'reader-close'
     });
 
+    // 给 chSel / fontDown/Up / lhBtn 加 mobile-hidden class(CSS 会处理隐藏)
+    chSel.classList.add('reader-chapter-wrap');
+    var fontGroup = el('div', { class: 'group reader-font-group' }, [fontDown, fontUp]);
+    lhBtn.classList.add('reader-lh-btn');
+    voiceSel.classList.add('voice-select-wrap');
+
     // 组装控制条
+    // - 桌面端:全部显示
+    // - 移动端:只显示 prev/play/next + speed + ⚙ + ✕(其他在 sheet 里)
     var controls = el('div', { class: 'reader-controls' }, [
       el('div', { class: 'group' }, [prevBtn, playBtn, nextBtn]),
       el('div', { class: 'group' }, [rateSel]),
-      el('div', { class: 'group' }, [chSel]),
-      el('div', { class: 'group' }, [fontDown, fontUp, lhBtn]),
-      el('div', { class: 'group' }, [themeGroup]),
-      el('div', { class: 'group' }, [voiceSel]),
-      el('div', { class: 'group' }, [sleepWrap]),
+      el('div', { class: 'group mobile-secondary' }, [chSel]),
+      fontGroup,
+      el('div', { class: 'group mobile-secondary' }, [lhBtn]),
+      el('div', { class: 'group mobile-secondary' }, [themeGroup]),
+      el('div', { class: 'group mobile-secondary' }, [voiceSel]),
+      el('div', { class: 'group mobile-secondary' }, [sleepWrap]),
       el('div', { class: 'spacer' }),
-      el('div', { class: 'group' }, [closeBtn])
+      el('div', { class: 'group' }, [settingsBtn, closeBtn])
     ]);
 
     return controls;
+  };
+
+  /* ─── iOS 提示 Toast(轻量,可关闭,可记忆) ────────────────── */
+  Reader.prototype._showIOSToastIfNeeded = function () {
+    try {
+      if (localStorage.getItem('studies-reader-ios-toast-dismissed') === '1') return;
+    } catch (e) {}
+    var self = this;
+    if (this.iosToast) return;
+    var t = el('div', { class: 'reader-ios-toast' }, [
+      document.createTextNode('💡 iOS 建议保持屏幕亮,避免朗读中断'),
+    ]);
+    var closeBtn = el('button', {
+      class: 'close-x',
+      onclick: function () {
+        try { localStorage.setItem('studies-reader-ios-toast-dismissed', '1'); } catch (e) {}
+        t.classList.remove('show');
+        setTimeout(function () { if (t.parentElement) t.remove(); }, 350);
+      }
+    }, '✕');
+    t.appendChild(closeBtn);
+    document.body.appendChild(t);
+    this.iosToast = t;
+    requestAnimationFrame(function () { t.classList.add('show'); });
+    // 5 秒后自动消失(用户没点关闭按钮的话)
+    setTimeout(function () {
+      if (t.parentElement && t.classList.contains('show')) {
+        t.classList.remove('show');
+        setTimeout(function () { if (t.parentElement) t.remove(); }, 350);
+      }
+    }, 5000);
+  };
+
+  /* ─── 设置 Sheet(移动端二级菜单) ─────────────────────────── */
+  Reader.prototype._toggleSheet = function () {
+    if (!this.sheet) {
+      this._buildSheet();
+    }
+    var isOpen = this.sheet.classList.contains('open');
+    if (isOpen) this._closeSheet();
+    else this._openSheet();
+  };
+
+  Reader.prototype._openSheet = function () {
+    if (!this.sheet) this._buildSheet();
+    this.sheetMask.classList.add('open');
+    this.sheet.classList.add('open');
+  };
+
+  Reader.prototype._closeSheet = function () {
+    if (this.sheet) this.sheet.classList.remove('open');
+    if (this.sheetMask) this.sheetMask.classList.remove('open');
+  };
+
+  Reader.prototype._buildSheet = function () {
+    var self = this;
+    var mask = el('div', {
+      class: 'reader-sheet-mask',
+      onclick: function () { self._closeSheet(); }
+    });
+    var sheet = el('div', { class: 'reader-sheet' });
+    sheet.appendChild(el('div', { class: 'sheet-handle' }));
+
+    // 行 1 · 章节跳转
+    var chapters = $$('.chapter');
+    var chOpts = chapters.map(function (ch, i) {
+      var h2 = ch.querySelector('h2');
+      var t = h2 ? h2.textContent.replace(/🎧.*/, '').trim() : '章节 ' + (i + 1);
+      if (t.length > 14) t = t.slice(0, 14) + '…';
+      return '<option value="' + (ch.id || 'chx-' + i) + '">' + (i + 1) + '. ' + t + '</option>';
+    }).join('');
+    var chSel2 = el('select');
+    chSel2.innerHTML = chOpts;
+    var curCh = this.chunks[0] && this.chunks[0].chapter;
+    if (curCh && curCh.id) chSel2.value = curCh.id;
+    chSel2.addEventListener('change', function (e) {
+      var ch = document.getElementById(e.target.value);
+      if (ch) {
+        self._closeSheet();
+        self.close();
+        setTimeout(function () { self.open({ chapter: ch }); }, 100);
+      }
+    });
+    sheet.appendChild(el('div', { class: 'sheet-row' }, [
+      el('div', { class: 'sheet-row-label' }, '章节'),
+      el('div', { class: 'sheet-row-control' }, [chSel2])
+    ]));
+
+    // 行 2 · 主题
+    var themeRow = el('div', { class: 'sheet-row-control' });
+    var pills = el('div', { class: 'sheet-pills' });
+    THEMES.forEach(function (t) {
+      var b = el('button', {
+        class: 'theme-circle' + (self.config.theme === t ? ' active' : ''),
+        'data-t': t,
+        title: '主题 · ' + t,
+        onclick: function () {
+          self.config.theme = t;
+          setConfig({ theme: t });
+          self._applyConfig();
+          $$('.theme-circle', sheet).forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+        }
+      });
+      pills.appendChild(b);
+    });
+    themeRow.appendChild(pills);
+    sheet.appendChild(el('div', { class: 'sheet-row' }, [
+      el('div', { class: 'sheet-row-label' }, '主题'),
+      themeRow
+    ]));
+
+    // 行 3 · 字号
+    var fontRow = el('div', { class: 'sheet-row-control' });
+    var fontPills = el('div', { class: 'sheet-pills' });
+    FONT_SIZES.forEach(function (s) {
+      var b = el('button', {
+        class: 'sheet-pill' + (self.config.fontSize === s ? ' active' : ''),
+        onclick: function () {
+          self.config.fontSize = s;
+          setConfig({ fontSize: s });
+          self._applyConfig();
+          $$('.sheet-pill', fontPills).forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+        }
+      }, s);
+      fontPills.appendChild(b);
+    });
+    fontRow.appendChild(fontPills);
+    sheet.appendChild(el('div', { class: 'sheet-row' }, [
+      el('div', { class: 'sheet-row-label' }, '字号'),
+      fontRow
+    ]));
+
+    // 行 4 · 行距
+    var lhRow = el('div', { class: 'sheet-row-control' });
+    var lhPills = el('div', { class: 'sheet-pills' });
+    var lhLabels = { tight: '紧', normal: '中', loose: '松' };
+    LINE_HEIGHTS.forEach(function (lh) {
+      var b = el('button', {
+        class: 'sheet-pill' + (self.config.lineHeight === lh ? ' active' : ''),
+        onclick: function () {
+          self.config.lineHeight = lh;
+          setConfig({ lineHeight: lh });
+          self._applyConfig();
+          $$('.sheet-pill', lhPills).forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+        }
+      }, lhLabels[lh]);
+      lhPills.appendChild(b);
+    });
+    lhRow.appendChild(lhPills);
+    sheet.appendChild(el('div', { class: 'sheet-row' }, [
+      el('div', { class: 'sheet-row-label' }, '行距'),
+      lhRow
+    ]));
+
+    // 行 5 · 音色(如有)
+    var voices = this.tts.getChineseVoices();
+    if (voices.length > 0) {
+      var vSel = el('select');
+      var vOpts = '<option value="">系统默认</option>' + voices.map(function (v) {
+        var sel = self.config.voice === v.name ? ' selected' : '';
+        return '<option value="' + v.name + '"' + sel + '>' + v.name.slice(0, 18) + '</option>';
+      }).join('');
+      vSel.innerHTML = vOpts;
+      vSel.addEventListener('change', function (e) {
+        self.config.voice = e.target.value;
+        setConfig({ voice: e.target.value });
+        if (self.isPlaying) self._speakCurrent();
+      });
+      sheet.appendChild(el('div', { class: 'sheet-row' }, [
+        el('div', { class: 'sheet-row-label' }, '音色'),
+        el('div', { class: 'sheet-row-control' }, [vSel])
+      ]));
+    }
+
+    // 行 6 · 定时关闭
+    var sleepRow = el('div', { class: 'sheet-row-control' });
+    var sleepPills = el('div', { class: 'sheet-pills' });
+    SLEEP_OPTIONS.forEach(function (opt) {
+      var b = el('button', {
+        class: 'sheet-pill' + (self.config.sleepTimer === opt.value ? ' active' : ''),
+        onclick: function () {
+          self._setSleepTimer(opt.value);
+          $$('.sheet-pill', sleepPills).forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+        }
+      }, opt.label);
+      sleepPills.appendChild(b);
+    });
+    sleepRow.appendChild(sleepPills);
+    sheet.appendChild(el('div', { class: 'sheet-row' }, [
+      el('div', { class: 'sheet-row-label' }, '定时'),
+      sleepRow
+    ]));
+
+    // 行 7 · 自动接下章 toggle
+    var autoRow = el('div', { class: 'sheet-row-control' });
+    var autoBtn = el('button', {
+      class: 'sheet-pill' + (this.config.autoNextChapter ? ' active' : ''),
+      onclick: function () {
+        self.config.autoNextChapter = !self.config.autoNextChapter;
+        setConfig({ autoNextChapter: self.config.autoNextChapter });
+        autoBtn.classList.toggle('active', self.config.autoNextChapter);
+        autoBtn.textContent = self.config.autoNextChapter ? '开启' : '关闭';
+      }
+    }, this.config.autoNextChapter ? '开启' : '关闭');
+    autoRow.appendChild(autoBtn);
+    sheet.appendChild(el('div', { class: 'sheet-row' }, [
+      el('div', { class: 'sheet-row-label' }, '章末自动接下章'),
+      autoRow
+    ]));
+
+    document.body.appendChild(mask);
+    document.body.appendChild(sheet);
+    this.sheet = sheet;
+    this.sheetMask = mask;
   };
 
   /* ─── 应用配置 ────────────────────────────────────────────── */
