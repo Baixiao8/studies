@@ -363,6 +363,14 @@
     this.sleepTicker = null;
     this.scrollLockTop = 0;
     this.miniBeforeScrollY = 0;
+
+    // v6 · 音频模式(高音质 Azure Neural,优先于浏览器原生 TTS)
+    this.audioEl = null;
+    this.audioMode = false;            // 当前是否使用音频模式
+    this.audioAvailable = false;       // 当前章是否有 audio 可用
+    this.audioSegments = null;         // 段落 ID → 时间秒数 映射
+    this.audioChapterId = null;
+    this.audioLastSegIdx = -1;
   }
 
   Reader.prototype.init = function () {
@@ -482,6 +490,22 @@
         console.warn('[Reader] 当前章节无可读段落');
         self.close();
         return;
+      }
+
+      // 异步检测 + 加载音频(不阻塞)· 加载完后启用切换按钮
+      var chapterId = chapter.id;
+      if (chapterId) {
+        self._loadAudio(chapterId).then(function (ok) {
+          self.audioAvailable = !!ok;
+          // 首次访问默认开启音频(如果可用)
+          if (ok && self.config.audioMode !== false) {
+            self.audioMode = true;
+          }
+          self._updateAudioToggle();
+          if (self.audioEl) {
+            self.audioEl.playbackRate = self.config.rate || 1.0;
+          }
+        });
       }
 
       // 计算起始段落 · 优先级:opts.startId > 视口可视段 > localStorage > 0
@@ -799,8 +823,10 @@
       var v = parseFloat(e.target.value);
       self.config.rate = v;
       setConfig({ rate: v });
-      // 如果正在播,重启当前段以新速度
-      if (self.isPlaying) self._speakCurrent();
+      // 音频模式:直接调 playbackRate(无缝切换)
+      if (self.audioEl) self.audioEl.playbackRate = v;
+      // Web TTS:正在播则重启当前段以新速度
+      if (self.isPlaying && !self.audioMode) self._speakCurrent();
     });
 
     // 章节 select
@@ -923,6 +949,13 @@
       title: '更多设置', class: 'reader-settings-btn'
     });
 
+    // 音频模式切换(默认隐藏,有音频时显示)
+    var audioToggleBtn = btn('🤖 标准', function () { self._toggleAudioMode(); }, {
+      title: '切换 Web TTS / 高音质录音', class: 'reader-audio-toggle'
+    });
+    audioToggleBtn.style.display = 'none';
+    this.audioToggleBtn = audioToggleBtn;
+
     // 关闭按钮
     var closeBtn = btn('✕', function () { self.close(); }, {
       title: '关闭 (ESC)', class: 'reader-close'
@@ -936,10 +969,11 @@
 
     // 组装控制条
     // - 桌面端:全部显示
-    // - 移动端:只显示 prev/play/next + speed + ⚙ + ✕(其他在 sheet 里)
+    // - 移动端:只显示 prev/play/next + speed + 音频切换 + ⚙ + ✕(其他在 sheet 里)
     var controls = el('div', { class: 'reader-controls' }, [
       el('div', { class: 'group' }, [prevBtn, playBtn, nextBtn]),
       el('div', { class: 'group' }, [rateSel]),
+      el('div', { class: 'group audio-toggle-group' }, [audioToggleBtn]),
       el('div', { class: 'group mobile-secondary' }, [chSel]),
       fontGroup,
       el('div', { class: 'group mobile-secondary' }, [lhBtn]),
@@ -1193,6 +1227,18 @@
 
   Reader.prototype.play = function () {
     if (this.currentIdx < 0) this.currentIdx = 0;
+    // 音频模式:走 <audio> 元素
+    if (this.audioMode && this.audioEl && this.audioSegments) {
+      var chunk = this.chunks[this.currentIdx];
+      if (chunk) {
+        this._playAudioFromSegment(chunk.id);
+        this.isPlaying = true;
+        this._updatePlayBtn();
+        this._updateMediaSession(chunk);
+        return;
+      }
+    }
+    // Web TTS 模式
     this._speakCurrent();
   };
 
@@ -1205,6 +1251,20 @@
     var chunk = this.chunks[this.currentIdx];
     if (!chunk) return;
     this._highlightChunk(this.currentIdx);
+    // 音频模式分支
+    if (this.audioMode && this.audioEl && this.audioSegments) {
+      this._playAudioFromSegment(chunk.id);
+      this.isPlaying = true;
+      this._updatePlayBtn();
+      this._updateMediaSession(chunk);
+      saveProgressDebounced({
+        chunkId: chunk.id,
+        idx: this.currentIdx,
+        chapter: chunk.chapter && chunk.chapter.id
+      });
+      return;
+    }
+    // Web TTS 默认分支
     this.tts.onEndCb = function () { self._onChunkEnd(); };
     this.tts.onErrCb = function (e) {
       console.warn('[Reader TTS error]', e);
@@ -1269,6 +1329,9 @@
   };
 
   Reader.prototype.pause = function () {
+    if (this.audioMode && this.audioEl) {
+      this.audioEl.pause();
+    }
     this.tts.cancel();
     this.isPlaying = false;
     this._updatePlayBtn();
@@ -1470,6 +1533,158 @@
         }, 200);
       }
     }, 500);
+  };
+
+  /* ============================================================ */
+  /* 6.5 · 音频模式(v6:高音质 Azure Neural 预录音频)             */
+  /* ============================================================ */
+
+  // 检测当前章是否有可用音频
+  Reader.prototype._checkAudioAvailable = function (chapterId) {
+    if (!chapterId) return Promise.resolve(false);
+    var self = this;
+    var audioUrl = 'audio/' + chapterId + '.mp3';
+    var jsonUrl = 'audio/' + chapterId + '.json';
+    return fetch(jsonUrl, { method: 'HEAD' })
+      .then(function (res) { return res.ok; })
+      .catch(function () { return false; });
+  };
+
+  // 加载某章音频 + 段落映射
+  Reader.prototype._loadAudio = function (chapterId) {
+    var self = this;
+    if (this.audioChapterId === chapterId && this.audioEl) {
+      return Promise.resolve(true);
+    }
+    var audioUrl = 'audio/' + chapterId + '.mp3';
+    var jsonUrl = 'audio/' + chapterId + '.json';
+    return fetch(jsonUrl)
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data || !data.segments) return false;
+        self.audioSegments = data.segments;
+        self.audioChapterId = chapterId;
+        // 创建或重用 audio element
+        if (!self.audioEl) {
+          self.audioEl = new Audio();
+          self.audioEl.preload = 'metadata';
+          self._setupAudioListeners();
+        }
+        self.audioEl.src = audioUrl;
+        return true;
+      })
+      .catch(function () { return false; });
+  };
+
+  Reader.prototype._setupAudioListeners = function () {
+    var self = this;
+    var a = this.audioEl;
+    a.addEventListener('timeupdate', function () {
+      if (!self.audioMode || !self.audioSegments) return;
+      self._syncAudioSegmentHighlight();
+    });
+    a.addEventListener('ended', function () {
+      self.isPlaying = false;
+      self._updatePlayBtn();
+      self._onChapterEnd();
+    });
+    a.addEventListener('play', function () {
+      self.isPlaying = true;
+      self._updatePlayBtn();
+    });
+    a.addEventListener('pause', function () {
+      self.isPlaying = false;
+      self._updatePlayBtn();
+    });
+  };
+
+  // 根据 audio.currentTime 找到对应段落并高亮
+  Reader.prototype._syncAudioSegmentHighlight = function () {
+    if (!this.audioSegments || !this.audioEl) return;
+    var t = this.audioEl.currentTime;
+    // 二分查找最大的 start <= t 的 segment
+    var lo = 0, hi = this.audioSegments.length - 1, found = 0;
+    while (lo <= hi) {
+      var mid = (lo + hi) >> 1;
+      if (this.audioSegments[mid].start <= t) {
+        found = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    if (found === this.audioLastSegIdx) return;
+    this.audioLastSegIdx = found;
+    var segId = this.audioSegments[found].id;
+    // 找到 chunks 里相同 ID 的 chunk,高亮
+    var chunkIdx = this.chunks.findIndex(function (c) { return c.id === segId; });
+    if (chunkIdx >= 0) {
+      this.currentIdx = chunkIdx;
+      this._highlightChunk(chunkIdx);
+      saveProgressDebounced({
+        chunkId: segId,
+        idx: chunkIdx,
+        chapter: this.audioChapterId
+      });
+    }
+  };
+
+  // 用音频模式从指定段开始播放
+  Reader.prototype._playAudioFromSegment = function (segId) {
+    if (!this.audioEl || !this.audioSegments) return;
+    var seg = this.audioSegments.find(function (s) { return s.id === segId; });
+    if (seg) {
+      this.audioEl.currentTime = seg.start;
+    }
+    var self = this;
+    var p = this.audioEl.play();
+    if (p && p.catch) {
+      p.catch(function (err) {
+        console.warn('[Reader audio] play failed:', err);
+        // 自动降级到 Web TTS
+        self.audioMode = false;
+        self._updateAudioToggle();
+        self._speakCurrent();
+      });
+    }
+  };
+
+  Reader.prototype._pauseAudio = function () {
+    if (this.audioEl) this.audioEl.pause();
+  };
+
+  // 切换 Web TTS / 音频模式
+  Reader.prototype._toggleAudioMode = function () {
+    if (!this.audioAvailable) return;
+    var wasPlaying = this.isPlaying;
+    // 停止当前播放
+    if (this.audioMode) {
+      this._pauseAudio();
+    } else {
+      this.tts.cancel();
+    }
+    this.audioMode = !this.audioMode;
+    setConfig({ audioMode: this.audioMode });
+    this._updateAudioToggle();
+    if (wasPlaying) {
+      // 用新模式继续播
+      this.isPlaying = false;
+      this.play();
+    }
+  };
+
+  Reader.prototype._updateAudioToggle = function () {
+    if (!this.audioToggleBtn) return;
+    if (this.audioMode) {
+      this.audioToggleBtn.textContent = '🎙 高音质';
+      this.audioToggleBtn.classList.add('active');
+      this.audioToggleBtn.title = '当前:Azure Neural 录音 · 点切回 Web TTS';
+    } else {
+      this.audioToggleBtn.textContent = '🤖 标准';
+      this.audioToggleBtn.classList.remove('active');
+      this.audioToggleBtn.title = '当前:Web TTS · 点切高音质录音';
+    }
+    this.audioToggleBtn.style.display = this.audioAvailable ? '' : 'none';
   };
 
   /* ============================================================ */

@@ -349,6 +349,31 @@
   font-size: 14px;
 }
 
+/* 音频模式切换按钮 · v6 高音质模式标识 */
+.reader-audio-toggle {
+  background: var(--r-btn-bg);
+  color: var(--r-ink);
+  padding: 0 14px;
+  font-family: "PingFang SC", sans-serif;
+  font-size: 12.5px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.reader-audio-toggle:hover {
+  background: var(--r-btn-bg-hover);
+}
+.reader-audio-toggle.active {
+  background: var(--r-accent);
+  color: var(--r-bg);
+  border-color: var(--r-accent);
+}
+@media (max-width: 768px) {
+  .reader-audio-toggle {
+    padding: 0 10px;
+    font-size: 11.5px;
+  }
+}
+
 /* ─── 内容区 ───────────────────────────────────────────────── */
 .reader-content {
   flex: 1;

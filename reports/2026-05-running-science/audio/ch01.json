@@ -1,0 +1,985 @@
+{
+  "voice": "zh-CN-YunxiNeural",
+  "chapter": "ch01",
+  "duration_sec": 2647.27,
+  "segments": [
+    {
+      "id": "auto-0",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "每一步跑步都是一场约 0.7 秒内完成的力学剧场——七个相位..."
+    },
+    {
+      "id": "auto-1",
+      "tag": "p",
+      "start": 16.85,
+      "preview": "跑步不是\"快走\",它是一次相变——双脚同时离地的腾空相出现的..."
+    },
+    {
+      "id": "auto-2",
+      "tag": "p",
+      "start": 25.15,
+      "preview": "故事。 1976 年米兰大学的某个清晨,生理学家 Giova..."
+    },
+    {
+      "id": "auto-3",
+      "tag": "p",
+      "start": 50.88,
+      "preview": "那个清晨记录下来的曲线,在三十年后仍是所有跑步生物力学教科书..."
+    },
+    {
+      "id": "auto-4",
+      "tag": "h3",
+      "start": 81.53,
+      "preview": "小节。 1.1 从走路到跑步——一次步态的相变"
+    },
+    {
+      "id": "auto-5",
+      "tag": "p",
+      "start": 86.58,
+      "preview": "在所有连续可变化的运动状态里,从走到跑并不是一个量的过渡,而..."
+    },
+    {
+      "id": "auto-6",
+      "tag": "h4",
+      "start": 106.3,
+      "preview": "走路:钟摆式的能量交换"
+    },
+    {
+      "id": "auto-7",
+      "tag": "p",
+      "start": 109.47,
+      "preview": "走路的力学本质,是 钟摆式能量交换 :在每一步的迈出过程中,..."
+    },
+    {
+      "id": "auto-8",
+      "tag": "p",
+      "start": 122.94,
+      "preview": "当 COM 处在弧线最高点(中支撑期 midstance)时..."
+    },
+    {
+      "id": "auto-9",
+      "tag": "p",
+      "start": 138.86,
+      "preview": "Cavagna 在 1976 年用力台和运动捕捉证实:走路时..."
+    },
+    {
+      "id": "auto-10",
+      "tag": "h4",
+      "start": 160.2,
+      "preview": "跑步:弹簧式的能量储释"
+    },
+    {
+      "id": "auto-11",
+      "tag": "p",
+      "start": 163.61,
+      "preview": "跑步则完全不同。COM 在中支撑期处于 最低点 而不是最高点..."
+    },
+    {
+      "id": "auto-12",
+      "tag": "p",
+      "start": 183.61,
+      "preview": "原理:跑步时身体重心(COM)在中支撑期最低。 翻译: 你脚..."
+    },
+    {
+      "id": "auto-13",
+      "tag": "p",
+      "start": 206.82,
+      "preview": "势能与动能在同一相位 同步变化 ,而不是反向交换。能量的暂存..."
+    },
+    {
+      "id": "auto-14",
+      "tag": "p",
+      "start": 221.17,
+      "preview": "这个相变的标志性事件,是 双支撑期 (double supp..."
+    },
+    {
+      "id": "auto-15",
+      "tag": "p",
+      "start": 261.49,
+      "preview": "原理:腾空相 (flight phase) = 两脚同时离地..."
+    },
+    {
+      "id": "auto-16",
+      "tag": "p",
+      "start": 287.21,
+      "preview": "反共识。 把走路当成\"慢速的跑步\",在生物力学上是错的。走和..."
+    },
+    {
+      "id": "auto-17",
+      "tag": "h3",
+      "start": 317.05,
+      "preview": "小节。 1.2 完整步态周期——七个相位的精密时序"
+    },
+    {
+      "id": "auto-18",
+      "tag": "p",
+      "start": 322.45,
+      "preview": "国际公认的跑步步态周期 (gait cycle) 划分,通常..."
+    },
+    {
+      "id": "auto-19",
+      "tag": "p",
+      "start": 341.0,
+      "preview": "支撑期 (stance phase) 通常占整个周期的 35..."
+    },
+    {
+      "id": "auto-20",
+      "tag": "p",
+      "start": 368.4,
+      "preview": "以下是按支撑相 / 摆动相分层的七事件结构。这套术语源自 P..."
+    },
+    {
+      "id": "auto-21",
+      "tag": "h4",
+      "start": 379.86,
+      "preview": "支撑相 (Stance Phase, 0–40%)"
+    },
+    {
+      "id": "auto-22",
+      "tag": "p",
+      "start": 384.27,
+      "preview": "① Initial Contact (IC, 0%) ——初..."
+    },
+    {
+      "id": "auto-23",
+      "tag": "p",
+      "start": 408.42,
+      "preview": "② Loading Response (LR, 0–10%)..."
+    },
+    {
+      "id": "auto-24",
+      "tag": "p",
+      "start": 445.43,
+      "preview": "原理:七相位 IC / LR / MS / TS / PS ..."
+    },
+    {
+      "id": "auto-25",
+      "tag": "p",
+      "start": 472.33,
+      "preview": "③ Midstance (MS, 10–25%) ——中支撑..."
+    },
+    {
+      "id": "auto-26",
+      "tag": "p",
+      "start": 493.19,
+      "preview": "④ Terminal Stance (TS, 25–35%)..."
+    },
+    {
+      "id": "auto-27",
+      "tag": "p",
+      "start": 509.98,
+      "preview": "⑤ Pre-Swing / Toe-Off (PS, 35–..."
+    },
+    {
+      "id": "auto-28",
+      "tag": "h4",
+      "start": 531.33,
+      "preview": "摆动相 (Swing Phase, 40–100%)"
+    },
+    {
+      "id": "auto-29",
+      "tag": "p",
+      "start": 535.9,
+      "preview": "⑥ Initial Swing (ISw, 40–55%) ..."
+    },
+    {
+      "id": "auto-30",
+      "tag": "p",
+      "start": 563.42,
+      "preview": "⑦ Mid-Swing (MSw, 55–85%) ——中摆..."
+    },
+    {
+      "id": "auto-31",
+      "tag": "p",
+      "start": 579.23,
+      "preview": "⑧ Terminal Swing (TSw, 85–100%..."
+    },
+    {
+      "id": "auto-32",
+      "tag": "p",
+      "start": 599.33,
+      "preview": "设身处地。 你跑 180 spm,一只脚的完整周期是 667..."
+    },
+    {
+      "id": "auto-33",
+      "tag": "p",
+      "start": 606.0,
+      "preview": "0 ms · 触地 IC :你右脚刚碰到地面,踝背屈 5°,..."
+    },
+    {
+      "id": "auto-34",
+      "tag": "p",
+      "start": 625.09,
+      "preview": "50 ms · 灌入 LR :体重在 30 ms 内全部压到..."
+    },
+    {
+      "id": "auto-35",
+      "tag": "p",
+      "start": 645.99,
+      "preview": "140 ms · 弹簧底 MS :重心通过支撑腿正上方,腿被..."
+    },
+    {
+      "id": "auto-36",
+      "tag": "p",
+      "start": 660.34,
+      "preview": "280 ms · 推离 PS :跟腱回弹,踝跖屈到 -20°..."
+    },
+    {
+      "id": "auto-37",
+      "tag": "p",
+      "start": 670.64,
+      "preview": "340 ms · 飞 ISw :你完全悬空。右腿屈膝 110..."
+    },
+    {
+      "id": "auto-38",
+      "tag": "p",
+      "start": 682.74,
+      "preview": "600 ms · 刹车 TSw :右腿前甩到峰值,腘绳肌正以..."
+    },
+    {
+      "id": "auto-39",
+      "tag": "p",
+      "start": 695.15,
+      "preview": "667 ms · 再触地 :右脚再次着地,新一个周期开始。"
+    },
+    {
+      "id": "auto-40",
+      "tag": "p",
+      "start": 700.76,
+      "preview": "关键洞察 :全程 667 ms 里,真正\"产生推力\"的只有 ..."
+    },
+    {
+      "id": "auto-41",
+      "tag": "p",
+      "start": 720.46,
+      "preview": "不同教材里,支撑期会写成 stance phase / su..."
+    },
+    {
+      "id": "auto-42",
+      "tag": "h3",
+      "start": 743.45,
+      "preview": "小节。 1.3 关节运动学——三平面的协同角度"
+    },
+    {
+      "id": "auto-43",
+      "tag": "p",
+      "start": 749.29,
+      "preview": "跑步从来不是矢状面 (sagittal plane) 内的二..."
+    },
+    {
+      "id": "auto-44",
+      "tag": "h4",
+      "start": 773.01,
+      "preview": "髋关节 (Hip) · 矢状面"
+    },
+    {
+      "id": "auto-45",
+      "tag": "p",
+      "start": 776.04,
+      "preview": "髋关节运动学是 钟摆 + 推进 双重角色。触地瞬间髋屈曲约 ..."
+    },
+    {
+      "id": "auto-46",
+      "tag": "p",
+      "start": 803.01,
+      "preview": "业余跑者最常见的力学错误,是 髋伸不足 (insuffici..."
+    },
+    {
+      "id": "auto-47",
+      "tag": "h4",
+      "start": 823.81,
+      "preview": "膝关节 (Knee) · 矢状面"
+    },
+    {
+      "id": "auto-48",
+      "tag": "p",
+      "start": 826.9,
+      "preview": "膝关节是 冲击吸收的主战场 。触地瞬间屈曲约 5–15°(后..."
+    },
+    {
+      "id": "auto-49",
+      "tag": "p",
+      "start": 853.17,
+      "preview": "膝的负重反应屈曲不是\"被动塌陷\",而是 主动的离心控制 。股..."
+    },
+    {
+      "id": "auto-50",
+      "tag": "h4",
+      "start": 884.75,
+      "preview": "踝关节 (Ankle) · 矢状面"
+    },
+    {
+      "id": "auto-51",
+      "tag": "p",
+      "start": 887.75,
+      "preview": "踝是 跑步弹簧系统的主开关 。触地角度因着地策略而异:后跟着..."
+    },
+    {
+      "id": "auto-52",
+      "tag": "p",
+      "start": 920.04,
+      "preview": "整个支撑期踝关节角速度可超过 600°/s,跟腱内的应变能在..."
+    },
+    {
+      "id": "auto-53",
+      "tag": "h4",
+      "start": 935.59,
+      "preview": "冠状面 (Frontal Plane) · 骨盆下垂与髋内收"
+    },
+    {
+      "id": "auto-54",
+      "tag": "p",
+      "start": 939.84,
+      "preview": "冠状面运动学是 稳定性 的指标,也是损伤研究的热点。最关键的..."
+    },
+    {
+      "id": "auto-55",
+      "tag": "p",
+      "start": 945.38,
+      "preview": "髋内收 (hip adduction) ——支撑相中,大腿相..."
+    },
+    {
+      "id": "auto-56",
+      "tag": "p",
+      "start": 964.39,
+      "preview": "对侧骨盆下垂 (contralateral pelvic d..."
+    },
+    {
+      "id": "auto-57",
+      "tag": "p",
+      "start": 983.12,
+      "preview": "这两个指标本质上是同一件事的两面:臀中肌(以及深层的小臀肌、..."
+    },
+    {
+      "id": "auto-58",
+      "tag": "h4",
+      "start": 1002.16,
+      "preview": "水平面 (Transverse Plane) · 旋转"
+    },
+    {
+      "id": "auto-59",
+      "tag": "p",
+      "start": 1005.87,
+      "preview": "水平面旋转最容易被肉眼忽视,但能量学上很关键。骨盆每一步绕垂..."
+    },
+    {
+      "id": "auto-60",
+      "tag": "p",
+      "start": 1036.32,
+      "preview": "原理:垂直振幅 VO (vertical oscillati..."
+    },
+    {
+      "id": "auto-61",
+      "tag": "p",
+      "start": 1069.1,
+      "preview": "① 测: 用 Garmin/Coros/Stryd 跑表跑 ..."
+    },
+    {
+      "id": "auto-62",
+      "tag": "p",
+      "start": 1082.76,
+      "preview": "② 改: 如果 VO ratio > 8% 或 GCT 不对..."
+    },
+    {
+      "id": "auto-63",
+      "tag": "p",
+      "start": 1101.95,
+      "preview": "③ 看: 4 周后重测 vertical ratio,目标下..."
+    },
+    {
+      "id": "auto-64",
+      "tag": "h3",
+      "start": 1116.48,
+      "preview": "小节。 1.4 时空参数——速度的两个分解"
+    },
+    {
+      "id": "auto-65",
+      "tag": "p",
+      "start": 1121.13,
+      "preview": "跑步速度可以写成一个简单的乘积: 速度 = 步频 × 步幅 ..."
+    },
+    {
+      "id": "auto-66",
+      "tag": "h4",
+      "start": 1133.76,
+      "preview": "步频 (Cadence, SPM)"
+    },
+    {
+      "id": "auto-67",
+      "tag": "p",
+      "start": 1136.67,
+      "preview": "步频 (steps per minute) 是单位时间内的总..."
+    },
+    {
+      "id": "auto-68",
+      "tag": "p",
+      "start": 1165.21,
+      "preview": "步频不是恒等量——它会随速度上升,但弹性很小:精英跑者从 5..."
+    },
+    {
+      "id": "auto-69",
+      "tag": "h4",
+      "start": 1184.68,
+      "preview": "步幅 (Stride Length)"
+    },
+    {
+      "id": "auto-70",
+      "tag": "p",
+      "start": 1187.01,
+      "preview": "一个完整步态周期内 COM 前进的距离,精英马拉松男子约 1..."
+    },
+    {
+      "id": "auto-71",
+      "tag": "p",
+      "start": 1208.87,
+      "preview": "步幅的上限不是腿长,而是 力量产生速度 。短跑生物力学研究表..."
+    },
+    {
+      "id": "auto-72",
+      "tag": "h4",
+      "start": 1230.03,
+      "preview": "触地时间 (Ground Contact Time, GCT..."
+    },
+    {
+      "id": "auto-73",
+      "tag": "p",
+      "start": 1233.87,
+      "preview": "从一脚 IC 到同脚 toe-off 的持续时间。精英长跑选..."
+    },
+    {
+      "id": "auto-74",
+      "tag": "p",
+      "start": 1260.25,
+      "preview": "GCT 不对称 (GCT balance / asymmet..."
+    },
+    {
+      "id": "auto-75",
+      "tag": "p",
+      "start": 1287.97,
+      "preview": "原理:占空比 DF (duty factor) = 触地时间..."
+    },
+    {
+      "id": "auto-76",
+      "tag": "h4",
+      "start": 1321.26,
+      "preview": "占空比 (Duty Factor, DF)"
+    },
+    {
+      "id": "auto-77",
+      "tag": "p",
+      "start": 1324.48,
+      "preview": "DF = GCT / 完整步态周期。走路 DF > 0.5(..."
+    },
+    {
+      "id": "auto-78",
+      "tag": "p",
+      "start": 1356.73,
+      "preview": "设身处地。 假设你现在配速 4:30/km,身高 175 c..."
+    },
+    {
+      "id": "auto-79",
+      "tag": "p",
+      "start": 1373.19,
+      "preview": "从精英标准看,你的步频偏低 12–18 spm(精英在 18..."
+    },
+    {
+      "id": "auto-80",
+      "tag": "p",
+      "start": 1404.71,
+      "preview": "怎么改 :不要试图同时改 GCT 和 VO——它们是 果 。..."
+    },
+    {
+      "id": "auto-81",
+      "tag": "h3",
+      "start": 1439.98,
+      "preview": "小节。 1.5 重心轨迹——COM 的正弦波"
+    },
+    {
+      "id": "auto-82",
+      "tag": "p",
+      "start": 1444.94,
+      "preview": "如果在跑步时把一个 LED 灯绑在腰椎 L4–L5 之间(近..."
+    },
+    {
+      "id": "auto-83",
+      "tag": "p",
+      "start": 1460.02,
+      "preview": "垂直振幅 (vertical oscillation, VO..."
+    },
+    {
+      "id": "auto-84",
+      "tag": "p",
+      "start": 1480.68,
+      "preview": "垂直比 (vertical ratio) ——垂直振幅除以步..."
+    },
+    {
+      "id": "auto-85",
+      "tag": "p",
+      "start": 1503.22,
+      "preview": "波形 ——COM 的水平速度也在每步内振荡:支撑期前半 (L..."
+    },
+    {
+      "id": "auto-86",
+      "tag": "p",
+      "start": 1529.63,
+      "preview": "从振幅的几何约束反推,精英跑者并不是\"跑得轻盈\"——他们是在..."
+    },
+    {
+      "id": "auto-87",
+      "tag": "h3",
+      "start": 1553.81,
+      "preview": "小节。 1.6 力学模型——倒立摆 vs 弹簧质量"
+    },
+    {
+      "id": "auto-88",
+      "tag": "p",
+      "start": 1559.27,
+      "preview": "理解跑步力学,最经济的工具是两个简化模型。它们都做了大胆的近..."
+    },
+    {
+      "id": "auto-89",
+      "tag": "h4",
+      "start": 1568.32,
+      "preview": "倒立摆模型 (Inverted Pendulum Model..."
+    },
+    {
+      "id": "auto-90",
+      "tag": "p",
+      "start": 1572.43,
+      "preview": "把人体简化成一根质量集中在顶端 (代表 COM) 的刚性杆,..."
+    },
+    {
+      "id": "auto-91",
+      "tag": "p",
+      "start": 1597.53,
+      "preview": "用这个模型解释跑步会立刻碰壁:跑步时 COM 在中支撑期不是..."
+    },
+    {
+      "id": "auto-92",
+      "tag": "h4",
+      "start": 1615.47,
+      "preview": "弹簧-质量模型 (Spring-Mass Model · S..."
+    },
+    {
+      "id": "auto-93",
+      "tag": "p",
+      "start": 1619.74,
+      "preview": "SLIP = Spring-Loaded Inverted ..."
+    },
+    {
+      "id": "auto-94",
+      "tag": "p",
+      "start": 1654.17,
+      "preview": "SLIP 模型下,腿刚度 (leg stiffness) k..."
+    },
+    {
+      "id": "auto-95",
+      "tag": "p",
+      "start": 1697.74,
+      "preview": "原理:SLIP = Spring-Loaded Invert..."
+    },
+    {
+      "id": "auto-96",
+      "tag": "h4",
+      "start": 1728.81,
+      "preview": "垂直刚度 (Vertical Stiffness) k_ve..."
+    },
+    {
+      "id": "auto-97",
+      "tag": "p",
+      "start": 1733.47,
+      "preview": "另一个常用度量是垂直刚度 k_vert = F_peak /..."
+    },
+    {
+      "id": "auto-98",
+      "tag": "p",
+      "start": 1765.68,
+      "preview": "反共识。 很多业余教练强调\"弹性\",鼓励学员\"像踩弹簧一样跳..."
+    },
+    {
+      "id": "auto-99",
+      "tag": "h3",
+      "start": 1794.55,
+      "preview": "小节。 1.7 着地策略——RFS / MFS / FFS ..."
+    },
+    {
+      "id": "auto-100",
+      "tag": "p",
+      "start": 1801.17,
+      "preview": "触地的那一瞬间,脚的哪一部分先碰地,称为 着地模式 (foo..."
+    },
+    {
+      "id": "auto-101",
+      "tag": "h4",
+      "start": 1817.17,
+      "preview": "三种模式的定义"
+    },
+    {
+      "id": "auto-102",
+      "tag": "p",
+      "start": 1819.11,
+      "preview": "后跟着地 (Rearfoot Strike, RFS) ——..."
+    },
+    {
+      "id": "auto-103",
+      "tag": "p",
+      "start": 1835.71,
+      "preview": "中足着地 (Midfoot Strike, MFS) ——前..."
+    },
+    {
+      "id": "auto-104",
+      "tag": "p",
+      "start": 1849.28,
+      "preview": "前掌着地 (Forefoot Strike, FFS) ——..."
+    },
+    {
+      "id": "auto-105",
+      "tag": "p",
+      "start": 1881.35,
+      "preview": "原理:着地策略 RFS / MFS / FFS。 翻译: 脚..."
+    },
+    {
+      "id": "auto-106",
+      "tag": "h4",
+      "start": 1916.66,
+      "preview": "力学差异(只列证据明确的)"
+    },
+    {
+      "id": "auto-107",
+      "tag": "p",
+      "start": 1919.68,
+      "preview": "核心结论: 没有任何一种着地模式在\"经济性\"或\"损伤率\"上有..."
+    },
+    {
+      "id": "auto-108",
+      "tag": "p",
+      "start": 1947.2,
+      "preview": "RFS 后跟着地 (你是 75-90% 的多数派):问题不在..."
+    },
+    {
+      "id": "auto-109",
+      "tag": "p",
+      "start": 1967.35,
+      "preview": "MFS 中足着地 :你已经在精英常见区,主要任务是 稳住 。..."
+    },
+    {
+      "id": "auto-110",
+      "tag": "p",
+      "start": 1979.46,
+      "preview": "FFS 前掌着地 (你可能从马拉松鞋或赤足训练来):重点是跟..."
+    },
+    {
+      "id": "auto-111",
+      "tag": "p",
+      "start": 1994.18,
+      "preview": "是否要改 :如果你没有反复出现的力学伤病, 不要碰 。如果你..."
+    },
+    {
+      "id": "auto-112",
+      "tag": "h4",
+      "start": 2008.53,
+      "preview": "速度依赖性"
+    },
+    {
+      "id": "auto-113",
+      "tag": "p",
+      "start": 2010.65,
+      "preview": "FSA 不是一个人的\"标签\",它是 速度的函数 。同一名跑者..."
+    },
+    {
+      "id": "auto-114",
+      "tag": "p",
+      "start": 2037.41,
+      "preview": "给业余跑者的实操原则: 不要主动\"改\"着地模式 。如果你有反..."
+    },
+    {
+      "id": "auto-115",
+      "tag": "h3",
+      "start": 2070.81,
+      "preview": "小节。 1.8 跑姿稳定性——动力链的薄弱环节"
+    },
+    {
+      "id": "auto-116",
+      "tag": "p",
+      "start": 2076.47,
+      "preview": "支撑相的几个 10–50 ms 内,身体要稳住整条动力链不让..."
+    },
+    {
+      "id": "auto-117",
+      "tag": "p",
+      "start": 2087.41,
+      "preview": "① 对侧骨盆下垂 (Contralateral Pelvic..."
+    },
+    {
+      "id": "auto-118",
+      "tag": "p",
+      "start": 2110.53,
+      "preview": "② 膝外翻 (Dynamic Knee Valgus) ——..."
+    },
+    {
+      "id": "auto-119",
+      "tag": "p",
+      "start": 2131.81,
+      "preview": "③ 过度内旋 (Overpronation) ——足在 LR..."
+    },
+    {
+      "id": "auto-120",
+      "tag": "p",
+      "start": 2150.47,
+      "preview": "④ 躯干前倾不足 / 过度 ——理想躯干相对垂直线前倾 5–..."
+    },
+    {
+      "id": "auto-121",
+      "tag": "p",
+      "start": 2167.43,
+      "preview": "⑤ 着地点过远 (Overstride) ——脚触地点距离 ..."
+    },
+    {
+      "id": "auto-122",
+      "tag": "p",
+      "start": 2190.47,
+      "preview": "① 测: 用手机 240 fps 慢动作,从正后方拍自己跑 ..."
+    },
+    {
+      "id": "auto-123",
+      "tag": "p",
+      "start": 2207.46,
+      "preview": "② 改: 每天 5 分钟\"激活包\"——蚌式 2×15/侧 +..."
+    },
+    {
+      "id": "auto-124",
+      "tag": "p",
+      "start": 2222.47,
+      "preview": "③ 看: 4 周后重拍视频对比骨盆下垂角度,目标从 >5° ..."
+    },
+    {
+      "id": "auto-125",
+      "tag": "h3",
+      "start": 2236.6,
+      "preview": "小节。 1.9 上肢摆动——角动量守恒的代价"
+    },
+    {
+      "id": "auto-126",
+      "tag": "p",
+      "start": 2241.68,
+      "preview": "很多跑者把\"手臂摆动\"当成节奏伴奏。它其实是一个隐藏的力学支..."
+    },
+    {
+      "id": "auto-127",
+      "tag": "p",
+      "start": 2249.82,
+      "preview": "身体在跑步中维持 沿垂直轴的总角动量 ≈ 0 (否则会原地转..."
+    },
+    {
+      "id": "auto-128",
+      "tag": "p",
+      "start": 2273.38,
+      "preview": "2014 年 Arellano & Kram 在 J Exp..."
+    },
+    {
+      "id": "auto-129",
+      "tag": "p",
+      "start": 2301.77,
+      "preview": "实操要点:"
+    },
+    {
+      "id": "auto-130",
+      "tag": "li",
+      "start": 2301.77,
+      "preview": "手臂前后摆,不要横摆过中线(横摆增加水平面角动量,加剧躯干扭..."
+    },
+    {
+      "id": "auto-131",
+      "tag": "li",
+      "start": 2301.77,
+      "preview": "肘屈约 90°,与髋部摆动反相"
+    },
+    {
+      "id": "auto-132",
+      "tag": "li",
+      "start": 2301.77,
+      "preview": "肩部放松,不要耸肩——耸肩浪费颈背肌群代谢"
+    },
+    {
+      "id": "auto-133",
+      "tag": "li",
+      "start": 2301.77,
+      "preview": "手不要握拳——握拳激活前臂屈肌增加上肢代谢约 1%"
+    },
+    {
+      "id": "auto-134",
+      "tag": "h3",
+      "start": 2321.6,
+      "preview": "小节。 1.10 跑步效率随速度的 U 形曲线"
+    },
+    {
+      "id": "auto-135",
+      "tag": "p",
+      "start": 2327.06,
+      "preview": "效率在生理学上有两个相关但不同的定义:经济性 (runnin..."
+    },
+    {
+      "id": "auto-136",
+      "tag": "p",
+      "start": 2342.66,
+      "preview": "当跑者被允许自由选择配速时,他们倾向选定一个让单位距离能耗 ..."
+    },
+    {
+      "id": "auto-137",
+      "tag": "p",
+      "start": 2379.56,
+      "preview": "有意思的是,人类的 自选步频 也是同样的 U 形——给定速度..."
+    },
+    {
+      "id": "auto-138",
+      "tag": "h4",
+      "start": 2413.82,
+      "preview": "协议。 协议 1 · 步频测定与改造"
+    },
+    {
+      "id": "auto-139",
+      "tag": "li",
+      "start": 2418.01,
+      "preview": "测什么: 当前自然步频 SPM,目标 175-185 (身高..."
+    },
+    {
+      "id": "auto-140",
+      "tag": "li",
+      "start": 2418.01,
+      "preview": "工具: Garmin/Coros/Apple Watch 任..."
+    },
+    {
+      "id": "auto-141",
+      "tag": "li",
+      "start": 2418.01,
+      "preview": "步骤: (1) E 配速跑 10 分钟,记录稳态步频。(2)..."
+    },
+    {
+      "id": "auto-142",
+      "tag": "li",
+      "start": 2454.91,
+      "preview": "频率: 节拍器训练每周 3-4 次,每次 10-20 分钟即..."
+    },
+    {
+      "id": "auto-143",
+      "tag": "li",
+      "start": 2454.91,
+      "preview": "判读: 4-6 周后自然步频上升 5-10 spm 视为成功..."
+    },
+    {
+      "id": "auto-144",
+      "tag": "h4",
+      "start": 2473.53,
+      "preview": "协议。 协议 2 · 慢动作着地自检"
+    },
+    {
+      "id": "auto-145",
+      "tag": "li",
+      "start": 2477.94,
+      "preview": "测什么: 触地瞬间小腿胫骨角 (与垂直线的夹角),理想 -2..."
+    },
+    {
+      "id": "auto-146",
+      "tag": "li",
+      "start": 2477.94,
+      "preview": "工具: iPhone 240 fps 慢动作 (Settin..."
+    },
+    {
+      "id": "auto-147",
+      "tag": "li",
+      "start": 2477.94,
+      "preview": "步骤: (1) 找人在跑步机侧面 2 米处拍 30 秒,镜头..."
+    },
+    {
+      "id": "auto-148",
+      "tag": "li",
+      "start": 2508.31,
+      "preview": "频率: 每月 1 次,跑姿改造期每 2 周 1 次"
+    },
+    {
+      "id": "auto-149",
+      "tag": "li",
+      "start": 2508.31,
+      "preview": "判读: 角度 >10° = overstride,先提步频 ..."
+    },
+    {
+      "id": "auto-150",
+      "tag": "h4",
+      "start": 2526.13,
+      "preview": "协议。 协议 3 · 垂直振幅追踪"
+    },
+    {
+      "id": "auto-151",
+      "tag": "li",
+      "start": 2530.31,
+      "preview": "测什么: Vertical Oscillation (VO)..."
+    },
+    {
+      "id": "auto-152",
+      "tag": "li",
+      "start": 2541.19,
+      "preview": "工具: Garmin HRM-Pro 心率带 (内置加速度计..."
+    },
+    {
+      "id": "auto-153",
+      "tag": "li",
+      "start": 2541.19,
+      "preview": "步骤: (1) E 配速跑 5 公里,导出活动数据。(2) ..."
+    },
+    {
+      "id": "auto-154",
+      "tag": "li",
+      "start": 2562.58,
+      "preview": "频率: 每月一次同配速同距离的\"参考跑\",形成长期曲线"
+    },
+    {
+      "id": "auto-155",
+      "tag": "li",
+      "start": 2562.58,
+      "preview": "判读: Ratio 上升 = 跑姿在恶化 (常见于跑量陡增、..."
+    },
+    {
+      "id": "auto-156",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "步态周期: T = 60 / SPM × 2 秒/单脚周期(..."
+    },
+    {
+      "id": "auto-157",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "速度: v = (步频 × 步幅) / 2 = SPM × ..."
+    },
+    {
+      "id": "auto-158",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "占空比: DF = GCT / T,跑步 DF<0.5,DF..."
+    },
+    {
+      "id": "auto-159",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "腿刚度: k_leg = F_peak / ΔL_leg,人..."
+    },
+    {
+      "id": "auto-160",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "垂直刚度: k_vert = F_peak / Δy_COM..."
+    },
+    {
+      "id": "auto-161",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "关节角度: 髋 -10° → +35°(伸-屈),膝 5° ..."
+    },
+    {
+      "id": "auto-162",
+      "tag": "p",
+      "start": 2587.11,
+      "preview": "这一组方程定义了\"跑步\"作为一个数学对象。下一章 (Ch2)..."
+    }
+  ]
+}
