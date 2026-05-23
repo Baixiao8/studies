@@ -5,6 +5,86 @@
 
 ---
 
+## v5.1 · 阅读模式三大体验修复(2026-05-23)
+
+针对用户首测后反馈的三大问题做系统性修复。
+
+### 三大问题诊断与修复
+
+#### ① 「从头开始读」是重大 UX bug
+
+用户在 Ch4.6 浏览,点 ▶ 期望从 Ch4.6 开始读,但实际从 chapter[0] 章节标题开始。
+**修复**:新增 `_detectVisibleChunkIdx(chapter)`,扫描视口内最居中的可读段落作为起点。
+**起始段优先级**:`opts.startId(URL 锚点) > 视口可视段 > localStorage 同章 24h > 0`
+
+#### ② 点击播放 + 页面加载卡顿
+
+诊断:
+- `_buildAllChunks()` 跨遍 12 章 ~10000 节点(200-400ms 阻塞)
+- `_estimateListenTime` 在 init 时同步遍历 12 章字数
+- `open()` 一次性同步执行 4 步重活
+- 视口外章节也参与 layout 计算
+
+**修复**:
+- `.chapter { content-visibility: auto; contain-intrinsic-size: 0 2400px }` — 视口外 11 章跳过 paint/layout 计算
+- `_estimateListenTime` → `requestIdleCallback`(idle 时间执行,不阻塞首屏)
+- `_buildAllChunks` 改 lazy,只在 `_onChapterEnd` 跨章衔接时才算
+- `open()` 改渐进式 3 帧渲染:①立即骨架 ②rAF 算 chunks ③rAF 填内容
+
+**预期收益**:
+- LCP(4G):3s → 1.5-1.8s
+- INP(点击响应):300-500ms → **32-80ms**
+- 用户感知"点 ▶ 瞬间响应"
+
+#### ③ 移动端 UI 控制条占 30% 屏幕
+
+诊断(用户截图):
+- 控制条双行 + iOS Safari nav,阅读区只剩 50%
+- iOS 提示 4 行横幅,关键视野被吃
+- 主题色块选中态不明显,⏰ emoji 风格不统一
+- Sleep 菜单弹出遮挡正文
+
+**修复**:
+- **控制条单行紧凑化**:只保留 ◀ ⏸ ▶| · 倍速 · A 字号 · ⚙ 设置 · ✕ 关闭
+- **二级控件折叠到 Sheet**(点 ⚙ 从底部弹起的抽屉):章节 / 主题 / 字号 / 行距 / 音色 / 定时 / 章末接下章
+- **iOS 提示降级为顶部 Toast**:5 秒自动消失 + 用户关闭后 localStorage 记忆永久不显示
+- **Sheet 用主题色 pill 按钮 + 圆环主题选择器**:选中态明显
+- **阅读区屏幕占比从 50% → 75%**
+
+### 新增文档
+
+- **`docs/PERF-analysis.md`**(300+ 行):性能优化深度分析
+  - 主流产品横向对比(微信读书 / Medium / Notion / 小宇宙 / 知乎 / Substack)
+  - Core Web Vitals 阈值与诊断框架
+  - 5 个 P0 问题深度分析 + 修复 + 预期收益
+  - ROI 决策矩阵 10 项(v5.1 完成 8 项)
+  - 实施验证清单 10 项
+
+### 代码改动
+
+- `_shared/reader.js`:open 渐进式 + visible chunk 检测 + sheet 弹出 + iOS toast(~250 行新增/重写)
+- `_shared/reader.css`:移动单行控制条 + Sheet + iOS Toast 新样式(~200 行新增/重写)
+- `_shared/style.css`:`section.chapter` content-visibility(2 行核心)
+- `docs/PERF-analysis.md`:新增 300+ 行
+- `CHANGELOG.md`:补 v5.1 条目
+
+### 实施验证清单(发布后 4 周观察)
+
+```
+[ ] WiFi 桌面 Chrome · LCP < 1.5s
+[ ] 4G 移动 Chrome · LCP < 2.5s
+[ ] 点 ▶ 进阅读模式 INP < 100ms
+[ ] 滚动到 Ch12 时无明显卡顿
+[ ] 12 张 hero 图按视口加载
+[ ] Sheet 弹出无遮挡正文
+[ ] iOS Toast 仅首次显示,关闭后不再
+[ ] 控制条单行,阅读区占屏 ≥ 75%
+[ ] 从当前可视段落开始播放
+[ ] 与桌面端控制条共享代码无 regression
+```
+
+---
+
 ## v5.0 · 阅读 + 听书模式(2026-05-23)
 
 > **不是给报告加播放按钮,是把研究报告从「久坐型阅读品」升级为「随身型消费品」。**
