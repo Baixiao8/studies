@@ -195,24 +195,31 @@
 }
 .reader-controls .spacer { flex: 1; }
 
-/* 控制按钮通用 */
+/* ════════════════════════════════════════════════════════════════ */
+/* Design System v1.0 应用 · 控制条规范                              */
+/* ════════════════════════════════════════════════════════════════ */
+
+/* 通用按钮 / select 容器 · 36px 高 / 6px 圆角 / btn-bg 底 */
 .reader-controls button,
 .reader-controls .reader-select-wrap {
   background: var(--r-btn-bg);
   border: none;
   color: var(--r-ink);
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 0 12px;
   border-radius: 6px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "PingFang SC", monospace;
   font-size: 13px;
   letter-spacing: 0.02em;
-  transition: background 0.15s, transform 0.1s;
-  display: flex;
+  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
+  height: 36px;
   min-height: 36px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 .reader-controls button:hover { background: var(--r-btn-bg-hover); }
 .reader-controls button:active { transform: scale(0.96); }
@@ -221,14 +228,14 @@
   color: var(--r-bg);
 }
 
-/* 主播放按钮(更大) */
+/* 主播放按钮 · 44px 圆形 · accent 红 */
 .reader-controls .reader-play {
   background: var(--r-accent);
   color: var(--r-bg);
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  font-size: 16px;
+  font-size: 14px;
   padding: 0;
 }
 .reader-controls .reader-play:hover {
@@ -236,21 +243,35 @@
   opacity: 0.88;
 }
 
-/* 倍速 / 章节 / 主题 select 包装 */
+/* 上下段按钮 · 36×36 方形圆角 */
+.reader-controls .reader-prev,
+.reader-controls .reader-next {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: 11px;
+}
+
+/* select 容器 · 与按钮同尺寸,有 ▾ 指示 */
 .reader-select-wrap {
   padding: 0;
   position: relative;
+  overflow: hidden;
 }
 .reader-select-wrap select {
   background: transparent;
   border: none;
   color: var(--r-ink);
-  padding: 8px 28px 8px 12px;
-  font-family: "JetBrains Mono", monospace;
+  padding: 0 28px 0 12px;
+  height: 36px;
+  font-family: "JetBrains Mono", "PingFang SC", monospace;
   font-size: 13px;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 .reader-select-wrap::after {
   content: "▾";
@@ -260,38 +281,73 @@
   transform: translateY(-50%);
   font-size: 10px;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.55;
+  color: var(--r-ink-soft);
+}
+/* 固定宽度 · 防止 select 内容长短导致控制条抖动 */
+.reader-select-wrap.reader-rate-wrap { width: 72px; }
+.reader-select-wrap.reader-chapter-wrap { width: 168px; }
+.reader-select-wrap.voice-select-wrap { width: 130px; }
+
+/* select option 在某些主题下会用系统默认背景 · 强制可读色 */
+.reader-controls select option {
+  background: var(--r-bg);
+  color: var(--r-ink);
 }
 
-/* 主题切换按钮组 */
+/* ── 主题切换 · 28×28 方形色块 · 选中用 accent 边框 ── */
 .reader-theme-group {
-  display: flex;
-  gap: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   background: var(--r-btn-bg);
   border-radius: 6px;
-  padding: 3px;
+  padding: 4px;
+  height: 36px;
+  box-sizing: border-box;
 }
 .reader-theme-group button {
   width: 28px;
   height: 28px;
+  min-height: 28px;
   border-radius: 4px;
   padding: 0;
   background: transparent;
-  border: 1.5px solid transparent;
-  min-height: auto;
+  border: 1.5px solid rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
 }
-.reader-theme-group button.active { border-color: var(--r-accent); }
+.reader-theme-group button:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  background: transparent;
+}
+.reader-theme-group button.active {
+  border-color: var(--r-accent);
+  box-shadow: 0 0 0 1.5px var(--r-bg) inset, 0 0 0 2.5px var(--r-accent);
+}
 .reader-theme-group button[data-t="paper"] { background: #f0ebdd; }
 .reader-theme-group button[data-t="dark"] { background: #1f1f1b; }
 .reader-theme-group button[data-t="green"] { background: #1c2e1f; }
 
-/* 关闭按钮 */
+/* 关闭按钮 · 透明背景,hover 浮起 */
 .reader-close {
   background: transparent !important;
-  font-size: 18px !important;
+  width: 36px !important;
+  padding: 0 !important;
+  font-size: 14px !important;
   color: var(--r-ink-soft) !important;
 }
-.reader-close:hover { color: var(--r-ink) !important; }
+.reader-close:hover {
+  background: var(--r-btn-bg) !important;
+  color: var(--r-ink) !important;
+}
+
+/* 设置按钮 · 桌面永久隐藏(! 重要),只在移动端入口 */
+.reader-settings-btn {
+  display: none !important;
+  width: 36px;
+  padding: 0;
+  font-size: 14px;
+}
 
 /* ─── 内容区 ───────────────────────────────────────────────── */
 .reader-content {
@@ -626,19 +682,26 @@
 }
 .reader-ios-warning strong { color: #e8a060; }
 
-/* ─── Sleep Timer 下拉菜单 ──────────────────────────────────── */
+/* ─── Sleep Timer 下拉菜单 · fixed 定位避免被控制条 overflow 裁切 ─ */
 .reader-sleep-menu {
-  position: absolute;
-  background: var(--r-bg-elevated);
+  position: fixed;
+  background: var(--r-bg);
   border: 1px solid var(--r-line);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 4px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
-  min-width: 140px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.20), 0 0 0 0.5px var(--r-line-soft);
+  min-width: 144px;
   display: none;
   z-index: 200;
 }
-.reader-sleep-menu.open { display: block; }
+.reader-sleep-menu.open {
+  display: block;
+  animation: sleepMenuIn 0.18s cubic-bezier(.22,.61,.36,1);
+}
+@keyframes sleepMenuIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 .reader-sleep-menu button {
   display: block;
   width: 100%;
@@ -646,13 +709,19 @@
   background: transparent;
   border: none;
   color: var(--r-ink);
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 9px 14px;
+  border-radius: 6px;
   cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", "PingFang SC", monospace;
   font-size: 13px;
+  min-height: 36px;
+  box-sizing: border-box;
+  height: auto;
+  transition: background 0.15s;
 }
-.reader-sleep-menu button:hover { background: var(--r-btn-bg); }
+.reader-sleep-menu button:hover {
+  background: var(--r-btn-bg);
+}
 .reader-sleep-menu button.active {
   background: var(--r-accent);
   color: var(--r-bg);

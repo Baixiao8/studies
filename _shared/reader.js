@@ -747,6 +747,15 @@
       setTimeout(function () { if (o.parentElement) o.remove(); }, 280);
       this.overlay = null;
     }
+    // 清理孤立 sleep menu(挂在 body 上,需要手动移除)
+    $$('.reader-sleep-menu').forEach(function (n) {
+      if (n.parentElement) n.remove();
+    });
+    // 清理 sheet
+    if (this.sheet && this.sheet.parentElement) this.sheet.remove();
+    if (this.sheetMask && this.sheetMask.parentElement) this.sheetMask.remove();
+    this.sheet = null;
+    this.sheetMask = null;
   };
 
   /* ─── 控制条渲染 ──────────────────────────────────────────── */
@@ -773,14 +782,18 @@
     this.playBtn = playBtn;
 
     // 上一段 / 下一段
-    var prevBtn = btn('◀', function () { self.prev(); }, { title: '上一段 (←)' });
-    var nextBtn = btn('▶|', function () { self.next(); }, { title: '下一段 (→)' });
+    var prevBtn = btn('◀', function () { self.prev(); }, {
+      title: '上一段 (←)', class: 'reader-prev'
+    });
+    var nextBtn = btn('▶|', function () { self.next(); }, {
+      title: '下一段 (→)', class: 'reader-next'
+    });
 
-    // 倍速 select
+    // 倍速 select(固定 72px 宽)
     var rateOpts = RATES.map(function (r) {
       return '<option value="' + r + '"' + (self.config.rate === r ? ' selected' : '') + '>' + r + 'x</option>';
     }).join('');
-    var rateSel = el('div', { class: 'reader-select-wrap', title: '朗读速度' });
+    var rateSel = el('div', { class: 'reader-select-wrap reader-rate-wrap', title: '朗读速度' });
     rateSel.innerHTML = '<select>' + rateOpts + '</select>';
     rateSel.querySelector('select').addEventListener('change', function (e) {
       var v = parseFloat(e.target.value);
@@ -798,7 +811,7 @@
       if (t.length > 18) t = t.slice(0, 18) + '…';
       return '<option value="' + (ch.id || 'chx-' + i) + '">' + (i + 1) + '. ' + t + '</option>';
     }).join('');
-    var chSel = el('div', { class: 'reader-select-wrap reader-section-label', title: '跳转到章节' });
+    var chSel = el('div', { class: 'reader-select-wrap reader-chapter-wrap', title: '跳转到章节' });
     chSel.innerHTML = '<select>' + chapterOpts + '</select>';
     chSel.querySelector('select').addEventListener('change', function (e) {
       var ch = document.getElementById(e.target.value);
@@ -867,10 +880,20 @@
     // 隐藏 if no voices
     if (voices.length === 0) voiceSel.style.display = 'none';
 
-    // 定时关闭按钮 + 菜单
-    var sleepBtn = btn('⏰', function (e) {
+    // 定时关闭按钮 + 菜单(fixed 定位,以 button 位置为锚)
+    var sleepBtn = btn('⏱', function (e) {
       e.stopPropagation();
-      sleepMenu.classList.toggle('open');
+      var isOpen = sleepMenu.classList.contains('open');
+      if (isOpen) {
+        sleepMenu.classList.remove('open');
+      } else {
+        // 计算 fixed 定位:菜单在按钮上方 8px
+        var rect = sleepBtn.getBoundingClientRect();
+        sleepMenu.style.left = Math.max(8, rect.left + rect.width / 2 - 72) + 'px';
+        sleepMenu.style.bottom = (window.innerHeight - rect.top + 8) + 'px';
+        sleepMenu.style.top = 'auto';
+        sleepMenu.classList.add('open');
+      }
     }, { title: '定时关闭' });
     var sleepMenu = el('div', { class: 'reader-sleep-menu' });
     SLEEP_OPTIONS.forEach(function (opt) {
@@ -880,7 +903,6 @@
           ev.stopPropagation();
           self._setSleepTimer(opt.value);
           sleepMenu.classList.remove('open');
-          // 更新菜单选中状态
           $$('button', sleepMenu).forEach(function (x) { x.classList.remove('active'); });
           b.classList.add('active');
         }
@@ -892,10 +914,9 @@
         sleepMenu.classList.remove('open');
       }
     });
-    var sleepWrap = el('div', {
-      class: 'reader-sleep-group',
-      style: { position: 'relative' }
-    }, [sleepBtn, sleepMenu]);
+    // sleep menu 直接挂到 body(不在控制条内,避免被 sticky overflow 裁切)
+    document.body.appendChild(sleepMenu);
+    var sleepWrap = el('div', { class: 'reader-sleep-group' }, [sleepBtn]);
 
     // 设置按钮(移动端入口,桌面隐藏)
     var settingsBtn = btn('⚙', function () { self._toggleSheet(); }, {
