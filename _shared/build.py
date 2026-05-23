@@ -317,18 +317,20 @@ def build_report(report_dir: Path, external: bool = False):
     # ─── INLINE 模式 (默认) · 把所有外部资源内联进 HTML ───
     if embed:
         print('\n[build] INLINE 模式 · 把 CSS/JS/glossary 内联进单文件 HTML (默认)')
-        # 1) 内联 style.css · 用 lambda 避免 CSS 里的 \22 被当 backreference
-        css = (shared_dir / 'style.css').read_text(encoding='utf-8')
-        css_block = f'<style>\n{css}\n</style>'
-        final = re.sub(
-            r'<link rel="stylesheet" href="\.\./\.\./_shared/style\.css[^"]*">',
-            lambda m: css_block,
-            final
-        )
-        # 2) 内联 progress.js / mini-toc.js / tooltip.js
+        # 1) 内联 CSS · style.css + reader.css
+        #    用 lambda 避免 CSS 里的 \22 被当 backreference
+        for css_name in ['style.css', 'reader.css']:
+            css_path = shared_dir / css_name
+            if not css_path.exists():
+                continue
+            css = css_path.read_text(encoding='utf-8')
+            css_block = f'<style>\n/* === {css_name} === */\n{css}\n</style>'
+            pattern = r'<link rel="stylesheet" href="\.\./\.\./_shared/' + re.escape(css_name) + r'[^"]*">'
+            final = re.sub(pattern, lambda m, cb=css_block: cb, final)
+        # 2) 内联 progress.js / mini-toc.js / tooltip.js / reader.js
         #    关键:JS 注释/字符串里如果包含 </script>,inline 后浏览器会提前关
         #    脚本块,触发 SyntaxError。必须先转义 </script> 为 <\/script>。
-        for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js']:
+        for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js', 'reader.js']:
             js = (shared_dir / js_name).read_text(encoding='utf-8')
             # 转义 </script> · 大小写不敏感(防 </SCRIPT> 等变体)
             js_safe = re.sub(r'</(script)>', r'<\\/\1>', js, flags=re.IGNORECASE)

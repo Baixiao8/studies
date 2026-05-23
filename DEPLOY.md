@@ -6,7 +6,7 @@
 
 ## 当前部署状态
 
-✅ **已上线** · v3.0 · Newsprint 报刊风
+✅ **已上线** · v5.0 · 阅读 + 听书模式(三主题 / TTS / mini player / Media Session 锁屏控制)
 
 | 资源 | URL |
 |---|---|
