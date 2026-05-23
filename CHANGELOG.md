@@ -5,6 +5,84 @@
 
 ---
 
+## v6.0 · 高音质 Audio Mode 集成(2026-05-24)
+
+针对 v5 三大结构性体验问题(iOS 锁屏中断 / 中文音色机械感 / 自研修补 ROI 递减),
+引入预生成 MP3 + 浏览器原生 `<audio>` 元素的新模式。
+
+### 三大问题对照
+
+| 问题 | v5 状态 | v6 解法 |
+|---|---|---|
+| iOS Safari 锁屏 30s 中断 | ❌ 系统硬限制无解 | ✅ `<audio>` 是浏览器一等公民,锁屏后台完美 |
+| 中文音色机械感 | ❌ 系统 TTS 质量差 | ✅ Azure Neural 神经音色(云希·男声·阳光) |
+| 自研修补 ROI | ❌ 修不动 Web 平台天花板 | ✅ 改走 audio 模式,平台限制变非限制 |
+
+### 技术方案
+
+```
+edge-tts(社区反向 API,免费)
+└── 调用 Edge 浏览器朗读功能背后的 Azure Neural TTS
+    └── 生成 MP3 + SentenceBoundary 词级时间戳
+        └── 自写 SRT + JSON 段落映射
+            └── 前端 reader.js 用原生 <audio> 播放 + timeupdate 同步段落高亮
+```
+
+**全程 0 成本**:edge-tts 免费,GitHub Pages 静态存储免费,浏览器原生 audio 免费。
+
+### 新增产物
+
+1. **`_shared/audio-gen.py`**(450+ 行)
+   - BeautifulSoup 严格过滤(嵌套 div / SVG / 表格 / 装饰)
+   - 自动分块(4500 字/块,处理 Edge TTS 单次请求限制)
+   - 修复关键 bug:`not getattr(tag, 'attrs', None)` 在空 dict 时误判 145 个 `<p>` 标签
+   - 输出 MP3 + SRT + JSON 三件套
+
+2. **`_shared/reader.js` v6 audio mode**
+   - 6 个新 prototype 方法(检测/加载/监听/同步/播放/切换)
+   - open() 异步检测音频可用性,有则自动启用
+   - play() / pause() / next() / prev() 全部加 audioMode 分支
+   - 速率切换同步到 audio.playbackRate(无缝)
+   - timeupdate 二分查找当前段落 → 高亮 + 进度记忆
+   - 控制条加 "🤖 标准 / 🎙 高音质" 切换按钮
+   - 音频播放失败自动降级到 Web TTS
+
+3. **章节音频**(逐步生成上线)
+   - Ch1:15.8MB MP3 / 45KB SRT / 163 段映射(已上线)
+   - Ch2-12:陆续生成中,~170MB 全部完成
+
+### 用户体验
+
+```
+桌面 + 移动 自动检测当前章节是否有音频:
+有音频 → 自动切换到高音质模式 + 显示 "🎙 高音质" 按钮
+无音频 → 降级到 Web TTS + 显示 "🤖 标准" 按钮
+
+切换按钮一键来回切换两种模式
+切换后从同一段落继续播放(进度无损)
+
+iOS Safari 锁屏:
+旧版 Web TTS → 30s 后系统暂停 ❌
+新版 audio  → 完美后台播放 ✅
+```
+
+### Bug 修复(audio-gen 开发过程)
+
+| Bug | 原因 | 修复 |
+|---|---|---|
+| 145 个 `<p>` 被跳过 | `not getattr(tag, 'attrs', None)` 在空 dict 时返回 True | 改为只检查 `tag.parent is None` |
+| Edge TTS NoAudioReceived | 单次请求字数超 5K 限制 | 段落级智能切块(每块 ≤4500 字) |
+| edge-tts 7.x SubMaker 失效 | API 改为 `SentenceBoundary` | 自写 SRT,直接处理 chunk['offset']/'duration' |
+| `hero-keypoints` 数据卡漏读 | regex 嵌套 div 处理不对 | 换用 BeautifulSoup 多轮 decompose |
+
+### 待办
+
+- [ ] Ch2-12 音频生成完成后 push
+- [ ] 移动端测试切换按钮 + 锁屏播放
+- [ ] 验证 Ch1 SRT 段落高亮是否精准
+
+---
+
 ## v5.1 · 阅读模式三大体验修复(2026-05-23)
 
 针对用户首测后反馈的三大问题做系统性修复。
