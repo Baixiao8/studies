@@ -1,0 +1,1134 @@
+{
+  "voice": "zh-CN-YunxiNeural",
+  "duration_estimate_sec": 3170.1,
+  "segments": [
+    {
+      "id": "auto-0",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "4.5 mmol/kg/s · 400-1500m 主力 ·..."
+    },
+    {
+      "id": "auto-1",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "1.2 mmol/kg/s · 马拉松 98% 靠它 · 容..."
+    },
+    {
+      "id": "auto-2",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "1 小时全力上限 · 比 VO2max 更预测耐力表现"
+    },
+    {
+      "id": "auto-3",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "每一次肌肉收缩消耗的能量货币只有一种——三磷酸腺苷 ATP。..."
+    },
+    {
+      "id": "auto-4",
+      "tag": "p",
+      "start": 31.38,
+      "preview": "跑步是一场以秒为单位的能量贸易——磷酸原系统是手头现金,糖酵..."
+    },
+    {
+      "id": "auto-5",
+      "tag": "p",
+      "start": 45.8,
+      "preview": "1907 年,英国生理学家 Archibald Hill 提..."
+    },
+    {
+      "id": "auto-6",
+      "tag": "p",
+      "start": 65.09,
+      "preview": "George Brooks,加州大学伯克利分校的代谢生理学家..."
+    },
+    {
+      "id": "auto-7",
+      "tag": "p",
+      "start": 100.46,
+      "preview": "Brooks 把这套机制命名为乳酸穿梭(lactate sh..."
+    },
+    {
+      "id": "auto-8",
+      "tag": "h3",
+      "start": 120.62,
+      "preview": "小节。 4.1ATP——肌肉的唯一直接货币"
+    },
+    {
+      "id": "auto-9",
+      "tag": "p",
+      "start": 125.21,
+      "preview": "骨骼肌中所有的机械功——肌动蛋白 (actin) 沿肌球蛋白..."
+    },
+    {
+      "id": "auto-10",
+      "tag": "p",
+      "start": 148.56,
+      "preview": "原理:ATP 水解为 ADP + Pi 释放 30.5 kJ..."
+    },
+    {
+      "id": "auto-11",
+      "tag": "p",
+      "start": 173.94,
+      "preview": "问题在于,肌肉内部储存的 ATP 总量极少。整个人体大约只有..."
+    },
+    {
+      "id": "auto-12",
+      "tag": "p",
+      "start": 198.34,
+      "preview": "所以\"能量代谢\"的真正主题不是 ATP 储备,而是 ATP ..."
+    },
+    {
+      "id": "auto-13",
+      "tag": "h3",
+      "start": 227.3,
+      "preview": "小节。 4.2三大供能系统——耦合,而非开关"
+    },
+    {
+      "id": "auto-14",
+      "tag": "p",
+      "start": 232.62,
+      "preview": "几乎所有教科书都画过那张著名的\"三色阶梯图\":磷酸原系统供能..."
+    },
+    {
+      "id": "auto-15",
+      "tag": "h4",
+      "start": 257.86,
+      "preview": "磷酸原系统 ATP-PCr · 0–10 秒"
+    },
+    {
+      "id": "auto-16",
+      "tag": "p",
+      "start": 262.23,
+      "preview": "骨骼肌中除了 ATP 还储存约 4 倍于 ATP 总量的 磷..."
+    },
+    {
+      "id": "auto-17",
+      "tag": "p",
+      "start": 271.82,
+      "preview": "PCr + ADP + H⁺ → Cr + ATP"
+    },
+    {
+      "id": "auto-18",
+      "tag": "p",
+      "start": 271.82,
+      "preview": "这是一个非氧化、非糖酵解的快速重合成通路。没有副产物(除了 ..."
+    },
+    {
+      "id": "auto-19",
+      "tag": "p",
+      "start": 307.6,
+      "preview": "原理:PCr(磷酸肌酸)+ ADP → ATP,功率 9 m..."
+    },
+    {
+      "id": "auto-20",
+      "tag": "p",
+      "start": 335.63,
+      "preview": "这是所有冲刺动作、起跑加速、马拉松最后 200 米冲线、间歇..."
+    },
+    {
+      "id": "auto-21",
+      "tag": "h4",
+      "start": 363.44,
+      "preview": "糖酵解系统 Glycolysis · 10 秒–2 分钟"
+    },
+    {
+      "id": "auto-22",
+      "tag": "p",
+      "start": 367.45,
+      "preview": "葡萄糖(来自肌糖原或血糖)经 10 步酶促反应分解为 丙酮酸..."
+    },
+    {
+      "id": "auto-23",
+      "tag": "p",
+      "start": 389.69,
+      "preview": "原理:糖酵解 = 葡萄糖经 10 步酶反应 → 丙酮酸,净产..."
+    },
+    {
+      "id": "auto-24",
+      "tag": "p",
+      "start": 415.37,
+      "preview": "丙酮酸有两条去路:"
+    },
+    {
+      "id": "auto-25",
+      "tag": "li",
+      "start": 415.37,
+      "preview": "当氧供应充足、线粒体能跟上时,丙酮酸进入线粒体,转化为乙酰辅..."
+    },
+    {
+      "id": "auto-26",
+      "tag": "li",
+      "start": 415.37,
+      "preview": "当氧供应跟不上、NADH 堆积时,丙酮酸被乳酸脱氢酶 (LD..."
+    },
+    {
+      "id": "auto-27",
+      "tag": "p",
+      "start": 415.37,
+      "preview": "关键认知:\"有氧\"和\"无氧\"糖酵解的上游 10 步反应完全相..."
+    },
+    {
+      "id": "auto-28",
+      "tag": "h4",
+      "start": 461.47,
+      "preview": "有氧氧化系统 Oxidative · 2 分钟以上"
+    },
+    {
+      "id": "auto-29",
+      "tag": "p",
+      "start": 465.35,
+      "preview": "线粒体内的三羧酸循环 + 电子传递链 + 氧化磷酸化,将丙酮..."
+    },
+    {
+      "id": "auto-30",
+      "tag": "p",
+      "start": 487.37,
+      "preview": "代价是速度。氧化磷酸化的最大功率约 1.0–1.5 mmol..."
+    },
+    {
+      "id": "auto-31",
+      "tag": "h4",
+      "start": 506.93,
+      "preview": "ATP-PCr 磷酸原"
+    },
+    {
+      "id": "auto-32",
+      "tag": "p",
+      "start": 509.12,
+      "preview": "最大功率冠军 · 容量最小 · 6–8 秒耗尽 · 零副产物..."
+    },
+    {
+      "id": "auto-33",
+      "tag": "h4",
+      "start": 517.72,
+      "preview": "糖酵解"
+    },
+    {
+      "id": "auto-34",
+      "tag": "p",
+      "start": 519.02,
+      "preview": "中等功率 · 中等容量 · 2 分钟达极限 · 产 H⁺ 和..."
+    },
+    {
+      "id": "auto-35",
+      "tag": "h4",
+      "start": 527.22,
+      "preview": "有氧氧化"
+    },
+    {
+      "id": "auto-36",
+      "tag": "p",
+      "start": 528.79,
+      "preview": "功率最低 · 容量近乎无限 · 持久王者 · 终产物 CO₂..."
+    },
+    {
+      "id": "auto-37",
+      "tag": "p",
+      "start": 528.79,
+      "preview": "跑步开始第 1 秒,三系统全部启动:ATP-PCr 立即顶上..."
+    },
+    {
+      "id": "auto-38",
+      "tag": "h3",
+      "start": 566.6,
+      "preview": "小节。 4.3跑步项目中的供能分布"
+    },
+    {
+      "id": "auto-39",
+      "tag": "p",
+      "start": 571.2,
+      "preview": "这是把\"三系统耦合\"翻译成具体配速的对照表。注意:这些数字是..."
+    },
+    {
+      "id": "auto-40",
+      "tag": "h3",
+      "start": 584.89,
+      "preview": "小节。 4.4乳酸真相——把它当燃料,不要当废物"
+    },
+    {
+      "id": "auto-41",
+      "tag": "p",
+      "start": 590.35,
+      "preview": "在所有运动生理常识里,被误传最久、纠正最难的一条就是\"乳酸是..."
+    },
+    {
+      "id": "auto-42",
+      "tag": "p",
+      "start": 619.45,
+      "preview": "George Brooks 在 1980–2000 年代连续..."
+    },
+    {
+      "id": "auto-43",
+      "tag": "p",
+      "start": 660.39,
+      "preview": "所以现代生理学家更愿意叫它乳酸阈 lactate thres..."
+    },
+    {
+      "id": "auto-44",
+      "tag": "p",
+      "start": 685.54,
+      "preview": "原理:LT1(约 2 mmol/L)= 乳酸首次脱离基线的强..."
+    },
+    {
+      "id": "auto-45",
+      "tag": "h4",
+      "start": 725.35,
+      "preview": "乳酸穿梭 Lactate Shuttle"
+    },
+    {
+      "id": "auto-46",
+      "tag": "p",
+      "start": 727.97,
+      "preview": "乳酸在体内有三个主要去向:"
+    },
+    {
+      "id": "auto-47",
+      "tag": "li",
+      "start": 727.97,
+      "preview": "细胞内穿梭:同一肌纤维内,快肌区产生的乳酸通过单羧酸转运蛋白..."
+    },
+    {
+      "id": "auto-48",
+      "tag": "li",
+      "start": 727.97,
+      "preview": "器官间穿梭:工作肌产生的乳酸进入血液,被心肌、安静肌肉、肾脏..."
+    },
+    {
+      "id": "auto-49",
+      "tag": "li",
+      "start": 727.97,
+      "preview": "Cori 循环:肝脏从血液中摄取乳酸,通过糖异生 (gluc..."
+    },
+    {
+      "id": "auto-50",
+      "tag": "p",
+      "start": 727.97,
+      "preview": "训练有素的耐力运动员的乳酸代谢能力远超普通人——同样配速下血..."
+    },
+    {
+      "id": "auto-51",
+      "tag": "p",
+      "start": 791.35,
+      "preview": "看到血乳酸读数,把它当作\"糖酵解贡献的相对指标\",而不是\"疲..."
+    },
+    {
+      "id": "auto-52",
+      "tag": "h3",
+      "start": 818.02,
+      "preview": "小节。 4.5燃料底物——三种货架的容量与单价"
+    },
+    {
+      "id": "auto-53",
+      "tag": "p",
+      "start": 823.9,
+      "preview": "如果说三大供能系统是不同的\"加工厂\",那么底物就是输入的原料..."
+    },
+    {
+      "id": "auto-54",
+      "tag": "p",
+      "start": 841.61,
+      "preview": "注意上表两个对照:糖原储量小但氧化快 (4 g/min)、脂..."
+    },
+    {
+      "id": "auto-55",
+      "tag": "h3",
+      "start": 879.33,
+      "preview": "小节。 4.6底物利用 × 强度——Crossover Co..."
+    },
+    {
+      "id": "auto-56",
+      "tag": "p",
+      "start": 884.84,
+      "preview": "George Brooks 在 1994 年提出 cross..."
+    },
+    {
+      "id": "auto-57",
+      "tag": "p",
+      "start": 905.9,
+      "preview": "原理:Crossover Concept = 强度上升时脂肪..."
+    },
+    {
+      "id": "auto-58",
+      "tag": "p",
+      "start": 939.09,
+      "preview": "这张图有几个关键解读:"
+    },
+    {
+      "id": "auto-59",
+      "tag": "li",
+      "start": 939.09,
+      "preview": "Crossover 点大约在 50% VO2max 处(对应..."
+    },
+    {
+      "id": "auto-60",
+      "tag": "li",
+      "start": 939.09,
+      "preview": "FATmax(脂肪绝对氧化速率峰值)出现在 40–60% V..."
+    },
+    {
+      "id": "auto-61",
+      "tag": "li",
+      "start": 939.09,
+      "preview": "训练适应让 crossover 点右移,意味着同样配速下脂肪..."
+    },
+    {
+      "id": "auto-62",
+      "tag": "li",
+      "start": 939.09,
+      "preview": "在 Z5 (90%+ VO2max) 时脂肪贡献接近零,几乎..."
+    },
+    {
+      "id": "auto-63",
+      "tag": "p",
+      "start": 980.3,
+      "preview": "想训练脂肪利用:在 FATmax 区(约 65–75% HR..."
+    },
+    {
+      "id": "auto-64",
+      "tag": "h3",
+      "start": 1020.8,
+      "preview": "小节。 4.7VO2max——氧的最大流量"
+    },
+    {
+      "id": "auto-65",
+      "tag": "p",
+      "start": 1025.3,
+      "preview": "最大摄氧量 VO2max(maximal oxygen up..."
+    },
+    {
+      "id": "auto-66",
+      "tag": "p",
+      "start": 1046.11,
+      "preview": "原理:VO2max = 每分钟每公斤体重能消耗的最大氧气量(..."
+    },
+    {
+      "id": "auto-67",
+      "tag": "p",
+      "start": 1076.22,
+      "preview": "典型范围:"
+    },
+    {
+      "id": "auto-68",
+      "tag": "li",
+      "start": 1076.22,
+      "preview": "久坐成年男性 35–45,久坐女性 28–35"
+    },
+    {
+      "id": "auto-69",
+      "tag": "li",
+      "start": 1076.22,
+      "preview": "业余跑者男性 50–60,女性 45–55"
+    },
+    {
+      "id": "auto-70",
+      "tag": "li",
+      "start": 1076.22,
+      "preview": "精英长跑男性 70–80,女性 60–70"
+    },
+    {
+      "id": "auto-71",
+      "tag": "li",
+      "start": 1076.22,
+      "preview": "世界级跑步运动员男性 80–88(Kipchoge 估计 8..."
+    },
+    {
+      "id": "auto-72",
+      "tag": "li",
+      "start": 1076.22,
+      "preview": "世界级越野滑雪/自行车运动员可达 90–96(Bjørn D..."
+    },
+    {
+      "id": "auto-73",
+      "tag": "h4",
+      "start": 1104.74,
+      "preview": "Fick 方程——VO2max 的解剖结构"
+    },
+    {
+      "id": "auto-74",
+      "tag": "p",
+      "start": 1108.64,
+      "preview": "VO2 = Q × (a-vO2 diff) = SV × ..."
+    },
+    {
+      "id": "auto-75",
+      "tag": "p",
+      "start": 1108.64,
+      "preview": "原理:Fick 方程 VO2 = Q × (a-vO2 di..."
+    },
+    {
+      "id": "auto-76",
+      "tag": "li",
+      "start": 1152.09,
+      "preview": "Q = 心输出量 cardiac output = 每搏量 ..."
+    },
+    {
+      "id": "auto-77",
+      "tag": "li",
+      "start": 1152.09,
+      "preview": "a-vO2 diff = 动静脉血氧差 = 单位血液中肌肉提..."
+    },
+    {
+      "id": "auto-78",
+      "tag": "p",
+      "start": 1152.09,
+      "preview": "这意味着 VO2max 由两部分决定:中央因素(心脏每分钟泵..."
+    },
+    {
+      "id": "auto-79",
+      "tag": "p",
+      "start": 1191.32,
+      "preview": "VO2max 是\"上限\",训练能提升 10–25%,但很难超..."
+    },
+    {
+      "id": "auto-80",
+      "tag": "p",
+      "start": 1214.42,
+      "preview": "① 测:找一段 1.6 公里平直路,做一次 Cooper 1..."
+    },
+    {
+      "id": "auto-81",
+      "tag": "p",
+      "start": 1235.72,
+      "preview": "② 改:VO2max 拉升靠 HIIT。每周 1 次:5 ×..."
+    },
+    {
+      "id": "auto-82",
+      "tag": "p",
+      "start": 1250.76,
+      "preview": "③ 看:每月重测 Cooper。8 周后没动 = 已逼近遗传..."
+    },
+    {
+      "id": "auto-83",
+      "tag": "p",
+      "start": 1263.01,
+      "preview": "你 35 岁、体重 70 kg、平常 5:30/km 巡航。..."
+    },
+    {
+      "id": "auto-84",
+      "tag": "p",
+      "start": 1276.04,
+      "preview": "0-2 min:你按 4:30/km 出发,感觉\"还行\"。心..."
+    },
+    {
+      "id": "auto-85",
+      "tag": "p",
+      "start": 1292.2,
+      "preview": "2-6 min:VO2 已经接近 100%。心率冲到 175..."
+    },
+    {
+      "id": "auto-86",
+      "tag": "p",
+      "start": 1307.07,
+      "preview": "6-10 min:地狱区。心率 185,呼吸 1:1。你想减..."
+    },
+    {
+      "id": "auto-87",
+      "tag": "p",
+      "start": 1325.09,
+      "preview": "10-12 min:有人会\"加速冲刺\"——这其实是大脑保留的..."
+    },
+    {
+      "id": "auto-88",
+      "tag": "h3",
+      "start": 1354.7,
+      "preview": "小节。 4.8乳酸阈、通气阈、临界速度——三条不同的\"边界线..."
+    },
+    {
+      "id": "auto-89",
+      "tag": "p",
+      "start": 1361.59,
+      "preview": "VO2max 是\"功率天花板\",但日常训练和比赛配速由另外几..."
+    },
+    {
+      "id": "auto-90",
+      "tag": "h4",
+      "start": 1381.22,
+      "preview": "有氧阈 AeT / LT1 / VT1"
+    },
+    {
+      "id": "auto-91",
+      "tag": "p",
+      "start": 1384.47,
+      "preview": "第一个相变:血乳酸首次脱离基线、通气量呼吸频率开始非线性上升..."
+    },
+    {
+      "id": "auto-92",
+      "tag": "h4",
+      "start": 1404.77,
+      "preview": "乳酸阈 LT2 / AT / RCP"
+    },
+    {
+      "id": "auto-93",
+      "tag": "p",
+      "start": 1407.97,
+      "preview": "第二个相变:血乳酸从约 2 mmol/L 升至 4 mmol..."
+    },
+    {
+      "id": "auto-94",
+      "tag": "h4",
+      "start": 1439.27,
+      "preview": "临界速度 CV / 临界功率 CP"
+    },
+    {
+      "id": "auto-95",
+      "tag": "p",
+      "start": 1443.08,
+      "preview": "来自 Monod 与 Scherrer 在 1965 年提出..."
+    },
+    {
+      "id": "auto-96",
+      "tag": "p",
+      "start": 1464.86,
+      "preview": "跑步中等价为临界速度 critical velocity:通..."
+    },
+    {
+      "id": "auto-97",
+      "tag": "p",
+      "start": 1485.55,
+      "preview": "从 AeT 到 LT2 之间是稳态可承受区:乳酸保持稳定,糖..."
+    },
+    {
+      "id": "auto-98",
+      "tag": "h3",
+      "start": 1522.81,
+      "preview": "小节。 4.9VO2 慢成分——为什么\"匀速跑\"其实在缓慢加..."
+    },
+    {
+      "id": "auto-99",
+      "tag": "p",
+      "start": 1529.16,
+      "preview": "把递增运动中的 VO2 曲线放大,你会发现一件违反直觉的事:..."
+    },
+    {
+      "id": "auto-100",
+      "tag": "p",
+      "start": 1553.93,
+      "preview": "它的来源有三:"
+    },
+    {
+      "id": "auto-101",
+      "tag": "li",
+      "start": 1553.93,
+      "preview": "原本只用 I 型纤维就够,后来被迫征召 IIa 甚至 IIx..."
+    },
+    {
+      "id": "auto-102",
+      "tag": "li",
+      "start": 1553.93,
+      "preview": "核心温度上升导致 Q10 效应,代谢率自然增加约 10–15..."
+    },
+    {
+      "id": "auto-103",
+      "tag": "li",
+      "start": 1553.93,
+      "preview": "呼吸做功上升(高强度时通气量 100–200 L/min,呼..."
+    },
+    {
+      "id": "auto-104",
+      "tag": "p",
+      "start": 1553.93,
+      "preview": "在 5K–半马区间,慢成分是\"为什么我能跑前 3 km 配速..."
+    },
+    {
+      "id": "auto-105",
+      "tag": "p",
+      "start": 1597.04,
+      "preview": "① 测:下一次 5K 比赛,把每公里配速记下来。如果第 5 ..."
+    },
+    {
+      "id": "auto-106",
+      "tag": "p",
+      "start": 1610.73,
+      "preview": "② 改:5K-10K 配速训练里加 progressive ..."
+    },
+    {
+      "id": "auto-107",
+      "tag": "p",
+      "start": 1623.31,
+      "preview": "③ 看:用跑表看 HR 漂移——同样配速下,30 分钟内心率..."
+    },
+    {
+      "id": "auto-108",
+      "tag": "h3",
+      "start": 1635.7,
+      "preview": "小节。 4.10跑步经济性 RE——能量利用效率的钥匙"
+    },
+    {
+      "id": "auto-109",
+      "tag": "p",
+      "start": 1641.84,
+      "preview": "两位 VO2max 都是 70 的跑者,马拉松成绩可能差 1..."
+    },
+    {
+      "id": "auto-110",
+      "tag": "p",
+      "start": 1659.87,
+      "preview": "原理:RE(Running Economy)= 每公里每公斤..."
+    },
+    {
+      "id": "auto-111",
+      "tag": "p",
+      "start": 1692.78,
+      "preview": "RE 的定义是每公里每公斤体重的耗氧量(ml O₂/kg/k..."
+    },
+    {
+      "id": "auto-112",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "精英黑人长跑运动员 170–185 ml/kg/km(肯尼亚..."
+    },
+    {
+      "id": "auto-113",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "精英非洲外长跑运动员 190–210"
+    },
+    {
+      "id": "auto-114",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "业余高水平跑者 210–230"
+    },
+    {
+      "id": "auto-115",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "初级业余跑者 240–270"
+    },
+    {
+      "id": "auto-116",
+      "tag": "p",
+      "start": 1692.78,
+      "preview": "影响 RE 的因素是一个长名单,排序大致按效应大小:"
+    },
+    {
+      "id": "auto-117",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "肌腱刚度(尤其跟腱)——弹性储能效率,占 RE 的 ~35%"
+    },
+    {
+      "id": "auto-118",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "体重——直接的几何缩放,每减 1% 体重 ~ 减 0.7% ..."
+    },
+    {
+      "id": "auto-119",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "力量与神经驱动——力量训练能提升 RE 4–8%(Beatt..."
+    },
+    {
+      "id": "auto-120",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "跑姿与垂直振幅——多余的上下振幅 = 浪费的能量"
+    },
+    {
+      "id": "auto-121",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "肌纤维构成——I 型纤维占比高的人 RE 自然低"
+    },
+    {
+      "id": "auto-122",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "跑鞋——超临界泡棉 + 碳板鞋 (Vaporfly 等) 提..."
+    },
+    {
+      "id": "auto-123",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "步频——接近自选步频时 RE 最低,人为强行改变会临时降低 ..."
+    },
+    {
+      "id": "auto-124",
+      "tag": "li",
+      "start": 1692.78,
+      "preview": "跑龄——即使 VO2max 已经稳定,RE 仍可在 5–10..."
+    },
+    {
+      "id": "auto-125",
+      "tag": "p",
+      "start": 1692.78,
+      "preview": "普通跑者训练 1 年 VO2max 可能提升 10–15%,..."
+    },
+    {
+      "id": "auto-126",
+      "tag": "h3",
+      "start": 1792.56,
+      "preview": "小节。 4.11耐力表现三角模型"
+    },
+    {
+      "id": "auto-127",
+      "tag": "p",
+      "start": 1796.89,
+      "preview": "把上面三个概念合起来,Joyner 在 1991 年提出了至..."
+    },
+    {
+      "id": "auto-128",
+      "tag": "p",
+      "start": 1796.89,
+      "preview": "Performance ≈ VO2max × %VO2max..."
+    },
+    {
+      "id": "auto-129",
+      "tag": "p",
+      "start": 1796.89,
+      "preview": "三个因子缺一不可:"
+    },
+    {
+      "id": "auto-130",
+      "tag": "li",
+      "start": 1796.89,
+      "preview": "VO2max——氧的最大流量,你的引擎排量"
+    },
+    {
+      "id": "auto-131",
+      "tag": "li",
+      "start": 1796.89,
+      "preview": "%VO2max maintainable——比赛中能维持的 ..."
+    },
+    {
+      "id": "auto-132",
+      "tag": "li",
+      "start": 1821.56,
+      "preview": "1/RE——经济性的倒数,每单位氧能产生多少速度"
+    },
+    {
+      "id": "auto-133",
+      "tag": "p",
+      "start": 1821.56,
+      "preview": "Kipchoge 在 INEOS 1:59 挑战时的估计值:..."
+    },
+    {
+      "id": "auto-134",
+      "tag": "h3",
+      "start": 1867.02,
+      "preview": "小节。 4.12撞墙——糖原耗尽的代谢级联"
+    },
+    {
+      "id": "auto-135",
+      "tag": "p",
+      "start": 1872.26,
+      "preview": "马拉松 30–35 km 之间,大多数业余跑者会经历\"撞墙\"..."
+    },
+    {
+      "id": "auto-136",
+      "tag": "h4",
+      "start": 1888.16,
+      "preview": "撞墙的代谢链"
+    },
+    {
+      "id": "auto-137",
+      "tag": "li",
+      "start": 1890.32,
+      "preview": "肌糖原降至临界值(<80 mmol/kg 湿重,约初始的 2..."
+    },
+    {
+      "id": "auto-138",
+      "tag": "li",
+      "start": 1890.32,
+      "preview": "脂肪氧化达到上限(~0.7 g/min,提供约 7 kcal..."
+    },
+    {
+      "id": "auto-139",
+      "tag": "li",
+      "start": 1890.32,
+      "preview": "肝糖原也耗尽——血糖开始下降,大脑供能危机(脑只用葡萄糖和酮..."
+    },
+    {
+      "id": "auto-140",
+      "tag": "li",
+      "start": 1890.32,
+      "preview": "中枢神经下调运动单元招募——这是大脑的自我保护反应,避免低血..."
+    },
+    {
+      "id": "auto-141",
+      "tag": "li",
+      "start": 1890.32,
+      "preview": "感知用力 RPE 飙升——同样的配速感觉变得不可承受"
+    },
+    {
+      "id": "auto-142",
+      "tag": "li",
+      "start": 1890.32,
+      "preview": "肌肉痉挛 + 神经-肌肉协调下降——电解质失衡 + Ca²⁺..."
+    },
+    {
+      "id": "auto-143",
+      "tag": "p",
+      "start": 1890.32,
+      "preview": "典型撞墙时间预测:全程跑 4 小时的跑者,体重 70 kg,..."
+    },
+    {
+      "id": "auto-144",
+      "tag": "p",
+      "start": 1954.53,
+      "preview": "1. 扩大糖原储备:赛前 3 天 carb-loading ..."
+    },
+    {
+      "id": "auto-145",
+      "tag": "p",
+      "start": 2002.82,
+      "preview": "假设你 70 kg、目标 4:00 完赛、平均配速 5:42..."
+    },
+    {
+      "id": "auto-146",
+      "tag": "p",
+      "start": 2024.69,
+      "preview": "0-15 km:配速稳,糖/脂 70/30 供能,每小时 ~..."
+    },
+    {
+      "id": "auto-147",
+      "tag": "p",
+      "start": 2042.39,
+      "preview": "15-28 km:腿开始沉,但配速能维持。肌糖原降到 50%..."
+    },
+    {
+      "id": "auto-148",
+      "tag": "p",
+      "start": 2063.29,
+      "preview": "28-32 km:著名的\"墙\"。肌糖原跌破临界 80 mmo..."
+    },
+    {
+      "id": "auto-149",
+      "tag": "p",
+      "start": 2087.34,
+      "preview": "32-42 km:勉强续航,纯脂肪模式 + 残余糖类 + 高..."
+    },
+    {
+      "id": "auto-150",
+      "tag": "h3",
+      "start": 2113.73,
+      "preview": "小节。 4.13代谢灵活性——精英跑者的隐藏货币"
+    },
+    {
+      "id": "auto-151",
+      "tag": "p",
+      "start": 2119.45,
+      "preview": "\"代谢灵活性\"(metabolic flexibility)..."
+    },
+    {
+      "id": "auto-152",
+      "tag": "p",
+      "start": 2139.19,
+      "preview": "代谢灵活性的标志:"
+    },
+    {
+      "id": "auto-153",
+      "tag": "li",
+      "start": 2139.19,
+      "preview": "同强度下脂肪氧化率更高,糖原节约"
+    },
+    {
+      "id": "auto-154",
+      "tag": "li",
+      "start": 2139.19,
+      "preview": "同强度下血乳酸更低"
+    },
+    {
+      "id": "auto-155",
+      "tag": "li",
+      "start": 2139.19,
+      "preview": "VO2 动力学更快(开始运动后 60s 内达稳态)"
+    },
+    {
+      "id": "auto-156",
+      "tag": "li",
+      "start": 2139.19,
+      "preview": "恢复期 EPOC 期糖原再合成更快"
+    },
+    {
+      "id": "auto-157",
+      "tag": "li",
+      "start": 2139.19,
+      "preview": "静息空腹 RER 接近 0.75(纯脂肪)而非 0.85(混..."
+    },
+    {
+      "id": "auto-158",
+      "tag": "p",
+      "start": 2139.19,
+      "preview": "训练带来的核心代谢适应包括:线粒体生物发生(PGC-1α 通..."
+    },
+    {
+      "id": "auto-159",
+      "tag": "h3",
+      "start": 2187.32,
+      "preview": "小节。 4.14把代谢翻译成训练——一张速查表"
+    },
+    {
+      "id": "auto-160",
+      "tag": "p",
+      "start": 2193.44,
+      "preview": "把这一章的所有概念回到地面,这里是把\"代谢区间\"翻译成具体训..."
+    },
+    {
+      "id": "auto-161",
+      "tag": "p",
+      "start": 2208.19,
+      "preview": "Z1 恢复: 30-45 min 慢跑,能哼歌。比赛后第二天..."
+    },
+    {
+      "id": "auto-162",
+      "tag": "p",
+      "start": 2215.14,
+      "preview": "Z2 基础: 周末早 90-150 min,能边跑边讲整句话..."
+    },
+    {
+      "id": "auto-163",
+      "tag": "p",
+      "start": 2224.27,
+      "preview": "Z3 灰区: 60-90 min 马拉松配速,只能讲短句。少..."
+    },
+    {
+      "id": "auto-164",
+      "tag": "p",
+      "start": 2233.27,
+      "preview": "Z4 阈值: 20-40 min 单段或 4 × 8 min..."
+    },
+    {
+      "id": "auto-165",
+      "tag": "p",
+      "start": 2242.95,
+      "preview": "Z5 间歇: 5 × 3-5 min 接近 5K-3K 配速..."
+    },
+    {
+      "id": "auto-166",
+      "tag": "p",
+      "start": 2252.45,
+      "preview": "Z6 神经: 8-12 × 30-60 s 全力冲刺,3 分..."
+    },
+    {
+      "id": "auto-167",
+      "tag": "p",
+      "start": 2263.56,
+      "preview": "下一次去测一个\"30 分钟全力测试\"——找一段平直无干扰路段..."
+    },
+    {
+      "id": "auto-168",
+      "tag": "p",
+      "start": 2298.14,
+      "preview": "跑步表现的代谢基础是三个变量的乘积:VO2max(发动机大小..."
+    },
+    {
+      "id": "auto-169",
+      "tag": "p",
+      "start": 2338.11,
+      "preview": "主要参考:[Brooks 2018 · Cell Metab..."
+    },
+    {
+      "id": "auto-170",
+      "tag": "h4",
+      "start": 2359.69,
+      "preview": "协议 1 · Cooper 12 分钟测试推 VO2max"
+    },
+    {
+      "id": "auto-171",
+      "tag": "li",
+      "start": 2364.2,
+      "preview": "测什么: 12 分钟全力跑的距离 → 反推 VO2max"
+    },
+    {
+      "id": "auto-172",
+      "tag": "li",
+      "start": 2364.2,
+      "preview": "工具: 跑表 + 400m 标准跑道(或一段平直无干扰路),..."
+    },
+    {
+      "id": "auto-173",
+      "tag": "li",
+      "start": 2364.2,
+      "preview": "步骤: 启动跑表 → 全力均速 12 分钟 → 记录总距离 ..."
+    },
+    {
+      "id": "auto-174",
+      "tag": "li",
+      "start": 2364.2,
+      "preview": "频率: 每 6-8 周 1 次,训练初期可月度"
+    },
+    {
+      "id": "auto-175",
+      "tag": "li",
+      "start": 2364.2,
+      "preview": "判读: 业余男性 45-55 / 业余女性 38-48 算合..."
+    },
+    {
+      "id": "auto-176",
+      "tag": "h4",
+      "start": 2398.87,
+      "preview": "协议 2 · 30 分钟全力跑推 LT2"
+    },
+    {
+      "id": "auto-177",
+      "tag": "li",
+      "start": 2403.01,
+      "preview": "测什么: 30 分钟可持续最高配速 → LT2 配速;后 2..."
+    },
+    {
+      "id": "auto-178",
+      "tag": "li",
+      "start": 2403.01,
+      "preview": "工具: 跑表(开启秒级配速 + 心率)+ 一段 8-10 k..."
+    },
+    {
+      "id": "auto-179",
+      "tag": "li",
+      "start": 2403.01,
+      "preview": "步骤: 热身 15 min Z2 → 全力均速跑 30 mi..."
+    },
+    {
+      "id": "auto-180",
+      "tag": "li",
+      "start": 2403.01,
+      "preview": "频率: 每 8-12 周 1 次"
+    },
+    {
+      "id": "auto-181",
+      "tag": "li",
+      "start": 2403.01,
+      "preview": "判读: LTHR 反推 Z1-Z5:Z1 100%。多数业余..."
+    },
+    {
+      "id": "auto-182",
+      "tag": "h4",
+      "start": 2439.15,
+      "preview": "协议 3 · Z2 巡航空腹脂肪氧化测试"
+    },
+    {
+      "id": "auto-183",
+      "tag": "li",
+      "start": 2443.05,
+      "preview": "测什么: 空腹晨跑 60 min Z2 后的精神状态与配速维..."
+    },
+    {
+      "id": "auto-184",
+      "tag": "li",
+      "start": 2443.05,
+      "preview": "工具: 跑表(心率带必备,腕表光学心率在低强度下不够准)"
+    },
+    {
+      "id": "auto-185",
+      "tag": "li",
+      "start": 2443.05,
+      "preview": "步骤: 起床后只喝水 → 30 min 内开跑 → 严格保持..."
+    },
+    {
+      "id": "auto-186",
+      "tag": "li",
+      "start": 2443.05,
+      "preview": "频率: 每周 1 次,马拉松备战期 12 周"
+    },
+    {
+      "id": "auto-187",
+      "tag": "li",
+      "start": 2443.05,
+      "preview": "判读: 60 min 后能轻松完成、配速无显著下降 → 脂肪..."
+    }
+  ]
+}
