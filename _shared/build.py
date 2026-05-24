@@ -223,6 +223,15 @@ def inject_chapter_enhancements(html: str, recap_data: dict) -> str:
         return html
     section_id = sec_match.group(1)
 
+    # v6.1 修复:给 section 加 class="chapter"(让 CSS content-visibility + reader.js 都能识别)
+    # 只在没有 class 时加(避免重复)
+    html = re.sub(
+        r'<section(\s+(?!class=)[^>]*)?id="(s\d+)"',
+        lambda m: '<section' + (m.group(1) or '') + ' class="chapter" id="' + m.group(2) + '"',
+        html,
+        count=1
+    )
+
     # -1) SVG 颜色反色:把暗色版 SVG 颜色批量映射成 Newsprint 浅色
     html = remap_svg_colors(html)
 

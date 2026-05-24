@@ -171,12 +171,12 @@
   }
 
   function chunkId(node, fallbackIdx) {
-    // 优先用现有 id
-    if (node.id) return 'reader-' + node.id;
-    var chapter = node.closest('.chapter');
-    var chapterId = chapter ? (chapter.id || 'chx') : 'chx';
-    // 用 chapter id + 顺序 hash
-    return 'reader-' + chapterId + '-' + fallbackIdx;
+    // v6.1 修复:必须与 audio-gen.py 的 ID 生成完全一致,否则 audio mode 段落高亮失效
+    // audio-gen.py 用 `tag.get('data-reader-id') or f'auto-{auto_id}'`
+    // 这里也用 data-reader-id 优先(已存在的),否则用 'auto-' + 顺序索引
+    var existing = node.getAttribute && node.getAttribute('data-reader-id');
+    if (existing) return existing;
+    return 'auto-' + fallbackIdx;
   }
 
   function classify(node) {
