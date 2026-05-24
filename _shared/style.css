@@ -1117,6 +1117,47 @@ footer .colophon h4 {
   margin: 32px 0 14px;
 }
 
+/* ─── Footer Signature (v8.6 · 署名块) ─────────────────────── */
+footer .signature {
+  max-width: 720px;
+  margin: 56px auto 0;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+footer .signature .sig-name {
+  font-family: var(--ff-serif);
+  font-size: 26px;
+  font-style: italic;
+  color: var(--ink);
+  margin: 0 0 8px;
+  letter-spacing: 0.06em;
+}
+footer .signature .sig-meta {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+footer .signature .sig-link {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  margin: 0;
+}
+footer .signature .sig-link a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--ink-faint);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+footer .signature .sig-link a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 /* ─── Progress Bar ───────────────────────────────────────── */
 .progress-bar {
   position: fixed; top: 0; left: 0; height: 2px; width: 0;
@@ -1485,6 +1526,9 @@ footer .colophon h4 {
   footer .colophon { font-size: 13px; padding-top: 32px; }
   footer .colophon p { font-size: 13px; }
   footer .colophon h4 { font-size: 9.5px; margin: 24px 0 10px; }
+  footer .signature { margin-top: 44px; padding-top: 28px; }
+  footer .signature .sig-name { font-size: 22px; }
+  footer .signature .sig-meta { font-size: 10px; }
 
   /* Tooltip · 移动端简化定位 */
   .term-tooltip {

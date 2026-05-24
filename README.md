@@ -4,7 +4,7 @@
 >
 > 🌐 **公开访问:** https://baixiao8.github.io/studies/
 > 📦 **仓库:** https://github.com/Baixiao8/studies
-> 🏷️ **当前版本:** v8.3 · 听书组件通用化(每章/每节 🎧 入口 / 自动接下章 / Wake Lock / 4 档倍速 / 跨报告复用)
+> 🏷️ **当前版本:** v8.6 · 极简署名尾页 + X 科学深度调研命名 + 听书组件通用化
 
 ---
 
