@@ -76,6 +76,97 @@
 
 ---
 
+## v8.x · 听书组件成熟化 · 多报告通用(2026-05-24)
+
+v7 极简化后,经过用户实测反馈迭代 4 个小版本,听书功能定型为**真正的通用公共组件**。
+
+### v8.0 · Apple 风格 + 章节入口 + 当前位置起播
+
+针对 v7 入口隐藏(只 URL/R 键)违背"移动端为先"的反思:
+
+- **章节入口**:每章 h1.section-h 旁注入 "🎧 听这章" Apple Pill
+- **从当前段起播**:`getStartNode()` 找视口里第一个完整可见的可读段
+- **SVG icon 系统**:Lucide / SF Symbols 风格,统一描边 1.75 / viewBox 24×24
+- **跨平台一致**:不再用 emoji ▶ ⏸ ✕,改 inline SVG
+
+### v8.0.1 · 修截图竞态 bug
+
+reader.css 异步加载期间 overlay 透明 → 底层文字穿透。修:99_footer.html bootstrap 内联 overlay 底色保底。
+
+### v8.1 · 小节入口 + 章末自动接下章
+
+用户实测后反馈:
+
+- **小节入口**:每个 h3 旁注入 mini 纯图标 pill(26×26 圆形,更克制)
+- **自动接下章**:用户没主动暂停 → 章末 800ms 停顿 → 自动接下章
+- **关键修复**:`extractText` clone + 移除 .reader-entry-btn → 朗读时不读"听这章"按钮文字
+
+### v8.2 · 图标 size 修复 + Wake Lock
+
+- **图标尺寸**:reader.css 给 button 内 SVG 明确 width/height(防 SVG 撑满 44px 容器)
+- **Wake Lock API**:`navigator.wakeLock.request('screen')` 防屏幕自动息屏
+- **诚实声明**:用户主动锁屏(按电源键)Web 平台无解,自动息屏可防
+
+### v8.3 · 真正的通用化 · 抽 bootstrap 到 _shared/
+
+之前 bootstrap script + entry CSS 都 inline 在每个报告的 `parts/99_footer.html`。新增报告要复制粘贴,不算通用。
+
+**v8.3 改造**:
+
+```
+_shared/reader-bootstrap.css(76 行)  · 入口层样式
+_shared/reader-bootstrap.js (104 行)  · 入口注入 + 触发
+_shared/reader.js          (348 行)  · 按需加载,完整 reader
+_shared/reader.css         (188 行)  · 按需加载,完整样式
+
+build.py inline 阶段自动把 reader-bootstrap.{css,js} 内联到 index.html
+完整 reader.{css,js} 仍按需加载(零首屏代价)
+```
+
+**新报告接入只需 2 行**:
+```html
+<!-- parts/00_hero.html -->
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css">
+
+<!-- parts/99_footer.html -->
+<script src="../../_shared/reader-bootstrap.js" defer></script>
+```
+
+build.py 自动 inline。每个章节标题自动出现"🎧 听这章"入口。
+
+### 同步改造:康复科学报告(2026-05-rehab-science)接入
+
+之前康复报告还是老 v6 状态(引着 reader.js,加载完整 reader)。v8.3 同步接入新 bootstrap:
+
+- 删除 `<link rel="stylesheet" href="reader.css">` 引用(避免首屏强加载)
+- 删除 `<script src="reader.js">` 引用(改为 bootstrap)
+- 加 reader-bootstrap.{css,js} 引用
+- rebuild 后 12 章自动获得"🎧 听这章" + "🎧" 小节入口
+
+### 倍速档位:0.75 / 1.0 / 1.25 / 1.5(4 档)
+
+用户实测后请求 + 1.25x(常用日常语速)。
+
+### 通用化效果
+
+| 维度 | v7.0 | v8.3 |
+|---|---|---|
+| 入口位置 | URL / 键盘 R(隐藏) | **每章标题旁 pill 按钮**(可见 / 移动友好) |
+| 小节入口 | 无 | **每节 h3 旁 mini 按钮** |
+| 章末行为 | 停 | **未暂停 → 自动接下章** |
+| Wake Lock | 无 | **播放期间防自动息屏** |
+| 接入成本 | 每报告 130 行复制粘贴 | **2 行 link/script 引用** |
+| 多报告复用 | 跑步报告专属 | **跑步 + 康复 + 未来任意报告** |
+
+### 学到的产品准则(写入 PRINCIPLES.md)
+
+- **入口可见性 > 代码体积**:为了"折叠隐藏"放弃"可发现性"是错的(v7 → v8 反转)
+- **小节粒度 > 大章节粒度**:长报告里"从这一节起播"是真实需求
+- **平台限制 ≠ 我的能力边界**:Web TTS 在 iOS 锁屏停,是诚实告诉用户,不是不停叠加
+- **抽到 _shared/ 才算通用化**:复制粘贴的 bootstrap 不是公共组件
+
+---
+
 ## v7.0 · 听书极简化 · 通用公共组件(2026-05-24)
 
 > 用户决策延续 v6.3 反思:既然要折叠,不如**直接改掉**,把听书作为通用公共组件,

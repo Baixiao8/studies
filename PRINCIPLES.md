@@ -234,3 +234,66 @@ git add . && git commit -m "report: <slug> v1.0" && git push
 - [ ] 分享卡片自动生成(社交媒体的 Open Graph)
 - [ ] 跨报告术语索引页
 - [ ] 数据图的 D3.js 化(目前是手画 SVG,未来交互化)
+
+---
+
+## 📖 听书组件接入指南(v8.3+)
+
+`_shared/reader-bootstrap.{js,css}` + `_shared/reader.{js,css}` 是**所有报告通用**的听书组件。
+
+### 新报告接入(只需 2 行)
+
+```html
+<!-- parts/00_hero.html · head 内 -->
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css?v=20260524c">
+
+<!-- parts/99_footer.html · body 末 -->
+<script src="../../_shared/reader-bootstrap.js?v=20260524c" defer></script>
+```
+
+`build.py` inline 模式会自动把这两个文件内联进 index.html。完整 reader.js / reader.css 按需加载(用户点入口时才下载)。
+
+### 触发方式(用户视角)
+
+1. 点击章节标题旁的 **"🎧 听这章"** pill 按钮(每章)
+2. 点击小节标题旁的 **🎧** mini 按钮(每节,从该节起播)
+3. URL 加 `?listen=1`
+4. 键盘按 R 键
+5. 任意 JS 调用 `window.activateReader()`
+
+### 报告写作约定(让朗读自然)
+
+- **章节大标题用 `<h1 class="section-h">` 或 `<h2>`** — 自动获得"听这章"入口
+- **小节标题用 `<h3>`** — 自动获得 mini "听此节"入口
+- **section 加 `class="chapter"`**(build.py 自动加)
+- **图表 / 装饰加合适 class**(`.hero`, `.svg-frame`, `.kp-*` 等)— 自动从朗读中排除
+- **不要把可朗读的纯文本藏在 SVG 内部** — SVG 整体被跳过
+
+### 听书功能边界(诚实告诉用户做不到什么)
+
+| 能力 | 状态 |
+|---|---|
+| Web Speech API 朗读 | ✅ |
+| 段落起播(任意小节) | ✅ |
+| 倍速 0.75 / 1.0 / 1.25 / 1.5x | ✅ |
+| 章末自动接下章 | ✅ |
+| 防屏幕自动息屏(Wake Lock) | ✅ |
+| iOS Safari 主动锁屏继续播 | ❌ 平台硬伤(30s 系统停 JS) |
+| 预录 MP3 / 多音色 / 段落高亮同步 | ❌ 主动不做(过度叠加) |
+
+### 修改约定
+
+任何 reader 修改在 `_shared/` 一处完成,然后**所有报告 rebuild + 验证**(防止某个报告改了某个没改的不一致)。
+
+---
+
+## 🧠 加功能"三问"(v6.3 反思,长期约束)
+
+每加新功能前**必答**:
+
+1. 用户**明确说要**了吗?(不是一句话引申)
+2. 强化核心 还是 叠加新场景?
+3. 失败的代价是什么?
+
+v5-v6 没认真问 → 1850+ 行听书代码 + 227MB 音频 → 最终砍掉。
+v8.x 每次都先问再做(小节入口 / 自动接下章 / Wake Lock 都过了三问)。

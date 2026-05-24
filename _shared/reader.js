@@ -27,7 +27,7 @@
     '.reader-overlay', '.reader-entry-btn'
   ];
   var INCLUDE_TAGS = 'h2,h3,h4,p,li,blockquote';
-  var RATES = [0.75, 1.0, 1.5];
+  var RATES = [0.75, 1.0, 1.25, 1.5];
 
   // ─── SVG Icons(Lucide 风格,统一描边 1.75 / viewBox 24×24)──
   var ICON = {

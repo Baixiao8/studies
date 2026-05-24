@@ -326,9 +326,10 @@ def build_report(report_dir: Path, external: bool = False):
     # ─── INLINE 模式 (默认) · 把所有外部资源内联进 HTML ───
     if embed:
         print('\n[build] INLINE 模式 · 把 CSS/JS/glossary 内联进单文件 HTML (默认)')
-        # 1) 内联 CSS · 只 inline style.css
-        #    v6.3 起 reader.css 不 inline,按需加载(见 99_footer.html bootstrap)
-        for css_name in ['style.css']:
+        # 1) 内联 CSS · style.css + reader-bootstrap.css(轻量入口层,通用)
+        #    v6.3 起 reader.css 不 inline,按需加载
+        #    v8.3 起 reader-bootstrap.css inline 进首屏(注入章节入口的轻量样式)
+        for css_name in ['style.css', 'reader-bootstrap.css']:
             css_path = shared_dir / css_name
             if not css_path.exists():
                 continue
@@ -340,7 +341,8 @@ def build_report(report_dir: Path, external: bool = False):
         #    关键:JS 注释/字符串里如果包含 </script>,inline 后浏览器会提前关
         #    脚本块,触发 SyntaxError。必须先转义 </script> 为 <\/script>。
         # v6.3 · reader.js 不 inline,按需加载
-        for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js']:
+        # v8.3 · reader-bootstrap.js inline 进首屏(注入入口 + 触发,通用)
+        for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js', 'reader-bootstrap.js']:
             js = (shared_dir / js_name).read_text(encoding='utf-8')
             # 转义 </script> · 大小写不敏感(防 </SCRIPT> 等变体)
             js_safe = re.sub(r'</(script)>', r'<\\/\1>', js, flags=re.IGNORECASE)

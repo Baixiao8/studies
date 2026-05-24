@@ -1,0 +1,92 @@
+/* ==========================================================================
+ * Reader Bootstrap CSS · 通用公共组件 v8.3
+ * 2026-05-24
+ *
+ * 这是 reader 听书组件的「入口层」样式,inline 在每个报告的 head 里:
+ *   - 章节标题旁的"听这章"pill 按钮(每章 h1.section-h / h2)
+ *   - 小节标题旁的纯图标 mini 入口(每节 h3)
+ *   - overlay 底色保底(避免 reader.css 异步加载期间文字穿透)
+ *
+ * 完整 reader.js / reader.css 仍按需加载(触发后),保持首屏轻量。
+ * ========================================================================== */
+
+/* overlay 底色保底(reader.css 异步加载期间防文字透出) */
+.reader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #f0ebdd;
+  display: none;
+}
+.reader-overlay.open {
+  display: flex;
+}
+
+/* 大章节"听这章"入口 · Apple Pill 风格(带文字) */
+.reader-entry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 14px;
+  padding: 5px 12px 5px 10px;
+  background: rgba(168, 66, 59, 0.07);
+  color: #a8423b;
+  border: 1px solid rgba(168, 66, 59, 0.22);
+  border-radius: 18px;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  vertical-align: 0.2em;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+  letter-spacing: 0.01em;
+  -webkit-tap-highlight-color: transparent;
+}
+.reader-entry-btn:hover {
+  background: rgba(168, 66, 59, 0.13);
+  border-color: rgba(168, 66, 59, 0.45);
+}
+.reader-entry-btn:active {
+  transform: scale(0.97);
+}
+.reader-entry-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* 小节迷你入口(纯图标,更克制) */
+.reader-entry-btn.mini {
+  padding: 4px;
+  margin-left: 8px;
+  width: 26px;
+  height: 26px;
+  justify-content: center;
+  gap: 0;
+  border-radius: 50%;
+  vertical-align: 0.05em;
+}
+.reader-entry-btn.mini svg {
+  width: 13px;
+  height: 13px;
+}
+.reader-entry-btn.mini > span {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .reader-entry-btn {
+    font-size: 12px;
+    padding: 5px 11px 5px 9px;
+    margin-left: 10px;
+  }
+  .reader-entry-btn svg { width: 13px; height: 13px; }
+  .reader-entry-btn.mini {
+    width: 24px;
+    height: 24px;
+    padding: 3px;
+    margin-left: 6px;
+  }
+  .reader-entry-btn.mini svg { width: 12px; height: 12px; }
+}
