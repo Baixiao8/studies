@@ -128,7 +128,27 @@
     this.playBtn = null;
     this.chapter = null;        // v8.1 · 记录当前章节用于自动接下章
     this._userPaused = false;   // v8.1 · 用户主动暂停标记
+    this._wakeLock = null;      // v8.2 · Wake Lock 防屏幕自动息屏
   }
+
+  // v8.2 · Wake Lock(防屏幕自动息屏 / 部分缓解 iOS 锁屏停播)
+  // 注意:仅防"系统自动息屏",用户主动锁屏仍会停 — 这是 Web 平台硬限制
+  Reader.prototype._requestWakeLock = function () {
+    var self = this;
+    if (!('wakeLock' in navigator) || this._wakeLock) return;
+    navigator.wakeLock.request('screen')
+      .then(function (lock) {
+        self._wakeLock = lock;
+        lock.addEventListener('release', function () { self._wakeLock = null; });
+      })
+      .catch(function (e) { /* 用户拒绝或不支持,静默 */ });
+  };
+  Reader.prototype._releaseWakeLock = function () {
+    if (this._wakeLock) {
+      try { this._wakeLock.release(); } catch (e) {}
+      this._wakeLock = null;
+    }
+  };
 
   Reader.prototype.open = function (opts) {
     if (this.overlay) return;
@@ -195,6 +215,14 @@
       }
     };
     document.addEventListener('keydown', this._keyHandler);
+
+    // v8.2 · 切到后台再回前台时,wake lock 自动失效,需要重新请求
+    this._visHandler = function () {
+      if (document.visibilityState === 'visible' && self.isPlaying) {
+        self._requestWakeLock();
+      }
+    };
+    document.addEventListener('visibilitychange', this._visHandler);
   };
 
   Reader.prototype.toggle = function () {
@@ -203,6 +231,7 @@
 
   Reader.prototype.play = function () {
     this._userPaused = false;
+    this._requestWakeLock();  // v8.2 · 播放时请求 wake lock
     if (this.synth.paused && this.utter) {
       this.synth.resume();
     } else {
@@ -271,6 +300,7 @@
   Reader.prototype.pause = function () {
     if (this.synth.speaking && !this.synth.paused) this.synth.pause();
     this._userPaused = true;  // v8.1 · 标记主动暂停 → 章末不自动接下章
+    this._releaseWakeLock();  // v8.2 · 暂停时释放 wake lock
     this._setPlaying(false);
   };
 
@@ -285,6 +315,7 @@
   Reader.prototype.close = function () {
     this.synth.cancel();
     this.isPlaying = false;
+    this._releaseWakeLock();  // v8.2 · 关闭释放 wake lock
     if (this.overlay) {
       this.overlay.remove();
       this.overlay = null;
@@ -293,6 +324,10 @@
     if (this._keyHandler) {
       document.removeEventListener('keydown', this._keyHandler);
       this._keyHandler = null;
+    }
+    if (this._visHandler) {
+      document.removeEventListener('visibilitychange', this._visHandler);
+      this._visHandler = null;
     }
   };
 
