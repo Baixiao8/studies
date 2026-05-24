@@ -1,1053 +1,157 @@
 /* ==========================================================================
-   Reader · 阅读 + 听书模式
-   v5.0 · 2026-05-23
-   作者:Claude(主笔) · 白笑(决策)
-   覆盖:_shared/ 框架级,所有报告自动可用
-   ========================================================================== */
+ * Reader · 极简听书组件样式
+ * v7.0 · 2026-05-24
+ *
+ * 通用化重写:无主题切换 / 无字号档位 / 无 Sheet / 无 mini player
+ * 只有最简 3 个控件 + 浮层
+ * ========================================================================== */
 
-/* ─── Reader Trigger · 右下角悬浮按钮 ─────────────────────────── */
-.reader-trigger {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9000;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #a8423b;
-  color: #f0ebdd;
-  border: none;
-  cursor: pointer;
-  font-family: -apple-system, system-ui, sans-serif;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(168, 66, 59, 0.35), 0 2px 6px rgba(0, 0, 0, 0.12);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-.reader-trigger:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 22px rgba(168, 66, 59, 0.45), 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-.reader-trigger:active { transform: translateY(0) scale(0.96); }
-.reader-trigger .reader-trigger-label {
-  position: absolute;
-  right: 64px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #2c2c2c;
-  color: #f0ebdd;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-family: "JetBrains Mono", monospace;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.18s;
-}
-.reader-trigger:hover .reader-trigger-label { opacity: 1; }
-
-/* ─── Reader Overlay · 全屏浮层 ───────────────────────────────── */
 .reader-overlay {
   position: fixed;
   inset: 0;
   z-index: 10000;
+  background: #f0ebdd;
+  color: #1a1a1a;
   display: none;
+  flex-direction: column;
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  animation: rOverlayIn 0.22s ease;
 }
 .reader-overlay.open {
   display: flex;
-  flex-direction: column;
-  animation: readerFadeIn 0.28s ease;
 }
-@keyframes readerFadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes rOverlayIn {
+  from { opacity: 0; transform: scale(0.985); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* ─── 三主题 · CSS Variables ──────────────────────────────────── */
-.reader-overlay[data-theme="paper"] {
-  --r-bg: #f0ebdd;
-  --r-bg-elevated: #ebe5d3;
-  --r-bg-control: rgba(240, 235, 221, 0.96);
-  --r-ink: #1a1a1a;
-  --r-ink-soft: #4a4a4a;
-  --r-ink-faint: #888888;
-  --r-accent: #a8423b;
-  --r-accent-soft: rgba(168, 66, 59, 0.10);
-  --r-accent-bg: rgba(168, 66, 59, 0.07);
-  --r-line: #c4bca4;
-  --r-line-soft: rgba(26, 26, 26, 0.08);
-  --r-highlight-bg: rgba(168, 66, 59, 0.10);
-  --r-highlight-border: #a8423b;
-  --r-btn-bg: rgba(26, 26, 26, 0.06);
-  --r-btn-bg-hover: rgba(26, 26, 26, 0.12);
-  --r-shadow: 0 1px 3px rgba(26, 26, 26, 0.08);
-}
-.reader-overlay[data-theme="dark"] {
-  --r-bg: #1f1f1b;
-  --r-bg-elevated: #2a2a24;
-  --r-bg-control: rgba(31, 31, 27, 0.96);
-  --r-ink: #e8e2d0;
-  --r-ink-soft: #b8b29c;
-  --r-ink-faint: #807a68;
-  --r-accent: #e8a85c;
-  --r-accent-soft: rgba(232, 168, 92, 0.16);
-  --r-accent-bg: rgba(232, 168, 92, 0.10);
-  --r-line: #44443c;
-  --r-line-soft: rgba(232, 226, 208, 0.10);
-  --r-highlight-bg: rgba(232, 168, 92, 0.18);
-  --r-highlight-border: #e8a85c;
-  --r-btn-bg: rgba(232, 226, 208, 0.08);
-  --r-btn-bg-hover: rgba(232, 226, 208, 0.16);
-  --r-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-.reader-overlay[data-theme="green"] {
-  --r-bg: #1c2e1f;
-  --r-bg-elevated: #243a28;
-  --r-bg-control: rgba(28, 46, 31, 0.96);
-  --r-ink: #deead3;
-  --r-ink-soft: #aebca4;
-  --r-ink-faint: #788872;
-  --r-accent: #95c878;
-  --r-accent-soft: rgba(149, 200, 120, 0.16);
-  --r-accent-bg: rgba(149, 200, 120, 0.10);
-  --r-line: #3a4e3c;
-  --r-line-soft: rgba(222, 234, 211, 0.10);
-  --r-highlight-bg: rgba(149, 200, 120, 0.18);
-  --r-highlight-border: #95c878;
-  --r-btn-bg: rgba(222, 234, 211, 0.08);
-  --r-btn-bg-hover: rgba(222, 234, 211, 0.16);
-  --r-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.reader-overlay {
-  background: var(--r-bg);
-  color: var(--r-ink);
-}
-
-/* ─── 字号档位 ────────────────────────────────────────────────── */
-.reader-overlay[data-size="S"] {
-  --r-font-size: 17px;
-  --r-font-size-h2: 26px;
-  --r-font-size-h3: 22px;
-  --r-font-size-h4: 19px;
-}
-.reader-overlay[data-size="M"] {
-  --r-font-size: 20px;
-  --r-font-size-h2: 32px;
-  --r-font-size-h3: 26px;
-  --r-font-size-h4: 22px;
-}
-.reader-overlay[data-size="L"] {
-  --r-font-size: 24px;
-  --r-font-size-h2: 38px;
-  --r-font-size-h3: 30px;
-  --r-font-size-h4: 26px;
-}
-.reader-overlay[data-size="XL"] {
-  --r-font-size: 28px;
-  --r-font-size-h2: 44px;
-  --r-font-size-h3: 34px;
-  --r-font-size-h4: 30px;
-}
-
-/* ─── 行距档位 ────────────────────────────────────────────────── */
-.reader-overlay[data-lh="tight"] { --r-line-height: 1.5; }
-.reader-overlay[data-lh="normal"] { --r-line-height: 1.75; }
-.reader-overlay[data-lh="loose"] { --r-line-height: 2.0; }
-
-/* ─── 控制条(桌面顶部 sticky) ─────────────────────────────────── */
+/* ─── 控制条 ──────────────────────────────────────────────── */
 .reader-controls {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: var(--r-bg-control);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(240, 235, 221, 0.95);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--r-line-soft);
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.08);
 }
-.reader-controls::-webkit-scrollbar { display: none; }
 
-.reader-controls .group {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-}
-.reader-controls .group + .group {
-  border-left: 1px solid var(--r-line-soft);
-  padding-left: 10px;
-  margin-left: 6px;
-}
-.reader-controls .spacer { flex: 1; }
-
-/* ════════════════════════════════════════════════════════════════ */
-/* Design System v1.0 应用 · 控制条规范                              */
-/* ════════════════════════════════════════════════════════════════ */
-
-/* 通用按钮 / select 容器 · 36px 高 / 6px 圆角 / btn-bg 底 */
 .reader-controls button,
-.reader-controls .reader-select-wrap {
-  background: var(--r-btn-bg);
+.reader-controls select {
+  background: rgba(26, 26, 26, 0.06);
   border: none;
-  color: var(--r-ink);
-  cursor: pointer;
-  padding: 0 12px;
+  color: #1a1a1a;
+  padding: 8px 14px;
   border-radius: 6px;
   font-family: "JetBrains Mono", "PingFang SC", monospace;
   font-size: 13px;
-  letter-spacing: 0.02em;
-  transition: background 0.18s ease, transform 0.12s ease, color 0.18s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
   height: 36px;
-  min-height: 36px;
-  flex-shrink: 0;
   box-sizing: border-box;
 }
-.reader-controls button:hover { background: var(--r-btn-bg-hover); }
-.reader-controls button:active { transform: scale(0.96); }
-.reader-controls button.active {
-  background: var(--r-accent);
-  color: var(--r-bg);
+.reader-controls button:hover,
+.reader-controls select:hover {
+  background: rgba(26, 26, 26, 0.12);
+}
+.reader-controls button:active {
+  transform: scale(0.96);
 }
 
-/* 主播放按钮 · 44px 圆形 · accent 红 */
-.reader-controls .reader-play {
-  background: var(--r-accent);
-  color: var(--r-bg);
+/* 主播放按钮 */
+.reader-play {
+  background: #a8423b !important;
+  color: #f0ebdd !important;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  font-size: 14px;
-  padding: 0;
+  border-radius: 50% !important;
+  font-size: 14px !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.reader-controls .reader-play:hover {
-  background: var(--r-accent);
+.reader-play:hover {
+  background: #a8423b !important;
   opacity: 0.88;
 }
 
-/* 上下段按钮 · 36×36 方形圆角 */
-.reader-controls .reader-prev,
-.reader-controls .reader-next {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  font-size: 11px;
-}
-
-/* select 容器 · 与按钮同尺寸,有 ▾ 指示 */
-.reader-select-wrap {
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-}
-.reader-select-wrap select {
-  background: transparent;
-  border: none;
-  color: var(--r-ink);
-  padding: 0 28px 0 12px;
-  height: 36px;
-  font-family: "JetBrains Mono", "PingFang SC", monospace;
-  font-size: 13px;
-  cursor: pointer;
+/* 速度 select */
+.reader-rate {
   appearance: none;
   -webkit-appearance: none;
-  outline: none;
-  width: 100%;
-  box-sizing: border-box;
-}
-.reader-select-wrap::after {
-  content: "▾";
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 10px;
-  pointer-events: none;
-  opacity: 0.55;
-  color: var(--r-ink-soft);
-}
-/* 固定宽度 · 防止 select 内容长短导致控制条抖动 */
-.reader-select-wrap.reader-rate-wrap { width: 72px; }
-.reader-select-wrap.reader-chapter-wrap { width: 168px; }
-.reader-select-wrap.voice-select-wrap { width: 130px; }
-
-/* select option 在某些主题下会用系统默认背景 · 强制可读色 */
-.reader-controls select option {
-  background: var(--r-bg);
-  color: var(--r-ink);
+  padding-right: 28px;
+  position: relative;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(26,26,26,0.5) 50%),
+    linear-gradient(135deg, rgba(26,26,26,0.5) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) calc(50% - 2px),
+    calc(100% - 9px) calc(50% - 2px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
 }
 
-/* ── 主题切换 · 28×28 方形色块 · 选中用 accent 边框 ── */
-.reader-theme-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  background: var(--r-btn-bg);
-  border-radius: 6px;
-  padding: 4px;
-  height: 36px;
-  box-sizing: border-box;
-}
-.reader-theme-group button {
-  width: 28px;
-  height: 28px;
-  min-height: 28px;
-  border-radius: 4px;
-  padding: 0;
-  background: transparent;
-  border: 1.5px solid rgba(0, 0, 0, 0.06);
-  flex-shrink: 0;
-}
-.reader-theme-group button:hover {
-  border-color: rgba(0, 0, 0, 0.12);
-  background: transparent;
-}
-.reader-theme-group button.active {
-  border-color: var(--r-accent);
-  box-shadow: 0 0 0 1.5px var(--r-bg) inset, 0 0 0 2.5px var(--r-accent);
-}
-.reader-theme-group button[data-t="paper"] { background: #f0ebdd; }
-.reader-theme-group button[data-t="dark"] { background: #1f1f1b; }
-.reader-theme-group button[data-t="green"] { background: #1c2e1f; }
-
-/* 关闭按钮 · 透明背景,hover 浮起 */
+/* 关闭按钮 */
 .reader-close {
   background: transparent !important;
-  width: 36px !important;
+  margin-left: auto;
+  width: 36px;
   padding: 0 !important;
-  font-size: 14px !important;
-  color: var(--r-ink-soft) !important;
+  font-size: 14px;
+  color: rgba(26, 26, 26, 0.6) !important;
 }
 .reader-close:hover {
-  background: var(--r-btn-bg) !important;
-  color: var(--r-ink) !important;
+  background: rgba(26, 26, 26, 0.08) !important;
+  color: #1a1a1a !important;
 }
 
-/* 设置按钮 · 桌面永久隐藏(! 重要),只在移动端入口 */
-.reader-settings-btn {
-  display: none !important;
-  width: 36px;
-  padding: 0;
-  font-size: 14px;
-}
-
-/* 音频模式切换按钮 · v6 高音质模式标识 */
-.reader-audio-toggle {
-  background: var(--r-btn-bg);
-  color: var(--r-ink);
-  padding: 0 14px;
-  font-family: "PingFang SC", sans-serif;
-  font-size: 12.5px;
-  white-space: nowrap;
-  border: 1px solid transparent;
-}
-.reader-audio-toggle:hover {
-  background: var(--r-btn-bg-hover);
-}
-.reader-audio-toggle.active {
-  background: var(--r-accent);
-  color: var(--r-bg);
-  border-color: var(--r-accent);
-}
-@media (max-width: 768px) {
-  .reader-audio-toggle {
-    padding: 0 10px;
-    font-size: 11.5px;
-  }
-}
-
-/* ─── 内容区 ───────────────────────────────────────────────── */
+/* ─── 内容区 ─────────────────────────────────────────────── */
 .reader-content {
   flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 60px 32px 200px;
+  padding: 36px 24px 80px;
   scroll-behavior: smooth;
 }
+
 .reader-content-inner {
   max-width: 720px;
   margin: 0 auto;
 }
 
-/* 标题 */
-.reader-content h2 {
-  font-family: "Inter Tight", "PingFang SC", sans-serif;
-  font-size: var(--r-font-size-h2);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 12px;
-  line-height: 1.2;
-  color: var(--r-ink);
-}
-.reader-content h2 + .reader-subtitle {
-  color: var(--r-ink-soft);
-  font-size: calc(var(--r-font-size) * 0.95);
-  margin: -8px 0 32px;
-  font-style: italic;
-}
-.reader-content h3 {
-  font-family: "Inter Tight", "PingFang SC", sans-serif;
-  font-size: var(--r-font-size-h3);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 48px 0 16px;
-  padding-top: 12px;
-  border-top: 1px solid var(--r-line-soft);
-  line-height: 1.25;
-}
-.reader-content h3:first-child { border-top: none; padding-top: 0; margin-top: 0; }
-.reader-content h3 .pre {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.75em;
-  color: var(--r-accent);
-  margin-right: 12px;
-  font-weight: 600;
-}
-.reader-content h4 {
-  font-size: var(--r-font-size-h4);
-  font-weight: 700;
-  margin: 28px 0 12px;
-  letter-spacing: -0.005em;
-  line-height: 1.3;
-}
-
-/* 正文段落 */
-.reader-content p {
-  font-size: var(--r-font-size);
-  line-height: var(--r-line-height);
-  margin: 0 0 18px;
-  color: var(--r-ink);
+.reader-content-inner p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: #1a1a1a;
+  margin: 0 0 1em;
   letter-spacing: 0.005em;
 }
-.reader-content p.lead {
-  font-size: calc(var(--r-font-size) * 1.05);
-  color: var(--r-ink-soft);
-  font-style: italic;
-  margin-bottom: 24px;
-}
 
-/* 列表 */
-.reader-content ul, .reader-content ol {
-  margin: 0 0 18px;
-  padding-left: 1.8em;
-  font-size: var(--r-font-size);
-  line-height: var(--r-line-height);
-}
-.reader-content li { margin: 6px 0; }
-
-/* 强调 */
-.reader-content strong { color: var(--r-accent); font-weight: 700; }
-.reader-content em { color: var(--r-ink); font-style: italic; font-weight: 600; }
-
-/* ─── 白话翻译 .plain ────────────────────────────────────────── */
-.reader-content .plain {
-  margin: 14px 0 24px;
-  padding: 14px 18px 14px 50px;
-  background: var(--r-accent-bg);
-  border-left: 3px solid var(--r-accent);
-  border-radius: 0 6px 6px 0;
-  font-size: calc(var(--r-font-size) * 0.92);
-  line-height: 1.7;
-  color: var(--r-ink-soft);
-  position: relative;
-}
-.reader-content .plain::before {
-  content: "人话";
-  position: absolute;
-  left: 14px;
-  top: 16px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--r-accent);
-  font-weight: 700;
-  padding: 2px 7px;
-  border: 1px solid var(--r-accent);
-  border-radius: 3px;
-  line-height: 1;
-}
-.reader-content .plain strong { color: var(--r-ink); }
-.reader-content .plain em { color: var(--r-accent); font-weight: 500; }
-
-/* ─── Callouts(继承原报告 class) ──────────────────────────────── */
-.reader-content .callout {
-  background: var(--r-bg-elevated);
-  border: 1px solid var(--r-line-soft);
-  border-left: 3px solid var(--r-accent);
-  padding: 20px 24px;
-  margin: 24px 0;
-  border-radius: 0 6px 6px 0;
-}
-.reader-content .callout .label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--r-accent);
-  margin-bottom: 12px;
-  font-weight: 700;
-}
-.reader-content .callout p {
-  margin: 8px 0;
-  font-size: calc(var(--r-font-size) * 0.95);
-}
-.reader-content .callout ol, .reader-content .callout ul {
-  margin: 8px 0;
-  font-size: calc(var(--r-font-size) * 0.95);
-}
-
-/* 反共识 · 红 */
-.reader-content .callout.sharp {
-  border-left-color: #c4564f;
-  background: linear-gradient(135deg, rgba(196, 86, 79, 0.10) 0%, var(--r-bg-elevated) 60%);
-}
-.reader-content .callout.sharp .label { color: #c4564f; }
-
-/* 实操 · 绿 */
-.reader-content .callout.ops { border-left-color: #6db8a0; }
-.reader-content .callout.ops .label { color: #6db8a0; }
-
-/* 第二人称剧本 · 紫 */
-.reader-content .callout.you {
-  border-left-color: #b07cc7;
-  background: linear-gradient(135deg, rgba(176, 124, 199, 0.08) 0%, var(--r-bg-elevated) 60%);
-}
-.reader-content .callout.you .label { color: #b07cc7; }
-
-/* 故事钩子 · 橙 */
-.reader-content .callout.story {
-  border-left-color: #e8a060;
-  font-family: "Inter Tight", "PingFang SC", sans-serif;
-  font-style: italic;
-}
-.reader-content .callout.story .label { color: #e8a060; }
-.reader-content .callout.story p { font-style: italic; }
-
-/* 章末协议 · 蓝灰 + 等宽 */
-.reader-content .callout.protocol {
-  border-left-color: #5a87a8;
-  background: linear-gradient(135deg, rgba(90, 135, 168, 0.10) 0%, var(--r-bg-elevated) 60%);
-  font-family: "JetBrains Mono", "PingFang SC", monospace;
-}
-.reader-content .callout.protocol .label { color: #5a87a8; }
-.reader-content .callout.protocol h4 {
-  font-family: "Inter Tight", "PingFang SC", sans-serif;
-  margin: 14px 0 8px;
-  color: var(--r-ink);
-}
-.reader-content .callout.protocol .stop {
-  margin-top: 14px;
-  padding: 10px 14px;
-  background: rgba(196, 86, 79, 0.12);
-  border-left: 2px solid #c4564f;
-  font-family: "PingFang SC", sans-serif;
-  font-size: calc(var(--r-font-size) * 0.88);
-  color: var(--r-ink);
-  border-radius: 0 4px 4px 0;
-}
-.reader-content .callout.protocol .stop::before {
-  content: "⚠ 何时停 ";
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: #c4564f;
-  font-weight: 700;
-  margin-right: 8px;
-}
-
-/* note / 中性提示 · 灰 */
-.reader-content .callout.note { border-left-color: var(--r-ink-faint); }
-.reader-content .callout.note .label { color: var(--r-ink-soft); }
-
-/* ─── SVG / 表格占位 ─────────────────────────────────────────── */
-.reader-placeholder {
-  margin: 28px 0;
-  padding: 18px 22px;
-  background: var(--r-btn-bg);
-  border: 1px dashed var(--r-line);
-  border-radius: 6px;
-  color: var(--r-ink-soft);
-  font-size: calc(var(--r-font-size) * 0.85);
-  font-style: italic;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.reader-placeholder:hover { background: var(--r-btn-bg-hover); }
-.reader-placeholder::before {
-  content: "▸ ";
-  color: var(--r-accent);
-  font-weight: 700;
-  margin-right: 4px;
-}
-
-/* ─── 当前段落高亮 + 滚动到中央 ──────────────────────────────── */
-.reader-content [data-current="true"] {
-  background: var(--r-highlight-bg);
-  border-left: 3px solid var(--r-highlight-border);
-  padding-left: 14px;
-  margin-left: -17px;
-  border-radius: 0 4px 4px 0;
-  transition: background 0.3s, border-color 0.3s;
-  scroll-margin-top: 35vh;
-  scroll-margin-bottom: 35vh;
-}
-.reader-content [data-current="true"].callout {
-  margin-left: 0;
-  border-left-width: 4px;
-  box-shadow: 0 0 0 2px var(--r-highlight-border);
-}
-
-/* ─── 听书时长估算 ────────────────────────────────────────────── */
-.reader-content .reader-listen-time {
-  display: inline-block;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  color: var(--r-ink-faint);
-  letter-spacing: 0.1em;
-  padding: 3px 8px;
-  border: 1px solid var(--r-line-soft);
-  border-radius: 3px;
-  margin-left: 10px;
-  vertical-align: middle;
-}
-
-/* ─── Mini Player(关闭 overlay 后底部常驻) ────────────────────── */
-.reader-mini {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 8000;
-  background: rgba(26, 26, 26, 0.94);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  color: #f0ebdd;
-  padding: 10px 14px;
-  border-radius: 30px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
-  display: none;
-  align-items: center;
-  gap: 10px;
-  font-family: "PingFang SC", sans-serif;
-  font-size: 13px;
-  min-width: 280px;
-  max-width: calc(100vw - 32px);
-}
-.reader-mini.open { display: flex; }
-.reader-mini button {
-  background: rgba(255, 255, 255, 0.12);
-  border: none;
-  color: #f0ebdd;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  flex-shrink: 0;
-  transition: background 0.15s;
-}
-.reader-mini button:hover { background: rgba(255, 255, 255, 0.22); }
-.reader-mini .reader-mini-play {
-  background: #a8423b;
-  width: 36px;
-  height: 36px;
-}
-.reader-mini .reader-mini-play:hover { background: #c25148; }
-.reader-mini .reader-mini-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-.reader-mini .reader-mini-title {
-  font-weight: 600;
-  font-size: 12.5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.reader-mini .reader-mini-sub {
-  font-size: 10.5px;
-  font-family: "JetBrains Mono", monospace;
-  opacity: 0.7;
-  letter-spacing: 0.04em;
-}
-
-/* ─── iOS 锁屏提示横幅 ──────────────────────────────────────── */
-.reader-ios-warning {
-  margin: 16px 24px 0;
-  padding: 12px 16px;
-  background: rgba(232, 168, 92, 0.16);
-  border-left: 3px solid #e8a060;
-  border-radius: 0 4px 4px 0;
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: var(--r-ink);
-}
-.reader-ios-warning strong { color: #e8a060; }
-
-/* ─── Sleep Timer 下拉菜单 · fixed 定位避免被控制条 overflow 裁切 ─ */
-.reader-sleep-menu {
-  position: fixed;
-  background: var(--r-bg);
-  border: 1px solid var(--r-line);
-  border-radius: 8px;
-  padding: 4px;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.20), 0 0 0 0.5px var(--r-line-soft);
-  min-width: 144px;
-  display: none;
-  z-index: 200;
-}
-.reader-sleep-menu.open {
-  display: block;
-  animation: sleepMenuIn 0.18s cubic-bezier(.22,.61,.36,1);
-}
-@keyframes sleepMenuIn {
-  from { opacity: 0; transform: translateY(6px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.reader-sleep-menu button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border: none;
-  color: var(--r-ink);
-  padding: 9px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: "JetBrains Mono", "PingFang SC", monospace;
-  font-size: 13px;
-  min-height: 36px;
-  box-sizing: border-box;
-  height: auto;
-  transition: background 0.15s;
-}
-.reader-sleep-menu button:hover {
-  background: var(--r-btn-bg);
-}
-.reader-sleep-menu button.active {
-  background: var(--r-accent);
-  color: var(--r-bg);
-}
-.reader-sleep-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--r-accent);
-  color: var(--r-bg);
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-family: "JetBrains Mono", monospace;
-  margin-left: 6px;
-}
-
-/* ============================================================ */
-/* 移动端 · 单行控制条 + 二级 Sheet 重新设计(v5.1)              */
-/* ============================================================ */
+/* ─── 移动端 ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  /* 触发按钮:缩小,避让 Safari nav */
-  .reader-trigger {
-    bottom: 18px;
-    right: 18px;
-    width: 52px;
-    height: 52px;
-  }
-  .reader-trigger .reader-trigger-label { display: none; }
-
-  /* Overlay:flex 列布局,内容区在上,控制条在下,sheet 浮层在上 */
-  .reader-overlay.open { flex-direction: column; }
-
-  /* 内容区先占主空间,paddingBottom 留给底部控制条 */
-  .reader-content {
-    flex: 1;
-    padding: 16px 18px 90px;
-  }
-  .reader-content h2 { font-size: calc(var(--r-font-size) * 1.5); }
-  .reader-content h3 { font-size: calc(var(--r-font-size) * 1.25); margin-top: 32px; }
-
-  /* 字号自适应小一档 */
-  .reader-overlay[data-size="S"] { --r-font-size: 16px; }
-  .reader-overlay[data-size="M"] { --r-font-size: 18px; }
-  .reader-overlay[data-size="L"] { --r-font-size: 21px; }
-  .reader-overlay[data-size="XL"] { --r-font-size: 25px; }
-
-  /* 控制条:底部固定 + 单行 + 紧凑 */
   .reader-controls {
-    position: fixed;
-    top: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-bottom: none;
-    border-top: 1px solid var(--r-line-soft);
-    padding: 8px 12px max(8px, env(safe-area-inset-bottom));
-    gap: 4px;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    overflow: visible;
-    z-index: 50;
-  }
-  .reader-controls .group {
-    gap: 3px;
-  }
-  .reader-controls .group + .group {
-    border-left: none;
-    padding-left: 0;
-    margin-left: 0;
+    padding: 10px 14px max(10px, env(safe-area-inset-bottom)) 14px;
   }
   .reader-controls button,
-  .reader-controls .reader-select-wrap {
-    padding: 7px 9px;
+  .reader-controls select {
+    padding: 8px 12px;
     font-size: 12px;
-    min-height: 38px;
   }
-  .reader-controls .reader-play {
+  .reader-play {
     width: 42px;
     height: 42px;
-    font-size: 16px;
   }
-
-  /* 移动端 · 默认隐藏二级控件(只显示 prev/play/next + speed + ⚙ + ✕) */
-  .reader-controls .mobile-secondary,
-  .reader-controls .reader-theme-group,
-  .reader-controls .reader-select-wrap.voice-select-wrap,
-  .reader-controls .reader-sleep-group,
-  .reader-controls .reader-font-group,
-  .reader-controls .reader-chapter-wrap,
-  .reader-controls .reader-lh-btn {
-    display: none !important;
+  .reader-content {
+    padding: 24px 18px 60px;
   }
-
-  /* 移动端 · 显示 ⚙ 设置按钮 */
-  .reader-settings-btn { display: flex !important; }
-
-  /* Mini player */
-  .reader-mini {
-    bottom: max(16px, env(safe-area-inset-bottom));
-    left: 16px;
-    right: 16px;
-    transform: none;
-    min-width: 0;
-  }
-  .reader-mini.open ~ .reader-trigger {
-    bottom: calc(80px + env(safe-area-inset-bottom));
-  }
-}
-
-/* 桌面端 · 默认隐藏 ⚙ 按钮(那是移动端入口) */
-.reader-settings-btn { display: none; }
-
-/* ─── 设置 Sheet(移动端二级菜单 / 从底部弹起)─────────────── */
-.reader-sheet {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 90;
-  background: var(--r-bg);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.18);
-  transform: translateY(100%);
-  transition: transform 0.28s cubic-bezier(.22,.61,.36,1);
-  padding: 8px 0 max(20px, env(safe-area-inset-bottom));
-  max-height: 80vh;
-  overflow-y: auto;
-}
-.reader-sheet.open { transform: translateY(0); }
-.reader-sheet .sheet-handle {
-  width: 38px;
-  height: 4px;
-  background: var(--r-ink-faint);
-  border-radius: 4px;
-  margin: 0 auto 18px;
-  opacity: 0.6;
-}
-.reader-sheet .sheet-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 22px;
-  border-bottom: 1px solid var(--r-line-soft);
-  font-size: 14px;
-}
-.reader-sheet .sheet-row:last-child { border-bottom: none; }
-.reader-sheet .sheet-row-label {
-  font-weight: 500;
-  color: var(--r-ink);
-  font-size: 14.5px;
-}
-.reader-sheet .sheet-row-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.reader-sheet .sheet-pill {
-  background: var(--r-btn-bg);
-  color: var(--r-ink);
-  border: none;
-  padding: 8px 14px;
-  border-radius: 18px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  cursor: pointer;
-  min-height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.reader-sheet .sheet-pill.active {
-  background: var(--r-accent);
-  color: var(--r-bg);
-}
-.reader-sheet select {
-  background: var(--r-btn-bg);
-  color: var(--r-ink);
-  border: none;
-  padding: 10px 36px 10px 14px;
-  border-radius: 18px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 13px;
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
-  min-width: 130px;
-}
-.reader-sheet .sheet-row-control .sheet-pills {
-  display: flex;
-  gap: 6px;
-}
-.reader-sheet .sheet-row-control .theme-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2.5px solid transparent;
-  cursor: pointer;
-  padding: 0;
-}
-.reader-sheet .sheet-row-control .theme-circle.active {
-  border-color: var(--r-accent);
-  box-shadow: 0 0 0 2px var(--r-bg), 0 0 0 4px var(--r-accent);
-}
-.reader-sheet .sheet-row-control .theme-circle[data-t="paper"] { background: #f0ebdd; border-color: #c4bca4; }
-.reader-sheet .sheet-row-control .theme-circle[data-t="dark"] { background: #1f1f1b; }
-.reader-sheet .sheet-row-control .theme-circle[data-t="green"] { background: #1c2e1f; }
-
-/* Sheet 遮罩 */
-.reader-sheet-mask {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 89;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.22s;
-}
-.reader-sheet-mask.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ─── iOS 提示 · 从 4 行横幅改为 Toast 单行 ────────────────────── */
-.reader-overlay .reader-ios-warning {
-  display: none;
-}
-.reader-ios-toast {
-  position: fixed;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100%);
-  z-index: 70;
-  background: rgba(31, 31, 27, 0.92);
-  color: #f0ebdd;
-  padding: 10px 16px;
-  border-radius: 22px;
-  font-size: 12.5px;
-  font-family: "PingFang SC", sans-serif;
-  max-width: calc(100vw - 32px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: transform 0.32s cubic-bezier(.22,.61,.36,1);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-}
-.reader-ios-toast.show {
-  transform: translateX(-50%) translateY(0);
-}
-.reader-ios-toast .close-x {
-  background: rgba(255, 255, 255, 0.16);
-  border: none;
-  color: inherit;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  font-size: 13px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-/* ─── 极小屏(<420px) · 进一步压缩 ─────────────────────────── */
-@media (max-width: 420px) {
-  .reader-controls button { padding: 7px 7px; }
-  .reader-controls .reader-play { width: 40px; height: 40px; }
-  .reader-controls .reader-select-wrap select { padding: 7px 24px 7px 10px; font-size: 12px; }
-}
-
-/* ─── Reader 打开时隐藏页面原内容滚动 ──────────────────────── */
-body.reader-open {
-  overflow: hidden;
-}
-
-/* ─── 调试输出区(可选,默认隐藏) ─────────────────────────────── */
-.reader-debug {
-  position: fixed;
-  bottom: 4px;
-  left: 4px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  padding: 4px 8px;
-  font-family: monospace;
-  font-size: 10px;
-  border-radius: 3px;
-  z-index: 99999;
-  display: none;
-  pointer-events: none;
-}
-.reader-debug.open { display: block; }
-
-/* ─── 旧浏览器兜底(没有 CSS variables 时给定基础样式) ────────── */
-@supports not (color: var(--r-ink)) {
-  .reader-overlay {
-    background: #f0ebdd;
-    color: #1a1a1a;
+  .reader-content-inner p {
+    font-size: 16.5px;
+    line-height: 1.75;
   }
 }
