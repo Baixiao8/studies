@@ -1565,9 +1565,10 @@
         self.audioSegments = data.segments;
         self.audioChapterId = chapterId;
         // 创建或重用 audio element
+        // preload=none:不点 ▶ 不下载 audio,移动端省流量
         if (!self.audioEl) {
           self.audioEl = new Audio();
-          self.audioEl.preload = 'metadata';
+          self.audioEl.preload = 'none';
           self._setupAudioListeners();
         }
         self.audioEl.src = audioUrl;

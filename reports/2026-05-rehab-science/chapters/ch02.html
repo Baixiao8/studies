@@ -1,0 +1,1441 @@
+<section id="s2" style="border-top: 4px solid var(--c-strength);">
+<div class="container">
+    <!-- 章节封面 · AI 生成插画 + HTML 数据标注 -->
+  <figure class="chapter-hero">
+    <img src="assets/ch02-hero.jpg" alt="五大组织 · 修复速度图谱" loading="lazy">
+    <figcaption>FIG 0 · 五大组织 · 修复速度差 100 倍的解剖语言</figcaption>
+  </figure>
+
+  <!-- 关键数据卡片 · 4 个关键数据点 -->
+  <div class="hero-keypoints">
+    <div class="kp">
+      <span class="kp-tag">▸ 肌肉</span>
+      <span class="kp-value"><em>4–6 周</em></span>
+      <p class="kp-desc">血供丰富 + 卫星细胞 (satellite cells) 真再生 · 几乎可还原</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 肌腱</span>
+      <span class="kp-value"><em>6–12 月</em></span>
+      <p class="kp-desc">胶原合成 1–2%/d · 但同步降解 · 净增长 ~0.1%/d</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 韧带</span>
+      <span class="kp-value"><em>1 年+</em></span>
+      <p class="kp-desc">血供贫乏 · 瘢痕填补 · 永远不到 100% 原始刚度</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 软骨</span>
+      <span class="kp-value"><em>~Never</em></span>
+      <p class="kp-desc">无血管 + 软骨细胞分裂能力差 · 几乎不可逆</p>
+    </div>
+  </div>
+
+  <div class="section-tag"><span class="num">02</span>TISSUE · 组织篇 / 第二章</div>
+  <h1 class="section-h">五大组织的差异化修复——肌肉、肌腱、韧带、骨、软骨 <span class="en">Muscle · Tendon · Ligament · Bone · Cartilage</span></h1>
+  <p class="section-sub">同一个人在同一次摔倒里,大腿肌肉拉伤 5 周可以重新冲刺,膝盖韧带撕裂可能一辈子打了折扣,软骨上的一道沟到死都不会平。"组织"两个字背后是一套被严重低估的解剖事实——这一章把肌肉、肌腱、韧带、骨、软骨、神经的修复机制逐一拆透,你会从根上理解为什么康复是"按组织计时",而不是"按周计时"。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>肌肉、肌腱、韧带、骨、软骨——五大组织修复速度差 <strong>100 倍以上</strong>,这是 <strong>80% 运动伤复发的根因</strong>。肌肉 4–6 周真再生,肌腱 6–12 月慢重塑,韧带 1 年+ 瘢痕填补,骨 3–4 月按 Wolff 定律重排,软骨成年后几乎不可再生。康复的第一原则不是"我恢复多久",是"我这次伤的是哪种组织,这种组织有自己不会改变的修复时钟"。逆着时钟练 = 必然复发;按着时钟练 = 能比同伤者快 30–50%。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 克利夫兰 · 1991</div>
+    <p>Arnold Caplan 当时是 Case Western Reserve 大学的发育生物学家,正盯着一批小鼠骨髓离心后沉在底下的灰白色细胞块发呆——那不是骨,不是软骨,不是血细胞,不是任何已知组织。他做了一件后来改变再生医学的事:把这批细胞放在不同的培养基里——加 TGF-β 长成软骨,加 BMP 长成骨,加 5-azacytidine 长成肌肉。<em>同一群细胞,长成三种不同的结缔组织。</em></p>
+    <p>1991 年他在 <em>Journal of Orthopaedic Research</em> 发表论文,给这群细胞起了一个后来火爆 30 年的名字——<strong>间充质干细胞</strong> (Mesenchymal Stem Cells, MSC)。他在论文里写了一句几乎成为再生医学宣言的话:<em>"任何中胚层来源的结缔组织,理论上都可以从这群细胞里再生。"</em></p>
+    <p>30 年过去,Caplan 的理论被部分证实、部分被打脸。<em>真正被证实的:</em>肌肉、骨、肌腱、软骨的修复确实涉及类似的"祖细胞分化"机制——但每种组织的分化效率、力学环境、血供条件天差地别。<em>被打脸的:</em>"软骨再生只是个时间问题"是 1990s 的乐观主义,2020s 的临床现实仍是——成人软骨基本不再生。这就是这一章要拆透的事:同样的"再生医学"叙事下,五种结缔组织走的是<strong>五种完全不同的命运</strong>。</p>
+    <p>这一章的方法论:我们不讲"5 种组织都能修复",我们讲<strong>每种组织各自的力学环境、细胞类型、血供条件如何决定它的修复速度</strong>。读完你会理解:为什么 ACL 必须重建、为什么跟腱康复要 6 个月起步、为什么半月板"红区可以缝、白区只能切"、为什么 Wolff 定律既能造骨也能折骨——以及最重要的:为什么"按周康复"是一种危险的简化。</p>
+  </div>
+
+  <h3><span class="pre">2.1</span>五大组织修复速度的 100 倍差距——一张总览图</h3>
+  <p class="lead">把五大组织的"完全修复时间"按对数轴画在一起,你会立刻看到康复医学最被低估的一个事实——<em>同一个人体里,不同组织的修复时间尺度跨越了 100 倍以上</em>。肌肉的 4 周和软骨的"几乎不能"在生物学上是两个完全不同的世界,虽然它们距离常常不超过几厘米。</p>
+
+  <p>"修复时间"在这里指的是<em>组织功能性恢复</em>——不是看片子说"看起来好了",也不是疼痛消失,而是<strong>组织在原应力下可以承受、不再易复发的状态</strong>。Garrett 1996(肌肉)、Cook 2009(肌腱)、Frank 1999(韧带)、Einhorn 2011(骨)、Buckwalter 1998(软骨)等综述给出的代表数字大致如下:</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 坐标轴 -->
+      <line x1="100" y1="320" x2="1020" y2="320" stroke="#3d3d36" stroke-width="1"/>
+      <line x1="100" y1="60" x2="100" y2="320" stroke="#3d3d36" stroke-width="1"/>
+
+      <!-- 坐标说明 -->
+      <text x="60" y="200" font-size="10" fill="#a39e8d" text-anchor="middle" transform="rotate(-90 60 200)" letter-spacing="0.1em">组织 · TISSUE TYPE</text>
+      <text x="560" y="358" font-size="10" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">修复时间(对数刻度)· LOG-SCALE RECOVERY TIME</text>
+
+      <!-- 时间刻度 (对数) -->
+      <g font-size="9.5" fill="#a39e8d" text-anchor="middle">
+        <text x="100" y="338">1d</text>
+        <text x="231" y="338">1w</text>
+        <text x="362" y="338">1mo</text>
+        <text x="493" y="338">3mo</text>
+        <text x="624" y="338">6mo</text>
+        <text x="755" y="338">1y</text>
+        <text x="886" y="338">3y</text>
+        <text x="1020" y="338">∞</text>
+      </g>
+
+      <!-- 五个组织的修复时间条 -->
+      <!-- 肌肉 4-6 周 (~280-420 px,即 W1-W6 大致 270-410) -->
+      <g transform="translate(0, 100)">
+        <text x="93" y="0" font-size="11" fill="#e8e4d8" text-anchor="end" letter-spacing="0.1em">肌肉 MUSCLE</text>
+        <rect x="180" y="-12" width="280" height="24" fill="#b56565" fill-opacity="0.7" stroke="#b56565" stroke-width="1.5"/>
+        <text x="320" y="3" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">4–6 周 · 真再生</text>
+        <text x="475" y="3" font-size="9" fill="#a39e8d">血供丰富 + 卫星细胞</text>
+      </g>
+
+      <!-- 骨 3-4 月 (临床 ~390-580) -->
+      <g transform="translate(0, 145)">
+        <text x="93" y="0" font-size="11" fill="#e8e4d8" text-anchor="end" letter-spacing="0.1em">骨 BONE</text>
+        <rect x="180" y="-12" width="430" height="24" fill="#c47f17" fill-opacity="0.7" stroke="#c47f17" stroke-width="1.5"/>
+        <text x="395" y="3" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">3–4 月 · 真再生 + 重塑</text>
+        <text x="625" y="3" font-size="9" fill="#a39e8d">骨痂 → 板层骨 · Wolff 定律</text>
+      </g>
+
+      <!-- 肌腱 6-12 月 -->
+      <g transform="translate(0, 190)">
+        <text x="93" y="0" font-size="11" fill="#e8e4d8" text-anchor="end" letter-spacing="0.1em">肌腱 TENDON</text>
+        <rect x="180" y="-12" width="575" height="24" fill="#d4a548" fill-opacity="0.7" stroke="#d4a548" stroke-width="1.5"/>
+        <text x="467" y="3" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">6–12 月 · 慢重塑</text>
+        <text x="770" y="3" font-size="9" fill="#a39e8d">胶原 1%/d 合成同步降解</text>
+      </g>
+
+      <!-- 韧带 1y+ -->
+      <g transform="translate(0, 235)">
+        <text x="93" y="0" font-size="11" fill="#e8e4d8" text-anchor="end" letter-spacing="0.1em">韧带 LIGAMENT</text>
+        <rect x="180" y="-12" width="706" height="24" fill="#658fa1" fill-opacity="0.7" stroke="#658fa1" stroke-width="1.5"/>
+        <text x="533" y="3" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">1 年+ · 瘢痕填补</text>
+        <text x="900" y="3" font-size="9" fill="#a39e8d">永远 70% 原刚度</text>
+      </g>
+
+      <!-- 软骨 ∞ -->
+      <g transform="translate(0, 280)">
+        <text x="93" y="0" font-size="11" fill="#e8e4d8" text-anchor="end" letter-spacing="0.1em">软骨 CARTILAGE</text>
+        <rect x="180" y="-12" width="840" height="24" fill="#a06bb0" fill-opacity="0.7" stroke="#a06bb0" stroke-width="1.5"/>
+        <text x="600" y="3" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">几乎不可再生</text>
+        <text x="1030" y="3" font-size="9" fill="#a39e8d" text-anchor="end">无血管 + 软骨细胞分裂极差</text>
+      </g>
+
+      <!-- 时间标记线 -->
+      <line x1="231" y1="60" x2="231" y2="320" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+      <line x1="362" y1="60" x2="362" y2="320" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+      <line x1="493" y1="60" x2="493" y2="320" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+      <line x1="624" y1="60" x2="624" y2="320" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+      <line x1="755" y1="60" x2="755" y2="320" stroke="#3d3d36" stroke-width="0.5" stroke-dasharray="2,3"/>
+
+      <!-- 标题 -->
+      <text x="100" y="40" font-size="12" fill="#d4a548" letter-spacing="0.18em">FIVE TISSUES · 100x 速度差的修复时间轴</text>
+      <text x="100" y="55" font-size="9" fill="#a39e8d" letter-spacing="0.1em">基于 Garrett 1996 / Cook 2009 / Frank 1999 / Einhorn 2011 / Buckwalter 1998</text>
+    </svg>
+    <div class="svg-caption">FIG 2.1 · 五大组织修复速度的对数轴对比——肌肉到软骨跨越 100 倍以上</div>
+  </div>
+
+  <p class="plain">原理:同一个伤者的同一次摔倒,可能同时损伤肌肉、肌腱、韧带、骨、软骨,但它们的修复时钟是独立运行的。肌肉用真细胞再生(卫星细胞),骨也用真再生(成骨-破骨耦合)但更慢,肌腱-韧带用"次品"瘢痕填补,软骨基本不修。<strong>翻译:</strong>康复不是"我躺多久",是"我这次伤的是哪种组织"。同一个跑者拉了大腿肌肉 5 周回归没事,但拉了髌腱可能要 9 个月——不是医生保守,是组织本身就这么慢。<em>放在你身上:</em>每次受伤,先问医生 "<em>这次主要伤的是哪种组织</em>"——肌肉?肌腱?韧带?骨?软骨?然后照着 4–6 周 / 6–12 月 / 1 年+ / 3–4 月 / 不会好 这五个时钟去做预期管理。把肌腱当肌肉练 = 必复发,把骨当肌腱拖 = 错过早期窗口,把软骨当软骨"养一养"= 给手术省时间。</p>
+
+  <h4>决定修复速度的三个底层变量</h4>
+  <p>为什么这些组织差这么大?这不是随机的——背后有三个可量化的生物学变量决定:</p>
+
+  <ul>
+    <li><strong>血供 (vascularity)</strong>——单位组织毫升血流量(mL/100g/min)。肌肉 ~30、骨 ~10、肌腱 ~1–2、韧带 ~0.5、关节软骨 ~0(无血管)。氧气和营养是细胞做工的前提,无血供 = 极慢愈合。</li>
+    <li><strong>祖细胞密度 (progenitor cell density)</strong>——具有分裂能力的修复细胞数量。肌肉有<em>卫星细胞</em> (satellite cells, SC) 在肌纤维表面,激活后大量增殖;骨有<em>骨膜成骨细胞</em>和骨髓 MSC;肌腱有<em>腱细胞</em> (tenocytes) 但增殖慢;韧带相似;软骨成年后<em>软骨细胞 (chondrocytes) 分裂能力几近于零</em>。</li>
+    <li><strong>细胞外基质周转 (ECM turnover)</strong>——胶原合成/降解速率。肌肉 ECM 占比小、周转快;骨在 Wolff 定律驱动下不停重塑(一年约 10% 骨量被替换);肌腱-韧带胶原合成 ~1–2%/天但同步降解,净增长 ~0.1%/d;软骨 II 型胶原半衰期 ~117 年(!)——这意味着你 30 岁膝盖上的软骨基质,直到你死前基本没换过。</li>
+  </ul>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">MUSCLE BLOOD</div>
+      <div class="num">~30</div>
+      <div class="sub">mL/100g/min · 血供最丰</div>
+    </div>
+    <div class="item">
+      <div class="label">TENDON BLOOD</div>
+      <div class="num">~1–2</div>
+      <div class="sub">mL/100g/min · 比肌肉低 20 倍</div>
+    </div>
+    <div class="item">
+      <div class="label">CARTILAGE BLOOD</div>
+      <div class="num">0</div>
+      <div class="sub">无血管 · 靠滑液扩散营养</div>
+    </div>
+    <div class="item">
+      <div class="label">CARTILAGE T1/2</div>
+      <div class="num">~117 y</div>
+      <div class="sub">II 型胶原半衰期 · 几乎不周转</div>
+    </div>
+  </div>
+
+  <h4>五大组织速查表</h4>
+  <table>
+    <thead>
+      <tr><th>组织</th><th>血供</th><th>祖细胞</th><th>临床修复时间</th><th>修复方式</th><th>复发风险</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>肌肉</td><td>极丰 ~30</td><td>卫星细胞密集</td><td><strong>4–6 周</strong></td><td>真再生(同型替代)</td><td>低(20–30%)</td></tr>
+      <tr><td>骨</td><td>丰 ~10</td><td>骨膜 + MSC + 骨内膜</td><td><strong>3–4 月</strong></td><td>真再生(骨痂 → 板层骨)</td><td>低(<10% 低风险位置)</td></tr>
+      <tr><td>肌腱</td><td>稀 ~1–2</td><td>腱细胞 + Tendon SC</td><td><strong>6–12 月</strong></td><td>慢重塑(混合瘢痕)</td><td>高(40–60%)</td></tr>
+      <tr><td>韧带</td><td>稀 ~0.5</td><td>纤维母细胞</td><td><strong>1 年+</strong></td><td>瘢痕填补(III 型胶原)</td><td>很高(60%+)</td></tr>
+      <tr><td>关节软骨</td><td>无</td><td>软骨细胞分裂极差</td><td><strong>几乎无</strong></td><td>不愈 / 纤维软骨替代</td><td>100%(进行性 OA)</td></tr>
+      <tr><td>外周神经</td><td>稀(神经外膜血管)</td><td>施万细胞</td><td><strong>1mm/天</strong></td><td>Wallerian + 轴突再生</td><td>视长度</td></tr>
+    </tbody>
+  </table>
+
+  <p>这张表是这一章 14 节的总纲——后面所有内容,都是把每一格背后的力学和细胞学拆透。你会看到为什么肌肉拉伤可以"边练边好"而肌腱必须"练才能好"、为什么骨折要打石膏而韧带要做支具、为什么软骨损伤的"早期就医"几乎决定了一辈子膝盖会不会痛。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / "整体康复时间"是误导</div>
+    <p>跑步圈、健身房、康复诊室常给伤者一个"康复时间"的笼统估计——比如"你这个伤大概 8 周回归"。<em>但 8 周对于谁?</em>对于肌肉拉伤,8 周可能康复过头;对于跟腱炎,8 周才刚刚开始;对于 ACL 重建,8 周连支具都没拆。"康复时间"必须按组织分:<strong>看片子问医生,这次主要伤的是哪种组织?</strong>然后照着这种组织的真实修复时钟去做预期。任何把不同组织"一起算"的康复计划,都是在赌运气。</p>
+  </div>
+
+  <h3><span class="pre">2.2</span>肌肉的修复——卫星细胞 (satellite cells) 与肌纤维再生</h3>
+  <p class="lead">肌肉是五大组织里<em>修复效率最高</em>的——同型替代、几乎不留瘢痕、可以恢复 95%+ 原始力学性质。这背后有一个 1961 年才被 Alexander Mauro 在电镜下发现的细胞——<strong>肌卫星细胞</strong> (satellite cells, SC),它静静趴在每根肌纤维的基底膜下,只在损伤时被激活,然后用一套精确的细胞程序完成肌纤维的真再生。</p>
+
+  <h4>卫星细胞的位置与静态</h4>
+  <p>每根成熟肌纤维(myofiber)外面包裹着一层基底膜 (basal lamina),内层与肌纤维之间的狭窄空间里,趴着 2–10 个卫星细胞。在静态肌肉里,SC 占肌纤维核总数的约 2–7%(年轻人偏高,老年人下降到 1–2%——这是肌少症 sarcopenia 的细胞学根因之一)。它们 G0 期休眠,几乎不分裂、不表达大部分肌肉基因,只表达一个关键的"身份标志":<em>Pax7 转录因子</em>。Pax7 + 状态就是"我是 SC,我准备好被激活"。</p>
+
+  <h4>损伤后的 5 阶段时序</h4>
+  <p>当肌纤维受损(撕裂、挫伤、过度离心、缺血缺氧),损伤区域释放<em>趋化因子</em>(HGF, IGF-1, FGF, 一氧化氮等),触发卫星细胞激活。Tedesco 2010 等综述总结的标准时序如下:</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 400" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 时间轴 -->
+      <line x1="100" y1="340" x2="1020" y2="340" stroke="#3d3d36" stroke-width="1"/>
+      <text x="60" y="190" font-size="10" fill="#a39e8d" text-anchor="middle" transform="rotate(-90 60 190)" letter-spacing="0.1em">细胞活动强度</text>
+      <text x="560" y="380" font-size="10" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">损伤后天数 · DAYS POST-INJURY</text>
+
+      <g font-size="9.5" fill="#a39e8d" text-anchor="middle">
+        <text x="100" y="358">0</text>
+        <text x="230" y="358">1d</text>
+        <text x="360" y="358">3d</text>
+        <text x="490" y="358">7d</text>
+        <text x="620" y="358">14d</text>
+        <text x="750" y="358">21d</text>
+        <text x="880" y="358">28d</text>
+        <text x="1020" y="358">6w</text>
+      </g>
+
+      <!-- 阶段背景 -->
+      <rect x="100" y="60" width="130" height="280" fill="#b56565" fill-opacity="0.08"/>
+      <text x="165" y="78" font-size="9.5" fill="#b56565" text-anchor="middle" letter-spacing="0.1em">① 炎症</text>
+      <text x="165" y="92" font-size="8" fill="#b56565" text-anchor="middle">D0–D3</text>
+
+      <rect x="230" y="60" width="260" height="280" fill="#c47f17" fill-opacity="0.08"/>
+      <text x="360" y="78" font-size="9.5" fill="#c47f17" text-anchor="middle" letter-spacing="0.1em">② SC 激活 + 增殖</text>
+      <text x="360" y="92" font-size="8" fill="#c47f17" text-anchor="middle">D1–D7</text>
+
+      <rect x="490" y="60" width="260" height="280" fill="#d4a548" fill-opacity="0.08"/>
+      <text x="620" y="78" font-size="9.5" fill="#d4a548" text-anchor="middle" letter-spacing="0.1em">③ 肌管融合</text>
+      <text x="620" y="92" font-size="8" fill="#d4a548" text-anchor="middle">D5–D14</text>
+
+      <rect x="750" y="60" width="270" height="280" fill="#8fa867" fill-opacity="0.08"/>
+      <text x="885" y="78" font-size="9.5" fill="#8fa867" text-anchor="middle" letter-spacing="0.1em">④ 重塑 + 力学适应</text>
+      <text x="885" y="92" font-size="8" fill="#8fa867" text-anchor="middle">D14–D42</text>
+
+      <!-- 中性粒细胞 + 巨噬细胞曲线 -->
+      <path d="M 100,330 Q 130,140 165,150 Q 200,170 230,250 Q 320,310 490,330" stroke="#b56565" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="200" y="135" font-size="9" fill="#b56565">中性粒+巨噬</text>
+
+      <!-- SC 激活/增殖 -->
+      <path d="M 100,330 Q 200,310 280,180 Q 380,110 490,150 Q 600,200 750,320" stroke="#c47f17" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="365" y="100" font-size="9" fill="#c47f17">SC 增殖</text>
+
+      <!-- 肌管融合 -->
+      <path d="M 100,335 L 300,335 Q 450,330 550,200 Q 700,120 880,160 Q 950,180 1020,200" stroke="#d4a548" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="660" y="130" font-size="9" fill="#d4a548">新肌管形成</text>
+
+      <!-- 胶原重塑 -->
+      <path d="M 100,335 L 400,335 Q 600,320 800,210 Q 900,180 1020,160" stroke="#8fa867" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <text x="930" y="195" font-size="9" fill="#8fa867">ECM 重塑</text>
+
+      <!-- 力学输出 -->
+      <path d="M 100,335 L 250,335 Q 400,300 550,230 Q 750,160 1020,110" stroke="#e8e4d8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="3,3"/>
+      <text x="950" y="100" font-size="9" fill="#e8e4d8">力学恢复</text>
+
+      <!-- 标题 -->
+      <text x="100" y="40" font-size="12" fill="#d4a548" letter-spacing="0.18em">MUSCLE REGENERATION · 肌纤维修复的 4 阶段时序</text>
+      <text x="100" y="55" font-size="9" fill="#a39e8d" letter-spacing="0.1em">基于 Tedesco 2010 / Järvinen 2005 / Bentzinger 2013</text>
+    </svg>
+    <div class="svg-caption">FIG 2.2 · 肌肉损伤后的 4 阶段——炎症、卫星细胞激活、肌管融合、ECM 重塑与力学恢复</div>
+  </div>
+
+  <p><strong>① 炎症期 D0–D3:</strong>损伤后数分钟内中性粒细胞 (neutrophils) 涌入清除坏死碎片;24 小时内 M1 型巨噬细胞 (M1 macrophages) 接力,继续清创并释放促增殖信号(IGF-1、HGF)。这阶段表现为肿胀、压痛、活动受限——但这<em>不是病</em>,是清理工地。</p>
+
+  <p><strong>② SC 激活 + 增殖 D1–D7:</strong>HGF 和一氧化氮 (NO) 是 SC 激活的关键开关。被激活的 SC 进入细胞周期,经历多轮分裂(每次约 12–18 小时),数量在 5–7 天内增长 10–100 倍。一部分增殖出的 SC <em>不分化</em>,而是返回 G0 期休眠——这是<em>自我更新</em> (self-renewal),保证 SC 池不会因每次损伤而耗竭。Pax7 + MyoD 共表达 = 增殖期 SC 的身份标志。</p>
+
+  <p><strong>③ 肌管融合 D5–D14:</strong>增殖的 SC 一部分分化成<em>成肌细胞</em> (myoblasts),开始表达<em>myogenin</em> 转录因子,失去分裂能力,沿损伤区域排列融合成<em>肌管</em> (myotubes)——多核合胞体。同时 M1 巨噬细胞转向 M2 型,释放抗炎和促修复信号 (IL-10, TGF-β)。新肌管在大约 D7–14 之间从外观看像"小肌纤维",在原基底膜骨架内填充——这是肌肉再生不留瘢痕的关键原因:<em>原基底膜是模具</em>。</p>
+
+  <p><strong>④ 重塑 + 力学适应 D14–D42:</strong>新肌纤维需要被神经重新支配(神经-肌接头重建)、需要重新被力学负荷"训练"才能恢复到原始力学性质。这一阶段<em>必须有适度的力学刺激</em>——卧床不动的话,新肌纤维会萎缩、肌纤维方向排列紊乱。这就是为什么肌肉康复"早期主动 + 渐进负荷"是金标准。Järvinen 2005 等系列论文证明:伤后 3–5 天就开始无痛 ROM + 等长收缩,可以把康复时间缩短 20–30%。</p>
+
+  <h4>肌肉修复的"几乎完美"——但也有上限</h4>
+  <p>肌肉为什么是"真再生"?有四个条件同时满足:</p>
+  <ul>
+    <li><strong>基底膜骨架保留</strong>——多数肌肉拉伤里基底膜不破,新肌管沿原模具填充,排列方向保持原样</li>
+    <li><strong>血供丰富</strong>——氧气和营养充足,代谢密度高</li>
+    <li><strong>卫星细胞密集</strong>——每根肌纤维都有 2–10 个原位干细胞,几乎"修复就在门口"</li>
+    <li><strong>力学环境可控</strong>——肌肉本身有主动控制能力,可以"自己 protect 自己"渐进负荷</li>
+  </ul>
+
+  <p>但有几个例外让肌肉<em>不能完全恢复</em>:</p>
+  <ul>
+    <li><strong>III 度撕裂(完全断裂)</strong>:基底膜断裂,新肌管无模具,瘢痕组织 (III 型胶原) 填补缺口。即使手术缝合也会留下纤维瘢痕,功能性恢复 ~60–80%</li>
+    <li><strong>反复同部位拉伤</strong>:每次都有少量瘢痕沉积,肌纤维间出现"硬结",刚度上升、弹性下降,反复发生几乎成定律</li>
+    <li><strong>挫伤后骨化性肌炎</strong> (myositis ossificans):严重挫伤(尤其大腿前侧)后,损伤区可能异位骨化,需要手术切除</li>
+    <li><strong>失神经</strong>:如果肌肉的运动神经被切断,即使 SC 系统完整,肌纤维也会持续萎缩——这是为什么神经损伤后"肌肉先废"</li>
+    <li><strong>老年</strong>:60 岁以上 SC 数量降至年轻时的 30–50%,且增殖能力下降——这是<em>老年肌肉伤后恢复慢</em>的细胞学根因</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">注 / SC 自我更新的"保险机制"</div>
+    <p>SC 增殖时只有约 80% 的子细胞分化成肌管,剩下 20% 通过"不对称分裂"返回 Pax7 + 静态——这是 SC 池的<em>自我更新</em>。如果没有这个机制,每次损伤都耗尽 SC,人到中年就没法再修复肌肉。但即便有这个机制,长期反复损伤仍会让 SC 池萎缩——这是为什么"反复拉伤"的肌肉越来越脆。Brack 2007 等研究表明,90 岁以上人体 SC 池仅剩年轻时的 ~25%。</p>
+  </div>
+
+  <p class="plain">原理:肌肉真再生靠卫星细胞,4 个条件齐全(基底膜完整 + 血供丰富 + SC 密集 + 可控力学)= 几乎不留瘢痕。<strong>翻译:</strong>肌肉是身体里最"幸运"的组织,因为它自带"修复工人"在每个肌纤维门口等着。但它的恢复速度<em>取决于你给不给它工作环境</em>——也就是早期适度负荷。<em>放在你身上:</em>肌肉拉伤后头 3 天冰敷 + 抬高就够,不需要长期卧床。第 4 天开始无痛 ROM,第 7 天开始等长收缩,第 14 天开始等张轻负荷——这是 Järvinen 协议的精髓。怕痛卧床 2 周的人,8 周还回不来;按时序练的人,5 周就能回赛场。</p>
+
+  <h3><span class="pre">2.3</span>肌肉损伤分级 I/II/III 与对应修复时序</h3>
+  <p class="lead">"我大腿拉伤了"——这一句话背后可能是 4 周回归,也可能是手术 + 半年。流行病学上肌肉损伤(尤其腘绳肌、股四头肌、小腿三头肌)的分级标准化经历了几次大调整:从 1960s 的临床三级(I/II/III)、到 1990s 加 MRI 影像确认、到 2014 年 Mueller-Wohlfahrt 等提出的<em>Munich 共识</em>把损伤分得更细。这一节把"拉伤分级"讲透,也让你知道为什么"看片子"对预后这么关键。</p>
+
+  <h4>经典三级分类(临床基础)</h4>
+  <table>
+    <thead>
+      <tr><th>分级</th><th>组织学</th><th>临床表现</th><th>MRI 表现</th><th>修复时间</th><th>处置</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>I 度</strong></td><td>少量肌纤维微撕裂(<5%)</td><td>轻度压痛 · 力量 90%+ · 无明显瘀斑</td><td>边界模糊水肿 · 无明确断裂</td><td><strong>1–3 周</strong></td><td>RICE 早期 + D4 起渐进负荷 · 不需手术</td></tr>
+      <tr><td><strong>II 度</strong></td><td>部分肌纤维断裂(5–50%)</td><td>明显压痛 + 触诊小凹陷 · 力量降 30–60% · 瘀斑出现</td><td>明确断裂区 + 出血 + 周围水肿</td><td><strong>3–8 周</strong></td><td>2 周制动后渐进 · 不需手术(除非肌腱-肌肉交界)</td></tr>
+      <tr><td><strong>III 度</strong></td><td>完全断裂(>50% 或全断)</td><td>剧痛 + 触及凹陷 / 异常隆起 · 力量塌陷 · 大瘀斑</td><td>完全断裂 + 残端回缩 + 大血肿</td><td><strong>3–6 月+</strong></td><td>大多需手术修复(尤其肌-腱交界 / 近止点)</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Munich 共识(2014)——更精细的 5 型分类</h4>
+  <p>临床实践发现 I/II/III 太粗——同样"II 度",肌肉中段拉伤和肌-腱交界拉伤预后完全不同。Mueller-Wohlfahrt 等提出新分型:</p>
+
+  <ul>
+    <li><strong>1A · 疲劳相关</strong>:无结构性损伤,肌肉过度负荷后的功能性疼痛。<em>修复:</em>1–3 天</li>
+    <li><strong>1B · 延迟性肌肉酸痛</strong> (DOMS):微观损伤,普遍性酸痛。<em>修复:</em>3–5 天</li>
+    <li><strong>2A · 脊柱相关 / 神经源性</strong>:神经牵涉肌张力升高,无结构损伤。<em>修复:</em>5–10 天</li>
+    <li><strong>2B · 肌肉相关</strong>:肌张力性损伤但无明确断裂。<em>修复:</em>5–14 天</li>
+    <li><strong>3A · 部分撕裂(轻)</strong>:< 1 根肌束 (fascicle) 断裂。<em>修复:</em>14–28 天</li>
+    <li><strong>3B · 部分撕裂(重)</strong>:≥ 1 根肌束断裂,但未完全断。<em>修复:</em>28–42 天</li>
+    <li><strong>4 · 完全断裂 / 肌腱撕脱</strong>:肌肉完全断裂 或 肌腱从骨上撕脱。<em>修复:</em>> 3 月,大多需手术</li>
+  </ul>
+
+  <h4>不同部位的预后差异</h4>
+  <p>同样的 II 度撕裂,不同位置预后差异巨大。这与<em>损伤位置的血供、力学应力、组织特性</em>直接相关:</p>
+
+  <ul>
+    <li><strong>肌肉中段(肌-肌纤维)</strong>:预后最好,血供丰富,4–6 周回归。代表:股四头肌中段、小腿三头肌中段</li>
+    <li><strong>肌腱-肌肉交界</strong> (myotendinous junction, MTJ):预后中等,血供稀,胶原密集。代表:腘绳肌近端(坐骨结节附近)、跟腱-小腿三头肌交界</li>
+    <li><strong>肌-骨止点</strong> (tendon-bone insertion):预后差,血供最稀,易撕脱骨片。代表:腘绳肌近端坐骨结节撕脱 (proximal hamstring avulsion)、跟腱止点撕脱</li>
+  </ul>
+
+  <p>这就是为什么<em>同一个 "腘绳肌拉伤"</em>,中段拉伤 4 周回归,近端 MTJ 拉伤 6–8 周,坐骨结节撕脱可能需要手术 + 3–6 月。MRI 不只是"看有没有断",更是<em>看在哪里断</em>。</p>
+
+  <h4>"复发率"是 II 度拉伤最被低估的问题</h4>
+  <p>Ekstrand 2016 等大规模队列(UEFA 足球队 12 年随访)显示:腘绳肌拉伤后 1 年内同部位复发率<strong>16–34%</strong>,这是所有运动伤里最高的复发率之一。复发的肌肉伤<em>恢复时间是首发的 1.7 倍</em>,且更多需要手术干预。复发率高的根因不在"是否手术",而在<em>力学训练是否到位</em>——尤其离心力量。北欧腘绳 (Nordic curl) 已被证明可降低首发肌肉伤 70%、复发率 86%(Petersen 2011 RCT)。</p>
+
+  <div class="callout you">
+    <div class="label">放在你身上 · 大腿后侧拉伤的 8 周完整时间表</div>
+    <p>你 28 岁,周末足球队员,昨天冲刺时大腿后侧"砰"地一下剧痛跛行下场。今天 MRI 显示:股二头肌长头近端 MTJ,3B 部分撕裂(肌束断裂但未全断)。下面是接下来 8 周身体里在发生什么 + 你该做什么:</p>
+    <table>
+      <thead>
+        <tr><th>周</th><th>组织里发生</th><th>能做 / 不能做</th><th>关键训练</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>W1(炎症期)</td><td>损伤区出血、血肿、中性粒+巨噬清创</td><td>RICE 24-72h;只走路;<em>禁:</em>跑、拉伸、按摩、热敷</td><td>等长收缩 30% 最大 × 5s × 10,无痛即可,日 2-3 次</td></tr>
+        <tr><td>W2(SC 激活)</td><td>卫星细胞激活、增殖;血肿逐步吸收</td><td>无痛慢走、固定自行车低强度;ROM 进行性恢复</td><td>等长 + 等长扣腿 + 健侧单腿桥模仿;患侧只做无痛弧</td></tr>
+        <tr><td>W3(肌管融合启动)</td><td>新肌管开始形成、排列尚紊乱;胶原沉积</td><td>水中跑、椭圆机低-中强度;拉伸<em>仍然限制</em>(伸长可能撕新生组织)</td><td>无痛等长 → 慢速等张闭链(单腿桥、Romanian Deadlift 低重)</td></tr>
+        <tr><td>W4(肌管成熟)</td><td>新肌管融合后开始有收缩力;ECM 排列开始按力学方向</td><td>慢跑 Z1 5-10 分钟测试;无 sprint;<em>关键:</em>开始离心负荷</td><td>北欧腘绳起步:3×3 (轻),双侧。Glute Bridge 离心慢下放</td></tr>
+        <tr><td>W5</td><td>力学性能恢复 ~60-70%</td><td>渐进速度跑(60-70% 最大);仍避免 sprint 起跑</td><td>北欧腘绳 3×5;单腿 Romanian Deadlift 3×8;减速跑训练</td></tr>
+        <tr><td>W6</td><td>力学性能 ~80%;胶原排列开始定型</td><td>开始变向、加速训练(submaximal);感觉无残余痛</td><td>北欧腘绳 3×8;A-skip / B-skip;短距冲刺 60% 强度</td></tr>
+        <tr><td>W7</td><td>组织接近完全恢复;但 ECM 重塑仍在进行</td><td>开始 95% 强度训练;1-2 次同侧专项动作测试</td><td>北欧腘绳 3×10;sprint 85-90%;减速急停</td></tr>
+        <tr><td>W8(回归)</td><td>力学性能 90%+,但 ECM 完全成熟需 12 周</td><td>正式回归比赛,但<em>北欧腘绳长期维持</em>(每周 2 次)</td><td>正常训练 + 维持北欧腘绳作为终身基础设施</td></tr>
+      </tbody>
+    </table>
+    <p><strong>关键认知:</strong></p>
+    <ul>
+      <li><em>"等不痛了再练"= 复发陷阱</em>——W4 必须开始离心,即使有轻度不适(疼痛 ≤3/10 OK)</li>
+      <li><em>急性期(W1)按摩、热敷、拉伸都是错的</em>——按摩可能挤散血肿、拉伸可能撕新生肌管</li>
+      <li><em>力量训练不停</em>——北欧腘绳一旦开始就长期维持,首发肌肉伤后复发率 30%+,你不想 6 个月后又来一次</li>
+      <li><em>同部位伤过 2 次以上</em>——必须做生物力学评估(髋伸展力、骨盆控制、腿后链协调),光练肌肉不够</li>
+      <li><em>近端 MTJ 拉伤比中段恢复慢 30-50%</em>——这次你算"中等麻烦",还不算最坏</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">2.4</span>肌腱的微观结构——胶原原纤维到肌腱原纤维束</h3>
+  <p class="lead">肌腱看起来像一根白色绳子,但它的微观结构是一座<em>5 级嵌套的力学建筑</em>——从单根胶原分子(直径 1.5 nm)层层卷绑到整条肌腱(直径 5 mm),每一级都是被生物机械精确设计过的力学单元。理解这套结构是理解"为什么肌腱修复这么慢"的前提。</p>
+
+  <h4>5 级嵌套(从小到大)</h4>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <!-- 5 级结构横向排列 -->
+      <text x="100" y="40" font-size="12" fill="#d4a548" letter-spacing="0.18em">TENDON HIERARCHY · 肌腱 5 级嵌套结构</text>
+      <text x="100" y="55" font-size="9" fill="#a39e8d" letter-spacing="0.1em">基于 Kannus 2000 / Wang 2006 / Screen 2015 综述</text>
+
+      <!-- Level 1: tropocollagen 分子 -->
+      <g transform="translate(100, 100)">
+        <text x="0" y="-5" font-size="10" fill="#a39e8d" letter-spacing="0.1em">① 分子</text>
+        <text x="0" y="8" font-size="8" fill="#a39e8d">~1.5 nm</text>
+        <!-- 三股螺旋示意 -->
+        <path d="M 0,40 Q 15,30 30,40 Q 45,50 60,40 Q 75,30 90,40 Q 105,50 120,40 Q 135,30 150,40" stroke="#d4a548" stroke-width="1.5" fill="none"/>
+        <path d="M 0,50 Q 15,40 30,50 Q 45,60 60,50 Q 75,40 90,50 Q 105,60 120,50 Q 135,40 150,50" stroke="#d4a548" stroke-width="1.5" fill="none"/>
+        <path d="M 0,60 Q 15,50 30,60 Q 45,70 60,60 Q 75,50 90,60 Q 105,70 120,60 Q 135,50 150,60" stroke="#d4a548" stroke-width="1.5" fill="none"/>
+        <text x="75" y="90" font-size="8" fill="#e8e4d8" text-anchor="middle">原胶原</text>
+        <text x="75" y="105" font-size="8" fill="#a39e8d" text-anchor="middle">tropocollagen</text>
+        <text x="75" y="120" font-size="8" fill="#a39e8d" text-anchor="middle">三股 α 螺旋</text>
+      </g>
+
+      <!-- 箭头 -->
+      <path d="M 260,140 L 290,140" stroke="#a39e8d" stroke-width="1" marker-end="url(#arr)"/>
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#a39e8d"/>
+        </marker>
+      </defs>
+
+      <!-- Level 2: 胶原原纤维 microfibril -->
+      <g transform="translate(290, 100)">
+        <text x="0" y="-5" font-size="10" fill="#a39e8d" letter-spacing="0.1em">② 原纤维</text>
+        <text x="0" y="8" font-size="8" fill="#a39e8d">10–500 nm</text>
+        <!-- 胶原原纤维 banding -->
+        <rect x="0" y="35" width="150" height="20" fill="#d4a548" fill-opacity="0.5" stroke="#d4a548" stroke-width="1"/>
+        <line x1="0" y1="45" x2="150" y2="45" stroke="#1a1814" stroke-width="0.5"/>
+        <line x1="22" y1="35" x2="22" y2="55" stroke="#1a1814" stroke-width="0.5"/>
+        <line x1="44" y1="35" x2="44" y2="55" stroke="#1a1814" stroke-width="0.5"/>
+        <line x1="66" y1="35" x2="66" y2="55" stroke="#1a1814" stroke-width="0.5"/>
+        <line x1="88" y1="35" x2="88" y2="55" stroke="#1a1814" stroke-width="0.5"/>
+        <line x1="110" y1="35" x2="110" y2="55" stroke="#1a1814" stroke-width="0.5"/>
+        <line x1="132" y1="35" x2="132" y2="55" stroke="#1a1814" stroke-width="0.5"/>
+        <text x="75" y="80" font-size="8" fill="#e8e4d8" text-anchor="middle">collagen fibril</text>
+        <text x="75" y="95" font-size="8" fill="#a39e8d" text-anchor="middle">67 nm 周期</text>
+        <text x="75" y="110" font-size="8" fill="#a39e8d" text-anchor="middle">交叉链桥</text>
+      </g>
+
+      <path d="M 450,140 L 480,140" stroke="#a39e8d" stroke-width="1" marker-end="url(#arr)"/>
+
+      <!-- Level 3: 纤维束 fiber -->
+      <g transform="translate(480, 100)">
+        <text x="0" y="-5" font-size="10" fill="#a39e8d" letter-spacing="0.1em">③ 纤维</text>
+        <text x="0" y="8" font-size="8" fill="#a39e8d">1–20 μm</text>
+        <rect x="0" y="30" width="150" height="30" fill="#d4a548" fill-opacity="0.5" stroke="#d4a548" stroke-width="1"/>
+        <!-- 内部多条纤维 -->
+        <line x1="0" y1="36" x2="150" y2="36" stroke="#1a1814" stroke-width="0.3"/>
+        <line x1="0" y1="40" x2="150" y2="40" stroke="#1a1814" stroke-width="0.3"/>
+        <line x1="0" y1="45" x2="150" y2="45" stroke="#1a1814" stroke-width="0.3"/>
+        <line x1="0" y1="50" x2="150" y2="50" stroke="#1a1814" stroke-width="0.3"/>
+        <line x1="0" y1="54" x2="150" y2="54" stroke="#1a1814" stroke-width="0.3"/>
+        <text x="75" y="80" font-size="8" fill="#e8e4d8" text-anchor="middle">fibril 束</text>
+        <text x="75" y="95" font-size="8" fill="#a39e8d" text-anchor="middle">tenocyte 在</text>
+        <text x="75" y="110" font-size="8" fill="#a39e8d" text-anchor="middle">纤维间隙</text>
+      </g>
+
+      <path d="M 640,140 L 670,140" stroke="#a39e8d" stroke-width="1" marker-end="url(#arr)"/>
+
+      <!-- Level 4: 纤维束 fascicle -->
+      <g transform="translate(670, 100)">
+        <text x="0" y="-5" font-size="10" fill="#a39e8d" letter-spacing="0.1em">④ 束</text>
+        <text x="0" y="8" font-size="8" fill="#a39e8d">50–300 μm</text>
+        <ellipse cx="75" cy="45" rx="75" ry="22" fill="#d4a548" fill-opacity="0.4" stroke="#d4a548" stroke-width="1.2"/>
+        <!-- 内部斑点 = 多条 fiber -->
+        <circle cx="40" cy="40" r="4" fill="#d4a548" fill-opacity="0.7"/>
+        <circle cx="55" cy="50" r="4" fill="#d4a548" fill-opacity="0.7"/>
+        <circle cx="75" cy="42" r="4" fill="#d4a548" fill-opacity="0.7"/>
+        <circle cx="95" cy="50" r="4" fill="#d4a548" fill-opacity="0.7"/>
+        <circle cx="110" cy="40" r="4" fill="#d4a548" fill-opacity="0.7"/>
+        <text x="75" y="80" font-size="8" fill="#e8e4d8" text-anchor="middle">fascicle</text>
+        <text x="75" y="95" font-size="8" fill="#a39e8d" text-anchor="middle">endotenon 包</text>
+        <text x="75" y="110" font-size="8" fill="#a39e8d" text-anchor="middle">含血管神经</text>
+      </g>
+
+      <path d="M 830,140 L 860,140" stroke="#a39e8d" stroke-width="1" marker-end="url(#arr)"/>
+
+      <!-- Level 5: 肌腱 tendon -->
+      <g transform="translate(860, 100)">
+        <text x="0" y="-5" font-size="10" fill="#a39e8d" letter-spacing="0.1em">⑤ 肌腱</text>
+        <text x="0" y="8" font-size="8" fill="#a39e8d">1–10 mm</text>
+        <ellipse cx="75" cy="45" rx="70" ry="25" fill="#d4a548" fill-opacity="0.3" stroke="#d4a548" stroke-width="1.5"/>
+        <!-- 内部多个 fascicle -->
+        <ellipse cx="50" cy="40" rx="14" ry="6" fill="#d4a548" fill-opacity="0.5"/>
+        <ellipse cx="75" cy="50" rx="14" ry="6" fill="#d4a548" fill-opacity="0.5"/>
+        <ellipse cx="100" cy="40" rx="14" ry="6" fill="#d4a548" fill-opacity="0.5"/>
+        <ellipse cx="62" cy="55" rx="11" ry="5" fill="#d4a548" fill-opacity="0.5"/>
+        <ellipse cx="90" cy="55" rx="11" ry="5" fill="#d4a548" fill-opacity="0.5"/>
+        <text x="75" y="80" font-size="8" fill="#e8e4d8" text-anchor="middle">tendon</text>
+        <text x="75" y="95" font-size="8" fill="#a39e8d" text-anchor="middle">epitenon 包</text>
+        <text x="75" y="110" font-size="8" fill="#a39e8d" text-anchor="middle">外膜 paratenon</text>
+      </g>
+
+      <!-- 底部数据带 -->
+      <g transform="translate(100, 260)">
+        <text x="0" y="0" font-size="10" fill="#d4a548" letter-spacing="0.15em">力学性质 · MECHANICAL PROPERTIES</text>
+
+        <text x="0" y="25" font-size="9.5" fill="#e8e4d8">极限拉应力</text>
+        <text x="200" y="25" font-size="9.5" fill="#d4a548">~50–100 MPa</text>
+        <text x="380" y="25" font-size="9" fill="#a39e8d">(比骨拉应力还大,接近软钢)</text>
+
+        <text x="0" y="45" font-size="9.5" fill="#e8e4d8">弹性模量</text>
+        <text x="200" y="45" font-size="9.5" fill="#d4a548">~1–2 GPa</text>
+        <text x="380" y="45" font-size="9" fill="#a39e8d">(比肌肉硬 100 倍,比骨软 10 倍)</text>
+
+        <text x="0" y="65" font-size="9.5" fill="#e8e4d8">极限应变</text>
+        <text x="200" y="65" font-size="9.5" fill="#d4a548">~4–8%</text>
+        <text x="380" y="65" font-size="9" fill="#a39e8d">(超过 4% 即微损伤,&gt; 8% 断裂)</text>
+
+        <text x="0" y="85" font-size="9.5" fill="#e8e4d8">能量回返</text>
+        <text x="200" y="85" font-size="9.5" fill="#d4a548">~93%</text>
+        <text x="380" y="85" font-size="9" fill="#a39e8d">(比橡胶筋还高效——奔跑省能源关键)</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 2.3 · 肌腱的 5 级嵌套结构与代表性力学参数</div>
+  </div>
+
+  <p>① <strong>原胶原分子</strong> (tropocollagen, 1.5 nm 直径,300 nm 长):三股 α 螺旋的 I 型胶原分子,是肌腱所有结构的最小积木。每根原胶原分子的氨基酸序列里,<em>Gly-X-Y 重复</em>(X 常是脯氨酸 Pro,Y 是羟脯氨酸 Hyp)是它的标志性身份。</p>
+
+  <p>② <strong>胶原原纤维</strong> (collagen fibril, 10–500 nm):多个原胶原分子按 67 nm 周期错开排列、形成的纤维结构。原纤维之间通过<em>赖氨酸交联</em> (lysyl-pyridinoline cross-links) 互锁——这是肌腱强度的根本来源。年轻肌腱的交联是"动态可逆"的,中年后变成<em>糖基化终产物</em> (AGEs) 的非酶交联——这是肌腱<em>随年龄变硬变脆</em>的分子机制。</p>
+
+  <p>③ <strong>胶原纤维</strong> (collagen fiber, 1–20 μm):多根胶原原纤维组成的"纤维",可在光镜下看见。在纤维间隙里散布着<em>腱细胞</em> (tenocytes)——稀疏的、扁平的、几乎不分裂的细胞,负责胶原的合成与维护。</p>
+
+  <p>④ <strong>肌腱原纤维束</strong> (fascicle, 50–300 μm):多根胶原纤维被一层结缔组织 (endotenon) 包裹形成的束。endotenon 里含<em>血管、神经、淋巴管</em>——这是肌腱稀疏的血供网络。</p>
+
+  <p>⑤ <strong>整条肌腱</strong> (tendon, 1–10 mm):多个 fascicle 被外膜 (epitenon, 紧贴肌腱表面 + paratenon, 疏松外鞘) 包裹形成的最终肌腱。paratenon 在跟腱、髌腱等可滑动肌腱周围发达,提供润滑。</p>
+
+  <h4>"波浪状卷曲" (crimp pattern) 与"脚跟-脚趾"曲线</h4>
+  <p>松弛状态下,胶原纤维呈<em>规律的波浪状卷曲</em>——这是腱独有的形态。受到拉力时,肌腱表现出典型的"<strong>脚跟-脚趾力-应变曲线</strong>":</p>
+  <ul>
+    <li><strong>0–2% 应变(toe region "脚趾区"):</strong>波浪卷曲被拉直,肌腱表现为"软"</li>
+    <li><strong>2–4% 应变(linear region "线性区"):</strong>胶原纤维真正承受拉力,刚度最大,正常运动绝大部分时间在这里</li>
+    <li><strong>4–8% 应变(microfailure):</strong>开始微损伤——纤维间滑移、原纤维内部分子断裂</li>
+    <li><strong>> 8% 应变:</strong>宏观断裂</li>
+  </ul>
+
+  <p>"卷曲"的生物学意义:它是肌腱的<em>缓冲带</em>。如果没有 crimp,任何小动作都会让肌腱在线性区承受峰值力,过载随时发生。crimp 让肌腱有 2% 的"无痛延展"空间,这也是为什么力学训练必须超过这个区(进入 linear region 才能给细胞信号)。</p>
+
+  <p class="plain">原理:肌腱是 5 级嵌套的力学建筑,胶原原纤维以 67 nm 周期错列、用赖氨酸交联固定。年轻时交联可逆,老年时糖基化让肌腱变脆。<strong>翻译:</strong>肌腱像一根五层织起来的绳子,从分子→原纤维→纤维→束→整条腱,每一层都有自己的"打结方式"。年轻时这些结是活结,可以重新打;老了就变成死结,断了就难重新长好。<em>放在你身上:</em>如果你 40 岁开始跑步突感跟腱痛,不是"你跑步姿势不对",是<em>你的胶原交联已经从活结变死结</em>,适应能力本来就比 20 岁的人慢一半。这不是借口,是预期管理——同样的康复协议,你要按 12 个月而不是 6 个月规划。</p>
+
+  <h3><span class="pre">2.5</span>肌腱修复的慢——胶原合成与降解几乎同步,净增长 0.1%/天</h3>
+  <p class="lead">肌肉拉伤 4–6 周可以完全恢复,肌腱呢?跟腱炎康复要 6–12 个月,而且即使临床康复后,组织学上的胶原排列要 12–24 个月才完全成熟。<em>为什么差这么大?</em>答案在一个被严重低估的数字——肌腱胶原的<strong>净合成速率约 0.1% / 天</strong>。这一节把这个数字拆透。</p>
+
+  <h4>胶原周转的两个数字</h4>
+  <p>Magnusson 2010 等用稳定同位素标记技术(13C 标记的脯氨酸,跟踪胶原合成)测得人跟腱的胶原周转参数:</p>
+  <ul>
+    <li><strong>胶原合成速率</strong>:静息约 0.5% / 天;运动后 24 小时内可升至 1–2% / 天</li>
+    <li><strong>胶原降解速率</strong>:与合成几乎同步,基础约 0.4% / 天;运动后也升高</li>
+    <li><strong>净增长 = 合成 - 降解</strong>:约 0.1% / 天</li>
+  </ul>
+
+  <p>这意味着:即使每天高效训练,肌腱胶原也只能净增长 0.1%。要肌腱组织发生<em>1% 的可测量变化</em>需要 10 天;<em>10% 的实质性增厚</em>需要 100 天(~3 个月);<em>结构性重塑成熟</em>需要 6–12 个月。这就是肌腱康复"慢得不可思议"的细胞学根因。</p>
+
+  <h4>对比:肌肉的同一参数</h4>
+  <p>肌肉蛋白合成速率呢?Phillips 1997 等用同样方法测量:静息约 1.5%/天,训练后可达 3–5%/天;净增长可达 1–2%/天。<strong>肌肉的净增长速率是肌腱的 10–20 倍</strong>——这就是为什么肌肉拉伤 4 周回归,肌腱"病变"要 4 个月才看见变化的原因。</p>
+
+  <h4>力学刺激如何调节胶原合成</h4>
+  <p>肌腱的胶原合成不是"自发"的,几乎完全依赖<em>力学刺激</em>(mechanotransduction)。腱细胞表面有一系列力敏感离子通道(Piezo1、TRPV4 等)和细胞骨架蛋白(integrin、cadherin),感知<em>胶原纤维的应变</em>并转化为基因表达信号。Magnusson 2014 等总结的关键发现:</p>
+  <ul>
+    <li><strong>无应变(卧床、固定):</strong>胶原合成下降 30–50%,降解相对加快——<em>肌腱萎缩</em></li>
+    <li><strong>低应变(< 2%):</strong>维持基础合成,无显著增长</li>
+    <li><strong>中应变(3–5%):</strong>最优,合成显著上调,适应性增厚</li>
+    <li><strong>高应变(> 6%):</strong>开始微损伤,IL-6 等促炎细胞因子升高</li>
+    <li><strong>极高应变(> 8%):</strong>宏观断裂</li>
+  </ul>
+
+  <p>关键临床含义:<em>肌腱康复必须给"中应变"刺激</em>。完全休息=组织不修;轻度走路=维持但不长;离心训练(Alfredson 协议)、慢速重负荷 HSR(Heavy Slow Resistance, Kongsgaard 2009)给到 3–5% 应变,才是真正激活胶原合成的力学剂量。</p>
+
+  <h4>"为什么停跑不能治好跟腱炎"</h4>
+  <p>这是临床上最常见的误解。"我跟腱痛,休息一个月就好了"——但停跑下肌腱没有应变刺激,胶原合成低、降解仍在,组织实际上<em>更虚</em>。重新跑的时候原本就退化的肌腱接受全负荷,几乎必然加重病情。这就是"休息→好转→再跑→复发"的死循环,90% 的跟腱炎康复失败都源于此。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 跟腱痛了 "完全休息" 是错的</div>
+    <p>NSAID 不行,完全休息也不行——这是 90% 跑者和医生还没接受的现代肌腱医学共识。肌腱<em>必须有应变刺激</em>才能合成胶原,完全休息让肌腱进一步退化。Alfredson 离心协议的关键不是"动作多难",而是"<em>允许疼痛 ≤ 4/10 继续做</em>"——你必须在有不适感时给肌腱足够的力学信号。等到完全不痛再练 = 永远治不好,因为"不痛"意味着组织从未被重新塑造。</p>
+  </div>
+
+  <h4>"肌腱病" (tendinopathy) 的细胞学颠覆——下节继续</h4>
+  <p>这套缓慢的修复机制还有一个更深的颠覆——肌腱"炎"其实<em>不是炎</em>。这是 1999 年 Khan 和 Cook 在文献上发起的一场命名运动,我们在下一节展开。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">SYNTH</div>
+      <div class="num">~0.5%/d</div>
+      <div class="sub">肌腱胶原静息合成速率</div>
+    </div>
+    <div class="item">
+      <div class="label">DEGRAD</div>
+      <div class="num">~0.4%/d</div>
+      <div class="sub">肌腱胶原静息降解速率</div>
+    </div>
+    <div class="item">
+      <div class="label">NET</div>
+      <div class="num">~0.1%/d</div>
+      <div class="sub">净增长 · 肌肉的 1/10</div>
+    </div>
+    <div class="item">
+      <div class="label">REMODEL</div>
+      <div class="num">12–24 mo</div>
+      <div class="sub">完全胶原重塑成熟时间</div>
+    </div>
+  </div>
+
+  <h3><span class="pre">2.6</span>肌腱病变 (tendinopathy) 的现代理解——不是 tendinitis</h3>
+  <p class="lead">1999 年,加拿大运动医学医生 Karim Khan 和 Jill Cook 在 <em>BMJ</em> 上发表了一篇短小但震撼的论文,标题直白:"<em>Time to abandon the 'tendinitis' myth</em>"——是时候放弃"肌腱炎"这个迷思了。这篇文章在接下来 25 年里彻底改写了肌腱医学,让"炎"字从临床术语里被赶出。这一节把这场命名革命的来龙去脉讲透,以及现代 tendinopathy 的<em>continuum 模型</em>。</p>
+
+  <h4>组织学证据——"炎"在哪里?</h4>
+  <p>1990s 之前,跑者得跟腱痛就被诊断为"跟腱炎" (Achilles tendinitis)——"-itis" 是炎症的拉丁后缀,意思是<em>有炎症细胞浸润</em>。但 1990s 中后期一系列组织学研究(Jozsa 1997, Maffulli 1998, Khan 1996)用电镜和免疫组化检查了大量"肌腱炎"病例的活检样本,结果发现:</p>
+  <ul>
+    <li>几乎找不到<em>中性粒细胞、淋巴细胞、巨噬细胞</em>——经典炎症细胞</li>
+    <li>找不到<em>炎症细胞因子</em>(IL-1、TNF-α 等)的明显升高</li>
+    <li>但发现<em>大量退变改变</em>:胶原纤维排列紊乱、纤维断裂、纤维之间的基质增生、新生血管侵入 (neovascularization)、腱细胞凋亡和增殖混合并存</li>
+  </ul>
+
+  <p>"炎"消失了,退变出现了——所以更准确的术语是 <em>tendinosis</em>(腱病)或 <em>tendinopathy</em>(腱病变,更通用)。这不是文字游戏,而是临床范式的根本转变:</p>
+  <ul>
+    <li>"炎"→ NSAID + 休息 + 冰敷(消炎)</li>
+    <li>"退变"→ 渐进力学负荷 + 胶原重塑刺激(修复)</li>
+  </ul>
+
+  <h4>Cook & Purdam 2009 的 Continuum 模型</h4>
+  <p>2009 年 Jill Cook 和 Craig Purdam 在 <em>Br J Sports Med</em> 发表的<em>三阶段连续谱模型</em>(continuum model of tendinopathy),是目前临床上最被接受的肌腱病理学框架:</p>
+
+  <table>
+    <thead>
+      <tr><th>阶段</th><th>组织学</th><th>临床表现</th><th>是否可逆</th><th>处置</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>① Reactive(反应期)</strong></td><td>腱细胞增殖、蛋白聚糖快速沉积、肌腱<em>暂时增厚</em>(可逆)</td><td>急性发作 · 突然过载后 · 间断性疼痛 · 肌腱触诊可肿胀</td><td>完全可逆 · 1–4 周</td><td>减量 + 适度负荷 + 冰敷(短期)</td></tr>
+      <tr><td><strong>② Disrepair(失修复期)</strong></td><td>胶原排列开始紊乱 · 新生血管侵入 · 部分腱细胞凋亡</td><td>慢性化 · 跑步时痛 + 跑后第二天加重 · 肌腱触诊增厚 + 局部硬结</td><td>部分可逆 · 数月</td><td>渐进负荷(离心 / HSR)+ 6–12 周协议</td></tr>
+      <tr><td><strong>③ Degenerative(退变期)</strong></td><td>明显的胶原结构紊乱 · 局部坏死区 · 大量新生血管</td><td>持续性疼痛 · 力学性能显著下降 · 影像可见明显病变(MRI 高信号、超声低回声区)</td><td><em>不可逆</em> · 但仍可改善症状</td><td>同上 + 必要时介入(冲击波、PRP、手术)</td></tr>
+    </tbody>
+  </table>
+
+  <p>这个模型最关键的发现:<strong>阶段间是可逆的(① ↔ ②),但 ③ 退变后无法回到完全健康</strong>。但这并不意味着 ③ 就是"无药可救"——多数退变期患者通过渐进负荷仍可显著改善症状和功能,只是组织学上不会回到 ①。这是为什么早期识别和干预 ① 反应期肌腱痛<em>性价比最高</em>——早 1 个月介入,可能省后续 6 个月的康复。</p>
+
+  <h4>"新生血管"是什么意思?</h4>
+  <p>"-itis" 假说的另一个错误是认为肌腱病无血管。事实上,病理性肌腱常有<em>大量新生血管</em>(neovascularization),Alfredson 等用超声多普勒可清楚看到。这些新生血管伴随<em>新生神经纤维</em>(neoneurogenesis)——这是<em>慢性肌腱痛的潜在解剖学根源</em>:正常肌腱几乎没有痛觉神经,但病变腱里的新生神经纤维(主要是 C-纤维)直接传递痛觉。某些治疗(如硬化注射 sclerotherapy)的机制就是<em>专门消除这些新生血管和神经</em>。</p>
+
+  <div class="callout note">
+    <div class="label">注 / "无炎症"不等于"不疼" — 疼痛是另一回事</div>
+    <p>肌腱病"没炎症"不代表它"不该疼"。Rio 2014 等研究发现肌腱痛与<em>新生神经纤维 + 中枢敏化 (central sensitization)</em> 有关——不是经典炎症通路,而是<em>慢痛通路</em>。这就是为什么 NSAID 对肌腱痛无效(没炎症),但<em>等长收缩 (isometric contractions)</em> 反而能即刻显著减痛(可能是脊髓痛闸门机制)。临床上"跟腱痛先做 5 秒等长 × 5 次"可以让多数患者的疼痛<em>立即下降 40–60%</em>——这是肌腱痛管理的现代实操。</p>
+  </div>
+
+  <h4>临床指导原则</h4>
+  <ol>
+    <li><strong>停用 "肌腱炎" 术语</strong>——专业医生现在都说 tendinopathy 或具体类型(中段跟腱病 / 止点性跟腱病)</li>
+    <li><strong>NSAID 几乎无效</strong>——短期止痛可以,长期使用不推荐(无炎症可消 + 可能抑制胶原合成)</li>
+    <li><strong>类固醇注射可能加重退变</strong>——短期止痛 1–2 周后症状反弹,且胶原结构进一步破坏。AAOS 等多个学会已不推荐</li>
+    <li><strong>核心治疗:渐进力学负荷</strong>——Alfredson 离心(跟腱中段)、HSR(髌腱、跟腱)、Rathleff 协议(足底筋膜)</li>
+    <li><strong>预期管理</strong>——明确告知患者康复周期 6–12 个月,而不是"过几周就好"</li>
+  </ol>
+
+  <h3><span class="pre">2.7</span>韧带的修复——血供少、瘢痕填补、永远的"次品"</h3>
+  <p class="lead">韧带和肌腱看起来很像——都是白色致密结缔组织、都富含 I 型胶原。但它们的修复命运完全不同。肌腱可以慢慢重塑,韧带则<em>永远做不到 100% 原始性质</em>——这背后是血供、细胞构成、力学环境的根本差异。这一节把韧带的"次品修复"机制讲透。</p>
+
+  <h4>韧带与肌腱的关键差异</h4>
+  <table>
+    <thead>
+      <tr><th>参数</th><th>肌腱</th><th>韧带</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>连接</td><td>肌肉 ↔ 骨</td><td>骨 ↔ 骨</td></tr>
+      <tr><td>力学功能</td><td>传递肌肉力,有储能弹性</td><td>稳定关节,限制异常运动</td></tr>
+      <tr><td>主要胶原</td><td>I 型 95%+</td><td>I 型 85%(部分韧带 III 型更高)</td></tr>
+      <tr><td>胶原排列</td><td>高度规则平行</td><td>较规则但有交织(应对多向力)</td></tr>
+      <tr><td>血供 (mL/100g/min)</td><td>~1–2</td><td>~0.5(关节内韧带几乎为 0)</td></tr>
+      <tr><td>主要细胞</td><td>腱细胞 (tenocytes)</td><td>纤维母细胞 (fibroblasts)</td></tr>
+      <tr><td>力学环境</td><td>静息常张力 + 运动周期负荷</td><td>静息低张力 + 异常运动时高峰</td></tr>
+      <tr><td>典型修复时间</td><td>6–12 月</td><td>1 年+(关节外);几乎不修复(关节内)</td></tr>
+      <tr><td>恢复原刚度</td><td>~95%</td><td>~70%(关节外);0%(关节内 ACL)</td></tr>
+    </tbody>
+  </table>
+
+  <h4>关节外韧带的修复 4 阶段</h4>
+  <p>以 MCL(膝内侧副韧带, medial collateral ligament)为例,这是被研究最深的关节外韧带修复模型(Frank 1999, Provenzano 2008):</p>
+
+  <ul>
+    <li><strong>① 出血 + 炎症 D0–D3:</strong>韧带断裂瞬间形成血肿,中性粒细胞 → 巨噬细胞清创。这阶段韧带几乎无承载能力。</li>
+    <li><strong>② 增殖 D3–W6:</strong>纤维母细胞迁移到损伤区,开始合成<em>III 型胶原</em>(<em>不是</em>原本的 I 型!)。III 型胶原结构和力学性质都<em>逊于</em> I 型——这就是瘢痕组织。新血管同时长入。</li>
+    <li><strong>③ 重塑 W6–M12:</strong>III 型胶原逐步被 I 型替换;胶原纤维开始按力学方向重排;血管和细胞密度逐渐降低。这阶段力学性能从 ~30% 缓慢上升到 ~70%。</li>
+    <li><strong>④ 成熟 M12+:</strong>组织继续成熟,但即使<em>数年后</em>,瘢痕区的胶原排列、横截面、刚度、强度都<strong>无法完全回到伤前水平</strong>。Provenzano 2008 大鼠 MCL 模型显示:伤后 12 个月,MCL 的<em>极限抗拉强度仅恢复到正常的 65–70%</em>,且永远停在这个水平。</li>
+  </ul>
+
+  <h4>为什么韧带"永远是次品"</h4>
+  <p>原因有四:</p>
+
+  <ol>
+    <li><strong>血供太稀:</strong>韧带血供约 0.5 mL/100g/min,是肌肉的 1/60。修复细胞缺氧少养、合成效率低。</li>
+    <li><strong>III 型胶原替代:</strong>瘢痕区是 III 型胶原(细而排列乱),而正常 I 型胶原粗而平行——力学性质天然劣势。即使重塑,<em>不能完全转换回 I 型</em>。</li>
+    <li><strong>胶原排列方向</strong>:正常韧带的胶原纤维高度按主力学方向平行排列,这是数月乃至数年逐渐发展的"力学记忆"。瘢痕组织的胶原是<em>各向同性</em>的——这是修复速度和强度的折损。</li>
+    <li><strong>力学环境差</strong>:韧带在静息时低张力、运动时承受复杂多向力——这种力学"突发性"不利于胶原的定向重塑,远逊于肌腱的"周期性持续负荷"。</li>
+  </ol>
+
+  <p>临床含义:任何韧带损伤后,即使影像上"愈合了",<em>力学性质永远是七折</em>。这就是为什么韧带损伤的复发率高(同部位 60%+),为什么任何 II 度以上韧带损伤都需要强化关节周围肌肉作"主动稳定器"代偿。</p>
+
+  <h4>关节内韧带的特殊命运</h4>
+  <p>关节外韧带(MCL、踝韧带)还能"次品修复",关节内韧带——主要是 ACL 和 PCL——情况更糟,基本<em>不愈合</em>。原因下一节讲透。</p>
+
+  <p class="plain">原理:韧带血供 ~0.5(肌肉的 1/60),修复用 III 型胶原瘢痕填补 I 型缺口,胶原排列无法重新平行化。<strong>翻译:</strong>韧带断了之后,身体不再"造同款",而是用一种结构更差的"次品胶原"填进去,且永远不会被替换成原来的样子。即使你完全康复了、可以正常跑步,这根韧带的力学性能也永远是七折——这就是韧带伤者复发率高的根本原因。<em>放在你身上:</em>踝扭伤、MCL 拉伤<em>"完全康复"</em>之后,关节周围的肌肉力量(本体感觉)<em>必须长期维持</em>——因为韧带本身已经是次品,只有强大的主动稳定器(肌肉)能弥补它的力学不足。北欧腘绳、单腿提踵、本体感觉训练(BOSU、闭眼单腿站)——这些都不是"练完就停",而是长期基础设施。</p>
+
+  <h3><span class="pre">2.8</span>ACL 为什么"不可自愈"——滑液环境与血肿缺失</h3>
+  <p class="lead">膝前交叉韧带 (Anterior Cruciate Ligament, ACL) 是运动医学最受关注的韧带——足球、滑雪、篮球的"职业终结者"。但 ACL 还有一个独特身份:它是<strong>身体里少数几条"完全断了基本不会自愈"</strong>的结构,几乎所有完全断裂都需要手术重建。MCL 全断可以保守愈合,ACL 全断为什么不能?答案在 ACL 的<em>解剖学特殊环境</em>。</p>
+
+  <h4>ACL 的解剖位置——关节腔内</h4>
+  <p>ACL 与 PCL(膝后交叉韧带)是<em>关节内韧带</em>(intra-articular ligaments)——它们位于膝关节囊内,被关节液 (synovial fluid) 包裹。这一点和 MCL(关节囊外侧)、踝韧带(关节囊外)有<strong>根本性差异</strong>。</p>
+
+  <h4>三个"为什么不愈合"的解剖学根因</h4>
+
+  <p><strong>① 血肿无法形成:</strong>韧带修复的第一步是<em>血肿</em>——血液中的纤维蛋白形成临时支架,细胞迁移到这里重建组织。但 ACL 断裂后,血液<em>立即被关节液稀释</em>,纤维蛋白凝块无法形成稳定支架。Murray 2007 等研究证实:关节腔内的 ACL 残端被关节液冲刷,几乎找不到稳定的纤维蛋白血凝块——这是修复的"原料"缺失。</p>
+
+  <p><strong>② 关节液中的酶降解修复信号:</strong>关节液含<em>纤维蛋白溶解酶</em> (plasmin) 和金属蛋白酶 (MMPs),专门防止关节内异物纤维化(防止关节粘连)。这套机制在 ACL 断裂时变成了"反修复机制"——任何想长出的新组织都被快速降解。</p>
+
+  <p><strong>③ 残端力学环境异常:</strong>正常 ACL 在膝屈伸时始终保持一定张力,这种"持续紧绷"是其力学健康的基础。断裂后两个残端弹缩成"两根小尾巴",几乎无张力刺激,周围细胞失去力学信号——胶原合成停滞。</p>
+
+  <h4>临床后果——为什么 ACL 重建是金标准</h4>
+  <p>因为以上三个原因,完全 ACL 断裂的<em>自愈率几乎为零</em>。Frobell 2010 等大型 RCT(KANON 研究)对比了"立即手术 vs 早期康复 + 延迟手术"两组,结论:运动需求高者必须手术,运动需求低者可保守(但要终身放弃高扭转运动)。临床指南(AOSSM 等)对 ACL 完全断裂 + 计划回归扭转性运动者,推荐 ACL 重建 (ACLR)。</p>
+
+  <table>
+    <thead>
+      <tr><th>韧带</th><th>位置</th><th>血肿形成</th><th>关节液影响</th><th>自愈可能</th><th>临床处置</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>MCL</td><td>关节外</td><td>正常形成</td><td>无</td><td>I-II 度自愈;III 度大多保守</td><td>大多保守 6–12 周</td></tr>
+      <tr><td>LCL(膝外侧副)</td><td>关节外</td><td>正常形成</td><td>无</td><td>同 MCL · 部分需手术</td><td>分级处理</td></tr>
+      <tr><td>ACL</td><td>关节内</td><td>无稳定血肿</td><td>稀释 + 酶降解</td><td>几乎零</td><td><strong>完全断裂大多重建</strong></td></tr>
+      <tr><td>PCL</td><td>关节内</td><td>无稳定血肿</td><td>同上</td><td>部分自愈(因有 残端贴合)</td><td>分级 · 部分保守</td></tr>
+      <tr><td>踝外侧韧带</td><td>关节外</td><td>正常形成</td><td>无</td><td>I-II 度高度自愈;III 度多保守</td><td>保守 4–8 周</td></tr>
+    </tbody>
+  </table>
+
+  <h4>ACL 重建技术的演进</h4>
+  <p>ACL 重建不是"修复",而是"替换"——用其他组织(常是患者自身的<em>骨-髌腱-骨</em> bone-patellar tendon-bone, BPTB;或<em>腘绳肌腱</em> hamstring tendon, HT;或<em>同种异体移植物</em> allograft)替代断裂的 ACL。</p>
+
+  <ul>
+    <li><strong>开放手术 → 关节镜微创(1980s 后):</strong>切口从 15 cm 缩到 3 个 5 mm 孔,术后恢复时间从 6 月 → 4 月</li>
+    <li><strong>单束 → 双束重建(2000s):</strong>恢复了原 ACL 的两束(前内侧束 AMB + 后外侧束 PLB)旋转稳定性。但 RCT 显示双束<em>临床效果</em>未显著优于单束,目前主流仍是单束</li>
+    <li><strong>自体 vs 同种异体:</strong>自体 BPTB"金标准",但取材区疼痛;HT 取材轻但稍弱;同种异体无取材痛但有传染病风险 + 失败率略高。<em>个体化选择</em></li>
+    <li><strong>移植物的"韧带化" (ligamentization):</strong>移植后的肌腱在体内经历"先死后生"——细胞死亡 + 重新被纤维母细胞填充 + 重塑成"类韧带"。这个过程需要 12–24 个月,这就是 ACL 重建后"康复 9 个月才能回扭转性运动"的细胞学根因</li>
+  </ul>
+
+  <h4>"BEAR 手术"——尝试修复而非重建</h4>
+  <p>Murray 2007 起,一系列研究尝试用<em>胶原-血支架</em> (BEAR, Bridge-Enhanced ACL Restoration) 在关节腔内提供人工血肿支架——理论上让 ACL 残端能"重新接上"。2020 年 BEAR-MOH 研究(Murray 2020)发表 2 年随访,显示 BEAR 在年轻患者中可能与传统 ACLR 效果接近。这条路线还在临床试验阶段,但是<em>"ACL 完全断裂未必必须重建"</em>的第一个真正可信的科学挑战。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / "保守治疗 ACL"不是不能,而是"代价是什么"</div>
+    <p>"ACL 断了一定要做手术?"——不,但代价是<em>放弃所有扭转性运动</em>。Frobell 2010 KANON 研究证明:运动需求低的人(走路、骑车、游泳为主)可以保守治疗,长期生活质量不差;运动需求高的人(足球、篮球、滑雪、网球)不重建大概率半月板二次损伤、加速骨关节炎。所以决策不是"要不要手术",而是<em>"你要继续什么运动?"</em>这是 ACL 损伤患者和医生应该一起回答的关键问题。</p>
+  </div>
+
+  <h3><span class="pre">2.9</span>骨的修复——血肿→纤维骨痂→硬骨痂→重塑</h3>
+  <p class="lead">骨折是骨头的"完全断裂",但骨的修复反而比韧带更彻底——经过 3–4 个月的 4 阶段过程,断裂区可以重新长出和原骨完全相同的<em>板层骨</em> (lamellar bone)。这一节把骨折修复的细胞学和力学过程讲透,以及为什么骨的修复比韧带、肌腱更"完整"。</p>
+
+  <h4>骨折修复的 4 阶段(经典 Cruess-Dumont 模型)</h4>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="100" y="35" font-size="12" fill="#d4a548" letter-spacing="0.18em">FRACTURE HEALING · 骨折愈合 4 阶段</text>
+      <text x="100" y="50" font-size="9" fill="#a39e8d" letter-spacing="0.1em">基于 Einhorn 2011 / Marsell 2011 综述</text>
+
+      <!-- 阶段 1: 血肿 (D0-W1) -->
+      <g transform="translate(100, 100)">
+        <text x="80" y="-5" font-size="10" fill="#d4a548" text-anchor="middle" letter-spacing="0.1em">① 血肿期</text>
+        <text x="80" y="8" font-size="9" fill="#a39e8d" text-anchor="middle">D0 – W1</text>
+        <!-- 骨头断裂示意 -->
+        <rect x="0" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <rect x="100" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <!-- 血肿 -->
+        <ellipse cx="80" cy="70" rx="35" ry="15" fill="#b56565" fill-opacity="0.6" stroke="#b56565" stroke-width="1.2"/>
+        <text x="80" y="73" font-size="8" fill="#e8e4d8" text-anchor="middle">血肿</text>
+        <text x="80" y="120" font-size="8" fill="#a39e8d" text-anchor="middle">炎症 · 趋化</text>
+        <text x="80" y="132" font-size="8" fill="#a39e8d" text-anchor="middle">MSC 迁入</text>
+      </g>
+
+      <!-- 阶段 2: 纤维骨痂 (W1-W3) -->
+      <g transform="translate(340, 100)">
+        <text x="80" y="-5" font-size="10" fill="#d4a548" text-anchor="middle" letter-spacing="0.1em">② 纤维骨痂</text>
+        <text x="80" y="8" font-size="9" fill="#a39e8d" text-anchor="middle">W1 – W3</text>
+        <rect x="0" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <rect x="100" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <!-- 软骨样骨痂 -->
+        <ellipse cx="80" cy="70" rx="45" ry="22" fill="#8fa867" fill-opacity="0.5" stroke="#8fa867" stroke-width="1.2"/>
+        <text x="80" y="73" font-size="8" fill="#e8e4d8" text-anchor="middle">软骨痂</text>
+        <text x="80" y="120" font-size="8" fill="#a39e8d" text-anchor="middle">软骨内骨化</text>
+        <text x="80" y="132" font-size="8" fill="#a39e8d" text-anchor="middle">血管侵入</text>
+      </g>
+
+      <!-- 阶段 3: 硬骨痂 (W3-W12) -->
+      <g transform="translate(580, 100)">
+        <text x="80" y="-5" font-size="10" fill="#d4a548" text-anchor="middle" letter-spacing="0.1em">③ 硬骨痂</text>
+        <text x="80" y="8" font-size="9" fill="#a39e8d" text-anchor="middle">W3 – W12</text>
+        <rect x="0" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <rect x="100" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <!-- 编织骨痂 -->
+        <ellipse cx="80" cy="70" rx="50" ry="25" fill="#c47f17" fill-opacity="0.6" stroke="#c47f17" stroke-width="1.5"/>
+        <text x="80" y="73" font-size="8" fill="#e8e4d8" text-anchor="middle">编织骨</text>
+        <text x="80" y="120" font-size="8" fill="#a39e8d" text-anchor="middle">骨膜内 + 软骨内骨化</text>
+        <text x="80" y="132" font-size="8" fill="#a39e8d" text-anchor="middle">骨稳定 不耐扭转</text>
+      </g>
+
+      <!-- 阶段 4: 重塑 (M3-Y2) -->
+      <g transform="translate(820, 100)">
+        <text x="80" y="-5" font-size="10" fill="#d4a548" text-anchor="middle" letter-spacing="0.1em">④ 重塑期</text>
+        <text x="80" y="8" font-size="9" fill="#a39e8d" text-anchor="middle">M3 – Y2</text>
+        <rect x="0" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <rect x="100" y="40" width="60" height="60" fill="#a39e8d" fill-opacity="0.3" stroke="#a39e8d" stroke-width="1.5"/>
+        <!-- 板层骨连接 -->
+        <rect x="55" y="55" width="50" height="30" fill="#d4a548" fill-opacity="0.7" stroke="#d4a548" stroke-width="1.5"/>
+        <text x="80" y="73" font-size="8" fill="#1a1814" text-anchor="middle" font-weight="bold">板层骨</text>
+        <text x="80" y="120" font-size="8" fill="#a39e8d" text-anchor="middle">破骨-成骨耦合</text>
+        <text x="80" y="132" font-size="8" fill="#a39e8d" text-anchor="middle">Wolff 定律重塑</text>
+      </g>
+
+      <!-- 底部时间轴 + 力学性能曲线 -->
+      <line x1="100" y1="280" x2="980" y2="280" stroke="#3d3d36" stroke-width="1"/>
+      <g font-size="9" fill="#a39e8d" text-anchor="middle">
+        <text x="100" y="298">D0</text>
+        <text x="240" y="298">W1</text>
+        <text x="380" y="298">W3</text>
+        <text x="520" y="298">W6</text>
+        <text x="660" y="298">W12</text>
+        <text x="820" y="298">M6</text>
+        <text x="980" y="298">Y2</text>
+      </g>
+      <text x="100" y="320" font-size="10" fill="#d4a548" letter-spacing="0.15em">力学性能恢复曲线</text>
+      <!-- 力学性能曲线: 几乎 0 → ~30% (W3) → ~70% (W12) → 100% (Y2) -->
+      <path d="M 100,275 L 200,272 Q 300,265 380,240 Q 480,210 660,205 Q 800,200 980,195"
+            stroke="#e8e4d8" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="240" cy="270" r="3" fill="#b56565"/>
+      <circle cx="380" cy="240" r="3" fill="#8fa867"/>
+      <circle cx="660" cy="205" r="3" fill="#c47f17"/>
+      <circle cx="980" cy="195" r="3" fill="#d4a548"/>
+      <text x="260" y="265" font-size="8" fill="#b56565">5%</text>
+      <text x="400" y="235" font-size="8" fill="#8fa867">30%</text>
+      <text x="680" y="200" font-size="8" fill="#c47f17">70%</text>
+      <text x="1000" y="195" font-size="8" fill="#d4a548">100%</text>
+    </svg>
+    <div class="svg-caption">FIG 2.4 · 骨折愈合的 4 阶段——血肿 / 纤维骨痂 / 硬骨痂 / 重塑及力学性能恢复曲线</div>
+  </div>
+
+  <p><strong>① 血肿期 D0–W1:</strong>骨折瞬间血管断裂,断端形成血肿(几毫升血液 + 纤维蛋白凝块)。骨膜 (periosteum) 和骨内膜 (endosteum) 受损,炎症细胞涌入。骨折断面经历短暂缺氧——这是触发血管新生的关键信号。无血肿(开放手术时大量冲洗、过度引流)会显著延迟愈合,这就是为什么现代骨科尽量"保留血肿"作为修复支架。</p>
+
+  <p><strong>② 纤维骨痂期 (Soft Callus) W1–W3:</strong>血肿被纤维血管组织替代,周围间充质干细胞 (MSC) 分化成<em>软骨细胞</em>(在低氧环境下偏向软骨命运)和<em>纤维母细胞</em>。形成的<em>软骨样组织 + 纤维组织</em>充满断端,这是"软骨痂" (cartilaginous callus)。这个阶段的"骨痂"在 X 光上看不见,但实际上已经在<em>力学上稳住了断端</em>——疼痛明显减轻。</p>
+
+  <p><strong>③ 硬骨痂期 (Hard Callus) W3–W12:</strong>软骨痂经历<em>软骨内骨化</em> (endochondral ossification)——和胚胎期长骨发育是同一机制。软骨痂的软骨细胞肥大、凋亡,血管和成骨细胞 (osteoblasts) 跟随血管侵入,沉积<em>编织骨</em> (woven bone)。同时骨膜内骨化 (intramembranous ossification) 也从断端外侧进行——成骨细胞直接产生骨基质。两者汇合,形成可在 X 光上明显看到的"骨痂"。这阶段力学性能从 30% 上升到 70%,可以负重但不耐扭转。</p>
+
+  <p><strong>④ 重塑期 (Remodeling) M3–Y2:</strong>编织骨被<em>破骨细胞</em> (osteoclasts) 吸收,被<em>板层骨</em> (lamellar bone) 替代;骨皮质重新连续;骨髓腔恢复;按 Wolff 定律,骨在力学应力方向上重新排列。这个过程可持续 1–2 年,完成后骨折区可与原骨完全无法区分——这是骨的"真再生"。</p>
+
+  <h4>骨修复"真再生"的细胞学基础</h4>
+  <p>为什么骨可以真再生,而韧带不能?三个核心差异:</p>
+  <ol>
+    <li><strong>祖细胞资源极丰富</strong>:骨膜成骨细胞、骨髓 MSC、骨内膜祖细胞——三个独立的修复细胞池,密度远高于韧带的纤维母细胞</li>
+    <li><strong>血供恢复快</strong>:骨膜下血管在伤后 1–2 周内重建,断端血肿提供短期支架,血管新生密集</li>
+    <li><strong>Wolff 定律的力学反馈</strong>:成骨细胞和破骨细胞会按力学应力<em>定向</em>排列新骨——这就是为什么愈合后的骨可以和原骨"无法区分"</li>
+  </ol>
+
+  <h4>影响骨折愈合的临床变量</h4>
+  <table>
+    <thead>
+      <tr><th>变量</th><th>对愈合的影响</th><th>临床含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>骨折类型</td><td>简单(横断 / 短斜)>粉碎 > 开放</td><td>粉碎 + 开放 + 软组织丧失 = 高不愈合风险</td></tr>
+      <tr><td>固定稳定性</td><td>稳定固定 → 直接愈合 (primary);相对稳定 → 经骨痂愈合 (secondary)</td><td>选 plate 还是 IM 钉 还是石膏要看断端</td></tr>
+      <tr><td>血供</td><td>骨膜血供保留 = 关键</td><td>过度剥离骨膜手术延迟愈合 → "微创"理念</td></tr>
+      <tr><td>力学负荷</td><td>适度负荷促进愈合(W1 后);过度负荷导致不愈合</td><td>渐进负重原则</td></tr>
+      <tr><td>吸烟</td><td><strong>降骨折愈合率 ~30–40%</strong>,不愈合 RR 1.5–2.0</td><td>戒烟是骨折后第一医嘱</td></tr>
+      <tr><td>糖尿病</td><td>愈合延迟 30–50%,不愈合 RR 1.8</td><td>血糖控制 + 慎选固定方式</td></tr>
+      <tr><td>NSAID</td><td>抑制成骨细胞 + 抑制软骨内骨化 → 早期 1-2 周避免</td><td>急性止痛改对乙酰氨基酚</td></tr>
+      <tr><td>维 D 缺乏</td><td>愈合延迟 + 不愈合风险升</td><td>骨折后查 25(OH)D,目标 >40 ng/mL</td></tr>
+      <tr><td>女性 REDs / 三联征</td><td>骨密度低 + 内分泌紊乱 = 应力骨折反复</td><td>EA &gt; 30 kcal/kg LBM/d · 月经评估</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="pre">2.10</span>Wolff 定律与骨的力学反馈——1000-2500 με 适应,>4000 με 骨折</h3>
+  <p class="lead">1892 年,德国解剖学家 Julius Wolff 发表了一本叫 <em>Das Gesetz der Transformation der Knochen</em>(《骨的转化定律》)的书。他在书里提出一个简单但震撼的观察:<strong>"骨会按它承受的力学应力,重塑自己的内部结构。"</strong>130 年后,这条定律仍是骨生物学的基石,也是骨折康复、应力骨折、骨质疏松的力学解释。这一节用现代生物力学语言把 Wolff 定律拆透,以及它的"应变窗口"——一个跑步、举铁、康复都用得到的关键数字。</p>
+
+  <h4>Wolff 1892 vs Frost 2003 现代版</h4>
+  <p>Wolff 原版定律的精髓是"骨适应力学环境",但 Wolff 没有量化"多少应变 / 多少应力 / 多少时间"。1960s 起 Harold Frost 在临床观察 + 动物实验基础上,提出了量化版的<em>骨力学应答阈值理论</em> (Mechanostat Theory, Frost 2003 定稿),把骨对力学的反应分成 4 个"应变窗口":</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="100" y="35" font-size="12" fill="#d4a548" letter-spacing="0.18em">FROST MECHANOSTAT · 骨的 4 个应变窗口</text>
+      <text x="100" y="50" font-size="9" fill="#a39e8d" letter-spacing="0.1em">Frost 2003 / 单位:微应变 microstrain με(1000 με = 0.1% 应变)</text>
+
+      <!-- X 轴 -->
+      <line x1="100" y1="280" x2="1020" y2="280" stroke="#3d3d36" stroke-width="1"/>
+      <text x="560" y="320" font-size="10" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">骨应变 · BONE STRAIN (μstrain)</text>
+
+      <g font-size="9.5" fill="#a39e8d" text-anchor="middle">
+        <text x="100" y="298">0</text>
+        <text x="280" y="298">500</text>
+        <text x="460" y="298">1000</text>
+        <text x="640" y="298">2500</text>
+        <text x="820" y="298">4000</text>
+        <text x="1020" y="298">25,000 (断裂)</text>
+      </g>
+
+      <!-- 4 个窗口 -->
+      <!-- Disuse 0-500 -->
+      <rect x="100" y="80" width="180" height="200" fill="#b56565" fill-opacity="0.15"/>
+      <text x="190" y="110" font-size="11" fill="#b56565" text-anchor="middle" letter-spacing="0.15em">DISUSE</text>
+      <text x="190" y="128" font-size="9" fill="#b56565" text-anchor="middle">废用</text>
+      <text x="190" y="148" font-size="8.5" fill="#a39e8d" text-anchor="middle">骨吸收 &gt; 骨形成</text>
+      <text x="190" y="162" font-size="8.5" fill="#a39e8d" text-anchor="middle">骨量下降</text>
+      <text x="190" y="180" font-size="8" fill="#a39e8d" text-anchor="middle">代表:卧床、宇航</text>
+      <text x="190" y="194" font-size="8" fill="#a39e8d" text-anchor="middle">骨量 -1-2%/周</text>
+
+      <!-- 0-500 微应变 表示 -->
+      <text x="190" y="230" font-size="9" fill="#e8e4d8" text-anchor="middle">&lt; 500 με</text>
+      <text x="190" y="245" font-size="8" fill="#a39e8d" text-anchor="middle">极低负荷</text>
+
+      <!-- Maintenance 500-1500 -->
+      <rect x="280" y="80" width="180" height="200" fill="#a39e8d" fill-opacity="0.1"/>
+      <text x="370" y="110" font-size="11" fill="#a39e8d" text-anchor="middle" letter-spacing="0.15em">MAINTENANCE</text>
+      <text x="370" y="128" font-size="9" fill="#a39e8d" text-anchor="middle">稳态维持</text>
+      <text x="370" y="148" font-size="8.5" fill="#a39e8d" text-anchor="middle">吸收 = 形成</text>
+      <text x="370" y="162" font-size="8.5" fill="#a39e8d" text-anchor="middle">骨量稳定</text>
+      <text x="370" y="180" font-size="8" fill="#a39e8d" text-anchor="middle">代表:正常活动</text>
+      <text x="370" y="194" font-size="8" fill="#a39e8d" text-anchor="middle">走路</text>
+
+      <text x="370" y="230" font-size="9" fill="#e8e4d8" text-anchor="middle">500–1500 με</text>
+      <text x="370" y="245" font-size="8" fill="#a39e8d" text-anchor="middle">日常负荷</text>
+
+      <!-- Adaptation 1500-3000 -->
+      <rect x="460" y="80" width="180" height="200" fill="#8fa867" fill-opacity="0.2"/>
+      <text x="550" y="110" font-size="11" fill="#8fa867" text-anchor="middle" letter-spacing="0.15em">ADAPTATION</text>
+      <text x="550" y="128" font-size="9" fill="#8fa867" text-anchor="middle">适应性增厚</text>
+      <text x="550" y="148" font-size="8.5" fill="#a39e8d" text-anchor="middle">形成 &gt; 吸收</text>
+      <text x="550" y="162" font-size="8.5" fill="#a39e8d" text-anchor="middle">骨密度上升</text>
+      <text x="550" y="180" font-size="8" fill="#a39e8d" text-anchor="middle">代表:跑步、举铁</text>
+      <text x="550" y="194" font-size="8" fill="#a39e8d" text-anchor="middle">骨量 +0.5-1%/月</text>
+
+      <text x="550" y="230" font-size="9" fill="#e8e4d8" text-anchor="middle">1500–3000 με</text>
+      <text x="550" y="245" font-size="8" fill="#a39e8d" text-anchor="middle">力学加载</text>
+
+      <!-- Overload 3000-4000 -->
+      <rect x="640" y="80" width="180" height="200" fill="#c47f17" fill-opacity="0.25"/>
+      <text x="730" y="110" font-size="11" fill="#c47f17" text-anchor="middle" letter-spacing="0.15em">OVERLOAD</text>
+      <text x="730" y="128" font-size="9" fill="#c47f17" text-anchor="middle">微损伤累积</text>
+      <text x="730" y="148" font-size="8.5" fill="#a39e8d" text-anchor="middle">微裂纹生成</text>
+      <text x="730" y="162" font-size="8.5" fill="#a39e8d" text-anchor="middle">需修复跟上</text>
+      <text x="730" y="180" font-size="8" fill="#a39e8d" text-anchor="middle">代表:跑量陡增</text>
+      <text x="730" y="194" font-size="8" fill="#a39e8d" text-anchor="middle">应力反应</text>
+
+      <text x="730" y="230" font-size="9" fill="#e8e4d8" text-anchor="middle">2500–4000 με</text>
+      <text x="730" y="245" font-size="8" fill="#a39e8d" text-anchor="middle">过载累积</text>
+
+      <!-- Pathologic >4000 -->
+      <rect x="820" y="80" width="200" height="200" fill="#c93f3f" fill-opacity="0.3"/>
+      <text x="920" y="110" font-size="11" fill="#c93f3f" text-anchor="middle" letter-spacing="0.15em">FRACTURE</text>
+      <text x="920" y="128" font-size="9" fill="#c93f3f" text-anchor="middle">骨折</text>
+      <text x="920" y="148" font-size="8.5" fill="#a39e8d" text-anchor="middle">微裂纹合并</text>
+      <text x="920" y="162" font-size="8.5" fill="#a39e8d" text-anchor="middle">宏观断裂</text>
+      <text x="920" y="180" font-size="8" fill="#a39e8d" text-anchor="middle">代表:应力骨折</text>
+      <text x="920" y="194" font-size="8" fill="#a39e8d" text-anchor="middle">外伤骨折</text>
+
+      <text x="920" y="230" font-size="9" fill="#e8e4d8" text-anchor="middle">&gt; 4000 με</text>
+      <text x="920" y="245" font-size="8" fill="#a39e8d" text-anchor="middle">病理性应变</text>
+    </svg>
+    <div class="svg-caption">FIG 2.5 · Frost Mechanostat 应变窗口——骨在不同应变下的 4 种命运</div>
+  </div>
+
+  <h4>4 个应变窗口的临床含义</h4>
+  <ol>
+    <li><strong>废用窗口 (< 500 με):</strong>骨吸收 > 形成。代表:卧床、太空、长期石膏固定。骨量 -1-2%/周(宇航员一个月可减 1-2% 骨密度)。康复中"过度保护"等同于让骨进入废用窗口。</li>
+    <li><strong>稳态窗口 (500–1500 με):</strong>吸收 = 形成。代表:正常走路、轻量日常活动。维持但不增。</li>
+    <li><strong>适应窗口 (1500–3000 με):</strong>形成 > 吸收,适应性增厚。这是<em>所有骨密度训练的目标区间</em>——跑步、举铁、跳跃都在这里。</li>
+    <li><strong>过载窗口 (2500–4000 με):</strong>微损伤累积,需要破骨-成骨耦合修复跟上。过载持续 + 修复跟不上 = 应力反应 (stress reaction) → 应力骨折。</li>
+    <li><strong>病理窗口 (> 4000 με):</strong>单次或反复达到 > 4000 με → 微裂纹合并成宏观骨折。</li>
+  </ol>
+
+  <h4>不同活动的真实骨应变估算</h4>
+  <p>这些数字不是抽象的——实际可以测量。Burr 1996 等用胫骨贴应变片(invasive 但准确)测得不同活动的真实骨应变:</p>
+  <ul>
+    <li>静坐 / 站立:< 500 με(废用窗口)</li>
+    <li>走路:600–1200 με(稳态)</li>
+    <li>慢跑:1500–2500 με(适应)</li>
+    <li>冲刺:2500–3500 με(适应 + 过载边缘)</li>
+    <li>跳跃落地:3000–5000 με(过载)</li>
+    <li>极限单次冲量(如车祸):> 25,000 με(直接骨折)</li>
+  </ul>
+
+  <h4>Wolff 定律对康复的指导</h4>
+  <ol>
+    <li><strong>"骨折后立即完全制动"是错的</strong>——长期完全无负荷让骨进入废用窗口,骨痂强度反而下降。现代骨科主张<em>渐进负重</em>:复杂骨折后第 2-4 周开始部分负重(用拐杖),第 6-8 周完全负重(取决于固定方式),把骨重新拉进适应窗口。</li>
+    <li><strong>骨密度低人群必须做"冲击性训练"</strong>:游泳、骑车的骨应变低,只有跑步、跳跃、举铁、负重快走才能进入适应窗口。绝经后女性如果只游泳,骨密度仍持续下降——必须加入冲击训练。</li>
+    <li><strong>应力骨折康复要"低应变开始"</strong>:游泳、骑车 4-6 周让微裂纹修复,再渐进引入冲击训练,2-3 个月恢复跑步,5-6 个月恢复跳跃。</li>
+    <li><strong>骨密度训练的"剂量响应"是非线性的</strong>:Robling 2002 等动物实验显示,同样的总负荷,<em>分段休息</em>(8 跳 → 休息 8 小时 → 8 跳)比连续 16 跳更有效——骨对力学信号有"饱和"现象,休息让信号通路重新激活。这意味着"早晚各 50 跳"比"一次 100 跳"对骨更好。</li>
+  </ol>
+
+  <div class="callout ops">
+    <div class="label">实操 / 骨密度训练的"骨增强餐"</div>
+    <p>对绝经后女性、骨密度 T-score 在 -1.0 到 -2.5 之间的人:</p>
+    <ul>
+      <li><strong>跳跃</strong>:每天 50 次原地跳(高度 5-10 cm 即可,关键是冲击 > 4× 体重)。研究(Bassey 1998)显示绝经前女性 6 个月可使股骨颈骨密度 +2.8%</li>
+      <li><strong>负重快走</strong>:每周 3 次 30 分钟 + 5–10% 体重负重背心(逐步加)</li>
+      <li><strong>抗阻训练</strong>:每周 2 次,深蹲 + 硬拉 + 引体向上 + 推举,80%+ 1RM 强度 — Watson 2018 LIFTMOR 研究显示绝经后女性 8 个月可使腰椎骨密度 +2.9%</li>
+      <li><strong>分段</strong>:同样总负荷,早晚分两次比一次性更有效</li>
+      <li><strong>营养支撑</strong>:钙 1200 mg/d + 维 D &gt; 40 ng/mL + 蛋白 1.2-1.6 g/kg/d</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">2.11</span>关节软骨的"几乎不可再生"——成年软骨细胞分裂能力极差</h3>
+  <p class="lead">膝盖软骨上的一道沟,可能一辈子就在那里。这不是夸张——这是关节软骨修复能力的事实。在所有结缔组织里,关节软骨是<em>修复能力最差</em>的——无血管、无神经、软骨细胞密度低(只占组织体积 1–5%)且成年后<em>几乎不分裂</em>。这一节把软骨的"不可再生"机制讲透,以及为什么这是骨关节炎 (OA) 不可逆性的根因。</p>
+
+  <h4>软骨的极端解剖</h4>
+  <p>关节软骨(透明软骨, hyaline cartilage)是一种<em>特殊的</em>结缔组织——和其他组织相比,它的解剖几乎处处反常:</p>
+  <ul>
+    <li><strong>无血管</strong>:营养完全依赖关节液 (synovial fluid) 通过扩散提供。一个不到 5 mm 厚的软骨层,中央细胞距离营养源最远</li>
+    <li><strong>无神经</strong>:软骨本身没有痛觉神经——OA 患者的疼痛实际来自<em>软骨下骨、关节囊、滑膜</em>,不是软骨本身</li>
+    <li><strong>无淋巴</strong>:废物代谢同样依赖扩散</li>
+    <li><strong>细胞密度极低</strong>:软骨细胞 (chondrocytes) 只占组织体积 1–5%,其余 95%+ 是基质</li>
+    <li><strong>基质极慢周转</strong>:II 型胶原半衰期 ~117 年(!),聚集蛋白聚糖 (aggrecan) 半衰期 ~3 年——软骨基质的"分子钟"以年为单位</li>
+    <li><strong>成年软骨细胞几乎不分裂</strong>:Buckwalter 1998 等大量研究证实,成年软骨细胞分裂周期长达数年,分裂能力远低于其他细胞</li>
+  </ul>
+
+  <h4>软骨的 4 层结构</h4>
+  <p>关节软骨在显微镜下分 4 层,每层胶原排列方向不同(应对不同方向的力):</p>
+  <ul>
+    <li><strong>表层 (superficial zone, 10–20% 厚)</strong>:胶原纤维平行于关节面,负责剪切应力。这是软骨损伤<em>最常见</em>的起始层</li>
+    <li><strong>中层 (middle zone, 40–60%)</strong>:胶原纤维斜向交错,负责压缩力分散</li>
+    <li><strong>深层 (deep zone, 20–30%)</strong>:胶原纤维垂直于关节面,锚定到钙化层</li>
+    <li><strong>钙化层 + 软骨下骨</strong>:胶原垂直延伸到软骨下骨,这是软骨与骨的力学锚点</li>
+  </ul>
+
+  <h4>软骨损伤的两种命运</h4>
+  <p>软骨损伤的命运取决于<em>是否深达软骨下骨</em>:</p>
+
+  <ul>
+    <li><strong>部分厚度损伤 (Partial-thickness, Outerbridge I-III):</strong>损伤仅在软骨内,未达软骨下骨。<em>命运:</em>几乎不愈合。损伤区周围软骨细胞偶尔有微弱反应,但因细胞密度低 + 无血供,通常静止数年。这就是 MRI 上能看见的"软骨缺损" — 你 25 岁伤的,到 50 岁可能还在那里。</li>
+    <li><strong>全厚度损伤 (Full-thickness, Outerbridge IV):</strong>损伤穿透软骨达软骨下骨,血管随之进入损伤区。<em>命运:</em>"次品愈合" — 骨髓 MSC 迁入,形成<em>纤维软骨</em> (fibrocartilage,主要 I 型胶原)。这种纤维软骨力学性能<em>远不如</em>原透明软骨——硬度低、耐磨性差、几年内退化。所以即使"愈合了"也是力学次品。</li>
+  </ul>
+
+  <h4>软骨损伤进展为 OA 的力学链条</h4>
+  <ol>
+    <li>软骨表层损伤 → 局部胶原纤维断裂、聚集蛋白聚糖丢失</li>
+    <li>关节面摩擦系数升高 → 软骨进一步磨损</li>
+    <li>软骨下骨"暴露"(eburnation) → 骨密度增厚、骨赘形成(osteophytes)</li>
+    <li>炎症因子(IL-1β、TNF-α)在关节腔升高 → 加速软骨基质降解</li>
+    <li>对侧关节面继发性磨损 → "对吻 OA"</li>
+    <li>临床:骨关节炎、慢性疼痛、关节活动受限、最终关节置换</li>
+  </ol>
+
+  <p>这条链条的可怕之处:<em>一旦启动就几乎不可逆</em>。即使影像学不进展(早期 OA 几年内可能"静止"),组织学上软骨细胞的代谢失衡仍在缓慢进行。所有的"软骨保护"措施(glucosamine、chondroitin、HA 注射)——证据强度都不足以宣称"逆转",只能"症状管理"。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 葡萄糖胺、氨糖、玻尿酸—证据弱</div>
+    <p>葡萄糖胺 (glucosamine)、硫酸软骨素 (chondroitin sulfate)、关节腔 HA 注射 (玻尿酸)——这些被广泛用于"软骨保护"的产品,在循证医学里都是<em>证据弱</em>的。GAIT 大型 RCT(NIH 资助,2006)显示葡萄糖胺 + 软骨素对一般 OA 患者无显著效果,仅对中重度患者亚组有边际改善。HA 注射的 RCT 结果分歧大,效应量小。多数学会(如 AAOS)对这些干预的推荐级别为"低"或"不推荐"。<em>真正循证的 OA 管理</em>:体重控制、髋膝肌力训练、负重适度、必要时手术 — 这些远比"补软骨"重要。</p>
+  </div>
+
+  <h3><span class="pre">2.12</span>软骨损伤分级与现代再生策略——微骨折、MACI、自体软骨</h3>
+  <p class="lead">既然成人软骨几乎不再生,临床医学如何面对软骨损伤?过去 30 年发展出了一系列"再生医学"手术——从最简单的<em>微骨折</em>到最复杂的<em>自体软骨细胞培养移植 (ACI/MACI)</em>。这一节把现代软骨手术的真实效果讲透,并给出选择决策。</p>
+
+  <h4>Outerbridge 分级(临床通用)</h4>
+  <table>
+    <thead>
+      <tr><th>等级</th><th>定义</th><th>临床含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td>正常</td><td>—</td></tr>
+      <tr><td>I</td><td>软骨软化 + 肿胀,表面平整</td><td>早期病变,可能可逆</td></tr>
+      <tr><td>II</td><td>表层裂纹 + 局部破损,深度 < 50%</td><td>部分厚度损伤</td></tr>
+      <tr><td>III</td><td>裂纹深度 > 50% 但未达骨</td><td>部分厚度损伤(深)</td></tr>
+      <tr><td>IV</td><td>软骨穿透 + 软骨下骨暴露</td><td>全厚度损伤,可能进展为 OA</td></tr>
+    </tbody>
+  </table>
+
+  <h4>5 种主流软骨修复手术</h4>
+
+  <table>
+    <thead>
+      <tr><th>技术</th><th>原理</th><th>修复组织</th><th>适应症</th><th>预后</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>① 微骨折 Microfracture</strong></td><td>关节镜下用锥子在软骨下骨穿孔,血液+MSC 涌入</td><td>纤维软骨</td><td>< 2 cm² 缺损 · 年龄 < 50 · BMI &lt; 30</td><td>5 年功能良好 ~60%,10 年下降到 30-40%</td></tr>
+      <tr><td><strong>② OAT/Mosaicplasty</strong></td><td>从同膝非负重区取软骨柱 + 软骨下骨,移植到缺损区</td><td>透明软骨</td><td>1-4 cm² 缺损 · 取材区有限</td><td>10 年功能良好 70-80%(年轻活跃患者)</td></tr>
+      <tr><td><strong>③ ACI</strong>(第一代自体软骨细胞移植)</td><td>取自身软骨细胞培养 4-6 周,二次手术植入缺损,膜片(periosteum)覆盖</td><td>透明软骨样</td><td>2-10 cm² 中大缺损</td><td>10 年功能良好 70%+ · 但需 2 次手术 · 失败率 ~10-15%</td></tr>
+      <tr><td><strong>④ MACI</strong>(第三代基质辅助 ACI)</td><td>同 ACI,但细胞预先种在胶原基质上,可关节镜植入</td><td>透明软骨样</td><td>同 ACI,操作更简</td><td>SUMMIT RCT 显示 5 年优于微骨折</td></tr>
+      <tr><td><strong>⑤ 同种异体软骨</strong> (Osteochondral allograft, OCA)</td><td>新鲜冷藏的同种异体骨软骨柱移植</td><td>透明软骨</td><td>大缺损 (>4 cm²) · 救治性</td><td>10 年生存率 70-80%(选择性病例)</td></tr>
+    </tbody>
+  </table>
+
+  <h4>"为什么微骨折效果衰减"</h4>
+  <p>微骨折是 1980s 由 Steadman 推广的简单技术——在软骨下骨上钻多个 2-3 mm 孔,让骨髓血液和 MSC 涌入缺损区。短期效果好(术后 1-2 年 70% 患者症状显著改善),但<em>5 年后效果开始衰减,10 年后约 30-40% 患者需要再次手术或关节置换</em>。原因:</p>
+  <ol>
+    <li>微骨折填充的是<em>纤维软骨</em>,不是透明软骨——硬度低、耐磨性差</li>
+    <li>纤维软骨随时间退化,关节面再次磨损</li>
+    <li>软骨下骨被钻孔后可能出现骨水肿、骨赘生长,改变关节力学</li>
+  </ol>
+
+  <p>现代趋势:<strong>微骨折正被更新的技术(AMIC、MACI)逐步替代</strong>。但对小缺损(<2 cm²)和经济考虑,微骨折仍是常用选择。</p>
+
+  <h4>MACI 的现代地位</h4>
+  <p>MACI(Matrix-Associated Autologous Chondrocyte Implantation)是 ACI 的演化版——把患者自体软骨细胞预先种在胶原 I/III 型基质 (Matricel) 上,然后通过关节镜微创植入。SUMMIT 多中心 RCT(2014)显示 MACI 比微骨折在 5 年功能评分显著更好,且对大缺损(>3 cm²)优势更明显。但 MACI 的代价:<em>2 次手术 + 6-12 个月康复 + 高成本(美国 ~5 万美元)</em>。</p>
+
+  <h4>选择决策框架</h4>
+  <p>临床上软骨手术选择主要考虑 4 个变量:</p>
+  <ul>
+    <li><strong>缺损大小</strong>:< 2 cm² → 微骨折 / OAT;2-10 cm² → MACI;> 10 cm² → OCA</li>
+    <li><strong>缺损深度</strong>:部分厚度 → MACI;全厚度 → 加 OAT 或 OCA</li>
+    <li><strong>患者年龄</strong>:< 30 → 任何方案;30-50 → 优选 MACI;> 50 → 考虑保守 + 力量训练 + 必要时关节置换</li>
+    <li><strong>活动需求</strong>:高(运动员)→ MACI/OAT;低(中老年)→ 保守 + 必要时关节置换</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">注 / 软骨手术的康复时间是被严重低估的</div>
+    <p>"做了微骨折 6 周就能跑了"是错的。所有软骨手术的康复都要 6-12 个月不能高冲击:<em>微骨折</em>—部分负重 6-8 周,完全负重 12 周,跑步 6 个月,撞击运动 9-12 个月。<em>MACI/ACI</em>—无负重 4-6 周,部分负重 6-12 周,跑步 6-9 个月,撞击运动 12-18 个月。这些时间表的根因:新生软骨需要 12-24 个月才能成熟到接受运动级负荷。<strong>过早回归 = 必然失败</strong>,这是软骨手术失败的最大原因。</p>
+  </div>
+
+  <h3><span class="pre">2.13</span>半月板的"红区白区"——决定修复 vs 切除的解剖学</h3>
+  <p class="lead">膝关节里两个新月形纤维软骨垫——内外侧半月板 (medial / lateral meniscus)——是膝关节力学最关键的"减震器"和"配适器"。但半月板的修复能力极度<em>分区</em>:同一根半月板上不同位置,有的能缝合愈合,有的只能切除。这是<em>所有运动医学</em>里"血供决定预后"最经典的案例。这一节把半月板的红区-白区解剖学讲透。</p>
+
+  <h4>半月板的解剖与功能</h4>
+  <p>每个膝关节有两个半月板——内侧(C 形)和外侧(更圆,接近 O 形)。它们由<em>纤维软骨</em>构成(主要 I 型胶原 + 部分 II 型),夹在股骨髁和胫骨平台之间。功能:</p>
+  <ul>
+    <li><strong>分散压缩负荷</strong>:把股骨髁的点接触转化为面接触,降低软骨接触压力 30–50%</li>
+    <li><strong>关节稳定性</strong>:增加关节面契合度,辅助 ACL/PCL 稳定</li>
+    <li><strong>关节液分布与润滑</strong>:扩散关节液,促进软骨营养</li>
+    <li><strong>本体感觉</strong>:半月板内有机械感受器,参与关节位置感</li>
+  </ul>
+
+  <h4>红区、红-白区、白区——血供的力学解剖</h4>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="100" y="35" font-size="12" fill="#d4a548" letter-spacing="0.18em">MENISCUS · 红区 / 红-白区 / 白区</text>
+      <text x="100" y="50" font-size="9" fill="#a39e8d" letter-spacing="0.1em">基于 Arnoczky 1982 经典血供研究</text>
+
+      <!-- 半月板横截面 -->
+      <g transform="translate(280, 80)">
+        <!-- 整体形状 (横截面 C 形) -->
+        <path d="M 50,150 Q 50,30 200,30 Q 350,30 350,150 L 350,180 Q 350,200 200,200 Q 50,200 50,180 Z"
+              fill="none" stroke="#a39e8d" stroke-width="2"/>
+
+        <!-- 红区 (外缘 1/3, 血供) -->
+        <path d="M 50,150 Q 50,30 200,30 Q 350,30 350,150 L 350,180 Q 350,200 200,200 Q 50,200 50,180 Z"
+              fill="#b56565" fill-opacity="0.5"/>
+
+        <!-- 红-白区 (中 1/3) -->
+        <path d="M 95,140 Q 95,68 200,68 Q 305,68 305,140 L 305,170 Q 305,180 200,180 Q 95,180 95,170 Z"
+              fill="#d4a548" fill-opacity="0.4"/>
+
+        <!-- 白区 (内 1/3, 无血供) -->
+        <path d="M 145,135 Q 145,110 200,110 Q 255,110 255,135 L 255,160 Q 255,165 200,165 Q 145,165 145,160 Z"
+              fill="#e8e4d8" fill-opacity="0.3"/>
+
+        <!-- 血管标注 -->
+        <line x1="40" y1="115" x2="60" y2="115" stroke="#b56565" stroke-width="1.5"/>
+        <line x1="40" y1="100" x2="58" y2="100" stroke="#b56565" stroke-width="1.5"/>
+        <line x1="42" y1="135" x2="60" y2="135" stroke="#b56565" stroke-width="1.5"/>
+        <line x1="42" y1="160" x2="60" y2="160" stroke="#b56565" stroke-width="1.5"/>
+        <text x="20" y="100" font-size="9" fill="#b56565" text-anchor="end">血管</text>
+
+        <!-- 区域标注 -->
+        <text x="72" y="100" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">红区</text>
+        <text x="72" y="115" font-size="8" fill="#b56565" text-anchor="middle">RED</text>
+        <text x="125" y="105" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">红-白</text>
+        <text x="125" y="118" font-size="8" fill="#c47f17" text-anchor="middle">R-W</text>
+        <text x="200" y="138" font-size="10" fill="#1a1814" text-anchor="middle" font-weight="bold">白区</text>
+        <text x="200" y="151" font-size="8" fill="#a39e8d" text-anchor="middle">WHITE</text>
+      </g>
+
+      <!-- 右侧说明表格 -->
+      <g transform="translate(680, 80)">
+        <text x="0" y="5" font-size="10" fill="#d4a548" letter-spacing="0.15em">区域 · 血供 · 修复</text>
+
+        <!-- 红区 -->
+        <rect x="0" y="20" width="15" height="15" fill="#b56565" fill-opacity="0.7"/>
+        <text x="22" y="32" font-size="10" fill="#e8e4d8">红区(外 1/3)</text>
+        <text x="22" y="47" font-size="9" fill="#a39e8d">血供丰富(0.5-1 mL/100g)</text>
+        <text x="22" y="60" font-size="9" fill="#a39e8d">缝合可愈合 70-90%</text>
+        <text x="22" y="73" font-size="9" fill="#a39e8d">"红-红撕裂"优选缝合</text>
+
+        <!-- 红-白区 -->
+        <rect x="0" y="90" width="15" height="15" fill="#d4a548" fill-opacity="0.7"/>
+        <text x="22" y="102" font-size="10" fill="#e8e4d8">红-白区(中 1/3)</text>
+        <text x="22" y="117" font-size="9" fill="#a39e8d">血供稀(0.1-0.5 mL/100g)</text>
+        <text x="22" y="130" font-size="9" fill="#a39e8d">缝合愈合 30-60%</text>
+        <text x="22" y="143" font-size="9" fill="#a39e8d">取决于年龄、撕裂类型</text>
+
+        <!-- 白区 -->
+        <rect x="0" y="160" width="15" height="15" fill="#e8e4d8" fill-opacity="0.5"/>
+        <text x="22" y="172" font-size="10" fill="#e8e4d8">白区(内 1/3)</text>
+        <text x="22" y="187" font-size="9" fill="#a39e8d">几乎无血供 0</text>
+        <text x="22" y="200" font-size="9" fill="#a39e8d">缝合愈合 &lt; 10%</text>
+        <text x="22" y="213" font-size="9" fill="#a39e8d">部分切除 (meniscectomy)</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 2.6 · 半月板的红-白区血供解剖——决定缝合还是切除的关键变量</div>
+  </div>
+
+  <p>1982 年 Arnoczky 等用注射造影剂研究半月板血供,发现一个简单但意义重大的事实:<em>半月板血供来自外周(关节囊一侧),沿径向向内逐渐减弱</em>。这就把半月板分成三个区:</p>
+  <ul>
+    <li><strong>红区 (red zone, 外 1/3):</strong>血供丰富,纤维软骨内有可见小血管</li>
+    <li><strong>红-白区 (red-white zone, 中 1/3):</strong>血供稀疏</li>
+    <li><strong>白区 (white zone, 内 1/3):</strong>几乎无血供,营养完全靠关节液扩散</li>
+  </ul>
+
+  <h4>"红区缝、白区切"的临床决策</h4>
+  <p>这种血供差异直接决定半月板撕裂的处置:</p>
+  <ul>
+    <li><strong>红-红撕裂(外缘)→ 缝合优选</strong>:愈合率 70-90%,保留半月板完整性</li>
+    <li><strong>红-白撕裂(中区)→ 看情况</strong>:急性、年轻、纵向撕裂可尝试缝合(愈合率 30-60%);慢性、退变性撕裂多选择部分切除</li>
+    <li><strong>白-白撕裂(内缘)→ 部分切除 (partial meniscectomy)</strong>:愈合率 < 10%,缝合失败率高,标准处置是切除撕裂区(尽量保留剩余半月板)</li>
+  </ul>
+
+  <h4>半月板切除的远期代价——"被低估的 OA 风险"</h4>
+  <p>这是半月板手术决策中最被低估的部分。Fairbank 1948 经典论文首次描述:全半月板切除后<em>20 年内骨关节炎发生率显著升高</em>。后续大量队列(Englund 2003 等)证实即使是<em>部分</em>半月板切除,也会显著加速同侧膝关节软骨退化:</p>
+  <ul>
+    <li>全半月板切除 (total meniscectomy):20 年 OA 风险约 70%(同年龄正常人 ~15%)</li>
+    <li>部分半月板切除 (partial meniscectomy):15 年 OA 风险约 40-50%</li>
+    <li>成功的半月板缝合:OA 风险接近未损伤膝</li>
+  </ul>
+
+  <p>这就是为什么现代膝关节外科<em>越来越倾向"能缝就缝"</em>——即使缝合愈合率不到 50%,长期保留半月板的好处远超手术风险。同时这也颠覆了一个常见误解——"做了半月板手术就好了"。从 OA 角度看,半月板切除是一个<em>把短期问题换成长期问题</em>的决策,患者必须充分知情。</p>
+
+  <h4>"退变性半月板撕裂"——ESCAPE 颠覆</h4>
+  <p>40 岁以上人群中,MRI 上找到"半月板退变性撕裂"的比例极高(50 岁以上约 60%,即使无症状),这部分撕裂是<em>软骨老化的自然进程</em>,不是急性损伤。过去几十年默认"找到撕裂 = 做关节镜",但 ESCAPE 研究(Sihvonen 2013 NEJM)等 RCT 颠覆了这一逻辑:</p>
+  <ul>
+    <li>退变性半月板撕裂 + 早期 OA 患者,关节镜部分切除 vs 物理治疗 + 假手术</li>
+    <li>1 年 + 5 年随访:<em>两组症状改善程度相当</em></li>
+    <li>结论:退变性撕裂的"关节镜热"是过度医疗,物理治疗优先</li>
+  </ul>
+
+  <p>这就是为什么现代指南(BMJ Rapid Recommendations 2017)对 40+ 退变性撕裂第一选择是物理治疗 + 力量训练,关节镜只用于"非创伤性"急性撕裂或保守失败的患者。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / "MRI 发现半月板撕裂"≠ "需要手术"</div>
+    <p>40 岁以上的人,MRI 上找到"半月板退变性撕裂"的概率极高,但这不等于<em>必须手术</em>。ESCAPE 研究和 BMJ Rapid Recommendations 2017 都明确:退变性撕裂物理治疗优先,只有特定情况(明显机械症状如卡顿、bucket-handle 撕裂、外伤性急性撕裂)才考虑关节镜。<em>而且</em>即使做手术,也应优先尝试缝合而不是切除——切除后 20 年的 OA 代价被严重低估。一个常见错误:体检发现 MRI 撕裂 → 急着做关节镜 → 切除 → 短期"好了" → 10 年后 OA 加速 → 关节置换提前。</p>
+  </div>
+
+  <h3><span class="pre">2.14</span>神经组织的修复——Wallerian 变性与轴突再生的 1mm/天</h3>
+  <p class="lead">本章讲的"五大组织"主要是结缔组织,但有一种组织即使不属于结缔组织家族,也常在运动伤中受累,必须讲清楚——<strong>外周神经</strong>。神经损伤的修复机制和结缔组织完全不同,但它的"修复速度"是一个所有运动医学医生都背熟的数字:<em>轴突再生 ~1 mm / 天</em>。这一节把神经的 Wallerian 变性 + 轴突再生讲透。</p>
+
+  <h4>外周神经的解剖</h4>
+  <p>外周神经由多个神经纤维束 (fascicles) 组成,每个束由多根<em>神经纤维</em>构成,每根神经纤维 = 一根轴突 (axon) + 周围的<em>髓鞘</em> (myelin sheath, 由施万细胞 Schwann cells 形成) + 包裹层。从内到外的"三鞘":</p>
+  <ul>
+    <li>神经内膜 (endoneurium):包每根神经纤维</li>
+    <li>神经束膜 (perineurium):包每个 fascicle</li>
+    <li>神经外膜 (epineurium):包整条神经</li>
+  </ul>
+
+  <h4>Seddon 三级分类(神经损伤分级,1943)</h4>
+  <table>
+    <thead>
+      <tr><th>分级</th><th>损伤程度</th><th>临床表现</th><th>修复</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>I · Neuropraxia(神经失用)</strong></td><td>髓鞘损伤,轴突完整</td><td>暂时性传导阻滞,运动+感觉丢失</td><td>数天-数周完全恢复,无需手术</td></tr>
+      <tr><td><strong>II · Axonotmesis(轴突断裂)</strong></td><td>轴突断裂,神经内膜完整</td><td>失神经,但有"再生通道"</td><td>轴突再生 1mm/d 沿原通道,可恢复但需时间</td></tr>
+      <tr><td><strong>III · Neurotmesis(神经断裂)</strong></td><td>整条神经断裂(包括所有鞘)</td><td>完全失神经,可能形成神经瘤</td><td><em>需手术修复</em> 才有恢复可能;即使手术,恢复也不完全</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Wallerian 变性——轴突的"自杀程序"</h4>
+  <p>1850 年英国生理学家 Augustus Waller 首次描述:神经被切断后,<em>远端</em>(远离神经元胞体的部分)轴突会经历一个程序性降解过程——这就是<em>Wallerian 变性</em>。</p>
+  <ol>
+    <li><strong>损伤后 24-48 小时</strong>:远端轴突开始结构性崩解,神经丝降解</li>
+    <li><strong>3-5 天</strong>:髓鞘开始崩解;施万细胞从髓鞘形成转变为<em>再生引导细胞</em>;巨噬细胞涌入清除髓鞘碎片</li>
+    <li><strong>1-2 周</strong>:远端形成"<em>施万细胞通道</em>" (bands of Büngner) ——清空的内膜管道,等待近端轴突芽伸入</li>
+  </ol>
+
+  <p>Wallerian 变性的<em>不是病理,是必要</em>——它清理了损伤区,为近端轴突再生提供"轨道"。</p>
+
+  <h4>轴突再生——1mm/天的硬约束</h4>
+  <p>损伤后<em>近端</em>(连着神经元胞体的部分)轴突在断口处发出"<em>生长锥</em>" (growth cone),沿施万细胞通道向远端生长。生长速度大致 <strong>1 mm / 天</strong>(~1 米/年)。</p>
+  <p>这意味着:</p>
+  <ul>
+    <li>坐骨神经离手指 ~80 cm → 完全再生需要 ~2 年</li>
+    <li>面神经损伤离嘴角 ~10 cm → 完全再生需要 ~100 天 = ~3 个月</li>
+    <li>手指尺神经损伤离指尖 ~30 cm → ~10 个月</li>
+  </ul>
+
+  <p>但"完全再生"的<em>功能恢复</em>不等于结构再生。轴突可能到达原靶器官(肌肉、皮肤),但:</p>
+  <ul>
+    <li>髓鞘不一定完整重建 → 传导速度可能慢 30-50%</li>
+    <li>轴突可能"<em>错配</em>" — 运动轴突连到感觉靶,反之亦然 → 功能错乱</li>
+    <li>靶肌肉如果失神经超过 12-18 个月,可能<em>纤维化</em>,即使神经回来肌肉也激不活 → 这是大神经损伤的"<strong>不可逆失神经</strong>"困境</li>
+  </ul>
+
+  <h4>"时间窗口"——为什么神经损伤要早期手术</h4>
+  <p>如果是 III 级损伤(神经断裂),手术修复(端端缝合或自体神经移植)<em>必须在 6 个月内</em>。超过 12-18 个月,靶肌肉纤维化,即使神经接通了也无法激活肌肉。这就是为什么神经损伤一旦怀疑,必须急诊神经科 / 手外科评估——错过窗口就是终生功能缺失。</p>
+
+  <h4>运动相关神经损伤</h4>
+  <table>
+    <thead>
+      <tr><th>损伤</th><th>典型机制</th><th>临床表现</th><th>预后</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>梨状肌综合征</td><td>梨状肌压迫坐骨神经</td><td>臀深部痛 + 大腿后侧放射痛 + 感觉异常</td><td>多保守 · 拉伸 + 力量 + 注射</td></tr>
+      <tr><td>胸廓出口综合征</td><td>颈胸过紧 + 神经血管束受压</td><td>上肢感觉异常 + 力量下降</td><td>姿势调整 + 物理治疗 · 顽固需手术</td></tr>
+      <tr><td>肘管综合征(尺神经)</td><td>肘屈曲反复 + 长时间撑肘</td><td>手指 4/5 麻 + 内在肌萎缩</td><td>姿势 · 夜间夹板 · III 度需手术</td></tr>
+      <tr><td>跖间神经瘤 (Morton)</td><td>跖骨间神经反复压迫</td><td>前足"踩到石子"感 + 局部痛</td><td>鞋调整 · 注射 · 顽固切除</td></tr>
+      <tr><td>外周神经牵拉伤(BPI)</td><td>橄榄球、摩托车摔倒,头颈被强烈拉扯</td><td>"burner / stinger" 手臂麻木无力</td><td>多数 < 24h 恢复;持续 > 24h 需评估</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout you">
+    <div class="label">放在你身上 · 神经性症状的"立刻就医"红旗</div>
+    <p>普通肌肉关节伤可以"再观察两周",神经损伤<em>不能</em>。下面几种症状出现立刻就医(神经科 / 手外科):</p>
+    <ul>
+      <li><strong>持续 > 24 小时的麻木 / 刺痛</strong>—— 不是"肌肉酸",是神经在抗议</li>
+      <li><strong>明确的"无力"</strong>(比如脚不能背屈、手指不能伸)—— 运动神经受损</li>
+      <li><strong>感觉异常</strong>—— 皮肤"陌生感"、灼烧、电击样</li>
+      <li><strong>对应肌肉萎缩</strong>—— 几周内可见,意味着神经已受累</li>
+      <li><strong>急性外伤后立刻无知觉</strong>(尤其颈/肘/腘窝)—— 神经断裂嫌疑,需<em>急诊</em></li>
+      <li><strong>大小便控制异常</strong> + 鞍区麻木 —— 马尾综合征,<em>绝对急诊</em>(8 小时窗口决定一辈子)</li>
+    </ul>
+    <p><strong>核心:</strong>神经损伤的修复速度被它的"1 mm/天"硬约束 — 每耽误 1 个月,远端肌肉再多失神经一些;超过 12-18 个月,靶肌肉纤维化,即使神经回来也激不活了。所以神经损伤的"急性窗口"比肌骨损伤窄得多 — 怀疑就要查,不要"再观察"。</p>
+  </div>
+
+  <h3><span class="pre">2.15</span>章末综合——五大组织的差异化康复哲学</h3>
+  <p class="lead">前 14 节把五大组织(以及神经)的修复机制逐一拆透。现在把它们拼起来,看一份完整的"差异化康复哲学"——为什么康复不能"一刀切",为什么按组织计时才是临床现实。</p>
+
+  <h4>同一个伤的"五种时钟"</h4>
+  <p>同一个摔倒,可能同时损伤多种组织。下面是一个真实案例的康复时间表对照(假设患者 30 岁、足球运动员,摔倒导致前交叉韧带断裂 + 同侧 MCL II 度撕裂 + 半月板红区撕裂 + 内侧股骨髁软骨 III 度损伤 + 大腿后侧肌肉 II 度拉伤):</p>
+
+  <table>
+    <thead>
+      <tr><th>组织</th><th>损伤</th><th>真实修复时间</th><th>临床注意</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>肌肉</td><td>腘绳肌 II 度拉伤</td><td>5-8 周</td><td>4-6 周内单独基本可回归足球</td></tr>
+      <tr><td>骨</td><td>(无)</td><td>—</td><td>—</td></tr>
+      <tr><td>肌腱</td><td>(无)</td><td>—</td><td>—</td></tr>
+      <tr><td>韧带 - MCL</td><td>II 度撕裂</td><td>6-10 周</td><td>保守治疗,可与其他康复同步</td></tr>
+      <tr><td>韧带 - ACL</td><td>完全断裂</td><td>—</td><td><em>必须重建</em>;术后康复 9-12 个月</td></tr>
+      <tr><td>半月板</td><td>红区纵向撕裂</td><td>缝合后 6 月愈合</td><td>缝合优于切除</td></tr>
+      <tr><td>软骨</td><td>III 度局灶缺损</td><td>不可自愈;手术后 12-18 个月</td><td>可能需 MACI</td></tr>
+    </tbody>
+  </table>
+
+  <p>整体康复周期由<em>最慢的组织</em>决定——这里是软骨手术 + ACL 重建,意味着<em>12-18 个月</em>才能完全回归足球。"我下个月能跑了吗?"——能,但跑步不等于回到对抗性运动。每种组织有自己的"绿灯",最后等齐才是真正的回归。</p>
+
+  <h4>跨组织共性 vs 差异</h4>
+
+  <p><strong>共性(所有组织都遵循):</strong></p>
+  <ol>
+    <li><strong>炎症 → 增殖 → 重塑</strong>三阶段框架(虽然时间尺度不同)</li>
+    <li><strong>力学刺激是修复的关键信号</strong>(完全制动 = 萎缩,过度负荷 = 再损伤)</li>
+    <li><strong>渐进负荷</strong>是康复的核心方法论</li>
+    <li><strong>血供决定速度</strong>是普遍规律(肌肉 > 骨 > 肌腱 > 韧带 > 软骨)</li>
+    <li><strong>祖细胞密度决定再生质量</strong>(肌肉真再生 > 骨真再生 > 肌腱重塑 > 韧带瘢痕 > 软骨次品)</li>
+  </ol>
+
+  <p><strong>差异(不能一刀切):</strong></p>
+  <ol>
+    <li><strong>时间尺度差 100 倍</strong>(肌肉 4-6 周 vs 软骨永远)</li>
+    <li><strong>修复方式根本不同</strong>(真再生 vs 瘢痕填补 vs 不愈合)</li>
+    <li><strong>力学刺激窗口不同</strong>(骨需要 1500-3000 με,肌腱需要 3-5% 应变,软骨需要循环压缩)</li>
+    <li><strong>NSAID 的影响完全不同</strong>(肌肉损伤短期可用,骨折前 2 周禁用,肌腱病无效,软骨损伤无效)</li>
+    <li><strong>"红旗"信号不同</strong>(肌肉的"红区"在剧痛 + 凹陷,神经的"红旗"在 24 小时未消的麻木)</li>
+  </ol>
+
+  <div class="callout ops">
+    <div class="label">读完本章 · 这周你能做的 3 件事</div>
+    <p><strong>① 测:</strong>对照本章的五大组织表,识别你身上是否有"持续 > 4 周的不适"被你按错组织对待。比如:跟腱僵紧你按"肌肉酸"在拉伸(应该按肌腱算 12 周 Alfredson)、膝外侧痛你按"软组织炎"在冰敷(应该按 ITBS 髋外展力量训练)、大腿后侧反复拉伤你按"肌肉问题"在拉伸(应该评估骨盆-髋伸展生物力学)。</p>
+    <p><strong>② 改:</strong>把你日历上任何"康复时间表"按组织重新写。比如,如果你正在做跟腱康复,问医生"我这次主要伤的是中段还是止点?是退变还是反应期?"——前者 12 周 Alfredson,后者 4-6 周减量 + 适度刺激。预期管理正确,执行才能不焦虑、不放弃。</p>
+    <p><strong>③ 看:</strong>这本报告其余各章节(尤其 ch04 肌腱专题、ch05 骨与软骨专题、ch06 神经专题)对每个具体组织有更深的实操协议。本章是地图,后续章节是各路线的施工细节。</p>
+  </div>
+
+  <div class="tldr" style="margin-top: 40px;">
+    <div class="label">▼ 本章核心要点</div>
+    <ul>
+      <li>五大组织的修复速度差 <strong>100 倍</strong>:肌肉 4–6 周,骨 3–4 月,肌腱 6–12 月,韧带 1 年+,软骨几乎不可逆。</li>
+      <li>决定速度的三个底层变量:<strong>血供、祖细胞密度、ECM 周转</strong>。</li>
+      <li><strong>肌肉是唯一接近"真再生"的组织</strong>——卫星细胞 + 基底膜模具 + 血供丰富。</li>
+      <li>肌腱"<strong>炎</strong>"其实是退变 <strong>tendinopathy</strong>(Khan & Cook 1999):NSAID 几乎无效,渐进负荷 (Alfredson / HSR) 是金标准。</li>
+      <li>肌腱胶原净合成速率仅 <strong>0.1%/天</strong>——这是肌腱康复"慢得不可思议"的细胞学根因。</li>
+      <li>韧带永远是"<strong>次品</strong>"——III 型瘢痕替代 I 型胶原,刚度恢复 ~70%。</li>
+      <li><strong>ACL 几乎不可自愈</strong>:关节液稀释血凝块 + 酶降解修复信号 + 残端张力丧失。</li>
+      <li>骨遵循 <strong>Wolff 定律</strong>:1500–3000 με 适应,> 4000 με 骨折;康复要"低应变开始,渐进进入适应窗口"。</li>
+      <li>关节软骨成年后<strong>几乎不再生</strong>:无血管、无神经、软骨细胞分裂能力极差;现代再生策略(微骨折/MACI/OCA)效果有限。</li>
+      <li>半月板"<strong>红区缝、白区切</strong>"——半月板切除 20 年 OA 风险 70%。</li>
+      <li>神经轴突再生 <strong>1 mm/天</strong>;> 12-18 个月失神经 → 肌肉纤维化,不可逆。</li>
+      <li><strong>同一个伤可能涉及多种组织,整体康复周期由最慢的组织决定</strong>。</li>
+    </ul>
+  </div>
+
+  <div class="callout protocol">
+    <div class="label">PROTOCOL · 本章关键操作清单</div>
+
+    <h4>协议 1 · "我这次伤的是哪种组织"决策流程</h4>
+    <ol>
+      <li><strong>测什么:</strong>任何"持续 > 2 周"的肌骨不适,先归类到主要组织,再按该组织的真实修复时钟做预期</li>
+      <li><strong>工具:</strong>就医时主动问 4 个问题(向运动医学医生 / PT):
+        <ul>
+          <li>① "这次主要伤的是哪种组织?" 肌肉?肌腱?韧带?骨?软骨?神经?</li>
+          <li>② "组织学上是哪个阶段?" 急性炎症?反应期?退变?完全断裂?</li>
+          <li>③ "现实修复时钟大概多长?" 按真实组织修复时间,不要按"经验" 给</li>
+          <li>④ "需要影像确认吗?" MRI、超声、X 光对不同组织的灵敏度不同</li>
+        </ul>
+      </li>
+      <li><strong>5 大组织对应时钟:</strong>
+        <ul>
+          <li>肌肉:I 度 1-3 周,II 度 3-8 周,III 度 3-6 月+</li>
+          <li>骨:低风险骨折 6-8 周,高风险骨折 3-6 月+,应力骨折看部位</li>
+          <li>肌腱:反应期 4-12 周,退变期 6-12 月+</li>
+          <li>韧带:I 度 2-4 周,II 度 6-12 周,III 度看是否手术(关节内必须手术)</li>
+          <li>软骨:几乎不愈合;手术后 12-18 个月</li>
+          <li>神经:I 度数周,II 度按 1 mm/天 算,III 度必须手术且 6 个月窗口</li>
+        </ul>
+      </li>
+      <li><strong>判读:</strong>如果医生给的"康复时间"明显比上面短(比如说"跟腱炎 2 周就好"),说明对组织的认知不够,换医生</li>
+    </ol>
+
+    <h4>协议 2 · 渐进负荷的"力学剂量"协议</h4>
+    <ol>
+      <li><strong>测什么:</strong>每种组织都需要"恰到好处"的力学刺激——不够(萎缩),刚好(适应),过量(再损伤)</li>
+      <li><strong>分组织剂量:</strong>
+        <ul>
+          <li><strong>肌肉</strong>:伤后 D3-D5 起等长收缩(30% 最大,无痛),D7 起等张轻负荷,D14 起渐进抗阻;离心训练 W4 起</li>
+          <li><strong>骨</strong>:伤后 W2-W4 起部分负重(用拐),W6-W8 完全负重,3 个月内逐步引入冲击训练</li>
+          <li><strong>肌腱</strong>:Alfredson 协议 = 3×15 直腿 + 3×15 屈膝 × 2/天 × 12 周;HSR = 3-4 组重负重 6-8 RM × 3/周 × 12 周;两者效果相当</li>
+          <li><strong>韧带</strong>:I/II 度伤后 W1-W3 ROM,W3-W6 渐进闭链负荷,W6+ 复杂动作;ACL 重建按 9-12 月协议</li>
+          <li><strong>软骨</strong>:术后 6-8 周无负重 → 部分负重 12 周 → 完全负重 6 月 → 跑步 6-9 月 → 撞击运动 12-18 月</li>
+        </ul>
+      </li>
+      <li><strong>剂量判读:</strong>
+        <ul>
+          <li>"恰到好处" = 训练时疼痛 ≤4/10,训练后 24h 内消退,组织功能逐周进步</li>
+          <li>"剂量不足" = 训练时无任何不适,数周无明显进步 → 增加负荷</li>
+          <li>"剂量过量" = 训练后 24h 仍痛、肿胀、功能倒退 → 减负荷一档</li>
+        </ul>
+      </li>
+      <li><strong>关键:</strong>"等不痛了再练"是大多数康复失败的根因——尤其肌腱和软骨。Alfredson 协议明确允许疼痛 ≤4/10 继续做,这是<em>胶原重塑必需的力学信号</em></li>
+    </ol>
+
+    <h4>协议 3 · 5 种"红旗"信号 · 立刻就医</h4>
+    <ol>
+      <li><strong>骨</strong>:
+        <ul>
+          <li>夜间疼痛或休息痛(应力骨折嫌疑)</li>
+          <li>压痛 < 3 cm 集中 + 跳跃痛阳性</li>
+          <li>高风险骨折部位(股骨颈、舟骨、第五跖骨 Jones、骶骨)疑似</li>
+        </ul>
+      </li>
+      <li><strong>韧带 / 关节</strong>:
+        <ul>
+          <li>急性大肿胀 + 关节卡顿(locking)</li>
+          <li>明显的关节不稳定感(打软腿、giving way)</li>
+          <li>急性外伤后听到"砰"声 + 立刻无法负重</li>
+        </ul>
+      </li>
+      <li><strong>肌肉 / 肌腱</strong>:
+        <ul>
+          <li>跟腱凹陷(palpable gap)+ 提踵无力 = 跟腱断裂,急诊</li>
+          <li>大腿后侧急性剧痛 + 大瘀斑 + 跛行 = 重度肌肉撕裂,可能手术</li>
+        </ul>
+      </li>
+      <li><strong>神经</strong>:
+        <ul>
+          <li>持续 > 24 小时的麻木 / 刺痛</li>
+          <li>明确的"无力"(脚不能背屈、手指不能伸等运动神经体征)</li>
+          <li>大小便控制异常 + 鞍区麻木 → <em>绝对急诊</em>(马尾综合征 8 小时窗口)</li>
+        </ul>
+      </li>
+      <li><strong>全身</strong>:
+        <ul>
+          <li>关节红肿 + 高热 = 化脓性关节炎</li>
+          <li>运动中或运动后晕厥、胸痛、心悸 = 心血管事件,停跑就医</li>
+          <li>跑步后尿色深红 / 茶色 + 肌肉剧痛 = 横纹肌溶解嫌疑</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="stop">本章 14 节讲透了五大组织的差异化修复,但<strong>这不是诊断教程</strong>。任何持续 > 2 周的不适,正确做法不是自己猜组织类型,而是<em>找运动医学医生 + MRI / 超声评估</em>,然后再用本章的知识理解医生说的"组织康复时钟"。把这本报告当地图,不当导航仪。</div>
+
+  </div>
+</div>
+</section>

@@ -1,0 +1,1363 @@
+<section id="s4" style="border-top: 4px solid var(--c-physio);">
+<div class="container">
+    <!-- 章节封面 -->
+  <figure class="chapter-hero">
+    <img src="assets/ch04-hero.jpg" alt="临床评估 · 主客观双轨" loading="lazy">
+    <figcaption>FIG 0 · 临床评估学 · 主观与客观的双轨叙事</figcaption>
+  </figure>
+
+  <!-- 关键数据卡片 -->
+  <div class="hero-keypoints">
+    <div class="kp">
+      <span class="kp-tag">▸ Lachman 试验</span>
+      <span class="kp-value"><em>85% / 94%</em></span>
+      <p class="kp-desc">敏感度 / 特异性 · ACL 撕裂诊断与 MRI 等同甚至更优</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ MMT 0-5 级</span>
+      <span class="kp-value"><em>Kendall 1949</em></span>
+      <p class="kp-desc">徒手肌力 6 级量表 · 临床评估的核心通用语言</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ SOAP 四段</span>
+      <span class="kp-value"><em>Weed 1968</em></span>
+      <p class="kp-desc">主观 / 客观 / 评估 / 计划 · 全球医疗记录的统一骨架</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 影像假阳</span>
+      <span class="kp-value"><em>无症状者 43%</em></span>
+      <p class="kp-desc">无痛人群 MRI 异常率 · 影像不是金标准 · 临床检查才是</p>
+    </div>
+  </div>
+
+  <div class="section-tag"><span class="num">04</span>CLINICAL ASSESSMENT · 评估篇 / 第四章</div>
+  <h1 class="section-h">临床评估学——主观、客观、特殊检查与影像分级 <span class="en">SOAP · Special Tests · Imaging Grades</span></h1>
+  <p class="section-sub">康复的第一公里不是治疗,是评估。把疼痛、动作、力量、感觉、影像编织成一份「这个人发生了什么、为什么、接下来怎么走」的临床推理——这就是 SOAP 框架的全部使命。本章把它逐字段拆开:从 OPQRST 病史采集,到 MMT 肌力分级,再到 Lachman、McMurray、Neer 等 14 大特殊试验的敏感度/特异性表,再到 MRI 何时该开、何时是噪声,最后回到 PROM 量表与临床推理的整合。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>SOAP 是评估的骨架——Subjective(病史)负责「故事」,Objective(查体)负责「证据」,Assessment(评估)负责「推理」,Plan(计划)负责「行动」。临床检查不是影像的廉价替代,在很多场景里是金标准本身——Lachman 对前交叉韧带撕裂敏感度 85-87%、特异性 94%,与 MRI 同等甚至更优。盲目预约 MRI 既贵又可能制造「无关异常」造成患者焦虑——无症状人群腰椎 MRI 异常率 43%、肩袖部分撕裂 30%、半月板信号改变 20%。MMT 肌力 0-5 级 + ROM + 14 个特殊试验 + PROM 量表(KOOS、DASH、ODI、VAS)= 循证评估的金字塔。患者讲完故事时,你已经有 80% 的诊断。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 凯斯西储大学医学院 · 1968</div>
+    <p>1968 年,凯斯西储大学医学院,内科医生 <em>Lawrence Weed</em> 在《新英格兰医学杂志》(NEJM) 上发表了一篇看似不起眼的论文——《Medical Records that Guide and Teach》。在这之前,医生病历的形式是「时间流叙事」:今天病人主诉什么,医生写什么,杂乱无章地堆在一起。换一个值班医生,翻三页都不知道患者现在到底是什么问题。</p>
+    <p>Weed 提出一个革命性的想法:病历应该按<em>问题</em>组织,每个问题分四段——<strong>Subjective(主观),Objective(客观),Assessment(评估),Plan(计划)</strong>。问题清单 + 每个问题的 SOAP 进展,构成 <em>Problem-Oriented Medical Record (POMR)</em>。</p>
+    <p>这看上去像是一个文书规范,实际是一场认知革命。它强迫医生把<strong>「患者说什么」</strong>(主观)和<strong>「你看到什么」</strong>(客观)在同一份病历中并列——两条独立的证据线,任何一条不能单独决定结论;它强迫医生在做 Plan 之前先写一句「我认为这是 X」的明确 Assessment——你的推理过程必须可被审查;它强迫医生把「这个人」按「问题」拆解,而不是按「就诊次数」记录,因为<em>一个人可能同时有 3 个问题在不同阶段</em>。</p>
+    <p>SOAP 在 1970 年代被美国医学院普遍采用,1980 年代成为护理与物理治疗的通用语,如今几乎所有 EHR(电子病历系统)的默认模板都基于 POMR。<em>对运动康复尤其关键</em>——患者讲「跑步时膝盖外侧痛」(S),你查体看到 Ober 阳性、髋外展弱(O),你写下「考虑 ITBS,排除外侧半月板撕裂」(A),你计划下次教离心训练 + Ober 复测 + 髋外展进阶(P)——四段下来,任何接手的同事 60 秒能跟上你。</p>
+    <p>1976 年,加拿大骨科医生 <em>John Lachman</em> 在《临床骨科》上描述了一种简单的膝关节检查:仰卧屈膝 20-30°,一手稳大腿,一手前拉胫骨,感受胫骨向前移位的终末感(end feel)。他的结论是这个 30 秒的徒手动作对前交叉韧带撕裂的诊断,优于当时盛行的「前抽屉试验」(anterior drawer)。后续 Benjaminse 2006 系统综述证实——<strong>Lachman 敏感度 85-87%、特异性 94%,与 MRI 相当甚至更优</strong>。同期 Hoppenfeld 1976 的《Physical Examination of the Spine and Extremities》和 Cyriax 1978 的临床评估教科书,把这一代「徒手循证检查」固化成今天的标准——这就是本章的全部背景。</p>
+  </div>
+
+  <h3><span class="pre">4.1</span>SOAP 四段框架——Subjective Objective Assessment Plan</h3>
+  <p class="lead">SOAP 不是文书规范,是<em>临床思维的脚手架</em>。一个完整的评估流程必须经过四个独立但有序的阶段:听患者讲故事(Subjective),做客观检查(Objective),做出推理判断(Assessment),写出可执行计划(Plan)。把这四段切开看,每一段都有自己独立的方法学、独立的常见错误、独立的训练要求。</p>
+
+  <h4>S · Subjective · 主观(15-20 分钟)</h4>
+  <p>这是患者「讲故事」的环节。包含主诉(chief complaint)、现病史(history of present illness, HPI)、既往史、家族史、社会史、用药史、过敏史。在运动康复语境中,HPI 是绝对核心——按 OPQRST(Onset / Provocation / Quality / Region / Severity / Timing)八轴展开,平均 15-20 分钟。<em>临床上 70-90% 的诊断信息来自这一段</em>(<em>Hampton 1975 经典论文</em>:门诊医生倾听病史得到 82% 的诊断信息,体检贡献 9%,实验室/影像贡献 9%)。</p>
+
+  <h4>O · Objective · 客观(15-25 分钟)</h4>
+  <p>这是治疗师「看证据」的环节。包含视诊 (inspection)、触诊 (palpation)、ROM 测量、肌力评定 (MMT)、特殊试验 (special tests)、神经学检查 (neurological exam)、功能筛查 (FMS / SFMA)、姿势评估等。每一项都必须用<em>客观、可重复、可量化</em>的方式记录——而不是「患者活动度还可以」。具体写「肩外展 AROM 145° (健侧 175°),终末感僵硬伴疼痛 5/10」。</p>
+
+  <h4>A · Assessment · 评估(5-10 分钟)</h4>
+  <p>这是<em>推理输出</em>。把 S 和 O 的信息综合,给出:① 工作诊断(working diagnosis)或鉴别诊断列表(differential dx);② ICF 框架下的功能障碍(身体结构/功能、活动、参与);③ 预后评估(prognosis)与目标;④ 排除红旗信号 (red flags)。这一段是 SOAP 里最考验功力的——它把零散的「证据」转化为「故事」。</p>
+
+  <h4>P · Plan · 计划(5-10 分钟)</h4>
+  <p>这是<em>行动列表</em>。包含:① 干预 (intervention) ——手法、运动疗法、电疗、教育等;② 转介 (referral) ——是否需要影像、骨科、神经科、营养咨询;③ 患者教育 (HEP, home exercise program);④ 复诊频率与时间表;⑤ 重新评估 (re-eval) 节点。Plan 必须 SMART——Specific、Measurable、Achievable、Relevant、Time-bound。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <line x1="60" y1="350" x2="1020" y2="350" stroke="#3d3d36" stroke-width="1"/>
+      <line x1="60" y1="40" x2="60" y2="350" stroke="#3d3d36" stroke-width="1"/>
+
+      <text x="540" y="32" font-size="13" fill="#d4a548" text-anchor="middle" letter-spacing="0.18em">SOAP · 评估四段框架与时间分配</text>
+
+      <!-- S 主观 -->
+      <g transform="translate(60, 60)">
+        <rect x="20" y="0" width="220" height="270" fill="#1f3a5f" fill-opacity="0.12" stroke="#1f3a5f" stroke-opacity="0.6" stroke-width="1.5"/>
+        <text x="130" y="22" font-size="20" fill="#1f3a5f" text-anchor="middle" letter-spacing="0.2em" font-weight="bold">S</text>
+        <text x="130" y="42" font-size="11" fill="#1f3a5f" text-anchor="middle" letter-spacing="0.1em">SUBJECTIVE · 主观</text>
+        <text x="130" y="60" font-size="9.5" fill="#a39e8d" text-anchor="middle">15-20 min · 占诊断 70-90%</text>
+        <line x1="30" y1="75" x2="230" y2="75" stroke="#1f3a5f" stroke-opacity="0.3" stroke-width="0.5"/>
+        <g font-size="10" fill="#e8e4d8">
+          <text x="35" y="95">▸ 主诉 Chief Complaint</text>
+          <text x="35" y="115">▸ 现病史 HPI / OPQRST</text>
+          <text x="35" y="135">▸ 既往史 PMH</text>
+          <text x="35" y="155">▸ 用药 Meds / 过敏 Allergy</text>
+          <text x="35" y="175">▸ 家族史 FHx</text>
+          <text x="35" y="195">▸ 社会史 SHx · 职业 · 运动</text>
+          <text x="35" y="215">▸ 红旗筛查 Red Flags</text>
+          <text x="35" y="235">▸ PROM 自评量表</text>
+          <text x="35" y="255">▸ 目标 Patient Goals</text>
+        </g>
+      </g>
+
+      <!-- O 客观 -->
+      <g transform="translate(320, 60)">
+        <rect x="20" y="0" width="220" height="270" fill="#5a6b4e" fill-opacity="0.12" stroke="#5a6b4e" stroke-opacity="0.6" stroke-width="1.5"/>
+        <text x="130" y="22" font-size="20" fill="#8fa867" text-anchor="middle" letter-spacing="0.2em" font-weight="bold">O</text>
+        <text x="130" y="42" font-size="11" fill="#8fa867" text-anchor="middle" letter-spacing="0.1em">OBJECTIVE · 客观</text>
+        <text x="130" y="60" font-size="9.5" fill="#a39e8d" text-anchor="middle">15-25 min · 验证/反驳 S</text>
+        <line x1="30" y1="75" x2="230" y2="75" stroke="#5a6b4e" stroke-opacity="0.3" stroke-width="0.5"/>
+        <g font-size="10" fill="#e8e4d8">
+          <text x="35" y="95">▸ 视诊 Inspection</text>
+          <text x="35" y="115">▸ 触诊 Palpation</text>
+          <text x="35" y="135">▸ 主动/被动 ROM</text>
+          <text x="35" y="155">▸ MMT 肌力 0-5</text>
+          <text x="35" y="175">▸ 特殊试验 Special Tests</text>
+          <text x="35" y="195">▸ 神经学 Reflex/Sensory</text>
+          <text x="35" y="215">▸ 功能筛查 FMS/SFMA</text>
+          <text x="35" y="235">▸ 影像复查 Imaging</text>
+          <text x="35" y="255">▸ Outcome Measures</text>
+        </g>
+      </g>
+
+      <!-- A 评估 -->
+      <g transform="translate(580, 60)">
+        <rect x="20" y="0" width="220" height="270" fill="#c47f17" fill-opacity="0.12" stroke="#c47f17" stroke-opacity="0.6" stroke-width="1.5"/>
+        <text x="130" y="22" font-size="20" fill="#c47f17" text-anchor="middle" letter-spacing="0.2em" font-weight="bold">A</text>
+        <text x="130" y="42" font-size="11" fill="#c47f17" text-anchor="middle" letter-spacing="0.1em">ASSESSMENT · 评估</text>
+        <text x="130" y="60" font-size="9.5" fill="#a39e8d" text-anchor="middle">5-10 min · 推理 / 编织</text>
+        <line x1="30" y1="75" x2="230" y2="75" stroke="#c47f17" stroke-opacity="0.3" stroke-width="0.5"/>
+        <g font-size="10" fill="#e8e4d8">
+          <text x="35" y="95">▸ 工作诊断 Working Dx</text>
+          <text x="35" y="115">▸ 鉴别 Differential</text>
+          <text x="35" y="135">▸ ICF 框架</text>
+          <text x="35" y="155">  · Body structure</text>
+          <text x="35" y="175">  · Activity</text>
+          <text x="35" y="195">  · Participation</text>
+          <text x="35" y="215">▸ 预后 Prognosis</text>
+          <text x="35" y="235">▸ 排除红旗 Red Flag Out</text>
+          <text x="35" y="255">▸ 临床推理理由</text>
+        </g>
+      </g>
+
+      <!-- P 计划 -->
+      <g transform="translate(840, 60)">
+        <rect x="20" y="0" width="180" height="270" fill="#b56565" fill-opacity="0.12" stroke="#b56565" stroke-opacity="0.6" stroke-width="1.5"/>
+        <text x="110" y="22" font-size="20" fill="#b56565" text-anchor="middle" letter-spacing="0.2em" font-weight="bold">P</text>
+        <text x="110" y="42" font-size="11" fill="#b56565" text-anchor="middle" letter-spacing="0.1em">PLAN · 计划</text>
+        <text x="110" y="60" font-size="9.5" fill="#a39e8d" text-anchor="middle">5-10 min · 行动</text>
+        <line x1="30" y1="75" x2="190" y2="75" stroke="#b56565" stroke-opacity="0.3" stroke-width="0.5"/>
+        <g font-size="10" fill="#e8e4d8">
+          <text x="35" y="95">▸ 干预 Intervention</text>
+          <text x="35" y="115">▸ 运动疗法</text>
+          <text x="35" y="135">▸ 手法 Manual</text>
+          <text x="35" y="155">▸ 教育 Education</text>
+          <text x="35" y="175">▸ HEP 家庭训练</text>
+          <text x="35" y="195">▸ 转介 Referral</text>
+          <text x="35" y="215">▸ 频率 / 时长</text>
+          <text x="35" y="235">▸ Re-eval 节点</text>
+          <text x="35" y="255">▸ SMART 目标</text>
+        </g>
+      </g>
+
+      <text x="540" y="370" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">Weed LL. 1968. NEJM. Medical Records that Guide and Teach.</text>
+    </svg>
+    <div class="svg-caption">FIG 4.1 · SOAP 四象限——评估的认知脚手架,Weed 1968 提出后成为全球医疗记录的统一范式</div>
+  </div>
+
+  <p>SOAP 的设计哲学:<strong>S 和 O 的物理隔离</strong>。患者讲的不能和你看的混同——这是医学认识论的基础。把它们分开记录,后续接手的医生可以独立验证你的推理。如果 S 说「右膝外侧痛」但 O 找不到任何外侧体征,你需要重新审视——可能是牵涉痛?可能是患者表达问题?可能是你触诊位置不对?<em>S 与 O 的不一致本身就是诊断线索</em>。</p>
+
+  <p class="plain">原理:SOAP = 把诊断推理拆成 4 个互不污染的认知步骤。<strong>翻译:</strong>就像律师不能让自己的预判污染证据采集——你不能因为患者一进门主诉「跑者膝」就只查膝盖。S 听完先列鉴别清单(髌股 / ITBS / 髌腱 / 半月板 / 牵涉痛),O 段挨个用客观证据验证或排除,A 段写出「我为什么选 X 而不是 Y」,P 段才是「怎么治」。<em>放在康复场景:</em>一份合格的初评 SOAP 长度约 1500-2500 字,初次评估 45-60 分钟,复评 15-25 分钟。短于这个时长的「SOAP」通常是省略了 A 段——直接从 O 跳到 P,这是新手最常见的失误。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">SUBJECTIVE</div>
+      <div class="num">70-90%</div>
+      <div class="sub">诊断信息来自病史(Hampton 1975)</div>
+    </div>
+    <div class="item">
+      <div class="label">PHYS EXAM</div>
+      <div class="num">9-15%</div>
+      <div class="sub">体检贡献的诊断信息</div>
+    </div>
+    <div class="item">
+      <div class="label">LABS/IMAGING</div>
+      <div class="num">~9%</div>
+      <div class="sub">实验室与影像的边际贡献</div>
+    </div>
+    <div class="item">
+      <div class="label">SOAP 初评</div>
+      <div class="num">45-60 min</div>
+      <div class="sub">首次评估标准时长 · 复评 15-25 min</div>
+    </div>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 听比看重要 · 体检比影像重要</div>
+    <p>新手最常见的两个反向操作:① <em>跳过 S 直接做 O</em>——患者刚坐下就开始做特殊试验,病史只问了「哪儿痛、痛多久」。结果是 O 段没有方向、随机筛查、漏掉关键鉴别;② <em>过度依赖影像</em>——上来就说「先去拍个 MRI 我们再谈」。这两种习惯都违反循证医学:Hampton 经典数据显示 82% 的诊断在病史阶段就能初步成型,体检验证 + 影像证实只是后续的精细化。一个会听故事的康复师比一个只会看 MRI 的强 10 倍。</p>
+  </div>
+
+  <h3><span class="pre">4.2</span>病史采集 (S, Subjective)——OPQRST 八轴问诊</h3>
+  <p class="lead">病史采集不是「问问题」,是<em>建模</em>——你在患者讲述的同时,在脑子里搭建出「这是什么伤、它怎么发生的、现在在哪一阶段、它对这个人意味着什么」的四维模型。问诊不是清单的机械执行,是<em>结构化叙事的引导</em>。下面把运动康复中最实用的 OPQRST 框架展开。</p>
+
+  <h4>OPQRST 八轴</h4>
+  <ul>
+    <li><strong>O — Onset</strong>(起病):什么时候开始?突然 (acute) 还是渐进 (insidious)?有明确受伤事件还是无?<em>这是急性 vs 累积过载性损伤的第一分水岭</em>——「我上周打球时膝盖一拧」(急性,考虑韧带/半月板)vs「跑步两个月以来膝外侧渐渐酸」(累积,考虑 ITBS/PFPS)。</li>
+    <li><strong>P — Provocation / Palliation</strong>(加重/缓解):什么动作让它更痛?什么让它舒服?<em>这是机械性疼痛的指纹</em>——下楼痛 → PFPS;下坡跑痛 → ITBS;晨起头几步痛 → 足底筋膜炎/跟腱病;坐着抬腿痛 → 髌腱炎;仰卧抬起会痛、坐久了痛 → 椎间盘问题。</li>
+    <li><strong>Q — Quality</strong>(性质):刺痛?钝痛?酸?胀?灼烧?麻木?「针刺感」「电击感」「火烧感」是神经根性疼痛的典型描述;「深部钝痛 + 边界不清」是肌肉/韧带性;「锐利定位明确」是结构性(骨/关节面)。</li>
+    <li><strong>R — Region / Radiation</strong>(部位/放射):指给我看痛点。能用一根手指点出来吗?它会传到哪儿去?<em>放射性疼痛常提示神经根受累或牵涉痛</em>——颈痛放射到手指(C5-T1 神经根);腰痛放射到臀部以下(L4-S1);肩痛放射到手肘外侧(C5/C6 或肩袖牵涉)。</li>
+    <li><strong>S — Severity</strong>(强度):用 0-10 评分(VAS / NPRS),目前是几?最痛时几?最不痛时几?<em>问三个分数而非一个</em>——单一「7 分」无法捕捉波动,但「现在 3、最差 8、最好 1」立刻显示出疼痛是<em>断续性</em>而非持续性。</li>
+    <li><strong>T — Timing</strong>(时序):一天里什么时候最痛?跑步开头 vs 跑开后 vs 跑后第二天?夜间是否影响睡眠?<em>夜间痛或休息痛是红旗信号</em>(警惕应力骨折、严重炎症、肿瘤、感染等)。</li>
+    <li><strong>+ Aggravating Activities</strong>(影响功能):它让你做不了什么?跑步?上下楼?抱孩子?系鞋带?这是 ICF 框架中的「活动 / 参与」维度——比单纯「痛」更重要,因为它决定了康复目标。</li>
+    <li><strong>+ Patient Goals</strong>(目标):你希望恢复到什么程度?能慢跑 5K?能回到马拉松?能正常上下班?<em>这一问从评估的开始就锚定了治疗的终点</em>——不锚目标的康复是开放式赌博。</li>
+  </ul>
+
+  <h4>红旗筛查 (Red Flags)——病史里的雷</h4>
+  <p>每次问诊都必须扫一遍下列「红旗」信号——它们提示<em>可能不是单纯肌骨问题</em>,需要医学转介:</p>
+  <ul>
+    <li><strong>夜间痛 / 休息痛</strong>:警惕骨折、感染、肿瘤;</li>
+    <li><strong>不明原因体重下降</strong>(6 个月 >5%);</li>
+    <li><strong>持续发热</strong>;</li>
+    <li><strong>癌症既往史</strong> + 新发肌骨痛(尤其腰椎、骨盆);</li>
+    <li><strong>大小便失禁或感觉异常</strong>(马尾综合征,腰椎红旗);</li>
+    <li><strong>双侧或进行性神经症状</strong>;</li>
+    <li><strong>近期严重外伤</strong>(高能机制伤);</li>
+    <li><strong>长期糖皮质激素使用</strong>(骨质疏松+骨折风险);</li>
+    <li><strong>静脉注射药物史 / 免疫抑制</strong>(感染风险);</li>
+    <li><strong>步态突变、平衡丧失</strong>(中枢/神经原因);</li>
+    <li><strong>女性闭经 ≥ 3 个月 + 任何骨痛</strong>(RED-S / 三联征);</li>
+    <li><strong>胸痛 / 心悸 / 晕厥</strong>(立即就医)。</li>
+  </ul>
+
+  <p class="plain">原理:OPQRST 八轴 = 让每个症状都被多个独立维度交叉验证,避免单一描述造成误导。<strong>翻译:</strong>同一个「膝盖痛」,O 不同(急性扭伤 vs 跑步两个月)+ P 不同(下楼痛 vs 下蹲痛)+ R 不同(髌骨下 vs 膝外侧 vs 关节线)+ T 不同(晨起痛 vs 跑后痛)= 完全不同的诊断。<em>放在康复场景:</em>同一个患者主诉「膝痛」,如果按 OPQRST 八轴展开是 8 个独立信号——8 个里只要 3-4 个对上某个诊断的「指纹」,你的工作诊断就已经 80% 落定,后面 O 段只需要验证和排除。新手只问「哪儿痛、痛多久、有多痛」三轴 = 信息量不够,做不出鉴别。</p>
+
+  <div class="callout note">
+    <div class="label">问诊技巧 · 开放式问 + 沉默</div>
+    <p>临床问诊的两个核心技巧:① <strong>开放式问题先于封闭式</strong>——「描述一下你的疼痛」比「是不是刺痛?」好;<em>Beckman 1984</em> 经典研究发现:平均 18 秒后医生会打断患者——这一打断丢掉了 23% 的关键信息;② <strong>沉默是工具</strong>——患者讲完一段后,如果你不急着问下一个问题、保持 3-5 秒沉默,患者往往会自己补充最重要的那句话——「其实……我还有一件事没说」。试试看。</p>
+  </div>
+
+  <h3><span class="pre">4.3</span>视诊 (Inspection)——姿势、肿胀、瘀斑、对称性</h3>
+  <p class="lead">视诊是 O 段的<em>第一帧</em>——患者一进门、脱了外套、坐下来,你已经在看了。视诊不需要患者配合,但需要你<em>系统、有意识、左右对照</em>。一份合格的视诊涵盖姿势、对称性、皮肤、肿胀、肌肉萎缩、步态、辅助器具使用——所有信息都用「客观语言」记录。</p>
+
+  <h4>静态视诊清单</h4>
+  <ul>
+    <li><strong>整体姿势</strong>(站立位):头前倾?圆肩驼背?骨盆前/后倾?脊柱侧弯?膝过伸/屈曲?足旋前/旋后?(参考第 3 章姿势评估)</li>
+    <li><strong>左右对称性</strong>:两侧肩高、髂嵴高、膝高、踝高;两侧肌肉体积(尤其股四头肌、臀大肌、小腿三头肌);两侧手臂自然摆放角度。</li>
+    <li><strong>皮肤</strong>:发红 (erythema)、瘀斑 (ecchymosis)、皮温升高、出汗异常、营养性改变(色素沉着、毛发脱落)、伤疤、手术切口。</li>
+    <li><strong>肿胀</strong>(swelling/effusion):局部还是弥漫?急性(几小时内)还是慢性?膝关节看髌上囊和髌韧带两侧凹陷是否消失;踝关节看外踝凹陷;手指看指节是否「腊肠样」。</li>
+    <li><strong>肌肉萎缩</strong>:左右对照测量周径(膝上 10 cm 测股四头肌;踝上 15 cm 测小腿三头肌);差异 >1 cm 视为有意义。</li>
+    <li><strong>畸形</strong>:任何明显的骨性、关节性畸形(脱位、半脱位、骨突);皮下结节(类风湿结节、痛风石、腱鞘囊肿)。</li>
+  </ul>
+
+  <h4>动态视诊——步态分析</h4>
+  <p>让患者走 10 米,前后两次。看的是:</p>
+  <ul>
+    <li><strong>对称性</strong>:左右步长相等吗?摆臂对称吗?</li>
+    <li><strong>步速</strong>:正常 1.2-1.4 m/s;<1.0 m/s 提示明显功能受损。</li>
+    <li><strong>跛行</strong>(antalgic gait):一侧承重时间缩短 = 该侧疼痛或不稳。</li>
+    <li><strong>Trendelenburg 步态</strong>:站立相骨盆向对侧倾斜 = 站立侧臀中肌弱(髋外展弱)。</li>
+    <li><strong>跨阈步态</strong>(steppage):足下垂、膝抬高过度 = 腓总神经损伤、L5 神经根。</li>
+    <li><strong>剪刀步态</strong>:两膝交叉 = 内收肌张力过高(脑瘫、中风后)。</li>
+    <li><strong>蹒跚步态</strong>(waddling):骨盆左右大幅摇摆 = 双侧髋外展弱(肌营养不良、髋关节炎)。</li>
+    <li><strong>共济失调步态</strong>(ataxic):宽基底、不稳、不能直线行走 = 小脑或后索病变。</li>
+  </ul>
+
+  <h4>肿胀的临床分级</h4>
+  <p>膝关节积液的标准临床分级(<em>Sturgill 2009</em>):</p>
+  <table>
+    <thead>
+      <tr><th>级别</th><th>所见</th><th>近似积液量</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td>无肿胀</td><td>—</td></tr>
+      <tr><td>Trace 痕量</td><td>需要 sweep test(挤压试验)才能引出波动</td><td>< 15 ml</td></tr>
+      <tr><td>1+</td><td>髌上囊和髌韧带两侧凹陷消失</td><td>15-30 ml</td></tr>
+      <tr><td>2+</td><td>髌骨悬浮 (ballottement) 阳性</td><td>30-50 ml</td></tr>
+      <tr><td>3+</td><td>髌骨不能压到底,膝外形整体膨大</td><td>> 50 ml</td></tr>
+    </tbody>
+  </table>
+
+  <p><em>关键反共识:</em>急性损伤后<strong>立即出现的肿胀</strong>(<2 小时)= 通常是<em>关节内血肿</em>(韧带断裂、骨折),不是炎症积液——血流速度比炎症渗出快得多。这是急诊判断的重要线索:24 小时后出现的肿胀更可能是单纯关节囊水肿或滑膜炎反应。<em>急性血肿 + 不能负重 = 70% 是 ACL 撕裂或骨折</em>。</p>
+
+  <div class="callout note">
+    <div class="label">触发记录的实操语言</div>
+    <p>不要写「患者膝盖有点肿」——写「右膝髌上囊及髌韧带两侧凹陷消失,sweep test 阳性,1+ 积液,皮温较对侧轻度升高 (~1°C),无红斑」。后者是<em>可重复的客观数据</em>,任何接手的人都能理解,2 周后复查可比较。</p>
+  </div>
+
+  <h3><span class="pre">4.4</span>触诊 (Palpation)——结构与功能的接触</h3>
+  <p class="lead">触诊是<em>评估中最被低估的技能</em>。一双经过训练的手能在 30 秒内分辨出肌肉、韧带、肌腱、关节囊、骨突的层次,识别压痛点、肌张力、皮温、肿胀边界、组织顺应性、可触及的解剖标志。视诊看「形态」,触诊摸「质感」。</p>
+
+  <h4>触诊的系统化层次</h4>
+  <p><em>Hoppenfeld 1976</em> 的经典教科书 <em>Physical Examination of the Spine and Extremities</em> 提出触诊的<em>分层系统</em>——从浅到深,逐层评估:</p>
+  <ol>
+    <li><strong>皮肤</strong>:温度、湿度、纹理、移动度(粘连?)、皮下结节;</li>
+    <li><strong>皮下脂肪与浅筋膜</strong>:厚度、压痛、肿胀;</li>
+    <li><strong>肌肉</strong>:张力、压痛、触发点 (trigger point)、左右对照、抗阻收缩时的形态;</li>
+    <li><strong>肌腱</strong>:走行、压痛、增厚、捻发音 (crepitus);</li>
+    <li><strong>韧带与关节囊</strong>:压痛、肿胀、缺损;</li>
+    <li><strong>骨与骨突</strong>:压痛、畸形、骨表面突起;</li>
+    <li><strong>关节</strong>:关节线压痛、积液波动、关节面捻发音。</li>
+  </ol>
+
+  <h4>关键解剖标志的触诊</h4>
+  <p>下面是康复评估中必触的核心标志(以下肢为例):</p>
+  <ul>
+    <li><strong>髂前上棘 ASIS</strong>:骨盆前倾/后倾的对照点。</li>
+    <li><strong>髂后上棘 PSIS</strong>:骨盆旋转、骶髂关节评估的锚点。</li>
+    <li><strong>大转子</strong>:髋关节高度对照、转子滑囊炎压痛点。</li>
+    <li><strong>髌骨上下极</strong>:髌腱止点(下极)、股四头肌腱止点(上极);髌腱炎在下极压痛。</li>
+    <li><strong>关节线</strong>(膝):屈膝 90° 时膝中线两侧的「沟」即关节线,半月板撕裂时关节线压痛。</li>
+    <li><strong>胫骨结节</strong>:髌腱止点,Osgood-Schlatter 病的压痛点。</li>
+    <li><strong>腓骨头</strong>:外侧副韧带止点、腓总神经走行点。</li>
+    <li><strong>内/外踝</strong>:踝韧带定位的基准。</li>
+    <li><strong>跟腱中段</strong>(止点上 2-6 cm):中段跟腱病的触诊带——增厚、压痛、捻发音都在这里。</li>
+    <li><strong>足底筋膜跟骨止点</strong>:足底筋膜炎的主要压痛点。</li>
+    <li><strong>第五跖骨基底</strong>:Jones 骨折部位,踝扭伤鉴别必触。</li>
+  </ul>
+
+  <h4>压痛分级</h4>
+  <p>压痛的标准临床分级(<em>Magee 2014</em>):</p>
+  <ul>
+    <li><strong>0</strong>:无压痛;</li>
+    <li><strong>I 度</strong>:患者主诉痛;</li>
+    <li><strong>II 度</strong>:患者皱眉;</li>
+    <li><strong>III 度</strong>:患者退缩 (withdraw);</li>
+    <li><strong>IV 度</strong>:不允许触及。</li>
+  </ul>
+
+  <p class="plain">原理:触诊 = 用手作为「分辨率高于影像的传感器」分层读取组织信息。<strong>翻译:</strong>训练有素的手能感知到 MRI 看不到的——肌张力高低、皮下粘连、轻度积液、组织滑动性。<em>放在康复场景:</em>跟腱中段触诊找到「梭形增厚 + 局部压痛 + 抗阻提踵时增厚段紧绷」三联征 = 教科书中段跟腱病;ITBS 触诊找到「股骨外侧髁上方 2-3 cm 处局部压痛 + 屈伸膝时压痛加重」= 教科书 ITBS;McMurray 阳性 + 内侧关节线压痛 = 内侧半月板撕裂高度怀疑。<em>触诊不是 O 段的「附加项」,是 O 段的核心信息源</em>——它在你写下「Lachman 阴性」之前,就已经决定了你接下来要做哪些试验。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 触诊比 MRI 更敏感(在很多场景里)</div>
+    <p>影像看「结构」,触诊摸「功能」——MRI 能拍到跟腱中段梭形增厚,但 MRI 无法回答「这个增厚段是炎症期还是退变稳定期、是不是真的痛、抗阻收缩时是否紧绷」。这些都得靠手摸出来。新手往往认为「先做个 MRI 看看」,但 80% 的肌骨问题在熟练触诊 + 病史 + 简单特殊试验之后,就已经不需要 MRI 了——MRI 只是<em>排除严重病变 + 手术规划</em>的工具,不是诊断的起点。</p>
+  </div>
+
+  <h3><span class="pre">4.5</span>ROM 测量——主动 vs 被动活动度,关节囊型态评估</h3>
+  <p class="lead">关节活动度 (Range of Motion, ROM) 是<em>所有肌骨评估的基础量化指标</em>。它衡量关节在三维空间中可达的范围,反映关节囊、韧带、肌肉、肌腱的协同状态。ROM 不是越大越好——它必须<em>对称、无痛、终末感正常</em>。下面把 AROM、PROM 与关节囊型态评估讲透。</p>
+
+  <h4>AROM vs PROM</h4>
+  <p><strong>AROM (Active ROM)</strong>:患者自己主动完成的活动范围。涉及肌肉力量、神经控制、关节通畅性、疼痛禁制——是<em>功能性的</em>测量。<br>
+  <strong>PROM (Passive ROM)</strong>:治疗师被动完成的活动范围(患者放松)。只受关节囊、韧带、骨性结构限制——是<em>结构性的</em>测量。</p>
+  <p>PROM 通常比 AROM 大 5-15°(因为去除了主动收缩的能量需求和保护性禁制)。这两个数字的<em>差值</em>本身就是诊断线索:</p>
+  <ul>
+    <li><strong>AROM = PROM 且都受限</strong>:关节囊/韧带/骨性问题(粘连、骨刺、关节囊紧缩);</li>
+    <li><strong>AROM < PROM 显著</strong>:肌力不足、神经损伤、疼痛禁制、肌腱断裂;</li>
+    <li><strong>AROM = PROM 且都正常</strong>:本节点无问题。</li>
+  </ul>
+
+  <h4>终末感 (End Feel)——关节囊型态的诊断</h4>
+  <p>这是 Cyriax 1978 提出的关键概念:被动推到 ROM 终点时,治疗师的手感知到的「阻挡的质感」。每种正常关节都有典型终末感,异常终末感是诊断线索。</p>
+  <table>
+    <thead>
+      <tr><th>终末感类型</th><th>感觉</th><th>正常出现</th><th>异常时的意义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>硬终止 Bone-to-bone</td><td>骨头碰骨头的硬挡</td><td>肘伸直、桡尺旋转</td><td>骨刺、关节面碎裂</td></tr>
+      <tr><td>软终止 Soft tissue</td><td>软组织挤压</td><td>屈膝、屈肘</td><td>—</td></tr>
+      <tr><td>组织拉伸 Tissue stretch</td><td>有弹性的紧</td><td>髋外旋、伸膝、肩外旋</td><td>关节囊纤维化或挛缩</td></tr>
+      <tr><td>关节囊 Capsular</td><td>类似橡皮的紧</td><td>—</td><td>关节囊炎(冻结肩)</td></tr>
+      <tr><td>痉挛 Muscle spasm</td><td>突然反弹回来</td><td>—</td><td>急性损伤、严重炎症</td></tr>
+      <tr><td>松弛 Empty</td><td>没有终末感,患者因痛拒绝</td><td>—</td><td>严重炎症、肿瘤、脓肿(红旗)</td></tr>
+      <tr><td>弹性反弹 Springy block</td><td>反复弹回</td><td>—</td><td>关节内游离体、半月板移位</td></tr>
+    </tbody>
+  </table>
+
+  <h4>关节囊型态 (Capsular Pattern)</h4>
+  <p>当关节囊整体发炎或纤维化时(如冻结肩、髋关节炎),关节活动受限呈<em>特定方向比例</em>——这就是关节囊型态。Cyriax 的经典型态:</p>
+  <ul>
+    <li><strong>肩</strong>:外旋 > 外展 > 内旋(冻结肩典型);</li>
+    <li><strong>髋</strong>:屈曲、内旋、外展受限明显(髋关节炎);</li>
+    <li><strong>膝</strong>:屈曲 >> 伸展(膝关节炎,屈曲首先受限);</li>
+    <li><strong>踝</strong>:跖屈 > 背屈(踝关节炎);</li>
+    <li><strong>颈椎</strong>:旋转和侧弯各方向均受限。</li>
+  </ul>
+
+  <h4>正常 ROM 参考值</h4>
+  <table>
+    <thead>
+      <tr><th>关节</th><th>动作</th><th>正常 AROM(°)</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr><td rowspan="2">肩</td><td>屈曲</td><td>0-180</td><td>含肩胛胸壁运动</td></tr>
+      <tr><td>外展 / 外旋 / 内旋</td><td>0-180 / 0-90 / 0-70</td><td>外旋通常最先受累</td></tr>
+      <tr><td rowspan="2">肘</td><td>屈曲 / 伸展</td><td>0-140 / 0</td><td>过伸 5-10° 为生理性</td></tr>
+      <tr><td>旋前 / 旋后</td><td>0-80 / 0-80</td><td>—</td></tr>
+      <tr><td rowspan="3">髋</td><td>屈曲 / 伸展</td><td>0-120 / 0-20</td><td>—</td></tr>
+      <tr><td>外展 / 内收</td><td>0-45 / 0-30</td><td>—</td></tr>
+      <tr><td>内旋 / 外旋</td><td>0-45 / 0-45</td><td>—</td></tr>
+      <tr><td rowspan="2">膝</td><td>屈曲 / 伸展</td><td>0-135 / 0</td><td>过伸 5° 为生理性</td></tr>
+      <tr><td>胫骨旋转(屈膝 90°)</td><td>内 30 / 外 40</td><td>—</td></tr>
+      <tr><td rowspan="2">踝</td><td>背屈 / 跖屈</td><td>0-20 / 0-50</td><td>背屈 <10° 提示小腿紧</td></tr>
+      <tr><td>内翻 / 外翻</td><td>0-35 / 0-25</td><td>—</td></tr>
+      <tr><td rowspan="4">脊柱</td><td>颈屈曲 / 伸展</td><td>0-60 / 0-75</td><td>下颌到胸 1-2 横指</td></tr>
+      <tr><td>颈侧弯 / 旋转</td><td>0-45 / 0-80</td><td>—</td></tr>
+      <tr><td>腰屈曲(Schober)</td><td>10-20 cm 延伸</td><td>L5-S1 至上 10 cm</td></tr>
+      <tr><td>腰伸展 / 侧弯 / 旋转</td><td>0-30 / 0-35 / 0-45</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <p><em>测量工具:</em>标准量角器 (universal goniometer) 是临床金标准,但<em>测量误差 ±5°</em>是常态。智能手机的 ROM 测量 app(如 iHandy Level、Coach's Eye)与量角器一致性良好,可作为替代。重要的不是绝对值的精确,而是<em>左右对照</em>和<em>纵向追踪</em>——「右肩外旋比左肩少 30°」「这周比上周多了 10°」比「85° 还是 90°」更有意义。</p>
+
+  <div class="callout ops">
+    <div class="label">实操 / ROM 测量的三项纪律</div>
+    <ul>
+      <li><strong>每次 AROM 和 PROM 都测</strong>——两个数字加上终末感才是完整的 ROM 信息;</li>
+      <li><strong>左右对照</strong>——绝对值意义不大,差异 >10% 才是异常;</li>
+      <li><strong>记录配合疼痛位置</strong>——「肩外展 110° 时出现疼痛弧,150° 后疼痛消失」比「外展 145°」信息量大 5 倍。</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">4.6</span>肌力评定 0-5 级 (MMT, Manual Muscle Testing)</h3>
+  <p class="lead">徒手肌力测试 (Manual Muscle Testing, MMT) 是 <em>Henry Kendall & Florence Kendall 1949</em> 提出、Daniels & Worthingham 1986 完善的 6 级量表(0-5),是康复评估中最通用的肌力评估方法。它不需要任何设备,30 秒内可测一块肌肉,是治疗师必备的核心技能。</p>
+
+  <h4>0-5 级量表</h4>
+  <table>
+    <thead>
+      <tr><th>级别</th><th>名称</th><th>定义</th><th>临床意义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>5</td><td>正常 Normal</td><td>抗最大阻力完成全 ROM,与健侧对称</td><td>无功能受损</td></tr>
+      <tr><td>4</td><td>良好 Good</td><td>抗中等阻力完成全 ROM,但弱于健侧</td><td>有功能但需训练</td></tr>
+      <tr><td>3</td><td>尚可 Fair</td><td>抗重力完成全 ROM,但不能抗任何外力阻力</td><td>初步功能水平,日常勉强</td></tr>
+      <tr><td>2</td><td>差 Poor</td><td>消除重力位置下完成全 ROM(如侧卧位测髋外展)</td><td>明显瘫痪,基本无功能</td></tr>
+      <tr><td>1</td><td>微弱 Trace</td><td>可触及或观察到肌肉收缩,但无关节运动</td><td>近完全瘫痪,神经损伤恢复早期</td></tr>
+      <tr><td>0</td><td>零 Zero</td><td>无任何收缩</td><td>完全瘫痪</td></tr>
+    </tbody>
+  </table>
+
+  <p>每级还可加 + / – 进一步细分(如 4+ 比 4 更接近 5,4– 比 4 略弱)。<em>4 级是临床最常见的「异常」</em>——既有功能又有缺陷,绝大多数康复目标设在「从 4 到 5」。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <line x1="60" y1="320" x2="1020" y2="320" stroke="#3d3d36" stroke-width="1"/>
+      <text x="540" y="30" font-size="13" fill="#d4a548" text-anchor="middle" letter-spacing="0.18em">MMT · 徒手肌力 0-5 级量表对照</text>
+      <text x="540" y="45" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">Kendall HO & Kendall FP. 1949. Muscles: Testing and Function</text>
+
+      <!-- 0 -->
+      <g transform="translate(80, 80)">
+        <rect x="0" y="0" width="140" height="220" fill="#b56565" fill-opacity="0.15" stroke="#b56565" stroke-width="1.5"/>
+        <text x="70" y="35" font-size="36" fill="#b56565" text-anchor="middle" font-weight="bold">0</text>
+        <text x="70" y="55" font-size="10" fill="#b56565" text-anchor="middle">零 · ZERO</text>
+        <line x1="20" y1="70" x2="120" y2="70" stroke="#b56565" stroke-opacity="0.3"/>
+        <text x="70" y="95" font-size="10" fill="#e8e4d8" text-anchor="middle">无任何收缩</text>
+        <text x="70" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">完全瘫痪</text>
+        <text x="70" y="160" font-size="9" fill="#a39e8d" text-anchor="middle">触不到</text>
+        <text x="70" y="175" font-size="9" fill="#a39e8d" text-anchor="middle">看不到</text>
+        <text x="70" y="200" font-size="9.5" fill="#b56565" text-anchor="middle">外周神经完全损伤</text>
+      </g>
+
+      <!-- 1 -->
+      <g transform="translate(240, 80)">
+        <rect x="0" y="0" width="140" height="220" fill="#c47f17" fill-opacity="0.15" stroke="#c47f17" stroke-width="1.5"/>
+        <text x="70" y="35" font-size="36" fill="#c47f17" text-anchor="middle" font-weight="bold">1</text>
+        <text x="70" y="55" font-size="10" fill="#c47f17" text-anchor="middle">微弱 · TRACE</text>
+        <line x1="20" y1="70" x2="120" y2="70" stroke="#c47f17" stroke-opacity="0.3"/>
+        <text x="70" y="95" font-size="10" fill="#e8e4d8" text-anchor="middle">能感觉到收缩</text>
+        <text x="70" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">但无关节运动</text>
+        <text x="70" y="160" font-size="9" fill="#a39e8d" text-anchor="middle">触诊有反应</text>
+        <text x="70" y="175" font-size="9" fill="#a39e8d" text-anchor="middle">观察可见收缩</text>
+        <text x="70" y="200" font-size="9.5" fill="#c47f17" text-anchor="middle">神经损伤恢复早期</text>
+      </g>
+
+      <!-- 2 -->
+      <g transform="translate(400, 80)">
+        <rect x="0" y="0" width="140" height="220" fill="#d4a548" fill-opacity="0.15" stroke="#d4a548" stroke-width="1.5"/>
+        <text x="70" y="35" font-size="36" fill="#d4a548" text-anchor="middle" font-weight="bold">2</text>
+        <text x="70" y="55" font-size="10" fill="#d4a548" text-anchor="middle">差 · POOR</text>
+        <line x1="20" y1="70" x2="120" y2="70" stroke="#d4a548" stroke-opacity="0.3"/>
+        <text x="70" y="95" font-size="10" fill="#e8e4d8" text-anchor="middle">消除重力下</text>
+        <text x="70" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">完成全 ROM</text>
+        <text x="70" y="160" font-size="9" fill="#a39e8d" text-anchor="middle">侧卧位测髋</text>
+        <text x="70" y="175" font-size="9" fill="#a39e8d" text-anchor="middle">平卧位测踝</text>
+        <text x="70" y="200" font-size="9.5" fill="#d4a548" text-anchor="middle">显著肌力丧失</text>
+      </g>
+
+      <!-- 3 -->
+      <g transform="translate(560, 80)">
+        <rect x="0" y="0" width="140" height="220" fill="#8fa867" fill-opacity="0.15" stroke="#8fa867" stroke-width="1.5"/>
+        <text x="70" y="35" font-size="36" fill="#8fa867" text-anchor="middle" font-weight="bold">3</text>
+        <text x="70" y="55" font-size="10" fill="#8fa867" text-anchor="middle">尚可 · FAIR</text>
+        <line x1="20" y1="70" x2="120" y2="70" stroke="#8fa867" stroke-opacity="0.3"/>
+        <text x="70" y="95" font-size="10" fill="#e8e4d8" text-anchor="middle">抗重力完成</text>
+        <text x="70" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">不抗外力阻力</text>
+        <text x="70" y="160" font-size="9" fill="#a39e8d" text-anchor="middle">日常勉强</text>
+        <text x="70" y="175" font-size="9" fill="#a39e8d" text-anchor="middle">楼梯吃力</text>
+        <text x="70" y="200" font-size="9.5" fill="#8fa867" text-anchor="middle">康复目标起点</text>
+      </g>
+
+      <!-- 4 -->
+      <g transform="translate(720, 80)">
+        <rect x="0" y="0" width="140" height="220" fill="#658fa1" fill-opacity="0.15" stroke="#658fa1" stroke-width="1.5"/>
+        <text x="70" y="35" font-size="36" fill="#658fa1" text-anchor="middle" font-weight="bold">4</text>
+        <text x="70" y="55" font-size="10" fill="#658fa1" text-anchor="middle">良好 · GOOD</text>
+        <line x1="20" y1="70" x2="120" y2="70" stroke="#658fa1" stroke-opacity="0.3"/>
+        <text x="70" y="95" font-size="10" fill="#e8e4d8" text-anchor="middle">抗中等阻力</text>
+        <text x="70" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">弱于健侧</text>
+        <text x="70" y="160" font-size="9" fill="#a39e8d" text-anchor="middle">康复中段</text>
+        <text x="70" y="175" font-size="9" fill="#a39e8d" text-anchor="middle">日常基本可</text>
+        <text x="70" y="200" font-size="9.5" fill="#658fa1" text-anchor="middle">最常见的临床异常</text>
+      </g>
+
+      <!-- 5 -->
+      <g transform="translate(880, 80)">
+        <rect x="0" y="0" width="140" height="220" fill="#1f3a5f" fill-opacity="0.18" stroke="#1f3a5f" stroke-width="1.5"/>
+        <text x="70" y="35" font-size="36" fill="#1f3a5f" text-anchor="middle" font-weight="bold">5</text>
+        <text x="70" y="55" font-size="10" fill="#1f3a5f" text-anchor="middle">正常 · NORMAL</text>
+        <line x1="20" y1="70" x2="120" y2="70" stroke="#1f3a5f" stroke-opacity="0.3"/>
+        <text x="70" y="95" font-size="10" fill="#e8e4d8" text-anchor="middle">抗最大阻力</text>
+        <text x="70" y="115" font-size="10" fill="#e8e4d8" text-anchor="middle">左右对称</text>
+        <text x="70" y="160" font-size="9" fill="#a39e8d" text-anchor="middle">完全恢复</text>
+        <text x="70" y="175" font-size="9" fill="#a39e8d" text-anchor="middle">回归运动</text>
+        <text x="70" y="200" font-size="9.5" fill="#1f3a5f" text-anchor="middle">康复终点</text>
+      </g>
+
+      <text x="540" y="345" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">+ / – 细分(4+ 比 4 更接近 5)· 4 级是「有功能但需训练」的最常见异常</text>
+    </svg>
+    <div class="svg-caption">FIG 4.2 · MMT 0-5 级量表——徒手肌力评估的通用语言,Kendall 1949 沿用至今</div>
+  </div>
+
+  <h4>MMT 的局限性——以及如何弥补</h4>
+  <p>MMT 是有用的快速筛查,但<em>有明显局限</em>:</p>
+  <ul>
+    <li><strong>天花板效应</strong>:对运动员尤其明显——一个能深蹲 150 kg 的跑者股四头肌「MMT 5 级」毫无意义,因为测试者的手不可能比 150 kg 强;</li>
+    <li><strong>主观性大</strong>:不同测试者评分的<em>kappa 系数仅 0.4-0.7</em>,信度中等;</li>
+    <li><strong>对耐力无评估</strong>:只测瞬间最大力量,不测肌肉耐力 (endurance);</li>
+    <li><strong>对单关节孤立肌群较准,对多关节复合动作不适合</strong>。</li>
+  </ul>
+  <p>弥补方法:① <strong>Handheld Dynamometer 手持测力计</strong>——量化到牛顿值,信度提升至 kappa 0.8-0.9;② <strong>1-RM 测试</strong>(深蹲、硬拉、卧推)——运动员场景的金标准;③ <strong>等速肌力测试</strong>(Biodex / Cybex)——研究场景的金标准;④ <strong>计次测试</strong>——单腿桥到力竭次数、提踵到力竭次数,左右对照。</p>
+
+  <h4>关键肌群的 MMT 测试位</h4>
+  <ul>
+    <li><strong>髋外展(臀中肌)</strong>:侧卧,上侧腿伸直外展,治疗师在大腿外侧施加向下阻力;</li>
+    <li><strong>髋伸展(臀大肌)</strong>:俯卧屈膝 90°,抬大腿,阻力在大腿后方;</li>
+    <li><strong>股四头肌</strong>:坐位屈膝 90°,伸膝,阻力在小腿前;</li>
+    <li><strong>腘绳肌</strong>:俯卧屈膝 45°,继续屈膝,阻力在小腿后;</li>
+    <li><strong>踝背屈(胫前肌)</strong>:坐位,踝背屈,阻力在足背;</li>
+    <li><strong>踝跖屈(小腿三头肌)</strong>:站立单腿提踵,正常 ≥25 次;<25 次提示弱;</li>
+    <li><strong>腓骨长短肌</strong>:坐位,踝外翻,阻力在足外侧;</li>
+    <li><strong>肩外展(三角肌中束)</strong>:坐位,肩外展 90°,阻力在上臂外侧;</li>
+    <li><strong>肩外旋(冈下肌)</strong>:侧卧或贴墙,屈肘 90°,前臂外旋,阻力在腕背侧;</li>
+    <li><strong>颈深屈肌</strong>:仰卧,下巴内收(craniocervical flexion),不能用胸锁乳突肌代偿。</li>
+  </ul>
+
+  <p class="plain">原理:MMT = 用治疗师标准化的徒手阻力,把肌力分到 6 个粗粒度的功能区间。<strong>翻译:</strong>它不能告诉你「股四头肌是 78 kg 还是 85 kg」,但能告诉你「这块肌肉处在什么功能阶段,下一步训练目标是什么」。<em>放在康复场景:</em>ACL 重建术后第 8 周,股四头肌从 MMT 2 进步到 4 = 可以进入闭链负重训练(深蹲、登台阶);MMT 4 进步到 5(左右对称且抗最大阻力)= 可以开始跑步回归。<em>MMT 不是「测肌力」,是「测康复阶段」</em>——它是阶段晋级的决策工具。</p>
+
+  <div class="callout note">
+    <div class="label">运动员场景 · MMT 之外</div>
+    <p>对运动员,MMT 5 几乎是「废话级别」的天花板。运动员需要的是<em>功能性肌力测试</em>:① <strong>单腿提踵到力竭次数</strong>(健侧 30+,患侧 ≤ 80% 即弱);② <strong>单腿深蹲质量</strong>(能否到 60° 而不内扣);③ <strong>等速肌力 H/Q 比</strong>(腘绳/股四,正常 60-70%,<55% 增加腘绳伤风险);④ <strong>跳跃测试</strong>(单腿跳距离 LSI,患/健 < 90% 不可回归运动);⑤ <strong>1RM 比值</strong>(健侧深蹲 100 kg 患侧 70 kg = LSI 70%,不达标)。</p>
+  </div>
+
+  <h3><span class="pre">4.7</span>特殊试验 (Special Tests)——膝关节 6 大试验</h3>
+  <p class="lead">特殊试验是 O 段的<em>诊断核心</em>——每个试验都针对一个特定结构或病变,有自己的敏感度 (sensitivity)、特异性 (specificity)、阳性预测值 (PPV)、阴性预测值 (NPV)。下面把膝关节最常用的 6 大试验讲透,数据来自 <em>Benjaminse 2006</em>、<em>Hegedus 2007</em>、<em>Décary 2017</em> 等系统综述。</p>
+
+  <h4>1 · Lachman 试验 · ACL 前交叉韧带</h4>
+  <p><strong>方法:</strong>仰卧屈膝 20-30°,治疗师一手稳定股骨远端,另一手握胫骨近端向前拉。感受胫骨向前移位的距离与终末感 (end feel)。</p>
+  <p><strong>阳性:</strong>胫骨向前移位 >3 mm 较健侧、或软终末感(无硬挡)。</p>
+  <p><strong>循证(Benjaminse 2006 系统综述):</strong>敏感度 <strong>85-87%</strong>、特异性 <strong>94%</strong>。<em>这是膝关节最敏感的徒手试验之一,与 MRI 相当甚至更优</em>。麻醉下测试敏感度可达 95% 以上。</p>
+  <p><strong>临床意义:</strong>ACL 撕裂诊断的金标准徒手试验。Lachman 阴性几乎可排除 ACL 完全撕裂;阳性 + 急性血肿 = 95% 是 ACL 撕裂。</p>
+
+  <h4>2 · 前抽屉试验 (Anterior Drawer) · ACL</h4>
+  <p><strong>方法:</strong>仰卧屈膝 90°,治疗师坐在患者足上,双手握住胫骨近端,向前拉。</p>
+  <p><strong>阳性:</strong>胫骨前移 >6 mm。</p>
+  <p><strong>循证:</strong>敏感度 <strong>仅 55%</strong>、特异性 <strong>92%</strong>。<em>显著低于 Lachman</em>——急性损伤后腘绳肌保护性紧张可掩盖前移,且 90° 屈膝时关节面几何也减少前移幅度。</p>
+  <p><strong>临床意义:</strong>Lachman 是首选;前抽屉作为补充。新手最常见错误是「我用了前抽屉,阴性所以 ACL 没事」——错。</p>
+
+  <h4>3 · McMurray 试验 · 半月板</h4>
+  <p><strong>方法:</strong>仰卧屈膝最大,治疗师一手握足、一手按膝关节线。胫骨外旋 + 缓慢伸膝(查内侧半月板);胫骨内旋 + 缓慢伸膝(查外侧半月板)。</p>
+  <p><strong>阳性:</strong>关节线触及「咔嗒」声、或患者感觉关节线疼痛、或闪缩反应。</p>
+  <p><strong>循证(Hegedus 2007 综述):</strong>敏感度 <strong>61%</strong>、特异性 <strong>84%</strong>。单独使用诊断力中等,需要与<em>关节线压痛 (joint line tenderness)</em> 联合——后者敏感度 83%、特异性 83%。两者联合诊断半月板撕裂的整体准确度可达 80% 以上。</p>
+  <p><strong>临床意义:</strong>McMurray + 关节线压痛 + Apley 三联,是半月板撕裂的徒手诊断组合。</p>
+
+  <h4>4 · Apley 试验 · 半月板</h4>
+  <p><strong>方法:</strong>俯卧屈膝 90°,治疗师一手稳大腿,另一手沿胫骨长轴<strong>向下压</strong>并旋转(压挤试验);然后<strong>向上拉</strong>并旋转(分离试验)。</p>
+  <p><strong>阳性:</strong>压挤旋转时痛 → 半月板;分离旋转时痛 → 韧带。</p>
+  <p><strong>循证:</strong>敏感度 <strong>22-60%</strong>、特异性 <strong>70-90%</strong>。敏感度差异较大,作为辅助试验。</p>
+
+  <h4>5 · Valgus / Varus 应力试验 · 内/外侧副韧带</h4>
+  <p><strong>方法:</strong>仰卧屈膝 30°,治疗师一手压膝外侧、另一手扳踝向外(查 MCL 内侧副韧带);反向操作查 LCL 外侧副韧带。</p>
+  <p><strong>阳性:</strong>关节内侧/外侧开口 >5 mm 较健侧,或终末感软。</p>
+  <p><strong>循证:</strong>敏感度 <strong>86-96%</strong>、特异性 <strong>85-100%</strong>。MCL 撕裂诊断的金标准徒手试验。</p>
+  <p><strong>临床意义:</strong>30° 屈曲位测纯韧带损伤;0° 完全伸直位测试如果阳性 = 不仅 MCL/LCL,还有 ACL/PCL/关节囊联合损伤,通常更严重。</p>
+
+  <h4>6 · 髌骨研磨试验 (Patellar Grind / Clarke's Sign) · PFPS</h4>
+  <p><strong>方法:</strong>仰卧伸膝,治疗师手压髌骨向远端,要求患者主动股四头肌收缩。</p>
+  <p><strong>阳性:</strong>髌骨下疼痛或股四收缩中断。</p>
+  <p><strong>循证:</strong>敏感度 <strong>49%</strong>、特异性 <strong>75%</strong>。诊断价值有限,假阳率高(很多无症状者也会引出疼痛)。</p>
+  <p><strong>临床意义:</strong>不能单独诊断 PFPS,需要结合「下楼痛 + 蹲痛 + 久坐痛 (movie sign) 」的病史 + 髌骨外推恐惧 (apprehension test) 等多个体征。</p>
+
+  <table>
+    <thead>
+      <tr><th>试验</th><th>查什么</th><th>方法概要</th><th>敏感度</th><th>特异性</th><th>临床定位</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Lachman</td><td>ACL</td><td>屈膝 20-30° 前拉胫骨</td><td>85-87%</td><td>94%</td><td>首选,与 MRI 等同</td></tr>
+      <tr><td>前抽屉</td><td>ACL</td><td>屈膝 90° 前拉胫骨</td><td>55%</td><td>92%</td><td>补充,急性期受腘绳屏蔽</td></tr>
+      <tr><td>后抽屉</td><td>PCL</td><td>屈膝 90° 后推胫骨</td><td>90%</td><td>99%</td><td>PCL 诊断金标准</td></tr>
+      <tr><td>McMurray</td><td>半月板</td><td>屈膝旋转伸膝</td><td>61%</td><td>84%</td><td>需联合关节线压痛</td></tr>
+      <tr><td>Apley</td><td>半月板</td><td>俯卧压挤旋转</td><td>22-60%</td><td>70-90%</td><td>辅助试验</td></tr>
+      <tr><td>Thessaly 试验</td><td>半月板</td><td>单脚站屈膝 20° 旋转</td><td>89%</td><td>97%</td><td>新兴高准确度试验</td></tr>
+      <tr><td>Valgus 30°</td><td>MCL</td><td>压膝外、扳踝向外</td><td>86-96%</td><td>85-100%</td><td>MCL 金标准</td></tr>
+      <tr><td>Varus 30°</td><td>LCL</td><td>反向操作</td><td>78%</td><td>80%</td><td>LCL 评估</td></tr>
+      <tr><td>髌骨研磨</td><td>髌股关节</td><td>压髌骨 + 主动股四</td><td>49%</td><td>75%</td><td>PFPS 辅助</td></tr>
+      <tr><td>髌骨外推恐惧</td><td>髌骨不稳</td><td>外推髌骨 + 屈膝</td><td>32%</td><td>86%</td><td>髌骨脱位评估</td></tr>
+      <tr><td>Ober</td><td>髂胫束</td><td>侧卧上腿后伸下放</td><td>—</td><td>—</td><td>ITBS 紧张度评估</td></tr>
+      <tr><td>Noble 试验</td><td>髂胫束</td><td>压股骨外侧髁 + 屈伸膝</td><td>—</td><td>—</td><td>ITBS 激发试验</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / 不是「单一阳性 = 诊断」</div>
+    <p>新手最容易犯的错:看到一个 +Lachman 就写「ACL 撕裂」。错。<em>没有一个特殊试验能单独诊断疾病</em>——所有诊断都是<em>临床推理的综合输出</em>。Lachman 阳性 + 急性扭伤史 + 即时血肿 + 不能继续比赛 + 听到「啪」一声 = 95% 是 ACL 撕裂。Lachman 阳性但无外伤史 + 无血肿 = 可能是慢性松弛、个体差异、操作误差。<em>特殊试验是证据的一票,不是判决</em>。</p>
+  </div>
+
+  <h3><span class="pre">4.8</span>特殊试验——肩关节 + 踝关节 8 大试验</h3>
+  <p class="lead">肩关节和踝关节是骨科门诊和运动康复中第二、第三高频部位(膝第一)。下面把这两个关节最实用的 8 大特殊试验讲透。</p>
+
+  <h4>肩关节 5 大试验</h4>
+  <p><strong>1 · Neer 试验 · 肩峰下撞击</strong>:治疗师固定肩胛骨,被动肩前屈至最大。阳性:肩前外侧痛 (40-80°)。<em>循证:</em>敏感度 <strong>72%</strong>、特异性 <strong>60%</strong>(Hegedus 2008)。</p>
+  <p><strong>2 · Hawkins-Kennedy 试验 · 肩峰下撞击</strong>:屈肘 90°、肩前屈 90°,被动内旋。阳性:肩前外侧痛。<em>循证:</em>敏感度 <strong>79%</strong>、特异性 <strong>59%</strong>。Neer + Hawkins 联合阴性可基本排除肩峰下撞击。</p>
+  <p><strong>3 · 空罐试验 (Empty Can) · 冈上肌</strong>:肩外展 90° + 水平内收 30° + 拇指向下(模拟「空罐」),抗阻向上举。阳性:疼痛或无力。<em>循证:</em>敏感度 <strong>74%</strong>、特异性 <strong>61%</strong>。无力比疼痛更预测撕裂。</p>
+  <p><strong>4 · 跌落试验 (Drop Arm) · 大型肩袖撕裂</strong>:被动肩外展 90°,要求患者缓慢放下手臂。阳性:手臂在 90° 附近突然「跌落」或不能控制下降。<em>循证:</em>敏感度 <strong>27%</strong>、特异性 <strong>97%</strong>。<em>低敏感高特异</em>——阳性几乎确诊大撕裂,阴性不能排除。</p>
+  <p><strong>5 · O'Brien 试验 (Active Compression) · SLAP / AC 关节</strong>:肩前屈 90° + 水平内收 15° + 拇指向下,抗阻向下压;然后拇指向上重复。阳性:拇指向下时痛,向上时缓解。<em>循证:</em>敏感度 <strong>67%</strong>、特异性 <strong>37%</strong>(SLAP 撕裂)。</p>
+
+  <h4>踝关节 3 大试验</h4>
+  <p><strong>6 · 前抽屉试验 (Anterior Drawer) · ATFL 前距腓韧带</strong>:踝跖屈 10-20°,一手稳胫骨远端,另一手握跟骨向前拉。阳性:前移 >5 mm 较健侧或软终末感。<em>循证:</em>敏感度 <strong>74%</strong>、特异性 <strong>38%</strong>(急性),敏感度 <strong>96%</strong>、特异性 <strong>84%</strong>(>5 天后,因为急性肿胀降低敏感度)。<em>所以踝扭伤要在 4-5 天后复查</em>——急性期前抽屉的诊断价值低。</p>
+  <p><strong>7 · 距骨倾斜试验 (Talar Tilt) · CFL 跟腓韧带</strong>:踝中立位,一手稳胫骨,另一手内翻足。阳性:角度 >10° 较健侧或软终末感。<em>循证:</em>敏感度 <strong>52%</strong>、特异性 <strong>84%</strong>(>5 天后)。</p>
+  <p><strong>8 · Thompson 试验 · 跟腱完全断裂</strong>:俯卧屈膝 90°,治疗师挤压小腿三头肌。阳性:足无跖屈反应 = 跟腱完全断裂。<em>循证:</em>敏感度 <strong>96%</strong>、特异性 <strong>93%</strong>。<em>跟腱断裂的金标准徒手试验,30 秒搞定</em>——比 MRI 都快。</p>
+
+  <table>
+    <thead>
+      <tr><th>试验</th><th>关节</th><th>查什么</th><th>方法概要</th><th>敏感度</th><th>特异性</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Neer</td><td>肩</td><td>肩峰下撞击</td><td>固定肩胛 + 被动前屈</td><td>72%</td><td>60%</td></tr>
+      <tr><td>Hawkins-Kennedy</td><td>肩</td><td>肩峰下撞击</td><td>前屈 90° + 内旋</td><td>79%</td><td>59%</td></tr>
+      <tr><td>Empty Can</td><td>肩</td><td>冈上肌</td><td>外展 90° + 内收 30° + 拇指向下抗阻</td><td>74%</td><td>61%</td></tr>
+      <tr><td>External Rotation Lag</td><td>肩</td><td>冈下肌</td><td>被动外旋至末端,要求保持</td><td>56%</td><td>98%</td></tr>
+      <tr><td>Lift-off / Belly Press</td><td>肩</td><td>肩胛下肌</td><td>手背贴腰后抬离</td><td>40-62%</td><td>79-92%</td></tr>
+      <tr><td>Drop Arm</td><td>肩</td><td>大型肩袖撕裂</td><td>被动外展 90° 再放下</td><td>27%</td><td>97%</td></tr>
+      <tr><td>O'Brien</td><td>肩</td><td>SLAP / AC 关节</td><td>前屈 90° + 内收 15° + 拇指向下抗阻</td><td>67%</td><td>37%</td></tr>
+      <tr><td>Apprehension / Relocation</td><td>肩</td><td>前下不稳</td><td>外展 90° + 外旋,患者紧张 → 后推肱骨头缓解</td><td>72%</td><td>96%</td></tr>
+      <tr><td>Anterior Drawer 踝</td><td>踝</td><td>ATFL</td><td>跖屈 10-20° 前拉跟骨</td><td>74%/96%</td><td>38%/84%</td></tr>
+      <tr><td>Talar Tilt</td><td>踝</td><td>CFL</td><td>中立位内翻足</td><td>52%</td><td>84%</td></tr>
+      <tr><td>Thompson</td><td>踝</td><td>跟腱完全断裂</td><td>俯卧屈膝 + 挤压小腿</td><td>96%</td><td>93%</td></tr>
+      <tr><td>Squeeze / Kleiger</td><td>踝</td><td>高位踝扭伤(联合韧带)</td><td>挤压腓骨 + 胫骨 / 外旋足</td><td>30-50%</td><td>88-93%</td></tr>
+      <tr><td>Ottawa Ankle Rules</td><td>踝</td><td>是否需要 X 光</td><td>5 个临床判断点</td><td>≈100%</td><td>~40%</td></tr>
+    </tbody>
+  </table>
+
+  <p><em>Ottawa Ankle Rules</em> 是一组临床决策规则(Stiell 1992 提出),用 5 个简单临床判断点决定踝扭伤后是否需要拍 X 光排除骨折——敏感度接近 100%,可<em>避免 30-40% 不必要的 X 光</em>。规则:踝部疼痛 + 下列任一即需 X 光:① 外踝/内踝后缘 6 cm 内压痛;② 第五跖骨基底压痛;③ 舟骨压痛;④ 不能负重 4 步(伤后即刻 + 急诊时各一次)。这是<em>临床决策规则的典范</em>——简单、敏感、节约成本。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 420" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="540" y="32" font-size="13" fill="#d4a548" text-anchor="middle" letter-spacing="0.18em">SPECIAL TESTS · 敏感度 vs 特异性象限图</text>
+      <text x="540" y="48" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">x 轴 = 特异性(用于「确诊」),y 轴 = 敏感度(用于「排除」)</text>
+
+      <!-- 坐标轴 -->
+      <line x1="120" y1="80" x2="120" y2="380" stroke="#3d3d36" stroke-width="1"/>
+      <line x1="120" y1="380" x2="1020" y2="380" stroke="#3d3d36" stroke-width="1"/>
+
+      <!-- 网格 -->
+      <line x1="120" y1="230" x2="1020" y2="230" stroke="#3d3d36" stroke-opacity="0.3" stroke-dasharray="2,3"/>
+      <line x1="570" y1="80" x2="570" y2="380" stroke="#3d3d36" stroke-opacity="0.3" stroke-dasharray="2,3"/>
+
+      <!-- 四象限标签 -->
+      <text x="345" y="155" font-size="10" fill="#c47f17" text-anchor="middle" letter-spacing="0.15em">高敏低特</text>
+      <text x="345" y="170" font-size="9" fill="#a39e8d" text-anchor="middle">阴性可排除</text>
+
+      <text x="795" y="155" font-size="10" fill="#8fa867" text-anchor="middle" letter-spacing="0.15em">高敏高特 · 理想</text>
+      <text x="795" y="170" font-size="9" fill="#a39e8d" text-anchor="middle">阴性排除 + 阳性确诊</text>
+
+      <text x="345" y="305" font-size="10" fill="#b56565" text-anchor="middle" letter-spacing="0.15em">低敏低特 · 无用</text>
+      <text x="345" y="320" font-size="9" fill="#a39e8d" text-anchor="middle">价值有限</text>
+
+      <text x="795" y="305" font-size="10" fill="#658fa1" text-anchor="middle" letter-spacing="0.15em">低敏高特</text>
+      <text x="795" y="320" font-size="9" fill="#a39e8d" text-anchor="middle">阳性可确诊</text>
+
+      <!-- 轴标签 -->
+      <text x="80" y="80" font-size="10" fill="#a39e8d">100%</text>
+      <text x="100" y="230" font-size="10" fill="#a39e8d" text-anchor="end">50%</text>
+      <text x="100" y="383" font-size="10" fill="#a39e8d" text-anchor="end">0%</text>
+      <text x="80" y="225" font-size="9" fill="#a39e8d" letter-spacing="0.1em" transform="rotate(-90 80 225)">敏感度 SENSITIVITY (%)</text>
+
+      <text x="120" y="400" font-size="10" fill="#a39e8d" text-anchor="middle">0%</text>
+      <text x="570" y="400" font-size="10" fill="#a39e8d" text-anchor="middle">50%</text>
+      <text x="1020" y="400" font-size="10" fill="#a39e8d" text-anchor="middle">100%</text>
+      <text x="570" y="415" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">特异性 SPECIFICITY (%)</text>
+
+      <!-- 试验点 -->
+      <!-- Lachman 85% / 94% -->
+      <g>
+        <circle cx="966" cy="125" r="6" fill="#8fa867" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="956" y="125" font-size="9.5" fill="#8fa867" text-anchor="end">Lachman (ACL)</text>
+        <text x="956" y="138" font-size="8" fill="#a39e8d" text-anchor="end">85% / 94%</text>
+      </g>
+
+      <!-- Thompson 96/93 -->
+      <g>
+        <circle cx="958" cy="92" r="6" fill="#8fa867" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="948" y="92" font-size="9.5" fill="#8fa867" text-anchor="end">Thompson (跟腱)</text>
+        <text x="948" y="105" font-size="8" fill="#a39e8d" text-anchor="end">96% / 93%</text>
+      </g>
+
+      <!-- Thessaly 89/97 -->
+      <g>
+        <circle cx="993" cy="112" r="6" fill="#8fa867" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="983" y="112" font-size="9.5" fill="#8fa867" text-anchor="end">Thessaly (半月板)</text>
+      </g>
+
+      <!-- Drop Arm 27/97 -->
+      <g>
+        <circle cx="993" cy="299" r="6" fill="#658fa1" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="983" y="299" font-size="9.5" fill="#658fa1" text-anchor="end">Drop Arm</text>
+        <text x="983" y="312" font-size="8" fill="#a39e8d" text-anchor="end">27% / 97%</text>
+      </g>
+
+      <!-- ER Lag 56/98 -->
+      <g>
+        <circle cx="998" cy="212" r="6" fill="#658fa1" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="988" y="212" font-size="9.5" fill="#658fa1" text-anchor="end">ER Lag (冈下)</text>
+      </g>
+
+      <!-- 前抽屉(膝)55/92 -->
+      <g>
+        <circle cx="948" cy="215" r="6" fill="#658fa1" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="938" y="215" font-size="9.5" fill="#658fa1" text-anchor="end">前抽屉(膝)</text>
+      </g>
+
+      <!-- Hawkins 79/59 -->
+      <g>
+        <circle cx="651" cy="143" r="6" fill="#c47f17" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="641" y="143" font-size="9.5" fill="#c47f17" text-anchor="end">Hawkins</text>
+        <text x="641" y="156" font-size="8" fill="#a39e8d" text-anchor="end">79% / 59%</text>
+      </g>
+
+      <!-- Empty Can 74/61 -->
+      <g>
+        <circle cx="668" cy="158" r="6" fill="#c47f17" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="678" y="158" font-size="9.5" fill="#c47f17">Empty Can</text>
+      </g>
+
+      <!-- McMurray 61/84 -->
+      <g>
+        <circle cx="876" cy="197" r="6" fill="#658fa1" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="866" y="197" font-size="9.5" fill="#658fa1" text-anchor="end">McMurray</text>
+      </g>
+
+      <!-- 髌骨研磨 49/75 -->
+      <g>
+        <circle cx="795" cy="233" r="6" fill="#658fa1" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="805" y="233" font-size="9.5" fill="#658fa1">髌骨研磨</text>
+      </g>
+
+      <!-- O'Brien 67/37 -->
+      <g>
+        <circle cx="453" cy="179" r="6" fill="#c47f17" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="443" y="179" font-size="9.5" fill="#c47f17" text-anchor="end">O'Brien</text>
+      </g>
+
+      <!-- 前抽屉(踝,5d+) 96/84 -->
+      <g>
+        <circle cx="876" cy="92" r="6" fill="#8fa867" stroke="#1a1814" stroke-width="1.5"/>
+        <text x="866" y="92" font-size="9.5" fill="#8fa867" text-anchor="end">前抽屉(踝 5d+)</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 4.3 · 特殊试验的敏感度-特异性象限——右上是理想区,Lachman / Thompson 是教科书级</div>
+  </div>
+
+  <div class="callout note">
+    <div class="label">SnNout 与 SpPin · 临床流行病学的两个口诀</div>
+    <p>① <strong>SnNout</strong>:高<strong>敏感</strong>性 (Sn) 试验<strong>阴性</strong> (N) 时,可<em>排除</em> (out) 该病。例:Thompson 试验阴性几乎排除跟腱完全断裂。<br>
+    ② <strong>SpPin</strong>:高<strong>特异</strong>性 (Sp) 试验<strong>阳性</strong> (P) 时,可<em>确诊</em> (in) 该病。例:Drop Arm 阳性 + 急性外伤 = 95% 是大型肩袖撕裂。<br>
+    把这两个口诀变成本能 = 你已经会读所有诊断研究的核心结论。</p>
+  </div>
+
+  <h3><span class="pre">4.9</span>神经学检查——肌力反射感觉、神经张力试验</h3>
+  <p class="lead">神经学检查 (neurological exam) 是 O 段中最少被新手认真做、但又是最关键的一段——一个被忽略的<em>L5 神经根受压</em>会让所有「腰椎康复」变成无效操作。神经学检查的四大支柱:肌力 (MMT)、深腱反射 (DTR)、感觉 (sensory)、神经张力试验 (neural tension)。</p>
+
+  <h4>1 · 肌力 · 神经根代表肌</h4>
+  <p>每个神经根都有典型「代表肌」(myotome)——这块肌肉的弱化提示对应神经根受累:</p>
+  <table>
+    <thead>
+      <tr><th>神经根</th><th>代表肌</th><th>动作</th><th>常见受压点</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>C5</td><td>三角肌、肱二头肌</td><td>肩外展、屈肘</td><td>C4-5 椎间盘</td></tr>
+      <tr><td>C6</td><td>腕伸肌、肱二头肌</td><td>腕背伸、屈肘</td><td>C5-6 椎间盘</td></tr>
+      <tr><td>C7</td><td>肱三头肌、腕屈肌</td><td>伸肘、腕屈</td><td>C6-7 椎间盘</td></tr>
+      <tr><td>C8</td><td>手指屈肌</td><td>抓握</td><td>C7-T1</td></tr>
+      <tr><td>T1</td><td>手指外展内收</td><td>手指 V 字</td><td>T1-2</td></tr>
+      <tr><td>L1-2</td><td>髂腰肌</td><td>屈髋</td><td>L1-2</td></tr>
+      <tr><td>L3</td><td>股四头肌</td><td>伸膝</td><td>L2-3</td></tr>
+      <tr><td>L4</td><td>胫前肌</td><td>踝背屈(脚跟走)</td><td>L3-4</td></tr>
+      <tr><td>L5</td><td>姆长伸肌、臀中肌</td><td>大拇趾背伸、髋外展</td><td>L4-5(最常见)</td></tr>
+      <tr><td>S1</td><td>腓骨长短肌、小腿三头肌</td><td>踝外翻、脚尖走</td><td>L5-S1</td></tr>
+      <tr><td>S2-4</td><td>盆底肌、肛门括约肌</td><td>大小便控制</td><td>马尾综合征</td></tr>
+    </tbody>
+  </table>
+
+  <h4>2 · 深腱反射 (DTR, Deep Tendon Reflex)</h4>
+  <p>反射弧的完整性测试。叩击肌腱,观察反射收缩。0-4+ 分级:</p>
+  <ul>
+    <li><strong>0</strong>:无反射(下运动神经元损伤);</li>
+    <li><strong>1+</strong>:反射减弱(下神经元损伤、肌肉萎缩);</li>
+    <li><strong>2+</strong>:正常;</li>
+    <li><strong>3+</strong>:反射亢进(上运动神经元损伤、焦虑);</li>
+    <li><strong>4+</strong>:阵挛(明确上神经元损伤,脊髓损伤、中风、ALS)。</li>
+  </ul>
+  <p>常用反射:① 肱二头肌反射 C5-6;② 肱三头肌反射 C7;③ 髌反射 L3-4;④ 跟腱反射 S1。<em>Babinski 征</em>(足底刺激后大拇趾背伸 + 其他趾扇形展开)= 上运动神经元损伤的红旗,正常成人应为屈曲反应。</p>
+
+  <h4>3 · 感觉 · 皮节图 (Dermatomes)</h4>
+  <p>每个神经根支配一个皮节区域。用棉签或大头针测轻触觉 / 痛觉,沿皮节分布检查。常用解剖标志:</p>
+  <ul>
+    <li><strong>C5</strong>:三角肌外侧</li>
+    <li><strong>C6</strong>:拇指、食指</li>
+    <li><strong>C7</strong>:中指</li>
+    <li><strong>C8</strong>:小指、无名指</li>
+    <li><strong>T1</strong>:前臂内侧</li>
+    <li><strong>T4</strong>:乳头水平</li>
+    <li><strong>T10</strong>:脐水平</li>
+    <li><strong>L1</strong>:腹股沟</li>
+    <li><strong>L2-3</strong>:大腿前内侧</li>
+    <li><strong>L4</strong>:小腿内侧、内踝</li>
+    <li><strong>L5</strong>:小腿外侧、足背、大拇趾</li>
+    <li><strong>S1</strong>:足外侧缘、小趾、足底外侧</li>
+    <li><strong>S2-4</strong>:会阴区、肛周(必查于腰痛红旗筛查!)</li>
+  </ul>
+
+  <h4>4 · 神经张力试验 (Neurodynamic Tests)</h4>
+  <p>这是 <em>David Butler 1991</em> 系统提出的神经组织滑动评估——神经从中枢到末梢需要在椎管和组织间隙中自由滑动,任何卡压、粘连、炎症都会引起<em>神经被牵拉时的疼痛</em>。</p>
+
+  <p><strong>SLR (Straight Leg Raise) 直腿抬高试验 · L4-S1 神经根</strong></p>
+  <p>方法:仰卧,治疗师抬起患者直腿,记录引起疼痛的角度。<br>
+  阳性:30-70° 间出现典型放射性下肢痛 (radicular pain),沿坐骨神经分布。<br>
+  <em>循证:</em>敏感度 <strong>91%</strong>、特异性 <strong>26%</strong>。<em>SLR 阴性几乎排除腰椎间盘突出</em>(SnNout);但阳性需要进一步评估。<br>
+  <strong>交叉 SLR</strong>(抬健侧腿引起患侧痛):敏感度仅 29% 但特异性 88% — 高特异性提示中央型大突出。</p>
+
+  <p><strong>Slump 试验 · 神经根整体张力</strong></p>
+  <p>方法:坐位,患者依次:① 弓背 (slump);② 颈前屈;③ 伸单膝;④ 踝背屈。每一步后询问症状变化。<br>
+  阳性:任何一步引出沿神经分布的放射性痛。逐步释放(如颈伸展后疼痛消失)= 强阳性(神经源性而非肌肉源性)。<br>
+  <em>循证:</em>敏感度 <strong>84%</strong>、特异性 <strong>83%</strong>。<em>比 SLR 更全面,神经张力评估的首选</em>。</p>
+
+  <p><strong>ULTT (Upper Limb Tension Test) · 上肢神经张力</strong></p>
+  <p>评估颈神经根(C5-T1)沿臂丛的张力。有 4 个变体,分别针对正中神经、桡神经、尺神经。阳性:沿神经分布的放射痛或感觉异常,通常在 90° 外展 + 外旋 + 伸肘 + 腕背伸时出现。<br>
+  <em>循证:</em>敏感度 <strong>72-97%</strong>、特异性 <strong>33-87%</strong>(根据变体不同)。颈椎神经根病的高敏感度筛查工具。</p>
+
+  <div class="callout sharp">
+    <div class="label">红旗 / 马尾综合征 (Cauda Equina Syndrome)</div>
+    <p>这是腰椎康复中绝对不能漏的红旗——L1 以下椎管内多个神经根受压。表现:<strong>① 鞍区(会阴/肛周)麻木;② 大小便失禁或潴留;③ 双侧下肢神经症状;④ 性功能突然丧失</strong>。一旦出现,<em>必须 24-48 小时内手术减压</em>,延误超过 48 小时永久性损伤风险骤升。任何腰痛患者都<em>必须问</em>这四个问题——「最近大小便有没有变化?会阴区有没有麻木?」患者可能羞于主动说,你必须问。</p>
+  </div>
+
+  <h3><span class="pre">4.10</span>功能性动作筛查 FMS / SFMA / Y-Balance</h3>
+  <p class="lead">特殊试验和 ROM 测的是「孤立的零件」,功能筛查测的是「整车的运动模式」。<em>Gray Cook 2010</em> 提出的功能性动作筛查 (Functional Movement Screen, FMS) 把全身基本动作模式拆成 7 个测试,每项 0-3 分,总分 21 分。后续 <em>SFMA</em>(选择性功能评估)和 <em>Y-Balance Test</em> 进一步细化。</p>
+
+  <h4>FMS 7 项测试</h4>
+  <ol>
+    <li><strong>深蹲 (Deep Squat)</strong>:双脚与肩同宽,木棒举过头,深蹲到底。评估髋膝踝肩同步活动。</li>
+    <li><strong>跨栏步 (Hurdle Step)</strong>:单腿跨越障碍。评估单腿稳定 + 髋屈曲 + 踝背屈。</li>
+    <li><strong>直线弓步 (In-line Lunge)</strong>:前后脚一条线弓步。评估髋分离活动 + 核心稳定。</li>
+    <li><strong>肩部活动 (Shoulder Mobility)</strong>:双手背后相互触摸。评估肩复合体活动度。</li>
+    <li><strong>主动直腿抬高 (Active SLR)</strong>:仰卧直腿抬高。评估腘绳活动 + 髋分离。</li>
+    <li><strong>俯卧撑稳定 (Trunk Stability Push-up)</strong>:俯卧撑姿势 + 起身。评估核心抗伸展稳定。</li>
+    <li><strong>旋转稳定 (Rotary Stability)</strong>:四点支撑,对侧手脚抬起。评估核心抗旋转稳定。</li>
+  </ol>
+
+  <p>每项评分:</p>
+  <ul>
+    <li><strong>3 分</strong>:无代偿完成,完美完成;</li>
+    <li><strong>2 分</strong>:有代偿但能完成;</li>
+    <li><strong>1 分</strong>:不能完成;</li>
+    <li><strong>0 分</strong>:动作中出现疼痛(无论分数,该项目降为 0 + 必须查疼痛来源)。</li>
+  </ul>
+
+  <h4>FMS 的循证现实</h4>
+  <p>FMS 在 2010 年代被广泛推广,声称「FMS ≤ 14 分预测损伤风险升高 2-3 倍」(Kiesel 2007)。但后续多个高质量综述(<em>Bonazza 2017</em>、<em>Moran 2017</em> 等)的结论更谨慎:</p>
+  <ul>
+    <li><strong>低分组确实损伤率略高</strong>,但<em>预测价值有限</em>(灵敏度 ~40%);</li>
+    <li><strong>不同测试者评分一致性</strong>:训练有素者 kappa ~0.6-0.8,新手 ~0.4-0.5;</li>
+    <li><strong>缺乏对运动员特异性的考虑</strong>——FMS 不是为高水平运动员设计的;</li>
+    <li><strong>分数提高是否减少损伤</strong>:证据弱。</li>
+  </ul>
+  <p>结论:FMS 是有用的<em>动作模式筛查</em>(找出明显代偿和不对称),但<em>不是有力的损伤预测工具</em>。把它当作筛查的起点,不是终点。</p>
+
+  <h4>SFMA · 选择性功能评估</h4>
+  <p><em>SFMA</em> 是 Cook 团队 2014 后开发的临床版 FMS——专为<em>有症状者</em>设计(FMS 为<em>无症状者</em>设计)。从 10 个 top-tier 动作开始,任何「功能性疼痛」(FP) 或「非功能性疼痛」(DN/DP) 都通过下钻分解到具体的关节、肌肉、稳定性问题。这是<em>临床评估的强大补充</em>,特别适合非特定性腰痛、肩痛等模糊主诉。</p>
+
+  <h4>Y-Balance Test · 动态平衡评估</h4>
+  <p><em>Plisky 2006</em> 提出。患者单腿站立,另一脚分别向前、后内、后外三个方向尽量伸出,测量距离。三个方向距离归一化(/ 下肢长度)后总和。</p>
+  <p><strong>循证:</strong></p>
+  <ul>
+    <li><strong>左右不对称 >4 cm</strong>:下肢损伤风险升高 2.5 倍(<em>Plisky 2006</em>,高中运动员);</li>
+    <li><strong>归一化总和 <94%</strong>:下肢损伤风险升高(具体阈值因人群而异);</li>
+    <li><strong>ACL 重建术后</strong>:Y-Balance 是回归运动的关键测试之一,LSI 应 >90%。</li>
+  </ul>
+
+  <div class="callout you">
+    <div class="label">放在你身上 · 30 分钟自助筛查清单</div>
+    <p>你 35 岁、办公室坐 10 小时/天、想恢复跑步,但担心「身体没准备好」。给自己做一次结构化筛查:</p>
+    <ol>
+      <li><strong>姿势(5 min)</strong>:对着镜子看头前倾度、圆肩、骨盆前倾;墙站测试(后脑-后背-臀部贴墙,看下背腰部能否塞进一只手——能塞进 = 正常,塞不进或能塞 2 只手都不对)。</li>
+      <li><strong>ROM 自测(8 min)</strong>:① 髋屈曲(仰卧抱膝到胸 ≥110°);② 髋伸展(俯卧抬腿 ≥15°);③ 踝背屈(墙距测试,膝触墙最远脚距 ≥10 cm);④ 肩外旋(贴墙背手摸到对侧肩胛骨);⑤ 颈侧弯(耳到肩 ≥40°)。</li>
+      <li><strong>力量自测(10 min)</strong>:① 单腿提踵到力竭(健侧 ≥25 次,双侧差异 <20%);② 单腿桥到力竭(≥20 次);③ 平板支撑(≥60 秒);④ 单腿深蹲(能否到 60° 而不内扣);⑤ 北欧腘绳(下放控制 ≥30° 屈髋)。</li>
+      <li><strong>平衡(5 min)</strong>:单脚闭眼站(健康成人 ≥30 秒)。</li>
+      <li><strong>动作模式(2 min)</strong>:深蹲到底(双脚跟不离地、膝不内扣、躯干前倾不超 30°);弓步前后(膝不超过脚尖 + 后膝触地)。</li>
+    </ol>
+    <p><strong>结果解读:</strong>① 任一项 ROM 比对侧差 >10° → 需针对性活动度训练;② 任一力量项达不到指标 → 重点强化(单腿桥不到 20 次 = 髋后链弱);③ 单脚闭眼站 < 15 秒 = 本体感觉差,跑步前先做平衡训练;④ 深蹲膝内扣 + 跟离地 = 踝背屈不足 + 髋外展弱,跑步前一定要解决。<em>30 分钟,你已经做了一份比大多数 PT 第一次评估更详细的自评</em>。</p>
+  </div>
+
+  <h3><span class="pre">4.11</span>影像金标准与陷阱——X 光 / CT / MRI / 超声</h3>
+  <p class="lead">影像是康复评估中最被滥用的工具——「先去拍个 MRI」是最常见的偷懒决策。每种影像模态有自己的适用、局限、辐射、成本。下面把四大模态讲透,然后讲一个反常识:<em>无症状者的 MRI 异常率惊人</em>——影像本身可能制造焦虑。</p>
+
+  <h4>1 · X 光 (Plain Radiograph)</h4>
+  <p><strong>适用:</strong>① 骨折、脱位(急诊首选);② 退行性改变(关节炎、骨刺);③ 骨结构异常(畸形、肿瘤、感染晚期);④ 钙化(钙化性肌腱炎、Achilles 跟骨突)。<br>
+  <strong>不适用:</strong>软组织(韧带、肌腱、半月板、椎间盘)X 光看不到。<br>
+  <strong>辐射:</strong>胸片 ~0.1 mSv(等同 10 天背景辐射);四肢 X 光 <0.01 mSv,极低。<br>
+  <strong>成本:</strong>低 (中国 30-200 元,美国 100-400 美元)。<br>
+  <strong>局限:</strong>软组织无法评估;应力骨折早期 X 光阴性(2-3 周后才出现骨痂);<em>不能用 X 光排除应力骨折</em>。</p>
+
+  <h4>2 · CT (Computed Tomography)</h4>
+  <p><strong>适用:</strong>① 复杂骨折(三维评估手术方案);② 椎间盘 / 椎管骨性结构;③ 急性头部 / 胸腹外伤;④ 关节内游离体定位。<br>
+  <strong>不适用:</strong>软组织对比度低于 MRI;非急诊场景下不优于 MRI。<br>
+  <strong>辐射:</strong>胸 CT ~7 mSv,腹盆 CT ~10 mSv = 一年背景辐射的 3-5 倍。<em>反复 CT 有累积致癌风险</em>,儿童尤甚。<br>
+  <strong>成本:</strong>中(中国 300-800 元,美国 500-1500 美元)。</p>
+
+  <h4>3 · MRI (Magnetic Resonance Imaging)</h4>
+  <p><strong>适用:</strong>① 韧带 / 肌腱撕裂 (ACL、肩袖、跟腱、半月板);② 椎间盘突出;③ 应力骨折(MRI 是金标准,早期 1 周内即可显示骨髓水肿);④ 软组织肿块;⑤ 关节软骨评估。<br>
+  <strong>不适用:</strong>① 急诊创伤(优先 X 光/CT 排骨折);② 体内有铁磁性植入物 (老式心脏起搏器、动脉瘤夹);③ 严重幽闭恐惧未做镇静。<br>
+  <strong>辐射:</strong>0 mSv,无电离辐射。<br>
+  <strong>成本:</strong>高 (中国 700-2000 元,美国 1500-3500 美元)。<br>
+  <strong>序列:</strong>T1 看解剖;T2 看水肿/液体(亮);PD 看半月板;STIR 看骨髓水肿(应力骨折)。</p>
+
+  <h4>4 · 超声 (Diagnostic Ultrasound)</h4>
+  <p><strong>适用:</strong>① 浅层肌腱(跟腱、髌腱、肩袖)实时动态评估;② 关节积液;③ 神经卡压(腕管、肘管);④ 引导注射 (PRP、激素);⑤ 床旁评估,即时反馈。<br>
+  <strong>不适用:</strong>骨内结构(超声无法穿透骨);深部结构(髋深部、椎间盘);肥胖患者图像质量下降。<br>
+  <strong>辐射:</strong>0 mSv,无电离辐射。<br>
+  <strong>成本:</strong>低-中(中国 100-500 元,美国 250-700 美元)。<br>
+  <strong>独特优势:</strong><em>动态评估</em>——能在收缩/活动中看肌腱滑动、撞击;<em>床旁实时</em>——可在诊室同时做诊断和评估治疗效果(如注射后即时复查)。</p>
+
+  <table>
+    <thead>
+      <tr><th>模态</th><th>查什么</th><th>不查什么</th><th>辐射</th><th>成本</th><th>独特价值</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>X 光</td><td>骨折、骨刺、对线、钙化</td><td>软组织</td><td>低</td><td>低</td><td>急诊骨折首选 + Ottawa 决策规则</td></tr>
+      <tr><td>CT</td><td>复杂骨折三维、椎管骨结构</td><td>软组织(MRI 更优)</td><td>高</td><td>中</td><td>三维手术规划</td></tr>
+      <tr><td>MRI</td><td>韧带、肌腱、半月板、椎间盘、骨髓水肿</td><td>急诊不优先(慢)</td><td>无</td><td>高</td><td>软组织金标准 + 应力骨折早期 1 周可见</td></tr>
+      <tr><td>超声</td><td>浅层肌腱动态、关节积液、神经卡压</td><td>骨内、深部</td><td>无</td><td>低-中</td><td>实时动态 + 引导注射 + 床旁</td></tr>
+      <tr><td>骨扫描</td><td>骨代谢热点(应力骨折、肿瘤、感染)</td><td>无特异性</td><td>中-高</td><td>中</td><td>全身筛查、隐匿病变</td></tr>
+      <tr><td>DEXA</td><td>骨密度 (T-score, Z-score)</td><td>不查损伤</td><td>极低</td><td>中</td><td>骨质疏松 + RED-S 评估</td></tr>
+    </tbody>
+  </table>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="540" y="32" font-size="13" fill="#d4a548" text-anchor="middle" letter-spacing="0.18em">IMAGING PYRAMID · 影像的临床地位金字塔</text>
+      <text x="540" y="48" font-size="9" fill="#a39e8d" text-anchor="middle" letter-spacing="0.1em">底层 = 廉价、首选筛查;顶层 = 昂贵、最后定案</text>
+
+      <!-- 金字塔 -->
+      <!-- 顶层 -->
+      <polygon points="490,80 590,80 540,140" fill="#b56565" fill-opacity="0.25" stroke="#b56565" stroke-width="1.5"/>
+      <text x="540" y="110" font-size="11" fill="#b56565" text-anchor="middle" letter-spacing="0.1em">MRI</text>
+      <text x="700" y="105" font-size="10" fill="#b56565">▸ 软组织、椎间盘、骨髓水肿</text>
+      <text x="700" y="120" font-size="9" fill="#a39e8d">高成本、慢、最精细</text>
+
+      <!-- 第二层 -->
+      <polygon points="430,150 650,150 590,140 490,140" fill="#c47f17" fill-opacity="0.2" stroke="#c47f17" stroke-width="1.5"/>
+      <text x="540" y="165" font-size="11" fill="#c47f17" text-anchor="middle" letter-spacing="0.1em">CT · 三维骨结构</text>
+      <text x="700" y="160" font-size="10" fill="#c47f17">▸ 复杂骨折三维评估</text>
+      <text x="700" y="175" font-size="9" fill="#a39e8d">中成本、高辐射、术前规划</text>
+
+      <!-- 第三层 -->
+      <polygon points="370,210 710,210 650,150 430,150" fill="#d4a548" fill-opacity="0.2" stroke="#d4a548" stroke-width="1.5"/>
+      <text x="540" y="190" font-size="11" fill="#d4a548" text-anchor="middle" letter-spacing="0.1em">超声 · 动态肌腱</text>
+      <text x="540" y="207" font-size="9.5" fill="#d4a548" text-anchor="middle">动态评估 + 引导注射</text>
+      <text x="700" y="215" font-size="10" fill="#d4a548">▸ 浅层肌腱、积液、神经</text>
+
+      <!-- 第四层 -->
+      <polygon points="290,290 790,290 710,210 370,210" fill="#8fa867" fill-opacity="0.2" stroke="#8fa867" stroke-width="1.5"/>
+      <text x="540" y="248" font-size="11" fill="#8fa867" text-anchor="middle" letter-spacing="0.1em">X 光 · 骨折、对线、关节炎</text>
+      <text x="540" y="270" font-size="9.5" fill="#a39e8d" text-anchor="middle">急诊骨折首选 · 廉价 · Ottawa 规则</text>
+      <text x="700" y="295" font-size="10" fill="#8fa867">▸ 任何疑似骨折首选</text>
+
+      <!-- 底层 -->
+      <polygon points="200,360 880,360 790,290 290,290" fill="#1f3a5f" fill-opacity="0.25" stroke="#1f3a5f" stroke-width="1.5"/>
+      <text x="540" y="320" font-size="13" fill="#658fa1" text-anchor="middle" letter-spacing="0.15em">临床评估 · CLINICAL EXAM</text>
+      <text x="540" y="340" font-size="9.5" fill="#a39e8d" text-anchor="middle">S + O · 病史 + 视诊 + 触诊 + ROM + MMT + 特殊试验</text>
+      <text x="540" y="355" font-size="9" fill="#1f3a5f" text-anchor="middle" letter-spacing="0.1em">▸ 80% 诊断在此完成,影像只是验证</text>
+
+    </svg>
+    <div class="svg-caption">FIG 4.4 · 影像的临床地位金字塔——底层临床评估完成 80% 诊断,影像逐级精细化</div>
+  </div>
+
+  <h4>无症状者的 MRI 异常率——影像的「假阳性」陷阱</h4>
+  <p>这是影像的关键反共识:<em>无症状的健康人群,MRI 异常率惊人</em>。多项大型流行病学研究证实:</p>
+  <ul>
+    <li><strong>腰椎间盘突出(无症状者):</strong>20 岁人群 ~30%、40 岁 ~50%、60 岁 ~65%、80 岁 ~84%(<em>Brinjikji 2015</em> 系统综述);</li>
+    <li><strong>颈椎间盘异常(无症状者):</strong>50 岁以上 ~80% 有椎间盘退变;</li>
+    <li><strong>肩袖部分撕裂(无症状者):</strong>50 岁以上 ~30%,70 岁以上 ~60%(<em>Sher 1995</em>);</li>
+    <li><strong>半月板撕裂信号(无症状者 >50 岁):</strong>~25-35%(<em>Englund 2008</em>);</li>
+    <li><strong>髋关节盂唇撕裂(无症状者):</strong>~70%(<em>Register 2012</em>);</li>
+    <li><strong>跟腱异常信号(无症状跑者):</strong>~30%。</li>
+  </ul>
+  <p>这意味着:如果你给一个 50 岁的无症状跑者做<em>全身 MRI</em>,你<em>一定</em>会找到「异常」——但这些异常和他/她的疼痛<em>未必相关</em>。把这些异常告诉患者(「您椎间盘突出了!您半月板撕裂了!」),会引发<em>灾难化认知</em>,严重者出现「影像伪致残」(imaging-induced disability)——患者因为知道自己「有伤」而停止活动,最终真的失能。</p>
+
+  <p class="plain">原理:影像异常 ≠ 临床症状。无症状人群异常率极高,影像只能在「临床高度怀疑某诊断」的前提下做<em>验证</em>。<strong>翻译:</strong>影像不是体检,是验证工具。先临床评估「我认为这是 X」,再用影像「确认 X」——而不是先做影像「看看有什么」。<em>放在康复场景:</em>一个跑者主诉膝外侧痛,Ober + 阳性 + 髋外展弱 + 下坡跑加重 = 临床诊断 ITBS,根本不需要 MRI;一个 ACL 撕裂高度怀疑(Lachman + 急性血肿)= MRI 是为术前规划 + 排除合并伤(MCL、半月板、骨挫伤)而非「确诊 ACL」;一个非特异性慢性腰痛(无放射、无神经症状、无红旗)= 不需要 MRI,MRI 找到的「异常」反而可能延缓康复进程。</p>
+
+  <div class="callout sharp">
+    <div class="label">反共识 / MRI 制造焦虑 · 影像伪致残</div>
+    <p><em>Jensen 1994</em> NEJM 经典研究:对 98 名<em>无症状</em>志愿者做腰椎 MRI——52% 有椎间盘膨出,27% 突出,1% 脱出。<em>Carragee 2006</em> 进一步证实:这些「异常」对未来疼痛和功能的预测力<em>几乎为零</em>——它们就像皱纹一样,是身体老化的正常现象,不是「病」。但患者一旦被告知「您腰椎有问题」,行为开始改变:不敢弯腰、不敢跑步、不敢搬东西。这种「知道异常导致行为改变,行为改变导致失能」的级联反应,被命名为「影像伪致残」。<em>循证康复的临床原则:能不做的影像不做;必须做的,要给患者讲清楚「异常 ≠ 病」</em>。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">实操 / 何时该开 MRI · 五条决策规则</div>
+    <ol>
+      <li><strong>临床高度怀疑严重病变需手术或排除红旗</strong>(ACL 撕裂术前规划、应力骨折、肿瘤、感染、马尾综合征);</li>
+      <li><strong>保守治疗 4-6 周无效 + 影响生活功能</strong>(顽固性肩痛、慢性腰痛对治疗反应差);</li>
+      <li><strong>临床检查不能确定鉴别诊断</strong>(同时怀疑 ACL + 半月板 + MCL 多结构损伤);</li>
+      <li><strong>需要客观证据指导手术决策</strong>(肩袖撕裂大小、椎间盘突出位置);</li>
+      <li><strong>专业运动员的回归运动决策</strong>(高规格证据要求)。</li>
+    </ol>
+    <p><strong>不要做 MRI 的情况</strong>:① 急性踝扭伤(优先 Ottawa 决策规则 + X 光);② 无症状跑者「想体检看看」;③ 急性腰痛 <6 周 + 无红旗(85% 自愈);④ 单纯肌肉酸痛;⑤ 任何只为「让自己放心」的影像。</p>
+  </div>
+
+  <h3><span class="pre">4.12</span>PROM 量表——KOOS、DASH、ODI、VAS、NPRS</h3>
+  <p class="lead">PROM (Patient-Reported Outcome Measures, 患者报告的结局指标) 是<em>主观评估的循证工具</em>——把患者的「感觉怎么样、能做什么、生活质量如何」用标准化问卷量化。PROM 是 SOAP 的 S 段最有力的补充,也是康复疗效追踪的金标准。</p>
+
+  <h4>1 · 疼痛量表 · VAS 与 NPRS</h4>
+  <p><strong>VAS (Visual Analogue Scale, 视觉模拟评分)</strong>:10 cm 直线,左端「无痛」,右端「极痛」,患者标记位置,测量 cm 数。范围 0-10。<br>
+  <strong>NPRS (Numerical Pain Rating Scale, 数字疼痛评分)</strong>:0-10 自报,「0 = 无痛,10 = 最痛」。临床更常用,简单口头沟通即可。<br>
+  <em>MCID(最小临床重要差异)</em>:通常 2 分。即「从 7 → 5」才算有意义的改善,「从 7 → 6」属于测量误差范围。<br>
+  <strong>实操技巧:</strong>问 3 个值——「目前」「最痛时」「最不痛时」,捕捉波动。</p>
+
+  <h4>2 · 膝关节 · KOOS / IKDC</h4>
+  <p><strong>KOOS (Knee Injury and Osteoarthritis Outcome Score)</strong>:42 项问卷,5 个子量表——疼痛、症状、ADL、运动/休闲、QoL。每子量表 0-100 分,100 = 完美。<br>
+  <em>MCID:</em>各子量表 8-10 分。<br>
+  <strong>IKDC (International Knee Documentation Committee)</strong>:18 项,适合年轻活动人群(ACL 术后)。<br>
+  <em>临床应用:</em>ACL 重建术后随访金标准。</p>
+
+  <h4>3 · 上肢 · DASH / Quick-DASH</h4>
+  <p><strong>DASH (Disabilities of Arm, Shoulder and Hand)</strong>:30 项,评估手臂、肩、手整体功能(肩袖损伤、腕管综合征、肱骨外上髁炎等)。<br>
+  <strong>Quick-DASH</strong>:11 项简化版,2-3 分钟完成,信效度与全版相当。<br>
+  <em>MCID:</em>~10 分。<br>
+  <strong>临床应用:</strong>肩肘腕康复随访;手术 vs 保守治疗效果比较。</p>
+
+  <h4>4 · 腰背 · ODI / Roland-Morris</h4>
+  <p><strong>ODI (Oswestry Disability Index)</strong>:10 项,每项 0-5 分,转换百分比。慢性腰痛功能评估的金标准。<br>
+  分级:0-20% 轻度;20-40% 中度;40-60% 重度;60-80% 严重残疾;>80% 卧床。<br>
+  <em>MCID:</em>10 分。<br>
+  <strong>Roland-Morris (RMDQ)</strong>:24 项,适合急性腰痛;简短易答。</p>
+
+  <h4>5 · 髋 · HOOS / iHOT</h4>
+  <p><strong>HOOS (Hip disability and Osteoarthritis Outcome Score)</strong>:KOOS 髋版本,40 项。<br>
+  <strong>iHOT-33 / iHOT-12</strong>:专为年轻髋关节患者(髋撞击综合征 FAI、盂唇撕裂)设计。</p>
+
+  <h4>6 · 足踝 · FAAM / AOFAS</h4>
+  <p><strong>FAAM (Foot and Ankle Ability Measure)</strong>:29 项,2 个子量表(ADL 21 项 + 运动 8 项)。<br>
+  <strong>AOFAS</strong>:美国足踝外科学会评分,医生填写为主(包含客观体征)。</p>
+
+  <h4>7 · 通用功能 · LEFS / SF-36 / EQ-5D</h4>
+  <p><strong>LEFS (Lower Extremity Functional Scale)</strong>:20 项,任何下肢损伤通用。<br>
+  <strong>SF-36 / SF-12</strong>:健康生活质量通用量表;<br>
+  <strong>EQ-5D</strong>:5 维度健康通用量表,卫生经济学常用。</p>
+
+  <table>
+    <thead>
+      <tr><th>量表</th><th>部位</th><th>项目数</th><th>评分范围</th><th>MCID</th><th>适用场景</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>VAS / NPRS</td><td>通用疼痛</td><td>1</td><td>0-10</td><td>2</td><td>每次就诊必测,捕捉波动</td></tr>
+      <tr><td>KOOS</td><td>膝</td><td>42</td><td>0-100 × 5 子量表</td><td>8-10</td><td>ACL/半月板/PFPS/OA 通用</td></tr>
+      <tr><td>IKDC</td><td>膝(年轻)</td><td>18</td><td>0-100</td><td>11.5</td><td>ACL 术后 随访金标准</td></tr>
+      <tr><td>Quick-DASH</td><td>上肢</td><td>11</td><td>0-100</td><td>~10</td><td>肩袖、腕管、网球肘</td></tr>
+      <tr><td>ODI</td><td>腰背</td><td>10</td><td>0-100%</td><td>10</td><td>慢性腰痛金标准</td></tr>
+      <tr><td>RMDQ</td><td>腰背</td><td>24</td><td>0-24</td><td>2-3</td><td>急性腰痛、简短易答</td></tr>
+      <tr><td>HOOS</td><td>髋</td><td>40</td><td>0-100 × 5 子量表</td><td>8-10</td><td>髋关节炎、髋术后</td></tr>
+      <tr><td>iHOT-12</td><td>髋(年轻)</td><td>12</td><td>0-100</td><td>13</td><td>FAI / 盂唇撕裂</td></tr>
+      <tr><td>FAAM</td><td>足踝</td><td>29</td><td>0-100 × 2</td><td>8 / 9</td><td>踝扭伤、跟腱、足底</td></tr>
+      <tr><td>LEFS</td><td>下肢通用</td><td>20</td><td>0-80</td><td>9</td><td>任何下肢损伤简易</td></tr>
+      <tr><td>SF-36 / SF-12</td><td>全身健康</td><td>36 / 12</td><td>0-100 × 8 维度</td><td>各维度差异</td><td>卫生经济学、生活质量</td></tr>
+      <tr><td>FABQ</td><td>恐惧回避</td><td>16</td><td>0-66</td><td>—</td><td>慢性痛心理评估</td></tr>
+      <tr><td>PHQ-9 / GAD-7</td><td>抑郁/焦虑</td><td>9 / 7</td><td>0-27 / 0-21</td><td>—</td><td>合并心理问题筛查</td></tr>
+    </tbody>
+  </table>
+
+  <h4>PROM 的临床应用 · 五个要点</h4>
+  <ul>
+    <li><strong>① 初评 + 复评同一量表</strong>——纵向比较才有意义;</li>
+    <li><strong>② MCID 是判读关键</strong>——「分数提高 1」不算改善,必须达到 MCID;</li>
+    <li><strong>③ 选择部位特异性量表 > 通用量表</strong>(KOOS > SF-36 for ACL);</li>
+    <li><strong>④ 加入心理量表筛查</strong>——慢性痛 30-50% 合并抑郁焦虑,影响康复结局(FABQ、PHQ-9);</li>
+    <li><strong>⑤ 数字化 + 自动化</strong>——让患者用手机填,治疗师只看趋势图,效率高 10 倍。</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">PROM 选择决策树</div>
+    <p>① <strong>疼痛 = VAS/NPRS</strong>(每次都要);② <strong>部位特异 + 患者活动水平</strong>:年轻运动员膝伤 → IKDC;中老年膝关节炎 → KOOS;急性腰痛 → RMDQ;慢性腰痛 → ODI;肩袖术后 → Quick-DASH 或 Constant Score;③ <strong>+ 心理量表</strong>:疼痛 >3 个月、避痛行为明显、患者主诉「人生都变了」 → 加 FABQ + PHQ-9;④ <strong>研究/正式报告</strong>:加 EQ-5D(卫生经济学)+ GRC(Global Rating of Change)。</p>
+  </div>
+
+  <h3><span class="pre">4.13</span>临床推理 (Clinical Reasoning)——把信息编织成决策</h3>
+  <p class="lead">这是 A 段(Assessment)的全部内容,也是 SOAP 里最难、最不可外包给问卷的一段。临床推理不是「按清单打勾」,是<em>把零散的证据编织成「这个人发生了什么」的连贯故事</em>。下面把临床推理的认知科学讲透。</p>
+
+  <h4>临床推理的双系统模型</h4>
+  <p><em>Croskerry 2009</em> 把临床推理拆成两个互补系统(基于 Kahneman 的双过程论):</p>
+  <ul>
+    <li><strong>系统 1 · 模式识别 (Pattern Recognition)</strong>:快速、自动、依赖经验。资深 PT 看 5 秒患者步态就「知道」是 Trendelenburg。这是经验内化后的「直觉」——准确性高,但易受偏倚影响。</li>
+    <li><strong>系统 2 · 假设演绎 (Hypothetico-Deductive)</strong>:慢、刻意、基于规则。新手或复杂病例必用——「列出鉴别清单 → 用病史/查体逐项验证 → 排除/降序」。准确性高,但耗时。</li>
+  </ul>
+  <p>专家级临床医师两个系统流畅切换——简单病例用系统 1 快速决策,复杂或异常病例切到系统 2 仔细推理。新手则必须几乎全程用系统 2。</p>
+
+  <h4>鉴别诊断的「金字塔」</h4>
+  <p>对任何主诉,临床推理都应该形成<em>降序排列</em>的鉴别诊断列表——从「最可能」到「不能漏」:</p>
+  <ol>
+    <li><strong>最可能</strong>(common):基于流行病学和病史最可能的诊断;</li>
+    <li><strong>次可能</strong>:其他需要考虑的肌骨问题;</li>
+    <li><strong>不能漏</strong>(can't miss):虽然概率低但漏掉后果严重(骨折、肿瘤、感染、马尾、心源性、动脉夹层等)。</li>
+  </ol>
+  <p>例:30 岁跑者「左小腿胫骨内缘酸痛 3 周」:</p>
+  <ul>
+    <li><em>最可能:</em>MTSS(内侧胫骨应力综合征);</li>
+    <li><em>次可能:</em>胫骨应力反应早期、胫骨后肌腱炎、慢性筋膜室综合征;</li>
+    <li><em>不能漏:</em>胫骨应力骨折(尤其女性 LEA / 闭经者)、深静脉血栓(单侧肿胀 + 红温)、骨肿瘤(夜间痛、年轻、罕见但严重)。</li>
+  </ul>
+  <p>临床检查的目的是<em>升降这个列表</em>——任何阳性体征要么让某诊断上升,要么把它从列表排除。</p>
+
+  <h4>临床推理的常见偏倚 · 警戒清单</h4>
+  <ul>
+    <li><strong>锚定偏倚 (Anchoring)</strong>:被第一个想法或第一个测试结果「锚住」,后续证据被选择性解读以支持它。<em>解药:</em>每次评估结束后问「如果我的工作诊断是错的,可能是什么?」</li>
+    <li><strong>可得性偏倚 (Availability)</strong>:最近见过的、印象深的诊断更容易被想起。<em>解药:</em>定期回看罕见但重要的鉴别清单。</li>
+    <li><strong>确认偏倚 (Confirmation)</strong>:只关注支持自己诊断的证据,忽略反对的。<em>解药:</em>主动列出「3 个反对当前诊断的证据」。</li>
+    <li><strong>过早闭合 (Premature Closure)</strong>:在证据不充分时过早锁定诊断。<em>解药:</em>除非很有把握,初评不要给确定性 100% 的诊断,给「工作诊断 + 鉴别清单」。</li>
+    <li><strong>归因偏倚 (Attribution)</strong>:把症状归因于患者「老了/胖/不锻炼」,而忽略具体病变。<em>解药:</em>对每个症状都问「假如这个人是 25 岁运动员,我会怎么想?」</li>
+    <li><strong>沉没成本 (Sunk Cost)</strong>:已经开了一些治疗,即使无效也不愿改诊断。<em>解药:</em>4-6 周治疗无效就主动重新评估,不要继续无效干预。</li>
+  </ul>
+
+  <h4>ICF 框架 · 把诊断翻译成功能</h4>
+  <p>WHO 的 ICF (International Classification of Functioning, Disability and Health) 是康复评估的核心概念框架——把医学诊断翻译成<em>功能性影响</em>:</p>
+  <ul>
+    <li><strong>身体结构/功能 (Body structures/functions)</strong>:解剖结构和生理功能;例:ACL 撕裂、股四头肌弱 MMT 3+、膝屈曲 ROM 90°。</li>
+    <li><strong>活动 (Activity)</strong>:个人执行任务的能力;例:不能跑步、上下楼需扶栏、不能单腿站立 10 秒。</li>
+    <li><strong>参与 (Participation)</strong>:在社会环境中的角色;例:不能继续每周 3 次球队训练、被迫缺席比赛、社交孤立。</li>
+    <li><strong>环境因素</strong>:家庭支持、工作要求、文化、物理障碍;</li>
+    <li><strong>个人因素</strong>:年龄、教育、生活方式、心理特质。</li>
+  </ul>
+  <p>合格的 Assessment 段应该<em>三个维度都涉及</em>——结构层(ACL 撕裂)+ 活动层(不能跑步、不能单腿跳)+ 参与层(影响球队、心理压力)。只写「ACL 撕裂」是不够的——那只是疾病标签,不是康复目标。</p>
+
+  <div class="callout note">
+    <div class="label">推理输出模板</div>
+    <p>合格的 A 段应该包含:① <strong>工作诊断 + 信心程度</strong>(「我认为是 X(70% 信心),次诊断 Y(20%),不能排除 Z(10%)」);② <strong>主要功能限制 (ICF)</strong>:结构 / 活动 / 参与三层;③ <strong>预后</strong>(典型恢复时长 + 个体因素);④ <strong>需要额外评估的方面</strong>(影像?转介?);⑤ <strong>红旗状态</strong>(已排除 X、Y、Z 严重病变)。新手最缺的不是知识,是<em>把推理过程写下来的习惯</em>——一旦写下来,逻辑漏洞就立刻暴露。</p>
+  </div>
+
+  <h3><span class="pre">4.14</span>整合——从主诉到处方的完整流程图</h3>
+  <p class="lead">把前 13 节的内容浓缩成一份可直接使用的临床评估流程图。从患者进门到 SOAP 完成,一个 45-60 分钟的初评应该按下列顺序展开。</p>
+
+  <h4>0-5 min · 接诊与开场</h4>
+  <ul>
+    <li>简短自我介绍 + 解释流程(降低患者焦虑);</li>
+    <li>请患者用一句话说主诉:「您主要想解决什么?」;</li>
+    <li>记录基本人口学(年龄、性别、职业、运动史)。</li>
+  </ul>
+
+  <h4>5-25 min · S · Subjective</h4>
+  <ul>
+    <li>HPI · OPQRST 八轴展开;</li>
+    <li>既往史 PMH、用药 Meds、过敏 Allergy、家族史 FHx、社会史 SHx;</li>
+    <li>红旗筛查(夜间痛、体重下降、发热、肠膀胱症状等);</li>
+    <li>患者目标(回到什么程度?何时?);</li>
+    <li>PROM 初评(VAS + 部位特异量表)——可由患者在等候时填好。</li>
+  </ul>
+
+  <h4>25-50 min · O · Objective</h4>
+  <ul>
+    <li><strong>视诊</strong>:整体姿势、对称性、肿胀、瘀斑、皮肤改变、步态(让患者走 10 m);</li>
+    <li><strong>触诊</strong>:系统分层、关键标志、压痛点定位;</li>
+    <li><strong>ROM</strong>:AROM + PROM(主要受累关节 + 上下游关节);记录终末感;</li>
+    <li><strong>MMT</strong>:0-5 级,关键肌群(运动员场景用功能性测试补充);</li>
+    <li><strong>特殊试验</strong>:基于 S 段假设有针对性地选,不要全部跑一遍;</li>
+    <li><strong>神经学检查</strong>:任何放射性症状都必须做(MMT + DTR + 感觉 + 神经张力);</li>
+    <li><strong>功能筛查</strong>(可选):FMS/SFMA/Y-Balance 用于运动员或动作模式问题;</li>
+    <li><strong>影像复查</strong>:已有影像评估并记录关键发现。</li>
+  </ul>
+
+  <h4>50-60 min · A + P · Assessment + Plan</h4>
+  <ul>
+    <li><strong>A · 评估</strong>:工作诊断 + 鉴别 + ICF 三层 + 预后 + 红旗状态;</li>
+    <li><strong>P · 计划</strong>:</li>
+    <li>· 干预:手法 / 运动疗法 / 教育 / 电疗 / 其他;</li>
+    <li>· HEP 家庭训练(具体动作 + 次数 + 频率);</li>
+    <li>· 复诊频率(典型 2x/周 × 4-8 周);</li>
+    <li>· 重新评估节点(2-4 周复评关键指标);</li>
+    <li>· 转介(如需要 MRI、骨科、营养、心理);</li>
+    <li>· SMART 目标(2 周、6 周、12 周);</li>
+    <li><strong>患者教育</strong>:用 1-2 分钟告诉患者「您发生了什么、为什么、我们要做什么、需要多久」——共同决策 (shared decision-making) 是循证康复的核心。</li>
+  </ul>
+
+  <div class="callout you">
+    <div class="label">放在你身上 · 一份完整 SOAP 病历示范</div>
+    <p>下面是一份针对前述「35 岁女性、跑步外侧膝痛 3 周」的合格 SOAP 病历:</p>
+
+    <p><strong>S · Subjective:</strong></p>
+    <ul>
+      <li>主诉:右膝外侧偏上痛 3 周,影响跑步训练</li>
+      <li>O · Onset:渐进起病,无外伤;3 周前周跑量从 25 km 加到 40 km;</li>
+      <li>P · Provocation:下坡跑明显加重,平路 5-10 min 后开始痛;下楼梯轻度痛;</li>
+      <li>Q · Quality:针刺样痛,定位精确;</li>
+      <li>R · Region:右膝外侧偏上 2-3 cm,1 指可点出;无放射;</li>
+      <li>S · Severity:NPRS 现在 1,最痛时 6,最不痛时 0;</li>
+      <li>T · Timing:跑中突然出现,跑后 1-2 h 消退;无夜间痛;</li>
+      <li>既往史:无;月经规律;无 NSAID 长期使用;</li>
+      <li>红旗:无(无夜间痛、无体重下降、无神经症状、无外伤);</li>
+      <li>患者目标:6 周内回到 40 km/周稳定训练,8 周后参加半马训练营;</li>
+      <li>PROM:KOOS-Pain 78/100、KOOS-Sport 60/100。</li>
+    </ul>
+
+    <p><strong>O · Objective:</strong></p>
+    <ul>
+      <li>视诊:站立位无明显畸形;右膝外侧轻度发红,无肿胀;步态无明显跛行;</li>
+      <li>触诊:股骨外侧髁上 2-3 cm 处局部压痛 II 度,直径 ~3 cm;髂胫束远端紧张;无关节线压痛;</li>
+      <li>ROM:右膝屈伸 0-135° 全 AROM,无痛终末感正常;</li>
+      <li>MMT:右髋外展 4-(臀中肌)/ 5(健侧),右股四头肌 5,右腘绳肌 5;</li>
+      <li>特殊试验:Ober + 阳性(髋内收受限至中线上 5°);Noble 阳性(屈伸膝 30° 时压痛复现);Lachman 阴性;McMurray 阴性;关节线压痛阴性;髌骨研磨阴性;</li>
+      <li>神经学:DTR 正常,感觉正常,SLR 阴性;</li>
+      <li>功能:单腿桥右 12 次 / 左 22 次,LSI 55%(显著弱);单腿深蹲右侧膝内扣 + 骨盆下沉;</li>
+      <li>步态分析(短跑录像):触地时右膝 valgus + 髋内收过度,过度跨步 (overstride),步频 162。</li>
+    </ul>
+
+    <p><strong>A · Assessment:</strong></p>
+    <ul>
+      <li>工作诊断:右髂胫束综合征 (ITBS)(85% 信心)——基于 Ober + Noble + 髂胫束远端压痛 + 典型病史(跑量陡增 + 下坡加重 + 定位精确);</li>
+      <li>鉴别诊断:外侧半月板撕裂(已排除,关节线压痛阴性 + McMurray 阴性,5% 残留)、外侧副韧带应力反应(<5%)、髌股关节疼痛(<5%);</li>
+      <li>不能漏:股骨颈应力骨折(无相关体征,排除);</li>
+      <li>主要功能障碍:</li>
+      <li>· 结构:髂胫束远端撞击 + 髋外展弱 LSI 55%;</li>
+      <li>· 活动:不能 >10 min 跑步,下坡跑无法完成;</li>
+      <li>· 参与:训练计划中断,无法完成下周半马训练营准备课;</li>
+      <li>预后:典型 ITBS 4-8 周保守治疗有效率 90%+,患者无慢性化风险,预后好;</li>
+      <li>红旗:已排除(无夜间痛、无神经症状、无系统性表现)。</li>
+    </ul>
+
+    <p><strong>P · Plan:</strong></p>
+    <ul>
+      <li>干预 · 本次:</li>
+      <li>· 患者教育(10 min):解释 ITBS 机制(挤压而非摩擦);跑量陡增是触发因素;现代康复重点在髋外展力量而非伸展;预期 4-8 周回归;</li>
+      <li>· 手法:髂胫束远端松动(MT),股骨外侧髁上局部按摩;</li>
+      <li>· HEP:① 减跑量至 15 km/周 × 2 周,平路为主,不下坡;② 单腿桥 3×15、侧卧蚌式 3×20、Pallof press 3×10/侧、单腿罗马尼亚硬拉 3×10/侧,每日;③ 步频暂时不调,2 周后开始 165 → 175 渐进;</li>
+      <li>转介:暂无;</li>
+      <li>复诊:1x/周 × 4 周,然后每 2 周一次;</li>
+      <li>2 周目标:Ober - 距离改善 5°,单腿桥右 ≥ 18 次,跑量 25 km 无痛;</li>
+      <li>6 周目标:KOOS-Sport ≥ 80,LSI ≥ 85%,跑量回到 40 km/周 无痛;</li>
+      <li>8 周目标:完全回归训练,Ober 阴性 / 弱阳性,下坡跑 30 min 无痛;</li>
+      <li>重新评估节点:2、4、6、8 周;</li>
+      <li>如 4 周无改善:重新评估(MRI 排除其他诊断、运动医学转介)。</li>
+    </ul>
+
+    <p><strong>这就是一份完整的初评 SOAP</strong>——约 1800 字,45 分钟,可被任何接手的同事在 5 分钟内跟上你的推理。你也可以用它和患者沟通:展示给患者看,告诉他「我看到了什么,我怎么想,我们要做什么」——这是<em>循证沟通</em>的实质。</p>
+  </div>
+
+  <div class="tldr" style="margin-top: 40px;">
+    <div class="label">▼ 本章核心要点</div>
+    <ul>
+      <li>SOAP(Subjective / Objective / Assessment / Plan)是临床评估的认知脚手架——S 和 O 物理隔离,A 必须显式推理,P 必须 SMART。</li>
+      <li>诊断信息 70-90% 来自病史(Hampton 1975),不是影像;OPQRST 八轴问诊是结构化叙事的核心。</li>
+      <li>视诊 + 触诊在很多场景比 MRI 更敏感——「梭形增厚 + 抗阻紧绷」摸出跟腱病;ITBS、PFPS、MTSS 都可临床诊断。</li>
+      <li>AROM ≠ PROM——两者的差异本身是诊断线索;终末感(end feel)是关节囊型态评估的核心。</li>
+      <li>MMT 0-5 级是康复阶段的决策工具,不是肌力的精确测量——运动员场景需用功能性测试补充。</li>
+      <li>Lachman 对 ACL 撕裂敏感度 85-87% / 特异性 94%,与 MRI 等同;Thompson 对跟腱断裂 96/93,30 秒搞定。</li>
+      <li>SnNout(高敏感阴性可排除)+ SpPin(高特异阳性可确诊)是临床流行病学的两个核心口诀。</li>
+      <li>神经学检查不能省——肌力代表肌 + DTR + 皮节 + 神经张力试验(SLR、Slump、ULTT)。</li>
+      <li>FMS / SFMA / Y-Balance 是动作模式筛查,不是有力的损伤预测工具;LSI < 90% 不可回归运动。</li>
+      <li>影像不是金标准,临床检查是——无症状者腰椎间盘异常率 30-65%、肩袖部分撕裂 30%、半月板信号 25-35%。</li>
+      <li>能不做的 MRI 不做——「影像伪致残」是真实现象(Jensen 1994、Carragee 2006)。</li>
+      <li>PROM 量表(KOOS、DASH、ODI、VAS、FAAM)是 PR 主观评估的循证补充;判读关键是 MCID,不是分数本身。</li>
+      <li>临床推理是双系统——模式识别(系统 1)+ 假设演绎(系统 2);避免锚定、可得性、确认、过早闭合等偏倚。</li>
+      <li>ICF 框架把医学诊断翻译成功能影响——结构 / 活动 / 参与三层缺一不可。</li>
+      <li>一份合格初评 SOAP 约 1500-2500 字、45-60 分钟;复评 15-25 分钟。短于这个时长通常省略了 A 段(推理)。</li>
+    </ul>
+  </div>
+
+  <div class="callout protocol">
+    <div class="label">PROTOCOL · 本章关键操作清单</div>
+
+    <h4>协议 1 · 45 分钟初评 SOAP 时间分配</h4>
+    <ol>
+      <li><strong>测什么:</strong> 一次完整的肌骨初评是否覆盖了 SOAP 全部四段 + ICF 三层 + 红旗排除</li>
+      <li><strong>工具:</strong> SOAP 模板(纸质或电子)+ 量角器 + 手持测力计(可选) + 计时器</li>
+      <li><strong>步骤(60 min 总):</strong>
+        <ul>
+          <li>0-5 min: 接诊 + 主诉 + 患者目标</li>
+          <li>5-25 min: S 段 · OPQRST 八轴 + 红旗筛查 + PROM 量表初评</li>
+          <li>25-35 min: O 段 · 视诊 + 触诊 + 步态分析</li>
+          <li>35-45 min: O 段 · ROM + MMT + 特殊试验(基于 S 段假设有针对性选)</li>
+          <li>45-50 min: O 段 · 神经学检查(任何放射症状必做)+ 功能筛查(选做)</li>
+          <li>50-55 min: A 段 · 工作诊断 + 鉴别 + ICF 三层 + 红旗状态</li>
+          <li>55-60 min: P 段 · 干预 + HEP + SMART 目标 + 复诊频率 + 患者教育</li>
+        </ul>
+      </li>
+      <li><strong>频率:</strong> 每位新患者初评 1 次;复评 15-25 min × 每 2-4 周或重要节点</li>
+      <li><strong>判读:</strong>
+        <ul>
+          <li>SOAP 总长 1500-2500 字 = 合格</li>
+          <li>A 段超过 100 字 + 三层 ICF + 鉴别列表 = 合格推理</li>
+          <li>P 段必须 SMART(具体、可测、可达、相关、有时限)</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="stop">SOAP 中没有明确「红旗排除」记录 + 患者有放射症状或夜间痛 + 系统性表现 → 必须重新评估并加做神经学检查、考虑医学转介</div>
+
+    <h4>协议 2 · 红旗筛查(每次评估必做)</h4>
+    <ol>
+      <li><strong>测什么:</strong> 任何一项红旗存在 → 立即医学转介,不要在 PT 范围内处理</li>
+      <li><strong>工具:</strong> 一张红旗清单 + 问诊技巧</li>
+      <li><strong>问诊清单(逐项必问):</strong>
+        <ul>
+          <li>① 夜间痛 / 休息痛(警惕骨折、肿瘤、感染)</li>
+          <li>② 不明原因体重下降 6 月内 &gt; 5%(肿瘤、系统性疾病)</li>
+          <li>③ 持续发热 / 寒战(感染)</li>
+          <li>④ 癌症既往史 + 新发肌骨痛(转移瘤)</li>
+          <li>⑤ 大小便失禁 / 鞍区麻木(马尾综合征,腰椎红旗)</li>
+          <li>⑥ 双侧或进行性神经症状(脊髓病、肿瘤)</li>
+          <li>⑦ 近期严重外伤 + 高能机制(骨折、内脏伤)</li>
+          <li>⑧ 长期糖皮质激素 / 免疫抑制(骨折、感染风险)</li>
+          <li>⑨ 静脉吸毒史(感染性关节炎、脓肿)</li>
+          <li>⑩ 步态突变 / 平衡丧失(中枢)</li>
+          <li>⑪ 女性闭经 &gt; 3 个月 + 任何骨痛(RED-S + 应力骨折)</li>
+          <li>⑫ 胸痛 / 心悸 / 晕厥(心源性,立即急诊)</li>
+        </ul>
+      </li>
+      <li><strong>频率:</strong> 每次评估开始时扫一遍 + 病情变化时重扫</li>
+      <li><strong>判读:</strong>
+        <ul>
+          <li>无任何红旗 → 继续标准评估流程</li>
+          <li>1 项红旗 → 详细询问 + 文件记录,考虑医学转介</li>
+          <li>多项红旗 / 严重红旗(马尾、胸痛、休息夜间痛 + 体重下降)→ 当日急诊转介,不要继续 PT 评估</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="stop">出现任何下列情况 → 立即急诊,不要「再观察一下」:① 鞍区麻木 + 大小便失禁(马尾综合征,48 小时内手术减压);② 胸痛 / 严重心悸 / 晕厥;③ 急性双侧神经症状 + 步态突然改变;④ 严重外伤 + 关节畸形 + 不能负重</div>
+
+    <h4>协议 3 · 影像决策规则 · 何时该开 MRI</h4>
+    <ol>
+      <li><strong>测什么:</strong> 是否需要影像;不必要的影像浪费金钱、增加焦虑、可能制造「影像伪致残」</li>
+      <li><strong>工具:</strong> 一份影像决策规则清单 + 临床判断</li>
+      <li><strong>开 MRI 的 5 条规则(必须满足任一):</strong>
+        <ul>
+          <li>① 临床高度怀疑严重病变需手术或排除红旗(ACL 撕裂、应力骨折、肿瘤、感染、马尾)</li>
+          <li>② 保守治疗 4-6 周无效 + 影响生活功能</li>
+          <li>③ 临床检查不能确定鉴别诊断(同时怀疑 ACL + 半月板 + MCL 多结构)</li>
+          <li>④ 需要客观证据指导手术决策(肩袖撕裂大小、椎间盘突出位置)</li>
+          <li>⑤ 专业运动员的回归运动决策</li>
+        </ul>
+      </li>
+      <li><strong>不开 MRI 的情况:</strong>
+        <ul>
+          <li>① 急性踝扭伤(优先 Ottawa 决策规则 + X 光)</li>
+          <li>② 无症状跑者「想体检看看」</li>
+          <li>③ 急性腰痛 &lt; 6 周 + 无红旗(85% 自愈)</li>
+          <li>④ 单纯肌肉酸痛 / DOMS</li>
+          <li>⑤ 任何只为「让自己放心」的影像</li>
+        </ul>
+      </li>
+      <li><strong>开 X 光的情况:</strong> 急诊创伤 + Ottawa 规则阳性、疑似骨折、关节脱位、应力骨折后期(2-3 周后骨痂)</li>
+      <li><strong>开超声的情况:</strong> 浅层肌腱动态评估、关节积液、引导注射、床旁即时反馈</li>
+      <li><strong>判读 / 沟通模板:</strong>
+        <ul>
+          <li>解释影像异常 ≠ 病:「您这个椎间盘膨出在您这个年龄段约 50% 的人都有,大多无症状」</li>
+          <li>聚焦临床:「影像证实了我的临床判断,治疗方案不变」</li>
+          <li>避免诊断标签致残:不要把「您椎间盘突出 / 您半月板撕裂」作为唯一沟通信息</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="stop">影像异常但临床无对应症状 → 可能是「无症状异常」(50 岁腰椎 50% / 肩袖 30%),不要在没有临床推理支持下基于影像开始治疗或手术 → 患者应该治疗自己的症状,不是治疗自己的 MRI</div>
+
+  </div>
+</div>
+</section>

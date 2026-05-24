@@ -1,0 +1,2206 @@
+{
+  "voice": "zh-CN-YunxiNeural",
+  "chapter": "ch10",
+  "duration_sec": 3470.28,
+  "segments": [
+    {
+      "id": "auto-0",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "训练之所以让人变强,不是因为\"练得多 = 强得多\",而是因为..."
+    },
+    {
+      "id": "auto-1",
+      "tag": "p",
+      "start": 24.27,
+      "preview": "提升表现的不是训练本身,是 训练 + 恢复 之间的张力。最强..."
+    },
+    {
+      "id": "auto-2",
+      "tag": "p",
+      "start": 43.41,
+      "preview": "故事。 2000 年代初期,美国生理学家 Stephen S..."
+    },
+    {
+      "id": "auto-3",
+      "tag": "p",
+      "start": 66.86,
+      "preview": "分析完后他发现了一个让运动科学界震惊的模式:精英耐力运动员的..."
+    },
+    {
+      "id": "auto-4",
+      "tag": "p",
+      "start": 89.7,
+      "preview": "这彻底颠覆了\"高强度训练越多越好\"的常识。Seiler 在 ..."
+    },
+    {
+      "id": "auto-5",
+      "tag": "p",
+      "start": 110.47,
+      "preview": "这一章拆解的就是这套 训练适应的剂量学 ——为什么 80% ..."
+    },
+    {
+      "id": "auto-6",
+      "tag": "h3",
+      "start": 133.89,
+      "preview": "小节。 10.1 应激-恢复-超量恢复:训练的基本物理学"
+    },
+    {
+      "id": "auto-7",
+      "tag": "p",
+      "start": 140.55,
+      "preview": "所有训练适应理论的起点,是 Hans Selye 在 195..."
+    },
+    {
+      "id": "auto-8",
+      "tag": "p",
+      "start": 166.92,
+      "preview": "原理:GAS 一般适应综合征 = 身体对任何应激的统一三相反..."
+    },
+    {
+      "id": "auto-9",
+      "tag": "p",
+      "start": 200.99,
+      "preview": "把这个模型挪到训练里,就形成了今天我们熟悉的\"应激-恢复-超..."
+    },
+    {
+      "id": "auto-10",
+      "tag": "p",
+      "start": 200.99,
+      "preview": "原理:supercompensation 超量恢复 = 训练..."
+    },
+    {
+      "id": "auto-11",
+      "tag": "p",
+      "start": 252.11,
+      "preview": "这条曲线告诉我们四件关键事:"
+    },
+    {
+      "id": "auto-12",
+      "tag": "li",
+      "start": 252.11,
+      "preview": "训练当下表现是下降的,不是上升的 ——你跑完一节质量课后做体..."
+    },
+    {
+      "id": "auto-13",
+      "tag": "li",
+      "start": 252.11,
+      "preview": "恢复需要时间 ——回到基线 24-48h,达到超量恢复 48..."
+    },
+    {
+      "id": "auto-14",
+      "tag": "li",
+      "start": 252.11,
+      "preview": "超量恢复有时间窗 ——错过这个窗口再来下一次刺激,只能从基线..."
+    },
+    {
+      "id": "auto-15",
+      "tag": "li",
+      "start": 252.11,
+      "preview": "不再刺激就回归 ——这就是训练记忆的衰退,没有持续训练的\"维..."
+    },
+    {
+      "id": "auto-16",
+      "tag": "h4",
+      "start": 284.92,
+      "preview": "这个模型的局限"
+    },
+    {
+      "id": "auto-17",
+      "tag": "p",
+      "start": 286.9,
+      "preview": "Selye-Yakovlev 模型给了我们一个直观的概念框架..."
+    },
+    {
+      "id": "auto-18",
+      "tag": "h3",
+      "start": 320.29,
+      "preview": "小节。 10.2 Banister 健身-疲劳模型 (Fit..."
+    },
+    {
+      "id": "auto-19",
+      "tag": "p",
+      "start": 326.06,
+      "preview": "1975 年 Eric Banister 提出一个改写整个训..."
+    },
+    {
+      "id": "auto-20",
+      "tag": "p",
+      "start": 340.2,
+      "preview": "用公式表达:"
+    },
+    {
+      "id": "auto-21",
+      "tag": "li",
+      "start": 340.2,
+      "preview": "p(t) = p₀ + k₁ · 健身(t) - k₂ · ..."
+    },
+    {
+      "id": "auto-22",
+      "tag": "li",
+      "start": 340.2,
+      "preview": "健身(t) = Σ TL(τ) · e^(-(t-τ)/τ₁..."
+    },
+    {
+      "id": "auto-23",
+      "tag": "li",
+      "start": 340.2,
+      "preview": "疲劳(t) = Σ TL(τ) · e^(-(t-τ)/τ₂..."
+    },
+    {
+      "id": "auto-24",
+      "tag": "p",
+      "start": 340.2,
+      "preview": "翻译成人话:每次训练既加\"健身分\"也加\"疲劳分\",疲劳分加得..."
+    },
+    {
+      "id": "auto-25",
+      "tag": "p",
+      "start": 377.41,
+      "preview": "这个模型的重要洞察:"
+    },
+    {
+      "id": "auto-26",
+      "tag": "li",
+      "start": 377.41,
+      "preview": "同样一次训练课,赛前 1 周做和赛前 3 周做完全不同——前..."
+    },
+    {
+      "id": "auto-27",
+      "tag": "li",
+      "start": 377.41,
+      "preview": "大训练量积累 4-8 周再减量,是因为健身衰减慢(τ=45d..."
+    },
+    {
+      "id": "auto-28",
+      "tag": "li",
+      "start": 377.41,
+      "preview": "休假 2 周不可怕——疲劳掉光、健身只损失一半,回归后短期甚..."
+    },
+    {
+      "id": "auto-29",
+      "tag": "p",
+      "start": 377.41,
+      "preview": "这是公路车与铁人三项最早引入的训练语言,后来 Trainin..."
+    },
+    {
+      "id": "auto-30",
+      "tag": "h3",
+      "start": 428.16,
+      "preview": "小节。 10.3 训练负荷度量——量、强度、频率与 TSS"
+    },
+    {
+      "id": "auto-31",
+      "tag": "p",
+      "start": 435.36,
+      "preview": "要建任何训练模型,先要能数化训练负荷。这是过去 30 年运动..."
+    },
+    {
+      "id": "auto-32",
+      "tag": "h4",
+      "start": 451.53,
+      "preview": "三个基础维度"
+    },
+    {
+      "id": "auto-33",
+      "tag": "li",
+      "start": 453.31,
+      "preview": "量 (Volume) :公里数或时间"
+    },
+    {
+      "id": "auto-34",
+      "tag": "li",
+      "start": 453.31,
+      "preview": "强度 (Intensity) :配速、心率、功率、RPE"
+    },
+    {
+      "id": "auto-35",
+      "tag": "li",
+      "start": 453.31,
+      "preview": "频率 (Frequency) :周训练次数"
+    },
+    {
+      "id": "auto-36",
+      "tag": "p",
+      "start": 453.31,
+      "preview": "三者乘积大致就是\"总训练量\"。但量和强度的关系是非线性的——..."
+    },
+    {
+      "id": "auto-37",
+      "tag": "h4",
+      "start": 479.49,
+      "preview": "TRIMP (Training Impulse, Banis..."
+    },
+    {
+      "id": "auto-38",
+      "tag": "p",
+      "start": 482.71,
+      "preview": "最早的复合负荷指标,1975 年 Banister 提出:"
+    },
+    {
+      "id": "auto-39",
+      "tag": "p",
+      "start": 482.71,
+      "preview": "TRIMP = 时间(min) × 心率储备(%) × 加权..."
+    },
+    {
+      "id": "auto-40",
+      "tag": "p",
+      "start": 482.71,
+      "preview": "加权因子使高心率区间负荷更重(指数加权)。问题:依赖准确的最..."
+    },
+    {
+      "id": "auto-41",
+      "tag": "h4",
+      "start": 503.21,
+      "preview": "TSS (Training Stress Score, Co..."
+    },
+    {
+      "id": "auto-42",
+      "tag": "p",
+      "start": 506.61,
+      "preview": "2003 年 Andrew Coggan 在自行车功率训练里..."
+    },
+    {
+      "id": "auto-43",
+      "tag": "p",
+      "start": 506.61,
+      "preview": "TSS = (时长 × NP² / FTP²) × 100"
+    },
+    {
+      "id": "auto-44",
+      "tag": "p",
+      "start": 506.61,
+      "preview": "原理:TSS = 训练负荷的单一数字,1 小时 @ 阈值 =..."
+    },
+    {
+      "id": "auto-45",
+      "tag": "p",
+      "start": 555.94,
+      "preview": "其中 NP 是 normalized power(归一化功率..."
+    },
+    {
+      "id": "auto-46",
+      "tag": "p",
+      "start": 568.65,
+      "preview": "跑步语境下,可用 rTSS(基于配速)或 hrTSS(基于心..."
+    },
+    {
+      "id": "auto-47",
+      "tag": "li",
+      "start": 575.19,
+      "preview": "1 小时轻松跑(Z2):30-40 rTSS"
+    },
+    {
+      "id": "auto-48",
+      "tag": "li",
+      "start": 575.19,
+      "preview": "1 小时节奏跑(Z3):60-80 rTSS"
+    },
+    {
+      "id": "auto-49",
+      "tag": "li",
+      "start": 575.19,
+      "preview": "1 小时阈值跑(Z4):85-100 rTSS"
+    },
+    {
+      "id": "auto-50",
+      "tag": "li",
+      "start": 575.19,
+      "preview": "10K 比赛配速:90-105 rTSS"
+    },
+    {
+      "id": "auto-51",
+      "tag": "li",
+      "start": 575.19,
+      "preview": "3 小时马拉松比赛:200-250 rTSS"
+    },
+    {
+      "id": "auto-52",
+      "tag": "p",
+      "start": 575.19,
+      "preview": "1 小时 8 公里(配速 7'30\"/km)的\"轻松跑\",换..."
+    },
+    {
+      "id": "auto-53",
+      "tag": "h3",
+      "start": 631.31,
+      "preview": "小节。 10.4 PMC——CTL / ATL / TSB ..."
+    },
+    {
+      "id": "auto-54",
+      "tag": "p",
+      "start": 637.01,
+      "preview": "把 Banister 模型和 TSS 工具结合,就有了今天耐..."
+    },
+    {
+      "id": "auto-55",
+      "tag": "h4",
+      "start": 650.13,
+      "preview": "三个指标"
+    },
+    {
+      "id": "auto-56",
+      "tag": "li",
+      "start": 651.64,
+      "preview": "CTL (Chronic Training Load) = ..."
+    },
+    {
+      "id": "auto-57",
+      "tag": "li",
+      "start": 651.64,
+      "preview": "ATL (Acute Training Load) = 过去..."
+    },
+    {
+      "id": "auto-58",
+      "tag": "li",
+      "start": 651.64,
+      "preview": "TSB (Training Stress Balance) ..."
+    },
+    {
+      "id": "auto-59",
+      "tag": "p",
+      "start": 651.64,
+      "preview": "原理:CTL = 过去 42 天平均 TSS · ATL =..."
+    },
+    {
+      "id": "auto-60",
+      "tag": "p",
+      "start": 707.94,
+      "preview": "这三个数字给了你一张连续的、可读的训练全景图。它们的解读规则..."
+    },
+    {
+      "id": "auto-61",
+      "tag": "h4",
+      "start": 714.6,
+      "preview": "CTL 涨速的安全区间"
+    },
+    {
+      "id": "auto-62",
+      "tag": "p",
+      "start": 717.16,
+      "preview": "经验法则:CTL 每周涨幅不超过 5-7 TSS/周。超过 ..."
+    },
+    {
+      "id": "auto-63",
+      "tag": "p",
+      "start": 736.14,
+      "preview": "① 测: 把 Strava / Garmin / Coros..."
+    },
+    {
+      "id": "auto-64",
+      "tag": "p",
+      "start": 752.13,
+      "preview": "② 改: 设定下周 CTL 涨幅目标 ≤ 5 TSS。如果当..."
+    },
+    {
+      "id": "auto-65",
+      "tag": "p",
+      "start": 768.3,
+      "preview": "③ 看: 每周日晚做一次\"PMC 体检\":TSB 落在哪个区..."
+    },
+    {
+      "id": "auto-66",
+      "tag": "h3",
+      "start": 782.53,
+      "preview": "小节。 10.5 训练区间——5 区与 3 区两种语言"
+    },
+    {
+      "id": "auto-67",
+      "tag": "p",
+      "start": 787.83,
+      "preview": "把训练强度切片,是为了让\"刺激\"的剂量可控。今天耐力训练界并..."
+    },
+    {
+      "id": "auto-68",
+      "tag": "h4",
+      "start": 803.58,
+      "preview": "5 区系统(Karvonen / Joe Friel 风格)"
+    },
+    {
+      "id": "auto-69",
+      "tag": "p",
+      "start": 806.81,
+      "preview": "基于 HRmax 百分比划分:"
+    },
+    {
+      "id": "auto-70",
+      "tag": "h4",
+      "start": 809.83,
+      "preview": "3 区系统(Seiler / 学术派)"
+    },
+    {
+      "id": "auto-71",
+      "tag": "p",
+      "start": 812.55,
+      "preview": "基于乳酸两个拐点(VT1/LT1 和 VT2/LT2)划分:"
+    },
+    {
+      "id": "auto-72",
+      "tag": "li",
+      "start": 812.55,
+      "preview": "Zone 1 :低于 LT1(乳酸 ≤ 2 mmol/L),..."
+    },
+    {
+      "id": "auto-73",
+      "tag": "li",
+      "start": 812.55,
+      "preview": "Zone 2 :LT1 与 LT2 之间(2-4 mmol/..."
+    },
+    {
+      "id": "auto-74",
+      "tag": "li",
+      "start": 812.55,
+      "preview": "Zone 3 :高于 LT2(>4 mmol/L),不能稳态"
+    },
+    {
+      "id": "auto-75",
+      "tag": "p",
+      "start": 812.55,
+      "preview": "3 区系统对应的 5 区系统:Seiler Z1 ≈ 5 区..."
+    },
+    {
+      "id": "auto-76",
+      "tag": "p",
+      "start": 854.16,
+      "preview": "反共识。 很多业余跑者听说\"80/20\"就以为是\"80% 跑..."
+    },
+    {
+      "id": "auto-77",
+      "tag": "h3",
+      "start": 891.25,
+      "preview": "小节。 10.6 极化训练 vs 金字塔 vs 阈值——三种..."
+    },
+    {
+      "id": "auto-78",
+      "tag": "p",
+      "start": 898.35,
+      "preview": "在确定了\"区\"之后,下一个问题是:不同区的训练量应该如何分布..."
+    },
+    {
+      "id": "auto-79",
+      "tag": "h4",
+      "start": 913.31,
+      "preview": "三种分布模式"
+    },
+    {
+      "id": "auto-80",
+      "tag": "li",
+      "start": 915.68,
+      "preview": "极化 (Polarized) :Z1 ≈ 80% / Z2 ..."
+    },
+    {
+      "id": "auto-81",
+      "tag": "li",
+      "start": 915.68,
+      "preview": "金字塔 (Pyramidal) :Z1 ≈ 70% / Z2..."
+    },
+    {
+      "id": "auto-82",
+      "tag": "li",
+      "start": 915.68,
+      "preview": "阈值 (Threshold) :Z1 ≈ 50% / Z2 ..."
+    },
+    {
+      "id": "auto-83",
+      "tag": "p",
+      "start": 915.68,
+      "preview": "原理:80/20 极化训练 = 80% 时间在 LT1 以下..."
+    },
+    {
+      "id": "auto-84",
+      "tag": "h4",
+      "start": 983.59,
+      "preview": "精英观察:Seiler 在挪威国家队 / 肯尼亚跑者中的发现"
+    },
+    {
+      "id": "auto-85",
+      "tag": "p",
+      "start": 988.18,
+      "preview": "Seiler 团队从 2000 年代开始用心率监测和乳酸采血..."
+    },
+    {
+      "id": "auto-86",
+      "tag": "h4",
+      "start": 1010.78,
+      "preview": "业余研究:Stöggl & Sperlich 2014 经典..."
+    },
+    {
+      "id": "auto-87",
+      "tag": "p",
+      "start": 1015.13,
+      "preview": "把 48 名训练有素的耐力运动员随机分到四组,匹配总训练量,..."
+    },
+    {
+      "id": "auto-88",
+      "tag": "li",
+      "start": 1015.13,
+      "preview": "极化组:VO2max +11.7%,TT 表现 +5.1%"
+    },
+    {
+      "id": "auto-89",
+      "tag": "li",
+      "start": 1015.13,
+      "preview": "阈值组:VO2max +4.8%,TT 表现 +2.4%"
+    },
+    {
+      "id": "auto-90",
+      "tag": "li",
+      "start": 1015.13,
+      "preview": "高量低强组:VO2max +4.6%,TT 表现 +2.0%"
+    },
+    {
+      "id": "auto-91",
+      "tag": "li",
+      "start": 1015.13,
+      "preview": "HIIT 组:VO2max +4.9%,TT 表现 +3.5..."
+    },
+    {
+      "id": "auto-92",
+      "tag": "p",
+      "start": 1015.13,
+      "preview": "极化组在 VO2max 和比赛表现两个指标上都明显优于其他三..."
+    },
+    {
+      "id": "auto-93",
+      "tag": "h4",
+      "start": 1056.65,
+      "preview": "金字塔 vs 极化的微妙差别"
+    },
+    {
+      "id": "auto-94",
+      "tag": "p",
+      "start": 1059.77,
+      "preview": "近年争议在精英耐力运动员身上其实是 金字塔 而非极化(Cas..."
+    },
+    {
+      "id": "auto-95",
+      "tag": "li",
+      "start": 1075.5,
+      "preview": "对业余跑者 :极化和金字塔都比阈值好(避免灰区是关键)"
+    },
+    {
+      "id": "auto-96",
+      "tag": "li",
+      "start": 1075.5,
+      "preview": "对精英 :金字塔可能更现实,但仍然 80%+ 在 LT1 以..."
+    },
+    {
+      "id": "auto-97",
+      "tag": "li",
+      "start": 1075.5,
+      "preview": "对马拉松专项 :金字塔略有优势,因为 MP(马拉松配速)正好..."
+    },
+    {
+      "id": "auto-98",
+      "tag": "h3",
+      "start": 1096.77,
+      "preview": "小节。 10.7 80/20 法则的实操细节"
+    },
+    {
+      "id": "auto-99",
+      "tag": "p",
+      "start": 1101.67,
+      "preview": "\"80% 慢、20% 快\"是 Seiler 法则的口语化版本..."
+    },
+    {
+      "id": "auto-100",
+      "tag": "h4",
+      "start": 1113.24,
+      "preview": "是时间 80%,不是公里 80%"
+    },
+    {
+      "id": "auto-101",
+      "tag": "p",
+      "start": 1116.9,
+      "preview": "80/20 指的是 训练时间 的分布,不是 训练公里 。这两..."
+    },
+    {
+      "id": "auto-102",
+      "tag": "h4",
+      "start": 1138.23,
+      "preview": "整个周期还是单次训练?"
+    },
+    {
+      "id": "auto-103",
+      "tag": "p",
+      "start": 1140.75,
+      "preview": "80/20 是 周/月平均 ,不是每次训练。比如一周 6 次..."
+    },
+    {
+      "id": "auto-104",
+      "tag": "li",
+      "start": 1144.65,
+      "preview": "4 次 Z1 轻松跑(每次 60 min) = 240 mi..."
+    },
+    {
+      "id": "auto-105",
+      "tag": "li",
+      "start": 1144.65,
+      "preview": "1 次 Z3-Z4 阈值课(60 min,含 30 min ..."
+    },
+    {
+      "id": "auto-106",
+      "tag": "li",
+      "start": 1144.65,
+      "preview": "1 次 Z5 间歇课(60 min,含 6 × 3 min ..."
+    },
+    {
+      "id": "auto-107",
+      "tag": "p",
+      "start": 1144.65,
+      "preview": "总计:312 min Z1 + 30 min Z4 + 18..."
+    },
+    {
+      "id": "auto-108",
+      "tag": "h4",
+      "start": 1181.58,
+      "preview": "新手的\"先 90/10 再 80/20\""
+    },
+    {
+      "id": "auto-109",
+      "tag": "p",
+      "start": 1185.17,
+      "preview": "对刚开始训练的新手或刚从伤病归来的人,Seiler 推荐先维..."
+    },
+    {
+      "id": "auto-110",
+      "tag": "p",
+      "start": 1201.9,
+      "preview": "① 测: 打开最近 4 周的训练日志,把每节课标记 Z1-Z..."
+    },
+    {
+      "id": "auto-111",
+      "tag": "p",
+      "start": 1217.72,
+      "preview": "② 改: 下周开始 Z1 跑严格用心率上限锁住——LT1 心..."
+    },
+    {
+      "id": "auto-112",
+      "tag": "p",
+      "start": 1236.29,
+      "preview": "③ 看: 4 周后再算一次时间分布。目标:Z1 时间占 75..."
+    },
+    {
+      "id": "auto-113",
+      "tag": "p",
+      "start": 1258.7,
+      "preview": "三个验证方式,任意一个不达标就是太快了:"
+    },
+    {
+      "id": "auto-114",
+      "tag": "p",
+      "start": 1258.7,
+      "preview": "1. 鼻呼吸测试 :Z1 配速下应能全程鼻呼吸不憋气,只用嘴..."
+    },
+    {
+      "id": "auto-115",
+      "tag": "p",
+      "start": 1258.7,
+      "preview": "2. 聊天测试 :能完整说完 30 字的句子,不需要中间换气..."
+    },
+    {
+      "id": "auto-116",
+      "tag": "p",
+      "start": 1270.39,
+      "preview": "3. 心率上限 :Z1 上限约为 LT1 配速对应的心率,业..."
+    },
+    {
+      "id": "auto-117",
+      "tag": "p",
+      "start": 1276.75,
+      "preview": "更精确做法:在跑步机上递增配速 + 测乳酸,找到乳酸首次开始..."
+    },
+    {
+      "id": "auto-118",
+      "tag": "h3",
+      "start": 1295.85,
+      "preview": "小节。 10.8 力量训练让跑步更快——量化收益"
+    },
+    {
+      "id": "auto-119",
+      "tag": "p",
+      "start": 1301.47,
+      "preview": "\"跑步运动员不需要练力量\"——这是 1990 年代以前的主流..."
+    },
+    {
+      "id": "auto-120",
+      "tag": "h4",
+      "start": 1323.4,
+      "preview": "关键证据汇总"
+    },
+    {
+      "id": "auto-121",
+      "tag": "p",
+      "start": 1325.27,
+      "preview": "原理:力量训练让 RE(跑步经济性)提升 4-8%、5K 成..."
+    },
+    {
+      "id": "auto-122",
+      "tag": "h4",
+      "start": 1366.3,
+      "preview": "机制:不是更大的肌肉,是更聪明的神经"
+    },
+    {
+      "id": "auto-123",
+      "tag": "p",
+      "start": 1370.41,
+      "preview": "力量训练对跑步的提升机制不在\"肌肉量\"——业余跑者关心的\"练..."
+    },
+    {
+      "id": "auto-124",
+      "tag": "li",
+      "start": 1384.99,
+      "preview": "神经驱动 :运动单位募集效率上升,同样力量下募集更少肌纤维 ..."
+    },
+    {
+      "id": "auto-125",
+      "tag": "li",
+      "start": 1384.99,
+      "preview": "肌腱刚度 :跟腱 + 髌腱 stiffness 上升 10-..."
+    },
+    {
+      "id": "auto-126",
+      "tag": "li",
+      "start": 1384.99,
+      "preview": "肌纤维类型转换 :IIx → IIa 转换,提升耐力"
+    },
+    {
+      "id": "auto-127",
+      "tag": "li",
+      "start": 1384.99,
+      "preview": "跑步姿态稳定性 :核心和臀部力量减少能量泄漏"
+    },
+    {
+      "id": "auto-128",
+      "tag": "li",
+      "start": 1384.99,
+      "preview": "抗疲劳能力 :比赛后段配速保持能力"
+    },
+    {
+      "id": "auto-129",
+      "tag": "p",
+      "start": 1384.99,
+      "preview": "反共识。 \"跑步选手不能练杠铃,会变重\"——这是 1980-..."
+    },
+    {
+      "id": "auto-130",
+      "tag": "h3",
+      "start": 1437.85,
+      "preview": "小节。 10.9 力量训练四大类型——哪个对跑步最有用?"
+    },
+    {
+      "id": "auto-131",
+      "tag": "h4",
+      "start": 1443.61,
+      "preview": "对跑步最关键的两类:重磅力量 + 增强式"
+    },
+    {
+      "id": "auto-132",
+      "tag": "p",
+      "start": 1448.06,
+      "preview": "研究反复显示这两类组合最有效。一个典型的\"跑者力量训练日\"可..."
+    },
+    {
+      "id": "auto-133",
+      "tag": "li",
+      "start": 1451.74,
+      "preview": "热身 10 min:动态拉伸 + 慢跑"
+    },
+    {
+      "id": "auto-134",
+      "tag": "li",
+      "start": 1451.74,
+      "preview": "力量主项 30 min:深蹲 5×4 @ 85% 1RM、硬..."
+    },
+    {
+      "id": "auto-135",
+      "tag": "li",
+      "start": 1451.74,
+      "preview": "增强式 15 min:跳箱 4×5、跨步跳 4×10m、单腿..."
+    },
+    {
+      "id": "auto-136",
+      "tag": "li",
+      "start": 1451.74,
+      "preview": "核心稳定 5-10 min:plank 系列、bird do..."
+    },
+    {
+      "id": "auto-137",
+      "tag": "p",
+      "start": 1451.74,
+      "preview": "总时长 60-75 分钟,每周 2 次,放在轻松跑日或单独日..."
+    },
+    {
+      "id": "auto-138",
+      "tag": "p",
+      "start": 1486.26,
+      "preview": "① 测: 本周做一次\"单腿测试三件套\":单腿深蹲(下蹲到大腿..."
+    },
+    {
+      "id": "auto-139",
+      "tag": "p",
+      "start": 1502.99,
+      "preview": "② 改: 下周日历上画两个 60 分钟力量训练时段,雷打不动..."
+    },
+    {
+      "id": "auto-140",
+      "tag": "p",
+      "start": 1523.07,
+      "preview": "③ 看: 6-8 周后跑同一段 Z2 路线,记录平均心率和配..."
+    },
+    {
+      "id": "auto-141",
+      "tag": "h4",
+      "start": 1545.9,
+      "preview": "\"撞日\"问题——干扰效应 (Interference Eff..."
+    },
+    {
+      "id": "auto-142",
+      "tag": "p",
+      "start": 1549.61,
+      "preview": "1980 年 Hickson 首次提出:同时练耐力和力量会减..."
+    },
+    {
+      "id": "auto-143",
+      "tag": "li",
+      "start": 1565.3,
+      "preview": "力量和高强度跑步训练间隔至少 6 小时,理想 24 小时"
+    },
+    {
+      "id": "auto-144",
+      "tag": "li",
+      "start": 1565.3,
+      "preview": "如果同日做,先力量后跑步,且跑步是 Z1-Z2"
+    },
+    {
+      "id": "auto-145",
+      "tag": "li",
+      "start": 1565.3,
+      "preview": "避免\"早晨阈值跑 + 傍晚重磅深蹲\"这种最差组合"
+    },
+    {
+      "id": "auto-146",
+      "tag": "p",
+      "start": 1565.3,
+      "preview": "没时间健身房?也别完全放弃,以下是 30 分钟版极简方案 ,..."
+    },
+    {
+      "id": "auto-147",
+      "tag": "p",
+      "start": 1565.3,
+      "preview": "1. 高脚杯深蹲 4×8 @ 中重"
+    },
+    {
+      "id": "auto-148",
+      "tag": "p",
+      "start": 1589.47,
+      "preview": "2. 单腿罗马尼亚硬拉 3×8/侧"
+    },
+    {
+      "id": "auto-149",
+      "tag": "p",
+      "start": 1593.15,
+      "preview": "3. 单腿跳箱 3×5/侧"
+    },
+    {
+      "id": "auto-150",
+      "tag": "p",
+      "start": 1596.3,
+      "preview": "4. Calf raises 单腿 3×15/侧(慢离心 3..."
+    },
+    {
+      "id": "auto-151",
+      "tag": "p",
+      "start": 1599.19,
+      "preview": "5. Plank 1 min × 3 + side plan..."
+    },
+    {
+      "id": "auto-152",
+      "tag": "p",
+      "start": 1604.17,
+      "preview": "器材:一对哑铃 + 跳箱。在家可完成。"
+    },
+    {
+      "id": "auto-153",
+      "tag": "h3",
+      "start": 1612.75,
+      "preview": "小节。 10.10 HIIT——高强度间歇的剂量学"
+    },
+    {
+      "id": "auto-154",
+      "tag": "p",
+      "start": 1617.96,
+      "preview": "间歇训练 (interval training) 不是新发明..."
+    },
+    {
+      "id": "auto-155",
+      "tag": "h4",
+      "start": 1639.24,
+      "preview": "四种主流间歇格式"
+    },
+    {
+      "id": "auto-156",
+      "tag": "h4",
+      "start": 1641.56,
+      "preview": "VO2max 刺激窗口"
+    },
+    {
+      "id": "auto-157",
+      "tag": "p",
+      "start": 1643.96,
+      "preview": "Billat 等的研究表明:要刺激 VO2max,需要让心率..."
+    },
+    {
+      "id": "auto-158",
+      "tag": "h4",
+      "start": 1664.49,
+      "preview": "业余跑者的剂量建议"
+    },
+    {
+      "id": "auto-159",
+      "tag": "li",
+      "start": 1666.59,
+      "preview": "初级(跑龄 <1 年):每周 1 次中间歇,谨慎引入"
+    },
+    {
+      "id": "auto-160",
+      "tag": "li",
+      "start": 1666.59,
+      "preview": "中级(1-3 年):每周 1 次短间歇 + 1 次阈值课"
+    },
+    {
+      "id": "auto-161",
+      "tag": "li",
+      "start": 1666.59,
+      "preview": "高级(3 年+):每周 1 次 VO2max + 1 次阈值..."
+    },
+    {
+      "id": "auto-162",
+      "tag": "p",
+      "start": 1666.59,
+      "preview": "过量 HIIT 是业余通病——3 次/周高强度课 + 3 次..."
+    },
+    {
+      "id": "auto-163",
+      "tag": "h3",
+      "start": 1690.69,
+      "preview": "小节。 10.11 节奏跑 / 阈值跑——被低估的中坚力量"
+    },
+    {
+      "id": "auto-164",
+      "tag": "p",
+      "start": 1696.31,
+      "preview": "阈值跑 (threshold run, T-pace) 是 ..."
+    },
+    {
+      "id": "auto-165",
+      "tag": "h4",
+      "start": 1706.91,
+      "preview": "什么是阈值配速"
+    },
+    {
+      "id": "auto-166",
+      "tag": "p",
+      "start": 1708.7,
+      "preview": "阈值配速 ≈ LT2 配速 ≈ 一小时全力比赛配速。换算法:"
+    },
+    {
+      "id": "auto-167",
+      "tag": "li",
+      "start": 1713.5,
+      "preview": "10K 比赛配速 + 10-15 s/km ≈ 阈值配速"
+    },
+    {
+      "id": "auto-168",
+      "tag": "li",
+      "start": 1713.5,
+      "preview": "半马比赛配速 - 5-10 s/km ≈ 阈值配速"
+    },
+    {
+      "id": "auto-169",
+      "tag": "li",
+      "start": 1713.5,
+      "preview": "30 分钟最大努力跑的平均配速 ≈ 阈值配速"
+    },
+    {
+      "id": "auto-170",
+      "tag": "h4",
+      "start": 1726.84,
+      "preview": "训练剂量"
+    },
+    {
+      "id": "auto-171",
+      "tag": "li",
+      "start": 1728.3,
+      "preview": "持续型:20-40 分钟连续 @ T-pace"
+    },
+    {
+      "id": "auto-172",
+      "tag": "li",
+      "start": 1728.3,
+      "preview": "分段型:2 × 15 min @ T-pace,RI 3 m..."
+    },
+    {
+      "id": "auto-173",
+      "tag": "li",
+      "start": 1728.3,
+      "preview": "巡航型:5-8 × 1000-1600m @ T-pace,..."
+    },
+    {
+      "id": "auto-174",
+      "tag": "p",
+      "start": 1728.3,
+      "preview": "每周 1 次,持续 6-10 周,LT2 配速可提升 5-1..."
+    },
+    {
+      "id": "auto-175",
+      "tag": "h4",
+      "start": 1751.67,
+      "preview": "为什么 LT2 比 VO2max 对马拉松更重要"
+    },
+    {
+      "id": "auto-176",
+      "tag": "p",
+      "start": 1756.26,
+      "preview": "马拉松配速通常对应 80-90% LT2(精英)或 70-8..."
+    },
+    {
+      "id": "auto-177",
+      "tag": "h3",
+      "start": 1778.11,
+      "preview": "小节。 10.12 长距离慢跑 LSD——基础的基础"
+    },
+    {
+      "id": "auto-178",
+      "tag": "p",
+      "start": 1783.39,
+      "preview": "LSD (long slow distance) 在 196..."
+    },
+    {
+      "id": "auto-179",
+      "tag": "h4",
+      "start": 1799.54,
+      "preview": "LSD 的关键参数"
+    },
+    {
+      "id": "auto-180",
+      "tag": "li",
+      "start": 1801.74,
+      "preview": "时长:75-180 分钟,不少于 75 分钟"
+    },
+    {
+      "id": "auto-181",
+      "tag": "li",
+      "start": 1801.74,
+      "preview": "配速:Z1-Z2 低端,约马拉松配速 + 45-90 s/k..."
+    },
+    {
+      "id": "auto-182",
+      "tag": "li",
+      "start": 1801.74,
+      "preview": "频率:每周 1 次"
+    },
+    {
+      "id": "auto-183",
+      "tag": "li",
+      "start": 1801.74,
+      "preview": "关键指标:跑完不疲惫到次日不能训练"
+    },
+    {
+      "id": "auto-184",
+      "tag": "h4",
+      "start": 1817.22,
+      "preview": "LSD 的特异适应"
+    },
+    {
+      "id": "auto-185",
+      "tag": "li",
+      "start": 1819.34,
+      "preview": "线粒体生物合成 :线粒体数量和功能上升,长时间运动唯一刺激"
+    },
+    {
+      "id": "auto-186",
+      "tag": "li",
+      "start": 1819.34,
+      "preview": "毛细血管密度 :Type I 肌纤维毛细血管 +20-50%"
+    },
+    {
+      "id": "auto-187",
+      "tag": "li",
+      "start": 1819.34,
+      "preview": "脂肪利用率 :同等强度下脂肪供能比例上升,节省糖原"
+    },
+    {
+      "id": "auto-188",
+      "tag": "li",
+      "start": 1819.34,
+      "preview": "心室扩张 :左心室容积上升(eccentric hypert..."
+    },
+    {
+      "id": "auto-189",
+      "tag": "li",
+      "start": 1819.34,
+      "preview": "骨骼/肌腱适应 :长时间慢跑产生足够刺激让结缔组织重塑(强度..."
+    },
+    {
+      "id": "auto-190",
+      "tag": "li",
+      "start": 1819.34,
+      "preview": "心理 :长时间单调跑步训练耐心和抗无聊能力"
+    },
+    {
+      "id": "auto-191",
+      "tag": "p",
+      "start": 1819.34,
+      "preview": "LSD 的核心是 时长 而非 公里 。一个慢跑者 2 小时跑..."
+    },
+    {
+      "id": "auto-192",
+      "tag": "h3",
+      "start": 1875.0,
+      "preview": "小节。 10.13 高原训练——红细胞游戏"
+    },
+    {
+      "id": "auto-193",
+      "tag": "p",
+      "start": 1879.61,
+      "preview": "在 1968 年墨西哥城奥运会(海拔 2240m)之后,高原..."
+    },
+    {
+      "id": "auto-194",
+      "tag": "h4",
+      "start": 1896.05,
+      "preview": "三种主要范式"
+    },
+    {
+      "id": "auto-195",
+      "tag": "li",
+      "start": 1898.31,
+      "preview": "LH-TH (Live High - Train High)..."
+    },
+    {
+      "id": "auto-196",
+      "tag": "li",
+      "start": 1902.12,
+      "preview": "LH-TL (Live High - Train Low) ..."
+    },
+    {
+      "id": "auto-197",
+      "tag": "li",
+      "start": 1918.27,
+      "preview": "LL-TH :住低练高。模拟低氧。效果弱"
+    },
+    {
+      "id": "auto-198",
+      "tag": "p",
+      "start": 1924.12,
+      "preview": "原理:LH-TL 高住低练 = 住在 2200-2500m(..."
+    },
+    {
+      "id": "auto-199",
+      "tag": "h4",
+      "start": 1972.34,
+      "preview": "生理适应轨迹"
+    },
+    {
+      "id": "auto-200",
+      "tag": "li",
+      "start": 1974.22,
+      "preview": "0-72h:急性高原反应,EPO 释放,但红细胞质量尚未变化..."
+    },
+    {
+      "id": "auto-201",
+      "tag": "li",
+      "start": 1974.22,
+      "preview": "1-2 周:EPO 峰值,网织红细胞上升,适应初步"
+    },
+    {
+      "id": "auto-202",
+      "tag": "li",
+      "start": 1974.22,
+      "preview": "2-4 周:红细胞质量提升 1-5%,血红蛋白浓度上升"
+    },
+    {
+      "id": "auto-203",
+      "tag": "li",
+      "start": 1974.22,
+      "preview": "3-4 周后返回平原:返低后 1-3 周表现峰值,4 周后红..."
+    },
+    {
+      "id": "auto-204",
+      "tag": "h4",
+      "start": 1997.71,
+      "preview": "个体响应差异"
+    },
+    {
+      "id": "auto-205",
+      "tag": "p",
+      "start": 1999.49,
+      "preview": "Chapman 等(1998)发现高原训练的响应有显著个体差..."
+    },
+    {
+      "id": "auto-206",
+      "tag": "h4",
+      "start": 2020.19,
+      "preview": "模拟高原 / IHE"
+    },
+    {
+      "id": "auto-207",
+      "tag": "p",
+      "start": 2022.48,
+      "preview": "对没有真高原可去的跑者,有三种替代:"
+    },
+    {
+      "id": "auto-208",
+      "tag": "li",
+      "start": 2022.48,
+      "preview": "低氧帐篷:夜间睡眠环境氧浓度降至 15-16%(模拟 250..."
+    },
+    {
+      "id": "auto-209",
+      "tag": "li",
+      "start": 2022.48,
+      "preview": "低氧训练室:跑步机在低氧环境下训练"
+    },
+    {
+      "id": "auto-210",
+      "tag": "li",
+      "start": 2022.48,
+      "preview": "IHE (Intermittent Hypoxic Expo..."
+    },
+    {
+      "id": "auto-211",
+      "tag": "h3",
+      "start": 2042.59,
+      "preview": "小节。 10.14 单调性 (Monotony) 与应变 (..."
+    },
+    {
+      "id": "auto-212",
+      "tag": "p",
+      "start": 2049.54,
+      "preview": "Foster 1998 提出两个被低估的过训风险指标:训练单..."
+    },
+    {
+      "id": "auto-213",
+      "tag": "h4",
+      "start": 2049.94,
+      "preview": "定义",
+      "estimated": true
+    },
+    {
+      "id": "auto-214",
+      "tag": "li",
+      "start": 2062.92,
+      "preview": "Monotony = 周内日训练负荷的均值 / 标准差"
+    },
+    {
+      "id": "auto-215",
+      "tag": "li",
+      "start": 2062.92,
+      "preview": "Strain = 周总负荷 × Monotony"
+    },
+    {
+      "id": "auto-216",
+      "tag": "h4",
+      "start": 2063.32,
+      "preview": "解读",
+      "estimated": true
+    },
+    {
+      "id": "auto-217",
+      "tag": "p",
+      "start": 2071.02,
+      "preview": "Monotony 高(>2.0)意味着每天训练负荷差不多,身..."
+    },
+    {
+      "id": "auto-218",
+      "tag": "p",
+      "start": 2071.62,
+      "preview": "举例:",
+      "estimated": true
+    },
+    {
+      "id": "auto-219",
+      "tag": "li",
+      "start": 2082.21,
+      "preview": "跑者 A:每天 70 TSS × 7 天 = 周 490 T..."
+    },
+    {
+      "id": "auto-220",
+      "tag": "li",
+      "start": 2082.21,
+      "preview": "跑者 B:周 1 天 150 TSS、3 天 50 TSS、..."
+    },
+    {
+      "id": "auto-221",
+      "tag": "p",
+      "start": 2082.21,
+      "preview": "跑者 B 总量更少但更安全,因为有真正的低负荷日。"
+    },
+    {
+      "id": "auto-222",
+      "tag": "p",
+      "start": 2111.26,
+      "preview": "反共识。 很多业余跑者觉得\"每天都跑 8 公里\"是好习惯——..."
+    },
+    {
+      "id": "auto-223",
+      "tag": "h3",
+      "start": 2141.47,
+      "preview": "小节。 10.15 减量 (Taper)——比赛前的最后一课"
+    },
+    {
+      "id": "auto-224",
+      "tag": "p",
+      "start": 2146.71,
+      "preview": "减量 (taper) 是比赛准备的最后阶段,大致 1-3 周..."
+    },
+    {
+      "id": "auto-225",
+      "tag": "p",
+      "start": 2166.06,
+      "preview": "原理:taper 减量 = 赛前 2-3 周量降 40-60..."
+    },
+    {
+      "id": "auto-226",
+      "tag": "h4",
+      "start": 2216.29,
+      "preview": "Mujika 减量四原则"
+    },
+    {
+      "id": "auto-227",
+      "tag": "li",
+      "start": 2218.67,
+      "preview": "训练量减少 40-60% :这是减量的主战场"
+    },
+    {
+      "id": "auto-228",
+      "tag": "li",
+      "start": 2218.67,
+      "preview": "训练强度 维持 不变 :这是减量最容易出错的地方——强度不能..."
+    },
+    {
+      "id": "auto-229",
+      "tag": "li",
+      "start": 2218.67,
+      "preview": "训练频率减少 0-30% :略减或不减,保持神经-肌肉刺激"
+    },
+    {
+      "id": "auto-230",
+      "tag": "li",
+      "start": 2218.67,
+      "preview": "持续 7-21 天 :1 周减量适合短距离(5K-10K),..."
+    },
+    {
+      "id": "auto-231",
+      "tag": "h4",
+      "start": 2243.89,
+      "preview": "典型马拉松 3 周减量"
+    },
+    {
+      "id": "auto-232",
+      "tag": "li",
+      "start": 2246.57,
+      "preview": "赛前 3 周:跑量降至平时的 70%,强度课保留 2 次"
+    },
+    {
+      "id": "auto-233",
+      "tag": "li",
+      "start": 2246.57,
+      "preview": "赛前 2 周:跑量降至 50%,强度课 1-2 次但单次量减..."
+    },
+    {
+      "id": "auto-234",
+      "tag": "li",
+      "start": 2246.57,
+      "preview": "赛前 1 周:跑量 30-40%,强度课 1 次短量(如 3..."
+    },
+    {
+      "id": "auto-235",
+      "tag": "h4",
+      "start": 2269.29,
+      "preview": "减量带来的提升"
+    },
+    {
+      "id": "auto-236",
+      "tag": "p",
+      "start": 2271.16,
+      "preview": "Mujika 综述:正确减量带来 1-3% 的表现提升。马拉..."
+    },
+    {
+      "id": "auto-237",
+      "tag": "h4",
+      "start": 2286.06,
+      "preview": "过度减量 = 脱训 (Detraining)"
+    },
+    {
+      "id": "auto-238",
+      "tag": "p",
+      "start": 2289.36,
+      "preview": "1 周减量减太狠(比如直接停跑)会让 CTL 也开始下降,神..."
+    },
+    {
+      "id": "auto-239",
+      "tag": "p",
+      "start": 2302.97,
+      "preview": "设身处地。 你 32 岁、当前半马 PB 1:50、目标 1..."
+    },
+    {
+      "id": "auto-240",
+      "tag": "p",
+      "start": 2315.47,
+      "preview": "怎么读这张表:"
+    },
+    {
+      "id": "auto-241",
+      "tag": "li",
+      "start": 2315.47,
+      "preview": "CTL 涨速 :每周 +3 到 +6 TSS,W7 临界(+..."
+    },
+    {
+      "id": "auto-242",
+      "tag": "li",
+      "start": 2315.47,
+      "preview": "TSB 节奏 :建造期长期 0 到 −6(在累积),恢复周抬..."
+    },
+    {
+      "id": "auto-243",
+      "tag": "li",
+      "start": 2315.47,
+      "preview": "恢复周不可省 :W4 和 W8 看似\"浪费\",其实是让 W5..."
+    },
+    {
+      "id": "auto-244",
+      "tag": "li",
+      "start": 2315.47,
+      "preview": "没必要每周更高 :W10 之后量不再涨,任务变成\"把 CTL..."
+    },
+    {
+      "id": "auto-245",
+      "tag": "p",
+      "start": 2315.47,
+      "preview": "常见出错点 :① 跳过 W4 / W8 恢复周(因为\"感觉还..."
+    },
+    {
+      "id": "auto-246",
+      "tag": "h3",
+      "start": 2382.64,
+      "preview": "小节。 10.16 周期化 (Periodization)—..."
+    },
+    {
+      "id": "auto-247",
+      "tag": "p",
+      "start": 2388.71,
+      "preview": "周期化是把训练目标分解成嵌套的时间块。1960 年代苏联 M..."
+    },
+    {
+      "id": "auto-248",
+      "tag": "h4",
+      "start": 2405.37,
+      "preview": "周期化的三层时间尺度"
+    },
+    {
+      "id": "auto-249",
+      "tag": "li",
+      "start": 2408.01,
+      "preview": "宏周期 (Macrocycle) :6-12 个月,围绕一两..."
+    },
+    {
+      "id": "auto-250",
+      "tag": "li",
+      "start": 2408.01,
+      "preview": "中周期 (Mesocycle) :3-6 周,完成一个具体训..."
+    },
+    {
+      "id": "auto-251",
+      "tag": "li",
+      "start": 2408.01,
+      "preview": "微周期 (Microcycle) :7-10 天,通常一周,..."
+    },
+    {
+      "id": "auto-252",
+      "tag": "h4",
+      "start": 2427.0,
+      "preview": "经典线性周期化(马拉松)"
+    },
+    {
+      "id": "auto-253",
+      "tag": "h4",
+      "start": 2429.87,
+      "preview": "反向周期化 (Reverse Periodization)"
+    },
+    {
+      "id": "auto-254",
+      "tag": "p",
+      "start": 2433.16,
+      "preview": "近年部分教练(Brad Hudson 等)推广反向模型:先速..."
+    },
+    {
+      "id": "auto-255",
+      "tag": "h4",
+      "start": 2458.15,
+      "preview": "阻塞周期化 (Block Periodization, Is..."
+    },
+    {
+      "id": "auto-256",
+      "tag": "p",
+      "start": 2462.0,
+      "preview": "把一个训练块(3-4 周)集中刺激一个生理系统(如纯 VO2..."
+    },
+    {
+      "id": "auto-257",
+      "tag": "h3",
+      "start": 2478.29,
+      "preview": "小节。 10.17 遗传与个体响应——HERITAGE 研究..."
+    },
+    {
+      "id": "auto-258",
+      "tag": "p",
+      "start": 2483.9,
+      "preview": "在 1995-2003 年,HERITAGE Family ..."
+    },
+    {
+      "id": "auto-259",
+      "tag": "h4",
+      "start": 2502.8,
+      "preview": "关键发现"
+    },
+    {
+      "id": "auto-260",
+      "tag": "li",
+      "start": 2504.35,
+      "preview": "VO2max 改善的均值约 +17%,但范围 0 到 +60..."
+    },
+    {
+      "id": "auto-261",
+      "tag": "li",
+      "start": 2504.35,
+      "preview": "约 15% 受试者是\"高响应者\" (high respond..."
+    },
+    {
+      "id": "auto-262",
+      "tag": "li",
+      "start": 2504.35,
+      "preview": "约 15-20% 是\"低响应者\" / \"非响应者\" (low..."
+    },
+    {
+      "id": "auto-263",
+      "tag": "li",
+      "start": 2504.35,
+      "preview": "响应度有强遗传性——同家庭成员的响应度相关性比随机配对高 5..."
+    },
+    {
+      "id": "auto-264",
+      "tag": "h4",
+      "start": 2530.0,
+      "preview": "非响应者的对策"
+    },
+    {
+      "id": "auto-265",
+      "tag": "p",
+      "start": 2531.86,
+      "preview": "Bonafiglia 等(2016)和 Ross 等(201..."
+    },
+    {
+      "id": "auto-266",
+      "tag": "p",
+      "start": 2550.62,
+      "preview": "设身处地。 如果你练了 12 周 VO2max 没什么变化,..."
+    },
+    {
+      "id": "auto-267",
+      "tag": "h3",
+      "start": 2578.75,
+      "preview": "小节。 10.18 业余跑者最常见的训练失误模式"
+    },
+    {
+      "id": "auto-268",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "太快太多 · 平时跑得太快(Z2-Z3 灰区),周末长跑也快..."
+    },
+    {
+      "id": "auto-269",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "不会真慢 · Z1 配速感觉\"太慢、没成就感\"于是不跑;只有..."
+    },
+    {
+      "id": "auto-270",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "不练力量 · 把每周可用时间全砸在跑里,跑量越大越易伤"
+    },
+    {
+      "id": "auto-271",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "跑量增长过快 · 一周 30 km 突然跳到 50 km,违..."
+    },
+    {
+      "id": "auto-272",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "缺少 LSD · 周长跑只有 12-15 km,达不到刺激线..."
+    },
+    {
+      "id": "auto-273",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "无 PMC / 无 TSS · 凭感觉训练,无量化负荷监测,..."
+    },
+    {
+      "id": "auto-274",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "赛前不减量 · 比赛前一周仍跑大量,带着疲劳上赛道"
+    },
+    {
+      "id": "auto-275",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "不休息日 · 每天都跑,Monotony 高、Strain ..."
+    },
+    {
+      "id": "auto-276",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "不睡觉 · 训练能控制,睡眠靠运气,这是过训的最快通路"
+    },
+    {
+      "id": "auto-277",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "追求 PB 不顾基础 · 不愿意花 6 个月练基础,只想直接..."
+    },
+    {
+      "id": "auto-278",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "无视个体差异 · 抄别人的训练计划而不个体化"
+    },
+    {
+      "id": "auto-279",
+      "tag": "li",
+      "start": 2584.54,
+      "preview": "\"不进步就加量\" · 应该减强度或换刺激,反而堆更多公里"
+    },
+    {
+      "id": "auto-280",
+      "tag": "h3",
+      "start": 2651.91,
+      "preview": "小节。 10.19 脱训 (Detraining) 与再训化"
+    },
+    {
+      "id": "auto-281",
+      "tag": "p",
+      "start": 2656.74,
+      "preview": "所有训练适应都会衰退,这是热力学第二定律级别的事实。问题是衰..."
+    },
+    {
+      "id": "auto-282",
+      "tag": "h4",
+      "start": 2666.26,
+      "preview": "停训后的时间线"
+    },
+    {
+      "id": "auto-283",
+      "tag": "li",
+      "start": 2668.1,
+      "preview": "1 周:几乎无变化,可能短暂表现下降(疲劳掉了但还没积新疲劳..."
+    },
+    {
+      "id": "auto-284",
+      "tag": "li",
+      "start": 2668.1,
+      "preview": "2 周:VO2max 下降 4-7%,血浆量回缩,心搏量下降"
+    },
+    {
+      "id": "auto-285",
+      "tag": "li",
+      "start": 2668.1,
+      "preview": "4 周:VO2max 下降 10-15%,毛细血管开始减少,..."
+    },
+    {
+      "id": "auto-286",
+      "tag": "li",
+      "start": 2668.1,
+      "preview": "8 周:VO2max 下降 15-20%,Type I 肌纤..."
+    },
+    {
+      "id": "auto-287",
+      "tag": "li",
+      "start": 2668.1,
+      "preview": "6 个月+:基本回到训练前水平"
+    },
+    {
+      "id": "auto-288",
+      "tag": "h4",
+      "start": 2696.97,
+      "preview": "训练记忆 (Muscle Memory)"
+    },
+    {
+      "id": "auto-289",
+      "tag": "p",
+      "start": 2699.61,
+      "preview": "但有趣的是,曾经训练过的人重新训练后恢复速度远快于初学者。机..."
+    },
+    {
+      "id": "auto-290",
+      "tag": "p",
+      "start": 2722.65,
+      "preview": "实操含义:跑了 5 年后停训 1 年,回归后 8-12 周能..."
+    },
+    {
+      "id": "auto-291",
+      "tag": "h3",
+      "start": 2731.55,
+      "preview": "小节。 10.20 运动量 vs 全因死亡率——U 型还是单..."
+    },
+    {
+      "id": "auto-292",
+      "tag": "p",
+      "start": 2738.5,
+      "preview": "这章最后一个问题不是关于表现,而是关于健康:跑多少最长寿?这..."
+    },
+    {
+      "id": "auto-293",
+      "tag": "h4",
+      "start": 2748.11,
+      "preview": "Lee 等 (2014) Copenhagen City H..."
+    },
+    {
+      "id": "auto-294",
+      "tag": "p",
+      "start": 2752.19,
+      "preview": "追踪 1098 名跑者 + 3950 名非跑者 12 年:"
+    },
+    {
+      "id": "auto-295",
+      "tag": "li",
+      "start": 2752.19,
+      "preview": "每周 1-2.4 小时慢跑:全因死亡风险 -71%(vs 久..."
+    },
+    {
+      "id": "auto-296",
+      "tag": "li",
+      "start": 2752.19,
+      "preview": "每周 2.5-4 小时跑步:风险 -54%"
+    },
+    {
+      "id": "auto-297",
+      "tag": "li",
+      "start": 2752.19,
+      "preview": "每周 >4 小时高强度跑步:风险与久坐相近"
+    },
+    {
+      "id": "auto-298",
+      "tag": "p",
+      "start": 2752.19,
+      "preview": "这就是\"U 型曲线\"——少跑比不跑好得多,但跑太多反而失去优..."
+    },
+    {
+      "id": "auto-299",
+      "tag": "h4",
+      "start": 2778.6,
+      "preview": "反驳观点:Lavie 团队 (2018)"
+    },
+    {
+      "id": "auto-300",
+      "tag": "p",
+      "start": 2782.11,
+      "preview": "2018 年大型 meta 分析(Schnohr et al..."
+    },
+    {
+      "id": "auto-301",
+      "tag": "h4",
+      "start": 2796.0,
+      "preview": "2022-2023 最新数据(Liu 等大队列)"
+    },
+    {
+      "id": "auto-302",
+      "tag": "p",
+      "start": 2800.22,
+      "preview": "最新分析显示:即便最高跑量组(每周 >75 km)死亡风险仍..."
+    },
+    {
+      "id": "auto-303",
+      "tag": "li",
+      "start": 2814.22,
+      "preview": "跑步对长寿绝对有益 ——任何剂量都比久坐好"
+    },
+    {
+      "id": "auto-304",
+      "tag": "li",
+      "start": 2814.22,
+      "preview": "边际收益递减 ——周 75-150 分钟中等强度是\"性价比\"..."
+    },
+    {
+      "id": "auto-305",
+      "tag": "li",
+      "start": 2814.22,
+      "preview": "极量是否真有害 仍有争议——可能与心血管亚临床损伤(心肌纤维..."
+    },
+    {
+      "id": "auto-306",
+      "tag": "p",
+      "start": 2814.22,
+      "preview": "反共识。 这件事很多严肃跑者不愿意接受:对追求 PB 的人来..."
+    },
+    {
+      "id": "auto-307",
+      "tag": "p",
+      "start": 2872.04,
+      "preview": "设身处地。 假设你 36 岁、男、目标全马 4:00,当前 ..."
+    },
+    {
+      "id": "auto-308",
+      "tag": "p",
+      "start": 2883.7,
+      "preview": "分布检验 :周总训练 ~6 小时跑步 + 40 min 力量..."
+    },
+    {
+      "id": "auto-309",
+      "tag": "p",
+      "start": 2914.89,
+      "preview": "常见误区 :"
+    },
+    {
+      "id": "auto-310",
+      "tag": "li",
+      "start": 2914.89,
+      "preview": "把 Tuesday 的 Easy 跑跑成 Z3(因为\"心率 ..."
+    },
+    {
+      "id": "auto-311",
+      "tag": "li",
+      "start": 2914.89,
+      "preview": "周日 LSD 跑成 M 配速全程—— 你毁掉了周一-二的恢复..."
+    },
+    {
+      "id": "auto-312",
+      "tag": "li",
+      "start": 2914.89,
+      "preview": "跳过力量训练—— 你失去了 4-8% RE 提升的免费红利"
+    },
+    {
+      "id": "auto-313",
+      "tag": "li",
+      "start": 2914.89,
+      "preview": "不减量进比赛—— 你的\"训练成果\"永远在疲劳层之下,看不见"
+    },
+    {
+      "id": "auto-314",
+      "tag": "p",
+      "start": 2914.89,
+      "preview": "16 周中的周期分配 :基础期 1-6 周(主 Z2 + 力..."
+    },
+    {
+      "id": "auto-315",
+      "tag": "h3",
+      "start": 2955.39,
+      "preview": "小节。 10.21 整章关键 takeaways"
+    },
+    {
+      "id": "auto-316",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "训练 = 应激 + 恢复 + 超量恢复 ——三者缺一不可,业..."
+    },
+    {
+      "id": "auto-317",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "用 PMC (CTL/ATL/TSB) 管理训练负荷 ——而..."
+    },
+    {
+      "id": "auto-318",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "80% 时间在 LT1 以下 (真正的轻松跑),不是 80%..."
+    },
+    {
+      "id": "auto-319",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "力量训练每周 2 次 ——5K 表现 +2-4%、经济性 +..."
+    },
+    {
+      "id": "auto-320",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "每周 1 节阈值课 + 1 节 VO2max 课 ——业余 ..."
+    },
+    {
+      "id": "auto-321",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "每周 1 节 LSD (75-180 min)——线粒体、毛..."
+    },
+    {
+      "id": "auto-322",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "赛前 2-3 周减量,量减 50% 强度保 ——表现 +1-..."
+    },
+    {
+      "id": "auto-323",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "CTL 每周涨速 ≤5-7 TSS,跑量每周涨 ≤10%"
+    },
+    {
+      "id": "auto-324",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "Monotony >2.0、Strain >6000 是过训..."
+    },
+    {
+      "id": "auto-325",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "不要拿自己跟训练学均值比——HERITAGE 显示个体响应差..."
+    },
+    {
+      "id": "auto-326",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "不要\"每天跑同样的量\"——高低交替更安全也更有效"
+    },
+    {
+      "id": "auto-327",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "不要因为\"没进步\"就加量,先排查强度分布、恢复、营养"
+    },
+    {
+      "id": "auto-328",
+      "tag": "li",
+      "start": 2960.61,
+      "preview": "不要把\"训练表现\"和\"健康寿命\"画等号——边际收益递减后两者..."
+    },
+    {
+      "id": "auto-329",
+      "tag": "p",
+      "start": 2960.61,
+      "preview": "设身处地。 没有\"完美训练计划\"。所有计划都是 对你过去未知..."
+    },
+    {
+      "id": "auto-330",
+      "tag": "h4",
+      "start": 3076.12,
+      "preview": "协议。 协议 1 · CTL 自测与 PMC 监测(inte..."
+    },
+    {
+      "id": "auto-331",
+      "tag": "li",
+      "start": 3083.5,
+      "preview": "测什么: 每周三个数字:CTL(健身)、ATL(疲劳)、TS..."
+    },
+    {
+      "id": "auto-332",
+      "tag": "li",
+      "start": 3083.5,
+      "preview": "工具: Strava / Garmin / Coros 跑表..."
+    },
+    {
+      "id": "auto-333",
+      "tag": "li",
+      "start": 3098.16,
+      "preview": "步骤: ① 注册 intervals.icu → ② 连接 ..."
+    },
+    {
+      "id": "auto-334",
+      "tag": "li",
+      "start": 3098.16,
+      "preview": "频率: 每周 1 次(周日晚),每 4 周做一次趋势复盘"
+    },
+    {
+      "id": "auto-335",
+      "tag": "li",
+      "start": 3098.16,
+      "preview": "判读: CTL 涨速 ≤ 5-7 TSS/周 = 安全 / ..."
+    },
+    {
+      "id": "auto-336",
+      "tag": "h4",
+      "start": 3139.6,
+      "preview": "协议。 协议 2 · 12 周半马训练骨架(目标 1:50 ..."
+    },
+    {
+      "id": "auto-337",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "测什么: 12 周后能否把半马成绩从当前水平降 5-8 分钟..."
+    },
+    {
+      "id": "auto-338",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "工具: 心率带(光学腕表 Z1-Z2 不准)+ 跑表 + 一..."
+    },
+    {
+      "id": "auto-339",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "步骤(每周固定): 周一: 休息或散步 30 min 周二:..."
+    },
+    {
+      "id": "auto-340",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周一: 休息或散步 30 min"
+    },
+    {
+      "id": "auto-341",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周二: Tempo 课(10 wu + 主项见下 + 10 ..."
+    },
+    {
+      "id": "auto-342",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周三: Easy 跑 50 min Z2 + 力量训练 30..."
+    },
+    {
+      "id": "auto-343",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周四: 休息"
+    },
+    {
+      "id": "auto-344",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周五: VO2max 间歇课(10 wu + 主项 + 10..."
+    },
+    {
+      "id": "auto-345",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周六: Easy 跑 30-40 min Z1 + 4×10..."
+    },
+    {
+      "id": "auto-346",
+      "tag": "li",
+      "start": 3146.02,
+      "preview": "周日: LSD 75-150 min Z2,W7-W10 中..."
+    },
+    {
+      "id": "auto-347",
+      "tag": "li",
+      "start": 3219.89,
+      "preview": "主项进度: W1-W4 基础:Tempo 3×6 min @..."
+    },
+    {
+      "id": "auto-348",
+      "tag": "li",
+      "start": 3219.89,
+      "preview": "W1-W4 基础:Tempo 3×6 min @ T,间歇 ..."
+    },
+    {
+      "id": "auto-349",
+      "tag": "li",
+      "start": 3219.89,
+      "preview": "W5-W8 建造:Tempo 4×8 min @ T,间歇 ..."
+    },
+    {
+      "id": "auto-350",
+      "tag": "li",
+      "start": 3219.89,
+      "preview": "W9-W10 专项:Tempo 内嵌 6 km HMP,间歇..."
+    },
+    {
+      "id": "auto-351",
+      "tag": "li",
+      "start": 3219.89,
+      "preview": "W11-W12 减量:量降 50%,强度课减半但不取消"
+    },
+    {
+      "id": "auto-352",
+      "tag": "li",
+      "start": 3219.89,
+      "preview": "频率: 周训练 5-6 次,总时长 6-8 小时,周 TSS..."
+    },
+    {
+      "id": "auto-353",
+      "tag": "li",
+      "start": 3299.2,
+      "preview": "判读: W4 末 5K 测速比基线快 30-60 秒 + W..."
+    },
+    {
+      "id": "auto-354",
+      "tag": "h4",
+      "start": 3321.31,
+      "preview": "协议。 协议 3 · Taper 14 天版(马拉松/半马通..."
+    },
+    {
+      "id": "auto-355",
+      "tag": "li",
+      "start": 3327.08,
+      "preview": "测什么: 赛日 TSB 落在 +5 到 +20、CTL 较 ..."
+    },
+    {
+      "id": "auto-356",
+      "tag": "li",
+      "start": 3327.08,
+      "preview": "工具: intervals.icu(看 TSB 曲线)+ 跑..."
+    },
+    {
+      "id": "auto-357",
+      "tag": "li",
+      "start": 3327.08,
+      "preview": "步骤: 赛前 D14: 正常训练最后一天,跑量峰值的 100..."
+    },
+    {
+      "id": "auto-358",
+      "tag": "li",
+      "start": 3327.08,
+      "preview": "赛前 D14: 正常训练最后一天,跑量峰值的 100%(参考..."
+    },
+    {
+      "id": "auto-359",
+      "tag": "li",
+      "start": 3327.08,
+      "preview": "赛前 D13-D7(第 2 周减量): 量降到 70%。保留..."
+    },
+    {
+      "id": "auto-360",
+      "tag": "li",
+      "start": 3362.45,
+      "preview": "赛前 D6-D3(赛周前段): 量降到 50-40%。保留 ..."
+    },
+    {
+      "id": "auto-361",
+      "tag": "li",
+      "start": 3370.92,
+      "preview": "赛前 D2: 25 min Z2 + 4-6×100 m s..."
+    },
+    {
+      "id": "auto-362",
+      "tag": "li",
+      "start": 3370.92,
+      "preview": "赛前 D1: 15-20 min Easy + 2×30 s..."
+    },
+    {
+      "id": "auto-363",
+      "tag": "li",
+      "start": 3370.92,
+      "preview": "赛日: 20 min 热身 + 几个 strides;比赛前..."
+    },
+    {
+      "id": "auto-364",
+      "tag": "li",
+      "start": 3424.87,
+      "preview": "频率: 一年用 2-3 次,围绕 A 级目标赛"
+    },
+    {
+      "id": "auto-365",
+      "tag": "li",
+      "start": 3424.87,
+      "preview": "判读: D2-D1 出现\"腿发轻、想跑得快\"的感觉 = 减量..."
+    }
+  ]
+}
