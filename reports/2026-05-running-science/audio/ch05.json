@@ -1,0 +1,1916 @@
+{
+  "voice": "zh-CN-YunxiNeural",
+  "chapter": "ch05",
+  "duration_sec": 4468.66,
+  "segments": [
+    {
+      "id": "auto-0",
+      "tag": "p",
+      "start": 0.1,
+      "preview": "从肺泡到线粒体,氧分子要穿过四道屏障、坐两段血液班车、被两台..."
+    },
+    {
+      "id": "auto-1",
+      "tag": "p",
+      "start": 16.14,
+      "preview": "心肺系统不是一个器官,而是一条 串联管线 。任何一段瓶颈都会..."
+    },
+    {
+      "id": "auto-2",
+      "tag": "p",
+      "start": 32.31,
+      "preview": "故事。 1992 年阿尔贝维尔冬奥会前夕,挪威生理学家在奥斯..."
+    },
+    {
+      "id": "auto-3",
+      "tag": "p",
+      "start": 60.49,
+      "preview": "这位选手叫 Bjørn Dæhlie。在接下来的 10 年里..."
+    },
+    {
+      "id": "auto-4",
+      "tag": "p",
+      "start": 82.46,
+      "preview": "Dæhlie 的故事点出了心肺生理学最古老的争论: VO₂m..."
+    },
+    {
+      "id": "auto-5",
+      "tag": "h3",
+      "start": 115.34,
+      "preview": "小节。 5.1 双重任务——输与排"
+    },
+    {
+      "id": "auto-6",
+      "tag": "p",
+      "start": 119.51,
+      "preview": "心肺系统在任何运动负荷下都同时执行两件相反的事:把氧 (O₂..."
+    },
+    {
+      "id": "auto-7",
+      "tag": "p",
+      "start": 146.47,
+      "preview": "静息状态下,这两件事的负载比是 5 L/min 的心输出量、..."
+    },
+    {
+      "id": "auto-8",
+      "tag": "p",
+      "start": 185.78,
+      "preview": "跑步的特殊性在于,它把这条管线从局部驱动(比如骑车主要是股四..."
+    },
+    {
+      "id": "auto-9",
+      "tag": "p",
+      "start": 215.94,
+      "preview": "原理:静息 Q 约 5 L/min,VO₂max 时 Q 升..."
+    },
+    {
+      "id": "auto-10",
+      "tag": "p",
+      "start": 250.4,
+      "preview": "反共识。 把耐力等价于\"心肺功能\",在生理学上是模糊到无用的..."
+    },
+    {
+      "id": "auto-11",
+      "tag": "h3",
+      "start": 279.23,
+      "preview": "小节。 5.2 心脏的解剖与冠状循环——四腔两泵"
+    },
+    {
+      "id": "auto-12",
+      "tag": "p",
+      "start": 285.03,
+      "preview": "心脏在解剖上是一对并联的双泵:右半边接收来自全身的乏氧血并把..."
+    },
+    {
+      "id": "auto-13",
+      "tag": "p",
+      "start": 313.34,
+      "preview": "四个腔的工作不对称:"
+    },
+    {
+      "id": "auto-14",
+      "tag": "li",
+      "start": 313.34,
+      "preview": "右心房 (RA) ——上下腔静脉的汇合口,压力 0–4 mm..."
+    },
+    {
+      "id": "auto-15",
+      "tag": "li",
+      "start": 325.65,
+      "preview": "右心室 (RV) ——肺循环的推进泵,壁厚约 3–5 mm,..."
+    },
+    {
+      "id": "auto-16",
+      "tag": "li",
+      "start": 337.78,
+      "preview": "左心房 (LA) ——肺静脉的接收腔,压力 8–12 mmH..."
+    },
+    {
+      "id": "auto-17",
+      "tag": "li",
+      "start": 343.68,
+      "preview": "左心室 (LV) ——体循环的主力泵,壁厚 8–12 mm,..."
+    },
+    {
+      "id": "auto-18",
+      "tag": "p",
+      "start": 357.9,
+      "preview": "心肌 (myocardium) 是脊椎动物体内独一无二的 横..."
+    },
+    {
+      "id": "auto-19",
+      "tag": "p",
+      "start": 390.9,
+      "preview": "心脏的血供来自 冠状循环 (coronary circula..."
+    },
+    {
+      "id": "auto-20",
+      "tag": "li",
+      "start": 390.9,
+      "preview": "左前降支 LAD (Left Anterior Descen..."
+    },
+    {
+      "id": "auto-21",
+      "tag": "li",
+      "start": 415.97,
+      "preview": "右冠状动脉 RCA (Right Coronary Arte..."
+    },
+    {
+      "id": "auto-22",
+      "tag": "li",
+      "start": 430.85,
+      "preview": "左回旋支 LCx (Left Circumflex) ——供..."
+    },
+    {
+      "id": "auto-23",
+      "tag": "p",
+      "start": 437.04,
+      "preview": "冠脉灌注有一个反直觉的细节: 左心室冠脉只在舒张期被灌注 。..."
+    },
+    {
+      "id": "auto-24",
+      "tag": "h3",
+      "start": 462.78,
+      "preview": "小节。 5.3 每搏量 SV——心脏的活塞行程"
+    },
+    {
+      "id": "auto-25",
+      "tag": "p",
+      "start": 467.7,
+      "preview": "心脏每收缩一次射出的血量,称为每搏量 (stroke vol..."
+    },
+    {
+      "id": "auto-26",
+      "tag": "p",
+      "start": 480.0,
+      "preview": "SV 的数值范围(健康成人):"
+    },
+    {
+      "id": "auto-27",
+      "tag": "p",
+      "start": 480.0,
+      "preview": "SV 由三个变量决定,这是 Frank-Starling 定..."
+    },
+    {
+      "id": "auto-28",
+      "tag": "h4",
+      "start": 487.53,
+      "preview": "前负荷 (Preload)"
+    },
+    {
+      "id": "auto-29",
+      "tag": "p",
+      "start": 489.62,
+      "preview": "心室在舒张末期被血液 充盈 到什么程度——本质上是舒张末期容..."
+    },
+    {
+      "id": "auto-30",
+      "tag": "p",
+      "start": 520.85,
+      "preview": "训练通过两条路径增加前负荷:① 血浆量扩张 (plasma ..."
+    },
+    {
+      "id": "auto-31",
+      "tag": "p",
+      "start": 551.35,
+      "preview": "原理:SV(每搏量)= 心脏一次收缩射出的血量;EDV(舒张..."
+    },
+    {
+      "id": "auto-32",
+      "tag": "h4",
+      "start": 588.28,
+      "preview": "后负荷 (Afterload)"
+    },
+    {
+      "id": "auto-33",
+      "tag": "p",
+      "start": 590.93,
+      "preview": "心室射血时必须克服的压力,在左心约等于主动脉压力,在右心约等..."
+    },
+    {
+      "id": "auto-34",
+      "tag": "h4",
+      "start": 626.37,
+      "preview": "收缩力 (Contractility / Inotropy)"
+    },
+    {
+      "id": "auto-35",
+      "tag": "p",
+      "start": 629.58,
+      "preview": "心肌细胞内 Ca²⁺ 通量与肌动蛋白-肌球蛋白横桥结合速率决..."
+    },
+    {
+      "id": "auto-36",
+      "tag": "p",
+      "start": 663.48,
+      "preview": "训练有素的耐力运动员在 静息 时表现出\"高 SV\"特征,但其..."
+    },
+    {
+      "id": "auto-37",
+      "tag": "h3",
+      "start": 692.06,
+      "preview": "小节。 5.4 心率 HR——节拍器与储备"
+    },
+    {
+      "id": "auto-38",
+      "tag": "p",
+      "start": 697.29,
+      "preview": "心率 (heart rate, HR) 是窦房结起搏频率的体..."
+    },
+    {
+      "id": "auto-39",
+      "tag": "h4",
+      "start": 712.78,
+      "preview": "静息心率 (HRrest)"
+    },
+    {
+      "id": "auto-40",
+      "tag": "p",
+      "start": 715.09,
+      "preview": "典型范围:久坐成人 60–100 bpm,定期训练者 40–..."
+    },
+    {
+      "id": "auto-41",
+      "tag": "p",
+      "start": 734.04,
+      "preview": "原理:静息 HR 下降不是心脏变强,主要是 迷走神经张力 (..."
+    },
+    {
+      "id": "auto-42",
+      "tag": "p",
+      "start": 769.27,
+      "preview": "HRrest 下降的 机制 主要不是\"心脏变强了所以跳得慢\"..."
+    },
+    {
+      "id": "auto-43",
+      "tag": "h4",
+      "start": 805.27,
+      "preview": "最大心率 (HRmax)"
+    },
+    {
+      "id": "auto-44",
+      "tag": "p",
+      "start": 807.82,
+      "preview": "窦房结在最大交感驱动下能达到的频率,主要由 年龄 决定,与训..."
+    },
+    {
+      "id": "auto-45",
+      "tag": "li",
+      "start": 816.08,
+      "preview": "Fox / 220-age ——经典公式,误差 ±12 bp..."
+    },
+    {
+      "id": "auto-46",
+      "tag": "li",
+      "start": 816.08,
+      "preview": "Tanaka 2001 / 208 - 0.7×age ——..."
+    },
+    {
+      "id": "auto-47",
+      "tag": "li",
+      "start": 816.08,
+      "preview": "Gulati 2010 / 206 - 0.88×age —..."
+    },
+    {
+      "id": "auto-48",
+      "tag": "p",
+      "start": 816.08,
+      "preview": "这些公式的 个体方差 都在 ±15 bpm 量级,意味着 4..."
+    },
+    {
+      "id": "auto-49",
+      "tag": "p",
+      "start": 861.62,
+      "preview": "原理:HRmax(最大心率)≈ 208 − 0.7×年龄,几..."
+    },
+    {
+      "id": "auto-50",
+      "tag": "h4",
+      "start": 900.23,
+      "preview": "心率储备 (Heart Rate Reserve, HRR)"
+    },
+    {
+      "id": "auto-51",
+      "tag": "p",
+      "start": 904.27,
+      "preview": "HRR = HRmax − HRrest。这是 Karvon..."
+    },
+    {
+      "id": "auto-52",
+      "tag": "p",
+      "start": 914.81,
+      "preview": "HR target = HR rest + intensit..."
+    },
+    {
+      "id": "auto-53",
+      "tag": "p",
+      "start": 914.81,
+      "preview": "比如 HRrest 50、HRmax 190,70% HRR..."
+    },
+    {
+      "id": "auto-54",
+      "tag": "h4",
+      "start": 952.59,
+      "preview": "HR 漂移 (Cardiac Drift)"
+    },
+    {
+      "id": "auto-55",
+      "tag": "p",
+      "start": 955.47,
+      "preview": "恒定配速持续跑 30 分钟以上时,HR 会缓慢上升 5–15..."
+    },
+    {
+      "id": "auto-56",
+      "tag": "p",
+      "start": 990.63,
+      "preview": "原理:Cardiac drift = 恒定配速下 HR 持续..."
+    },
+    {
+      "id": "auto-57",
+      "tag": "h3",
+      "start": 1027.34,
+      "preview": "小节。 5.5 心输出量 Q = SV × HR"
+    },
+    {
+      "id": "auto-58",
+      "tag": "p",
+      "start": 1033.22,
+      "preview": "心输出量 (cardiac output, Q,有时写作 C..."
+    },
+    {
+      "id": "auto-59",
+      "tag": "p",
+      "start": 1049.15,
+      "preview": "典型数值:"
+    },
+    {
+      "id": "auto-60",
+      "tag": "p",
+      "start": 1049.15,
+      "preview": "注意精英和久坐者 静息 Q 相同 (都是 ~5 L/min)..."
+    },
+    {
+      "id": "auto-61",
+      "tag": "p",
+      "start": 1071.15,
+      "preview": "Z1 恢复(<70% HRmax): HR 低,SV 正在爬..."
+    },
+    {
+      "id": "auto-62",
+      "tag": "p",
+      "start": 1085.68,
+      "preview": "Z2 基础(70-80% HRmax): SV 已达 85-..."
+    },
+    {
+      "id": "auto-63",
+      "tag": "p",
+      "start": 1102.92,
+      "preview": "Z3 灰区(80-88%): SV 完全到顶,Q 推进 10..."
+    },
+    {
+      "id": "auto-64",
+      "tag": "p",
+      "start": 1116.32,
+      "preview": "Z4 阈值(88-92%): HR 高、SV 仍稳定在峰值、..."
+    },
+    {
+      "id": "auto-65",
+      "tag": "p",
+      "start": 1129.2,
+      "preview": "Z5 间歇(92-100%): HR 与 SV 都在峰值附近..."
+    },
+    {
+      "id": "auto-66",
+      "tag": "p",
+      "start": 1143.87,
+      "preview": "Q 随运动强度的上升曲线在 低强度区是 SV 主导 (SV ..."
+    },
+    {
+      "id": "auto-67",
+      "tag": "p",
+      "start": 1169.31,
+      "preview": "这条曲线对训练分区有直接含义: LT1 以下的\"基础区\" (..."
+    },
+    {
+      "id": "auto-68",
+      "tag": "p",
+      "start": 1201.23,
+      "preview": "① 测: 晨起卧位测一周静息 HR,取中位数。然后每周训练后..."
+    },
+    {
+      "id": "auto-69",
+      "tag": "p",
+      "start": 1220.85,
+      "preview": "② 改: 把跑量中 80% 严格压在 Z2(LTHR 的 8..."
+    },
+    {
+      "id": "auto-70",
+      "tag": "p",
+      "start": 1243.65,
+      "preview": "③ 看: 每次长跑后 30 分钟段的 HR 漂移。同样 Z2..."
+    },
+    {
+      "id": "auto-71",
+      "tag": "h3",
+      "start": 1261.01,
+      "preview": "小节。 5.6 静脉回流——第二心脏"
+    },
+    {
+      "id": "auto-72",
+      "tag": "p",
+      "start": 1265.61,
+      "preview": "SV 不能比静脉回流多。这是个常被忽视的物理约束:心脏不能\"..."
+    },
+    {
+      "id": "auto-73",
+      "tag": "p",
+      "start": 1284.06,
+      "preview": "肌肉泵 (muscle pump) ——这是最大的辅助泵,也..."
+    },
+    {
+      "id": "auto-74",
+      "tag": "p",
+      "start": 1318.43,
+      "preview": "呼吸泵 (respiratory pump) ——吸气时胸腔..."
+    },
+    {
+      "id": "auto-75",
+      "tag": "p",
+      "start": 1343.84,
+      "preview": "静脉瓣 (venous valves) ——单向阀门,沿下肢..."
+    },
+    {
+      "id": "auto-76",
+      "tag": "p",
+      "start": 1362.75,
+      "preview": "恢复日的低强度跑(60% HRmax)看似没什么训练价值,但..."
+    },
+    {
+      "id": "auto-77",
+      "tag": "p",
+      "start": 1388.79,
+      "preview": "原理:肌肉泵 = 小腿三头肌每次触地收缩挤压深静脉,把血液向..."
+    },
+    {
+      "id": "auto-78",
+      "tag": "h3",
+      "start": 1426.33,
+      "preview": "小节。 5.7 运动员心脏——离心性与向心性的两条路"
+    },
+    {
+      "id": "auto-79",
+      "tag": "p",
+      "start": 1432.51,
+      "preview": "长期训练的心脏在结构上明显异于久坐心脏,这套适应被命名为 \"..."
+    },
+    {
+      "id": "auto-80",
+      "tag": "p",
+      "start": 1449.84,
+      "preview": "Morganroth 1975 年的标志性研究比较了游泳/跑..."
+    },
+    {
+      "id": "auto-81",
+      "tag": "h4",
+      "start": 1460.18,
+      "preview": "离心性肥大 (Eccentric Hypertrophy)"
+    },
+    {
+      "id": "auto-82",
+      "tag": "p",
+      "start": 1463.53,
+      "preview": "耐力训练(跑、骑、游、划)长期高 Q + 中等血压负荷下的适..."
+    },
+    {
+      "id": "auto-83",
+      "tag": "h4",
+      "start": 1497.21,
+      "preview": "向心性肥大 (Concentric Hypertrophy)"
+    },
+    {
+      "id": "auto-84",
+      "tag": "p",
+      "start": 1500.75,
+      "preview": "力量训练(举重、推举、瓦尔萨尔瓦动作)长期高血压、低 Q 负..."
+    },
+    {
+      "id": "auto-85",
+      "tag": "p",
+      "start": 1532.28,
+      "preview": "跑者的 典型 echo 图像 :LVEDD 56–62 mm..."
+    },
+    {
+      "id": "auto-86",
+      "tag": "p",
+      "start": 1555.84,
+      "preview": "\"停训回归\" (detraining test) 是金标准:..."
+    },
+    {
+      "id": "auto-87",
+      "tag": "p",
+      "start": 1576.43,
+      "preview": "反共识。 \"运动员心脏\"在普通体检里经常被误标为\"心肌肥厚\"..."
+    },
+    {
+      "id": "auto-88",
+      "tag": "p",
+      "start": 1609.54,
+      "preview": "原理:耐力训练让 LV(左心室)向\"离心性肥大\"重塑——腔体..."
+    },
+    {
+      "id": "auto-89",
+      "tag": "h3",
+      "start": 1648.15,
+      "preview": "小节。 5.8 血液的训练适应——PVE、EPO、毛细血管"
+    },
+    {
+      "id": "auto-90",
+      "tag": "p",
+      "start": 1654.41,
+      "preview": "心肺训练的适应不是单一时间常数的过程,而是几个时间尺度叠加。..."
+    },
+    {
+      "id": "auto-91",
+      "tag": "h4",
+      "start": 1664.8,
+      "preview": "第 1–2 周:血浆量扩张 (PVE)"
+    },
+    {
+      "id": "auto-92",
+      "tag": "p",
+      "start": 1668.53,
+      "preview": "耐力训练在 3–5 次低中强度长跑后,血浆量 (plasma..."
+    },
+    {
+      "id": "auto-93",
+      "tag": "p",
+      "start": 1694.64,
+      "preview": "PVE 是 最快的训练适应 ——它在结构性改变之前就把 SV..."
+    },
+    {
+      "id": "auto-94",
+      "tag": "h4",
+      "start": 1724.06,
+      "preview": "第 4–8 周:红细胞质量上升 (Hbmass)"
+    },
+    {
+      "id": "auto-95",
+      "tag": "p",
+      "start": 1728.67,
+      "preview": "训练诱导的肾脏 EPO (erythropoietin) 分..."
+    },
+    {
+      "id": "auto-96",
+      "tag": "p",
+      "start": 1756.11,
+      "preview": "这就是为什么 血液操控 (blood doping)历史上在..."
+    },
+    {
+      "id": "auto-97",
+      "tag": "h4",
+      "start": 1790.44,
+      "preview": "第 6–12 周:毛细血管密度"
+    },
+    {
+      "id": "auto-98",
+      "tag": "p",
+      "start": 1793.5,
+      "preview": "工作肌中毛细血管/纤维比 (capillary-to-fib..."
+    },
+    {
+      "id": "auto-99",
+      "tag": "h4",
+      "start": 1828.92,
+      "preview": "第 12 周以上:线粒体与酶"
+    },
+    {
+      "id": "auto-100",
+      "tag": "p",
+      "start": 1831.92,
+      "preview": "这个阶段的适应主要在第 6 章(代谢)中展开,但要注意它与心..."
+    },
+    {
+      "id": "auto-101",
+      "tag": "p",
+      "start": 1860.02,
+      "preview": "这条时间轴对周期化有几条直接推论:"
+    },
+    {
+      "id": "auto-102",
+      "tag": "li",
+      "start": 1860.02,
+      "preview": "新训练计划至少 8 周才能看到 SV 之外的实质性适应 ——..."
+    },
+    {
+      "id": "auto-103",
+      "tag": "li",
+      "start": 1860.02,
+      "preview": "赛季前最后 6 周不要做大的训练变更 ——毛细血管和线粒体适..."
+    },
+    {
+      "id": "auto-104",
+      "tag": "li",
+      "start": 1860.02,
+      "preview": "训练空窗 2 周以上就会丢失 PVE ——这是为什么大假后第..."
+    },
+    {
+      "id": "auto-105",
+      "tag": "li",
+      "start": 1860.02,
+      "preview": "线粒体丢失最慢但也丢 ——3 个月不练丢 20–30%,半年..."
+    },
+    {
+      "id": "auto-106",
+      "tag": "p",
+      "start": 1860.02,
+      "preview": "原理:训练 1-2 周 PVE → 4-8 周 Hbmass..."
+    },
+    {
+      "id": "auto-107",
+      "tag": "p",
+      "start": 1928.99,
+      "preview": "① 测: 记录今天的 HRrest + 同一段 Z2 配速下..."
+    },
+    {
+      "id": "auto-108",
+      "tag": "p",
+      "start": 1948.52,
+      "preview": "② 改: 训练新周期前 4 周以\"建立 PVE 和 SV 适..."
+    },
+    {
+      "id": "auto-109",
+      "tag": "p",
+      "start": 1965.39,
+      "preview": "③ 看: 不要在新计划 4 周内换计划。看 8 周后的 5K..."
+    },
+    {
+      "id": "auto-110",
+      "tag": "h3",
+      "start": 1978.76,
+      "preview": "小节。 5.9 Fick 方程的展开——中央 × 外周"
+    },
+    {
+      "id": "auto-111",
+      "tag": "p",
+      "start": 1984.14,
+      "preview": "Fick 方程 (Adolf Fick, 1870) 把氧的..."
+    },
+    {
+      "id": "auto-112",
+      "tag": "p",
+      "start": 1984.14,
+      "preview": "VO₂ = Q × (CaO₂ − CvO₂)"
+    },
+    {
+      "id": "auto-113",
+      "tag": "p",
+      "start": 1984.14,
+      "preview": "其中 Q 是心输出量(中央项),(CaO₂ − CvO₂) ..."
+    },
+    {
+      "id": "auto-114",
+      "tag": "h4",
+      "start": 2013.67,
+      "preview": "动脉氧含量 CaO₂"
+    },
+    {
+      "id": "auto-115",
+      "tag": "p",
+      "start": 2016.14,
+      "preview": "每升动脉血携带的氧量,主要由 Hb 浓度决定:"
+    },
+    {
+      "id": "auto-116",
+      "tag": "p",
+      "start": 2016.14,
+      "preview": "CaO₂ ≈ 1.34 × Hb × SaO₂ + 0.00..."
+    },
+    {
+      "id": "auto-117",
+      "tag": "p",
+      "start": 2016.14,
+      "preview": "对正常 Hb = 150 g/L、SaO₂ = 98%:Ca..."
+    },
+    {
+      "id": "auto-118",
+      "tag": "p",
+      "start": 2047.25,
+      "preview": "正常人海平面运动时 SaO₂ 维持 96–98%。但精英耐力..."
+    },
+    {
+      "id": "auto-119",
+      "tag": "h4",
+      "start": 2083.01,
+      "preview": "混合静脉氧含量 CvO₂"
+    },
+    {
+      "id": "auto-120",
+      "tag": "p",
+      "start": 2085.79,
+      "preview": "体循环回流到右心房的混合静脉血氧含量。静息时 CvO₂ ≈ ..."
+    },
+    {
+      "id": "auto-121",
+      "tag": "h4",
+      "start": 2109.45,
+      "preview": "a-vO₂ diff 的训练适应"
+    },
+    {
+      "id": "auto-122",
+      "tag": "p",
+      "start": 2112.2,
+      "preview": "注意精英和久坐者 静息 a-vO₂ diff 几乎相同 ——..."
+    },
+    {
+      "id": "auto-123",
+      "tag": "p",
+      "start": 2133.15,
+      "preview": "这是 \"中央 vs 外周\" 命题的数学起点:"
+    },
+    {
+      "id": "auto-124",
+      "tag": "p",
+      "start": 2133.15,
+      "preview": "原理:Fick 方程 VO₂ = Q × (CaO₂ − C..."
+    },
+    {
+      "id": "auto-125",
+      "tag": "p",
+      "start": 2173.64,
+      "preview": "原理:Hbmass(每公斤体重血红蛋白质量)= 总携氧能力的..."
+    },
+    {
+      "id": "auto-126",
+      "tag": "p",
+      "start": 2214.73,
+      "preview": "设身处地。 你 35 岁、78 kg、过去半年没系统训练。基..."
+    },
+    {
+      "id": "auto-127",
+      "tag": "p",
+      "start": 2243.83,
+      "preview": "W1-W2 · 血浆量扩张(PVE)期 :训练 3-5 次低..."
+    },
+    {
+      "id": "auto-128",
+      "tag": "p",
+      "start": 2280.55,
+      "preview": "W4-W8 · 红细胞质量(Hbmass)上升期 :训练诱导..."
+    },
+    {
+      "id": "auto-129",
+      "tag": "p",
+      "start": 2312.54,
+      "preview": "W8-W12 · 毛细血管与线粒体接力 :此时中央(心脏 +..."
+    },
+    {
+      "id": "auto-130",
+      "tag": "p",
+      "start": 2341.89,
+      "preview": "关键洞察 :12 周内你的\"心肺系统\"进步主要在前 8 周(..."
+    },
+    {
+      "id": "auto-131",
+      "tag": "h3",
+      "start": 2360.83,
+      "preview": "小节。 5.10 中央与外周——VO₂max 与 LT 的不..."
+    },
+    {
+      "id": "auto-132",
+      "tag": "p",
+      "start": 2366.89,
+      "preview": "把 Fick 方程的两项分别推到极限,得到 VO₂max。但..."
+    },
+    {
+      "id": "auto-133",
+      "tag": "h4",
+      "start": 2386.46,
+      "preview": "中央天花板 (Central Limitation)"
+    },
+    {
+      "id": "auto-134",
+      "tag": "p",
+      "start": 2389.44,
+      "preview": "VO₂max 由 最大 Q × 最大 a-vO₂ diff ..."
+    },
+    {
+      "id": "auto-135",
+      "tag": "p",
+      "start": 2417.65,
+      "preview": "所以\"练 VO₂max\"本质上是\"练心脏腔体和总血量\"。最有..."
+    },
+    {
+      "id": "auto-136",
+      "tag": "h4",
+      "start": 2434.96,
+      "preview": "外周天花板 (Peripheral Limitation)"
+    },
+    {
+      "id": "auto-137",
+      "tag": "p",
+      "start": 2438.62,
+      "preview": "LT(lactate threshold)和 RE(runn..."
+    },
+    {
+      "id": "auto-138",
+      "tag": "p",
+      "start": 2460.75,
+      "preview": "所以\"练 LT\"本质上是\"练线粒体\"。最有效的刺激是 大量 ..."
+    },
+    {
+      "id": "auto-139",
+      "tag": "p",
+      "start": 2495.42,
+      "preview": "反共识。 业余跑者最大的训练错误,是 大部分时间在\"中等强度..."
+    },
+    {
+      "id": "auto-140",
+      "tag": "h4",
+      "start": 2533.4,
+      "preview": "VO₂max"
+    },
+    {
+      "id": "auto-141",
+      "tag": "p",
+      "start": 2535.21,
+      "preview": "75 ml/kg/min"
+    },
+    {
+      "id": "auto-142",
+      "tag": "p",
+      "start": 2535.21,
+      "preview": "主要练法:HIIT(4×4 min @ 95% HRmax)..."
+    },
+    {
+      "id": "auto-143",
+      "tag": "h4",
+      "start": 2548.79,
+      "preview": "LT2 (MLSS)"
+    },
+    {
+      "id": "auto-144",
+      "tag": "p",
+      "start": 2551.65,
+      "preview": "88 % VO₂max"
+    },
+    {
+      "id": "auto-145",
+      "tag": "p",
+      "start": 2551.65,
+      "preview": "主要练法:Threshold 跑(20–40 min @ T..."
+    },
+    {
+      "id": "auto-146",
+      "tag": "h4",
+      "start": 2552.05,
+      "preview": "RE",
+      "estimated": true
+    },
+    {
+      "id": "auto-147",
+      "tag": "p",
+      "start": 2565.47,
+      "preview": "180 ml/kg/km"
+    },
+    {
+      "id": "auto-148",
+      "tag": "p",
+      "start": 2565.47,
+      "preview": "主要练法:LSD + 跑量积累 主要适应:肌腱劲度 + 神经..."
+    },
+    {
+      "id": "auto-149",
+      "tag": "h4",
+      "start": 2576.09,
+      "preview": "Hbmass"
+    },
+    {
+      "id": "auto-150",
+      "tag": "p",
+      "start": 2577.55,
+      "preview": "13 g/kg"
+    },
+    {
+      "id": "auto-151",
+      "tag": "p",
+      "start": 2577.55,
+      "preview": "主要练法:LH-TL 高原 + 大跑量 主要适应:Hb 总量..."
+    },
+    {
+      "id": "auto-152",
+      "tag": "h3",
+      "start": 2587.76,
+      "preview": "小节。 5.11 肺通气——TV、RR、VE"
+    },
+    {
+      "id": "auto-153",
+      "tag": "p",
+      "start": 2593.87,
+      "preview": "空气进入肺泡是这条管线的入口,通气量决定了氧能不能足量进入血..."
+    },
+    {
+      "id": "auto-154",
+      "tag": "h4",
+      "start": 2606.71,
+      "preview": "潮气量 (Tidal Volume, TV)"
+    },
+    {
+      "id": "auto-155",
+      "tag": "p",
+      "start": 2609.66,
+      "preview": "每次呼吸的吸入或呼出气量。静息成人 TV ≈ 0.5 L(占..."
+    },
+    {
+      "id": "auto-156",
+      "tag": "h4",
+      "start": 2638.27,
+      "preview": "呼吸频率 (Respiratory Rate, RR)"
+    },
+    {
+      "id": "auto-157",
+      "tag": "p",
+      "start": 2641.97,
+      "preview": "每分钟呼吸次数。静息 12–15 次/min,中等运动 25..."
+    },
+    {
+      "id": "auto-158",
+      "tag": "h4",
+      "start": 2666.84,
+      "preview": "分钟通气量 (Minute Ventilation, VE)"
+    },
+    {
+      "id": "auto-159",
+      "tag": "p",
+      "start": 2670.86,
+      "preview": "VE = TV × RR。静息 6–8 L/min,最大可到..."
+    },
+    {
+      "id": "auto-160",
+      "tag": "h4",
+      "start": 2690.39,
+      "preview": "通气效率 (VE/VCO₂)"
+    },
+    {
+      "id": "auto-161",
+      "tag": "p",
+      "start": 2693.51,
+      "preview": "排出 1 L CO₂ 需要的通气量,反映气体交换效率。健康成..."
+    },
+    {
+      "id": "auto-162",
+      "tag": "h4",
+      "start": 2725.67,
+      "preview": "通气阈 (Ventilatory Thresholds, V..."
+    },
+    {
+      "id": "auto-163",
+      "tag": "p",
+      "start": 2730.49,
+      "preview": "VE 随强度的上升不是线性,而是出现两个折点:"
+    },
+    {
+      "id": "auto-164",
+      "tag": "li",
+      "start": 2730.49,
+      "preview": "VT1 (anaerobic threshold) ——VE..."
+    },
+    {
+      "id": "auto-165",
+      "tag": "li",
+      "start": 2752.22,
+      "preview": "VT2 (respiratory compensation ..."
+    },
+    {
+      "id": "auto-166",
+      "tag": "p",
+      "start": 2765.55,
+      "preview": "VT1/VT2 是非侵入性测定 LT1/LT2 的金标准,在..."
+    },
+    {
+      "id": "auto-167",
+      "tag": "h3",
+      "start": 2782.34,
+      "preview": "小节。 5.12 呼吸-步态耦合 LRC——4:1 与 2:..."
+    },
+    {
+      "id": "auto-168",
+      "tag": "p",
+      "start": 2789.14,
+      "preview": "跑步时呼吸和步态不是独立节奏,而是 锁相 (phase-lo..."
+    },
+    {
+      "id": "auto-169",
+      "tag": "p",
+      "start": 2804.64,
+      "preview": "常见 LRC 模式(数字含义:几步一次呼吸循环,完整循环 =..."
+    },
+    {
+      "id": "auto-170",
+      "tag": "li",
+      "start": 2804.64,
+      "preview": "2:1 ——每 2 步一次完整呼吸(1 步吸 + 1 步呼)..."
+    },
+    {
+      "id": "auto-171",
+      "tag": "li",
+      "start": 2819.99,
+      "preview": "3:1 ——每 3 步一次呼吸。低中强度精英常用。这个模式的..."
+    },
+    {
+      "id": "auto-172",
+      "tag": "li",
+      "start": 2833.14,
+      "preview": "4:1 ——每 4 步一次呼吸。低强度长距离精英典型。最经济..."
+    },
+    {
+      "id": "auto-173",
+      "tag": "li",
+      "start": 2840.21,
+      "preview": "2:2 ——每 4 步一个呼吸(2 步吸 + 2 步呼)。一..."
+    },
+    {
+      "id": "auto-174",
+      "tag": "li",
+      "start": 2846.46,
+      "preview": "3:2 / 5:2 ——奇数比例,出现在配速变化中。"
+    },
+    {
+      "id": "auto-175",
+      "tag": "li",
+      "start": 2851.43,
+      "preview": "1:1 ——每步一次呼吸。最大强度冲刺,通常 ≥800m 配..."
+    },
+    {
+      "id": "auto-176",
+      "tag": "p",
+      "start": 2857.89,
+      "preview": "LRC 的力学动机有三:"
+    },
+    {
+      "id": "auto-177",
+      "tag": "p",
+      "start": 2857.89,
+      "preview": "① 呼吸泵-肌肉泵协同 :吸气负压配合静脉回流,呼气正压辅助..."
+    },
+    {
+      "id": "auto-178",
+      "tag": "p",
+      "start": 2871.45,
+      "preview": "② 核心肌肉双重任务 :腹横肌、膈肌既要稳定脊柱抵抗触地冲击..."
+    },
+    {
+      "id": "auto-179",
+      "tag": "p",
+      "start": 2884.48,
+      "preview": "③ 振动共振 :在跑动中胸腔的力学波动(每步触地产生上下加速..."
+    },
+    {
+      "id": "auto-180",
+      "tag": "p",
+      "start": 2897.06,
+      "preview": "精英与业余的 LRC 差异:精英在低中强度普遍使用 3:1 ..."
+    },
+    {
+      "id": "auto-181",
+      "tag": "p",
+      "start": 2924.95,
+      "preview": "有限的临床证据表明:在 恒定低中强度 下主动调整 LRC 到..."
+    },
+    {
+      "id": "auto-182",
+      "tag": "h4",
+      "start": 2966.73,
+      "preview": "\"右脚出气岔气\"的迷信"
+    },
+    {
+      "id": "auto-183",
+      "tag": "p",
+      "start": 2969.0,
+      "preview": "跑者圈广为流传的说法: 侧腹疼痛 (exercise-rel..."
+    },
+    {
+      "id": "auto-184",
+      "tag": "p",
+      "start": 2989.04,
+      "preview": "证据如何?Morton 等人 2014 年的 meta 分析..."
+    },
+    {
+      "id": "auto-185",
+      "tag": "h3",
+      "start": 3018.04,
+      "preview": "小节。 5.13 呼吸肌——膈肌、肋间肌、腹横肌"
+    },
+    {
+      "id": "auto-186",
+      "tag": "p",
+      "start": 3023.65,
+      "preview": "呼吸不是被动的胸廓抖动,而是一组横纹肌的精密协作。这组肌肉在..."
+    },
+    {
+      "id": "auto-187",
+      "tag": "h4",
+      "start": 3034.78,
+      "preview": "膈肌 (Diaphragm)"
+    },
+    {
+      "id": "auto-188",
+      "tag": "p",
+      "start": 3036.84,
+      "preview": "主要吸气肌,贡献静息吸气的 70–80%。它是一片穹顶状的横..."
+    },
+    {
+      "id": "auto-189",
+      "tag": "p",
+      "start": 3065.4,
+      "preview": "膈肌的纤维构成 非常适合耐力运动 :I 型(慢肌)纤维约 5..."
+    },
+    {
+      "id": "auto-190",
+      "tag": "h4",
+      "start": 3085.36,
+      "preview": "外肋间肌 (External Intercostals)"
+    },
+    {
+      "id": "auto-191",
+      "tag": "p",
+      "start": 3088.64,
+      "preview": "静息吸气的次要贡献者(20–30%),在运动时贡献上升到 5..."
+    },
+    {
+      "id": "auto-192",
+      "tag": "h4",
+      "start": 3098.89,
+      "preview": "辅助吸气肌(高强度)"
+    },
+    {
+      "id": "auto-193",
+      "tag": "p",
+      "start": 3101.95,
+      "preview": "胸锁乳突肌、斜角肌、胸大肌(锁骨头)、上斜方肌——这些在静息..."
+    },
+    {
+      "id": "auto-194",
+      "tag": "h4",
+      "start": 3121.97,
+      "preview": "呼气肌(主动呼气)"
+    },
+    {
+      "id": "auto-195",
+      "tag": "p",
+      "start": 3124.35,
+      "preview": "静息呼气是被动的(肺弹性回缩),不需要肌肉做功。运动时呼气变..."
+    },
+    {
+      "id": "auto-196",
+      "tag": "h4",
+      "start": 3148.99,
+      "preview": "呼吸功 (Work of Breathing, Wb)"
+    },
+    {
+      "id": "auto-197",
+      "tag": "p",
+      "start": 3152.2,
+      "preview": "静息时 Wb 占总 VO₂ 仅 1–2%(几乎可忽略)。最大..."
+    },
+    {
+      "id": "auto-198",
+      "tag": "h4",
+      "start": 3172.8,
+      "preview": "呼吸肌代谢反射 (Respiratory Muscle Me..."
+    },
+    {
+      "id": "auto-199",
+      "tag": "p",
+      "start": 3177.07,
+      "preview": "Dempsey 等人 (1996, 2002 系列) 的标志..."
+    },
+    {
+      "id": "auto-200",
+      "tag": "p",
+      "start": 3212.57,
+      "preview": "原理:呼吸肌代谢反射 = 膈肌接近疲劳时,III/IV 类传..."
+    },
+    {
+      "id": "auto-201",
+      "tag": "h4",
+      "start": 3248.64,
+      "preview": "呼吸肌训练 (Respiratory Muscle Trai..."
+    },
+    {
+      "id": "auto-202",
+      "tag": "p",
+      "start": 3252.87,
+      "preview": "使用阻力呼吸器(POWERbreathe、Expand-A-..."
+    },
+    {
+      "id": "auto-203",
+      "tag": "li",
+      "start": 3267.78,
+      "preview": "RMT 4–6 周后吸气肌力量 (MIP) 提升 15–30..."
+    },
+    {
+      "id": "auto-204",
+      "tag": "li",
+      "start": 3267.78,
+      "preview": "耐力测试中力竭时间提高 10–25%(以低于最大强度的 TT..."
+    },
+    {
+      "id": "auto-205",
+      "tag": "li",
+      "start": 3267.78,
+      "preview": "呼吸感受 (perception of breathless..."
+    },
+    {
+      "id": "auto-206",
+      "tag": "p",
+      "start": 3267.78,
+      "preview": "所以 RMT 不是\"练 VO₂max\",而是 提高呼吸肌的代..."
+    },
+    {
+      "id": "auto-207",
+      "tag": "p",
+      "start": 3302.12,
+      "preview": "RMT 设备:POWERbreathe 之类的弹簧阻力呼吸器..."
+    },
+    {
+      "id": "auto-208",
+      "tag": "h3",
+      "start": 3332.99,
+      "preview": "小节。 5.14 VO₂ 动力学——启动与恢复的时间常数"
+    },
+    {
+      "id": "auto-209",
+      "tag": "p",
+      "start": 3339.32,
+      "preview": "在某一恒定强度下开始运动时,VO₂ 不是立刻跳到新稳态,而是..."
+    },
+    {
+      "id": "auto-210",
+      "tag": "h4",
+      "start": 3351.59,
+      "preview": "On-kinetics (启动动力学)"
+    },
+    {
+      "id": "auto-211",
+      "tag": "p",
+      "start": 3354.43,
+      "preview": "从静息或低强度切换到高强度的瞬间,VO₂ 跟随的过程通常被分..."
+    },
+    {
+      "id": "auto-212",
+      "tag": "li",
+      "start": 3354.43,
+      "preview": "第一相 (Cardiodynamic Phase, 0–20..."
+    },
+    {
+      "id": "auto-213",
+      "tag": "li",
+      "start": 3375.17,
+      "preview": "第二相 (Primary Component, 20 s –..."
+    },
+    {
+      "id": "auto-214",
+      "tag": "li",
+      "start": 3389.87,
+      "preview": "第三相 (Slow Component, > 3 min) ..."
+    },
+    {
+      "id": "auto-215",
+      "tag": "h4",
+      "start": 3410.34,
+      "preview": "训练对 τ 的影响"
+    },
+    {
+      "id": "auto-216",
+      "tag": "p",
+      "start": 3412.28,
+      "preview": "精英耐力运动员 τ ≈ 25–40 s,业余 40–60 s..."
+    },
+    {
+      "id": "auto-217",
+      "tag": "p",
+      "start": 3427.1,
+      "preview": "这对 间歇训练 有直接含义:做 1 min on / 1 m..."
+    },
+    {
+      "id": "auto-218",
+      "tag": "h4",
+      "start": 3452.62,
+      "preview": "Off-kinetics (恢复动力学)"
+    },
+    {
+      "id": "auto-219",
+      "tag": "p",
+      "start": 3455.45,
+      "preview": "运动停止后 VO₂ 下降的过程,τ 通常比 on-kinet..."
+    },
+    {
+      "id": "auto-220",
+      "tag": "h3",
+      "start": 3475.82,
+      "preview": "小节。 5.15 运动后氧债 EPOC"
+    },
+    {
+      "id": "auto-221",
+      "tag": "p",
+      "start": 3480.1,
+      "preview": "运动停止后,VO₂ 不会立刻回到静息基线,而是在一段时间内维..."
+    },
+    {
+      "id": "auto-222",
+      "tag": "p",
+      "start": 3494.47,
+      "preview": "EPOC 分两段:"
+    },
+    {
+      "id": "auto-223",
+      "tag": "h4",
+      "start": 3496.5,
+      "preview": "快速 EPOC (Fast Component, 0–60 ..."
+    },
+    {
+      "id": "auto-224",
+      "tag": "p",
+      "start": 3501.33,
+      "preview": "占总 EPOC 的 60–70%,机制:"
+    },
+    {
+      "id": "auto-225",
+      "tag": "li",
+      "start": 3501.33,
+      "preview": "ATP 与磷酸肌酸 (PCr) 储备的再合成——这是 EPO..."
+    },
+    {
+      "id": "auto-226",
+      "tag": "li",
+      "start": 3501.33,
+      "preview": "肌红蛋白与血红蛋白的再饱和——这部分约 5–10 ml O₂..."
+    },
+    {
+      "id": "auto-227",
+      "tag": "li",
+      "start": 3501.33,
+      "preview": "升高的体温维持的额外代谢(Q₁₀ 效应)——体温每升高 1°..."
+    },
+    {
+      "id": "auto-228",
+      "tag": "li",
+      "start": 3501.33,
+      "preview": "升高的心肺频率维持(HR、VE 比静息还高 30–60 mi..."
+    },
+    {
+      "id": "auto-229",
+      "tag": "h4",
+      "start": 3531.78,
+      "preview": "慢速 EPOC (Slow Component, 1–24 ..."
+    },
+    {
+      "id": "auto-230",
+      "tag": "p",
+      "start": 3536.53,
+      "preview": "占 30–40%,机制涉及:"
+    },
+    {
+      "id": "auto-231",
+      "tag": "li",
+      "start": 3536.53,
+      "preview": "肝脏与肌肉清除血乳酸(乳酸 → 葡萄糖,Cori 循环)"
+    },
+    {
+      "id": "auto-232",
+      "tag": "li",
+      "start": 3536.53,
+      "preview": "糖原再合成(若运动后补碳水)"
+    },
+    {
+      "id": "auto-233",
+      "tag": "li",
+      "start": 3536.53,
+      "preview": "儿茶酚胺、皮质醇的持续升高维持的代谢"
+    },
+    {
+      "id": "auto-234",
+      "tag": "li",
+      "start": 3536.53,
+      "preview": "组织修复与细胞应激反应(IL-6 等炎症介质引发的代谢)"
+    },
+    {
+      "id": "auto-235",
+      "tag": "p",
+      "start": 3536.53,
+      "preview": "EPOC 总量与运动强度 呈指数关系 :30 min 中等有..."
+    },
+    {
+      "id": "auto-236",
+      "tag": "h3",
+      "start": 3591.15,
+      "preview": "小节。 5.16 高原训练——Live High, Trai..."
+    },
+    {
+      "id": "auto-237",
+      "tag": "p",
+      "start": 3596.08,
+      "preview": "海拔越高大气压越低,氧分压相应下降:海平面 PaO₂ ≈ 1..."
+    },
+    {
+      "id": "auto-238",
+      "tag": "h4",
+      "start": 3613.88,
+      "preview": "急性反应 (Acute, 0–48 h)"
+    },
+    {
+      "id": "auto-239",
+      "tag": "p",
+      "start": 3617.5,
+      "preview": "到达高原立即:"
+    },
+    {
+      "id": "auto-240",
+      "tag": "li",
+      "start": 3617.5,
+      "preview": "SaO₂ 从 98% 降到 90–92%(2500m)"
+    },
+    {
+      "id": "auto-241",
+      "tag": "li",
+      "start": 3617.5,
+      "preview": "通气量代偿性上升,RR 与 TV 都增加,血液 pH 偏碱(..."
+    },
+    {
+      "id": "auto-242",
+      "tag": "li",
+      "start": 3617.5,
+      "preview": "HR 在同强度下上升 5–15 bpm(代偿氧含量下降)"
+    },
+    {
+      "id": "auto-243",
+      "tag": "li",
+      "start": 3617.5,
+      "preview": "最大 VO₂ 下降 ~6%/1000m 海拔"
+    },
+    {
+      "id": "auto-244",
+      "tag": "li",
+      "start": 3617.5,
+      "preview": "常见症状:头痛、失眠、食欲下降 (AMS, Acute Mo..."
+    },
+    {
+      "id": "auto-245",
+      "tag": "h4",
+      "start": 3650.17,
+      "preview": "慢性适应 (Chronic, 1–4 weeks)"
+    },
+    {
+      "id": "auto-246",
+      "tag": "p",
+      "start": 3654.25,
+      "preview": "1–4 周内出现的结构性适应:"
+    },
+    {
+      "id": "auto-247",
+      "tag": "li",
+      "start": 3654.25,
+      "preview": "EPO 在到达后 1–2 小时即开始上升,网织红细胞 3–5..."
+    },
+    {
+      "id": "auto-248",
+      "tag": "li",
+      "start": 3654.25,
+      "preview": "肾脏增加排出 HCO₃⁻ 以代偿呼吸性碱中毒,血液 pH 恢..."
+    },
+    {
+      "id": "auto-249",
+      "tag": "li",
+      "start": 3654.25,
+      "preview": "肌肉线粒体密度有研究显示 下降 (慢性低氧诱导 mitoph..."
+    },
+    {
+      "id": "auto-250",
+      "tag": "li",
+      "start": 3654.25,
+      "preview": "毛细血管密度可能上升,但证据不一致"
+    },
+    {
+      "id": "auto-251",
+      "tag": "h4",
+      "start": 3683.38,
+      "preview": "Live High, Train Low (LH-TL)"
+    },
+    {
+      "id": "auto-252",
+      "tag": "p",
+      "start": 3686.61,
+      "preview": "Levine 与 Stray-Gundersen (1997..."
+    },
+    {
+      "id": "auto-253",
+      "tag": "li",
+      "start": 3697.42,
+      "preview": "住在高海拔——足够的低氧暴露刺激 EPO 与 Hbmass ..."
+    },
+    {
+      "id": "auto-254",
+      "tag": "li",
+      "start": 3697.42,
+      "preview": "训练在低海拔——保持训练强度不下降,避免高海拔训练的\"训练去..."
+    },
+    {
+      "id": "auto-255",
+      "tag": "p",
+      "start": 3697.42,
+      "preview": "有效剂量:每天 12+ 小时在 2200 m 以上,持续 3..."
+    },
+    {
+      "id": "auto-256",
+      "tag": "h4",
+      "start": 3735.16,
+      "preview": "低氧训练设备 (Hypoxic Tents / Chambe..."
+    },
+    {
+      "id": "auto-257",
+      "tag": "p",
+      "start": 3738.51,
+      "preview": "在低海拔模拟高原睡眠的设备,通过降低环境 O₂ 浓度模拟 2..."
+    },
+    {
+      "id": "auto-258",
+      "tag": "p",
+      "start": 3760.18,
+      "preview": "① 训练强度下降 ——许多业余跑者把高原训练做成\"上去训练\"..."
+    },
+    {
+      "id": "auto-259",
+      "tag": "h3",
+      "start": 3801.47,
+      "preview": "小节。 5.17 运动员心脏事件——猝死与筛查"
+    },
+    {
+      "id": "auto-260",
+      "tag": "p",
+      "start": 3807.18,
+      "preview": "尽管耐力运动整体上是心血管健康的最大单一干预,在长距离比赛中..."
+    },
+    {
+      "id": "auto-261",
+      "tag": "h4",
+      "start": 3822.6,
+      "preview": "SCD 的流行病学"
+    },
+    {
+      "id": "auto-262",
+      "tag": "p",
+      "start": 3824.82,
+      "preview": "马拉松与半马比赛中 SCD 发生率约 0.5–1 / 100..."
+    },
+    {
+      "id": "auto-263",
+      "tag": "h4",
+      "start": 3851.21,
+      "preview": "主要病因"
+    },
+    {
+      "id": "auto-264",
+      "tag": "li",
+      "start": 3852.62,
+      "preview": "肥厚型心肌病 (HCM) ——< 35 岁运动员 SCD 的..."
+    },
+    {
+      "id": "auto-265",
+      "tag": "li",
+      "start": 3852.62,
+      "preview": "冠状动脉异常起源 (ACA) ——尤其是左冠脉起源于右窦(L..."
+    },
+    {
+      "id": "auto-266",
+      "tag": "li",
+      "start": 3852.62,
+      "preview": "致心律失常性右心室发育不良 (ARVC) ——耐力运动员中相..."
+    },
+    {
+      "id": "auto-267",
+      "tag": "li",
+      "start": 3852.62,
+      "preview": "原发性心律失常 (Channelopathies) ——长 ..."
+    },
+    {
+      "id": "auto-268",
+      "tag": "li",
+      "start": 3852.62,
+      "preview": "冠心病 (CAD) ——> 35 岁 SCD 的首因(>50..."
+    },
+    {
+      "id": "auto-269",
+      "tag": "h4",
+      "start": 3896.5,
+      "preview": "筛查策略"
+    },
+    {
+      "id": "auto-270",
+      "tag": "p",
+      "start": 3898.22,
+      "preview": "欧洲心脏病学会 (ESC) 2005 年建议所有竞技运动员每..."
+    },
+    {
+      "id": "auto-271",
+      "tag": "p",
+      "start": 3927.3,
+      "preview": "对普通业余跑者:"
+    },
+    {
+      "id": "auto-272",
+      "tag": "li",
+      "start": 3927.3,
+      "preview": "有家族猝死史(45 岁前一级亲属猝死)→ 心内科评估 + 心..."
+    },
+    {
+      "id": "auto-273",
+      "tag": "li",
+      "start": 3927.3,
+      "preview": "有运动诱发胸痛、晕厥、近晕厥 → 立即停止训练并就医"
+    },
+    {
+      "id": "auto-274",
+      "tag": "li",
+      "start": 3927.3,
+      "preview": "35 岁以上初次开始耐力训练 → 至少做静息心电图 + 血脂..."
+    },
+    {
+      "id": "auto-275",
+      "tag": "li",
+      "start": 3927.3,
+      "preview": "训练状态正常但有心电图 ST-T 异常 → 鉴别\"运动员心脏..."
+    },
+    {
+      "id": "auto-276",
+      "tag": "li",
+      "start": 3927.3,
+      "preview": "不要在症状性运动中坚持\"咬牙过去\"——这是 SCD 最常见的..."
+    },
+    {
+      "id": "auto-277",
+      "tag": "h4",
+      "start": 3963.53,
+      "preview": "训练量的\"反 U 形\"健康曲线"
+    },
+    {
+      "id": "auto-278",
+      "tag": "p",
+      "start": 3966.93,
+      "preview": "训练量与心血管健康不是简单单调正相关。Lavie 与 O'K..."
+    },
+    {
+      "id": "auto-279",
+      "tag": "li",
+      "start": 3970.81,
+      "preview": "0–150 min/周 中等强度:健康收益快速上升,全因死亡..."
+    },
+    {
+      "id": "auto-280",
+      "tag": "li",
+      "start": 3970.81,
+      "preview": "150–450 min/周:收益继续上升但边际递减,死亡率下..."
+    },
+    {
+      "id": "auto-281",
+      "tag": "li",
+      "start": 3970.81,
+      "preview": ">500 min/周:有限证据显示某些心血管标志物(冠脉钙化..."
+    },
+    {
+      "id": "auto-282",
+      "tag": "p",
+      "start": 3970.81,
+      "preview": "这是耐力领域目前的活跃争议(Maron, O'Keefe, ..."
+    },
+    {
+      "id": "auto-283",
+      "tag": "p",
+      "start": 4023.64,
+      "preview": "反共识。 耐力运动员的 心房颤动 (atrial fibri..."
+    },
+    {
+      "id": "auto-284",
+      "tag": "p",
+      "start": 4061.58,
+      "preview": "设身处地。 假设你 35 岁,体重 70 kg,开始训练前久..."
+    },
+    {
+      "id": "auto-285",
+      "tag": "p",
+      "start": 4088.64,
+      "preview": "第 1-2 周 :你会觉得\"心跳没那么累了\"。这不是错觉——..."
+    },
+    {
+      "id": "auto-286",
+      "tag": "p",
+      "start": 4108.19,
+      "preview": "第 4-8 周 :VO₂max 涨到 42(+10%),主要..."
+    },
+    {
+      "id": "auto-287",
+      "tag": "p",
+      "start": 4124.31,
+      "preview": "第 12-24 周 :外周适应启动——毛细血管密度 +30%..."
+    },
+    {
+      "id": "auto-288",
+      "tag": "p",
+      "start": 4150.69,
+      "preview": "1 年后 :VO₂max 接近 53-55,RHR 45-4..."
+    },
+    {
+      "id": "auto-289",
+      "tag": "h3",
+      "start": 4181.33,
+      "preview": "小节。 5.18 本章小结"
+    },
+    {
+      "id": "auto-290",
+      "tag": "p",
+      "start": 4184.83,
+      "preview": "心肺系统是耐力的两块独立天花板:中央(VO₂max ≈ Q ..."
+    },
+    {
+      "id": "auto-291",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "Fick 方程: VO₂ = Q × (CaO₂ − CvO..."
+    },
+    {
+      "id": "auto-292",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "心输出量: Q = SV × HR,最大 Q 久坐 ~21 ..."
+    },
+    {
+      "id": "auto-293",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "HRmax 估算: 208 − 0.7 × 年龄(Tanak..."
+    },
+    {
+      "id": "auto-294",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "Karvonen: HR target = HR rest ..."
+    },
+    {
+      "id": "auto-295",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "动脉氧含量: CaO₂ ≈ 1.34 × Hb × SaO₂..."
+    },
+    {
+      "id": "auto-296",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "训练适应序列: 1–2 wk PVE → 4–8 wk Hb..."
+    },
+    {
+      "id": "auto-297",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "LH-TL 剂量: 12+ h/d 在 2200+ m,3–..."
+    },
+    {
+      "id": "auto-298",
+      "tag": "p",
+      "start": 4207.41,
+      "preview": "从 Q 与 a-vO₂ diff 两个角度出发,下一章 (C..."
+    },
+    {
+      "id": "auto-299",
+      "tag": "h4",
+      "start": 4272.64,
+      "preview": "协议。 协议 1 · 7 天晨脉基线 + 月度追踪"
+    },
+    {
+      "id": "auto-300",
+      "tag": "li",
+      "start": 4278.35,
+      "preview": "测什么: HRrest(静息心率)的 7 天中位数,作为心血..."
+    },
+    {
+      "id": "auto-301",
+      "tag": "li",
+      "start": 4278.35,
+      "preview": "工具: 带胸带的跑表(Polar / Garmin H10 ..."
+    },
+    {
+      "id": "auto-302",
+      "tag": "li",
+      "start": 4278.35,
+      "preview": "步骤: 晨醒后 不下床、不解小便、不看手机 ,平卧 5 mi..."
+    },
+    {
+      "id": "auto-303",
+      "tag": "li",
+      "start": 4308.0,
+      "preview": "频率: 每天测,每周记一次中位数。新训练周期前一周建立基线"
+    },
+    {
+      "id": "auto-304",
+      "tag": "li",
+      "start": 4313.85,
+      "preview": "判读: 训练 8-12 周后 HRrest 中位数降 5-8..."
+    },
+    {
+      "id": "auto-305",
+      "tag": "h4",
+      "start": 4333.34,
+      "preview": "协议。 协议 2 · HRV(心率变异性)监测训练就绪度"
+    },
+    {
+      "id": "auto-306",
+      "tag": "li",
+      "start": 4339.71,
+      "preview": "测什么: rMSSD(相邻心跳间隔差异的均方根),反映迷走神..."
+    },
+    {
+      "id": "auto-307",
+      "tag": "li",
+      "start": 4339.71,
+      "preview": "工具: HRV4Training / Elite HRV /..."
+    },
+    {
+      "id": "auto-308",
+      "tag": "li",
+      "start": 4360.38,
+      "preview": "步骤: 晨起平卧 2-3 min,测 1-3 min HRV..."
+    },
+    {
+      "id": "auto-309",
+      "tag": "li",
+      "start": 4371.23,
+      "preview": "频率: 每天测,作为当日训练强度决策依据。基线内 → 按计划..."
+    },
+    {
+      "id": "auto-310",
+      "tag": "li",
+      "start": 4381.59,
+      "preview": "判读: HRV 趋势性下降 7+ 天 = 累积疲劳,需要减量..."
+    },
+    {
+      "id": "auto-311",
+      "tag": "h4",
+      "start": 4398.9,
+      "preview": "协议。 协议 3 · 实测 HRmax(避开公式误差)"
+    },
+    {
+      "id": "auto-312",
+      "tag": "li",
+      "start": 4404.75,
+      "preview": "测什么: 个人 HRmax 真实值(公式 208-0.7×年..."
+    },
+    {
+      "id": "auto-313",
+      "tag": "li",
+      "start": 4404.75,
+      "preview": "工具: 带胸带的跑表 + 400m 跑道或一段 1 km 上..."
+    },
+    {
+      "id": "auto-314",
+      "tag": "li",
+      "start": 4417.59,
+      "preview": "步骤: 方案 A · 跑道:充分热身 20 min → 10..."
+    },
+    {
+      "id": "auto-315",
+      "tag": "li",
+      "start": 4442.29,
+      "preview": "频率: 每 1-2 年测一次。HRmax 不随训练改变,但随..."
+    },
+    {
+      "id": "auto-316",
+      "tag": "li",
+      "start": 4449.04,
+      "preview": "判读: 用实测 HRmax 重新校准 Z1-Z5 区间;或直..."
+    },
+    {
+      "id": "auto-317",
+      "tag": "p",
+      "start": 4449.04,
+      "preview": "主要参考来源"
+    }
+  ]
+}
