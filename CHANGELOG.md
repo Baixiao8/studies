@@ -76,6 +76,93 @@
 
 ---
 
+## v6.3 · 听书功能折叠 · 产品决策反思(2026-05-24)
+
+> 用户反馈"卡顿一直没修好",触发了一次诚实的产品反思。
+> 决定:**B 路径折叠** — reader 代码默认不加载,按需启用。
+
+### 背景:产品决策反思
+
+经过 v5(听书 P0-P2 + Sheet)→ v5.1(性能急救)→ v5.2(Design System)→ v6.0(预录音频)→ v6.1(content-visibility)→ v6.2(ID 一致性修复),用户反馈仍是"卡顿明显"。
+
+诚实评估:
+- ❌ **错位 1**:研究报告是密度型内容(公式 / SVG / 嵌套结构),不适合朗读
+- ❌ **错位 2**:13.7 小时报告的"通勤听书"假设不真实
+- ❌ **错位 3**:reader 1000+ 行代码 + 227MB 音频 → 工程债爆炸
+
+100% 卡顿/UI bug 都集中在 v5-v6 添加的部分,v1-v4 内容本身从未卡过。
+
+### v6.3 折叠方案
+
+- `reader.css` / `reader.js` **不再 inline 到 index.html**
+- 部分 HTML 文件移除外部 link/script 引用
+- 加 30 行 `bootstrap` script 默认 inline
+- 触发条件(三选一):
+  - URL `?listen=1` 或 `?reader=1` 参数
+  - URL hash `#read=xxx`(分享段落 URL 仍能用)
+  - 键盘 R 键
+  - `window.activateReader()` 全局函数
+- 触发后动态 inject `_shared/reader.{css,js}`,正常工作
+- audio/ 目录保留,按需加载
+
+### 数据对比
+
+| 维度 | v6.2 | v6.3 |
+|---|---|---|
+| 首屏 index.html | 1.13MB | **1.04MB**(-90KB)|
+| inline 资源 | reader.css 13K + reader.js 25K + bootstrap 30 行 | 仅 bootstrap 30 行 |
+| 首屏可见控件 | 右下角 ▶ 触发按钮 | **无** |
+| 用户能触发 | 点击 / R 键 / URL | URL `?listen=1` / R 键 |
+| 默认体验 | 阅读 + 听书 | **纯阅读** |
+| reader 代码 | 在首屏 HTML 里 | 完全不加载 |
+
+### 产品形态结果
+
+```
+现在的产品定义:
+  深度研究报告(纯视觉阅读品)
+  附带:可选听书模式(高级用户主动启用)
+  形态:案头工具,不是听书 app
+```
+
+### 沉没成本处理
+
+- ✅ reader.js / reader.css / audio-gen.py / Design System / PRD / READER_RULES — 全部代码保留
+- ✅ 12 章 audio 文件保留(227MB,以后随时可用)
+- ✅ 即将出新报告(如纯叙事性内容)可一键启用听书
+- ⚠️ 一周工作"未删除但默认不可见"
+
+### 学到的产品准则(写入 PRINCIPLES.md)
+
+> **每加一个功能前回答 3 个问题**:
+> 1. 用户在反馈里**明确说要这个**了吗?(不是 casual remark 引申)
+> 2. 这个功能是**强化核心**还是**叠加新场景**?
+> 3. 这个功能**失败的代价**是什么?
+
+---
+
+## v6.2 · 修复 ID 不一致 + section.chapter 缺失(2026-05-24)
+
+自动化测试找到两个隐藏严重 bug:
+- chunkId 生成不一致 → audio mode 段落高亮永远失效
+- section 没有 `class="chapter"` → v5.1/v6.1 性能优化没生效
+
+修复:
+- reader.js chunkId 改为 `auto-N` 顺序索引(与 audio-gen.py 对齐)
+- build.py 装配时给 section 加 class="chapter"
+
+---
+
+## v6.1 · 移动端性能急救(2026-05-24)
+
+- section.chapter content-visibility + contain
+- .svg-frame 视口外懒渲染
+- .callout 独立渲染单元
+- audio preload="none"
+- Ch9-10 音频上线
+
+---
+
 ## v6.0 · 高音质 Audio Mode 集成(2026-05-24)
 
 针对 v5 三大结构性体验问题(iOS 锁屏中断 / 中文音色机械感 / 自研修补 ROI 递减),

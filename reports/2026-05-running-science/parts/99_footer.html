@@ -36,7 +36,40 @@
 <script src="../../_shared/progress.js?v=20260522b" defer></script>
 <script src="../../_shared/mini-toc.js?v=20260522b" defer></script>
 <script src="../../_shared/tooltip.js?v=20260522b" defer></script>
-<script src="../../_shared/reader.js?v=20260523a" defer></script>
+
+<!-- v6.3 · Reader 听书功能折叠:默认不加载,按 R 或 URL ?listen=1 才动态注入 reader.{js,css} -->
+<script>
+(function () {
+  'use strict';
+  var loaded = false;
+  function loadReader() {
+    if (loaded) return;
+    loaded = true;
+    var ver = '20260524a';
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = '../../_shared/reader.css?v=' + ver;
+    document.head.appendChild(l);
+    var s = document.createElement('script');
+    s.src = '../../_shared/reader.js?v=' + ver;
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+  // URL 触发(?listen=1 或 #read=xxx)
+  if (location.search.indexOf('listen=1') >= 0 || location.search.indexOf('reader=1') >= 0 || location.hash.indexOf('#read=') >= 0) {
+    loadReader();
+  }
+  // R 键触发(仅按一次)
+  document.addEventListener('keydown', function (e) {
+    if (loaded) return;
+    if (e.key !== 'r' && e.key !== 'R') return;
+    if (/input|textarea|select/i.test(e.target.tagName)) return;
+    loadReader();
+  });
+  // 暴露全局 API(供未来「听书」按钮 / 任何外部触发)
+  window.activateReader = loadReader;
+})();
+</script>
 
 </body>
 </html>

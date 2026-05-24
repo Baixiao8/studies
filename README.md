@@ -4,7 +4,7 @@
 >
 > 🌐 **公开访问:** https://baixiao8.github.io/studies/
 > 📦 **仓库:** https://github.com/Baixiao8/studies
-> 🏷️ **当前版本:** v6.0 · 高音质 Audio Mode(Azure Neural 预录音频 / iOS 锁屏完美 / 段落级跳转 / 一键切换 Web TTS 标准模式)
+> 🏷️ **当前版本:** v6.3 · 听书功能折叠(默认纯阅读模式,按 R 或 `?listen=1` 才加载听书 — 性能优先 / 产品形态聚焦)
 
 ---
 

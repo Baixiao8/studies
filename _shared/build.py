@@ -326,9 +326,9 @@ def build_report(report_dir: Path, external: bool = False):
     # ─── INLINE 模式 (默认) · 把所有外部资源内联进 HTML ───
     if embed:
         print('\n[build] INLINE 模式 · 把 CSS/JS/glossary 内联进单文件 HTML (默认)')
-        # 1) 内联 CSS · style.css + reader.css
-        #    用 lambda 避免 CSS 里的 \22 被当 backreference
-        for css_name in ['style.css', 'reader.css']:
+        # 1) 内联 CSS · 只 inline style.css
+        #    v6.3 起 reader.css 不 inline,按需加载(见 99_footer.html bootstrap)
+        for css_name in ['style.css']:
             css_path = shared_dir / css_name
             if not css_path.exists():
                 continue
@@ -339,7 +339,8 @@ def build_report(report_dir: Path, external: bool = False):
         # 2) 内联 progress.js / mini-toc.js / tooltip.js / reader.js
         #    关键:JS 注释/字符串里如果包含 </script>,inline 后浏览器会提前关
         #    脚本块,触发 SyntaxError。必须先转义 </script> 为 <\/script>。
-        for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js', 'reader.js']:
+        # v6.3 · reader.js 不 inline,按需加载
+        for js_name in ['progress.js', 'mini-toc.js', 'tooltip.js']:
             js = (shared_dir / js_name).read_text(encoding='utf-8')
             # 转义 </script> · 大小写不敏感(防 </SCRIPT> 等变体)
             js_safe = re.sub(r'</(script)>', r'<\\/\1>', js, flags=re.IGNORECASE)
