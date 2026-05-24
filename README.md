@@ -12,8 +12,8 @@
 
 | # | 主题 | 字数 | 阅读 | 听书 | AI 图 | 公开链接 |
 |---|---|---|---|---|---|---|
-| **2026-05** | 运动学之内 · 跑步的科学解构 | ~137K | 6.5h | 🎧 同步 | 12 张 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-running-science/) |
-| **2026-05** | 修复之内 · 运动康复的科学解构 | ~220K | 10.4h | (待生成) | (待生成) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-rehab-science/) |
+| **2026-05** | 跑步的内在 · 人体运动学的 12 章深度解构 | ~137K | 6.5h | 🎧 同步 | 12 张 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-running-science/) |
+| **2026-05** | 康复的内在 · 运动康复的 12 章深度解构 | ~220K | 10.4h | (待生成) | (待生成) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-rehab-science/) |
 | 2026-06 | (规划中) | — | — | — | — | — |
 
 ### v5.0 升级亮点(2026-05-23)· 阅读 + 听书双通道
