@@ -51,7 +51,7 @@
     display: flex;
   }
 
-  /* 章节"听这章"入口 · Apple Pill 风格 */
+  /* 章节"听这章"入口 · Apple Pill 风格(大章节版,带文字) */
   .reader-entry-btn {
     display: inline-flex;
     align-items: center;
@@ -84,6 +84,26 @@
     height: 14px;
     flex-shrink: 0;
   }
+
+  /* 小节迷你入口(纯图标,更克制) */
+  .reader-entry-btn.mini {
+    padding: 4px;
+    margin-left: 8px;
+    width: 26px;
+    height: 26px;
+    justify-content: center;
+    gap: 0;
+    border-radius: 50%;
+    vertical-align: 0.05em;
+  }
+  .reader-entry-btn.mini svg {
+    width: 13px;
+    height: 13px;
+  }
+  .reader-entry-btn.mini > span {
+    display: none;
+  }
+
   @media (max-width: 768px) {
     .reader-entry-btn {
       font-size: 12px;
@@ -91,6 +111,13 @@
       margin-left: 10px;
     }
     .reader-entry-btn svg { width: 13px; height: 13px; }
+    .reader-entry-btn.mini {
+      width: 24px;
+      height: 24px;
+      padding: 3px;
+      margin-left: 6px;
+    }
+    .reader-entry-btn.mini svg { width: 12px; height: 12px; }
   }
 </style>
 <script>
@@ -121,21 +148,43 @@
   }
 
   // 章节"听这章"入口注入(移动端为先 · 一直可见)
+  // 大章节标题(h1.section-h / h2):full pill 带文字
+  // 小节标题(h3):mini 纯图标 pill,从该小节起播
   function injectEntries() {
-    var headings = document.querySelectorAll('section.chapter h2, section.chapter h1.section-h');
-    headings.forEach(function (h) {
+    // 大章节入口
+    document.querySelectorAll('section.chapter h2, section.chapter h1.section-h').forEach(function (h) {
       if (h.querySelector('.reader-entry-btn')) return;
       var chapter = h.closest('section.chapter') || h.closest('section');
       var btn = document.createElement('button');
       btn.className = 'reader-entry-btn';
       btn.type = 'button';
-      btn.title = '从这里开始听这一章';
+      btn.title = '从这一章开始听';
       btn.setAttribute('aria-label', '听这一章');
       btn.innerHTML = ICON_HEADPHONES + '<span>听这章</span>';
       btn.addEventListener('click', function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
         loadReader({ chapter: chapter });
+      });
+      h.appendChild(document.createTextNode(' '));
+      h.appendChild(btn);
+    });
+
+    // 小节入口(h3)· mini 风格 · 从该小节起播
+    document.querySelectorAll('section.chapter h3').forEach(function (h) {
+      if (h.querySelector('.reader-entry-btn')) return;
+      var chapter = h.closest('section.chapter');
+      if (!chapter) return;
+      var btn = document.createElement('button');
+      btn.className = 'reader-entry-btn mini';
+      btn.type = 'button';
+      btn.title = '从这一小节开始听';
+      btn.setAttribute('aria-label', '从此小节听');
+      btn.innerHTML = ICON_HEADPHONES + '<span>听此节</span>';
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        loadReader({ chapter: chapter, startNodeId: h.id || null, startNode: h });
       });
       h.appendChild(document.createTextNode(' '));
       h.appendChild(btn);

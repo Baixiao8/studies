@@ -107,7 +107,12 @@
     var startIdx = startNode ? all.indexOf(startNode) : 0;
     if (startIdx < 0) startIdx = 0;
     return all.slice(startIdx)
-      .map(function (n) { return (n.textContent || '').replace(/\s+/g, ' ').trim(); })
+      .map(function (n) {
+        // clone + 移除入口按钮 → 朗读时不读"听这章""听此节"等按钮文字
+        var c = n.cloneNode(true);
+        c.querySelectorAll('.reader-entry-btn').forEach(function (b) { b.remove(); });
+        return (c.textContent || '').replace(/\s+/g, ' ').trim();
+      })
       .filter(function (t) { return t.length > 1; })
       .join('\n\n');
   }
@@ -121,6 +126,8 @@
     this.text = '';
     this.overlay = null;
     this.playBtn = null;
+    this.chapter = null;        // v8.1 · 记录当前章节用于自动接下章
+    this._userPaused = false;   // v8.1 · 用户主动暂停标记
   }
 
   Reader.prototype.open = function (opts) {
@@ -129,6 +136,7 @@
 
     var chapter = (opts && opts.chapter) || getVisibleChapter();
     var startNode = (opts && opts.startNode) || getStartNode(chapter);
+    this.chapter = chapter;
     this.text = extractText(chapter, startNode);
     if (!this.text) {
       console.warn('[Reader] 当前位置没有可朗读文本');
@@ -194,6 +202,7 @@
   };
 
   Reader.prototype.play = function () {
+    this._userPaused = false;
     if (this.synth.paused && this.utter) {
       this.synth.resume();
     } else {
@@ -210,7 +219,11 @@
     this.utter.pitch = 1.0;
     this.utter.volume = 1.0;
     var self = this;
-    this.utter.onend = function () { self._setPlaying(false); };
+    this.utter.onend = function () {
+      self._setPlaying(false);
+      // v8.1 · 章末自动接下一章(除非用户主动暂停)
+      if (!self._userPaused) self._autoNext();
+    };
     this.utter.onerror = function (e) {
       if (e.error !== 'interrupted' && e.error !== 'canceled') {
         console.warn('[Reader] TTS error:', e);
@@ -219,8 +232,45 @@
     this.synth.speak(this.utter);
   };
 
+  // v8.1 · 自动接下一章 · 章末停顿 800ms,从下一章首开始读
+  Reader.prototype._autoNext = function () {
+    if (!this.chapter) return;
+    var chapters = $$('section.chapter');
+    var idx = chapters.indexOf(this.chapter);
+    if (idx < 0 || idx >= chapters.length - 1) return;
+    var nextCh = chapters[idx + 1];
+    var nextText = extractText(nextCh, null);
+    if (!nextText) return;
+    this.chapter = nextCh;
+    this.text = nextText;
+    this._updateContent();
+    var self = this;
+    setTimeout(function () {
+      if (!self._userPaused) {
+        self._speak();
+        self._setPlaying(true);
+      }
+    }, 800);
+  };
+
+  // v8.1 · 更新 overlay 内容(自动接下章时重填新章节文本)
+  Reader.prototype._updateContent = function () {
+    if (!this.overlay) return;
+    var inner = this.overlay.querySelector('.reader-content-inner');
+    if (!inner) return;
+    inner.innerHTML = '';
+    this.text.split('\n\n').forEach(function (para) {
+      var p = document.createElement('p');
+      p.textContent = para;
+      inner.appendChild(p);
+    });
+    var content = this.overlay.querySelector('.reader-content');
+    if (content) content.scrollTop = 0;
+  };
+
   Reader.prototype.pause = function () {
     if (this.synth.speaking && !this.synth.paused) this.synth.pause();
+    this._userPaused = true;  // v8.1 · 标记主动暂停 → 章末不自动接下章
     this._setPlaying(false);
   };
 
