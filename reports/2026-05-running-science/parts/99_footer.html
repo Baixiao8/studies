@@ -37,15 +37,79 @@
 <script src="../../_shared/mini-toc.js?v=20260522b" defer></script>
 <script src="../../_shared/tooltip.js?v=20260522b" defer></script>
 
-<!-- v6.3 · Reader 听书功能折叠:默认不加载,按 R 或 URL ?listen=1 才动态注入 reader.{js,css} -->
+<!-- v8.0 · Reader Bootstrap:章节入口注入 + 按需加载完整 reader -->
+<style>
+  /* v8.0.1 · overlay 底色保底(避免 reader.css 异步加载期间文字透出) */
+  .reader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #f0ebdd;
+    display: none;
+  }
+  .reader-overlay.open {
+    display: flex;
+  }
+
+  /* 章节"听这章"入口 · Apple Pill 风格 */
+  .reader-entry-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 14px;
+    padding: 5px 12px 5px 10px;
+    background: rgba(168, 66, 59, 0.07);
+    color: #a8423b;
+    border: 1px solid rgba(168, 66, 59, 0.22);
+    border-radius: 18px;
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    vertical-align: 0.2em;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+    letter-spacing: 0.01em;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .reader-entry-btn:hover {
+    background: rgba(168, 66, 59, 0.13);
+    border-color: rgba(168, 66, 59, 0.45);
+  }
+  .reader-entry-btn:active {
+    transform: scale(0.97);
+  }
+  .reader-entry-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 768px) {
+    .reader-entry-btn {
+      font-size: 12px;
+      padding: 5px 11px 5px 9px;
+      margin-left: 10px;
+    }
+    .reader-entry-btn svg { width: 13px; height: 13px; }
+  }
+</style>
 <script>
 (function () {
   'use strict';
+
+  // SF Symbols / Lucide 风格 · headphones(描边 1.75 · 跨平台一致)
+  var ICON_HEADPHONES = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14a9 9 0 0 1 18 0"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>';
+
   var loaded = false;
-  function loadReader() {
-    if (loaded) return;
+  function loadReader(opts) {
+    window.__readerOpts = opts || {};
+    if (loaded) {
+      // 已加载过:直接调用 open(可能是关了再开)
+      if (window.__reader) window.__reader.open(window.__readerOpts);
+      return;
+    }
     loaded = true;
-    var ver = '20260524a';
+    var ver = '20260524b';
     var l = document.createElement('link');
     l.rel = 'stylesheet';
     l.href = '../../_shared/reader.css?v=' + ver;
@@ -55,19 +119,55 @@
     s.defer = true;
     document.body.appendChild(s);
   }
-  // URL 触发(?listen=1 或 #read=xxx)
-  if (location.search.indexOf('listen=1') >= 0 || location.search.indexOf('reader=1') >= 0 || location.hash.indexOf('#read=') >= 0) {
-    loadReader();
+
+  // 章节"听这章"入口注入(移动端为先 · 一直可见)
+  function injectEntries() {
+    var headings = document.querySelectorAll('section.chapter h2, section.chapter h1.section-h');
+    headings.forEach(function (h) {
+      if (h.querySelector('.reader-entry-btn')) return;
+      var chapter = h.closest('section.chapter') || h.closest('section');
+      var btn = document.createElement('button');
+      btn.className = 'reader-entry-btn';
+      btn.type = 'button';
+      btn.title = '从这里开始听这一章';
+      btn.setAttribute('aria-label', '听这一章');
+      btn.innerHTML = ICON_HEADPHONES + '<span>听这章</span>';
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        loadReader({ chapter: chapter });
+      });
+      h.appendChild(document.createTextNode(' '));
+      h.appendChild(btn);
+    });
   }
-  // R 键触发(仅按一次)
-  document.addEventListener('keydown', function (e) {
-    if (loaded) return;
-    if (e.key !== 'r' && e.key !== 'R') return;
-    if (/input|textarea|select/i.test(e.target.tagName)) return;
-    loadReader();
-  });
-  // 暴露全局 API(供未来「听书」按钮 / 任何外部触发)
-  window.activateReader = loadReader;
+
+  // URL / 键盘触发(从当前可视段起播)
+  function attachAutoTriggers() {
+    if (location.search.indexOf('listen=1') >= 0 ||
+        location.search.indexOf('reader=1') >= 0 ||
+        location.hash.indexOf('#read=') >= 0) {
+      loadReader();
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'r' && e.key !== 'R') return;
+      if (/input|textarea|select/i.test(e.target.tagName)) return;
+      loadReader();
+    });
+  }
+
+  // 全局 API(任何外部触发)
+  window.activateReader = function (opts) { loadReader(opts); };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      injectEntries();
+      attachAutoTriggers();
+    });
+  } else {
+    injectEntries();
+    attachAutoTriggers();
+  }
 })();
 </script>
 
