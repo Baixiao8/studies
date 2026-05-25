@@ -367,6 +367,7 @@ reports/<slug>/index.pdf  # 部署到 GitHub Pages
 | 2026-05-26 | v1.0 | 初次创建,决议:暂不做导出 |
 | 2026-05-26 | v1.1 | 修订 Bug 2 真根因:从"audio loop 误设"改为"Chrome SpeechSynthesis 长 utterance 自动重启 bug"(项目用 Web Speech API)。诚实留痕。修复 v8.7 已实施,详见 `CHANGELOG.md` |
 | 2026-05-26 | v1.2 | Bug 1 实测后追加诊断:v8.7 修了 active 乱跳,但漏了 `html { scroll-behavior: smooth }` 跨长距离 30+ 秒过慢的问题。v8.7.1 在 click handler 加 `e.preventDefault` + 手动 `window.scrollTo({ behavior: 'auto' })` 绕过。诚实留痕:**静态 grep 通过 ≠ UI 通过,UI 验证必须人手做**——这是 v8.7 流程教训 |
+| 2026-05-26 | v1.3 | Bug 1 实修第三次:v8.7.1 用 `{ behavior: 'auto' }` 以为是 instant,**踩 MDN spec 陷阱**(`'auto'` 实为"读 CSS scroll-behavior"= smooth)。v8.7.2 改为老 API `scrollTo(x, y)` 强制 instant。**反复诊断错的教训**:UI 反馈 → 假设 → **验证 spec**,不要凭感觉理解 API 语义。详见 `CHANGELOG.md` v8.7.2 |
 
 ---
 

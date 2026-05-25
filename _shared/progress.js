@@ -61,9 +61,12 @@
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
 
-        // 手动 instant scroll,sticky-nav 高 80px,留出标题不被遮挡
+        // v8.7.2 · 强制 instant scroll · sticky-nav 高 80px,留出标题不被遮挡
+        // 注意 spec 陷阱:window.scrollTo({ behavior: 'auto' }) 中 'auto' 意为
+        // "读 CSS scroll-behavior",而 _shared/style.css 设了 smooth,导致仍走 smooth。
+        // 用老 API form scrollTo(x, y) 强制 instant,不被 CSS 影响。
         const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({ top: targetTop, behavior: 'auto' });
+        window.scrollTo(0, targetTop);
         // 手动更新 URL hash(因为 preventDefault 阻止了浏览器原生 hash change)
         history.pushState(null, '', '#' + targetId);
 

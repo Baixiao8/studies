@@ -5,6 +5,49 @@
 
 ---
 
+## v8.7.2 · v8.7.1 的二次修复 · MDN spec 陷阱(2026-05-26)
+
+v8.7.1 用 `window.scrollTo({ top, behavior: 'auto' })` 想实现 instant scroll,**但踩了 MDN spec 陷阱**:`behavior: 'auto'` 不是"立即"的意思,而是"**读 CSS `scroll-behavior` 的值**";项目 CSS 设了 `html { scroll-behavior: smooth }`,所以这条 JS 仍走 smooth scroll——v8.7.1 修复**没真生效**。
+
+### 用户实测复现
+
+跑步报告点 07 神经:
+- URL 变 `#s7` ✓
+- nav active 变 "07 神经" ✓
+- 但内容显示"4 小时撞墙马拉松"(s4 能量章的 persona card)→ scroll 还在 s4 附近 smooth 路上
+
+### 修复 · `_shared/progress.js`
+
+```diff
+- window.scrollTo({ top: targetTop, behavior: 'auto' });
++ window.scrollTo(0, targetTop);  // 老 API form 不接受 behavior,总是 instant
+```
+
+老的 `window.scrollTo(x, y)` API form **不接受 behavior 参数**,**总是 instant** — 不被 CSS scroll-behavior 影响。最稳的方式。
+
+### MDN spec 陷阱备忘录(候选写入 PRINCIPLES)
+
+| 写法 | 实际行为 |
+|---|---|
+| `scrollTo({ behavior: 'smooth' })` | 强制 smooth |
+| `scrollTo({ behavior: 'instant' })` | 强制 instant(2022+ 浏览器) |
+| **`scrollTo({ behavior: 'auto' })`** | **读 CSS scroll-behavior(陷阱)** |
+| `scrollTo(x, y)` 老 API form | **总是 instant** ✓ |
+
+下次想"立即 scroll 且不被 CSS 影响",用 `scrollTo(x, y)` 老 API form,**不要**用 `{ behavior: 'auto' }`。
+
+### 教训
+
+代码量仅 1 行修复——但是这是我**反复犯的诊断错**:
+
+- v8.7 静态 grep 通过就报"完成",没让用户 UI 验证
+- v8.7.1 误用 `'auto'` 以为是 instant
+- v8.7.2 终于读对 MDN spec
+
+**第三次了**,这条教训留得特别详细,以儆效尤。
+
+---
+
 ## v8.7.1 · 导航定位补充修复 · 绕过 smooth scroll 长距离过慢(2026-05-26)
 
 v8.7 修了导航 active 乱跳,但用户实测**仍点击导航不跳到目标章节**(截图:URL 已变 `#s9`、nav active 已显示 09 肩肘,但内容停在 03 疼痛章)。深入诊断后发现是另一个长期存在的体验问题。
