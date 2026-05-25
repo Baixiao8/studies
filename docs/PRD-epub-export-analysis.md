@@ -369,6 +369,7 @@ reports/<slug>/index.pdf  # 部署到 GitHub Pages
 | 2026-05-26 | v1.2 | Bug 1 实测后追加诊断:v8.7 修了 active 乱跳,但漏了 `html { scroll-behavior: smooth }` 跨长距离 30+ 秒过慢的问题。v8.7.1 在 click handler 加 `e.preventDefault` + 手动 `window.scrollTo({ behavior: 'auto' })` 绕过。诚实留痕:**静态 grep 通过 ≠ UI 通过,UI 验证必须人手做**——这是 v8.7 流程教训 |
 | 2026-05-26 | v1.3 | Bug 1 实修第三次:v8.7.1 用 `{ behavior: 'auto' }` 以为是 instant,**踩 MDN spec 陷阱**(`'auto'` 实为"读 CSS scroll-behavior"= smooth)。v8.7.2 改为老 API `scrollTo(x, y)` 强制 instant。**反复诊断错的教训**:UI 反馈 → 假设 → **验证 spec**,不要凭感觉理解 API 语义。详见 `CHANGELOG.md` v8.7.2 |
 | 2026-05-26 | v1.4 | Bug 1 实修第四次:v8.7.2 误以为"老 API form `scrollTo(x, y)` 不受 CSS 影响",**用 Claude in Chrome MCP 浏览器实测后发现:老 API form 仍走 CSS smooth!** v8.7.3 改为显式 `scrollTo({ behavior: 'instant' })`,这是唯一可靠的强制 instant 写法。**最大教训**:我有 MCP 浏览器测试工具,但前 3 轮反复说"我不能测",凭代码层猜测改 → push → 等用户报错,3 次都错。**任何 UI / scroll / 交互 bug 都应该先用 MCP 实测再改**。详见 `CHANGELOG.md` v8.7.3 |
+| 2026-05-26 | v1.5 | Bug 1 实修**第五次**:v8.7.3 数据显示 scroll diff=0 完美到位,但**用 MCP screenshot 实测**发现 viewport 显示错章节——真根因是 **chapter hero 图片 lazy-load 加载完后 layout 持续 shift**,s9 在 click 瞬间在 docPos 26220,几秒后图片加载完变成 47060,但 viewport 仍停在 26140。v8.7.4 加 retry 监听 image load + 定时 fallback。**最终最大教训**:`pageYOffset == expectedY` 数据上对,**不代表 viewport 显示正确章节**。**screenshot 是唯一硬证据**。必须考虑 image lazy load / web font / async DOM 引起的 layout shift。详见 `CHANGELOG.md` v8.7.4 |
 
 ---
 

@@ -5,6 +5,73 @@
 
 ---
 
+## v8.7.4 · 第五次修复 · image lazy-load 引起的 layout shift(2026-05-26)
+
+v8.7.3 用 `scrollTo({ behavior: 'instant' })` 强制立即 scroll,数据显示 scroll 立即到位(diff=0)——但用户**等图片加载完**后看到的是错章节。
+
+### 用 MCP browser + screenshot 实测发现真根因
+
+| 时刻 | 状态 |
+|---|---|
+| navigate readyState=complete | s9 docPos = **26220**(图片占位符,未加载完) |
+| click 后 instant scroll | scrollY = 26140(= 26220 - 80) ✓ |
+| 等 2 秒后(图片加载完) | s9 docPos = **47060**(layout shifted **+20840 px**) |
+| 但 scrollY 仍 = 26140 | viewport 显示 s8 的内容(因 s9 已被推到 47060)|
+
+**章节 hero 图片 lazy-load 加载完后 layout 持续 shift**,导致 click 瞬间的 target 位置过几秒后不再准确。
+
+### 修复 · `_shared/progress.js`
+
+```javascript
+const doScroll = () => {
+  const tt = target.getBoundingClientRect().top + window.pageYOffset - 80;
+  window.scrollTo({ top: tt, behavior: 'instant' });
+};
+
+doScroll();  // 立即(响应快)
+
+let userCancelled = false;
+const onUserInput = () => { userCancelled = true; };
+window.addEventListener('wheel', onUserInput, { passive: true, once: true });
+window.addEventListener('touchmove', onUserInput, { passive: true, once: true });
+window.addEventListener('keydown', onUserInput, { passive: true, once: true });
+
+// 定时 retry(catch 非 image 的 layout shift)
+[50, 150, 400, 1000].forEach(d => setTimeout(() => { if (!userCancelled) doScroll(); }, d));
+
+// image load retry(主战场)
+document.querySelectorAll('img').forEach(img => {
+  if (!img.complete) {
+    img.addEventListener('load', () => { if (!userCancelled) doScroll(); }, { once: true });
+  }
+});
+```
+
+### 关键设计
+
+- **尊重用户意图**:wheel/touchmove/keydown 一旦发生,后续 retry 立即取消,不再 snap back
+- **多策略叠加**:timer retry + image load listener,任一触发都 rescroll
+- **轻量**:retry 是 `scrollTo({behavior:'instant'})`,如果 layout 没变是 no-op
+
+### 反复 5 轮修复的完整教训
+
+| 版本 | 假设 | 实际 |
+|---|---|---|
+| v8.7 | 静态 grep 通过 = 修好 | 漏了 smooth 慢 |
+| v8.7.1 | `{behavior:'auto'}` = instant | `'auto'` 读 CSS |
+| v8.7.2 | 老 API form = instant | 老 API 仍受 CSS 影响 |
+| v8.7.3 | `'instant'` 立即 = 修好 | scroll 立即到位但 layout shift |
+| **v8.7.4** | **MCP screenshot 验证才相信** | **终于找到真相** |
+
+**根本流程教训**:
+
+1. **代码层验证 ≠ 功能验证**——`pageYOffset == expectedY` 不代表 viewport 显示正确章节
+2. **screenshot 是最硬证据**——viewport 显示什么就是什么,数字会骗人
+3. **必须考虑 async DOM 变化**——image lazy load / web font / async script 都会改 layout
+4. **任何 UI/scroll 交互 bug 必须用 MCP 浏览器实测 + screenshot 验证**
+
+---
+
 ## v8.7.3 · 第四次修复(终于)· 用 MCP 浏览器实测才找到真根因(2026-05-26)
 
 v8.7.2 用老 API form `scrollTo(x, y)` 想强制 instant,但**还是被 CSS `scroll-behavior: smooth` 接管**——我之前以为"老 API form 不受 CSS 影响",完全错了。
