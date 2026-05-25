@@ -5,6 +5,47 @@
 
 ---
 
+## v8.7.1 · 导航定位补充修复 · 绕过 smooth scroll 长距离过慢(2026-05-26)
+
+v8.7 修了导航 active 乱跳,但用户实测**仍点击导航不跳到目标章节**(截图:URL 已变 `#s9`、nav active 已显示 09 肩肘,但内容停在 03 疼痛章)。深入诊断后发现是另一个长期存在的体验问题。
+
+### 真根因
+
+`_shared/style.css` L78:`html { scroll-behavior: smooth; }` 让所有锚点跳转都走浏览器原生 smooth scroll。**跨长距离(s1 → s9 约 10 万 px)smooth scroll 要 30+ 秒才完成**——用户体验上像"卡住没动",其实页面在慢慢滚。
+
+v8.7 修了 active 状态(立即设到目标 link),但**没改 scroll 行为**——用户看到 nav active 对、URL 对,但页面还在 smooth scroll 的路上,截图正是这个中间帧。
+
+### 修复 · `_shared/progress.js` click handler
+
+```javascript
+e.preventDefault();                                                       // 阻止原生 smooth scroll
+const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;  // 扣 sticky-nav 80px
+window.scrollTo({ top: targetTop, behavior: 'auto' });                    // 立即跳
+history.pushState(null, '', '#' + targetId);                              // 手动更新 URL
+```
+
+- isProgrammaticScroll 兜底 timeout 从 1200ms 缩短到 600ms(instant 比 smooth 快很多)
+- 代码量 +10 行
+
+### 保留 smooth scroll 的场景
+
+`html { scroll-behavior: smooth }` **CSS 不动**——这条对**鼠标滚轮、键盘 Page Down、reader 自动滚动到段落**等场景仍有用。只有 nav 点击长距离这一条绕过它。
+
+### 测试 checklist
+
+- [ ] 点击 sticky-nav 远距离链接(如 09 / 12),立即定位,不再"卡住"
+- [ ] sticky-nav 不会遮挡目标章节标题(80px 偏移生效)
+- [ ] URL hash 仍能更新(history.pushState 工作)
+- [ ] 浏览器后退按钮仍能回到上一次的 hash
+- [ ] 鼠标滚轮 / Page Down 仍有 smooth 体验(只 nav click 改了)
+
+### 关联
+
+- v8.7 实修后用户实测发现的体验问题——"测试不够透彻"的留痕:静态 grep 通过 ≠ UI 体验通过,UI 验证必须人手做
+- `docs/PRD-epub-export-analysis.md` Bug 1 章节同步追加 v1.2 补丁说明
+
+---
+
 ## v8.7 · 双 bug 修复:导航定位 + 段落循环(2026-05-26)
 
 修两个长期遗留的播放器 bug——发现于实际使用(作者自己),原本想用"epub 导出绕道"workaround,经严谨分析后(见 `docs/PRD-epub-export-analysis.md`)决定**直接修根因**,不做 epub。

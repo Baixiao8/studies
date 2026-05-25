@@ -46,17 +46,34 @@
     let programmaticScrollTimer = null;
 
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (!target) return;  // 不存在的锚点,让浏览器默认处理
+
+        // v8.7.1 · 阻止浏览器原生 smooth scroll
+        // 根因:_shared/style.css 设了 html { scroll-behavior: smooth }
+        // 跨长距离(s1→s9 约 10 万 px)smooth 要 30+ 秒,体验上像卡住
+        e.preventDefault();
+
         isProgrammaticScroll = true;
         // 立即把 active 设到目标 link(给用户即时反馈,不等 IO)
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
-        // 兜底:scrollend 不支持的浏览器(Safari < 17.4),1.2s 后强制解锁
+
+        // 手动 instant scroll,sticky-nav 高 80px,留出标题不被遮挡
+        const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: targetTop, behavior: 'auto' });
+        // 手动更新 URL hash(因为 preventDefault 阻止了浏览器原生 hash change)
+        history.pushState(null, '', '#' + targetId);
+
+        // 兜底:scrollend 不支持的浏览器(Safari < 17.4),0.6s 后强制解锁
+        // instant scroll 比 smooth 快很多,所以等待时间从 1200 降到 600
         if (programmaticScrollTimer) clearTimeout(programmaticScrollTimer);
         programmaticScrollTimer = setTimeout(() => {
           isProgrammaticScroll = false;
           programmaticScrollTimer = null;
-        }, 1200);
+        }, 600);
       });
     });
 
