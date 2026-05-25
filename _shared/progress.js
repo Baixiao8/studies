@@ -61,12 +61,16 @@
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
 
-        // v8.7.2 · 强制 instant scroll · sticky-nav 高 80px,留出标题不被遮挡
-        // 注意 spec 陷阱:window.scrollTo({ behavior: 'auto' }) 中 'auto' 意为
-        // "读 CSS scroll-behavior",而 _shared/style.css 设了 smooth,导致仍走 smooth。
-        // 用老 API form scrollTo(x, y) 强制 instant,不被 CSS 影响。
+        // v8.7.3 · 强制 instant scroll · sticky-nav 高 80px,留出标题不被遮挡
+        // ⚠️ MDN spec 陷阱(v8.7→v8.7.1→v8.7.2→v8.7.3 反复 4 次才搞清楚):
+        //   CSS html { scroll-behavior: smooth } 影响所有 JS scroll API:
+        //   - scrollTo(x, y) 老 API form  → 仍受 CSS smooth 影响(以前以为不会)
+        //   - scrollTo({ behavior: 'auto' }) → 读 CSS = smooth
+        //   - scrollTo({ behavior: 'instant' }) → 强制 instant,**唯一可靠的写法**
+        //   - document.documentElement.style.scrollBehavior = 'auto' 临时禁用不可靠
+        // 已用 MCP browser 在浏览器实测过 3 种方法,只有显式 'instant' 立即生效。
         const targetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo(0, targetTop);
+        window.scrollTo({ top: targetTop, behavior: 'instant' });
         // 手动更新 URL hash(因为 preventDefault 阻止了浏览器原生 hash change)
         history.pushState(null, '', '#' + targetId);
 

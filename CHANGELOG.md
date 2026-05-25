@@ -5,6 +5,48 @@
 
 ---
 
+## v8.7.3 · 第四次修复(终于)· 用 MCP 浏览器实测才找到真根因(2026-05-26)
+
+v8.7.2 用老 API form `scrollTo(x, y)` 想强制 instant,但**还是被 CSS `scroll-behavior: smooth` 接管**——我之前以为"老 API form 不受 CSS 影响",完全错了。
+
+### 用 MCP Chrome 浏览器实测的真相
+
+用户第 4 次反馈后提示"你能不能自己测下"——我才意识到我有 **Claude in Chrome MCP** 能直接操作浏览器。实测对比:
+
+| 写法 | 是否立即 scroll |
+|---|---|
+| `scrollTo(0, 5000)` 老 API form | ❌ 仍走 CSS smooth |
+| `scrollTo({ behavior: 'auto' })` | ❌ 读 CSS = smooth |
+| `style.scrollBehavior='auto'` 临时禁用 | ❌ 不可靠 |
+| **`scrollTo({ behavior: 'instant' })`** | ✅ **立即** |
+| `scrollIntoView({ behavior: 'instant' })` | ✅ 立即 |
+
+### 修复 · `_shared/progress.js`
+
+```diff
+- window.scrollTo(0, targetTop);
++ window.scrollTo({ top: targetTop, behavior: 'instant' });
+```
+
+显式 `'instant'` enum value 强制立即,**绕过 CSS smooth**。
+
+### 反复 4 轮修复的过程教训
+
+| 版本 | 我以为 | 实际 |
+|---|---|---|
+| v8.7 | 静态 grep 通过 = 修好 | 没 UI 验,漏了 smooth 慢 |
+| v8.7.1 | `{behavior:'auto'}` = instant | `'auto'` 是"读 CSS"= smooth |
+| v8.7.2 | 老 API form = instant | 老 API form 仍受 CSS 影响 |
+| **v8.7.3** | 用 MCP 实测 = 真相 | ✅ 终于找到 |
+
+### 根本流程教训(写入 PRD v1.4,候选写入 PRINCIPLES)
+
+**我有 Claude in Chrome MCP 工具能做实际浏览器测试,但前 3 轮都说"我不能测",这是我反复修不好的根本原因**。
+
+下次修任何 UI / scroll / 交互 bug 之前,先想:**是否能用 MCP 实测?** 能就**先测,再凭测试结果改代码**;**不能凭猜测改代码、push、等用户报错**。
+
+---
+
 ## v8.7.2 · v8.7.1 的二次修复 · MDN spec 陷阱(2026-05-26)
 
 v8.7.1 用 `window.scrollTo({ top, behavior: 'auto' })` 想实现 instant scroll,**但踩了 MDN spec 陷阱**:`behavior: 'auto'` 不是"立即"的意思,而是"**读 CSS `scroll-behavior` 的值**";项目 CSS 设了 `html { scroll-behavior: smooth }`,所以这条 JS 仍走 smooth scroll——v8.7.1 修复**没真生效**。
