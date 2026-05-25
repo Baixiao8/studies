@@ -5,6 +5,60 @@
 
 ---
 
+## v8.7 · 双 bug 修复:导航定位 + 段落循环(2026-05-26)
+
+修两个长期遗留的播放器 bug——发现于实际使用(作者自己),原本想用"epub 导出绕道"workaround,经严谨分析后(见 `docs/PRD-epub-export-analysis.md`)决定**直接修根因**,不做 epub。
+
+### Bug 1 · 导航定位 — `_shared/progress.js`
+
+**症状**:点击 sticky-nav 链接,active 高亮不能一次到位,要点 2-3 次才正确。
+
+**根因**:多事件源(用户点击 / 用户滚动)同时写共享状态(`.active` class),没有协调层。点击锚点 → 浏览器原生 scroll → 中间所有 sections 一闪而过都触发 IntersectionObserver 的 isIntersecting,active 在 scroll 期间乱跳;最终停留时,因为 IO 的 `rootMargin: '-30% 0px -60% 0px'` 只有 10% 中间窗口,目标 section 可能没正好落在区间内 → active 停在错的 link。
+
+**修复**:
+
+- 监听 nav link 点击 → 立即把 active 设到目标 link(用户即时反馈,不等 IO)
+- 加 `isProgrammaticScroll` flag,scroll 期间屏蔽 IO 的 active 更新
+- `scrollend` 事件解锁(Chrome 114+ / Firefox 109+ / Safari 17.4+)+ `setTimeout(1200ms)` 兜底(老浏览器)
+
+**代码量**:+25 行
+
+### Bug 2 · 段落循环 — `_shared/reader.js`
+
+**症状**:点击播放后,听一段时间(~15s)会"循环播放某段",停不下来。
+
+**根因**:**Chrome SpeechSynthesis 长 utterance bug** — 朗读单个 `SpeechSynthesisUtterance` 超过 ~15 秒后,Chrome 会自动停止并可能从某段重新开始(已知多年未修)。代码把整章(1-3K 字,朗读 5-10 分钟)塞进一个 utterance,必中。
+
+**修复**(业界标准 workaround:切段落级队列):
+
+- 构造函数加 `_queue: []` + `_queueIdx: 0`
+- `_speak()` 拆成两个:
+  - `_speak()` = 初始化队列(`text.split('\n\n')`)+ 启动
+  - `_speakNext()` = 播单段,`onend` 推进 idx + 递归调用自己;队列尾 → `_autoNext()`(v8.1 自动接下章不变)
+- `play()` 加"队列中断后从当前段继续"分支(用户暂停 → 继续不重头)
+- `rateSel.onchange` 保留 `_queueIdx`,只 cancel + speakNext(用新倍速读当前段,不 reset 到第 1 段)
+
+**代码量**:+20 行净增
+
+### 关联
+
+- **决策来源**:`docs/PRD-epub-export-analysis.md` v1.1(暂不做 epub,改修根因)
+- **PRD 修订留痕**:v8.7 实修中发现 Bug 2 真根因不是 PRD v1.0 写的 "audio loop",已在 PRD v1.1 修订;诚实记录在文档历史
+- **根因复盘已沉淀**:两个 bug 都是"多事件源写共享状态 + 缺少协调层"模式,见 PRD §4.4 — 建议未来纳入 `PRINCIPLES.md` 通用规则
+
+### 测试 checklist(部署前必跑)
+
+- [ ] **Bug 1**:点击 nav 不同链接,active 立即定位且不乱跳
+- [ ] **Bug 1**:scroll 完成后,继续手动滚动,IO 正常接管 active 更新
+- [ ] **Bug 1**:scrollend 不支持的浏览器(老 Safari)上,setTimeout 兜底生效
+- [ ] **Bug 2**:听整章不"循环某段",顺序到结尾
+- [ ] **Bug 2**:中途暂停 → 继续:从暂停段接着读,不重头
+- [ ] **Bug 2**:中途换倍速:保留进度,新倍速读当前段
+- [ ] **Bug 2**:章末 → 自动接下一章(v8.1 功能不能被改坏)
+- [ ] **Bug 2**:关闭重开:从当前位置起播
+
+---
+
 ## v7.0 · 第二份深度报告:运动康复(2026-05-24)
 
 「修复之内 · 运动康复的科学解构」12 章上线,与「运动学之内」共享 `_shared/` 设计系统——

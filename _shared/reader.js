@@ -129,6 +129,8 @@
     this.chapter = null;        // v8.1 · 记录当前章节用于自动接下章
     this._userPaused = false;   // v8.1 · 用户主动暂停标记
     this._wakeLock = null;      // v8.2 · Wake Lock 防屏幕自动息屏
+    this._queue = [];           // v8.7 · 段落队列,避免 Chrome SpeechSynthesis 长文本(>~15s)自动重启 bug
+    this._queueIdx = 0;
   }
 
   // v8.2 · Wake Lock(防屏幕自动息屏 / 部分缓解 iOS 锁屏停播)
@@ -176,7 +178,11 @@
       title: '朗读速度',
       onchange: function (e) {
         self.rate = parseFloat(e.target.value);
-        if (self.isPlaying) self._speak();
+        if (self.isPlaying) {
+          // v8.7 · 保留 _queueIdx 进度,只用新倍速重读当前段(不 reset 到第一段)
+          self.synth.cancel();
+          self._speakNext();
+        }
       }
     });
     RATES.forEach(function (r) {
@@ -234,24 +240,45 @@
     this._requestWakeLock();  // v8.2 · 播放时请求 wake lock
     if (this.synth.paused && this.utter) {
       this.synth.resume();
+    } else if (this._queue.length > 0 && this._queueIdx < this._queue.length) {
+      // v8.7 · 队列中断后继续(用户暂停 → 继续):从当前段接着读,不重头
+      this._speakNext();
     } else {
       this._speak();
     }
     this._setPlaying(true);
   };
 
+  // v8.7 · 拆成 _speak(初始化队列)+ _speakNext(播单段,串行推进)
+  // 修复:Chrome SpeechSynthesis 朗读单个长 utterance(>~15s)会自动停并从某段重启
+  // 业界标准 workaround:切段落级队列,每段 < 15s
   Reader.prototype._speak = function () {
     this.synth.cancel();
-    this.utter = new SpeechSynthesisUtterance(this.text);
+    this._queue = this.text.split('\n\n')
+      .map(function (t) { return t.trim(); })
+      .filter(function (t) { return t.length > 1; });
+    this._queueIdx = 0;
+    this._speakNext();
+  };
+
+  Reader.prototype._speakNext = function () {
+    var self = this;
+    if (!this._queue || this._queueIdx >= this._queue.length) {
+      // 队列播完 → 章末,v8.1 自动接下一章(除非用户主动暂停)
+      this._setPlaying(false);
+      if (!this._userPaused) this._autoNext();
+      return;
+    }
+    var paragraph = this._queue[this._queueIdx];
+    this.utter = new SpeechSynthesisUtterance(paragraph);
     this.utter.lang = 'zh-CN';
     this.utter.rate = this.rate;
     this.utter.pitch = 1.0;
     this.utter.volume = 1.0;
-    var self = this;
     this.utter.onend = function () {
-      self._setPlaying(false);
-      // v8.1 · 章末自动接下一章(除非用户主动暂停)
-      if (!self._userPaused) self._autoNext();
+      if (self._userPaused) return;   // 用户暂停期间停在当前 idx,等 resume
+      self._queueIdx++;
+      self._speakNext();
     };
     this.utter.onerror = function (e) {
       if (e.error !== 'interrupted' && e.error !== 'canceled') {

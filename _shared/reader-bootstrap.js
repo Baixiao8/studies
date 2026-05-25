@@ -35,7 +35,7 @@
       return;
     }
     loaded = true;
-    var ver = '20260524c';
+    var ver = '20260526a';  // v8.7 · Bug 2 修复后更新 cache buster,触发浏览器重新下载新 reader.js
     var l = document.createElement('link');
     l.rel = 'stylesheet';
     l.href = '../../_shared/reader.css?v=' + ver;
