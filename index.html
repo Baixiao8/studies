@@ -263,24 +263,22 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    margin-top: 12px;
-    padding: 7px 14px;
+    margin-top: 10px;
+    padding: 0;
     font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: var(--blue);
-    border: 1.5px solid var(--blue);
-    border-radius: 2px;
+    color: var(--ink-mid);     /* 比"阅读"主 CTA 浅一档,做层级区分 */
     text-transform: uppercase;
     text-decoration: none;
     background: transparent;
-    transition: all 0.15s ease;
+    border: none;              /* Ghost · 无边框 */
     cursor: pointer;
+    transition: color 0.15s ease;
   }
   .report-cta .epub-btn:hover {
-    background: var(--blue);
-    color: var(--paper);
+    color: var(--red);         /* hover 变红,跟"阅读"hover 行为一致 */
   }
 
   /* ─── WIP placeholder ─── */
