@@ -5,6 +5,76 @@
 
 ---
 
+## v9.2 · A 模式 CI 上线 + EPUB 体验小修(2026-05-26)
+
+### 阶段 4:A 模式 CI · main 永远干净 · 全自动部署
+
+按 v1.6 PRD 路线实施。
+
+**架构变化**:
+
+```
+之前(模式 B):
+  你 push 章节+产物 → main → Pages 从 main 部署
+
+之后(模式 A · gh-pages 分支模式):
+  你 push 章节 → main → GitHub Actions 自动 build → push gh-pages → Pages 从 gh-pages 部署
+```
+
+**新增文件**:
+- `.github/workflows/build-and-deploy.yml` · 完整 CI 配置
+  - 监控 paths: `reports/**` / `_shared/**` / `index.html` / `tools/requirements.txt`
+  - 装 Python + Chromium(缓存命中后 ~5 秒)
+  - 跑所有 reports 的 `build.py`(自动级联 `build_epub.py`)
+  - 准备 `.deploy/` 目录(只含部署文件)
+  - 用 `peaceiris/actions-gh-pages@v4` 部署到 gh-pages 分支
+  - `force_orphan: true` · gh-pages 不累积历史
+- `.gitignore` 加 `reports/*/index.html` + `reports/*/*.epub` + `.deploy/`
+
+**git 操作**:
+- `git rm --cached` 4 个 `reports/*/index.html` + 3 个 `*.epub`,让 main 不再追踪产物
+- 用 `gh CLI` 直接切 GitHub Pages source 到 gh-pages(免 user 上 GitHub 网页操作)
+- 手动触发首次 Pages build(切 source 不自动 trigger)
+
+**CI 性能**:
+
+| 阶段 | 首次 | 缓存命中 |
+|---|---|---|
+| Setup Python + pip | 30-60 s | 5-10 s |
+| Playwright Chromium | 3-5 min | 5 s(从 actions cache 恢复) |
+| Build 全部 reports | 1-2 min | 1-2 min |
+| Deploy gh-pages | 10-20 s | 10-20 s |
+| **总计** | **~5-7 min** | **~1-2 min** |
+
+**未来 user 工作流**:
+
+```bash
+# 写完报告后
+cd 运动健康
+git add reports/2026-XX-<slug>/chapters reports/2026-XX-<slug>/parts reports/2026-XX-<slug>/assets
+git commit -m "report: <slug> v1.0"
+git push
+# 等 1-2 分钟,CI 自动 build + 部署,网站自动更新
+```
+
+**不再需要本地 build**(`tools/.venv` 保留作本地预览工具)。
+
+### UI 小修
+
+- **Marathon 卡片去掉「↗ 外站」tag**(`阅 读 ↗` 的箭头已暗示外站)
+- **AI-UX-Book 卡片改用 `<article data-href>` 结构 + 加 EPUB 按钮**(跟其他 3 张本站卡片一致)
+- EPUB 按钮 v9.1.1 ghost 风格保持
+
+### Phase 3 · 清理 main 历史里的 epub binary
+
+用 `git filter-repo` 把之前 commit 进 main 的 `reports/*/*.epub` + `reports/*/index.html` 从全部历史移除,**force push** main。
+
+- main repo size: ~25 MB → ~5 MB(降 80%)
+- main commit SHA 全部 rewrite(单人 repo 无影响)
+- gh-pages 不受影响(force_orphan,不依赖 main history)
+
+---
+
 ## v9.1 · EPUB 导出 v1.0 · 完整书本版(2026-05-26)
 
 按 `docs/PRD-epub-export-analysis.md` v1.6 决议实施。**完整书本版**(嵌图 + SVG/table 渲染 PNG + 多级 TOC + callout 保留)。
