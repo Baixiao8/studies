@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="zh-CN" unique-identifier="bookid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="bookid">{{ identifier }}</dc:identifier>
+    <dc:title>{{ title }}</dc:title>
+    <dc:creator>白笑</dc:creator>
+    <dc:language>zh-CN</dc:language>
+    <dc:date>{{ date }}</dc:date>
+    <dc:description>{{ description }}</dc:description>
+    <dc:publisher>Studies · Deep Research Archive</dc:publisher>
+    <dc:rights>仅供个人学习使用</dc:rights>
+    <meta property="dcterms:modified">{{ modified }}</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="css" href="styles/main.css" media-type="text/css"/>
+    {{ chapter_items }}
+    {{ image_items }}
+  </manifest>
+  <spine>
+    {{ spine_items }}
+  </spine>
+</package>

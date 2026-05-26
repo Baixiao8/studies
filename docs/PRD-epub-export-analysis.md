@@ -370,6 +370,7 @@ reports/<slug>/index.pdf  # 部署到 GitHub Pages
 | 2026-05-26 | v1.3 | Bug 1 实修第三次:v8.7.1 用 `{ behavior: 'auto' }` 以为是 instant,**踩 MDN spec 陷阱**(`'auto'` 实为"读 CSS scroll-behavior"= smooth)。v8.7.2 改为老 API `scrollTo(x, y)` 强制 instant。**反复诊断错的教训**:UI 反馈 → 假设 → **验证 spec**,不要凭感觉理解 API 语义。详见 `CHANGELOG.md` v8.7.2 |
 | 2026-05-26 | v1.4 | Bug 1 实修第四次:v8.7.2 误以为"老 API form `scrollTo(x, y)` 不受 CSS 影响",**用 Claude in Chrome MCP 浏览器实测后发现:老 API form 仍走 CSS smooth!** v8.7.3 改为显式 `scrollTo({ behavior: 'instant' })`,这是唯一可靠的强制 instant 写法。**最大教训**:我有 MCP 浏览器测试工具,但前 3 轮反复说"我不能测",凭代码层猜测改 → push → 等用户报错,3 次都错。**任何 UI / scroll / 交互 bug 都应该先用 MCP 实测再改**。详见 `CHANGELOG.md` v8.7.3 |
 | 2026-05-26 | v1.5 | Bug 1 实修**第五次**:v8.7.3 数据显示 scroll diff=0 完美到位,但**用 MCP screenshot 实测**发现 viewport 显示错章节——真根因是 **chapter hero 图片 lazy-load 加载完后 layout 持续 shift**,s9 在 click 瞬间在 docPos 26220,几秒后图片加载完变成 47060,但 viewport 仍停在 26140。v8.7.4 加 retry 监听 image load + 定时 fallback。**最终最大教训**:`pageYOffset == expectedY` 数据上对,**不代表 viewport 显示正确章节**。**screenshot 是唯一硬证据**。必须考虑 image lazy load / web font / async DOM 引起的 layout shift。详见 `CHANGELOG.md` v8.7.4 |
+| 2026-05-26 | **v1.6** | **决议反转 · 决定做 EPUB 导出**。播放器 bug 修好后(v8.7.4),用户白笑明确说"还是想去微信读书",理由 4 条:① 微信读书定时关闭功能(睡前听书);② 微信读书声音更自然(预录人声 vs 浏览器 TTS);③ 跨设备同步续听(下次接着听);④ 微信读书有沉没成本(已有听书时长)。**这些是 Web vs APP 的结构性差距**(后台播放 / 跨设备 / 人声 / 生态沉没),**不是 bug 能补的**。原决议"暂不做"的前提是"修 bug 后需求消失",**实测后该前提不成立**——结构性需求与 bug 无关。 范围调整:V1 做"完整书本版"(嵌入章节 hero / SVG 表格渲染为 PNG / 完整 callout 样式),只跑步 + 康复本站报告,Marathon 外站不管。技术栈:Playwright 渲染 SVG → PNG。详见 `docs/EPUB-BUILD.md` |
 
 ---
 

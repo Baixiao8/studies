@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+/* EPUB 内部样式 · 简化 Newsprint 报刊风,适配各 reader
+   注:EPUB reader 对 CSS 支持差异大,只用核心、稳定的属性 */
+
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei",
+               "Noto Sans CJK SC", "Source Han Sans CN", sans-serif;
+  line-height: 1.75;
+  margin: 0 1em;
+  color: #2c2c2c;
+}
+
+/* ─── Headings ─── */
+h1 {
+  font-family: -apple-system, "Helvetica Neue", sans-serif;
+  font-size: 1.8em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 1.5em 0 0.6em;
+  line-height: 1.15;
+  color: #1a1a1a;
+}
+
+h2 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 1.2em 0 0.4em;
+  color: #1a1a1a;
+}
+
+h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 1em 0 0.3em;
+  color: #1a1a1a;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  color: #2c2c2c;
+}
+
+/* ─── Paragraphs ─── */
+p {
+  margin: 0 0 0.8em;
+  font-size: 1em;
+}
+
+p.lead {
+  font-size: 1.05em;
+  color: #1a1a1a;
+}
+
+p.section-sub {
+  font-size: 1.05em;
+  color: #4a4a4a;
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+em { font-style: italic; }
+strong { font-weight: 700; color: #a8423b; }
+
+/* ─── TL;DR / Section tag ─── */
+.tldr {
+  margin: 1em 0;
+  padding: 1em 1.2em;
+  border-left: 5px solid #a8423b;
+  background: #fef5f4;
+}
+.tldr .label {
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #a8423b;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+}
+.tldr p {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin: 0;
+}
+
+.section-tag {
+  font-family: monospace;
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #6e6e6e;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+}
+.section-tag .num {
+  display: inline-block;
+  background: #1a1a1a;
+  color: #f0ebdd;
+  padding: 0.15em 0.5em;
+  margin-right: 0.6em;
+  border-radius: 2px;
+}
+
+/* ─── Callouts ─── */
+.callout {
+  margin: 1em 0;
+  padding: 0.8em 1em;
+  border-left: 4px solid #ccc;
+  background: #f5f5f5;
+  font-size: 0.95em;
+}
+.callout.sharp    { border-left-color: #a8423b; background: #fef5f4; }
+.callout.ops      { border-left-color: #6a8b3d; background: #f5faf0; }
+.callout.you      { border-left-color: #9c4bb5; background: #faf5fc; }
+.callout.note     { border-left-color: #888;    background: #f7f7f7; }
+.callout.story    { border-left-color: #c47f17; background: #fdf8ef; font-style: italic; }
+.callout.protocol { border-left-color: #4a6fa5; background: #f3f6fb; font-family: monospace; font-size: 0.9em; }
+.callout.stop     { border-left-color: #c93f3f; background: #fdf2f2; font-weight: 500; }
+
+.callout-label {
+  display: block;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+  opacity: 0.7;
+}
+
+/* ─── Plain (白话翻译) ─── */
+.plain {
+  font-size: 0.92em;
+  color: #4a4a4a;
+  background: #f0ebdd;
+  padding: 0.5em 0.8em;
+  border-radius: 2px;
+  margin: 0.4em 0 0.8em;
+}
+
+/* ─── Chips ─── */
+.chip {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: #f0ebdd;
+  color: #2c2c2c;
+  font-size: 0.85em;
+  font-family: monospace;
+  border-radius: 2px;
+  margin: 0 0.2em;
+}
+
+/* ─── Images ─── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+}
+
+.chapter-hero {
+  margin: 0 0 1.5em;
+}
+.chapter-hero img {
+  width: 100%;
+  margin: 0;
+}
+
+/* ─── Figures(SVG / table rendered as PNG)─── */
+.fig, .svg-frame {
+  margin: 1.2em 0;
+  text-align: center;
+}
+.fig img, .svg-frame img {
+  display: block;
+  margin: 0 auto;
+}
+.fig-caption, .svg-caption {
+  font-size: 0.82em;
+  color: #6e6e6e;
+  font-family: monospace;
+  margin-top: 0.4em;
+}
+
+/* ─── Tables(如果有保留为 HTML 的)─── */
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9em;
+  width: 100%;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.4em 0.6em;
+  text-align: left;
+}
+th {
+  background: #f0ebdd;
+  font-weight: 700;
+}
+
+/* ─── Lists ─── */
+ul, ol {
+  margin: 0.5em 0 0.8em 1.5em;
+  padding: 0;
+}
+li {
+  margin-bottom: 0.3em;
+}
+
+/* ─── Section divider ─── */
+hr {
+  border: 0;
+  border-top: 1px solid #c4bca4;
+  margin: 2em 0;
+}
+
+/* ─── Code ─── */
+code, pre {
+  font-family: "Menlo", "Courier New", monospace;
+  font-size: 0.9em;
+}
+code {
+  background: #f0ebdd;
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+}
+pre {
+  background: #f7f7f7;
+  padding: 0.8em;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+/* ─── Chapter recap ─── */
+.chapter-recap {
+  margin: 2em 0 1em;
+  padding: 1em 1.2em;
+  border: 2px solid #d4a548;
+  background: #fdf8ef;
+}
+.chapter-recap h4 {
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #c47f17;
+  text-transform: uppercase;
+  margin: 0 0 0.5em;
+}
+.chapter-recap ol {
+  margin: 0 0 0 1.5em;
+}
+.chapter-recap li {
+  margin-bottom: 0.4em;
+}
+
+/* ─── References ─── */
+.ref {
+  font-size: 0.85em;
+  color: #6e6e6e;
+  font-style: italic;
+  margin: 0.5em 0;
+}
