@@ -5,6 +5,50 @@
 
 ---
 
+## v9.0 · 项目首页改造 · 报告汇总入口(2026-05-26)
+
+把 `index.html` 从"跑步报告精装头版"改造成"白笑深度研究档案"的**版面目录**。
+
+### 改动
+
+| 之前 | 之后 |
+|---|---|
+| 跑步报告专属精装头版(944 行) | 跨报告的汇总入口(单页 ~500 行) |
+| 只能跳到跑步报告 | 列出所有报告 + 外站报告 |
+| 加新报告要重写首页 | 加新报告改 HTML 注释指引的卡片块即可 |
+
+### 当前收录
+
+| 报告 | 路径 | 状态 |
+|---|---|---|
+| 跑步科学深度调研 v2.0 | `reports/2026-05-running-science/` | 本站 |
+| 康复科学深度调研 v1.0 | `reports/2026-05-rehab-science/` | 本站 |
+| Marathon Manual v4.0 | `https://baixiao8.github.io/study/marathon/` | 外站(独立 GitHub Pages 子站)|
+| 《AI 时代的用户体验之书》v0.1 | — | WIP · 写完后加入 |
+
+### 设计
+
+- 保留 Newsprint 报刊风(米黄底 + 报刊红 + Inter Tight + 苹方 + JetBrains Mono)
+- masthead-mini → hero(深度研究档案大标题)→ section-divider(分类版块)→ report-list
+- 每张报告卡:`kicker / date / title / subtitle / stats / cta`
+- 外站报告带 `↗ 外站` 蓝色 tag,target="_blank"
+- WIP 占位用斜体 + 蓝色 In Draft tag,等做好替换成正式卡片
+
+### 加新报告的指引
+
+新 `index.html` 顶部加了 HTML 注释,4 步:
+
+```html
+<!--
+  1. 在 reports/ 下新建报告目录 YYYY-MM-<slug>(参考 PRINCIPLES.md)
+  2. 复制一个 <a class="report-card"> 卡片块,改 href + kicker + h2 + subtitle + stats + date
+  3. 外链:加 target="_blank" + <div class="external-tag">↗ 外站</div>
+  4. 完全新主题:新建 section,从 <hr class="section-divider"> 开始
+-->
+```
+
+---
+
 ## v8.7.4 · 第五次修复 · image lazy-load 引起的 layout shift(2026-05-26)
 
 v8.7.3 用 `scrollTo({ behavior: 'instant' })` 强制立即 scroll,数据显示 scroll 立即到位(diff=0)——但用户**等图片加载完**后看到的是错章节。
