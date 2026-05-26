@@ -556,6 +556,17 @@
       }
     });
   });
+
+  // EPUB 下载文件名 · 从卡片 <h2> 自动设 download attribute(=书本名)
+  // URL 保持 slug.epub(稳定),但浏览器保存时用书本名,如「AI 时代的用户体验之书.epub」
+  document.querySelectorAll('.epub-btn').forEach(function(btn) {
+    var card = btn.closest('.report-card');
+    if (!card) return;
+    var h2 = card.querySelector('h2');
+    if (h2 && h2.textContent.trim()) {
+      btn.setAttribute('download', h2.textContent.trim() + '.epub');
+    }
+  });
 </script>
 </body>
 </html>
