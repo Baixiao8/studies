@@ -29,6 +29,14 @@ reports/*/build/
 reports/*/dist/
 reports/*/_temp/
 
+# ─── A 模式 CI · 部署产物(由 GitHub Actions 在 gh-pages 分支生成,不进 main)───
+# main 分支只存源:chapters/ + parts/ + assets/ + _shared/(脚本+样式)
+# 以下产物全部 .gitignored,由 CI 自动生成 + 推到 gh-pages
+reports/*/index.html
+reports/*/*.epub
+.deploy/
+# 顶层 index.html 仍 commit(首页本体,非生成物)
+
 # Local config (不要把本地密钥提交)
 .env
 .env.local
