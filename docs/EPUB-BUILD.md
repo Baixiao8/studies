@@ -156,8 +156,38 @@ bash tools/setup.sh
 
 ---
 
+## 🆕 v9.2+ 之后:CI 全自动模式(推荐)
+
+阶段 4 上线后,你**不再需要本地跑 build**:
+
+```bash
+# 写完报告后
+cd 运动健康
+git add reports/2026-XX-<slug>/chapters reports/2026-XX-<slug>/parts reports/2026-XX-<slug>/assets
+git commit -m "report: <slug> v1.0"
+git push
+# 等 1-2 分钟,GitHub Actions 自动 build + 部署
+```
+
+`tools/.venv` 只用于**本地预览**(可选)。
+
+CI 触发条件(`.github/workflows/build-and-deploy.yml`):
+- push 到 main + paths 匹配:`reports/**` / `_shared/**` / `index.html` / `tools/requirements.txt`
+
+部署目标:**gh-pages 分支**(orphan commit · 不累积历史)→ GitHub Pages serve
+
+监控 CI:
+```bash
+gh run list -L 3              # 看最近 3 次 CI run
+gh run view <run-id> --log    # 看具体 log
+gh workflow run build-and-deploy.yml  # 手动触发(workflow_dispatch)
+```
+
+---
+
 ## CHANGELOG
 
 | 日期 | 版本 | 改动 |
 |---|---|---|
 | 2026-05-26 | v1.0 | 初次实现 — 由 PRD v1.6 决策驱动 |
+| 2026-05-26 | v1.1 | 上 A 模式 CI(GitHub Actions)+ gh-pages 部署 + main 历史清理 |
