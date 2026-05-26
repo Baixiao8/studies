@@ -1,0 +1,172 @@
+{
+  "s0": {
+    "title": "前言 · 立场与读法",
+    "points": [
+      "<strong>核心命题</strong>:AI 产品的成败,越来越多地取决于 UX,而不是模型本身——从 ChatGPT 比 GPT-3 网页版火一万倍可以看到。",
+      "<strong>四个立场</strong>:UI 让位于意图层 · 信任比可用性更重要 · 错误是主菜不是边角料 · 设计师是新一代系统工程师。",
+      "<strong>本书不写</strong>:模型训练 / 千图AI 功能细节 / AI 商业模式 / 视觉规范 / 全景产品评测。",
+      "<strong>本书写</strong>:AI 产品的 UX 新难题(Part II)· 头部产品怎么解(Part III)· 经典原则怎么改写(Part IV 第 14 章)· 怎么用到千图AI(末章)。",
+      "<strong>读法</strong>:线性读 4-6 小时 / 问题读跳到对应章节 / 案例读从 Part III 倒推。如果只看一章,看末两章千图AI 体检与路线图。"
+    ]
+  },
+  "s1": {
+    "title": "范式跃迁要点",
+    "points": [
+      "<strong>三个时代</strong>:GUI(1984-2007) → 触控(2007-2022) → Agent(2022-),每个时代有一个'Hello'时刻(Macintosh / iPhone / ChatGPT)。",
+      "<strong>每个时代的核心矛盾</strong>:GUI 解决专家工具民主化 · 触控解决随身使用 · Agent 解决意图直接执行。",
+      "<strong>失控风险逐代上升</strong>:GUI 低(每步手动)→ 触控中(手势误触)→ Agent 高(AI 自动执行)。这是 AI 时代最重要的新议题。",
+      "<strong>跃迁不是替代是重心位移</strong>:Word 没死,只是文字创作主战场移到 ChatGPT。不要为了 AI 化而 AI 化。",
+      "<strong>底层规律</strong>:每次跃迁 = 新输入设备 + 新认知模型;旧时代的'遗产税'变成新时代的设计议题。"
+    ]
+  },
+  "s2": {
+    "title": "AI UX 五大新特质",
+    "points": [
+      "<strong>输出复杂度超过秒判</strong>:Smart Compose vs Copilot——AI 输出越长,'验证机制'越关键。",
+      "<strong>意图可能被错解</strong>:Photoshop vs Photoroom——意图型软件必须为'AI 理解错了'准备体面退路。",
+      "<strong>UI 从资产变实例</strong>:Notion 模板 vs Notion AI——UI 元素从'预先存在'变成'按需生成',需要全新的生成 / 修改 / 保存 / 复用四态。",
+      "<strong>多步自动执行</strong>:滴滴 vs Cursor Composer——Agent 的中断 / 回滚 / 介入需要新设计,'取消'按钮不够用。",
+      "<strong>上下文成为资产</strong>:百度搜索 vs 豆包对话——'记忆'从无变成核心资产,需要可见 / 可控 / 可移植。"
+    ]
+  },
+  "s3": {
+    "title": "信任 UX 要点",
+    "points": [
+      "<strong>幻觉是 LLM 结构性特征</strong>,不是 bug——Schwartz 律师案不只是用户轻信,也是 UX 失败。",
+      "<strong>信任分三层</strong>:任务级(这次对吗)/ 系统级(平时靠谱吗)/ 模型级(AI 能信吗),要分别设计。",
+      "<strong>5 种信任 UX 模式</strong>:Confidence Display · Citation · Source Transparency · Disclaimer · Verify-before-Act。每种都有典型坑。",
+      "<strong>行业最佳实践</strong>:可点验引用(Perplexity)+ 主动说不知道(Claude)+ 关键时刻确认(Computer Use)+ 不堆废话 disclaimer + 可审计记忆(ChatGPT)。",
+      "<strong>警惕过度</strong>:按'可逆性 × 错误成本'分级,避免用户麻木——堆 disclaimer 不如关键时刻一次强提示。"
+    ]
+  },
+  "s4": {
+    "title": "可控性悖论要点",
+    "points": [
+      "<strong>核心悖论</strong>:自动化越强,人在关键时刻的失控越严重(法航 447 / Bainbridge 1983)。AI 介入度与用户控制感反比。",
+      "<strong>可控性 5 维度</strong>:启动控制 / 过程控制 / 边界控制 / 撤销控制 / 学习控制——必须独立设计,不是二元判断。",
+      "<strong>4 种行业解法</strong>:Cursor 三段式介入(Tab/Composer/Agent)· Claude Artifact 编辑预览分离 · Krea 实时参数滑块 · ChatGPT Memory 可审计学习。",
+      "<strong>控制权交接是危险时刻</strong>:AI 主动放手 / 用户主动接手时,必须明确状态、避免抢控制。",
+      "<strong>可控性不是越多越好</strong>:创意 / 生产 / 执行 / 协作 四类任务各有最优可控性配方。"
+    ]
+  },
+  "s5": {
+    "title": "生成式 UI 要点",
+    "points": [
+      "<strong>定义边界</strong>:能用自然语言指令对其做下一步修改才算生成式 UI,不只是 AI 生成的内容。Midjourney 图像不算,Claude Artifact 算。",
+      "<strong>4 种形态</strong>:Sidebar Canvas(Claude Artifact)· Floating(ChatGPT Canvas)· Inline Component(Perplexity 答案块)· Full-page(v0 / Bolt)。",
+      "<strong>形态被'内容尺寸'驱动</strong>,不是被模型能力驱动——这是反直觉但反复验证的设计判断。",
+      "<strong>4 种状态设计</strong>:生成中 / 待审批 / 已应用 / 版本切换——传统 UI 没有,生成式 UI 必须明确每一态。",
+      "<strong>默认进入'待审批'</strong>而不是'已应用',给用户最后把关机会——这是 AI 产品的'信任默认值'。"
+    ]
+  },
+  "s6": {
+    "title": "错误兜底要点",
+    "points": [
+      "<strong>5 类错误</strong>:系统级 / 输出级 / 理解级 / 边界级 / 时间级——不同类型的错对应完全不同的 UX 策略。",
+      "<strong>4 种兜底机制</strong>:Retry · Partial Recovery · Fallback to Human · Skip &amp; Acknowledge——按错误类型选合适机制。",
+      "<strong>错误文案 6 条铁律</strong>:不说 Something went wrong / 不暴露错误码给用户 / 主语用'我'不用'你'/ 下一步动作必须明确 / 可恢复错误不用 modal / 同一错误不要 spam。",
+      "<strong>过度承诺的产品错误容忍度低</strong>:Rabbit R1 / Humane Pin 因预期落差被骂死;诚实预期的产品(早期 Claude)出错宽容度高。",
+      "<strong>对千图AI</strong>:错误分类提示 + 局部重绘入口 + 排队预估时间——是 3 个最优 ROI 改进点。"
+    ]
+  },
+  "s7": {
+    "title": "提示词层要点",
+    "points": [
+      "<strong>prompt 不是输入框</strong>,是新交互层——从命令到对话到意图的三段史。",
+      "<strong>分三层</strong>:即时输入(placeholder + slash)+ 用户偏好(custom instructions / Memory)+ 产品策略(system prompt)。",
+      "<strong>Placeholder 8 种写法</strong>:产品越通用越要'放空',越垂直越要'具体例子'——千图AI 适合'试试:[图像 prompt 例子]'。",
+      "<strong>Slash command 4 原则</strong>:不超过 10 个 / 命令名用动词 / 必须有 autocomplete / 每条要 hover 说明。",
+      "<strong>prompt 失败 4 种兜底</strong>:主动追问 · 注释假设 · prompt 改写建议 · 对比生成——这 4 个组合降低用户 prompt 焦虑最有效。"
+    ]
+  },
+  "s8": {
+    "title": "Agent 边界要点",
+    "points": [
+      "<strong>Agent ≠ Chatbot</strong>:三个必要特征(能拆解任务 + 能调用工具 + 能多步执行),只回答的都不算。",
+      "<strong>5 级自主性梯度</strong>:L0 推荐 / L1 单步 / L2 短链 / L3 长链+审批 / L4-L5 全自动——L3 是当前最佳平衡点。",
+      "<strong>边界 4 维度</strong>:功能边界 / 资源边界 / 时间边界 / 信任边界——必须独立设计。",
+      "<strong>5 个必停 trigger</strong>:不可逆操作前 / 权限超限时 / 关键决策歧义时 / 资源即将超限时 / 错误重复发生时。",
+      "<strong>3 个不该停场景</strong>:低风险中间步骤 / 已做过的同类决策 / 用户已明示偏好——否则用户疲劳。"
+    ]
+  },
+  "s9": {
+    "title": "多模态要点",
+    "points": [
+      "<strong>6 种模态</strong>:文字 / 语音 / 静态视觉 / 动态视觉 / 手势空间 / 动作——AI 时代有 2 种以上模态的产品都叫'多模态'。",
+      "<strong>4 种典型形态</strong>:看图说话(GPT-4V)· 说话写文(ChatGPT Voice)· 实时视频(Gemini Live)· 空间手势(Vision Pro)。",
+      "<strong>模态切换 4 议题</strong>:何时切(主动 vs 自动)/ 切换指示(视觉听觉)/ 多模态主线 / 模态降级。",
+      "<strong>'模态选择'本身的学问</strong>:每个任务有最优模态——写代码要文字,brainstorm 适合语音,识物适合摄像头,不要全模态铺开。",
+      "<strong>多模态是乘法不是加法</strong>:每多一个模态设计复杂度翻倍。先把核心模态做到极致,再扩辅助模态。"
+    ]
+  },
+  "s10": {
+    "title": "AI 人格要点",
+    "points": [
+      "<strong>人格 5 件套</strong>:语气词汇 / 拒绝姿态 / 道歉密度 / 主动性 / 不确定性表达——这 5 件套的具体选择就是用户感知的'人格'。",
+      "<strong>3 个标杆对比</strong>:Claude 克制+共情 / ChatGPT 直接给方案 / Grok sarcastic 反建制——每种对应不同用户群,没有谁对谁错。",
+      "<strong>人格是怎么烙的</strong>:system prompt(策略层)+ RLHF(训练标注员)+ Constitutional AI(自评宪法)+ Fine-tuning(语料微调)。",
+      "<strong>情感 3 条边界</strong>:不让 AI 主动表达自我感受 / 不提供治疗式回应 / 不鼓励过度依赖——Sydney 事件是反面教材。",
+      "<strong>对千图AI</strong>:专业克制 + 直接拒绝 + 给替代方案 + 主动给变体——不要做 ChatGPT 式过度热情。"
+    ]
+  },
+  "s11": {
+    "title": "内容生成横评要点",
+    "points": [
+      "<strong>6 款产品 6 种 UX 哲学</strong>:Claude 赢在信任+Artifact / v0 赢在代码即 UI / Krea 赢在实时画布 / 即梦赢在中文场景 / 通义万相赢在企业级 / Midjourney 赢在风格独家。",
+      "<strong>没有全能冠军</strong>:每家在某个维度做到 ★★★★★,其他维度行业平均——这就是'极致单点'策略。",
+      "<strong>核心 insight 1</strong>:用户产物决定 UX 形态——v0 输出代码长得像 IDE,Krea 输出探索长得像画布。",
+      "<strong>核心 insight 2</strong>:人格匹配用户群——专业用户偏好 Claude 克制,大众用户偏好 ChatGPT 直接。",
+      "<strong>千图AI 启示</strong>:选'中文场景模板'(学即梦)+ '信任设计'(学 Claude)做极致,其他维度做到行业平均即可。"
+    ]
+  },
+  "s12": {
+    "title": "DevTools 横评要点",
+    "points": [
+      "<strong>4 个产品 4 个介入级别</strong>:Copilot(L1)/ Cursor(L2-L3 可切换)/ Bolt(L4)/ Lovable(L3 UI-first)——共同证明 AI 产品 UX 第一决策是介入级别定位。",
+      "<strong>Copilot 的'不抢戏'</strong>:AI 是 IDE 辅助层不是主角——这种渐进式 AI 化对企业用户最易接受。",
+      "<strong>Cursor 的 AI-native</strong>:重做 IDE 围绕 AI 设计——证明用户愿意离开 VS Code 用 AI-native 工具。",
+      "<strong>Bolt 的两难</strong>:目标用户是非工程师,但 AI 卡住时非工程师无法 debug——L4 产品必须给'逃逸到工程师'入口。",
+      "<strong>Lovable 的局部编辑</strong>:精细到元素级 AI 编辑——设计师的工作流就是局部精调,'整体重生'是错的颗粒度。"
+    ]
+  },
+  "s13": {
+    "title": "失败考古要点",
+    "points": [
+      "<strong>2024 年 4-5 月双子翻车</strong>:Humane AI Pin 被 WSJ 评'近乎不可用',Rabbit R1 的 LAM 被 The Verge 揭穿是预写脚本。",
+      "<strong>Rabbit R1 失败根因</strong>:把用户痛点判断错(用户讨厌的不是'打开 APP'而是'被推送骚扰'),后面所有 UX 都白做。",
+      "<strong>Humane Pin 失败根因</strong>:押宝'反屏幕'哲学,但视觉信息密度比语音高 10 倍,用户不接受。",
+      "<strong>Sydney 失败根因</strong>:给消费级 AI 设计'有趣人格'= 不可预测 = 失控风险——商业 AI 不要追求人格惊喜。",
+      "<strong>4 类失败模式</strong>:过度承诺 / 能力虚标 / UX 漏掉关键场景 / 缺乏边界感——千图AI 8 条避坑清单见正文。"
+    ]
+  },
+  "s14": {
+    "title": "AI 时代设计十二诫",
+    "points": [
+      "<strong>体检经典启发法</strong>:70% 保留(升级)+ 30% 新增——Norman / Nielsen 没过时,但要打 AI 时代补丁。",
+      "<strong>12 诫的前 6 条(升级类)</strong>:信任优于可用性 / 错误是主菜 / 必须给逃生通道 / 不可逆操作有预览态 / 自然语言新输入层 / UI 协作 4 态。",
+      "<strong>12 诫的后 6 条(新增类)</strong>:Agent 必停 trigger / 撤销是底线 / 透明度优于黑盒 / 上下文是资产 / 人格匹配用户 / 让人更聪明不更依赖。",
+      "<strong>3 种用法</strong>:做新功能时过 12 条 / design review checklist / PR 自动审。",
+      "<strong>3 个不要</strong>:不要 12 条都满分(不现实)/ 不要当通过-不通过判断(是讨论框架)/ 不要僵化执行(2-3 年会修改)。"
+    ]
+  },
+  "s15": {
+    "title": "千图AI 体检要点 · FACT-CHECK",
+    "points": [
+      "<strong>基于外部观察的诊断</strong>,白笑团队必须验证现状描述。整体得分约 6.5/10,跟同期国内产品同水位。",
+      "<strong>5 条主要缺口</strong>:信任设计(5/10)/ 错误兜底(5/10)/ prompt 体验(6/10)/ 透明度(5/10)/ 上下文资产(4/10)——ROI 最高的改进方向。",
+      "<strong>4 条优势</strong>:逃生通道(7/10)/ 预览态(7/10)/ 撤销底线(7/10)/ 让人更聪明(7/10)——产品护城河,继续保持。",
+      "<strong>4 个核心场景</strong>:生成新图缺场景模板 / 改图缺局部重绘入口 / 历史缺派生树 / 失败缺分类提示——这是下一章路线图的输入。",
+      "<strong>下一步</strong>:团队内部走查 + 跟实际产品 / 商业团队对齐,再决定哪些建议进路线图。"
+    ]
+  },
+  "s16": {
+    "title": "千图AI 路线图要点 · FACT-CHECK",
+    "points": [
+      "<strong>90 天 5 个 Quick Win</strong>:中文场景模板 + 错误分类 + 模型透明 + AI 自评 + 局部重绘入口——工程量小,用户感知强。",
+      "<strong>180 天 3 个中型改造</strong>:派生树历史 + Memory 偏好 + Projects 概念——填上下文资产缺口。",
+      "<strong>365 天 2 个大型重构</strong>:场景化 Agent 工作流 + 多模态输入(语音/图)——战略级跃迁。",
+      "<strong>5 件主动不做的事</strong>:不做过度热情人格 / 不做 AI 全自动 / 不做情感陪伴 / 不做打卡机制 / 不在所有维度赶上同行(选极致单点)。",
+      "<strong>4 条执行建议</strong>:每个 QW 一个 owner / AI UX 双周会 / 每月 12 诫复盘 / 把本书放团队文档区作设计评审论证依据。"
+    ]
+  }
+}

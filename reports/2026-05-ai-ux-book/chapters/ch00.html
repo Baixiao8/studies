@@ -1,0 +1,139 @@
+<section id="s0" style="border-top: 4px solid var(--c-psych);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">00</span>PREFACE · 前言</div>
+  <h1 class="section-h">为什么我们要写这本书 <span class="en">Why This Book Exists</span></h1>
+  <p class="section-sub">写之前先讲清楚:这本书是给谁的、为什么要写、不写什么、写它时我们站在哪里、读它的人应该怎么读。把这五件事先说清楚,后面 16 章就不会跑偏。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>AI 产品的成败,越来越多地取决于 UX,而不是模型本身——而我们手上的 UX 教科书,大多写于 GUI 时代,正在面对生成式 AI 时漏风。这本书就是想填这个洞。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2022 年 11 月 30 日</div>
+    <p>OpenAI 在 2022 年 11 月 30 日发布 ChatGPT 时,内部预期是"研究预览,一周内可能几万人用"。两周后,用户破百万;两个月后,破一亿——成为史上增长最快的消费级产品。</p>
+    <p>但少有人注意到:ChatGPT 背后的模型 GPT-3.5,从 2020 年开始就以 API 形式开放给开发者,有一个叫 <em>playground</em> 的网页版可以直接对话。能力差距没那么悬殊。<strong>真正引爆 ChatGPT 的不是模型,是把"开发者输入框 + JSON 输出"换成了"对话气泡 + 流式打字"。</strong>就这么一个看上去不起眼的 UX 改动,撬开了消费级 AI 时代的大门。</p>
+  </div>
+
+  <h3><span class="pre">0.1</span>起源 · 一个让我们困惑的现象</h3>
+  <p class="lead">这个故事告诉我们一件事:AI 产品的成败,越来越多地取决于 UX,而不是模型本身。</p>
+
+  <p>但当我们去翻 UX 教科书,会发现一个尴尬的事实——Don Norman《设计心理学》写于 1988 年,最近一次大修订是 2013 年。Jakob Nielsen 可用性十大启发法发表于 1994 年。Steve Krug《点石成金》写于 2000 年。</p>
+
+  <p>这些经典在 GUI 和触控时代被反复验证过,但它们面对 ChatGPT / Claude / Cursor / v0 / Krea 这一代产品时,开始<em>漏风</em>:</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 经典 UX 原则的"AI 时代漏洞清单"</div>
+    <ul>
+      <li><strong>"系统状态可见"</strong>——在生成式 UI 里怎么定义?界面本身在被生成。</li>
+      <li><strong>"用户控制与自由"</strong>——在 Agent 里怎么定义?用户让 AI 自动执行时,要给多少干预入口?</li>
+      <li><strong>"错误预防"</strong>——在会幻觉的 LLM 里怎么定义?错误是必然的,不是异常。</li>
+      <li><strong>"一致性"</strong>——在每次输出都不一样的生成式产品里怎么定义?不一致才是常态。</li>
+    </ul>
+  </div>
+
+  <p>我们需要新的语言、新的判断标准、新的设计原则。这本书就是想试着搭建这些。</p>
+
+  <h3><span class="pre">0.2</span>我们为什么写这本书</h3>
+
+  <p>千图AI 是一个 AI 产品。我们做的是图像生成与编辑领域的 SaaS,目标用户是设计师、营销人员、创作者。</p>
+
+  <p>作为这个产品的设计、产品、研发团队,我们每天都在做大大小小的 UX 决策:</p>
+
+  <ul>
+    <li>生成中的进度指示是用百分比还是"骨架闪烁"?</li>
+    <li>输入框的 placeholder 应该写「请输入您的需求」还是「试试:一只在月球上喝咖啡的橘猫」?</li>
+    <li>AI 改出来的图用户觉得不对,应该让他继续 prompt 调,还是直接拖拽局部重绘?</li>
+    <li>当模型输出失败时,是用红色弹窗告诉他"生成失败",还是用一段灰色小字解释"这个 prompt 触发了内容安全策略,建议换成 XXX"?</li>
+    <li>高级用户的 prompt 写出 1500 字,要不要给他一个"压缩"按钮?这种功能算"贴心"还是算"越权"?</li>
+  </ul>
+
+  <p>我们能 case by case 地拍板,但<strong>我们缺一个能让全团队对齐判断的"上位语言"</strong>。</p>
+
+  <ul>
+    <li>设计师说"这样符合 Material Design"——但 Material Design 不教你怎么处理幻觉。</li>
+    <li>产品说"用户希望更多控制"——但"控制"在 AI 产品里有 5 种不同的定义。</li>
+    <li>研发说"模型这次输出有 80% 的置信度"——但置信度怎么呈现给用户、要不要呈现,是 UX 问题不是工程问题。</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">i 我们为什么要这本书</div>
+    <p>不是为了发表,是为了团队下一次开会讨论「是否在生成结果旁边显示 confidence score」时,大家能在同一个坐标系里争论。</p>
+  </div>
+
+  <h3><span class="pre">0.3</span>这本书不写什么 / 写什么</h3>
+
+  <p>写之前,我们想先划清边界,避免读者带着错的期待来。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>这本书<strong>不写</strong></th><th>这本书<strong>写</strong></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>AI 模型怎么训练(工程团队的事)</td><td>AI 产品独有的 UX 难题是什么(Part II 问题地图)</td></tr>
+        <tr><td>千图AI 的具体功能怎么做(PRD 的事)</td><td>头部 AI 产品是怎么解的(Part III 案例 X-Ray)</td></tr>
+        <tr><td>AI 产品的商业模式 / 增长 / 定价(GTM 的事)</td><td>经典 UX 原则在 AI 时代怎么改写(Part IV 第 14 章)</td></tr>
+        <tr><td>设计稿的视觉规范 / token 系统(<code>designknowledge.md</code> 的事)</td><td>这些诊断和原则怎么应用到千图AI(末章应用)</td></tr>
+        <tr><td>对所有 AI 产品的全景评测(科技媒体的事)</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span class="pre">0.4</span>我们的四个立场</h3>
+
+  <p>写一本书没有立场就是写百科。我们想在开篇就把几个有点"锋芒"的立场亮出来——这样读者后面看到论证时不会觉得突兀,反对的读者也能从一开始就知道在反对什么。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 立场 1 · UI 不会消失,但 UI 的中心地位会让位给"意图层"</div>
+    <p>对话 / Agent 不会取代 GUI,但 GUI 的设计重心会从「承载操作」转向「承载意图的表达和确认」。这是为什么 Claude Artifact、v0 这种"AI 生成 UI"会成为新主流—— UI 变成了对话的副产品。设计师的工作不再是"画完所有静态界面",而是"设计 AI 怎么帮用户生成合适的界面"。</p>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ 立场 2 · 信任比可用性更重要</div>
+    <p>在 GUI 时代,可用性是产品能不能用的底线。在 AI 时代,<strong>信任</strong>才是产品能不能用的底线——用户不信任 AI 的输出,再可用也是负担(甚至是危险)。所以 AI 产品的 UX 设计师,首先是<em>信任设计师</em>。每一个 confidence 显示、每一处 citation 链接、每一段 disclaimer 文案,都是在做信任设计。</p>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ 立场 3 · 错误不是异常,是 UX 的核心场景</div>
+    <p>传统软件的错误处理是「边角料」——主流程跑通了再补错误页。AI 产品的错误处理是「主菜」——"AI 出错时用户怎么继续"这个问题必须在第一稿设计就回答,而不是放到 v2 再补。因为 LLM 的错误是<strong>必然的、高频的、用户无法预防的</strong>。</p>
+  </div>
+
+  <div class="callout note">
+    <div class="label">i 立场 4 · AI 产品的设计师,是新一代"系统工程师"</div>
+    <p>AI 产品的 UX 设计不再是"画几张稿"。它跨越前端、后端、模型、prompt、安全策略、商业策略。设计师必须懂模型的能力边界(不然会做出模型做不到的设计),必须懂 prompt 工程(不然写不好 placeholder 和 system prompt),必须懂 token 经济(不然不知道为什么某个流式效果代价昂贵)。这是设计师角色的"系统化"升级。</p>
+  </div>
+
+  <p>这四个立场会贯穿全书。如果你看完一章发现"咦这里似乎在反复说一个观点",大概率是这四面旗在背后挥动。</p>
+
+  <h3><span class="pre">0.5</span>怎么读这本书 · 三种读法</h3>
+
+  <div class="callout ops">
+    <div class="label">✓ 三种读法,按你的场景选</div>
+    <ol>
+      <li><strong>线性读</strong>——从前言开始按章节顺序读完。最完整的体验,需要 4-6 小时。</li>
+      <li><strong>问题读</strong>——你在做某个具体 AI 产品决策时,直接跳到对应章节。
+        <ul>
+          <li>设计"AI 生成结果旁边要不要有 confidence 标识" → 第 3 章 信任与幻觉</li>
+          <li>设计"AI 改图改一半要不要让用户中断" → 第 4 章 可控性悖论 + 第 8 章 Agent 边界感</li>
+          <li>设计"对话输入框的 placeholder 怎么写" → 第 7 章 提示词作为新交互层</li>
+          <li>设计"为什么我们的 AI 没有 ChatGPT 那种'温度'" → 第 10 章 AI 人格设计</li>
+        </ul>
+      </li>
+      <li><strong>案例读</strong>——先跳到 Part III 案例横评(第 11-13 章),看头部产品怎么做的,再回头看 Part II 问题地图理解背后逻辑。最快也最具体,但容易"知其然不知其所以然"。</li>
+    </ol>
+  </div>
+
+  <p>末章(第 15-16 章)是千图AI 的体检和路线图。<strong>如果你只看一章,看这两章</strong>。前面 14 章是为这两章铺路的。</p>
+
+  <div class="callout you">
+    <div class="label">◐ 对读者的请求</div>
+    <p>这本书不是终稿,是 v0.1。我们把它放在内部文档区,是希望团队边读边批注、边争论边修订。每一条让你点头的,欢迎留个 +1;每一条让你皱眉的,请告诉我们错在哪。<em>一本被团队反复争论过的书,才有可能成为团队真正共享的判断标准。</em></p>
+  </div>
+
+  <p class="ref">主要参考:<br>
+  Don Norman, <em>The Design of Everyday Things</em>, 1988/2013 · Jakob Nielsen, <em>Usability Heuristics</em>, 1994 · Steve Krug, <em>Don't Make Me Think</em>, 2000 · OpenAI ChatGPT 发布历史, 2022-11-30 · 内部讨论与团队访谈,千图AI 设计团队, 2026-05</p>
+
+</div>
+</section>

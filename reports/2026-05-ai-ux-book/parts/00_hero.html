@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 时代的用户体验之书 · 千图AI 内部读本</title>
+<meta name="description" content="一份给千图AI 团队的内部 UX 读本——AI 时代的设计语言、问题地图、案例横评、原则重构、千图AI 应用。16 章完整版。">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_shared/style.css?v=20260526a">
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css?v=20260526a">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ============= HERO ============= -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">AI UX HANDBOOK · 内部读本 · v1.0 · COMPLETE</div>
+    <h1>
+      AI 时代的用户体验之书<span class="ital">.</span>
+      <span class="small">范式 · 问题地图 · 案例 · 原则 · 应用 · <em class="ital">An AI-Native UX Handbook</em></span>
+    </h1>
+    <p class="lede">
+      这不是一份对外发表稿,是一份<em>写给千图AI 团队的内部读本</em>——
+      当 ChatGPT、Claude、Cursor、v0、Krea 重写了 UX 的词汇表,
+      Don Norman 1988 年的设计原则开始漏风,
+      我们需要新的设计语言、新的判断标准、新的应用准绳。
+      <strong>16 章 · 4 幕 · 一套适用于 AI 产品的设计思考框架。</strong>
+      本书不写"怎么用 AI",写"AI 产品的 UX 怎么设计"。
+    </p>
+
+    <div class="hero-meta">
+      <div class="item">
+        <div class="label">CHAPTERS</div>
+        <div class="value">16<span class="unit">/4 PARTS</span></div>
+        <div class="sub">总论 · 问题地图 · 案例横评 · 重构应用</div>
+      </div>
+      <div class="item">
+        <div class="label">VERSION</div>
+        <div class="value">v1.0<span class="unit">16/16</span></div>
+        <div class="sub">完整版 · 2026-05 首发</div>
+      </div>
+      <div class="item">
+        <div class="label">DEPTH</div>
+        <div class="value">~50K<span class="unit">words</span></div>
+        <div class="sub">学术深度 + 案例密度 + 可操作建议</div>
+      </div>
+      <div class="item">
+        <div class="label">AUDIENCE</div>
+        <div class="value">内部<span class="unit">team</span></div>
+        <div class="sub">千图AI 设计 · 产品 · 研发</div>
+      </div>
+    </div>
+
+    <div class="hero-toc-section">
+      <div class="hero-toc-label">CHAPTER MAP · 章节地图</div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">前言 <span class="en">PREFACE</span></div>
+        <div class="hero-toc">
+          <a href="#s0" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">PREFACE</span>
+            <div class="title">为什么我们要写这本书</div>
+            <div class="en">Why This Book Exists</div>
+            <div class="desc">起源 / 边界 / 四个立场 / 三种读法。从 ChatGPT 比 GPT-3 网页版火一万倍说起。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第一篇 总论与历史 <span class="en">PART I · CONTEXT &amp; EVOLUTION</span></div>
+        <div class="hero-toc">
+          <a href="#s1" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 01 · PARADIGM</span>
+            <div class="title">GUI → 触控 → Agent 范式跃迁</div>
+            <div class="en">The Three Paradigm Shifts</div>
+            <div class="desc">三个时代,三个 Hello 时刻,三段范式。理解今天的 UX 难题是上一代的"遗产税"。</div>
+          </a>
+          <a href="#s2" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">CHAPTER 02 · WHY DIFFERENT</span>
+            <div class="title">AI 产品的 UX 为什么不一样?</div>
+            <div class="en">What Makes AI UX Different</div>
+            <div class="desc">5 组对比 → 5 个特质 → 引出 Part II 问题地图。从 Smart Compose vs Copilot 开始。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第二篇 问题地图 <span class="en">PART II · PROBLEM MAP · 8 大 UX 新难题</span></div>
+        <div class="hero-toc">
+          <a href="#s3" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">CHAPTER 03 · TRUST</span>
+            <div class="title">信任与幻觉</div>
+            <div class="en">Trust &amp; Hallucinations</div>
+            <div class="desc">从 Schwartz 律师案讲起。信任三层次 · 5 种 UX 模式 · 产品横评。</div>
+          </a>
+          <a href="#s4" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">CHAPTER 04 · CONTROL</span>
+            <div class="title">可控性悖论</div>
+            <div class="en">The Control Paradox</div>
+            <div class="desc">从法航 447 讲起。可控性 5 维度 · 4 种行业解法 · 适用边界。</div>
+          </a>
+          <a href="#s5" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">CHAPTER 05 · GENERATIVE UI</span>
+            <div class="title">生成式 UI</div>
+            <div class="en">Generative UI</div>
+            <div class="desc">从 v0 发布讲起。4 种形态 + 4 种状态设计 · Claude Artifact / v0 / Bolt 对比。</div>
+          </a>
+          <a href="#s6" class="card" style="--ch-color: var(--c-recovery);">
+            <span class="num">CHAPTER 06 · GRACEFUL FAILURE</span>
+            <div class="title">错误兜底与优雅降级</div>
+            <div class="en">Graceful Failure</div>
+            <div class="desc">5 类错误 · 4 种兜底机制 · 文案 6 条铁律 · 用户心理预期管理。</div>
+          </a>
+          <a href="#s7" class="card" style="--ch-color: var(--c-nutrition);">
+            <span class="num">CHAPTER 07 · PROMPT LAYER</span>
+            <div class="title">提示词作为新交互层</div>
+            <div class="en">Prompt as New Interaction</div>
+            <div class="desc">从命令到对话到意图 · placeholder 8 种写法 · slash command · 失败兜底 4 种。</div>
+          </a>
+          <a href="#s8" class="card" style="--ch-color: var(--c-injury);">
+            <span class="num">CHAPTER 08 · AGENT EDGE</span>
+            <div class="title">Agent 的边界感</div>
+            <div class="en">Agent Boundaries</div>
+            <div class="desc">从 Devin 翻车讲起。5 级自主性 · 边界 4 维度 · 5 个必停 trigger。</div>
+          </a>
+          <a href="#s9" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">CHAPTER 09 · MULTIMODAL</span>
+            <div class="title">多模态融合</div>
+            <div class="en">Multimodal Fusion</div>
+            <div class="desc">语音 + 视觉 + 手势 + 文本 · 6 种模态 / 4 种产品形态 / 切换 4 议题。</div>
+          </a>
+          <a href="#s10" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 10 · PERSONALITY</span>
+            <div class="title">AI 产品的人格与情感设计</div>
+            <div class="en">AI Persona &amp; Emotion Design</div>
+            <div class="desc">从 Sydney 失控讲起。人格 5 件套 · Claude vs ChatGPT vs Grok · 情感设计 3 边界。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第三篇 案例横评 <span class="en">PART III · CASE STUDIES</span></div>
+        <div class="hero-toc">
+          <a href="#s11" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">CHAPTER 11 · GENERATIVE</span>
+            <div class="title">内容生成类 X-Ray</div>
+            <div class="en">Generative Products X-Ray</div>
+            <div class="desc">6 款产品横评:Claude / v0 / Krea / 即梦 / 通义万相 / Midjourney。给千图AI 3 条启示。</div>
+          </a>
+          <a href="#s12" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">CHAPTER 12 · DEVTOOLS</span>
+            <div class="title">AI 辅助生产力对比组</div>
+            <div class="en">AI DevTools Comparison</div>
+            <div class="desc">4 个产品 4 个介入级别:Copilot / Cursor / Bolt / Lovable。同一问题的 4 种解法。</div>
+          </a>
+          <a href="#s13" class="card" style="--ch-color: var(--c-injury);">
+            <span class="num">CHAPTER 13 · FAILURES</span>
+            <div class="title">硬件 / Agent 的失败考古</div>
+            <div class="en">Hardware &amp; Agent Failures</div>
+            <div class="desc">Rabbit R1 / Humane Pin / Sydney 三个翻车案例 · 4 类失败模式 + 8 条避坑清单。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第四篇 重构与应用 <span class="en">PART IV · RECONSTRUCTION &amp; APPLICATION</span></div>
+        <div class="hero-toc">
+          <a href="#s14" class="card" style="--ch-color: var(--c-race);">
+            <span class="num">CHAPTER 14 · NEW PRINCIPLES</span>
+            <div class="title">AI 时代设计十二诫</div>
+            <div class="en">The Twelve Commandments</div>
+            <div class="desc">Don Norman / Nielsen 启发法的体检与重写。12 条原则 + 每条带"为什么 / 怎么落地 / 反面案例"。</div>
+          </a>
+          <a href="#s15" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">CHAPTER 15 · QIANTU AUDIT</span>
+            <div class="title">千图AI 的 UX 体检</div>
+            <div class="en">Qiantu AI Audit</div>
+            <div class="desc">用 12 诫给千图AI 打分。整体 6.5/10 · 5 条主要缺口 + 4 个具体场景诊断。<strong>需团队 FACT-CHECK</strong>。</div>
+          </a>
+          <a href="#s16" class="card" style="--ch-color: var(--c-recovery);">
+            <span class="num">CHAPTER 16 · ROADMAP</span>
+            <div class="title">千图AI 的 90 / 180 / 365 天改进路线图</div>
+            <div class="en">Action Roadmap</div>
+            <div class="desc">5 个 Quick Win + 3 个中型改造 + 2 个大型重构 · 5 件主动不做的事 · 4 条执行建议。</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main>

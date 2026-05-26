@@ -1,0 +1,233 @@
+<section id="s16" style="border-top: 4px solid var(--c-recovery);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">16</span>ROADMAP · 重构应用 / 第十六章</div>
+  <h1 class="section-h">千图AI 的 90 / 180 / 365 天改进路线图 <span class="en">Action Roadmap</span></h1>
+  <p class="section-sub">把第 15 章的诊断转化为可落地的行动计划——3 个时间窗、10 个具体动作、每个动作带"为什么 / 做什么 / 谁做 / 度量"四件套。这是这本书最后的"产物",从知识变成行动的桥。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>90 天做 <strong>5 个 quick win</strong>(场景模板 + 错误分类 + 模型透明 + AI 自评 + 局部重绘入口);180 天做 <strong>3 个中型改造</strong>(派生树历史 + Memory 偏好 + Projects 概念);365 天做 <strong>2 个大型重构</strong>(场景化 Agent 工作流 + 多模态输入)。<em>不做的事比做的事更重要——明确列了 5 件"主动不做"</em>。</p>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ FACT-CHECK 警告 · 必读</div>
+    <p>本章建议基于第 15 章的外部诊断推导,<strong>不是千图AI 团队正式 roadmap</strong>。所有"建议做"的事项需要:</p>
+    <ol>
+      <li>团队内部讨论 ROI 与现状匹配度</li>
+      <li>跟实际产品 / 商业 / 工程团队对齐</li>
+      <li>跟 Wayne(领导)同步,纳入正式规划再执行</li>
+    </ol>
+    <p>请把本章当作"<em>外部专家的体检报告 + 推荐方案</em>",不是正式产品决策。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / "诊断 → 行动"的桥</div>
+    <p>所有体检报告(医疗 / 产品 / 公司)都有一个共同失败模式:<strong>诊断写得很好,但读完没人知道下周该做什么</strong>。</p>
+    <p>这一章我们刻意避免这个陷阱——把第 15 章的"得分 + 缺口"翻译成"<em>谁、什么时候、做什么、做完怎么判断</em>"四件套。每个建议都能直接进 Jira / Linear 当 ticket。</p>
+    <p>同时明确"<em>不做什么</em>"——好的路线图一半价值在"做什么",另一半价值在"明确不做什么",避免团队精力发散。</p>
+  </div>
+
+  <h3><span class="pre">16.1</span>路线图方法论 · ROI 矩阵</h3>
+
+  <p class="lead">我们用一个简单矩阵决定"什么进 90 天 / 什么进 180 天 / 什么进 365 天"。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>象限</th><th>说明</th><th>处理</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>高 ROI + 低工程量</strong></td><td>用户感知强 + 工程量小</td><td>进 90 天 quick win</td></tr>
+        <tr><td><strong>高 ROI + 中工程量</strong></td><td>用户感知强 + 工程量中等</td><td>进 180 天中型改造</td></tr>
+        <tr><td><strong>高 ROI + 高工程量</strong></td><td>战略级,需要长期投入</td><td>进 365 天大型重构</td></tr>
+        <tr><td><strong>低 ROI + 任何工程量</strong></td><td>用户感知弱</td><td><em>不做</em>(写进"不做清单")</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span class="pre">16.2</span>90 天(Q1)· 5 个 Quick Win</h3>
+
+  <p class="lead">这 5 件事工程量小 / 用户感知强 / ROI 极高,建议立刻启动。</p>
+
+  <h4>Quick Win 1 · 中文场景模板库</h4>
+  <div class="callout ops">
+    <div class="label">✓ 90D-1 · 中文场景模板</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章缺口 3,对照即梦 / 通义万相,中文场景模板是中文 AI 工具的标配</li>
+      <li><strong>做什么</strong>:首页加 8-12 个场景卡片(电商主图 / 公众号封面 / 朋友圈背景 / PPT 配图 / 朋友圈封面 / 抖音封面 / 头像 / 表情包 / Banner / 海报 / 节日营销),每个场景卡进入后是定制 prompt 模板,用户填关键字</li>
+      <li><strong>谁做</strong>:设计 + 产品 + 前端(后端 prompt 模板由内容团队维护)</li>
+      <li><strong>度量</strong>:模板入口点击率 / 模板转化为生成的比例 / 模板用户 vs 自由 prompt 用户留存对比</li>
+      <li><strong>工程量</strong>:小(2-3 周)</li>
+    </ul>
+  </div>
+
+  <h4>Quick Win 2 · 错误分类提示</h4>
+  <div class="callout ops">
+    <div class="label">✓ 90D-2 · 错误分类</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章缺口 2,当前错误提示过于通用</li>
+      <li><strong>做什么</strong>:把"生成失败"拆成 5 类提示(系统级 / 输出级 / 理解级 / 边界级 / 时间级),每类对应不同文案 + 不同推荐行动</li>
+      <li><strong>谁做</strong>:后端(错误码分类) + 设计(文案 + UI) + 前端</li>
+      <li><strong>度量</strong>:失败后用户重试率 / 失败后流失率 / 客服关于"为什么失败"的工单减少</li>
+      <li><strong>工程量</strong>:小(1-2 周)</li>
+    </ul>
+  </div>
+
+  <h4>Quick Win 3 · 模型版本与生成参数透明</h4>
+  <div class="callout ops">
+    <div class="label">✓ 90D-3 · 透明度</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章缺口 4,透明度提升信任(对照 Claude / Perplexity)</li>
+      <li><strong>做什么</strong>:每张生成图旁边小字"由 千图AI v3.2 · 写实风格 · seed:xxx 生成",可点开看完整参数,可一键复制参数用于复现</li>
+      <li><strong>谁做</strong>:设计 + 前端(后端已有 metadata)</li>
+      <li><strong>度量</strong>:复制参数功能使用率 / 用户对"模型升级"的感知 NPS</li>
+      <li><strong>工程量</strong>:小(1 周)</li>
+    </ul>
+  </div>
+
+  <h4>Quick Win 4 · AI 自评 + 多图推荐</h4>
+  <div class="callout ops">
+    <div class="label">✓ 90D-4 · 信任设计</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章缺口 1,信任设计的颗粒度</li>
+      <li><strong>做什么</strong>:每张生成图给"AI 自评分"(3 档:prompt 匹配度 / 美观度 / 安全度);4 张备选里给"推荐这张"小标记 + 简短理由</li>
+      <li><strong>谁做</strong>:算法(自评模型) + 设计 + 前端</li>
+      <li><strong>度量</strong>:用户点击"推荐张"的比例 / 用户对生成质量的满意度变化</li>
+      <li><strong>工程量</strong>:中(3-4 周,主要在算法自评模型)</li>
+    </ul>
+  </div>
+
+  <h4>Quick Win 5 · 局部重绘入口显眼化</h4>
+  <div class="callout ops">
+    <div class="label">✓ 90D-5 · 改图工作流</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章场景 2,局部重绘入口不显眼,用户都走"重生"高成本路径</li>
+      <li><strong>做什么</strong>:生成图下方"局部修改"按钮跟"重新生成"同等显眼;点击进入框选 + 局部描述的交互</li>
+      <li><strong>谁做</strong>:设计(交互重设计)+ 算法(inpaint 体验优化)+ 前端</li>
+      <li><strong>度量</strong>:局部重绘使用率(从当前 < 10% 提升到 > 30%目标)/ 用户每次成功生成的"次数"(派生效率)</li>
+      <li><strong>工程量</strong>:中(3-4 周)</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">16.3</span>180 天(H1)· 3 个中型改造</h3>
+
+  <h4>中型改造 1 · 派生树形态的历史</h4>
+  <div class="callout ops">
+    <div class="label">✓ 180D-1 · 派生树历史</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章场景 3 + 缺口 6,历史平铺难找派生关系</li>
+      <li><strong>做什么</strong>:历史页改成"Canvas / Graph"形态——每张图是节点,基于某张图改出来的是子节点。可视化 + 可缩放 + 可对比</li>
+      <li><strong>参照</strong>:Krea Canvas / Figma 文件结构 / Git 分支</li>
+      <li><strong>谁做</strong>:产品(信息架构) + 设计(交互) + 前端(画布渲染) + 后端(派生关系数据模型)</li>
+      <li><strong>度量</strong>:重复用户的历史回查频次 / 基于历史的二次生成率</li>
+      <li><strong>工程量</strong>:大(2-3 个月)</li>
+    </ul>
+  </div>
+
+  <h4>中型改造 2 · Memory + Custom Instructions</h4>
+  <div class="callout ops">
+    <div class="label">✓ 180D-2 · 用户偏好层</div>
+    <ul>
+      <li><strong>为什么</strong>:第 15 章缺口 5,上下文资产</li>
+      <li><strong>做什么</strong>:加用户偏好层——"我永远要写实风格"、"我永远生成 4 张"、"我永远要竖图"等。每次生成自动应用偏好。用户能看 / 改 / 删偏好(可审计面板)</li>
+      <li><strong>参照</strong>:ChatGPT Memory / Claude Custom Instructions</li>
+      <li><strong>谁做</strong>:产品(信息架构 + 隐私设计) + 设计 + 后端(用户偏好数据模型) + 前端</li>
+      <li><strong>度量</strong>:偏好设置率(% 用户设过偏好)/ 偏好用户的留存对比 / 平均 prompt 长度减少</li>
+      <li><strong>工程量</strong>:大(2-3 个月)</li>
+    </ul>
+  </div>
+
+  <h4>中型改造 3 · Projects 概念</h4>
+  <div class="callout ops">
+    <div class="label">✓ 180D-3 · 项目化</div>
+    <ul>
+      <li><strong>为什么</strong>:用户为同一项目生成多张图时,系统不知道这是一组</li>
+      <li><strong>做什么</strong>:加"Projects"或"画册"概念,用户能把相关生成组织到一起,共享上下文 / 风格 / 偏好;支持项目级"风格锁定"(让一个项目内所有图风格统一)</li>
+      <li><strong>参照</strong>:ChatGPT Projects / Claude Projects / Notion Pages</li>
+      <li><strong>谁做</strong>:产品 + 设计 + 后端(项目数据模型)+ 前端</li>
+      <li><strong>度量</strong>:项目创建率 / 项目内多次生成的留存对比</li>
+      <li><strong>工程量</strong>:大(2-3 个月,需要跟会员系统对齐)</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">16.4</span>365 天(Y1)· 2 个大型重构</h3>
+
+  <h4>大型重构 1 · 场景化 Agent 工作流</h4>
+  <div class="callout ops">
+    <div class="label">✓ 365D-1 · 场景化 Agent</div>
+    <ul>
+      <li><strong>为什么</strong>:第 8 章 + 第 12 章,Agent 是 AI 产品的下一个能力跃迁</li>
+      <li><strong>做什么</strong>:针对核心场景做"半自动 Agent"——例如"批量电商主图(用户给商品名 + 风格,Agent 自动生成 100 张不同角度 / 不同背景)"、"自动多尺寸适配(同一图自动出小红书 / 抖音 / 朋友圈 / 公众号封面 4 种尺寸)"、"系列设计(同一活动的海报 / Banner / 闪屏一套出)"</li>
+      <li><strong>谁做</strong>:产品(场景定义) + 算法(Agent 编排) + 设计(Step-by-step UI) + 后端 + 前端</li>
+      <li><strong>度量</strong>:Agent 流程完成率 / 批量场景对营收贡献</li>
+      <li><strong>工程量</strong>:超大(全年)</li>
+      <li><strong>风险点</strong>:第 8 章 5 个必停 trigger 必须做对 + 资源 cap 必须有</li>
+    </ul>
+  </div>
+
+  <h4>大型重构 2 · 多模态输入</h4>
+  <div class="callout ops">
+    <div class="label">✓ 365D-2 · 多模态</div>
+    <ul>
+      <li><strong>为什么</strong>:第 9 章,多模态降低使用门槛</li>
+      <li><strong>做什么</strong>:
+        <ul>
+          <li>语音输入 prompt(移动端,Q3)</li>
+          <li>图片输入优化(上传参考图让 AI 模仿风格,体验大幅改善,Q4)</li>
+          <li>(可选)摄像头实时:对着实物拍让 AI 出"同款风格设计"(垂直场景试点)</li>
+        </ul>
+      </li>
+      <li><strong>谁做</strong>:算法(ASR / 视觉理解) + 移动端(关键)+ 后端 + 前端</li>
+      <li><strong>度量</strong>:移动端 prompt 输入方式分布(语音 vs 文字)/ 图参考使用率 / 多模态用户留存</li>
+      <li><strong>工程量</strong>:超大(全年)</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">16.5</span>不做清单 · 5 件主动不做的事</h3>
+
+  <p class="lead">明确"不做什么"和"做什么"同等重要。这 5 件事是基于第 13 章失败考古 + 千图AI 当前阶段判断,不建议做。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 5 件主动不做的事</div>
+    <ol>
+      <li><strong>不做"过度热情"的 AI 人格</strong>。第 11 诫 + 第 11 章对比——千图AI 服务专业用户,人格要克制不要做成 ChatGPT 式"太棒了!你的想法真有创意!"</li>
+      <li><strong>不做"AI 全自动一键搞定"</strong>。第 13 章 Rabbit R1 教训——不要营销虚标,不要做用户无法接管的全自动</li>
+      <li><strong>不做"AI 伴侣 / 情感陪伴"</strong>。第 10 章边界——千图AI 是工具型产品,不要往社交 / 陪伴方向扩</li>
+      <li><strong>不做"打卡 / 连续使用奖励"</strong>。第 12 诫——不要做让用户沉迷的机制,健康度优先</li>
+      <li><strong>不在所有维度上"赶上同行"</strong>。第 11 章"极致单点"启示——选 1-2 个维度做到 ★★★★★,其他维度做到行业平均即可</li>
+    </ol>
+  </div>
+
+  <h3><span class="pre">16.6</span>怎么落地 · 执行机制建议</h3>
+
+  <p class="lead">最后给一个执行机制的建议,降低"路线图写了没人执行"的风险。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 4 条执行建议</div>
+    <ol>
+      <li><strong>每个 Quick Win 一个 owner</strong>——明确到人,不是"产品团队负责"。每周同步进度。</li>
+      <li><strong>设"AI UX 双周会"</strong>——产品 / 设计 / 算法 / 工程一起,review Quick Win 进度 + 用户反馈 + 12 诫体检的滚动更新。</li>
+      <li><strong>每月一个"12 诫复盘"</strong>——把当月做的功能,用 12 诫过一遍,看是否符合 / 违反哪几条。</li>
+      <li><strong>把这本书放在团队文档区</strong>——新人 onboarding 必读,设计 / 产品评审引用本书章节作为论证。</li>
+    </ol>
+  </div>
+
+  <h3><span class="pre">16.7</span>本章小结 · 全书收官</h3>
+
+  <p>从前言"为什么写这本书"到这一章"路线图怎么落地",16 章约 50000 字,我们完成了一次系统的"<strong>AI 时代 UX 思考框架</strong>"构建。</p>
+
+  <p><strong>这本书的最终价值</strong>:不是这 16 章读完用户知道了多少新名词,是<em>当团队下次开会讨论"是否在生成结果旁边显示 confidence score"时,大家能在同一个坐标系里争论</em>(前言原话)。</p>
+
+  <p><strong>这本书是 v0.1</strong>——我们承诺持续迭代。2026 年下半年会有 v0.2,加入新出现的 AI 产品(GPT-5 / Claude 4 / Gemini 2 / 国内新出的产品),并根据团队批注修订观点。<em>欢迎团队成员留 issue / PR / 文档批注</em>。</p>
+
+  <div class="callout you">
+    <div class="label">◐ 最后的请求</div>
+    <p>读到这里的人,如果你对某一章有强烈共鸣或强烈反对,<strong>请告诉我们</strong>。一本被团队反复争论过的书,才有可能成为团队真正共享的判断标准。<em>这本书的价值不在它写完,在它被团队真实使用</em>。</p>
+  </div>
+
+  <p class="ref">主要参考:<br>
+  本书第 1-15 章所有论述总和 · 千图AI 项目内部资料 · Geoffrey Moore, <em>Crossing the Chasm</em>(产品阶段判断)· Marty Cagan, <em>Inspired</em>(产品路线图方法论)· 即梦 / 通义万相 / Krea 产品 roadmap 公开信息(对照参考)</p>
+
+</div>
+</section>

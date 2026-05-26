@@ -15,6 +15,7 @@
 | **2026-05** | 跑步科学深度调研 · 力学/生理/神经/训练/伤病/极限 | ~137K | 6.5h | 🎧 同步 | 12 张 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-running-science/) |
 | **2026-05** | 康复科学深度调研 · 组织修复/疼痛/评估/八大伤区/回归赛场 | ~220K | 10.4h | (待生成) | (待生成) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-rehab-science/) |
 | **2026-05** | 野外生存深度调研 · 水/火/食/宿/行/救 · 中国温带山地林区版 | ~120K | 5.7h | (待生成) | (待生成) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-outdoor-survival/) |
+| **2026-05** | AI 时代的用户体验之书 · 千图AI 内部 UX 读本 · 16 章 4 幕(范式 / 问题地图 / 案例横评 / 千图AI 应用) | ~50K | 1.8h | 🎧 同步 | (无配图) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-ai-ux-book/) |
 | 2026-06 | (规划中) | — | — | — | — | — |
 
 ### v5.0 升级亮点(2026-05-23)· 阅读 + 听书双通道

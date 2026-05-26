@@ -1,0 +1,172 @@
+<section id="s7" style="border-top: 4px solid var(--c-nutrition);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">07</span>PROMPT LAYER · 问题地图 / 第七章</div>
+  <h1 class="section-h">提示词作为新交互层:从命令到对话到意图 <span class="en">Prompt as New Interaction</span></h1>
+  <p class="section-sub">prompt 不是"输入框",是 AI 时代的新键盘鼠标——是用户向系统表达意图的主要载体。这一章我们把 prompt 拆成 3 层(placeholder / slash command / system prompt),看每一层各自的设计议题,以及"prompt 失败时怎么帮用户改"这件被严重低估的事。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>prompt UX 不只是"写好 placeholder"。它是一个三层架构:用户即时输入(prompt) + 用户偏好层(custom instructions / .cursorrules) + 产品策略层(system prompt)。<em>每一层都有自己的设计语言,三层共同决定 AI 表现</em>。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 交互词汇的三段史</div>
+    <p><strong>1970s</strong>:用户对计算机的"输入"是一行命令——<code>ls -la | grep "foo"</code>。命令必须精确,语法错一个字符就报错。这是命令行时代。</p>
+    <p><strong>1990s</strong>:用户的"输入"被解构成"在哪点击 + 在哪输入"——找到菜单、点按钮、填表单。GUI 把命令翻译成了空间动作。但用户仍然要知道"命令的结构",只是被可视化了。</p>
+    <p><strong>2020s</strong>:用户的"输入"变成了"用人话说清楚意图"——"帮我写一份给设计团队看的 AI UX 内部读本,16 章 4 幕,大概 5 万字"。系统自己把这段话翻译成一系列具体动作。<em>这是计算机交互史上第一次,用户不需要学习"如何对系统说话"——系统学习如何理解人</em>。</p>
+    <p>这就是 prompt 时代的本质:输入层从"命令"演化为"意图",而设计师的工作,是让这个翻译过程尽量准确。</p>
+  </div>
+
+  <h3><span class="pre">7.1</span>prompt 是什么 vs 不是什么</h3>
+
+  <p><strong>是</strong>:用自然语言表达的意图,可以是简短一句话或长达几页的指令。</p>
+  <p><strong>不是</strong>:</p>
+  <ul>
+    <li><em>不是</em>命令语法——没有"标准格式",同样的意图可以有无数种说法</li>
+    <li><em>不是</em>查询语言——不是 SQL,不需要精确的字段名</li>
+    <li><em>不是</em>"魔法咒语"—— prompt engineering 圈里流传的"加 'step by step'" "加 'you are an expert'" 不是必须的,是早期模型的临时优化技巧,现代模型大多不需要</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">i prompt 的"两个端"</div>
+    <p><strong>短 prompt</strong>(<= 30 字):适合明确意图("写一首关于秋天的诗")。这种 prompt 的 UX 焦点是<em>placeholder + 例子触发</em>。</p>
+    <p><strong>长 prompt</strong>(> 200 字):适合复杂任务(写代码 / 做规划)。这种 prompt 的 UX 焦点是<em>结构化输入 + 多次迭代 + 模板复用</em>。</p>
+    <p>两端的 UX 完全不同。设计师做 prompt 体验时,要先想清楚自己的产品主要服务哪一端。</p>
+  </div>
+
+  <h3><span class="pre">7.2</span>Placeholder 的 8 种写法 · 产品对比</h3>
+
+  <p class="lead">输入框的 placeholder 是用户对 AI 的"第一印象"——它在 0.5 秒内告诉用户"我能跟它说什么"。我们看头部产品的 8 种写法。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>产品</th>
+          <th>placeholder 文案</th>
+          <th>风格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ChatGPT</td><td>"Ask anything"(早期是"Send a message")</td><td>极简,鼓励开放</td></tr>
+        <tr><td>Claude</td><td>"Reply to Claude..."</td><td>对话感强,人格化</td></tr>
+        <tr><td>Perplexity</td><td>"Ask anything..."</td><td>简洁 + 暗示问答场景</td></tr>
+        <tr><td>Cursor</td><td>"Ask Cursor anything"(Chat) / "Edit, generate, or chat"(Cmd+K)</td><td>明确给出能力分类</td></tr>
+        <tr><td>v0</td><td>"What can I help you ship?"</td><td>动词聚焦"ship",强调产物</td></tr>
+        <tr><td>Krea</td><td>"Type your prompt"(简洁版) / 大量预设 prompt 例子</td><td>留白 + 提供 starter</td></tr>
+        <tr><td>Midjourney</td><td>无 placeholder(Discord 命令)</td><td>原生工具感</td></tr>
+        <tr><td>豆包</td><td>"开始聊天吧"</td><td>口语化,降门槛</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ 三种 placeholder 写法的隐含哲学</div>
+    <ul>
+      <li><strong>"Ask anything"</strong>(ChatGPT / Perplexity 早期)——传达"我什么都能问",但用户经常卡住,不知道从哪开始</li>
+      <li><strong>"试试:[具体例子]"</strong>(Krea / Notion AI)——降低首次使用门槛,但容易让用户跟随例子,失去探索</li>
+      <li><strong>"What can I help you ship?"</strong>(v0)——明确产品边界(只做 UI 不闲聊),减少误用</li>
+    </ul>
+    <p><strong>判断</strong>:产品越通用,placeholder 越要"放空";产品越垂直,placeholder 越要"具体"。<em>千图AI 这种垂直生成产品,适合"试试:[图像 prompt 例子]"的具体引导</em>。</p>
+  </div>
+
+  <h3><span class="pre">7.3</span>Slash Command · 在对话里嵌入快速指令</h3>
+
+  <p class="lead">/ 命令是 AI 产品的另一个 UX 突破——在自然语言对话里,允许嵌入结构化指令。它让用户既能用"人话",又能用"准命令"。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>产品</th>
+          <th>典型 slash command</th>
+          <th>用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Notion AI</td><td><code>/ai</code>、<code>/summary</code>、<code>/translate</code></td><td>触发 AI 功能</td></tr>
+        <tr><td>Linear</td><td><code>/duplicate</code>、<code>/assign</code></td><td>触发操作 + AI 辅助</td></tr>
+        <tr><td>Discord 风</td><td><code>/imagine</code>、<code>/blend</code></td><td>调用专门模型</td></tr>
+        <tr><td>Cursor</td><td><code>/edit</code>、<code>/explain</code>、<code>/fix</code></td><td>意图分类</td></tr>
+        <tr><td>Claude</td><td>暂无 slash(用对话直接表达意图)</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Slash command 的设计原则</h4>
+
+  <div class="callout ops">
+    <div class="label">✓ 设计 slash command 的 4 个判断</div>
+    <ol>
+      <li><strong>不要超过 10 个</strong>——超过用户记不住,等于没用。控制在 5-8 个核心命令。</li>
+      <li><strong>命令名要"动词"</strong>—— <code>/edit</code> 比 <code>/edits</code> 好,<code>/summarize</code> 比 <code>/summary</code> 好(动词暗示"接下来要做的动作")。</li>
+      <li><strong>必须有 autocomplete 下拉提示</strong>——用户打 <code>/</code> 立刻出列表,不需要记。</li>
+      <li><strong>每个命令要有 hover/inline 说明</strong>——告诉用户"这条命令是做什么的",避免用户瞎试。</li>
+    </ol>
+  </div>
+
+  <h3><span class="pre">7.4</span>System Prompt vs User Prompt 的分层</h3>
+
+  <p class="lead">这是 prompt 体验的"暗层"——大多数用户看不到,但它决定了 AI 的基线表现。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>层</th>
+          <th>谁写</th>
+          <th>用户能否看 / 改</th>
+          <th>例子</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>System Prompt</strong>(产品策略层)</td><td>产品团队</td><td>看不到、不能改</td><td>"You are a helpful assistant for image generation. Always respond in user's language..."</td></tr>
+        <tr><td><strong>Custom Instructions</strong>(用户偏好层)</td><td>用户</td><td>能看、能改</td><td>"I prefer concise answers. I'm a designer. Always use Chinese."</td></tr>
+        <tr><td><strong>Conversation Prompt</strong>(即时输入)</td><td>用户</td><td>当然能改</td><td>"帮我生成一张产品宣传图"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>三层都对 AI 行为有影响,但用户对它们的"控制权"完全不同。这就引出一个设计议题:<strong>用户偏好层应该多透明?</strong></p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 透明度的两个极端</div>
+    <ul>
+      <li><strong>完全黑盒</strong>(早期 ChatGPT):用户连 system prompt 是什么都不知道,产品改 prompt 用户毫无感知——直到某天 AI 行为突变,用户困惑</li>
+      <li><strong>完全开放</strong>(Cursor 的 .cursorrules):用户能看到所有 prompt 层,能改,能版本控制。但对普通用户太复杂</li>
+    </ul>
+    <p><strong>折中</strong>:暴露用户偏好层(Custom Instructions / Memory)给所有用户,system prompt 对开发者开放(API)、对消费用户隐藏。这是 ChatGPT / Claude 当前的做法。</p>
+  </div>
+
+  <h3><span class="pre">7.5</span>Prompt 失败时怎么帮用户改</h3>
+
+  <p class="lead">这是一个被严重低估的 UX 议题。用户写了一个 prompt,AI 没给出想要的结果——下一步用户最难,因为他不知道"该改哪"。</p>
+
+  <h4>4 种"prompt 失败诊断"机制</h4>
+
+  <ol>
+    <li><strong>主动追问</strong>(Clarifying questions):AI 不直接生成,先问"你说的'宣传图'是给社交媒体用还是给印刷品?"——把模糊降下来再做。Perplexity Pro 模式经常这么做。</li>
+    <li><strong>结果带"我以为你想要"的注释</strong>:AI 生成后说"我假设你想要写实风格;如果想要插画风格,回复 'use illustration style'"。Claude 在长任务里经常这样。</li>
+    <li><strong>Prompt 改写建议</strong>:用户没出好结果,AI 主动说"试着加上 X 描述会更好",甚至直接给一个改进版 prompt 让用户复制。Krea 的 prompt assistant 就是这个思路。</li>
+    <li><strong>对比生成</strong>:同一 prompt 出多个版本(A/B/C/D),让用户从中选——把"找对 prompt"的负担降到"挑一个我喜欢的"。Midjourney 默认就是 4 张,Krea / 即梦也都用这种方式。</li>
+  </ol>
+
+  <div class="callout ops">
+    <div class="label">✓ 千图AI 的 prompt 失败兜底建议(详见第 15 章)</div>
+    <p>图像生成的 prompt 失败率天然高(模糊性高 + 视觉主观)。建议优先做<strong>主动追问</strong>(给关键约束选项:写实/插画 · 横/竖 · 单人/多人)和<strong>对比生成</strong>(同 prompt 出 4 张供选)。<em>这两个组合是降低用户 prompt 焦虑最有效的 UX 投入</em>。</p>
+  </div>
+
+  <h3><span class="pre">7.6</span>本章小结</h3>
+
+  <p>prompt 不是输入框,是 AI 时代的<strong>新交互层</strong>。它分三层:placeholder + slash command(用户即时层)、custom instructions(用户偏好层)、system prompt(产品策略层)。每一层有自己的设计议题。</p>
+
+  <p>设计师最容易忽略的是<strong>"prompt 失败时怎么帮用户改"</strong>——主动追问、注释假设、改写建议、对比生成,这 4 种机制各有适用,组合起来可以让"用户 prompt 焦虑"显著降低。</p>
+
+  <p>下一章我们讨论紧密相关的议题——<strong>Agent 的边界感</strong>。当 AI 不只是回答 prompt,而是基于 prompt 自动执行多步任务,"什么时候自动、什么时候问"成为新的核心议题。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic Claude Custom Instructions 文档 · OpenAI ChatGPT Custom Instructions 公告, 2023-07 · Cursor <code>.cursorrules</code> 文档 · Jakob Nielsen, <em>Conversational UI Patterns</em>, NN/g, 2024 · Vercel v0 prompting guide · Krea Prompt Assistant 文档</p>
+
+</div>
+</section>
