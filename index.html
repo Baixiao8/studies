@@ -259,6 +259,29 @@
     text-transform: uppercase;
     margin-top: 10px;
   }
+  .report-cta .epub-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+    padding: 7px 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+    border: 1.5px solid var(--blue);
+    border-radius: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+  .report-cta .epub-btn:hover {
+    background: var(--blue);
+    color: var(--paper);
+  }
 
   /* ─── WIP placeholder ─── */
   .wip-card {
@@ -379,7 +402,7 @@
   <div class="report-list">
 
     <!-- 跑步科学 -->
-    <a href="reports/2026-05-running-science/" class="report-card">
+    <article class="report-card" data-href="reports/2026-05-running-science/">
       <div class="report-meta-left">
         <div class="kicker">RUNNING · 跑步</div>
         <div class="date">2026 · 05 · v2.0</div>
@@ -399,11 +422,12 @@
       </div>
       <div class="report-cta">
         <div class="cta-text">阅 读 →</div>
+        <a class="epub-btn" href="reports/2026-05-running-science/2026-05-running-science.epub" download>📥 EPUB</a>
       </div>
-    </a>
+    </article>
 
     <!-- 康复科学 -->
-    <a href="reports/2026-05-rehab-science/" class="report-card">
+    <article class="report-card" data-href="reports/2026-05-rehab-science/">
       <div class="report-meta-left">
         <div class="kicker">REHAB · 康复</div>
         <div class="date">2026 · 05 · v1.0</div>
@@ -423,11 +447,12 @@
       </div>
       <div class="report-cta">
         <div class="cta-text">阅 读 →</div>
+        <a class="epub-btn" href="reports/2026-05-rehab-science/2026-05-rehab-science.epub" download>📥 EPUB</a>
       </div>
-    </a>
+    </article>
 
     <!-- 野外生存 -->
-    <a href="reports/2026-05-outdoor-survival/" class="report-card">
+    <article class="report-card" data-href="reports/2026-05-outdoor-survival/">
       <div class="report-meta-left">
         <div class="kicker">WILDERNESS · 野外生存</div>
         <div class="date">2026 · 05 · v1.0</div>
@@ -447,11 +472,12 @@
       </div>
       <div class="report-cta">
         <div class="cta-text">阅 读 →</div>
+        <a class="epub-btn" href="reports/2026-05-outdoor-survival/2026-05-outdoor-survival.epub" download>📥 EPUB</a>
       </div>
-    </a>
+    </article>
 
     <!-- Marathon Manual · 外站 -->
-    <a href="https://baixiao8.github.io/study/marathon/" class="report-card" target="_blank" rel="noopener">
+    <article class="report-card" data-href="https://baixiao8.github.io/study/marathon/" data-target="_blank">
       <div class="report-meta-left">
         <div class="kicker">MARATHON · 全马备战</div>
         <div class="date">2026 · 05 · v4.0</div>
@@ -473,7 +499,7 @@
         <div class="cta-text">阅 读 ↗</div>
         <div class="external-tag">↗ 外站</div>
       </div>
-    </a>
+    </article>
 
   </div>
 
@@ -516,5 +542,22 @@
   </div>
 
 </div>
+
+<script>
+  // 卡片整体可点击,但 EPUB 按钮独立 link 不冒泡
+  // (HTML5 不允许 <a> 嵌套 <a>,所以用 JS 模拟卡片 link)
+  document.querySelectorAll('.report-card[data-href]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      // 点 EPUB 按钮(或其内部元素)不触发整卡跳转
+      if (e.target.closest('.epub-btn')) return;
+      var href = card.dataset.href;
+      if (card.dataset.target === '_blank') {
+        window.open(href, '_blank', 'noopener');
+      } else {
+        window.location.href = href;
+      }
+    });
+  });
+</script>
 </body>
 </html>

@@ -384,3 +384,21 @@ if __name__ == '__main__':
 
     external = '--external' in sys.argv
     build_report(report_dir, external=external)
+
+    # ─── v9.x · 顺便 build EPUB · 若 _shared/build_epub.py 存在 ───
+    # 优先用 tools/.venv 里的 Python(有 playwright + bs4),
+    # 不管 build.py 自己被哪个 Python 跑都能正常调用。
+    epub_script = Path(__file__).resolve().parent / 'build_epub.py'
+    if epub_script.exists() and '--no-epub' not in sys.argv:
+        venv_py = Path(__file__).resolve().parent.parent / 'tools' / '.venv' / 'bin' / 'python3'
+        py = str(venv_py) if venv_py.exists() else sys.executable
+        print('\n' + '=' * 60)
+        print(f'[build] 顺便生成 EPUB(用 {py})...')
+        import subprocess
+        try:
+            result = subprocess.run([py, str(epub_script), str(report_dir)], check=False)
+            if result.returncode != 0:
+                print('\n[build] ⚠️ EPUB 生成失败(但 HTML 已 OK)')
+                print('         手动跑: tools/.venv/bin/python3 _shared/build_epub.py ' + str(report_dir))
+        except Exception as e:
+            print(f'\n[build] ⚠️ EPUB 调用出错: {e}')

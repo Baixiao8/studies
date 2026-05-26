@@ -5,6 +5,59 @@
 
 ---
 
+## v9.1 · EPUB 导出 v1.0 · 完整书本版(2026-05-26)
+
+按 `docs/PRD-epub-export-analysis.md` v1.6 决议实施。**完整书本版**(嵌图 + SVG/table 渲染 PNG + 多级 TOC + callout 保留)。
+
+### 实现
+
+- **`_shared/build_epub.py`**(~430 行 Python)
+  - bs4 解析 build 后 `index.html` → 提取章节
+  - Playwright 渲染 inline SVG / `<table>` 为 PNG(用项目 CSS 注入,正确解析 `var(--c-theory)` 等)
+  - 多级 `nav.xhtml`(章 h1.section-h + 节 h3)→ 微信读书听书**可跳子节点**
+  - 拷贝 `assets/ch*-hero.jpg` 嵌入(若存在)
+  - 移除运行时 UI(sticky-nav / mini-toc / reader 按钮 / progress-bar / tooltip)
+  - 打包成 EPUB 3 spec 兼容 zip(mimetype 第一个 + Stored 不压缩)
+
+- **`_shared/build.py` 集成**
+  - 跑完 HTML 装配后,自动调用 `build_epub.py`(优先用 `tools/.venv/bin/python3`,fallback 用 `sys.executable`)
+  - 加 `--no-epub` 标记跳过
+
+- **`index.html` 改造**
+  - 卡片由 `<a>` 改为 `<article data-href="...">`(因 HTML 不允许 `<a>` 嵌套 `<a>`)
+  - CTA 区加 `<a class="epub-btn" download>📥 EPUB</a>`(蓝色 mono 风)
+  - 末尾 JS:卡片整体仍可点击跳转,EPUB 按钮 click 不冒泡
+
+### 首发三份报告 EPUB
+
+| 报告 | 大小 | 图片资产 | 备注 |
+|---|---|---|---|
+| 跑步科学 v2.0 | 5.9 MB | 82 PNG + 12 JPG hero | 完整 |
+| 康复科学 v1.0 | 11.3 MB | 156 PNG | hero JPG 尚未生成(可后续 inject-hero.py 补) |
+| 野外生存 v1.0 | 6.9 MB | PNG 渲染 | hero JPG 尚未生成 |
+
+### 用法
+
+```bash
+# 跑单份(同时生成 HTML + EPUB,集成模式)
+tools/.venv/bin/python3 _shared/build.py reports/<slug>
+
+# 只跑 EPUB(若 HTML 已存在)
+tools/.venv/bin/python3 _shared/build_epub.py reports/<slug>
+
+# 跳过 EPUB
+tools/.venv/bin/python3 _shared/build.py reports/<slug> --no-epub
+```
+
+详见 `docs/EPUB-BUILD.md`。
+
+### 下一步
+
+- 阶段 4:**A 模式 CI** — `.gitignore` 排除 epub 产物 + `gh-pages` 分支 + GitHub Actions 自动 build + 部署。
+- 当前 v9.1 暂走"模式 B"(产物进 main),阶段 4 实施后用 `git filter-repo` 清理 history。
+
+---
+
 ## v9.0 · 项目首页改造 · 报告汇总入口(2026-05-26)
 
 把 `index.html` 从"跑步报告精装头版"改造成"白笑深度研究档案"的**版面目录**。
