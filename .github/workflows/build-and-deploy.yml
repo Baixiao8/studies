@@ -89,19 +89,37 @@ jobs:
           touch .deploy/.nojekyll
 
           # 每个 report 的产物 + assets
+          # A 模式: 有 chapters/ → 用 CI build 装配出的 index.html + epub + assets/
+          # B 模式: 无 chapters/ → 单文件 SPA,index.html 是源,整目录 mirror(排除元数据/源材料)
           for slug_dir in reports/*/; do
             slug=$(basename "$slug_dir")
             if [[ "$slug" == _* ]]; then continue; fi
             if [ ! -f "$slug_dir/index.html" ]; then continue; fi
             mkdir -p ".deploy/reports/$slug"
-            cp "$slug_dir/index.html" ".deploy/reports/$slug/"
-            # epub(若有)
-            if compgen -G "$slug_dir/*.epub" > /dev/null; then
-              cp "$slug_dir"/*.epub ".deploy/reports/$slug/"
-            fi
-            # assets/(章节封面 + 其他静态资源)
-            if [ -d "$slug_dir/assets" ]; then
-              cp -r "$slug_dir/assets" ".deploy/reports/$slug/"
+
+            if [ -d "$slug_dir/chapters" ]; then
+              # A 模式
+              cp "$slug_dir/index.html" ".deploy/reports/$slug/"
+              if compgen -G "$slug_dir/*.epub" > /dev/null; then
+                cp "$slug_dir"/*.epub ".deploy/reports/$slug/"
+              fi
+              if [ -d "$slug_dir/assets" ]; then
+                cp -r "$slug_dir/assets" ".deploy/reports/$slug/"
+              fi
+            else
+              # B 模式 · 单文件 SPA 整目录 mirror
+              rsync -a \
+                --exclude='*.md' \
+                --exclude='项目文档.md' \
+                --exclude='archive/' \
+                --exclude='generation/' \
+                --exclude='knowledge/' \
+                --exclude='memory/' \
+                --exclude='source.pdf' \
+                --exclude='.git*' \
+                --exclude='__pycache__/' \
+                --exclude='.DS_Store' \
+                "$slug_dir" ".deploy/reports/$slug/"
             fi
           done
 

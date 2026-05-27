@@ -37,6 +37,13 @@ reports/*/*.epub
 .deploy/
 # 顶层 index.html 仍 commit(首页本体,非生成物)
 
+# ─── B 模式 · 单文件 SPA 报告例外(不走 build.py,index.html 是源不是产物)───
+# 这些报告没有 chapters/+parts/ 结构,index.html 就是本体,必须 commit
+# CI 会对没有 chapters/ 的报告走"整目录 mirror"分支(见 workflow)
+!reports/2026-05-marathon/index.html
+!reports/2026-05-skills-building-guide/index.html
+!reports/2026-05-thinking-evolution/index.html
+
 # Local config (不要把本地密钥提交)
 .env
 .env.local
