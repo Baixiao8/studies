@@ -18,5 +18,135 @@
       "<strong>可操控性</strong>:四个维度(角色 / 格式 / 范例 / 约束)可拉,但拽不动「训练里没见过的格式」「真不知道的事实」「计算密集推理」「Constitutional AI 安全底线」。",
       "<strong>幻觉是结构性产出</strong>:四个性质冲突时必然出现,不是 bug;更强的模型只会让幻觉更难发现,不能消除——必须靠外部验证(RAG / Citations / 工具调用)而非「模型变好」。"
     ]
+  },
+  "s2": {
+    "title": "Agent vs Chat 要点",
+    "points": [
+      "<strong>本质区别</strong>:Chat 被动应答(问→答),Agent 主动循环(感知→行动→验证)。Agent 不是「会写代码的 Chat」,是另一类系统。",
+      "<strong>Agentic Loop 三阶段</strong>:Gather Context 收集现场 → Take Action 动手 → Verify Work 自检。三阶段闭环,verify 失败回到 ① 重收集。",
+      "<strong>Agent 比 Chat 强在</strong>:看现场 / 动手 / 自我检查;<strong>危险在</strong>:能动手意味着能搞砸;自我检查不等于真能检出。",
+      "<strong>监工模式</strong>:跟 Agent 协作的正确姿势——你不是问问题,是看工人干活,在关键节点拍板。错误姿势是「点菜」(描述完就放手)。",
+      "<strong>选用决策</strong>:咨询 / 头脑风暴 → Chat;批量文件处理 / 跨应用任务 → Agent;关键判断:任务路径可不可预测、错了好不好回滚。"
+    ]
+  },
+  "s3": {
+    "title": "4D 框架要点",
+    "points": [
+      "<strong>起源</strong>:Anthropic + Prof. Joseph Feller (UCC) + Prof. Rick Dakan (Ringling) 2024 学术合作,CC-BY 4.0 开放;不是 prompt 技巧而是「人和 AI 分工」的元方法论。",
+      "<strong>四个 D</strong>:Delegation 决定谁干 · Description 把意图讲清 · Discernment 评估输出 · Diligence 对结果负责。每个 D 都对应一类失败模式。",
+      "<strong>两个循环</strong>:Description-Discernment 循环(任务层迭代:写 prompt→看结果→改)· Delegation-Diligence 循环(责任层:选任务→监督→调边界)。",
+      "<strong>真正用处</strong>:不是教技巧,是给团队共同语言——下次说「这 prompt 不行」,能精确说「Description 没讲清还是 Discernment 没做」。",
+      "<strong>4D 的局限</strong>:它是方法论不是技巧;它假设 AI 输出能被审——超长输出 / 实时生成场景下 Discernment 跑不通,需要补外部验证。"
+    ]
+  },
+  "s4": {
+    "title": "幻觉真相要点",
+    "points": [
+      "<strong>三种形态</strong>:事实型(编名字/日期/引用如 Schwartz 案)· 推理型(数学算错/逻辑跳步)· 自信型(没有不确定性自知,什么都说得斩钉截铁)。",
+      "<strong>幻觉是结构性产出</strong>:四性质冲突时必然出现——不是 bug,是 LLM 这套机制的副产品。「等模型变好」防不了。",
+      "<strong>系统级四层防御</strong>:RAG 检索增强 · Citations 引用机制 · Tool Use 用计算器/数据库替代 · Constitutional AI 训练阶段降低底层率。",
+      "<strong>用户级三武器</strong>:罕见事实警惕(常见准/罕见编)· 多 prompt 复述看一致性 · 关键决策外部验证。",
+      "<strong>反共识</strong>:更强的模型,幻觉不消失只是更难发现——Claude Opus 编的引用作者名年份期刊都符合真实分布,你需要查数据库才知道是假的。"
+    ]
+  },
+  "s5": {
+    "title": "三件套要点",
+    "points": [
+      "<strong>按协作模式分</strong>不是按功能分:Chat(被动应答 · 不动文件)· Cowork(直接操作本地文件应用)· Code(工程级 Agent · 改代码提 PR)。",
+      "<strong>三模式都跑 Agentic Loop</strong>,区别只在「Loop 深度 + AI 权限」——这是同一套底层,三种暴露面。",
+      "<strong>决策树</strong>:写周报 → Chat / 整理一个月 Slack 导出 → Cowork / 给 React 项目加测试 → Code;按「需不需要动文件 + 是不是编程任务」两轴判断。",
+      "<strong>反共识</strong>:很多人用 Chat 干 Cowork 的活(让 Chat 写代码再 copy-paste)或用 Code 干 Chat 的活(开昂贵 agent 问咨询)——选错模式效率成本翻车。",
+      "<strong>组合用</strong>:同一个项目里三模式可以接力——先用 Chat 头脑风暴方案 → Cowork 整理资料 → Code 实施。不是非要选一个。"
+    ]
+  },
+  "s6": {
+    "title": "桌面端四部件要点",
+    "points": [
+      "<strong>四部件互补</strong>:Projects 长期上下文容器 · Artifacts 持续编辑内容容器 · Skills 重复工作流包 · Connectors 外部数据桥梁。",
+      "<strong>Projects 本质</strong>:把上次对话关键信息自动塞回这次上下文窗口——是工程实现,不是 LLM 真的「记住了」。",
+      "<strong>Artifacts 设计哲学</strong>:内容跟对话分离;一个 Artifact 可被反复改而不丢上下文。对比传统 chat 把代码和对话混一起。",
+      "<strong>Connectors = MCP 的官方应用商店版</strong>:Gmail/Calendar/Linear 这些 Connectors 底层都是 MCP 协议,Anthropic 替你搭好了 server。",
+      "<strong>反共识</strong>:很多人把 Projects 当 Chat 历史用,没用真正的杀手锏——给 Project 配 SystemPrompt + 长期文件 + 限定 Skills。粒度浪费了。"
+    ]
+  },
+  "s7": {
+    "title": "EPCC 工作流要点",
+    "points": [
+      "<strong>四阶段</strong>:Explore 勘察(读文件/看风格/查 git)· Plan 规划(只读模式输出实施计划)· Code 编码(按 Plan 执行)· Commit 提交(verify 后再提)。",
+      "<strong>跳过 Explore 是错的</strong>不是抄近路——看似浪费时间,实际是节省时间。没看上下文的 Code 会风格不一致跟现有代码冲突。",
+      "<strong>三种 Approval Mode 配对</strong>:Plan Mode(只读)= Explore + Plan · Manual(每步确认)= 陌生代码库 · Auto-Accept(自动)= Plan 已审 + 你信任的范围。",
+      "<strong>Auto-Accept 不能跨越 Plan 用</strong>:开 Auto-Accept 的前提永远是「Plan 已经审过」,直接给开放任务开 Auto 等于让 AI 失控。",
+      "<strong>跟 4D 对应</strong>:Explore + Plan ≈ Description 把意图讲清楚;Code ≈ Delegation 执行;Commit 前 verify ≈ Discernment 评估输出。"
+    ]
+  },
+  "s8": {
+    "title": "四把刀要点",
+    "points": [
+      "<strong>Skill</strong>:SKILL.md 文件夹,教 Claude「怎么做某类任务」,Claude 看到匹配场景自动加载——是知识 / 工作流的载体。",
+      "<strong>Subagent</strong>:独立上下文窗口的小代理,主代理派任务给它拿到总结——是任务切片 / 并行执行机制。",
+      "<strong>Hook</strong>:事件触发脚本(PreToolUse / PostToolUse 等),settings.json 配——是强制策略 / 自动化机制,例如 commit 前强制 lint。",
+      "<strong>MCP</strong>:外部协议,让 Claude 接入数据库 / API / 内部服务——是外部世界桥梁。前三个是内部机制,MCP 跨进程跨厂商。",
+      "<strong>反共识</strong>:很多人滥用 Subagent(任何任务都开分身反而拖慢)/ 把 Skill 当 CLAUDE.md 用(放大量背景信息破坏按需加载本质)。四把刀分清场景再用。"
+    ]
+  },
+  "s9": {
+    "title": "Prompt 工程要点",
+    "points": [
+      "<strong>五条原则</strong>:① 清晰直接(开门见山)② 具体明确(给字数/格式/反例)③ XML 标签结构化(让 Claude 知道哪段是哪段)④ 给例子(few-shot)⑤ 让它先思考(CoT / Extended Thinking)。",
+      "<strong>Extended Thinking</strong>:Claude 内部「思考预算」机制,你设 budget_tokens,它用这些 token 做内部推理后产出最终回答——适合数学/多步推理/代码审查。",
+      "<strong>判断武器</strong>:任何 prompt 写完先问「这五条做到几条」;失败 prompt 诊断:漏哪条 → 加上 → 重试。",
+      "<strong>反共识</strong>:① prompt 工程不会死——只是从「写魔法咒语」转向「写清晰需求」② 越长越好是错——清晰直接 > 啰嗦冗长 ③ Few-Shot 不永远有用——任务明确时 zero-shot 更稳。",
+      "<strong>跟 4D Description 对应</strong>:prompt 五原则就是 Description 的实操版;写不好 prompt 不是技巧问题,是 Description 没做到位。"
+    ]
+  },
+  "s10": {
+    "title": "Prompt Caching 要点",
+    "points": [
+      "<strong>机制</strong>:重复前缀缓存,后续请求只算「新增部分」token,价格降到原价 10%——是 API 工程级成本控制。",
+      "<strong>五条规则</strong>:① 缓存前缀不能断 ② 最小 1024 tokens ③ 5 分钟 TTL(可付费延 1h)④ 创建有写入费(1.25 倍)⑤ 用 cache_control 标记 · 最多 4 个 breakpoint。",
+      "<strong>何时开</strong>:同一段长 system prompt / 工具定义 / 文档片段 5 分钟内多次调用 → 开。一次性查询 / prompt 每次都不一样 → 不开,反而贵。",
+      "<strong>Extended Thinking 的成本陷阱</strong>:thinking tokens 也算钱,而且不能 cache 每次重新算——「长 prompt + Extended Thinking」组合成本可能比预想高。",
+      "<strong>反共识</strong>:① 命中率 100% 不是最优,要看绝对成本节省 ② TTL 越长越好是错(延 1h 要付费不一定划算)③ Prompt Caching ≠ GPU KV cache 是两层抽象。"
+    ]
+  },
+  "s11": {
+    "title": "RAG 要点",
+    "points": [
+      "<strong>为什么需要</strong>:LLM 知识截止 + 不能直接塞整个数据库(窗口 + 注意力)。RAG = 给 LLM 外挂记忆。",
+      "<strong>三步流程</strong>:Chunk 分块(切法影响一切)→ Embed 嵌入(向量空间)→ Retrieve 检索(取 K 个最相关块塞 prompt)。",
+      "<strong>BM25 vs 向量 vs 混合</strong>:BM25 抓死亡词组精确匹配;向量抓语义近似;工业标准是 Hybrid Search 两者互补。Reranking 给候选打更精细的相关性分留 5-10 个。",
+      "<strong>Contextual Retrieval</strong>:Anthropic 2024-09 提的——每个 chunk 嵌入前先让 Claude 加一段「这 chunk 来自哪里讲什么」上下文。公开数据:降低检索失败率 49%(+rerank 67%)。",
+      "<strong>何时不该用 RAG</strong>:知识库 < 10K tokens 直接全塞 prompt 更准更便宜 / 任务不需要外部知识 / 数据高度结构化用 SQL 更准 / 需要跨多文档推理用 Agent + Tool Use。"
+    ]
+  },
+  "s12": {
+    "title": "MCP 三大原语要点",
+    "points": [
+      "<strong>MCP 是什么</strong>:Anthropic 2024-11 开放标准协议,让 LLM 跟外部系统对接——类比 USB-C 之于充电、HTTP 之于网络,是「LLM 接外部数据」的标准化版。",
+      "<strong>三原语按「谁控制」分</strong>:Tools = Model-controlled(LLM 自己决定调用)· Resources = Application-controlled(应用主动提供)· Prompts = User-controlled(用户从模板选)。",
+      "<strong>设计 MCP server 先想清楚每个能力归哪一类</strong>——错位会让 Claude 用不上你的服务,这是最常见的 MCP 设计错误。",
+      "<strong>进阶四题</strong>:Sampling(server 反向请求 client 调 LLM 绕开 API key)· Roots(文件访问边界)· Notifications(实时反馈)· StreamableHTTP(生产级传输取代 SSE)。",
+      "<strong>反共识</strong>:① MCP ≠ Function Calling(单 API 内 vs 跨进程跨厂商开放协议)② 越多越好是错(过多 server 污染工具选择降低准确率)③ MCP 不取代 RAG(Resources 适合中小数据,大库还是要 RAG)。"
+    ]
+  },
+  "s13": {
+    "title": "Agent Workflow 四模式要点",
+    "points": [
+      "<strong>四种模式</strong>:Parallelization 并行(N 个独立子任务同时跑)· Chaining 链式(串行流水线)· Routing 路由(分流给不同 specialist)· Agent 自主代理(单 agent 循环里自己决定下一步)。",
+      "<strong>能用 Workflow 就别上 Agent</strong>:前三种结构化、可预测、可控、易调试;Agent 灵活但贵慢难追踪。先看能不能拆成前三种,真拆不动才上 Agent。",
+      "<strong>四种模式各自失败模式</strong>:Parallel 失败=子任务不独立要 reconcile · Chain 失败=中间一步错后面全错且很自信 · Route 失败=分流错任务到不了 specialist · Agent 失败=无限循环 / 烧 token / 做错事还自己写错总结。",
+      "<strong>选模式判断</strong>:任务能否拆 + 子任务能否独立 + 路径是否可预测——按这三个轴决定用哪种。",
+      "<strong>Subagent 是 Workflow 的实现机制</strong>:Parallelization / Routing 通常通过 Claude Code 的 Subagent 落地;Chaining 用 prompt 串联;Agent 模式用主代理 + 工具集合。"
+    ]
+  },
+  "s14": {
+    "title": "学习路径与收尾要点",
+    "points": [
+      "<strong>18 门课真正不可替代的只有 4 门</strong>:Claude 101 · AI Capabilities and Limitations · Building with Claude API · Introduction to Agent Skills——加起来约 11h,看完拿到 80% 价值。",
+      "<strong>重叠预警</strong>:Building with Claude API / Bedrock / Vertex 三门重叠 80%+,选其一即可;AI Fluency 六门重叠 60%+,只看主课 + 一个对应人群版就够。",
+      "<strong>五种角色最优路径</strong>:开发者 11h · PM/设计 3.5h · 教育者 2.5h · 业务运营 2h · 决策者 1.5h——决策者顺序反过来,先 AI Capabilities 再 Claude 101。",
+      "<strong>真正学会需要实际项目</strong>:挑一个 hobby 项目跑 EPCC 一遍 / 把本书一章做成 Skill 沉淀 / 拿公司真实流程套 4D 框架试试。学完官方课不是终点。",
+      "<strong>最后的判断武器</strong>:学习不是刷证书,是建立可重用的判断;遇到新产品 / 新概念,问「它落在这本书的哪一章 / 解决哪个 LLM 性质 / 替代哪个老机制」——这是这本书想留给读者的真正思维习惯。"
+    ]
   }
 }

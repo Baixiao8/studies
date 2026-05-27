@@ -1,0 +1,482 @@
+<section id="s12" style="border-top: 4px solid var(--c-recovery);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">12</span>PROTOCOL · 第五篇 / 第十二章</div>
+  <h1 class="section-h">MCP 三大原语 · Tools / Resources / Prompts <span class="en">Model Context Protocol</span></h1>
+  <p class="section-sub">第八章把 MCP 当作四把刀里「通往外部世界的协议桥梁」一笔带过,这一章把这座桥梁拆开看清楚。MCP 不是一种新工具调用方式,而是一份开放规范——它把「LLM 怎么接外部系统」这件事,从「每家自己造一套」改成「全行业共用一套」。要用好 MCP,关键不在于「能不能跑通」,而在于<em>把每一个能力归到 Tools / Resources / Prompts 三大原语里的哪一类</em>。归错了,Claude 用不上你的服务。</p>
+
+  <div class="tldr">
+    <div class="label">▼ 三十秒看懂这一章</div>
+    <p>MCP 的核心抽象是三大原语:<strong>Tools 由模型决定何时调用</strong>(查数据库、跑命令、发邮件)、<strong>Resources 由应用主动提供</strong>(文件、配置、上下文数据)、<strong>Prompts 由用户从模板里选</strong>(/translate /summarize 这类预设)。设计一个 MCP server 时,真正难的不是写代码,是想清楚<em>每一个能力归哪一类</em>——错位会让 Claude 永远调不到、或者反过来污染工具选择。除了三大原语,还有四个进阶题(Sampling 反向 LLM 调用、Roots 文件边界、Notifications 实时反馈、StreamableHTTP 取代旧 SSE)、一个生态(几百个官方 + 社区 server)和三条反共识(MCP 不是 Function Calling、不是越多越好、不一定取代 RAG)。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2024 年 11 月 25 日 · Anthropic 发布 MCP</div>
+    <p>2024 年 11 月 25 日,Anthropic 在工程博客发了一篇看起来不太起眼的文章——<em>Introducing the Model Context Protocol</em>。规范开源、SDK 同步放出(Python / TypeScript)、五个官方参考 server(Filesystem / Git / Slack / GitHub / Postgres)同时上线 [Anthropic 2024c]。文章的措辞很克制,说这是「一个开放标准,让 AI 助手连接外部数据源和工具」——但行业里读懂的人都明白这意味着什么。</p>
+    <p>故事的另一面发生在一个真实团队里。某个做内部知识管理 SaaS 的小公司,2024 年中花了两个季度做一件事:写「Claude 适配层」「ChatGPT 适配层」「Cursor 适配层」「Cline 适配层」——每家 Agent 厂商的工具协议都不同,他们的同一组 API(搜文档、读文档、编辑文档)要在四个适配层里各写一份,各自维护、各自 bug、各自版本不一致。两个工程师的时间几乎全砸在适配上,真正的功能迭代被卡死。</p>
+    <p>MCP 发布的第二周,他们把四个适配层全删了。改成一个 MCP server,实现一次,Claude Desktop 能用、Claude Code 能用、Cursor 能用、Cline 也能用——只要那家 Agent 实现了 MCP 客户端。半年后,这家公司的 CTO 在一场技术 Meetup 里说:「MCP 不是省了我们一点工时,是让我们从『集成商』变回了『产品商』。」</p>
+    <p>这就是 MCP 的真实价值——它不是新发明了「LLM 调外部服务」这件事(Function Calling 早就能干),它发明的是<strong>一个让所有 LLM 跟所有外部服务对话的统一插头</strong>。类比起来:HTTP 之于网络、USB-C 之于充电、ODBC 之于数据库——MCP 想做的是 LLM 时代的同等位置 [modelcontextprotocol.io 2024]。</p>
+  </div>
+
+  <h3><span class="pre">12.1</span>MCP 是什么 · <span class="en">A Standard Plug for LLMs</span></h3>
+
+  <p class="lead">MCP 全称 Model Context Protocol,是 Anthropic 2024 年 11 月开源的一份协议规范。它的设计目标只有一句:<strong>让「LLM 接外部系统」从「每家自己造一套」变成「行业共用一套」</strong>。</p>
+
+  <p>这件事之所以重要,要先看看 MCP 出现之前是什么样。在 2022-2024 这两年,几乎每一家 LLM 应用都在做同一件事——自己定义「工具调用格式」、自己写「外部服务适配」、自己处理「鉴权和状态」。OpenAI 有 Function Calling、Anthropic 有 Tool Use、Google 有 Gemini Functions、Cursor 有自己的 Agent 协议、Cline 也有一套——格式各不相同,字段命名各不相同,错误处理各不相同。结果是:<em>任何想做 LLM 集成的外部系统(GitHub、Notion、Slack、Postgres)都要给每一家 LLM 厂商单独写一份对接</em>。这是行业层面巨大的重复劳动。</p>
+
+  <p>MCP 把这件事重构了。它定义了一组协议层抽象,所有 LLM 客户端按这套规范调用,所有外部系统按这套规范提供能力。一边一份代码,组合自由——就像 USB-C 让所有充电器和所有设备解耦那样。</p>
+
+  <h4>MCP 的三层架构</h4>
+
+  <p>规范层面,MCP 是 client-server 架构,但术语跟传统 web 不太一样:</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">HOST</div>
+      <div class="num">宿主应用</div>
+      <div class="sub">Claude Desktop / Claude Code / Cursor — 用户直接看到的 LLM 应用</div>
+    </div>
+    <div class="item">
+      <div class="label">CLIENT</div>
+      <div class="num">客户端</div>
+      <div class="sub">宿主内的 MCP 客户端模块 — 负责跟 server 通信</div>
+    </div>
+    <div class="item">
+      <div class="label">SERVER</div>
+      <div class="num">服务端</div>
+      <div class="sub">独立进程 — 暴露 Tools / Resources / Prompts 三类能力</div>
+    </div>
+    <div class="item">
+      <div class="label">TRANSPORT</div>
+      <div class="num">传输层</div>
+      <div class="sub">stdio(本地)/ StreamableHTTP(远程) — 协议无关具体形态</div>
+    </div>
+  </div>
+
+  <p>这套架构的好处:<strong>server 一次实现,所有合规的 host 都能用</strong>。坏处:<strong>多了一层进程间通信,本地启动有几百毫秒级开销</strong>。所以判断要不要上 MCP,先看这事值不值得跨进程——本地一个 Bash 一行能做的,绝对不必上 server。</p>
+
+  <div class="callout note">
+    <div class="label">i 关键观察 · MCP 不发明能力,只规范接口</div>
+    <p>MCP 不让 Claude 多做任何「以前做不到」的事——它做的是把「以前每家各自定义的事」统一成「一份规范说了算的事」。这条很重要:它意味着 MCP 的价值不来自技术突破,来自<em>行业协调</em>。HTTP 不发明计算,但让 Web 成立;ODBC 不发明数据库,但让数据库可移植;MCP 不发明 Agent,但让 Agent 生态可以横向打通 [modelcontextprotocol.io 2024]。理解了这一层,就能理解为什么 Anthropic 把它放出来作为开源标准而不是私有协议——这是策略性让步,目的是把市场做大、把生态绑回 Anthropic。</p>
+  </div>
+
+  <h3><span class="pre">12.2</span>Tools 工具 · 模型决定何时调用 <span class="en">Model-Controlled</span></h3>
+
+  <p class="lead">三大原语里,Tools 是开发者最熟悉的——它对应传统意义上的「Function Calling」「Tool Use」。一个 Tool 是 server 暴露的可调用函数,有名字、有参数 schema、有返回值,<strong>由 Claude 自己决定何时调用、传什么参数</strong>。</p>
+
+  <p>典型场景:查数据库、调外部 API、跑命令、发邮件、创建工单。任何「需要主动执行一个动作」的能力,都该归 Tools。</p>
+
+  <h4>Tools 的几个关键特征</h4>
+
+  <p><strong>特征一 · Model-controlled · 模型自主决策</strong>。Tools 的核心权力交给模型——它判断当前任务需要哪个工具、传什么参数、什么时候调。这意味着 Tool 的 description 写得好不好,直接决定模型用不用它。Anthropic 官方建议 Tool description 里讲清楚:这个工具做什么、什么时候该用、什么时候不该用、参数怎么填、返回什么 [Anthropic 2024c]。description 写糊了,模型大概率绕过它。</p>
+
+  <p><strong>特征二 · 副作用要明确</strong>。Tool 可能产生真实世界的副作用(发邮件、改数据库、调外部 API)。规范里没有「dry-run」内建机制,但工程上强烈建议<em>把读和写分开</em>——<code>list_emails</code> 和 <code>send_email</code> 拆成两个 Tool,而不是一个 <code>email</code> 工具靠参数区分。这样模型在权衡风险时更准,Hook 拦截写操作也更容易。</p>
+
+  <p><strong>特征三 · 输入有 schema、输出无 schema</strong>。Tool 的输入参数必须用 JSON Schema 描述清楚——这是模型决定怎么传参的唯一依据。输出则是自由文本(或结构化字符串),Claude 把它当上下文继续推理。这条不对称很关键:输入 schema 越严越好,输出反而该给 Claude 留解释空间。</p>
+
+  <h4>一个真实例子</h4>
+
+  <p>看一个查飞书日历的 MCP server,它的 <code>list_events</code> 工具大致长这样:</p>
+
+  <pre><code>{
+  "name": "list_events",
+  "description": "列出指定日期范围内的日程事件。
+    用于:用户问『今天有什么会』『下周日程』『还有哪些约』。
+    不用于:创建日程(用 create_event)、查找空闲(用 check_freebusy)。",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "start_date": { "type": "string", "format": "date" },
+      "end_date":   { "type": "string", "format": "date" },
+      "calendar_id": { "type": "string", "default": "primary" }
+    },
+    "required": ["start_date", "end_date"]
+  }
+}</code></pre>
+
+  <p>Claude 看到这份 description + schema,就有了判断依据:用户说「今天的会」,它会推断出 <code>start_date</code> 和 <code>end_date</code> 都是今天,调 <code>list_events</code> 拿结果,把摘要给用户。整个流程对用户透明——他根本不知道背后调了一个 MCP server。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 常见误解 · 「Tool 越多越好,把所有能力都做成 Tool」</div>
+    <p>这是新手最容易犯的错。一个 server 暴露 50 个细粒度 Tool,模型在权衡时会变迷糊——同时有 <code>list_events</code> / <code>get_event</code> / <code>find_events_by_keyword</code> / <code>search_events</code> 四个看起来都能查日程的工具,模型选哪个全凭运气。Anthropic 的实测经验是:<strong>单 server 的 Tool 数量控制在 5-15 个之间,每个 Tool 的职责严格单一,description 把适用场景和反例都写清楚</strong>,准确率最高 [Anthropic Academy 2025d]。超过 20 个就该想想是不是有些能力该挪到 Resources(数据)或者拆成多个 server。</p>
+  </div>
+
+  <h3><span class="pre">12.3</span>Resources 资源 · 应用主动提供 <span class="en">Application-Controlled</span></h3>
+
+  <p class="lead">Resources 是三大原语里最容易被忽略也最容易被误解的一类。它对应的是<strong>「server 主动告诉 client 有哪些数据可读」</strong>——典型场景:文件内容、配置、文档、上下文数据、当前选中的代码片段、当前打开的工单。</p>
+
+  <p>Resources 和 Tools 最核心的差别,在于「谁决定要不要用」。Tool 是<em>模型决定调不调</em>;Resource 是<em>应用主动塞给模型</em>。这是 application-controlled 的含义——宿主应用(Claude Desktop / Cursor)决定哪些 Resource 自动塞进上下文、哪些等用户挑选。</p>
+
+  <h4>Resource 的典型形态</h4>
+
+  <p>每个 Resource 有一个 URI(类似 <code>file:///path/to/file.md</code> 或 <code>calendar://primary/today</code>)、一个 MIME type、一段文本或二进制内容。client 可以:</p>
+
+  <ul>
+    <li>✅ <strong>list resources</strong> — 拿到当前 server 提供的所有 Resource 清单</li>
+    <li>✅ <strong>read resource</strong> — 按 URI 取某个 Resource 的内容</li>
+    <li>✅ <strong>subscribe</strong> — 订阅某个 Resource 的变更,变了主动收到通知</li>
+  </ul>
+
+  <p>宿主应用拿到这些能力之后,可以选择不同策略:</p>
+
+  <ul>
+    <li><strong>自动注入</strong>:用户打开 Claude Desktop,自动把「当前桌面的笔记内容」作为 Resource 塞进上下文</li>
+    <li><strong>用户挑选</strong>:Claude Desktop 在 UI 上展示可用 Resources,用户点击「附加」把某份文件加进对话</li>
+    <li><strong>引用占位</strong>:Resource 不展开内容,只在上下文里放一个 URI,模型需要时显式读</li>
+  </ul>
+
+  <h4>Resources 和 Tools 的边界判断</h4>
+
+  <p>新手最常问的问题是:既然 Tool 也能读数据,为什么还要 Resources?这两个的区分,本质是「主动权归谁」:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>判别角度</th><th>该用 Tool</th><th>该用 Resource</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>触发主导</strong></td>
+          <td>模型判断「我现在需要查这个」</td>
+          <td>应用判断「这份数据用户当前肯定要参考」</td>
+        </tr>
+        <tr>
+          <td><strong>调用频率</strong></td>
+          <td>条件性 / 偶尔 / 按需</td>
+          <td>每次任务都用 / 全程上下文</td>
+        </tr>
+        <tr>
+          <td><strong>数据形态</strong></td>
+          <td>动作的产物(查询结果)</td>
+          <td>静态或半静态的引用资料</td>
+        </tr>
+        <tr>
+          <td><strong>典型例子</strong></td>
+          <td>search_docs("xxx") 返回搜索结果</td>
+          <td>文件内容、当前选中代码、配置</td>
+        </tr>
+        <tr>
+          <td><strong>UI 暴露</strong></td>
+          <td>用户看不到调用过程</td>
+          <td>用户能在 UI 里看见可附加资源</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>一个具体对照:VS Code 风格的「读当前打开的文件」该是 Resource(应用知道用户正在编辑哪个文件,主动提供),「搜索整个代码库找某个函数定义」该是 Tool(模型按需触发,搜索关键词由模型决定)。两个都关于「读代码」,但归属不同。</p>
+
+  <div class="callout note">
+    <div class="label">i 关键观察 · Resources 是「Agent 时代的剪贴板」</div>
+    <p>把 Resources 理解成「应用层的剪贴板」很贴切——用户在 IDE 里选了某段代码、在 Notion 里圈了某条记录、在浏览器里高亮了某段文字,这些「当前关注的东西」如果通过 MCP Resource 暴露,Claude 就能精准地把上下文聚焦到这里。<strong>没有 Resource 的话,你只能靠用户手动复制粘贴或者靠 Tool 全文搜索去猜</strong>。Resources 把「现在我关心什么」这条隐式语境变成了协议层的一等公民——这是 MCP 区别于纯 Function Calling 协议的最大设计 [modelcontextprotocol.io 2024]。</p>
+  </div>
+
+  <h3><span class="pre">12.4</span>Prompts 提示 · 用户从模板里选 <span class="en">User-Controlled</span></h3>
+
+  <p class="lead">第三类原语 Prompts,在三个里关注度最低,但用对了非常省事。它的本质是<strong>server 提供的「预设任务模板」,用户在客户端 UI 里挑一个,客户端把模板填好后发给模型</strong>。</p>
+
+  <p>典型场景:Claude Desktop 输入框里的 <code>/translate</code>、<code>/summarize</code>、<code>/code-review</code> 这些 slash command。它们对用户而言是「快速指令」,对 server 而言是「我推荐的高频任务,提前帮你 prompt 好」。</p>
+
+  <h4>Prompt 跟前两个原语的差别</h4>
+
+  <p>Prompt 是 user-controlled——「用户从清单里挑」,既不是模型自己调(像 Tool),也不是应用自动塞(像 Resource)。它对应的人类直觉是「快捷指令」「模板」「Recipe」。这种归属决定了几个特征:</p>
+
+  <ul>
+    <li>✅ <strong>可参数化</strong>:用户挑了 <code>/translate</code> 之后,client 弹出一个表单让用户填「源语言」「目标语言」,然后把完整的 prompt 发给模型</li>
+    <li>✅ <strong>对用户可见</strong>:Prompt 列表在 UI 上展示,用户能浏览所有可用模板,知道这个 server 给我能用什么</li>
+    <li>✅ <strong>不调用工具</strong>:Prompt 本身只是文本模板,它生成的 prompt 发给模型后,模型再自主决定要不要调 Tool / 用 Resource</li>
+  </ul>
+
+  <h4>一个真实例子</h4>
+
+  <p>假设有个「代码 review」MCP server,它暴露一个 <code>review-pr</code> Prompt:</p>
+
+  <pre><code>{
+  "name": "review-pr",
+  "description": "对一个 GitHub PR 做完整 code review",
+  "arguments": [
+    { "name": "repo",     "description": "GitHub 仓库", "required": true },
+    { "name": "pr_number","description": "PR 编号",    "required": true },
+    { "name": "focus",    "description": "重点关注(可选:security / perf / style)" }
+  ]
+}</code></pre>
+
+  <p>用户在 Claude Desktop 输入 <code>/review-pr</code>,UI 弹出表单,用户填 <code>anthropic/foo</code> + <code>1234</code> + <code>security</code>。client 拿到参数,从 server 取出真正的 prompt 模板:</p>
+
+  <pre><code>"请对 {repo} 仓库的 #{pr_number} 做 code review,重点关注 {focus}。
+步骤:
+1. 用 github_mcp::get_pr 拿到 PR diff
+2. 逐文件分析,检查 {focus} 相关问题
+3. 按严重程度排序,输出报告"</code></pre>
+
+  <p>client 把模板填好,发给模型。模型按这份 prompt 跑流程——它会自动调用 github_mcp 的 Tool 拿 PR、自动按要求格式输出。<strong>Prompt 的价值,是把「用户高频任务的 prompt」沉淀成 server 提供方的最佳实践,而不是让每个用户自己摸索怎么写 prompt</strong>。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 常见误解 · 「Prompts 是给开发者用的」</div>
+    <p>恰恰相反——Prompts 是给<em>终端用户</em>用的快捷入口。开发者写 prompt 走的是代码或者直接 prompt 输入框,不需要 Prompts 原语。Prompts 的真正受众是非技术用户:他们不会写 prompt,但能从一个清单里挑「我要做这件事」,然后填一些显而易见的参数。设计 server 时,如果你的 server 主要服务于自动化场景(Agent 自己调),那 Tools 就够了,Prompts 是浪费;如果你的 server 服务于人在 Claude Desktop 这种 UI 里使用,那 Prompts 是<em>给用户提供入口</em>的关键——没有它,用户不知道这个 server 能干嘛。</p>
+  </div>
+
+  <h3><span class="pre">12.5</span>三大原语对比 · 「谁控制」是核心区分 <span class="en">The Defining Question</span></h3>
+
+  <p class="lead">把前三节压成一张表。设计 MCP server 时,真正难的不是写代码,是想清楚每一个能力<strong>归哪一类</strong>——归错了,Claude 永远调不到、或者反过来污染工具选择。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>Tools 工具</th>
+          <th>Resources 资源</th>
+          <th>Prompts 提示</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>谁控制</strong></td>
+          <td>Model-controlled 模型决定</td>
+          <td>Application-controlled 应用决定</td>
+          <td>User-controlled 用户决定</td>
+        </tr>
+        <tr>
+          <td><strong>何时触发</strong></td>
+          <td>模型推理中按需调用</td>
+          <td>应用主动塞或用户附加</td>
+          <td>用户从 UI 清单里挑</td>
+        </tr>
+        <tr>
+          <td><strong>典型场景</strong></td>
+          <td>查数据库、跑命令、发邮件、调外部 API</td>
+          <td>文件内容、配置、当前选中代码、文档</td>
+          <td>/translate、/summarize、/review-pr</td>
+        </tr>
+        <tr>
+          <td><strong>有无副作用</strong></td>
+          <td>可有(执行动作)</td>
+          <td>通常只读</td>
+          <td>无(只生成 prompt)</td>
+        </tr>
+        <tr>
+          <td><strong>设计陷阱</strong></td>
+          <td>暴露太多 Tool 让模型选迷糊</td>
+          <td>该当 Resource 的当成 Tool 让模型靠搜索找</td>
+          <td>开发者自动场景里硬塞 Prompts 占位</td>
+        </tr>
+        <tr>
+          <td><strong>类比</strong></td>
+          <td>员工自己决定调用的工具</td>
+          <td>领导主动发到员工桌面的资料</td>
+          <td>菜单上预设好的套餐</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这张表的<strong>「谁控制」</strong>一行,是设计 MCP server 时必须先回答的问题。看到一个能力,问自己:<em>这件事什么时候发生</em>?</p>
+
+  <ul>
+    <li>「模型在推理中按需用」 → Tool</li>
+    <li>「应用层判断现在该塞给模型」 → Resource</li>
+    <li>「用户主动选要做这件事」 → Prompt</li>
+  </ul>
+
+  <p>同一个外部系统,可以同时提供三类:Linear MCP 可以暴露 <code>create_issue</code> Tool(模型按需建工单)、<code>linear://current-sprint</code> Resource(应用主动塞当前 sprint 概览)、<code>/triage-bugs</code> Prompt(用户挑这个模板批量分类未处理 bug)。<strong>三者不替代,各管一段</strong>。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器 · 设计 server 时按「谁控制」一问到底</div>
+    <p>拿到一个外部系统(假设是 Notion),不要直接想「这玩意儿要暴露哪些功能」,先列所有能力,再对每个能力问:模型自己决定何时用 → Tool;应用层根据当前场景塞 → Resource;用户从菜单挑 → Prompt。一遍走完,server 的形态就清楚了。<em>这条提问框架,是把 MCP server 从「可以跑」做到「Claude 用得上」的关键差别</em>。</p>
+  </div>
+
+  <h3><span class="pre">12.6</span>进阶四题 · <span class="en">Beyond the Three Primitives</span></h3>
+
+  <p class="lead">三大原语解释完之后,MCP 还有四个进阶特性值得讲清楚——它们解决的是「server 跟 client 协作时的几个棘手问题」,在 server 做大之后才会真正用到。</p>
+
+  <h4>题一 · Sampling — server 反向请求 client 调 LLM</h4>
+
+  <p>常规 MCP 流程是 client → server(client 调 Tool、读 Resource)。但有一类需求反过来:server 在执行 Tool 时,自己也想用 LLM 推理一下——比如一个「自动生成单元测试」的 Tool,执行过程里需要让 LLM 分析代码、产生测试用例。</p>
+
+  <p>朴素方案是 server 自己持有一份 API key 调 Claude API。但这有问题:server 自己付费、自己管 key、用户多了成本失控。MCP 设计了一个反向请求机制——Sampling:<strong>server 把「我需要 LLM 推理一下」这个请求发回给 client,client 用宿主应用的现有模型连接执行,把结果回给 server</strong> [modelcontextprotocol.io 2024]。</p>
+
+  <p>好处:</p>
+  <ul>
+    <li>✅ <strong>不用 server 持有 API key</strong> — 所有 LLM 调用都走宿主应用的额度</li>
+    <li>✅ <strong>统一的安全审计</strong> — 用户能看到所有 LLM 调用</li>
+    <li>✅ <strong>模型可替换</strong> — 用户在 Claude Desktop 切换模型,server 自动跟着切</li>
+  </ul>
+
+  <h4>题二 · Roots — 文件访问权限边界</h4>
+
+  <p>Roots 解决的是「server 该有哪些文件访问权」。当一个 Filesystem MCP server 跑起来,它技术上能读整个磁盘——这显然不安全。MCP 规范定义了 Roots 抽象:<strong>client 在握手时告诉 server「你只能在这几个目录里活动」</strong>,server 按这个边界跑。</p>
+
+  <p>典型场景:Claude Code 在某个项目里启动,把这个项目目录作为唯一 Root 告诉 Filesystem server,server 后续所有 read/list/write 都被约束在这个目录里。<em>这相当于操作系统级 chroot 的 MCP 版,但是协作式的——server 自觉遵守,client 也可以二次校验</em>。</p>
+
+  <h4>题三 · Notifications — 实时反馈与进度</h4>
+
+  <p>有些 Tool 跑得久(几十秒到几分钟):跑一个大型测试套件、做一次完整代码扫描、上传一个大文件。如果 Tool 调用是「阻塞式等结果」,用户体验很差——前端没法显示进度,Claude 也不知道现在到哪一步。</p>
+
+  <p>MCP 的 Notifications 机制让 server 在 Tool 执行过程中<strong>主动推送进度消息</strong>到 client。client 收到消息后,可以在 UI 上更新进度条、在对话里显示「正在跑第 3/10 个测试」、让模型决定是不是要等下去。这对长跑任务的协作体验是质的提升 [modelcontextprotocol.io 2024]。</p>
+
+  <h4>题四 · StreamableHTTP Transport — 取代旧 SSE</h4>
+
+  <p>MCP 早期支持两种传输:<code>stdio</code>(本地进程)、<code>SSE</code>(Server-Sent Events,远程)。SSE 是单向流,适合服务器推送,但有几个工程问题:不容易做无状态水平扩展、防火墙穿透差、连接管理复杂、断线重连体验差。</p>
+
+  <p>2025 年规范升级引入 <strong>StreamableHTTP</strong> 替代 SSE,作为生产级远程传输的推荐方案 [modelcontextprotocol.io 2025]。它的核心改进:</p>
+
+  <ul>
+    <li>✅ <strong>无状态水平扩展</strong> — 同一个 server 可以由多个实例服务,client 任意连</li>
+    <li>✅ <strong>普通 HTTP 友好</strong> — 走标准 HTTP,所有反向代理 / 负载均衡 / CDN 都能透传</li>
+    <li>✅ <strong>双向流</strong> — 既能 server push、也能 client 主动 invoke</li>
+    <li>✅ <strong>明确的会话语义</strong> — 通过 session ID 关联多次请求,而不是依赖长连接</li>
+  </ul>
+
+  <p>对开发者的实际影响:<strong>2025 年之后写新的远程 MCP server,直接用 StreamableHTTP,SSE 看作 legacy</strong>。已有的 SSE server 会有过渡期,但新生态主推 StreamableHTTP。</p>
+
+  <div class="callout note">
+    <div class="label">i 关键观察 · 这四个特性都不是「核心原语」,但都是「生产化必需」</div>
+    <p>三大原语解决的是「能不能跑」,这四个进阶题解决的是「跑得好不好、跑得安不安全、跑得稳不稳」。Sampling 解决成本与安全、Roots 解决权限边界、Notifications 解决长跑体验、StreamableHTTP 解决远程部署。<strong>把这四题想清楚,server 才能从「demo」做到「生产」</strong>。新人做 MCP server 时容易只关注三大原语,把这四题留到出问题再说——能跑的 demo 跟能撑住的生产系统之间,就是这四题的工程量 [Anthropic Academy 2025e]。</p>
+  </div>
+
+  <h3><span class="pre">12.7</span>生态全景 · <span class="en">Hundreds of Servers, One Protocol</span></h3>
+
+  <p class="lead">MCP 发布一年多以来,生态扩张速度超出 Anthropic 预期。到 2026 年初,官方 + 社区维护的 server 数量已经过千。这一节不可能一一列举,只挑几条主轴讲清楚生态的形态。</p>
+
+  <h4>官方参考实现</h4>
+
+  <p>Anthropic 自己维护一组「reference server」作为生态种子和样板。这些 server 不只是给用户用,更是给后来者抄作业用——展示一个标准 MCP server 长什么样、frontmatter 怎么写、错误处理怎么做、Roots 怎么用 [Anthropic 2024c]:</p>
+
+  <ul>
+    <li><strong>Filesystem</strong> — 本地文件读写,带 Roots 边界控制</li>
+    <li><strong>Git</strong> — 仓库历史、diff、blame</li>
+    <li><strong>GitHub</strong> — issue / PR / repo 操作</li>
+    <li><strong>Slack</strong> — 消息收发、频道管理</li>
+    <li><strong>Postgres</strong> — 数据库查询,只读</li>
+    <li><strong>Google Drive / Maps / Memory / Puppeteer / Sentry</strong> 等</li>
+  </ul>
+
+  <h4>第三方主流 server</h4>
+
+  <p>第三方厂商和社区贡献的 server 覆盖几乎所有常见 SaaS 和开发工具:</p>
+
+  <ul>
+    <li><strong>协作类</strong>:Notion、Linear、Jira、Atlassian Confluence、ClickUp、Asana、Monday</li>
+    <li><strong>开发类</strong>:Cursor、Sentry、PagerDuty、Datadog、Vercel、Cloudflare</li>
+    <li><strong>设计类</strong>:Figma、Framer、Sketch</li>
+    <li><strong>数据类</strong>:Snowflake、BigQuery、ClickHouse、ElasticSearch、MongoDB</li>
+    <li><strong>沟通类</strong>:飞书(Lark)、企业微信、Discord、Telegram、Zoom</li>
+    <li><strong>AI 工具类</strong>:Replicate、HuggingFace、OpenAI、Perplexity</li>
+  </ul>
+
+  <p>这份名单还在持续增长。MCP 官方有一个 server registry 索引(modelcontextprotocol.io/registry),作为生态的中心目录,但社区里也有 awesome-mcp-servers 这类清单,补充更多边缘场景。</p>
+
+  <h4>跨 Agent 厂商的接纳</h4>
+
+  <p>MCP 真正成为「行业标准」的标志,是其他 Agent 厂商也实现了 MCP 客户端。到 2026 年初,主流 Agent IDE / Desktop 大多兼容 MCP:</p>
+
+  <ul>
+    <li>✅ <strong>Anthropic Claude Desktop / Claude Code</strong> — 原生支持</li>
+    <li>✅ <strong>Cursor</strong> — 2025 年中接入 MCP 客户端</li>
+    <li>✅ <strong>Cline / Continue.dev</strong> — 早期就跟进</li>
+    <li>✅ <strong>Zed / JetBrains AI Assistant</strong> — 2025 年下半年加入</li>
+  </ul>
+
+  <p>这意味着<strong>你给 Claude 写的 MCP server,大概率也能给 Cursor / Cline 用,无需重写</strong>。这就是开放协议的网络效应——server 作者只需要实现一次,服务范围却随客户端生态指数级扩展。这种正反馈是 MCP 一年内能起势的根本原因 [modelcontextprotocol.io 2025]。</p>
+
+  <h3><span class="pre">12.8</span>反共识三条 · <span class="en">Three Counterintuitive Truths</span></h3>
+
+  <p class="lead">行业里关于 MCP 有几个流传很广的误区。这一节专门拆解三条最常见的反共识,让读者跳过这些坑。</p>
+
+  <h4>反共识一 · 「MCP 跟 Function Calling 是一回事」</h4>
+
+  <p>这是最常见的误解,也最容易导致后续判断全错。Function Calling 和 MCP 在<em>形式</em>上确实像——都涉及模型调用外部能力——但它们解决的问题不在一个层级:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>维度</th><th>Function Calling</th><th>MCP</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>范围</strong></td><td>单一 LLM API 内的功能扩展</td><td>跨进程、跨厂商的开放协议</td></tr>
+        <tr><td><strong>定义方</strong></td><td>每家 LLM 厂商自己定义格式</td><td>统一规范,所有家共用</td></tr>
+        <tr><td><strong>实现位置</strong></td><td>函数代码跟调用方耦合在一起</td><td>独立 server 进程,跨应用复用</td></tr>
+        <tr><td><strong>能力类型</strong></td><td>只有 Tool 一类</td><td>三大原语 + 进阶四题</td></tr>
+        <tr><td><strong>跨厂商</strong></td><td>OpenAI 格式 ≠ Anthropic 格式</td><td>同一份 server 服务多家 host</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>简单类比:Function Calling 像是「在一个 app 内部加一些插件 API」,MCP 像是「定义了一份标准协议,所有 app 跟所有插件都按这套对话」。前者是<em>应用内功能</em>,后者是<em>生态层基础设施</em>。</p>
+
+  <p>具体到工程影响:用 OpenAI Function Calling 写的工具代码,换到 Claude 上要重写;用 MCP 写的 server,Claude / Cursor / Cline 都能直接用。这就是协议层抽象的价值。</p>
+
+  <h4>反共识二 · 「MCP server 装得越多越好」</h4>
+
+  <p>很多用户拿到 Claude Desktop 就开始疯狂装 MCP server——GitHub 装一个、Slack 装一个、Notion 装一个、Linear 装一个、Filesystem 装一个、Postgres 装一个... 装到 20+ 之后,发现一个奇怪现象:<strong>Claude 在简单任务上反而变笨了</strong>。问它一个明明该用现有信息就能答的问题,它非要绕一圈调某个 MCP Tool;问它写一段代码,它先调五次 MCP 看看有什么资源可用。</p>
+
+  <p>原因:<strong>过多 MCP server 同时挂着,Tool 总数从 5 个膨胀到 80 个,模型每一次推理都要在 80 个 Tool 里挑选——这会显著污染工具选择,降低准确率,也大幅消耗注意力</strong> [Anthropic Academy 2025d]。</p>
+
+  <p>实操经验:</p>
+  <ul>
+    <li>✅ <strong>按场景分组挂载</strong>:写代码场景挂 GitHub + Filesystem,开会场景挂日历 + Notion,不要全开</li>
+    <li>✅ <strong>用「项目级配置」隔离</strong>:Claude Code 的 settings.json 按项目配 MCP,每个项目只挂当下需要的</li>
+    <li>✅ <strong>临时开启 / 关闭</strong>:Claude Desktop 支持运行时开关,需要时再开</li>
+    <li>❌ <strong>不要一次性挂 20+ server 在全局</strong>:这会让所有任务都变慢、变迷糊</li>
+  </ul>
+
+  <h4>反共识三 · 「MCP 取代 RAG」</h4>
+
+  <p>有人看到 Resources 能提供文件内容,就觉得 MCP 把第十一章讲的 RAG 全干掉了——不用做索引、不用 embedding、不用 vector DB,直接让 server 提供 Resources 就完了。<strong>这个判断对小规模数据成立,对大规模数据不成立</strong>。</p>
+
+  <p>原因:Resources 的工作方式是「整份内容塞进上下文」。上下文窗口有上限(200K tokens / ~15 万中文字),一份 100 页的文档塞进来还有余量,但一个有 10 万文档的知识库——绝对塞不下。这时候 RAG 还是必要的:<em>先 embedding 检索找到 top-K 相关片段,再把片段作为 Resource 塞给模型</em>。</p>
+
+  <p>两者的真实关系是<strong>互补</strong>,不是替代:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>场景</th><th>数据规模</th><th>推荐方案</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>当前打开的几份文件</td><td>≤ 上下文 1/3</td><td>MCP Resources 直接塞</td></tr>
+        <tr><td>一个项目的所有代码</td><td>能塞,但占满窗口</td><td>Resources(精选)+ Tool(grep)按需补</td></tr>
+        <tr><td>公司全部内部文档</td><td>百万级 chunks</td><td>RAG(向量检索)+ MCP Tool 包装检索</td></tr>
+        <tr><td>千万级 / 实时数据</td><td>无论怎么裁都塞不下</td><td>RAG + 数据库 + MCP Tool 暴露查询</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>更精准的说法:<strong>MCP 提供了「数据接入的协议层」,RAG 提供了「数据检索的算法层」。两层叠加,各管一段——MCP 解决「LLM 怎么调到数据」,RAG 解决「数据怎么按相关度筛选」</strong>。看到 MCP 出现就预言 RAG 死亡的判断,是混淆了协议层和算法层(第十一章详谈)。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 反共识汇总 · 三条最常见的 MCP 误判</div>
+    <ul>
+      <li>❌ 「MCP = Function Calling 的新名字」 → MCP 是跨厂商协议,Function Calling 是单 API 功能,不在一个层级</li>
+      <li>❌ 「MCP server 越多越好」 → 过多 Tool 污染模型选择,按场景分组挂载、临时开关</li>
+      <li>❌ 「MCP 取代 RAG」 → 两层互补,中小数据用 Resources,大数据还得 RAG + MCP Tool 包装</li>
+    </ul>
+  </div>
+
+  <h3><span class="pre">12.9</span>这一章给你的判断武器</h3>
+
+  <p class="lead">读完这一章合上,你应该带走以下几个能直接用的判断武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 设计 MCP server,先回答「谁控制」</div>
+    <p>对每个能力问:模型自己决定何时用 → Tool;应用主动判断该塞 → Resource;用户从清单挑 → Prompt。这条提问框架,是把 MCP server 从「能跑」做到「Claude 真用得上」的核心差别。归错了原语类型,Claude 永远调不到、或者一直误调。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · Tool 数量控制在 5-15,description 把适用场景写透</div>
+    <p>单 server 的 Tool 数量过多,模型选不准。Anthropic 实测的甜区是 5-15 个 Tool / server,每个 Tool 的 description 把「什么时候用、什么时候不用、参数怎么填」都写清楚。同一个 Claude 桌面上挂的 MCP server 总数也别超过 5-7 个常驻,按场景启停。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · MCP 跟 RAG 不是替代关系</div>
+    <p>中小规模数据(≤ 上下文 1/3)可以靠 MCP Resources 直接塞;大规模数据必须 RAG 检索 + MCP Tool 包装。两层互补:MCP 是协议层、RAG 是算法层,各管一段。看到 MCP 出现就放弃 RAG 是常见误判。</p>
+  </div>
+
+  <p>这一章把 MCP 的协议本质、三大原语、进阶四题、生态全景、反共识三条全讲完了。回看脉络:第 <a href="#s6">六章</a> 提过 Claude Desktop 的 Connectors,本质就是 MCP client 的产品化呈现;第 <a href="#s8">八章</a> 把 MCP 当作四把刀里「通往外部世界的协议桥梁」一笔带过,这一章是它的展开;第 <a href="#s11">十一章</a> RAG 跟本章的关系刚刚说清楚——协议层和算法层的互补。下一章 <a href="#s13">第十三章</a> 我们换到 Agent 工作流模式——MCP 提供了「触达外部」的能力,但 Agent 怎么把这些能力组装成稳定可维护的工作流(Prompt Chaining / Routing / Parallelization / Orchestrator-Workers / Evaluator-Optimizer),那是另一个完整的话题。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic, <em>Introducing the Model Context Protocol</em>, engineering blog, 2024-11 [Anthropic 2024c] · modelcontextprotocol.io 官方规范站, 2024-2026 · Anthropic Skilljar Academy, <em>Introduction to MCP</em> course, 2025 [Anthropic Academy 2025d] · Anthropic Skilljar Academy, <em>MCP Advanced Topics</em> course, 2025 [Anthropic Academy 2025e] · Anthropic MCP Python SDK documentation, github.com/modelcontextprotocol/python-sdk, 2024-2026 · Anthropic MCP TypeScript SDK documentation, github.com/modelcontextprotocol/typescript-sdk, 2024-2026 · MCP Reference Servers, github.com/modelcontextprotocol/servers, 2024-2026 · modelcontextprotocol.io/registry, MCP 官方 server registry, 2025-2026.</p>
+
+</div>
+</section>

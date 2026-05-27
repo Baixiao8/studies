@@ -1,0 +1,374 @@
+<section id="s14" style="border-top: 4px solid var(--c-psych);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">14</span>PATHS · 第六篇 / 第十四章</div>
+  <h1 class="section-h">18 门官方课速查 + 5 种角色路径 <span class="en">Skilljar Academy Field Guide</span></h1>
+  <p class="section-sub">前面十三章把 LLM 底层、4D 方法论、产品生态、Claude Code 工程、MCP、Agent 架构都讲透了。但 Anthropic 官方在 <em>Skilljar Academy</em> 上挂着的 18 门课里,还有大量「具体怎么操作」的肌肉记忆——快捷键、SDK 参数、Bedrock 凭证、教师讲义模板。这一章不再讲新概念,而是给你一份「看完这本书之后,怎么继续学」的导航——18 门课怎么分组、哪几门重叠、五种角色各走哪一条最短路。</p>
+
+  <div class="tldr">
+    <div class="label">▼ 三十秒看懂这一章</div>
+    <p>Anthropic 把 18 门免费课程分成五个轨道:入门 2 门、AI 素养 6 门、开发者 5 门、API & MCP 3 门、云部署 2 门。横向扫一遍会发现两个重叠区——<em>Building with Claude API</em> + <em>Bedrock</em> + <em>Vertex AI</em> 是同一门课的三种部署皮肤(重叠 80%+);AI Fluency 六门课重叠 60%+,选主课加一个对应人群版即可。剥掉重叠,真正不可替代的只有 4 门:<em>Claude 101</em>、<em>AI Capabilities and Limitations</em>、<em>Building with the Claude API</em>、<em>Introduction to Agent Skills</em>——约 11 小时拿走 80% 价值。其余 14 门按角色挑:开发者 11h、PM 设计 3.5h、教育者 2.5h、业务运营 2h、决策者 1.5h。挑完之后真正学会还得靠项目——这一章末尾给你一份「下一步」清单。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2026 年 3 月 · Skilljar Academy 开张那一周</div>
+    <p>2026 年 3 月,Anthropic 把原本散落在官方 docs、cookbook、博客里的零散教程统一搬到一个新域名:<em>anthropic.skilljar.com</em>。开张当周挂出 12 门课,半年后扩到 18 门,全部免费、全部带交互式 quiz、全部颁发可分享徽章。Anthropic 内部一份产品说明把它定位成「Claude 用户的工程驾照」——从「会聊天」升级到「能上生产」。</p>
+    <p>真实的反响是分裂的。社区里一拨人——尤其是教师和业务岗——把课程截图刷屏,觉得终于有官方版「能直接拿去内训」的素材。另一拨开发者群组里则是另一种情绪:某团队 leader 在 X 上发了一篇短文,说他让全组花一周刷完所有 18 门课,结束后才发现 <em>Building with the Claude API</em>、<em>Claude with Amazon Bedrock</em>、<em>Claude with Google Cloud Vertex AI</em> 三门课里讲的 prompt caching、tool use、streaming 几乎一模一样——重叠率他粗估有 80%,只是后两门把 API 凭证那部分换成了对应云厂商的版本。</p>
+    <p>这一章要回答的就是这位 leader 没想清楚的事:18 门课<em>怎么挑</em>,才能不浪费时间又不漏关键。下面给的不是 Skilljar 课程列表本身——那个登录页面就能查——而是<strong>读完这本书之后,你在「继续学」这件事上的最优路径</strong>。</p>
+  </div>
+
+  <h3><span class="pre">14.1</span>18 门课全景速查 · 五个轨道一张表 <span class="en">The Full Catalog</span></h3>
+
+  <p class="lead">先把 18 门课摆全。Anthropic 没有官方分轨,这里按内容性质归成五组,每门标明级别、时长、一句话定位。级别用 Anthropic 自己的标记:<em>Foundation</em>(入门,无需基础)、<em>Build</em>(进阶,需要会用 Claude)、<em>Advanced</em>(深度,需要会写代码或带项目经验)。</p>
+
+  <h4>轨道 A · 入门(Foundation)· 共 2 门 · 总时长约 1 小时</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>课程名称</th><th>级别</th><th>时长</th><th>一句话定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>Claude 101</em></td><td>Foundation</td><td>~30 min</td><td>给完全没用过 Claude 的人,讲清「这是个什么」「能干什么」「在哪用」</td></tr>
+        <tr><td><em>AI Capabilities and Limitations</em></td><td>Foundation</td><td>~30 min</td><td>讲清 LLM 能做什么、不能做什么、什么时候会幻觉——这本书<a href="#s1">第 1 章</a>的 Skilljar 版</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这两门是所有人的起点。无论你是什么角色,这两门都建议先刷——加起来 1 小时,把后面所有课要用的基础词汇打通。</p>
+
+  <h4>轨道 B · AI 素养(AI Fluency)· 共 6 门 · 总时长约 4 小时</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>课程名称</th><th>级别</th><th>时长</th><th>一句话定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>AI Fluency Framework &amp; Foundations</em></td><td>Foundation</td><td>~60 min</td><td>4D 方法论主课——Delegation / Description / Discernment / Diligence,本书<a href="#s4">第 4 章</a>讲过</td></tr>
+        <tr><td><em>AI Fluency for Educators</em></td><td>Foundation</td><td>~45 min</td><td>给老师的版本——课堂场景、学生作弊、教学设计</td></tr>
+        <tr><td><em>AI Fluency for Students</em></td><td>Foundation</td><td>~30 min</td><td>给学生的版本——怎么用 AI 不被当作弊、怎么不依赖</td></tr>
+        <tr><td><em>AI Fluency for Nonprofits</em></td><td>Foundation</td><td>~45 min</td><td>给非营利组织的版本——预算受限场景下的 AI 应用</td></tr>
+        <tr><td><em>AI Fluency for Small Businesses</em></td><td>Foundation</td><td>~45 min</td><td>给小企业主的版本——客服、营销、内容</td></tr>
+        <tr><td><em>Teaching AI Fluency</em></td><td>Build</td><td>~45 min</td><td>给培训师的版本——怎么把 4D 框架教给别人</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这六门里 <em>AI Fluency Framework &amp; Foundations</em> 是主课,其余五门是<strong>同一套 4D 框架</strong>在不同人群场景下的应用变体——案例换了、术语换了、底层方法论没换。后面 14.2 节会展开这点。</p>
+
+  <h4>轨道 C · 开发者(Developer)· 共 5 门 · 总时长约 6 小时</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>课程名称</th><th>级别</th><th>时长</th><th>一句话定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>Claude Code 101</em></td><td>Build</td><td>~45 min</td><td>Claude Code 入门——装、跑、第一个 EPCC 循环,本书<a href="#s6">第 6 章</a>的 Skilljar 版</td></tr>
+        <tr><td><em>Claude Code in Action</em></td><td>Build</td><td>~90 min</td><td>真实项目演练——hooks、slash command、CLAUDE.md,本书<a href="#s7">第 7 章</a>的 hands-on</td></tr>
+        <tr><td><em>Introduction to Agent Skills</em></td><td>Build</td><td>~60 min</td><td>Skill 系统——把可复用流程封装成 .skill 文件,Claude 自动调用</td></tr>
+        <tr><td><em>Introduction to Subagents</em></td><td>Build</td><td>~45 min</td><td>子代理——主 agent 拆派给 sub-agent 并行,本书<a href="#s13">第 13 章</a>的实操版</td></tr>
+        <tr><td><em>Introduction to Claude Cowork</em></td><td>Foundation</td><td>~30 min</td><td>团队协作模式——多人共享 Claude session、共享 memory、共享 skill</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这五门里 <em>Claude Code 101</em> + <em>Code in Action</em> + <em>Agent Skills</em> + <em>Subagents</em> 是开发者主线;<em>Claude Cowork</em> 是横切——它对所有角色(包括 PM、设计师、决策者)都有用,不只给开发者。</p>
+
+  <h4>轨道 D · API &amp; MCP · 共 3 门 · 总时长约 11 小时</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>课程名称</th><th>级别</th><th>时长</th><th>一句话定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>Building with the Claude API</em></td><td>Advanced</td><td>~8h 10min</td><td>本系列最重的一门——API 全家桶:auth、streaming、tools、caching、batch、files、citations、thinking,本书<a href="#s8">第 8 章</a>到<a href="#s12">第 12 章</a>的官方完整版</td></tr>
+        <tr><td><em>Introduction to MCP</em></td><td>Build</td><td>~60 min</td><td>MCP 协议入门——server / client / transport,本书<a href="#s12">第 12 章</a>的 Skilljar 版</td></tr>
+        <tr><td><em>MCP Advanced Topics</em></td><td>Advanced</td><td>~90 min</td><td>MCP 进阶——OAuth、resource templates、prompt templates、远程服务器部署</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><em>Building with the Claude API</em> 是 18 门课里时长最长的——8 小时 10 分钟,几乎相当于其他 17 门加起来的一半。它是 Anthropic 官方对「生产级 Claude 应用」最完整的一份教材,任何想把 Claude 接到自己产品后端的工程师都绕不开。</p>
+
+  <h4>轨道 E · 云部署 · 共 2 门 · 总时长约 8 小时</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>课程名称</th><th>级别</th><th>时长</th><th>一句话定位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>Claude with Amazon Bedrock</em></td><td>Advanced</td><td>~4h</td><td>把 Claude 接到 AWS Bedrock 的版本——凭证、region、IAM、计费</td></tr>
+        <tr><td><em>Claude with Google Cloud Vertex AI</em></td><td>Advanced</td><td>~4h</td><td>把 Claude 接到 GCP Vertex AI 的版本——同上,只是云厂商不同</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这两门跟轨道 D 的关系是 14.2 节要展开的核心问题——重叠区在哪、能不能跳过。</p>
+
+  <h3><span class="pre">14.2</span>重叠预警 · 别傻刷,先剔除冗余 <span class="en">Where the Overlaps Are</span></h3>
+
+  <p class="lead">18 门课的总时长加起来约 30 小时,但内容真正独立的不到 18 小时——剩下的 12 小时全是重叠。这一节把两个最大的重叠区拎出来,告诉你能跳过哪几门。</p>
+
+  <h4>重叠区一 · API 三连(Building with Claude API · Bedrock · Vertex)· 重叠率 ~80%</h4>
+
+  <p>这三门课的目录排出来惊人地相似:都讲 messages API、都讲 streaming、都讲 tool use、都讲 prompt caching、都讲 batch processing、都讲 vision、都讲 files API、都讲 citations、都讲 extended thinking。区别只在最后两章——<em>Building with Claude API</em> 用的是 Anthropic 直连 API + Anthropic SDK;<em>Bedrock</em> 把 auth 换成 AWS SigV4 + boto3;<em>Vertex AI</em> 把 auth 换成 GCP service account + Vertex SDK。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>内容模块</th><th>Anthropic API</th><th>Bedrock</th><th>Vertex</th><th>结论</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>auth 与凭证</td><td>API key</td><td>AWS SigV4 / IAM</td><td>GCP service account</td><td>不同 — 唯一真正不重叠的部分</td></tr>
+        <tr><td>messages / streaming</td><td>✓</td><td>✓(几乎同款)</td><td>✓(几乎同款)</td><td>重叠</td></tr>
+        <tr><td>tool use</td><td>✓</td><td>✓(同款)</td><td>✓(同款)</td><td>重叠</td></tr>
+        <tr><td>prompt caching</td><td>✓</td><td>✓</td><td>✓</td><td>重叠</td></tr>
+        <tr><td>batch / files / vision / citations / thinking</td><td>✓</td><td>✓</td><td>✓</td><td>重叠</td></tr>
+        <tr><td>计费与配额</td><td>Anthropic 账单</td><td>AWS 账单</td><td>GCP 账单</td><td>不同</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>结论很硬:三选一就够</strong>。如果你直接用 Anthropic API,刷 <em>Building with the Claude API</em>;如果你公司锁死 AWS,刷 <em>Claude with Amazon Bedrock</em>;如果你公司锁死 GCP,刷 <em>Claude with Google Cloud Vertex AI</em>。<em>三门都刷是浪费 8 小时</em>——你不会因为多刷两门就更懂 prompt caching,你只会重复听同一段话三遍。如果未来确实要切换云厂商,补的不是另一门完整课,而是「auth + 计费」那两章——半小时搞定。</p>
+
+  <h4>重叠区二 · AI Fluency 六门 · 重叠率 ~60%</h4>
+
+  <p>这六门的核心是同一套 4D 框架——Delegation(选模型)/ Description(写 prompt)/ Discernment(判结果)/ Diligence(守底线)。<em>AI Fluency Framework &amp; Foundations</em> 是主课,讲清四个 D 的定义、判断标准、典型反模式。其余五门(Educators / Students / Nonprofits / Small Businesses / Teaching AI Fluency)做的事是<strong>把同一套框架套到不同人群的场景上</strong>——案例换成课堂、学生作业、非营利捐款、小企业客服、培训讲义,但底层的 4D 没变。</p>
+
+  <div class="callout note">
+    <div class="label">i 五个人群版的真实差别在哪</div>
+    <p>差别主要在三处:<strong>案例库</strong>(老师版用学生作弊案例、小企业版用客服话术案例)、<strong>禁忌清单</strong>(学生版强调「别完全外包思考」、教师版强调「别把学生作品当 AI 训练数据」)、<strong>评估标准</strong>(教师版加了课堂场景的成功指标、企业版加了 ROI 计算)。如果你在的人群跟某个版本对得上,刷主课 + 对应人群版,2 小时左右;如果你不在任何一个对应人群里(比如你是产品经理),只刷主课,1 小时,够了。</p>
+  </div>
+
+  <p><strong>结论:六门最多刷两门</strong>——<em>Framework &amp; Foundations</em> 必刷,然后挑一门跟你身份匹配的。其余四门除非你换岗位,否则别碰。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 反共识 · 「Anthropic 出了 18 门课,全刷完才算系统学过」 — 错</div>
+    <p>这是「完美主义偏误」——以为课程数量代表知识量。实际上 18 门里真正不可替代的只有 4 门——<em>Claude 101</em>、<em>AI Capabilities and Limitations</em>、<em>Building with the Claude API</em>(或对应云版)、<em>Introduction to Agent Skills</em>。这 4 门加起来约 11 小时,看完拿到 80% 价值。其余 14 门要么是这 4 门的具体应用(Bedrock / Vertex 是云栈版),要么是开发者主线的细节增强(<em>Code in Action</em> 是 Code 101 的 hands-on 续集),要么是 AI Fluency 的人群版变体。<strong>不要按门数刷,按你的实际场景挑</strong>——少刷一门没看的课,多花一小时跑一个真实项目,收益高得多。</p>
+  </div>
+
+  <h3><span class="pre">14.3</span>路径一 · 开发者 · 11 小时拿到 80% <span class="en">For Developers</span></h3>
+
+  <p class="lead">如果你是工程师、要把 Claude 接到自己的产品里——下面这条路径是回报最高的一条。Anthropic 内部 onboarding 新工程师走的也大致是这一条。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">STEP 1</div>
+      <div class="num">Claude 101</div>
+      <div class="sub">30 min · 概念打底 · 跳过不读会有术语断层</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 2</div>
+      <div class="num">AI Capabilities</div>
+      <div class="sub">30 min · 幻觉与限制 · 这本书 <a href="#s1">第 1 章</a>已覆盖,可加速</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 3</div>
+      <div class="num">Claude Code 101</div>
+      <div class="sub">45 min · 装好工具,跑第一个 EPCC</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 4</div>
+      <div class="num">Code in Action</div>
+      <div class="sub">90 min · 真实项目演练 · 这本书 <a href="#s7">第 7 章</a>是干货版</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 5</div>
+      <div class="num">Agent Skills</div>
+      <div class="sub">60 min · 必学 · 没学过 Skill 算没用过 Claude Code</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 6</div>
+      <div class="num">Subagents</div>
+      <div class="sub">45 min · 多 agent 协同 · 接 <a href="#s13">第 13 章</a>的工程实操</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 7</div>
+      <div class="num">Building with Claude API</div>
+      <div class="sub">8h 10min · 重头戏 · 拆成 5 周每周刷一段</div>
+    </div>
+  </div>
+
+  <p><strong>总时长约 11 小时</strong>。这条路径覆盖了从「写第一个 prompt」到「把 Claude 接生产」的完整链条。可以跳过的是:</p>
+
+  <ul>
+    <li>❌ <strong>跳过 Claude Cowork</strong>——除非你团队真要多人共享 session,否则这是横切课,后补</li>
+    <li>❌ <strong>跳过 AI Fluency 六门</strong>——4D 框架在本书<a href="#s4">第 4 章</a>已讲透,Skilljar 那门主要是案例</li>
+    <li>❌ <strong>跳过 Bedrock / Vertex</strong>——除非你公司锁定云厂商。用 Anthropic 直连 API 的项目,这两门是冗余</li>
+    <li>❌ <strong>跳过 MCP Advanced</strong>——除非你要写 MCP server。只是用 MCP server,Introduction 那门足够</li>
+  </ul>
+
+  <div class="callout ops">
+    <div class="label">✓ 开发者路径的额外建议 · 按这个顺序刷,不要乱跳</div>
+    <p>有些开发者一开始就冲去刷最重的 <em>Building with Claude API</em>,觉得「我是工程师,简单的课跳过」——结果发现里面频繁引用「prompt 工程五原则」「Claude 的 personality 设计」这些概念,而这些都是 <em>Claude 101</em> 和 <em>AI Capabilities</em> 讲过的。<strong>顺序不是「难度递增」,是「依赖关系」</strong>——前面的课打地基,后面的课盖楼。跳过地基直接盖楼,你会在 API 课的第三章发现自己得回去补前两门——还不如老老实实从头走。</p>
+  </div>
+
+  <h3><span class="pre">14.4</span>路径二 · PM / 设计师 · 3.5 小时摸清边界 <span class="en">For Product Managers &amp; Designers</span></h3>
+
+  <p class="lead">如果你是 PM 或设计师——要决定「这个功能该不该用 Claude」「界面长什么样」「跟工程师怎么对齐」——你的目标是<em>理解能力边界</em>,不是动手 implement。</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>必刷 · Claude 101(30 min)</h4>
+      <p>建立基础词汇:token、context window、system prompt、temperature。后面跟工程师 review 方案、跟用户讲产品价值,都要用这些词。<a href="#s1">第 1 章</a>已经覆盖了八成,Skilljar 那门主要是 UI 上的「在哪点哪个按钮」。</p>
+    </div>
+    <div class="card">
+      <h4>必刷 · AI Capabilities &amp; Limitations(30 min)</h4>
+      <p>讲清 Claude 能做什么、不能做什么、什么时候会幻觉。这门课是 PM 写 PRD 时最该带的判断武器——见到「让 AI 来 X」的需求,先问能不能、再问该不该。<a href="#s1">第 1 章</a>的 Schwartz 律师案就是这门课的核心案例。</p>
+    </div>
+    <div class="card">
+      <h4>必刷 · Introduction to Claude Cowork(30 min)</h4>
+      <p>Cowork 是 Claude 2026 推出的团队协作模式,跟产品形态最相关。看完你能判断:你们团队该不该用 Cowork 取代现在的 Slack 群组协作?边界在哪?用户体验上的雷区是什么?</p>
+    </div>
+    <div class="card">
+      <h4>必刷 · AI Fluency Framework &amp; Foundations(60 min)</h4>
+      <p>4D 方法论——Delegation / Description / Discernment / Diligence。这门是 PM 在产品决策时的标尺:每个用 Claude 的 feature,都用这四个 D 自检一遍,能挡住一半的「拍脑袋上 AI」的需求。<a href="#s4">第 4 章</a>是浓缩版,Skilljar 那门多了案例。</p>
+    </div>
+  </div>
+
+  <p><strong>总时长约 3.5 小时</strong>。这条路径不让你自己写 prompt 写代码,但能让你跟工程师对齐、跟用户讲清楚、跟老板汇报时不被忽悠。可以跳过的是几乎所有开发者轨道课——你不需要懂 SDK 怎么用,你需要懂能力边界。</p>
+
+  <div class="callout note">
+    <div class="label">i PM 的隐藏增量 · 看一遍《Claude Code 101》</div>
+    <p>不让你自己用 Claude Code 写代码,而是让你<em>看一遍它的工作流</em>——EPCC(Explore / Plan / Code / Commit)循环、CLAUDE.md 怎么写、为什么有「Plan Mode」。看完这门 45 分钟的课,你跟工程师讨论「怎么把 Claude Code 接进我们的 dev workflow」时,不会被一些术语挡在外面。这是 PM 选刷,不是必刷,但 ROI 很高——多花 45 分钟,跟工程师沟通的信噪比能上一个台阶。</p>
+  </div>
+
+  <h3><span class="pre">14.5</span>路径三 · 教育者 · 2.5 小时拿到全套教学素材 <span class="en">For Educators</span></h3>
+
+  <p class="lead">如果你是中小学老师、大学老师、培训师、教练——你的目标不只是「自己会用 Claude」,还要<em>会教别人用</em>。Anthropic 在教育这块下了很大力气,有一整套对应素材。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">STEP 1</div>
+      <div class="num">Claude 101</div>
+      <div class="sub">30 min · 入门概念 · 教学前自己得过一遍</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 2</div>
+      <div class="num">AI Fluency Framework</div>
+      <div class="sub">60 min · 4D 主课 · 给学生讲课时这是核心教材</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 3</div>
+      <div class="num">AI Fluency for Educators</div>
+      <div class="sub">45 min · 课堂场景实操 · 怎么处理学生作弊 / 怎么改作业评估</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 4</div>
+      <div class="num">Teaching AI Fluency</div>
+      <div class="sub">45 min · 给培训师 · 怎么把 4D 框架教给别人 · 含课件模板</div>
+    </div>
+  </div>
+
+  <p><strong>总时长约 2.5 小时</strong>。这条路径完成后你拿到:基础词汇 + 4D 框架 + 课堂场景应对 + 教学素材。要给学生讲一节 AI 课、要给同事做一次内训、要重新设计一份课程大纲——这 2.5 小时基本够。可以跳过的是开发者轨道全部、API 三连全部——除非你教的是计算机课,否则这些不在你的教学范围里。</p>
+
+  <p>如果你教的是高中生或本科生,可以额外加 <em>AI Fluency for Students</em>(30 min)——它是给学生看的视角,你刷一遍能知道学生那边在被教什么,讲课时能呼应。</p>
+
+  <h3><span class="pre">14.6</span>路径四 · 业务 / 运营 · 2 小时把 AI 嵌进工作流 <span class="en">For Business &amp; Operations</span></h3>
+
+  <p class="lead">如果你是市场、销售、客服、运营、HR、行政——你的目标是<em>把 AI 嵌进现有工作流,而不是开发新工具</em>。Anthropic 给这类用户的路径最短。</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>必刷 · Claude 101(30 min)</h4>
+      <p>建立基础词汇。这一门是所有人的起点,业务岗也不例外。看完你至少知道「Claude.ai」「Projects」「Artifacts」分别是什么、怎么用。</p>
+    </div>
+    <div class="card">
+      <h4>必刷 · AI Capabilities and Limitations(30 min)</h4>
+      <p>知道什么时候会幻觉、什么时候不能信。业务岗最容易踩的坑就是「让 Claude 帮我查一下 X 公司去年的财报数据」——它会编。这门课讲透了为什么。</p>
+    </div>
+    <div class="card">
+      <h4>必刷 · 挑一门人群匹配的 AI Fluency(45 min)</h4>
+      <p>非营利刷 <em>for Nonprofits</em>,小企业主刷 <em>for Small Businesses</em>,大企业员工建议刷 <em>for Educators</em>(里面的「批改作业」案例稍微转译一下就是「review 报告」)。三门挑一,目的是看现成案例怎么把 4D 套到日常工作里。</p>
+    </div>
+    <div class="card">
+      <h4>必刷 · Claude Cowork(30 min)</h4>
+      <p>团队场景里 Cowork 是直接相关的 feature——共享 session、共享 memory、共享 skill 库。看完你能判断你们部门要不要把现在的 wiki / 文档 / SOP 迁移到 Cowork 里。</p>
+    </div>
+  </div>
+
+  <p><strong>总时长约 2 小时</strong>。这条路径不让你写 prompt,让你<em>知道哪些工作可以外包给 Claude、哪些不能、外包给谁(产品形态)</em>。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 业务岗最常见的反模式 · 「我要先学会写 prompt」</div>
+    <p>很多业务岗一上来就要刷《Prompt Engineering 大全》之类的内容,觉得 prompt 是核心技能。其实对业务岗来说,真正的核心技能是<strong>「判断哪些事该让 Claude 做」</strong>——这是 4D 里的 Delegation。Prompt 写得好坏的差距,在简单任务上不到 20%(默认能力本来就够);决定该不该用 AI、用哪个产品形态(Chat / Project / Skill / Code),才是 10 倍的差距。<a href="#s4">第 4 章</a>对这点已经讲透——业务岗刷完那一章 + 上面 2 小时的课,就够了,别再陷在 prompt 技巧里。</p>
+  </div>
+
+  <h3><span class="pre">14.7</span>路径五 · 决策者 · 1.5 小时看懂战略全景 <span class="en">For Decision Makers</span></h3>
+
+  <p class="lead">如果你是高管、创始人、投资人、董事——你的目标是<em>看懂战略全景</em>,不是动手用。你不需要会写 prompt,你需要在 AI 战略会议上分得清「这家公司在 wrap GPT」和「这家公司在做真正的产品」。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">STEP 1</div>
+      <div class="num">AI Capabilities</div>
+      <div class="sub">30 min · 第一门刷的,不是 Claude 101 · 先知道 LLM 能与不能</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 2</div>
+      <div class="num">Claude 101</div>
+      <div class="sub">30 min · 再看 Anthropic 是怎么把能力包装成产品的</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 3</div>
+      <div class="num">这本书的精华</div>
+      <div class="sub">30-45 min · 回看序言 + <a href="#s1">第 1 章</a> + <a href="#s2">第 2 章</a> + <a href="#s3">第 3 章</a> + <a href="#s8">第 8 章</a></div>
+    </div>
+  </div>
+
+  <p><strong>总时长约 1.5 小时</strong>。决策者顺序跟其他角色不一样——先刷 <em>AI Capabilities</em>(知道能力边界,挡住一半 AI 噪音),再刷 <em>Claude 101</em>(看产品包装),最后回看本书的核心章节做综合判断。</p>
+
+  <p>本书序言讲了 Anthropic 这家公司的来历和定位;<a href="#s1">第 1 章</a>讲 LLM 的四个性质——你跟 CTO 讨论时能挡住「AI 会推理 / 会思考」这类幻觉;<a href="#s2">第 2 章</a>讲 Agent 和 Chat 的本质差别——你判断一个项目是「真 AI 产品」还是「假 AI 套壳」的标尺;<a href="#s3">第 3 章</a>讲 Anthropic 产品矩阵(Claude.ai / API / Code / Cowork)——你能判断采购哪个、给谁配哪个;<a href="#s8">第 8 章</a>讲 API 和工具调用——你能预估「把 Claude 接进我们 stack」的工程量。</p>
+
+  <p>开发者轨道、AI Fluency 人群版、Bedrock / Vertex——决策者一门都不用刷。需要时让团队里的工程师 review 一下汇报给你,30 分钟就讲完了。</p>
+
+  <h3><span class="pre">14.8</span>这一章给你的判断武器 · 学完不是终点 <span class="en">After the Course</span></h3>
+
+  <p class="lead">读完这一章,合上书,你应该带走以下三个能直接用的判断武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 按角色挑课,不按门数挑课</div>
+    <p>18 门课的时长加起来 30 小时,你按角色挑的最短路径只有 1.5-11 小时。差出来的 20 小时不是「学得更深」,是「重复听三遍同样的话」。挑课的标准只有一个:<strong>「这门课讲的东西,我会在未来 3 个月里实际用上吗?」</strong>会,刷;不会,跳。Anthropic 没有发徽章排行榜,刷完所有 18 门不会给你额外认可——但用 11 小时把开发者那条路径走完,你能搭出来一个真东西。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · 课程是钥匙,项目才是门</div>
+    <p>Skilljar 上看再多课,如果不开 Claude Code 跑一个真实项目,你的肌肉记忆建不起来。Anthropic 工程师自己也是这么学的——课程过一遍,然后立刻开一个 hobby 项目实操。<strong>课程刷完 + 真实项目跑通,才算「学会」</strong>。下面给一份「下一步」清单,任何一条做完都比再多刷一门课收益高。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · 真不可替代的只有 4 门 · 其余 14 门按需挑</div>
+    <p>剥掉重叠,18 门里真正不可替代的只有 4 门:<em>Claude 101</em>(基础)、<em>AI Capabilities and Limitations</em>(边界)、<em>Building with the Claude API</em>(深度 · 或对应云版)、<em>Introduction to Agent Skills</em>(扩展)。加起来约 11 小时。<strong>其余 14 门是这 4 门的具体应用、人群变体、或开发者主线的细节增强——按需挑,别系统刷</strong>。</p>
+  </div>
+
+  <h4>下一步 · 把课程变成项目的 7 个建议</h4>
+
+  <p>挑一条做,效果好于再多刷一门课。</p>
+
+  <ul>
+    <li>✅ <strong>挑一个 hobby 项目用 Claude Code 跑一遍 EPCC</strong> — 不必是大项目,改自己的 dotfiles、写一个 CLI 小工具、给一个旧仓库补测试都行。重点是把<a href="#s7">第 7 章</a>讲的 Explore / Plan / Code / Commit 完整走一遍</li>
+    <li>✅ <strong>把这本书的某一章做成 Skill 沉淀</strong> — 比如把<a href="#s4">第 4 章</a>的 4D 决策框架封装成一个 <code>.skill</code> 文件,下次做产品决策时让 Claude 帮你过一遍。这是 <em>Agent Skills</em> 课里最实操的应用</li>
+    <li>✅ <strong>拿你公司的真实流程套 4D 框架试试</strong> — 选一个你部门正在用 Claude 的工作流,逐项过 Delegation / Description / Discernment / Diligence,看哪一步是漏的。这是 PM / 业务岗最高 ROI 的练习</li>
+    <li>✅ <strong>给团队写一份 CLAUDE.md</strong> — 把团队的 coding style、命名规范、review checklist 写成一份 CLAUDE.md,签入仓库。这是<a href="#s7">第 7 章</a>讲的工程上手最快的一步</li>
+    <li>✅ <strong>用 Anthropic 直连 API 跑一个最小生产 demo</strong> — 不必上线,只要把「请求 → 加 cache_control → 命中率监控 → 账单查看」这条链跑通一次。这是<a href="#s10">第 10 章</a> Prompt Caching 的实操延伸</li>
+    <li>✅ <strong>把现有内部文档迁一份到 Cowork</strong> — 选一份团队共享的 SOP / wiki,把它放进 Claude Cowork 里看看效果。这是判断「要不要全面迁过去」的最便宜实验</li>
+    <li>✅ <strong>开一个 MCP server 试一下</strong> — 哪怕只是一个 Hello World server,跑通一次「Claude Code → MCP server → 调用本地工具」的循环,你对<a href="#s12">第 12 章</a>讲的协议就从「读懂」升级到「能用」</li>
+  </ul>
+
+  <h4>最后一段 · 写给读完整本书的你</h4>
+
+  <p>这本书写到这里,LLM 底层<a href="#s1">(第 1 章)</a>、Agent 范式<a href="#s2">(第 2 章)</a>、Anthropic 产品矩阵<a href="#s3">(第 3 章)</a>、4D 方法论<a href="#s4">(第 4 章)</a>、prompt 工程<a href="#s5">(第 5 章)</a>、Claude Code 入门<a href="#s6">(第 6 章)</a>到工程实操<a href="#s7">(第 7 章)</a>、API 全家桶<a href="#s8">(第 8 章)</a>、prompt engineering 五原则<a href="#s9">(第 9 章)</a>、Prompt Caching<a href="#s10">(第 10 章)</a>、RAG<a href="#s11">(第 11 章)</a>、MCP<a href="#s12">(第 12 章)</a>、多 Agent 架构<a href="#s13">(第 13 章)</a>——十三章覆盖了一份完整的 Claude 工程地图。这一章是地图之外的「下一步指南」。</p>
+
+  <p>但有件事这本书没法替你做——<strong>真正学会需要实际项目</strong>。所有概念在你脑子里翻了一遍,跟你在键盘上敲过、踩过坑、debug 到凌晨,是两种知识。第一种是「读过」,第二种是「会」。<a href="#s4">第 4 章</a>讲过 Discernment——你能不能判断 Claude 输出的对错,取决于你有没有在真实任务上踩过它的雷。这个雷不踩,Discernment 永远停在书本层面。</p>
+
+  <p>所以这本书的真正结尾,不在这一段——在你合上书之后开的第一个 hobby 项目里。挑一个上面的下一步建议,这周末花两个晚上做出来。做出来之后回头看这本书,会发现很多原来读着「明白了」的章节,这次才真的明白了。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic Skilljar Academy, <em>Course catalog</em>, anthropic.skilljar.com, 全部 18 门课程页面,访问于 2026 · Anthropic, <em>Skilljar Academy launch announcement</em>, 2026-03 · 各课程具体页面:<em>Claude 101</em> / <em>AI Capabilities and Limitations</em> / <em>AI Fluency: Framework &amp; Foundations</em> / <em>AI Fluency for Educators · Students · Nonprofits · Small Businesses</em> / <em>Teaching AI Fluency</em> / <em>Claude Code 101</em> / <em>Claude Code in Action</em> / <em>Introduction to Agent Skills</em> / <em>Introduction to Subagents</em> / <em>Introduction to Claude Cowork</em> / <em>Building with the Claude API</em> / <em>Introduction to MCP</em> / <em>MCP Advanced Topics</em> / <em>Claude with Amazon Bedrock</em> / <em>Claude with Google Cloud Vertex AI</em>,均托管于 anthropic.skilljar.com,2026 · Anthropic, <em>Cookbook</em>, github.com/anthropics/anthropic-cookbook, 2025-2026(作为课程外的项目实操参考)。</p>
+
+</div>
+</section>

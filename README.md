@@ -30,7 +30,7 @@
 
 | # | 主题 | 字数 | 阅读 | 听书 | AI 图 | 公开链接 |
 |---|---|---|---|---|---|---|
-| **2026-05** | Anthropic 与 Claude 深度调研 · LLM 原理/方法论/产品全家桶/编码代理/MCP 协议 | 14 章 | — | — | — | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-anthropic-academy/) |
+| **2026-05** | Anthropic 与 Claude 深度调研 · LLM 原理/方法论/产品全家桶/编码代理/MCP 协议 | ~80K | 3.8h | 🎧 同步 | — | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-anthropic-academy/) |
 | **2026-05** | Skills 构建指南 · 中文化对照 · Anthropic《Building Skills for Claude》6 章 + 3 附录 | (单页 SPA) | — | — | — | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-skills-building-guide/) |
 | 2026-06 | (规划中) | — | — | — | — | — |
 

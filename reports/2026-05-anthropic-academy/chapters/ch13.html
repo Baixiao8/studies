@@ -1,0 +1,411 @@
+<section id="s13" style="border-top: 4px solid var(--c-recovery);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">13</span>ARCHITECTURE · 第五篇 / 第十三章</div>
+  <h1 class="section-h">Agent Workflow 四种模式 <span class="en">Four Workflow Patterns</span></h1>
+  <p class="section-sub">Anthropic 在 2024 年 12 月那篇《Building Effective Agents》博客里,把多 Agent 系统的搭法归成了四种模式:并行、链式、路由、自主代理。前三种是<em>结构化</em>的工作流,行为可预测、成本可控;最后一种才是真正的 Agent。这一章把四种模式逐个拆开,讲清楚每种适合什么、会怎么坏、以及那条最重要的工程经验——能用 Workflow 就别上 Agent。</p>
+
+  <div class="tldr">
+    <div class="label">▼ 三十秒看懂这一章</div>
+    <p>多 Agent 系统不是「把好几个 Agent 凑一起」这么简单。Anthropic 把它拆成四种结构:<strong>Parallelization</strong> 把任务切成 N 份让 N 个 agent 同时跑;<strong>Chaining</strong> 把任务串成流水线、上一步输出喂给下一步;<strong>Routing</strong> 用一个分流 agent 把不同类型的输入派给不同 specialist;<strong>Agent</strong> 是单 agent 在循环里自己决定下一步。前三种行为可预测、贵不到哪去、出错容易查;Agent 模式灵活但慢、贵、难追踪。Anthropic 的工程经验只有一句:<strong>能用 Workflow 就别上 Agent</strong>——任务真拆不动了再上自主代理。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2024 年 12 月 19 日 · Anthropic 工程博客</div>
+    <p>2024 年 12 月 19 日,Anthropic 在工程博客上挂出了一篇看起来不起眼的文章,标题就一句话——《Building Effective Agents》。作者署名是 Erik Schluntz 和 Barry Zhang,两位都是 Claude 应用研究团队的工程师 [Anthropic 2024c]。</p>
+    <p>文章开头第一段就给整个 Agent 社区当头浇了一盆冷水:「我们跟几十个团队聊过他们怎么搭 Agent 系统。一致的发现是——<em>最成功的实现,用的不是复杂框架,而是简单、可组合的模式</em>。」翻译过来就是:别再迷信 LangChain、AutoGPT、CrewAI 这些花里胡哨的多 agent 框架了,大多数情况下你不需要它们。</p>
+    <p>这篇博客真正的贡献,是把当时业界混乱的「Agent 系统」概念拆成两层:<strong>Workflow</strong>(工作流,步骤预设)和 <strong>Agent</strong>(自主代理,自己决定下一步)。Workflow 又细分为三种基本模式——并行、链式、路由。加上 Agent,正好四种。这四种模式之后被 Anthropic 写进了官方课程、Claude Code 的内部架构、客户案例库,成了所有用 Claude 搭多 agent 系统的人都绕不开的范本。</p>
+    <p>更扎心的一句是:「<em>对很多用例来说,一次 LLM 调用加点上下文就够了——你根本不需要 agent</em>」。读完整篇博客你会发现,Anthropic 的态度跟当时硅谷主流叙事完全相反——大家都在喊「多 agent 协同是未来」,Anthropic 在说「先别急,看看你这事是不是真用得着」。这种「反 hype」的工程审美,就是这一章最值得带走的精神底色。</p>
+  </div>
+
+  <h3><span class="pre">13.1</span>四种模式全景 · <span class="en">The Map of Four</span></h3>
+
+  <p class="lead">先把四种模式摆到一张图上。理解了这张图,你看任何一个号称「多 Agent」的系统,都能立刻判断它属于哪一类、可能在哪里出问题。</p>
+
+  <p>Anthropic 在博客里给四种模式画了示意图,核心区别在于<strong>「谁决定下一步」</strong>和<strong>「步骤是否预设」</strong>这两个维度:</p>
+
+  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  ① PARALLELIZATION (并行)
+  ─────────────────────────
+                  ┌─ agent A ─┐
+       input ──→ ─┼─ agent B ─┼─→ aggregator ──→ output
+                  └─ agent C ─┘
+       (N 个独立子任务同时跑,最后汇总)
+
+  ② CHAINING (链式)
+  ─────────────────────────
+       input ─→ agent A ─→ agent B ─→ agent C ─→ output
+       (流水线,每一步依赖上一步)
+
+  ③ ROUTING (路由)
+  ─────────────────────────
+                    ┌─→ specialist X
+       input ─→ router ┼─→ specialist Y
+                    └─→ specialist Z
+       (分流 agent 决定派给谁)
+
+  ④ AGENT (自主代理)
+  ─────────────────────────
+       input ─→ agent ↺ (decide → tool → observe → decide …) ─→ output
+       (单 agent 自己在循环里决定下一步用哪个工具)
+  </pre>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>① Parallelization</th>
+          <th>② Chaining</th>
+          <th>③ Routing</th>
+          <th>④ Agent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>结构</strong></td><td>扇形,N 路并发</td><td>线形,串行流水</td><td>树形,先分流后专精</td><td>循环,自己决定下一步</td></tr>
+        <tr><td><strong>步骤是否预设</strong></td><td>是</td><td>是</td><td>是(路由规则预设)</td><td>否</td></tr>
+        <tr><td><strong>典型用例</strong></td><td>批量分析、多视角对比、独立子任务</td><td>翻译流水线、内容审核多阶段</td><td>客服分流、问题分类后专家应答</td><td>开放性编程、调试、研究任务</td></tr>
+        <tr><td><strong>延迟</strong></td><td>低(并发)</td><td>线性叠加</td><td>2 跳(路由 + specialist)</td><td>不可预测,可能很长</td></tr>
+        <tr><td><strong>成本</strong></td><td>N 倍(同时调 N 次)</td><td>N 倍(串行调 N 次)</td><td>≈ 2 次调用</td><td>不可预测,可能烧光预算</td></tr>
+        <tr><td><strong>调试难度</strong></td><td>低,每路独立可重放</td><td>中,要看哪一步坏了</td><td>低,先看路由对不对</td><td>高,循环路径每次都可能不同</td></tr>
+        <tr><td><strong>典型失败模式</strong></td><td>子任务不独立,要做 reconciliation</td><td>中间一步错了后面全错</td><td>分流错误,永远到不了对的 specialist</td><td>无限循环、烧 token、做错还自信</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout note">
+    <div class="label">i 一句话区分 Workflow 和 Agent</div>
+    <p>Anthropic 给出的定义最简洁:<strong>Workflow 是步骤由开发者预先设计、LLM 在每一步「填空」的系统;Agent 是步骤由 LLM 自己在运行时决定的系统</strong> [Anthropic 2024c]。Parallelization、Chaining、Routing 都是 Workflow——你画好流程图、LLM 在每个节点干活;Agent 模式才是真的「自己决定下一步」。这个边界一旦想清楚,你就不会再把所有用了多个 LLM 调用的东西都叫「Agent」——很多时候它只是个工作流。回头看 <a href="#s2">第 2 章</a> 那一节讲过的 Chat / Workflow / Agent 三分,本章是把 Workflow 这一层进一步切开。</p>
+  </div>
+
+  <h3><span class="pre">13.2</span>① Parallelization · 并行模式 <span class="en">Parallelization</span></h3>
+
+  <p class="lead">最简单的多 agent 模式。把一个任务拆成 N 个互相独立的子任务,N 个 agent 同时跑,最后用一个 aggregator(汇总器)把结果拼起来。结构像扇形展开再合拢。</p>
+
+  <h4>什么时候用</h4>
+
+  <p>判断标准只有一条:<strong>子任务彼此独立,A 的输出不影响 B 的输入</strong>。一旦满足这条,Parallelization 永远是首选——它把 N 次串行 LLM 调用的延迟压成了 1 次。</p>
+
+  <p>Anthropic 博客里把并行又细分成两种子模式 [Anthropic 2024c]:</p>
+
+  <ul>
+    <li><strong>Sectioning(分片)</strong>——把任务按维度切。比如同一份合同,让 agent A 看法律风险、agent B 看商业条款、agent C 看语言规范,三路并发,最后合成一份审查报告。</li>
+    <li><strong>Voting(投票)</strong>——把任务交给 N 个独立 agent 跑同一件事,然后用多数投票或加权平均得出结论。常用于内容安全审核、代码评审这种「单次判断可能错、多人投票更稳」的场景。</li>
+  </ul>
+
+  <h4>典型场景</h4>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">BATCH</div>
+      <div class="num">批量分析</div>
+      <div class="sub">N 份简历 / N 份产品 / N 个候选人</div>
+    </div>
+    <div class="item">
+      <div class="label">MULTI-VIEW</div>
+      <div class="num">多视角</div>
+      <div class="sub">同一份合同的法律 / 商务 / 语言三路审查</div>
+    </div>
+    <div class="item">
+      <div class="label">VOTING</div>
+      <div class="num">投票</div>
+      <div class="sub">N 个 agent 各跑一次,多数派胜出</div>
+    </div>
+    <div class="item">
+      <div class="label">GUARDRAIL</div>
+      <div class="num">护栏</div>
+      <div class="sub">主任务跑的同时,并行跑一个安全检查 agent</div>
+    </div>
+  </div>
+
+  <h4>真实工程案例</h4>
+
+  <p>Claude Code 的 <strong>Subagent</strong> 机制本质上就是 Parallelization 的实现——主 agent 接到「修一个跨 5 个模块的 bug」这种任务时,会派出多个 subagent 各自去读不同模块的源码、各自整理上下文,然后把摘要回传给主 agent。每个 subagent 用的是独立的 context window,互不污染,主 agent 拿到几份摘要后做整合决策 [Anthropic Claude Code Docs 2025]。这种结构比单 agent 顺序读 5 个模块快得多,而且每个 subagent 都有自己的「专注边界」,不会被无关代码干扰。详见 <a href="#s8">第 8 章</a>「四把刀」里 Subagent 那一刀的展开。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 用 Parallelization 的标准姿势</div>
+    <p><strong>动手前先问三个问题</strong>:(1) 子任务真的彼此独立吗?(2) 汇总器写得清楚每一路输出怎么合并吗?(3) 如果某一路 agent 失败,整个任务还能跑完吗?三个都答得上来,放心并行——速度提升立竿见影,成本是 N 倍调用但延迟接近 1 次调用。Anthropic 内部用这种结构给客户做合同分析,常见 5-10 路并发,延迟比线性串行低一个数量级。</p>
+  </div>
+
+  <h4>失败模式</h4>
+
+  <p>Parallelization 最常见的踩坑是<strong>子任务其实不独立</strong>——你以为可以并行,跑完发现 A 的结论应该影响 B 的判断,只能在 aggregator 里做大量「调和(reconciliation)」工作:对比 A 和 B 哪个更可信、人工补一条 prompt 让 LLM 二次裁决、甚至要求重跑。这种调和成本一旦超过节省的延迟,Parallelization 就是负优化——你应该改用 Chaining。</p>
+
+  <p>第二个踩坑是<strong>aggregator 设计太弱</strong>。N 路 agent 各自输出一段文字,简单拼接是垃圾;要 aggregator 真的去合并、去重、对比、给出统一结论,它本身就是一次需要好好写 prompt 的 LLM 调用——很多团队忽略了 aggregator 的工程量。</p>
+
+  <h3><span class="pre">13.3</span>② Chaining · 链式模式 <span class="en">Chaining</span></h3>
+
+  <p class="lead">流水线模式。第 1 个 agent 的输出喂给第 2 个 agent,第 2 个的输出喂给第 3 个,串行下去,最后一步输出最终结果。结构是一条直线,每一步都依赖上一步。</p>
+
+  <h4>什么时候用</h4>
+
+  <p>判断标准:<strong>任务能被切成几个清晰的、依次依赖的阶段,每个阶段单独写 prompt 比塞进一个大 prompt 效果更好</strong>。</p>
+
+  <p>Anthropic 在博客里给的经典例子是<strong>多语言营销文案生成流水线</strong> [Anthropic 2024c]:</p>
+
+  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  阶段 1 · 写英文初稿        →  阶段 2 · 检查初稿是否符合品牌调性
+                              ↓ (gate: 不符合就停)
+  阶段 3 · 翻译成目标语言     →  阶段 4 · 本地化润色 + 文化检查
+                              ↓
+  阶段 5 · 最终格式化输出
+  </pre>
+
+  <p>注意里面的「gate(关卡)」——某些步骤之间可以加一个判断:这一步的输出合格吗?不合格就回退或停止。这是 Chaining 的一个重要变种,Anthropic 把它叫做 <em>Prompt Chaining with Gates</em>。</p>
+
+  <h4>典型场景</h4>
+
+  <ul>
+    <li>✅ <strong>内容创作流水线</strong>:草稿 → 风格调整 → 事实核查 → 最终润色</li>
+    <li>✅ <strong>多步推理任务</strong>:提取问题 → 分解子问题 → 逐个回答 → 综合结论</li>
+    <li>✅ <strong>数据清洗 + 转换</strong>:原始数据 → 结构化 → 校验 → 归一化 → 输出</li>
+    <li>✅ <strong>翻译流水线</strong>:原文 → 直译 → 意译润色 → 校对 → 排版</li>
+    <li>❌ <strong>子任务彼此独立的批处理</strong>(应该用 Parallelization)</li>
+    <li>❌ <strong>输入类型多样需要分流的任务</strong>(应该用 Routing)</li>
+  </ul>
+
+  <h4>失败模式</h4>
+
+  <div class="callout sharp">
+    <div class="label">✕ Chaining 最大的陷阱 · 错误沿链条累积放大</div>
+    <p>Chaining 的根本风险是:<strong>中间某一步错了,后面所有步都会错,而且错得很自信</strong>。第 2 步的输出虽然偏离原意,但格式正确、看起来合理;第 3 步以为这是可靠的输入继续加工;第 4 步在偏离基础上再偏离一点。等到最后一步输出时,误差已经累积到面目全非,但因为每一步单看都「正确」,你回查的时候找不到明显的错位。</p>
+    <p>Anthropic 的工程建议是:<strong>关键链节加 gate</strong>(显式判断这一步输出合格吗?)、<strong>记录每一步的 intermediate output</strong>(出错时可以从任意一步重跑)、<strong>避免链条过长</strong>(超过 5-6 步就该考虑拆成多个独立流水线)。</p>
+  </div>
+
+  <h3><span class="pre">13.4</span>③ Routing · 路由模式 <span class="en">Routing</span></h3>
+
+  <p class="lead">一个「分流 agent」(router)看一眼输入,根据输入类型把任务派给不同的 specialist agent。每个 specialist 只擅长一类问题,但因为专精,在自己擅长的领域比通用 agent 准、便宜、快。</p>
+
+  <h4>什么时候用</h4>
+
+  <p>判断标准:<strong>输入可以被清晰分成有限几类,不同类应该用完全不同的 prompt 或不同的模型来处理</strong>。</p>
+
+  <p>典型例子是<strong>客服分流</strong>:用户的工单可能是「退款请求」「技术故障」「账户疑问」「投诉」四类中的一种。如果用一个万能 agent 处理所有类型,它的 prompt 会变得无比臃肿——既要懂退款政策又要懂技术、又要懂投诉处理流程——而且每一类的最佳模型其实不同(退款用便宜的 Haiku 就够,技术故障要用 Opus)。Routing 的好处:</p>
+
+  <ul>
+    <li>✅ 每个 specialist 的 prompt 可以精雕细琢、长度合理</li>
+    <li>✅ 不同类型可以用不同模型,匹配成本</li>
+    <li>✅ 加新类型时,只加一个 specialist,不动其他</li>
+    <li>✅ 路由错误可以被监控、纠正,有可观测性</li>
+  </ul>
+
+  <h4>典型场景</h4>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">CS</div>
+      <div class="num">客服分流</div>
+      <div class="sub">退款 / 技术 / 投诉 / 账户</div>
+    </div>
+    <div class="item">
+      <div class="label">MODEL</div>
+      <div class="num">按难度选模型</div>
+      <div class="sub">简单问题给 Haiku,复杂给 Opus</div>
+    </div>
+    <div class="item">
+      <div class="label">LANG</div>
+      <div class="num">按语言分流</div>
+      <div class="sub">中文 / 英文 / 日文各自的 specialist</div>
+    </div>
+    <div class="item">
+      <div class="label">DOMAIN</div>
+      <div class="num">按领域分流</div>
+      <div class="sub">医疗 / 法律 / 金融 specialist</div>
+    </div>
+  </div>
+
+  <h4>失败模式</h4>
+
+  <p>Routing 的最大失败模式是<strong>分流 agent 路由错误</strong>——用户问的是技术问题,被错误归类为「账户疑问」,被派给账户 specialist。账户 specialist 完全答非所问,但因为它「专精」于账户问题,答得很流畅,用户根本看不出问题被路由错了。</p>
+
+  <p>Anthropic 的建议是:<strong>路由模型本身要选得起好</strong>——不要为了省钱用最小的模型做 routing,因为路由错误代价远大于路由成本。常见做法是用 Haiku 4.5 做 routing(比 Opus 便宜但准确率仍高),给 router 加一个「不确定就回退到通用 agent」的兜底分支,以及把所有 routing 决策记录下来定期回查。</p>
+
+  <h3><span class="pre">13.5</span>④ Agent · 自主代理模式 <span class="en">Agent</span></h3>
+
+  <p class="lead">前三种模式的步骤都是开发者预先设计的,LLM 只在每一步填空。第四种不同——给单个 agent 一组工具、一个目标,让它在循环里自己决定下一步用哪个工具、下下一步看什么数据、什么时候停。<strong>这才是真正的 Agent</strong>。</p>
+
+  <h4>Agent 的循环结构</h4>
+
+  <p>回头看 <a href="#s2">第 2 章</a> 讲过的 Agentic Loop:Gather Context → Take Action → Verify Work → 回到第一步。Agent 模式就是把这个循环交给 LLM 自己跑——不预设循环次数、不预设具体步骤、不预设用哪个工具,完全让 LLM 在每一轮根据当前观察决定下一步。</p>
+
+  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  while not done:
+      # LLM 看当前上下文,自己决定下一步干什么
+      next_step = llm.decide(context, available_tools)
+
+      if next_step.is_final_answer():
+          done = True
+          break
+
+      # 调用 LLM 选的工具
+      result = execute(next_step.tool, next_step.args)
+
+      # 把结果塞回上下文,进入下一轮
+      context.append(result)
+  </pre>
+
+  <p>注意这个循环的「自主性」体现在:Agent 自己决定<em>用不用工具、用哪个工具、用了之后看到结果再决定下一个工具、什么时候判断任务完成、什么时候放弃</em>。没有任何一步是开发者预设的——开发者只给了工具集和目标。</p>
+
+  <h4>典型场景</h4>
+
+  <p>Agent 模式适合<strong>路径不可预测的开放任务</strong>:</p>
+
+  <ul>
+    <li>✅ <strong>开放性编程任务</strong>:「在这个项目里加一个用户认证功能」——可能要改 5 个文件也可能要改 20 个,要装新依赖也可能不用,完全看现有代码</li>
+    <li>✅ <strong>调试 bug</strong>:bug 可能在前端也可能在后端、可能要看日志也可能要跑 profiler,路径不可预测</li>
+    <li>✅ <strong>研究类任务</strong>:「调研一下 2025 年 LLM 评测基准的现状」——要查什么文献、对比哪些维度,边查边定</li>
+    <li>❌ <strong>步骤固定的批量任务</strong>(应该用 Parallelization 或 Chaining)</li>
+    <li>❌ <strong>有强成本预算的生产环境任务</strong>(Agent 烧 token 不可控)</li>
+  </ul>
+
+  <h4>真实工程案例</h4>
+
+  <p>Claude Code 在跑「修复一个跨多模块 bug」这种任务时,本质上就是 Agent 模式 [Anthropic Claude Code Docs 2025]。它会自己决定:</p>
+
+  <ol>
+    <li>先看哪个文件——读相关源码、读最近 git log、读测试文件</li>
+    <li>判断 bug 可能在哪——根据读到的内容动态确定</li>
+    <li>改哪段代码——可能改一处也可能改五处</li>
+    <li>跑测试——失败了就回到第 2 步重新分析</li>
+    <li>什么时候算完——所有相关测试都绿,且没改无关文件</li>
+  </ol>
+
+  <p>没有任何一步是预设的——任务接到的时候,连「这个 bug 在哪个文件」都还不知道,谈不上预设流程。这正是 Agent 模式区别于 Workflow 的本质。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ Agent 模式的四种典型失败</div>
+    <p><strong>一 · 无限循环</strong> —— Agent 卡在错误路径上越走越深,Verify 又不严,自己以为还在进步,token 烧光预算才停。<strong>二 · 自信地走错路</strong> —— Agent 第一步判断错了方向,后续每一步都基于错误假设继续推进,而且因为 LLM 输出自信、过程「看起来合理」,你回查时找不到具体的错点。<strong>三 · 工具误用</strong> —— Agent 选了错误的工具(比如该读文件却调了网络搜索),或工具参数填错。<strong>四 · 错误总结</strong> —— Agent 跑完循环输出「任务完成」,但实际任务根本没做对——它把「我做了点什么」写成了「我把目标达成了」。这是 LLM「自信和正确是两件事」(回看 <a href="#s1">第 1 章</a>)在 Agent 模式下被放大的版本。</p>
+  </div>
+
+  <h3><span class="pre">13.6</span>怎么选 · 能用 Workflow 就别上 Agent <span class="en">Choose the Boring One</span></h3>
+
+  <p class="lead">这一节是整章最重要的一节。Anthropic 给所有用 Claude 搭多 agent 系统的人,反复强调的一条工程经验只有一句:<strong>能用 Workflow 解决的,就别上 Agent</strong>。</p>
+
+  <h4>为什么这条经验这么重</h4>
+
+  <p>前三种 Workflow 模式(Parallelization、Chaining、Routing)有一个共同特征:<strong>步骤是开发者预设的,LLM 只在每一步填空</strong>。这意味着:</p>
+
+  <ul>
+    <li>✅ <strong>行为可预测</strong>:任务跑哪些步,你提前就知道</li>
+    <li>✅ <strong>成本可控</strong>:LLM 调用次数有上限,token 消耗有边界</li>
+    <li>✅ <strong>延迟可估</strong>:N 步流水线大约多长时间,提前能算</li>
+    <li>✅ <strong>容易调试</strong>:错了找哪一步,定位清晰</li>
+    <li>✅ <strong>可观测性强</strong>:每一步的输入输出都可以记录、回查、回放</li>
+  </ul>
+
+  <p>Agent 模式把所有这些可控性都换走了——换来的是「灵活」「能处理开放任务」「不需要开发者设计流程」。这个权衡只在<em>必须如此</em>的时候才划算。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 反直觉的事实 · Agent 不是 Workflow 的「升级版」</div>
+    <p>很多人觉得「Workflow 是初级版,Agent 是高级版,工程能力够了就该上 Agent」——这是被营销话术带偏了。<strong>Workflow 和 Agent 是两种不同形态,各自适合不同任务,不存在升级关系</strong>。一个生产环境的客服系统,Routing + 几个 specialist 永远比一个万能 Agent 稳定;一个数据处理流水线,Chaining 永远比 Agent 便宜。只有当任务<em>真的</em>路径不可预测(开放性编程、调试、研究),Agent 才是合理选择。Anthropic 博客原话:「<em>对许多生产应用来说,基于 LLM 调用预定义路径的 workflow 是最佳选择</em>」[Anthropic 2024c]。</p>
+  </div>
+
+  <h4>决策流程</h4>
+
+  <p>遇到一个新需求,Anthropic 建议按下面这个流程走:</p>
+
+  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  Step 1: 这事一次 LLM 调用能搞定吗?
+          能  → 用单次调用 + 好的 prompt,不要搞复杂
+          不能 → ↓
+
+  Step 2: 任务能拆成 N 个互相独立的子任务吗?
+          能  → Parallelization
+          不能 → ↓
+
+  Step 3: 任务能拆成几个依次依赖的阶段吗?
+          能  → Chaining
+          不能 → ↓
+
+  Step 4: 输入可以被清晰分成几类,各自需要不同处理吗?
+          能  → Routing
+          不能 → ↓
+
+  Step 5: 任务路径真的不可预测吗?
+          是  → Agent(但准备好预算和监控)
+          否  → 回 Step 2 重新拆
+  </pre>
+
+  <div class="callout ops">
+    <div class="label">✓ 一个实操判断 · 「能画出流程图吗」</div>
+    <p>遇到一个任务,在动手前试着把它的流程画出来——如果你能在白板上画出清晰的流程图(框 + 箭头),那就是 Workflow,选 Parallel / Chain / Route 中的一种。如果画不出来——任务路径真的会随情况变化、没法预先标出来——才是 Agent。这条标准比任何复杂权衡都直接,Anthropic 内部工程师推 prototype 时常用。</p>
+  </div>
+
+  <h4>混合模式</h4>
+
+  <p>注意上面的四种模式不是互斥的——真实生产系统往往是<strong>混合</strong>的。比如一个客服系统:</p>
+
+  <ol>
+    <li>用 <strong>Routing</strong> 先把工单按类型分流</li>
+    <li>「技术故障」类工单进入一个 <strong>Chaining</strong> 流水线:提取问题描述 → 查知识库 → 生成回复 → 风险检查</li>
+    <li>知识库查询这一步,内部用 <strong>Parallelization</strong> 同时查多个知识源</li>
+    <li>只有当 Chaining 流水线判断「这事自动化处理不了,需要人介入」时,才在某个分支上启动一个 <strong>Agent</strong> 做开放性诊断</li>
+  </ol>
+
+  <p>真正的工程艺术,不是「选哪一种模式」,而是<strong>在系统的每一层选最适合那一层的模式</strong>——上层用 Workflow 保稳定,底层用 Agent 处理不确定。Anthropic 的 Claude Code 本身也是这种混合架构:外层是预设的 EPCC 流程(回看 <a href="#s7">第 7 章</a>),中层是 Subagent 分发(Parallelization 的实现),底层才是真的 Agent 循环。</p>
+
+  <h3><span class="pre">13.7</span>四种模式的失败模式总览 · <span class="en">Failure Modes</span></h3>
+
+  <p class="lead">前面每节都讲了各自的失败模式,这一节做个总览,方便你以后回查。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>模式</th><th>典型失败</th><th>预防机制</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Parallelization</strong></td>
+          <td>子任务其实不独立 / aggregator 太弱只是简单拼接 / 某一路失败拖累整个任务</td>
+          <td>动手前确认独立性 / aggregator 当成独立任务好好写 prompt / 给每路 agent 加超时和兜底</td>
+        </tr>
+        <tr>
+          <td><strong>Chaining</strong></td>
+          <td>中间一步错误沿链放大 / 链条过长难以追错 / 没有 gate 兜底</td>
+          <td>关键节点加 gate / 记录每步 intermediate output / 链条超过 5-6 步就考虑拆分</td>
+        </tr>
+        <tr>
+          <td><strong>Routing</strong></td>
+          <td>分流错误,任务进入错误 specialist / router 模型太小准确率不够 / 没有兜底分支</td>
+          <td>router 用足够好的模型 / 不确定时回退通用 agent / 记录所有 routing 决策定期审计</td>
+        </tr>
+        <tr>
+          <td><strong>Agent</strong></td>
+          <td>无限循环 / 自信地走错路 / 工具误用 / 错误总结(假装做完了)</td>
+          <td>设最大循环次数和 token 预算 / Verify 用外部信号不要让 LLM 自评 / 关键操作加 human checkpoint(EPCC,<a href="#s7">第 7 章</a>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout note">
+    <div class="label">i 一个被忽略的事实 · 失败模式不是 bug,是结构性产出</div>
+    <p>这四种失败不是「实现得不好」才会出现——它们是<em>每种模式的结构本身决定的概率事件</em>。Chaining 一定会有累积误差,Routing 一定会有分流错误,Agent 一定会有走错路的循环。工程上的责任不是「消灭失败」,是<strong>把失败的频率和代价降到可接受</strong>。这跟传统软件工程「bug 应该被消灭」的思路完全不同——AI 系统里你必须接受「失败是常态,工程是限制失败影响」。</p>
+  </div>
+
+  <h3><span class="pre">13.8</span>这一章给你的判断武器</h3>
+
+  <p class="lead">读完这章,你应该带走以下几个能直接用的判断武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 看到一个「多 Agent 系统」时,先判断它属于四种模式中的哪一种</div>
+    <p>不要被「多 Agent」这个词冲晕——多 Agent 系统大致就这四类。Parallelization 是扇形并发、Chaining 是线形流水、Routing 是树形分流、Agent 才是真的循环自主。判断清楚后,你能立刻预判:成本会怎样、延迟会怎样、容易在哪里坏。任何号称「全新架构」的多 agent 框架,十有八九还是这四种的某种组合。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · 默认从 Workflow 开始,真不行才上 Agent</div>
+    <p>这是 Anthropic 官方反复强调的工程经验,也是这一章最重要的一条。Workflow 行为可预测、成本可控、容易调试;Agent 灵活但贵、慢、难追踪。除非任务真的路径不可预测——开放性编程、调试、研究——否则一律先试 Workflow。能画出流程图就是 Workflow,画不出来才是 Agent。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · 真实生产系统几乎一定是混合架构</div>
+    <p>四种模式不是互斥的,真实系统往往多层嵌套——上层 Routing 分流、中层 Chaining 流水、子步骤 Parallelization 并发、只在路径真的不可预测的最内层才嵌一个 Agent。看到一个系统设计,先识别它的分层,再判断每一层用了哪种模式合不合理。任何号称「一个 Agent 搞定一切」的设计,基本都是营销话术——工程上的好系统都是分层的。</p>
+  </div>
+
+  <p>下一章我们把视角再拉远一层——讲 Anthropic 的 <strong>MCP</strong>(Model Context Protocol)。MCP 是这套 Workflow / Agent 体系背后真正的工程底座:它定义了 agent 怎么连工具、怎么连数据源、怎么跨进程协作。理解了 MCP,你就能解释为什么 2025 年之后 Anthropic 把它推成了行业标准、为什么 Claude Code 的工具调用比其他框架的工具调用更稳定。回看 <a href="#s12">第 12 章</a> 讲的 MCP 雏形,下一章是把整个协议讲透。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic, <em>Building Effective Agents</em>, engineering blog by E. Schluntz &amp; B. Zhang, 2024-12-19 [Anthropic 2024c](核心引用) · Anthropic, <em>Claude Code Documentation: Subagents</em>, 2025 [Anthropic Claude Code Docs 2025] · Anthropic Skilljar Academy, <em>Building with the Claude API: Agents &amp; Workflows</em> module, 2025 · L. Weng, <em>LLM Powered Autonomous Agents</em>, lilianweng.github.io blog, 2023(对比视角) · Anthropic, <em>Claude Tool Use Documentation</em>, 2025 · OpenAI, <em>Practices for Governing Agentic AI Systems</em>, 2023.</p>
+
+</div>
+</section>

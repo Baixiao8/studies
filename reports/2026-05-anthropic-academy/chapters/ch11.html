@@ -1,0 +1,520 @@
+<section id="s11" style="border-top: 4px solid var(--c-recovery);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">11</span>RETRIEVAL · 第五篇 / 第十一章</div>
+  <h1 class="section-h">RAG · 让 AI 用你的私有数据 <span class="en">Retrieval Augmented Generation</span></h1>
+  <p class="section-sub">前面讲过 LLM 的两条根本限制——知识截止日(<a href="#s1">第 1 章</a>)和长尾事实必编(<a href="#s4">第 4 章</a>)。一个知道 2026 年 1 月之前事的模型,你怎么让它回答 2026 年 3 月发生的事?一个没读过你公司内部文档的模型,你怎么让它精确回答员工的报销政策?答案不是等下一代,是给它外挂记忆。这一章把外挂记忆这套系统拆开,讲清楚每个零件、每个选择、每个雷。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>RAG 是给 LLM 加一个外部书架——用户提问时先去书架上找相关页,再把这些页连同问题一起塞进上下文窗口让 LLM 答。三步:Chunk 切块 → Embed 嵌入 → Retrieve 检索。工业标准是混合搜索(BM25 词法 + 向量语义)+ Reranker 二次精排。Anthropic 2024 年 9 月公开的 <em>Contextual Retrieval</em> 在嵌入前先给每块加一段上下文摘要,把检索失败率压低 49%,配上 reranking 一共压 67%。最反共识的一条:Embedding 模型选什么没那么重要,Chunk 怎么切和要不要 Rerank 才是大头。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2024 年 9 月 19 日 · Anthropic 工程博客</div>
+    <p>2024 年 9 月 19 日,Anthropic 在官方博客挂出一篇名为 <em>Introducing Contextual Retrieval</em> 的技术文章。文章前两段几乎没讲新方法,先讲了一件让所有做 RAG 的工程师都共鸣的事——<strong>当知识库变大,RAG 的检索准确率会陡崩</strong>。</p>
+    <p>文章举了一个具体的例子。一段文本:<em>「公司当季收入比上一季度增长 3%。」</em>这段话在原始财报里是完全合理的——读者知道它讲的是 ACME Corp 2023 年第二季度。但当这段话被切成一个 chunk 单独存进向量库时,它丢失了所有外部语境:是哪家公司、哪一年、哪一季。用户问 ACME 2023 Q2 的收入增长时,检索系统找不到这一段,因为这段话的向量里没有 ACME、没有 2023、没有 Q2。</p>
+    <p>这就是 RAG 在生产环境最常见的死法:文档切成片之后,每片都变成无主孤魂。Anthropic 的解决方法,是在嵌入前让 Claude 先给每个 chunk 加一句自动生成的上下文——「这段来自 ACME Corp 2023 年 Q2 财报,讨论的是收入同比」。然后再嵌入这段「上下文 + 原文」的合体。</p>
+    <p>他们公开了实测数据:在数百万 tokens 规模的知识库上,这一步让<strong>检索失败率从基线下降 49%</strong>;再叠加一层 reranker,下降 <strong>67%</strong>。一篇看起来朴素的工程笔记,把整个 RAG 行业的最佳实践往前推了一代——这也是为什么本章把 Contextual Retrieval 单列一节讲。</p>
+    <p class="ref">参考:Anthropic, <em>Introducing Contextual Retrieval</em>, anthropic.com/news/contextual-retrieval, 2024-09-19.</p>
+  </div>
+
+  <h3><span class="pre">11.1</span>为什么需要 RAG · <span class="en">Why External Memory</span></h3>
+
+  <p class="lead">先把 RAG 要解决的问题界定清楚——不是所有 LLM 应用都需要 RAG,但凡是涉及<em>模型自己不知道的私有信息或最新信息</em>的应用,几乎都绕不过去。</p>
+
+  <p>LLM 的两条硬限制摆在这里:第一,知识有截止日(<a href="#s1">第 1 章</a> 1.2),Claude Opus 4.7 卡在 2026 年 1 月;第二,公司内部文档、员工手册、客户合同、产品 SKU 这些数据,LLM 训练时压根没见过,问它就是在问长尾——它会编一个看起来合理的答案,但答案是不可用的。</p>
+
+  <h4>那直接把所有数据塞进 prompt 行不行</h4>
+
+  <p>不行——这是 RAG 之所以存在的工程理由。Claude Opus 4.7 的标准上下文是 200K tokens(约 15 万中文字),1M context 模式能撑到 100 万 tokens。但有三个原因让你不能也不该这么用:</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">COST</div>
+      <div class="num">成本</div>
+      <div class="sub">每次都带 200K tokens 进 prompt,API 费用按 tokens 计</div>
+    </div>
+    <div class="item">
+      <div class="label">LATENCY</div>
+      <div class="num">延迟</div>
+      <div class="sub">输入 tokens 越多,首字延迟越久</div>
+    </div>
+    <div class="item">
+      <div class="label">ATTENTION</div>
+      <div class="num">注意力稀</div>
+      <div class="sub">lost-in-the-middle,塞越多漏看越多</div>
+    </div>
+    <div class="item">
+      <div class="label">SIZE</div>
+      <div class="num">规模</div>
+      <div class="sub">企业知识库动辄几个 GB,根本塞不下</div>
+    </div>
+  </div>
+
+  <p>所以工业界采用的方案不是把所有数据塞进窗口,而是<strong>每次只塞跟当前问题最相关的几小段</strong>。怎么判断「最相关」?这就是 RAG 三步流程要回答的问题。</p>
+
+  <div class="callout note">
+    <div class="label">i RAG 的原始论文 · 2020 年那篇 NeurIPS</div>
+    <p>RAG 这个词最早出自 Lewis 等人 2020 年发表的 <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>(NeurIPS 2020)。论文最早是为问答任务设计的——把维基百科切成段、用 Dense Passage Retrieval 检索、用 BART 生成答案。当时还没有 ChatGPT,但论文里那张图——「Query → Retriever → Generator」三个框——成了今天所有 RAG 系统的祖宗结构。这一架构最大的优势论文标题就讲了:可以处理「Knowledge-Intensive」的任务,即任务依赖大量外部知识而非纯靠语言能力。</p>
+  </div>
+
+  <h3><span class="pre">11.2</span>三步流程 · 这是骨架 <span class="en">The Three-Step Pipeline</span></h3>
+
+  <p class="lead">把 RAG 拆到最基础,就是三个动作:把文档切块、把每块变成向量存起来、用户提问时拿问题去比对最相似的几块。一切复杂的 RAG 系统都是这三步的精细化。</p>
+
+  <h4>步骤一 · Chunk 分块 · 决定一切的起点</h4>
+
+  <p>原始文档可能是几万字的 PDF、几个小时的会议转录、整本产品手册。直接拿整个文档去嵌入会有两个问题:一是嵌入模型本身有输入上限(典型 512-8192 tokens),二是把一整本书压缩成一个向量,语义粒度太粗,任何具体问题都比不准。</p>
+
+  <p>所以要切。怎么切是 RAG 系统里<strong>最被低估的决策</strong>——同一份数据、同一套模型、同一套检索逻辑,只是换个切法,检索准确率能差两倍以上。常见的切法:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>切法</th>
+          <th>怎么切</th>
+          <th>典型 chunk 大小</th>
+          <th>适用场景</th>
+          <th>风险</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>固定 token 数</strong></td>
+          <td>每 500 / 800 / 1000 tokens 切一刀,允许 50-100 tokens 重叠</td>
+          <td>500-1000 tokens</td>
+          <td>快速搭原型 · 无结构文本</td>
+          <td>容易把一句话切两半,语义破碎</td>
+        </tr>
+        <tr>
+          <td><strong>按段落 / 章节</strong></td>
+          <td>沿原文档自然分隔符切——空行、Markdown 标题、HTML 标签</td>
+          <td>200-1500 tokens 不等</td>
+          <td>文档结构清晰 · 文章 / 报告</td>
+          <td>段落长度不均,有的太短有的太长</td>
+        </tr>
+        <tr>
+          <td><strong>按语义</strong></td>
+          <td>用嵌入相似度跑滑窗,在语义跳变处下刀</td>
+          <td>动态</td>
+          <td>对话转录 · 无标题长文</td>
+          <td>慢 · 调参敏感 · 不一定值</td>
+        </tr>
+        <tr>
+          <td><strong>层级分块</strong></td>
+          <td>大块(整章)+ 小块(段落)同时存,检索时先粗后细</td>
+          <td>双层</td>
+          <td>大型知识库 · 跨段引用</td>
+          <td>实现复杂 · 存储翻倍</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>实操经验:90% 的项目用<strong>按段落切 + 固定 token 上限 fallback</strong>就够好——遇到 Markdown 标题、空行、列表分隔就切,如果切出来的段落超过 1000 tokens 再按固定长度补切。这套规则简单、稳、可解释。在调过 Anthropic Skilljar 上的 RAG 实验后,基本会回归这一套。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ Chunk size 不是越小越好,也不是越大越好</div>
+    <p>新手常见的两个极端:一种把 chunk 切到 100 tokens 以下「让检索更精确」,结果每块都丢失上下文,检索回来全是无用碎片;另一种把 chunk 设到 2000 tokens 以上「让 LLM 看到完整段落」,结果一块里塞了好几个主题,嵌入向量被稀释,语义检索失效。<strong>500-1000 tokens 是经验上的甜区</strong>——粗一点的章节级摘要可以用 1500,细一点的 FAQ 可以用 300,但 95% 的场景应该从 500-1000 开始调,而不是从 100 或 2000 开始。</p>
+  </div>
+
+  <h4>步骤二 · Embed 嵌入 · 把文本变成向量</h4>
+
+  <p>切完之后,每个 chunk 用嵌入模型(embedding model)转成一个固定维度的浮点数向量——典型维度 384 / 768 / 1024 / 1536 / 3072。嵌入模型的训练目标就一件事:<em>语义相近的文本,在向量空间里距离也近</em>。「股票上涨」和「股价走高」嵌成的向量会非常接近,「股票上涨」和「水果丰收」则距离很远。</p>
+
+  <p>嵌入完成后,所有 chunk 的向量被存进向量数据库(Pinecone / Weaviate / Qdrant / Chroma 等),数据库为快速检索建立索引(典型用 HNSW 近似最近邻算法)。这是个一次性预处理,后续每次提问都不用重做。</p>
+
+  <h4>步骤三 · Retrieve 检索 · 找出最相似的 K 块</h4>
+
+  <p>用户提问 → 把问题也用同一个嵌入模型转成向量 → 在向量库里找距离最近的 K 个 chunk(典型 K = 5 ~ 20)→ 把这些 chunk 连同原问题一起拼成 prompt 喂给 Claude → Claude 基于这些块的内容生成答案。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">STEP 1</div>
+      <div class="num">Chunk</div>
+      <div class="sub">长文档 → 500-1000 tokens 小段</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 2</div>
+      <div class="num">Embed</div>
+      <div class="sub">每段 → 1024 维向量,存向量库</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 3</div>
+      <div class="num">Retrieve</div>
+      <div class="sub">问题 → 向量 → 找 Top-K 相似块</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 4</div>
+      <div class="num">Generate</div>
+      <div class="sub">Top-K + 问题 → Claude → 答案</div>
+    </div>
+  </div>
+
+  <p>这就是一个最朴素的 RAG 系统。但工业界很少停在这里——因为光靠向量检索召回的 Top-K 经常不够准,会漏掉一些重要的精确匹配,也会带入不少噪声。下面三节讲的 BM25 混合、Reranking、Contextual Retrieval,都是在这套基础上叠的加固层。</p>
+
+  <h3><span class="pre">11.3</span>BM25 vs 向量搜索 · 词法和语义的互补 <span class="en">Lexical vs Semantic</span></h3>
+
+  <p class="lead">很多人以为 RAG 等于向量搜索。错。向量搜索很强,但它有个盲区——精确的命名实体、专有名词、代码标识符、案号编号,在向量空间里反而比不准。这种地方,1972 年发明的 BM25 这种「老土」算法比向量搜索更靠谱。</p>
+
+  <h4>两套算法各自的脾气</h4>
+
+  <p><strong>BM25</strong>(Best Matching 25)是基于词频和逆文档频率的<em>词法匹配</em>算法。它的工作原理简单:把文档拆成词,统计每个词在文档里出现多少次、在整个语料里多稀有,基于这两个数算出文档跟查询的相关度分。1994 年由 Robertson 等人完成现代形式,至今仍是 Elasticsearch 等全文搜索引擎的默认排序算法。</p>
+
+  <p><strong>向量搜索</strong>是基于嵌入模型的<em>语义匹配</em>。它不关心查询和文档用了什么具体词,只关心语义有多近。「Claude 的上下文窗口多大」和「Anthropic 模型能处理多长输入」在词面上几乎没重叠,但向量距离会很近——这就是它的强项。</p>
+
+  <h4>什么时候 BM25 比向量搜索好</h4>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>精确实体匹配</h4>
+      <p>用户问「<code>HTTP/2 RFC 7540</code> 第 5.1 节」,BM25 会立刻锁定包含「7540」和「5.1」的文档。向量搜索可能把它跟一堆「HTTP 协议综述」、「网络分层模型」混在一起召回——因为「RFC 7540」这种 token 在嵌入里语义太弱。</p>
+    </div>
+    <div class="card">
+      <h4>专有名词 / 代码 / 错误码</h4>
+      <p>「<code>ECONNREFUSED</code>」、「<code>NullPointerException</code>」、「<code>--max-tokens 4096</code>」这种字符串,BM25 直接命中,向量搜索经常把它们当成无意义符号丢掉。代码库 RAG 几乎一定要带 BM25。</p>
+    </div>
+    <div class="card">
+      <h4>罕见词组的死亡精确</h4>
+      <p>用户问「2026 年第 11 期 Anthropic 安全报告」,他想要的是那一个特定文档,不是任何「Anthropic 安全报告」概念近邻。BM25 几乎一定能找到那一篇,向量搜索可能返回五份不同期次的报告排在一起。</p>
+    </div>
+    <div class="card">
+      <h4>否定 / 限定 / 数量词</h4>
+      <p>「不含麸质的食物」「100mg 以上的剂量」——「不含」「以上」这种限定词,向量模型容易丢掉,BM25 至少会精确命中这些词的位置,可以做后处理过滤。</p>
+    </div>
+  </div>
+
+  <h4>什么时候向量搜索比 BM25 好</h4>
+
+  <ul>
+    <li>✅ 用户用了和文档完全不同的词表达同一个意思——「怎么训练对齐」 vs 「RLHF 流程」</li>
+    <li>✅ 多语言场景——用户用英文问,文档是中文</li>
+    <li>✅ 模糊查询 / 概念性问题——「这个工具适合什么场景」</li>
+    <li>✅ 总结类、归纳类、对比类的问题</li>
+  </ul>
+
+  <h4>所以工业标准是 Hybrid Search 混合搜索</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>BM25 词法</th>
+          <th>向量 语义</th>
+          <th>Hybrid 混合</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>核心机制</strong></td>
+          <td>词频 / 倒排索引</td>
+          <td>嵌入 / 向量距离</td>
+          <td>两者并行 · 分数融合</td>
+        </tr>
+        <tr>
+          <td><strong>历史</strong></td>
+          <td>1994 年成熟</td>
+          <td>2018 年随 BERT 起来</td>
+          <td>2020 年后成为业界标配</td>
+        </tr>
+        <tr>
+          <td><strong>计算成本</strong></td>
+          <td>极低 · 毫秒级</td>
+          <td>中等 · 需 GPU 嵌入</td>
+          <td>偏中等 · 两路并行</td>
+        </tr>
+        <tr>
+          <td><strong>精确匹配</strong></td>
+          <td>★★★★★</td>
+          <td>★★</td>
+          <td>★★★★★</td>
+        </tr>
+        <tr>
+          <td><strong>语义近似</strong></td>
+          <td>★</td>
+          <td>★★★★★</td>
+          <td>★★★★★</td>
+        </tr>
+        <tr>
+          <td><strong>多语言</strong></td>
+          <td>差</td>
+          <td>好</td>
+          <td>好</td>
+        </tr>
+        <tr>
+          <td><strong>典型用法</strong></td>
+          <td>Elasticsearch · Lucene</td>
+          <td>Pinecone · Weaviate</td>
+          <td>OpenSearch · Vespa · Anthropic 推荐</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>两路并行,各自召回 Top-N(典型每路 50 个),用 Reciprocal Rank Fusion(RRF)或者加权求和把分数合起来,最后给一个统一的排名。Anthropic 在 Contextual Retrieval 那篇博客的实测里专门对比过:仅向量 vs 仅 BM25 vs Hybrid——Hybrid 比单跑任一一种都明显好。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 操作建议 · RAG 系统的最低配置</div>
+    <p>除非你的数据极度纯文本(比如纯小说、纯访谈转录),否则<strong>不要只跑向量搜索</strong>。最低配置是「向量 + BM25 + RRF 融合」三件套。Elasticsearch、OpenSearch、Vespa 这些主流搜索引擎都内置了 BM25,叠一个向量插件就是 Hybrid。如果你已经在 Pinecone 上跑了纯向量,加一个 BM25 通常能在不动其他参数的情况下把召回率拉高 10-15%——这是 RAG 最便宜的一次升级。</p>
+  </div>
+
+  <h3><span class="pre">11.4</span>Reranking 重排 · 把噪声筛掉 <span class="en">Cross-Encoder Reranking</span></h3>
+
+  <p class="lead">Hybrid 召回的 Top-K 还不能直接塞给 LLM——里面通常混着 30%-50% 的无关或弱相关结果。这时候需要第二轮筛选,用一个更精细但更慢的模型重新打分,这就是 Reranking。</p>
+
+  <h4>为什么第一轮检索不够准</h4>
+
+  <p>第一轮检索为了快,用的是 <strong>Bi-Encoder</strong>(双塔编码器)——查询和文档分别独立嵌入成向量,然后比距离。优点:文档向量可以预先存好,查询来了只算一次,毫秒级响应。缺点:查询和文档<em>没有任何交互</em>,模型在嵌入文档时不知道未来会被什么查询问,只能输出一个「泛用」的向量。</p>
+
+  <p>Reranker 用的是 <strong>Cross-Encoder</strong>(交叉编码器)——把查询和每个候选文档<em>拼在一起</em>送进同一个 Transformer,模型可以做精细的 token-to-token 注意力,看哪些词真正匹配、上下文逻辑通不通。Reimers & Gurevych 2019 年的 Sentence-BERT 论文里给过经典对比数据:Cross-Encoder 在语义文本相似度任务上比 Bi-Encoder 高 5-10 个百分点,但计算成本高 100 倍以上——所以不能用它做第一轮全库搜索,只能做第二轮在 Top 几十个候选里精排。</p>
+
+  <h4>典型的 Rerank 流程</h4>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">RECALL</div>
+      <div class="num">第一轮</div>
+      <div class="sub">Hybrid 召回 50-100 候选,毫秒级</div>
+    </div>
+    <div class="item">
+      <div class="label">RERANK</div>
+      <div class="num">第二轮</div>
+      <div class="sub">Cross-Encoder 精排,挑出 Top 5-10</div>
+    </div>
+    <div class="item">
+      <div class="label">FEED</div>
+      <div class="num">送入</div>
+      <div class="sub">Top 5-10 拼 prompt 喂 Claude</div>
+    </div>
+    <div class="item">
+      <div class="label">ANSWER</div>
+      <div class="num">生成</div>
+      <div class="sub">Claude 基于精排块作答</div>
+    </div>
+  </div>
+
+  <h4>Reranker 怎么选</h4>
+
+  <p>2026 年常用的几个 Reranker:Cohere Rerank(API 服务,工程上最省心)、bge-reranker-v2-m3(开源、中英双语友好)、Jina Reranker、Voyage Rerank。选哪个不太关键,关键是<strong>有没有这一步</strong>——大多数生产 RAG 系统加一个 Reranker 都能立竿见影,典型场景下检索 nDCG 提升 10-20%。</p>
+
+  <div class="callout note">
+    <div class="label">i Reranker 的成本怎么算</div>
+    <p>每个查询要给 50-100 个候选打分,每次打分都要跑一次 Cross-Encoder——这个成本看起来吓人,但 Reranker 本身是个小模型(通常 100M-500M 参数),用 GPU 批量打分,50 个候选大概 50-200 毫秒,加几美分。对于一个生产应用,Reranker 的延迟和成本通常是<em>可承受的</em>;它带来的检索质量提升远超这点开销。除非你的场景对延迟极度敏感(实时对话),否则<strong>默认应该加 Reranker</strong>。</p>
+  </div>
+
+  <h3><span class="pre">11.5</span>Contextual Retrieval · Anthropic 2024 推的新招 <span class="en">The 49%/67% Breakthrough</span></h3>
+
+  <p class="lead">章首故事讲的就是这个方法。2024 年 9 月 19 日 Anthropic 公开,本质是用 LLM 自己解决 LLM 用不好 RAG 的问题——在嵌入每个 chunk 之前,先让 Claude 生成一段「这个 chunk 来自哪里、讲什么」的上下文,把这段上下文拼到 chunk 前面,然后再嵌入。</p>
+
+  <h4>它为什么有用</h4>
+
+  <p>回到章首那个例子:<em>「公司当季收入比上一季度增长 3%。」</em>这段话单独嵌入,向量里没有「ACME」、没有「2023」、没有「财报」——任何带这些关键词的查询都比不准。但如果在嵌入前先让 Claude 看完整篇财报,然后给这段话加一句:</p>
+
+  <blockquote>
+    <p><em>「本段来自 ACME Corp 2023 年第二季度财报,讨论公司收入同比增长情况;上文讨论了主要业务线的表现。」</em></p>
+  </blockquote>
+
+  <p>把这段上下文拼到原文前面再嵌入——向量空间里它就有了「ACME」「2023」「Q2」「财报」「收入」这些锚点,任何关于这家公司这一季的查询都能命中。这一个动作的代价只是<em>每个 chunk 在建索引时多调一次 Claude</em>(可以用 Haiku 这种便宜模型),但收益是检索质量的结构性改善。</p>
+
+  <h4>Anthropic 公布的实测数据</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>配置</th>
+          <th>检索失败率(相对基线)</th>
+          <th>主要带来什么</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>基线 · 纯向量(Embedding Only)</td>
+          <td>100%(基准)</td>
+          <td>语义召回 · 但丢失全局语境</td>
+        </tr>
+        <tr>
+          <td>+ BM25 混合(Hybrid)</td>
+          <td>降至约 65%(降 35%)</td>
+          <td>精确实体匹配</td>
+        </tr>
+        <tr>
+          <td>+ Contextual Embedding</td>
+          <td>降至约 51%(降 49%)</td>
+          <td>每个 chunk 带上下文锚点</td>
+        </tr>
+        <tr>
+          <td>+ Contextual BM25</td>
+          <td>降至约 51%(降 49%,同上)</td>
+          <td>词法检索也享受上下文</td>
+        </tr>
+        <tr>
+          <td>+ Contextual + Reranking</td>
+          <td>降至约 33%(降 67%)</td>
+          <td>三层叠加 · Anthropic 推荐配置</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>注意第三行那个 49%——这是 Contextual Retrieval 那篇博客最被引用的一个数。它不是「准确率提升 49%」,而是「检索失败率下降 49%」。这两个表述有微妙差别,但都是非常显著的工程提升。叠上 reranking 把失败率压到基线的 33%——也就是<strong>本来三次找错有两次,现在变成三次找错有一次</strong>。</p>
+
+  <h4>怎么实施</h4>
+
+  <p>关键工程细节是<em>把上下文生成这一步的成本压下来</em>。Anthropic 的方案用了两个技巧:</p>
+
+  <ul>
+    <li>✅ 用便宜模型生成 context——Claude Haiku 4.5 / 3.5 都够用,不需要 Opus</li>
+    <li>✅ 利用 prompt caching——同一篇长文档处理 N 个 chunk 时,文档本身只算一次费,后续每个 chunk 只算上下文生成的 delta</li>
+    <li>✅ 一篇 5 万字文档切 100 个 chunk,启用 caching 后总成本约 1 美元量级</li>
+  </ul>
+
+  <div class="callout ops">
+    <div class="label">✓ 操作建议 · 什么样的 RAG 系统应该上 Contextual Retrieval</div>
+    <ul>
+      <li>知识库大于 100K tokens · 文档结构复杂(财报 / 合同 / 技术手册)→ 强烈建议上</li>
+      <li>知识库小于 50K tokens · 文档比较自包含(每段都带主语)→ 可以不上,直接 Hybrid + Rerank 就够</li>
+      <li>实时索引场景 · 每来一个文档都要立刻可查 → 慎用,上下文生成会拖慢索引</li>
+      <li>纯代码库 · 函数 / 类已经天然带上下文锚点 → 边际收益小,可以不上</li>
+    </ul>
+    <p>判断要不要上的最简单办法:从知识库里随机抽 20 个 chunk,问自己「单独看这段话,我能不能判断它属于哪个文档、讲什么主题」。如果一半以上看不出来,就该上 Contextual Retrieval。</p>
+  </div>
+
+  <h3><span class="pre">11.6</span>何时不该用 RAG · 反过来想 <span class="en">When NOT to Use RAG</span></h3>
+
+  <p class="lead">RAG 是个好工具,但不是所有 LLM 应用都该上。下面这几种场景上了 RAG 反而是负担——既增加复杂度,又降低答案质量。</p>
+
+  <h4>场景一 · 知识库太小,直接全塞 prompt 反而更好</h4>
+
+  <p>如果你的全部参考资料加起来不到 10K tokens(约 7500 中文字),直接把所有内容塞进 system prompt 比 RAG 准、便宜、快。原因很简单:Claude 看到完整全文,不会因为某个 chunk 没召回就漏信息;每次都走 prompt caching,后续调用几乎免费;没有检索这一步,就没有检索误差。</p>
+
+  <p>判断标准:全部资料 < 10K tokens → 全塞;10K-100K → 看情况,可以全塞但贵,RAG 也行;> 100K → 必须 RAG。</p>
+
+  <h4>场景二 · 任务不依赖外部知识</h4>
+
+  <p>写诗、写代码补全、改语法、做翻译、做总结、做对比、做头脑风暴——这些任务考验的是 LLM 自身的语言能力,不需要外部知识。强行套一个 RAG 反而稀释 prompt——把 LLM 的注意力从「请认真写一首诗」拉到「这五段无关的检索结果是干嘛的」,质量反而下降。</p>
+
+  <h4>场景三 · 数据高度结构化</h4>
+
+  <p>数据已经在数据库里、有清晰的 schema、查询逻辑可以用 SQL / GraphQL / API 表达——这种场景应该走 <strong>Tool Use</strong>(<a href="#s8">第 8 章</a>),让 LLM 写 SQL 去数据库查,不要走 RAG。理由:</p>
+
+  <ul>
+    <li>✅ SQL 查询是确定性的,RAG 检索是概率性的——结构化数据上前者更准</li>
+    <li>✅ SQL 能跑聚合、过滤、JOIN,RAG 只能召回相似段落</li>
+    <li>✅ 数据更新时,数据库自动同步,RAG 还得重建索引</li>
+  </ul>
+
+  <h4>场景四 · 用户问题需要跨多文档推理或计算</h4>
+
+  <p>「把这家公司过去四个季度的财报对比,算出收入增长趋势,再跟同行业三家公司对比」——RAG 单跳搞不定。这种任务要的是 Agent + Tool Use 的组合(<a href="#s13">第 13 章</a>):LLM 先做规划,然后多步调用「查这家公司财报」「查那家公司财报」「算增长率」等工具。RAG 在这种 Agent 任务里通常是一个被反复调用的<em>子工具</em>,而不是整个架构的主轴。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 一条容易踩的雷 · 「我们做 AI 应用,所以肯定要 RAG」</div>
+    <p>不是。RAG 之所以火,是因为很多 LLM 应用恰好属于「问私有数据」这一类。但把 RAG 当成 AI 应用的默认配置,会强加给团队一堆它本不需要的复杂度——向量库选型、嵌入模型迭代、chunk 策略调参、reranker 升级、检索质量监控——每一项都是工程债。<strong>先问任务本身需不需要外部知识,再问需要的是 RAG 还是 SQL,最后才是 RAG 怎么实现</strong>。这三个判断的顺序反过来,就是工程灾难的起点。</p>
+  </div>
+
+  <h3><span class="pre">11.7</span>反共识 · 三条业界普遍信但不一定对的话 <span class="en">The Counterintuitive Truths</span></h3>
+
+  <p class="lead">最后讲三条反共识——这是把 Anthropic 自己的实验数据、Skilljar 课程里的反复强调、以及在生产环境踩过的坑提炼出来的。</p>
+
+  <h4>反共识一 · 「RAG 比 Fine-tuning 好」</h4>
+
+  <p>这条话说得太绝对了。在「持续更新的事实性知识」这一类任务上 RAG 确实碾压 fine-tune——知识库变了,RAG 重建索引就行,fine-tune 要重训。但在「特定格式 / 特定风格 / 特定推理模式」这类任务上,fine-tune 才是正解。比如把 Claude 训练成只输出符合公司格式的 JSON、用某种特定语气写邮件、按某种固定模板写报告——这些是<em>风格</em>而非<em>知识</em>,RAG 喂例子的效果远不如直接 fine-tune。</p>
+
+  <p>正确的判断:如果信息是「事实」(会过期、会更新、会扩展),用 RAG;如果信息是「风格」(稳定、固定、需要稳定泛化),考虑 fine-tune;两者都需要时叠加。Anthropic 2024 年开放的 Claude fine-tuning 也是为了配合 RAG 用,不是替代。</p>
+
+  <h4>反共识二 · 「向量搜索是 RAG 的核心」</h4>
+
+  <p>错。RAG 系统的<em>瓶颈</em>极少是向量搜索本身——更换嵌入模型从 1024 维换到 3072 维,典型场景下检索准确率可能只升 2-5%。但同样的精力如果花在<strong>改进 chunk 策略</strong>或<strong>加 Reranker</strong>上,提升可以是 15-30%。</p>
+
+  <p>所以 RAG 的优化优先级应该是:Chunk 策略 → Hybrid (BM25 + 向量) → Reranking → Contextual Retrieval → 最后才是嵌入模型选型。新手喜欢一上来就纠结「用 OpenAI 的 embedding 还是用开源的」,把最容易优化的部分留到最后——这是 RAG 工程上最常见的注意力错配。</p>
+
+  <h4>反共识三 · 「Embedding 模型越大越好」</h4>
+
+  <p>不对。Anthropic 在 Skilljar Academy 的 RAG 模块里有一组对比实验:中等规模 embedding 模型(1024 维)+ 好的 chunking + Reranker,跑出来的检索 nDCG 比大规模 embedding 模型(3072 维)+ 烂 chunking + 无 Reranker 高出一截。意思是:<em>架构选择比模型选型更重要</em>。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>配置组合</th>
+          <th>嵌入模型</th>
+          <th>chunk 质量</th>
+          <th>有无 Rerank</th>
+          <th>典型检索 nDCG</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>豪华版烂工程</td>
+          <td>大(3072 维)</td>
+          <td>差</td>
+          <td>无</td>
+          <td>0.55</td>
+        </tr>
+        <tr>
+          <td>朴素版好工程</td>
+          <td>中(1024 维)</td>
+          <td>好</td>
+          <td>有</td>
+          <td>0.73</td>
+        </tr>
+        <tr>
+          <td>豪华版好工程</td>
+          <td>大(3072 维)</td>
+          <td>好</td>
+          <td>有</td>
+          <td>0.76</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>注意第二行和第三行——把嵌入模型从中等升到豪华,准确率只升 4%;但从烂工程升到好工程,准确率升 33%。这就是「工程比模型重要」最直观的体现。预算有限的团队应该<strong>先把工程做好,再考虑升级模型</strong>;反过来做,投入产出比极差。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 一句话总结这三条反共识</div>
+    <p>RAG 不是一个「选最好的模型,然后调一调」的任务。它是<strong>一个系统工程问题</strong>,赢家是把整套流程——chunk、hybrid、rerank、contextual——每一环都打磨到位的团队,不是单押一个超大 embedding 模型的团队。理解到这一层,你的 RAG 系统迭代节奏就会跟那些「换模型 → 测一测 → 再换模型」的团队完全不同。</p>
+  </div>
+
+  <h3><span class="pre">11.8</span>这一章给你的判断武器</h3>
+
+  <p class="lead">合上这一章,带走以下几把直接能用的武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 先判断要不要 RAG,再判断怎么做 RAG</div>
+    <p>知识库 < 10K tokens 全塞;任务不依赖外部知识不要 RAG;数据结构化走 SQL;跨文档推理走 Agent + Tool Use。RAG 只在「问私有 / 最新事实性知识」这一类场景里是最优解。这一步判断对了,后面的工程才有意义。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · 三步流程的优化顺序 · Chunk → Hybrid → Rerank → Contextual</div>
+    <p>这个顺序是按「投入产出比」排的。Chunk 策略改进最便宜见效最大;Hybrid 加 BM25 几乎零成本;Reranker 中等成本收益显著;Contextual Retrieval 适用范围有边界但 Anthropic 的 49%/67% 数据已经站得很硬。最后才是换嵌入模型——这一步通常只能换来个位数百分点的提升。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · 生产 RAG 的最低配置清单</div>
+    <ul>
+      <li>Chunk:按段落 + 500-1000 tokens 上限 fallback,允许 10%-20% 重叠</li>
+      <li>检索:Hybrid(BM25 + 向量),用 RRF 合并 Top-N</li>
+      <li>精排:加 Reranker,Top-N 50 → Top-K 5-10</li>
+      <li>(可选)Contextual:大型 / 复杂文档库强烈建议</li>
+      <li>评估:维护一个 50-200 题的检索准确率 eval set,每次改动都跑</li>
+    </ul>
+    <p>少哪一项都不算生产级 RAG。最后那条评估集是很多团队漏掉的——没有 eval,你改任何参数都是凭感觉。</p>
+  </div>
+
+  <div class="callout you">
+    <div class="label">→ 给你 · 下次见到 RAG 系统时怎么快速诊断</div>
+    <p>不管别人在介绍他们的 RAG 系统,还是你在 review 自己团队的 RAG 项目,问这几个问题就够:第一,chunk 怎么切的、典型大小是多少;第二,有没有 BM25,还是只跑向量;第三,有没有 Reranker;第四,有没有评估集、最近一次跑出来准确率多少;第五,这个 RAG 是不是真有必要,任务能不能用全塞 / SQL / Tool Use 替代。这五个问题打完,这个 RAG 系统在第几代、问题在哪、值不值得继续投入,基本心里就有数了。</p>
+  </div>
+
+  <p>下一章我们把视角从 RAG 这种「拉数据进 prompt」的方式,切换到更通用的接入协议——<strong>MCP(Model Context Protocol)</strong>。MCP 是 Anthropic 在 2024 年 11 月开源的标准,它让 Claude 可以用统一接口连任意外部系统:数据库、文件系统、Slack、Notion、企业内部 API,还有——把你的 RAG 知识库注册成 MCP Resource,Claude 就能像查向量库一样调它。MCP 是 Agent 时代的「USB-C 接口」,下一章把这个协议讲清楚。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic, <em>Introducing Contextual Retrieval</em>, anthropic.com/news/contextual-retrieval, 2024-09-19 · P. Lewis et al., <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>, NeurIPS 2020 · V. Karpukhin et al., <em>Dense Passage Retrieval for Open-Domain Question Answering</em>, EMNLP 2020 · N. Reimers & I. Gurevych, <em>Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks</em>, EMNLP 2019 · S. Robertson et al., <em>Okapi at TREC-3</em>(BM25 原始论文), 1994 · Anthropic Skilljar Academy, <em>Building with the Claude API · RAG Module</em>, 2025 · Anthropic, <em>Prompt caching documentation</em>, 2024 · N. Liu et al., <em>Lost in the Middle: How Language Models Use Long Contexts</em>, arXiv 2023.</p>
+
+</div>
+</section>

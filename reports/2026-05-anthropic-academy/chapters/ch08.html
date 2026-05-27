@@ -1,0 +1,477 @@
+<section id="s8" style="border-top: 4px solid var(--c-theory);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">08</span>TOOLING · 第四篇 / 第八章</div>
+  <h1 class="section-h">Skills / Subagents / Hooks / MCP 四把刀 <span class="en">When to Use Which</span></h1>
+  <p class="section-sub">Claude Code 给开发者留了四个自定义机制——Skills、Subagents、Hooks、MCP。新人最常踩的坑是把它们当成同一类东西、随手抓一个用。这一章把四把刀彻底分开:每一把的本质、触发方式、配置方式、典型场景,以及遇到一个需求该怎么 30 秒内选对刀。</p>
+
+  <div class="tldr">
+    <div class="label">▼ 三十秒看懂这一章</div>
+    <p>四把刀的边界一句话:<strong>Skill</strong> 是「教 Claude 怎么做某件事」的工作流载体——按需自动加载;<strong>Subagent</strong> 是「派分身去做一件事、主线不受打扰」的并行机制——独立上下文;<strong>Hook</strong> 是「在特定事件前后强制跑某段脚本」的策略机制——不依赖模型自觉;<strong>MCP</strong> 是「让 Claude 接入外部系统」的协议桥梁——通向数据库 / API / 内部服务。把这四个分清,你才能不滥用 Subagent 拖慢主任务、不把 Skill 当 CLAUDE.md 用、不用一段裸 prompt 去做本该用 Hook 强制的事。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2025 年 10 月 16 日 · Anthropic 推出 Agent Skills</div>
+    <p>2025 年 10 月,Anthropic 在官方博客发布了一项看似不起眼的功能:Agent Skills。文档很短——SKILL.md 文件,放在 <code>~/.claude/skills/</code> 或项目 <code>.claude/skills/</code> 目录下,头部 frontmatter 写明这个技能在什么场景下触发,正文写做这件事的步骤。Claude 在跑任务时,会扫描所有可用 Skills,匹配场景就把对应的 SKILL.md 加载到上下文里 [Anthropic 2025a]。</p>
+    <p>这条消息发布后的两周里,开发者社区出现了一种典型的迁移行为。之前他们把所有跨项目的偏好、模板、流程都堆在 CLAUDE.md 里——发邮件的模板、生成 PR 描述的格式、把 Figma 导出的 SVG 转 React 组件的步骤、内部 API 的鉴权方式——CLAUDE.md 越涨越长,一些团队的根目录 CLAUDE.md 已经超过 3000 字,每次对话都全量塞进上下文。</p>
+    <p>Skills 出现之后,这些散乱的「教程式」内容开始被拆成一个个独立 Skill 包。<code>send-email/SKILL.md</code> 只在「用户提到发邮件、起草通知」时加载;<code>figma-to-react/SKILL.md</code> 只在「涉及 SVG 转组件」时加载。CLAUDE.md 回归本来的角色——项目级硬性规则和团队约定,而不是所有知识的垃圾桶 [Anthropic Academy 2025a]。</p>
+    <p>但与此同时,另一批人栽在了 Subagent 上。Claude Code 1.0 之后,<code>/agents</code> 命令让创建子代理变得很简单,有人就把<em>所有任务</em>都开 subagent:写一个函数派一个 subagent、跑一个测试派一个 subagent、改一行配置派一个 subagent。结果主任务变得比直接做还慢——subagent 启动、上下文准备、总结回传,每个动作都有 overhead,简单事被它放大成复杂事 [Anthropic Academy 2025b]。</p>
+    <p>这一年里,这四把刀的边界在社区被反复讨论、反复试错,最终沉淀出一些共识。这一章把这些共识讲清楚,你就不用从头踩一遍。</p>
+  </div>
+
+  <h3><span class="pre">8.1</span>四把刀全景 · <span class="en">The Four Knives</span></h3>
+
+  <p class="lead">Claude Code 的四种自定义机制,从抽象到具体可以这样排:<strong>MCP 是地基</strong>(让 Claude 触达外部世界)、<strong>Hook 是底盘</strong>(让特定动作前后跑强制脚本)、<strong>Subagent 是工位</strong>(让任务在独立上下文里跑)、<strong>Skill 是工作手册</strong>(教 Claude 怎么做某类活)。它们不是替代关系,而是分层关系——一个高级 Claude Code 项目通常四个全用,各管一段。</p>
+
+  <p>先看一张总览表,把四把刀的本质、触发、配置、典型场景一眼对清。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>Skill</th>
+          <th>Subagent</th>
+          <th>Hook</th>
+          <th>MCP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>本质</strong></td>
+          <td>工作手册</td>
+          <td>独立工位</td>
+          <td>策略闸口</td>
+          <td>外部桥梁</td>
+        </tr>
+        <tr>
+          <td><strong>解决什么</strong></td>
+          <td>「怎么做这类活」</td>
+          <td>「主线别被卡住」</td>
+          <td>「必须每次都做」</td>
+          <td>「碰不到的外部系统」</td>
+        </tr>
+        <tr>
+          <td><strong>触发方式</strong></td>
+          <td>场景匹配自动加载</td>
+          <td>主代理显式派活</td>
+          <td>事件触发(PreTool / PostTool / UserPrompt 等)</td>
+          <td>工具调用通过 MCP server</td>
+        </tr>
+        <tr>
+          <td><strong>配置位置</strong></td>
+          <td>SKILL.md 文件 + frontmatter</td>
+          <td><code>/agents</code> 命令 + agent 配置文件</td>
+          <td><code>settings.json</code> 里的 hooks 段</td>
+          <td>MCP server 进程 + settings.json 注册</td>
+        </tr>
+        <tr>
+          <td><strong>上下文</strong></td>
+          <td>挂到主上下文里</td>
+          <td>独立上下文(隔离)</td>
+          <td>脚本独立运行,不进上下文</td>
+          <td>调用结果进上下文</td>
+        </tr>
+        <tr>
+          <td><strong>是否能拒绝</strong></td>
+          <td>模型决定要不要看</td>
+          <td>主代理决定派不派</td>
+          <td><strong>强制</strong> · 模型无法绕过</td>
+          <td>模型决定调不调</td>
+        </tr>
+        <tr>
+          <td><strong>典型场景</strong></td>
+          <td>发邮件 / 写 PR / 转 PDF</td>
+          <td>跑长任务 / 并行调研</td>
+          <td>commit 前 lint / edit 后 format</td>
+          <td>查 Linear / 读 PostgreSQL</td>
+        </tr>
+        <tr>
+          <td><strong>典型反例</strong></td>
+          <td>把通用上下文当 Skill 写</td>
+          <td>简单任务也开 subagent</td>
+          <td>把业务逻辑塞进 Hook</td>
+          <td>能本地做的事也走 MCP</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>表里有几个关键差别值得单独点出来:</p>
+
+  <ul>
+    <li>✅ <strong>只有 Hook 是强制的</strong>。Skill / Subagent / MCP 都是「模型自己决定要不要用」——它可以选择不加载某个 Skill、不派 subagent、不调 MCP 工具。Hook 不一样,只要事件触发,脚本必跑,模型连知道都不一定知道。</li>
+    <li>✅ <strong>只有 Subagent 有独立上下文</strong>。这是它的核心价值,也是它的成本来源——独立上下文意味着主代理拿不到 subagent 的中间过程,只能拿到它最后的总结,有些信息会丢。</li>
+    <li>✅ <strong>只有 MCP 是协议</strong>,其他三个都是 Claude Code 内部机制。MCP 是 Anthropic 在 2024 年开源的标准 [Anthropic 2024c],其他厂商的 Agent 也能用,这意味着你为 Claude Code 写的 MCP server 也能给 Cursor、Cline 用。</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">i 关键观察 · 「按需加载」是 Skill 的核心设计哲学</div>
+    <p>Skill 之所以能跟 CLAUDE.md 区分开,核心就是<strong>按需加载</strong>。CLAUDE.md 是每次对话都全量塞进上下文的——它消耗的 token 是固定成本。Skill 是匹配到场景才加载——它的 token 消耗是按需成本。一个项目可以有 50 个 Skill,但任何一次对话通常只触发 1-2 个。<strong>把不需要每次都讲的事写进 Skill,把每次都需要的硬规则写进 CLAUDE.md</strong>——这条边界是 Skills 设计的隐含意图,也是社区一年来反复确认的最佳实践 [Anthropic Academy 2025a]。</p>
+  </div>
+
+  <h3><span class="pre">8.2</span>Skill · 教 Claude「怎么做某类活」 <span class="en">Skills as Workflow Containers</span></h3>
+
+  <p class="lead">Skill 是一个文件夹,里面放一个 <code>SKILL.md</code>,以及任何辅助文件(脚本、模板、示例)。SKILL.md 头部是 YAML frontmatter,描述这个 Skill 在什么场景下应该被触发;正文是这个任务怎么做的工作流——前置检查、步骤、产出格式、注意事项。</p>
+
+  <h4>一个具体例子:发飞书邮件的 Skill</h4>
+
+  <p>看下面这个真实的 SKILL.md 结构(简化版),感受 Skill 的形态:</p>
+
+  <pre><code>~/.claude/skills/lark-mail/
+├── SKILL.md
+├── templates/
+│   ├── notification.md
+│   └── weekly-report.md
+└── scripts/
+    └── send.sh
+
+# SKILL.md frontmatter
+---
+name: lark-mail
+description: 飞书邮箱 — 起草、发送、回复邮件。
+  Use when user mentions 起草邮件、写一封邮件、发邮件、
+  draft email, send email, reply email
+---
+
+# SKILL.md 正文
+## 触发场景
+当用户提到发邮件 / 起草通知 / 回复邮件 ...
+
+## 标准流程
+1. 先用 lark-cli auth check 确认登录态
+2. 用 lark-cli contact +search 找收件人 open_id
+3. ...
+
+## 模板
+notification 类邮件用 templates/notification.md ...</code></pre>
+
+  <p>Claude 在跑任务时,会扫所有 Skill 的 frontmatter description,匹配上当前场景就把对应 SKILL.md 加载进上下文。整个过程对用户透明——你说「帮我给团队发个周报」,Claude 内部自动加载 <code>lark-mail/SKILL.md</code>,按里面的步骤跑;你说「帮我转一下这个 PDF」,Claude 加载的是 <code>pdf-tools/SKILL.md</code>。</p>
+
+  <h4>Skill 的几条设计原则</h4>
+
+  <p><strong>原则一 · description 决定触发准确率</strong>。Skill 能不能被加载,完全靠 frontmatter 的 description 写得好不好。Anthropic 官方文档给的建议是:description 里写明<em>触发词、典型场景、不该触发的反例</em> [Anthropic 2025a]。description 写得越具体,误触和漏触就越少。</p>
+
+  <p><strong>原则二 · 一个 Skill 只做一件事</strong>。不要写一个「通用助手」的 Skill,把所有偏好都塞进去——那不叫 Skill,那是把 CLAUDE.md 换了个名字。一个 Skill 应该聚焦一个清晰的任务族(发邮件 / 转 PDF / 创建工单),边界清楚,匹配条件明确。</p>
+
+  <p><strong>原则三 · Skill 可以调用 MCP server</strong>。这一点最容易被忽略。Skill 是工作流容器,里面的步骤可以调外部工具——而这些工具往往就是 MCP 提供的。例如 <code>lark-mail</code> Skill 的步骤里会调 <code>lark-cli</code>(它可以是 MCP server),<code>deploy-prod</code> Skill 会调一个连到 K8s 的 MCP server。<strong>Skill 是「怎么做」,MCP 是「拿什么做」,两层叠在一起才完整</strong>。</p>
+
+  <p><strong>原则四 · 用户 / 项目 / 团队三层组织</strong>。Skill 文件夹可以放在三个地方:</p>
+
+  <ul>
+    <li><code>~/.claude/skills/</code> · 用户级,对所有项目生效(发邮件、转 PDF 这种通用工作流)</li>
+    <li><code>.claude/skills/</code> · 项目级,只在当前项目生效(项目特有的发布流程、内部 API 调用方式)</li>
+    <li>插件包 · 通过 Claude Code Plugin 分发(团队级,统一安装)</li>
+  </ul>
+
+  <div class="callout sharp">
+    <div class="label">✕ 常见误解 · 「Skill 就是放在 .claude 里的 CLAUDE.md」</div>
+    <p>这是社区里最高频的误解,也是 Skill 用不出价值的根本原因。CLAUDE.md 是<em>每次都加载</em>的,它适合放硬规则(命名约定、必须用的工具、绝对禁止的操作)。Skill 是<em>按需加载</em>的,它适合放<em>条件性</em>知识(某类任务的工作流)。两个的差别不在内容形式,而在加载机制——你把通用上下文塞进 Skill,Claude 在不该触发的场景也加载它,token 浪费、注意力分散;反过来,你把条件性工作流写进 CLAUDE.md,每次对话都塞 3000 字进上下文,所有任务都被它拖累。<strong>判别标准:这段内容是不是每次对话都必须知道?是 → CLAUDE.md;不是 → Skill</strong>。</p>
+  </div>
+
+  <h4>Skill 的合适场景 vs 不合适场景</h4>
+
+  <ul>
+    <li>✅ <strong>跨项目通用的工作流</strong>:发邮件、写 commit message、把 Figma 导出转 React、生成会议纪要</li>
+    <li>✅ <strong>有标准化步骤的任务</strong>:跑测试、做 code review、发布到 staging</li>
+    <li>✅ <strong>需要附带模板 / 脚本 / 示例文件</strong>:Skill 文件夹本身就是个容器,模板和脚本可以放在同一目录</li>
+    <li>❌ <strong>项目硬规则</strong>(永远必须用 TypeScript、不准动某个文件夹)→ CLAUDE.md</li>
+    <li>❌ <strong>一次性任务</strong>(只在这次需要)→ 直接 prompt</li>
+    <li>❌ <strong>需要外部访问能力</strong>(查数据库 / 调 API)→ Skill 不提供能力,要配 MCP</li>
+  </ul>
+
+  <h3><span class="pre">8.3</span>Subagent · 派分身去跑、主线不卡 <span class="en">Subagents as Parallel Workers</span></h3>
+
+  <p class="lead">Subagent 是主代理派出去的小代理,它有自己独立的上下文窗口,跑完一个任务后把<em>结论摘要</em>回报给主代理。主代理拿到摘要,继续往下走——subagent 的中间过程不会污染主代理的上下文。</p>
+
+  <p>Anthropic 的 Skilljar 课程把 Subagent 的价值压成一句话:<strong>「保持主上下文干净 + 实现并行 + 任务隔离」</strong> [Anthropic Academy 2025b]。这三件事是 Subagent 的全部价值,也是判断要不要用它的标尺。</p>
+
+  <h4>什么时候 Subagent 真的有用</h4>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">USE CASE 1</div>
+      <div class="num">独立子模块</div>
+      <div class="sub">3 个以上彼此独立的章节 / 文件块 / 调研子题,并行派 subagent 同时跑</div>
+    </div>
+    <div class="item">
+      <div class="label">USE CASE 2</div>
+      <div class="num">脏活</div>
+      <div class="sub">读 50 个文件找一条信息 — subagent 干完只回报结论,主代理不必把 50 个文件全看一遍</div>
+    </div>
+    <div class="item">
+      <div class="label">USE CASE 3</div>
+      <div class="num">大输出</div>
+      <div class="sub">长报告分段写 — 主代理装配,subagent 各负责一段产出</div>
+    </div>
+    <div class="item">
+      <div class="label">USE CASE 4</div>
+      <div class="num">探索性发散</div>
+      <div class="sub">「先扫一遍代码库回报观察」— 这种任务 subagent 跑完就丢,不必污染主上下文</div>
+    </div>
+  </div>
+
+  <p>这四个场景的共同特征:<strong>任务可切片、产出可摘要、主代理不需要看中间过程</strong>。任何一个不满足,就该重新想要不要开 subagent。</p>
+
+  <h4>什么时候 Subagent 反而拖慢</h4>
+
+  <p>Subagent 不是免费的。开一个 subagent 的成本包括:启动延迟、上下文准备、独立 LLM 调用、摘要回传——加起来通常比直接做多 30-60%。所以下面这些场景千万别滥用:</p>
+
+  <ul>
+    <li>❌ <strong>简单任务也派 subagent</strong>:「写一个函数」开 subagent、「跑一次测试」开 subagent——这种事直接做更快</li>
+    <li>❌ <strong>任务彼此依赖</strong>:第二个 subagent 需要看第一个 subagent 的中间过程才能做——这种应该是顺序任务,不是并行 subagent</li>
+    <li>❌ <strong>需要主代理看到完整产出</strong>:subagent 只回报摘要,如果你需要看 subagent 的完整思考链,那它该是主代理</li>
+    <li>❌ <strong>用户期待持续可见</strong>:subagent 跑的时候用户看不到细节,等结果出来才能 review——交互延迟显著</li>
+  </ul>
+
+  <div class="callout sharp">
+    <div class="label">✕ 反共识 · 「越多 subagent 越快」</div>
+    <p>很多人把 subagent 当成「并行万能药」,任何任务都派分身。实际上 subagent 的并行收益只有在<em>任务真的独立 + 单任务足够大</em>时才大于 overhead。Anthropic 内部的经验是:<strong>派 subagent 的门槛是「这个子任务单独跑预计 5 分钟以上 + 跟其他子任务完全独立 + 主代理只需要它的总结」</strong>三个条件全占,才派。不满足就直接在主代理里串行做。<em>「派分身」不是流程必修,是协作工具,能用 Bash 一行解决的事别开 agent</em>。</p>
+  </div>
+
+  <h4>Subagent 的配置方式</h4>
+
+  <p>Claude Code 用 <code>/agents</code> 命令创建和管理 subagent 配置 [Anthropic Docs 2025]。一个 agent 配置文件包含:</p>
+
+  <ul>
+    <li><strong>name</strong> · agent 的标识</li>
+    <li><strong>description</strong> · 什么时候用它(类似 Skill 的 frontmatter,主代理靠它决定要不要派)</li>
+    <li><strong>system prompt</strong> · 这个 subagent 的角色定位、产出格式约束</li>
+    <li><strong>tools</strong> · subagent 能用哪些工具(可以比主代理少,实现权限隔离)</li>
+    <li><strong>model</strong> · 可选,subagent 可以用更小的模型(比如 Haiku)做简单子任务,降本</li>
+  </ul>
+
+  <p>这个最后一条是 Subagent 的隐藏价值——主代理用 Opus,subagent 跑简单调研用 Haiku,成本降一个数量级。这条用法 Anthropic 在 Claude Code Foundations 课程里专门讲过 [Anthropic Academy 2025b]。</p>
+
+  <h3><span class="pre">8.4</span>Hook · 在特定事件前后强制跑脚本 <span class="en">Hooks as Policy Gates</span></h3>
+
+  <p class="lead">Hook 是绑在 Claude Code 事件上的脚本——某个事件触发,脚本必跑,模型无法绕过、无法商量。这是它跟其他三把刀最大的差别:<strong>Skill / Subagent / MCP 都依赖模型自己决定要不要用,Hook 是强制的</strong>。</p>
+
+  <h4>Hook 支持的事件</h4>
+
+  <p>Claude Code 在 2025 年下半年逐步开放了一组事件 hook,目前主要的几个 [Anthropic Docs 2025b]:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>事件</th><th>触发时机</th><th>典型用途</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>PreToolUse</code></td><td>Claude 调任何工具<em>之前</em></td><td>权限检查、输入校验、危险操作拦截</td></tr>
+        <tr><td><code>PostToolUse</code></td><td>工具调用<em>结束后</em></td><td>结果日志、副作用清理</td></tr>
+        <tr><td><code>UserPromptSubmit</code></td><td>用户发送一条消息<em>时</em></td><td>注入额外上下文、敏感词检查</td></tr>
+        <tr><td><code>Stop</code></td><td>Claude 准备结束这一轮回复时</td><td>最终输出审查、强制收尾流程</td></tr>
+        <tr><td><code>SubagentStop</code></td><td>某个 subagent 结束时</td><td>验证 subagent 产出格式</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Hook 配置在 <code>settings.json</code> 里。一个典型例子是「commit 前强制跑 lint」——在 <code>PreToolUse</code> 上挂一个 hook,匹配工具是 <code>Bash</code> 且命令含 <code>git commit</code>,跑 <code>npm run lint</code>,失败就阻断 commit 操作。Claude 根本没机会绕过——它发起 commit,事件触发,lint 跑,不过就直接被拦下。</p>
+
+  <h4>Hook 的真正价值:把「必须做」从模型自觉变成系统强制</h4>
+
+  <p>这一点值得展开。Skill 和 CLAUDE.md 里也能写「commit 前要跑 lint」,但这是<em>规则</em>——模型可能忘、可能漏、可能在某个特殊场景里跳过。Hook 是<em>机制</em>——只要事件触发,脚本必跑,无关模型怎么想。</p>
+
+  <p>这条差别在严肃工程里特别重要:</p>
+
+  <ul>
+    <li>✅ <strong>合规 / 安全场景</strong>:任何 commit 必须扫密钥、任何 edit 必须走 git 备份 → 用 Hook,模型不能选择跳过</li>
+    <li>✅ <strong>自动化粘合</strong>:edit 后自动 prettier、写完文件自动 reload — 用 Hook,不依赖模型记得</li>
+    <li>✅ <strong>注入上下文</strong>:每条用户 prompt 来时,自动把当前 git status 塞进上下文 — 用 <code>UserPromptSubmit</code> hook</li>
+    <li>❌ <strong>业务逻辑</strong>:复杂的判断该不该做某事 — 这种该交给模型,Hook 只做硬规则</li>
+    <li>❌ <strong>调试性输出</strong>:想看模型在干什么 — 用日志,不要乱挂 hook 影响正常流程</li>
+  </ul>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器 · Hook 是把工程纪律「写死」的唯一办法</div>
+    <p>当你发现自己反复在 CLAUDE.md 里强调一条规则、但模型还是隔三差五漏掉,就该想:<em>这条规则要不要变成 Hook</em>?写在 prompt 里靠模型自觉的规则,有失守的可能;挂在事件上靠系统执行的 Hook,没有失守的可能。但代价是 Hook 写多了,Claude Code 的行为会变僵——所以 Hook 的边界要清晰:<strong>只挂硬性策略,不挂软性偏好</strong>。一个项目通常有 2-5 个 Hook 就够了,超过 10 个说明你在用 Hook 当业务逻辑写,方向跑偏。</p>
+  </div>
+
+  <h3><span class="pre">8.5</span>MCP · 通往外部世界的协议桥梁 <span class="en">MCP as Bridge to the World</span></h3>
+
+  <p class="lead">前三把刀都是 Claude Code 内部机制——它们扩展的是 Claude 自身的行为方式。MCP(Model Context Protocol)不一样,它是一个<em>外部协议</em>,定义了 Claude 怎么跟外部系统对话——数据库、API、内部服务、IDE、各种 SaaS。</p>
+
+  <p>Anthropic 2024 年 11 月开源了 MCP 规范 [Anthropic 2024c]。规范的核心抽象:一个 MCP server 暴露一组 tools(可调用的函数)、resources(可读的资源)、prompts(预定义的提示模板),Claude 通过标准协议跟 server 通信。任何系统只要实现了 MCP 规范,Claude 就能用它。</p>
+
+  <h4>MCP 长什么样</h4>
+
+  <p>一个真实的 MCP server 例子——查飞书日历:</p>
+
+  <ul>
+    <li><strong>tools</strong>:<code>list_events</code>、<code>create_event</code>、<code>check_freebusy</code> — Claude 调这些函数</li>
+    <li><strong>resources</strong>:<code>calendar://primary/today</code> — Claude 可以读今日日程作为上下文</li>
+    <li><strong>prompts</strong>:<code>plan_meeting</code> — 预定义的「规划会议」流程模板</li>
+  </ul>
+
+  <p>当 Claude 在跑「明天有哪些会」这个任务时,它发现自己有 <code>list_events</code> 这个工具可用,就调用 MCP server,server 拿用户的 access token 去查飞书 API,把结果通过 MCP 协议回给 Claude,Claude 整合进回复。<strong>整个过程对用户透明,但 Claude 触达了一个没有 MCP 就根本碰不到的世界</strong>。</p>
+
+  <h4>MCP 的几个关键判断</h4>
+
+  <p><strong>判断一 · 不是所有外部访问都需要 MCP</strong>。Claude Code 自带 Bash、Read、Write 等工具,本地文件、本地命令、curl 一个公开 API,都不需要 MCP。MCP 的价值在于:外部系统有<em>持久身份(token/session)</em>、需要<em>结构化协议</em>、希望被<em>多个 Agent 复用</em>。比如查 Linear、读 PostgreSQL、调内部 RPC 服务、操作 Figma——这些是 MCP 的本职。</p>
+
+  <p><strong>判断二 · MCP server 是独立进程,要单独跑</strong>。MCP server 通常是个长驻进程(stdio 模式或 HTTP),Claude Code 通过 settings.json 注册要连哪些 server,启动时建立连接。这意味着配 MCP 比配 Skill 重——你要管 server 的生命周期、鉴权、错误处理、版本升级。<strong>能用 Skill + Bash 拼出来的事,不必上 MCP</strong>。</p>
+
+  <p><strong>判断三 · MCP 是跨 Agent 标准</strong>。这是 MCP 跟其他三把刀最大的战略差别。Skill、Subagent、Hook 都是 Claude Code 专有,你写的只能给 Claude Code 用。MCP 是 Anthropic 推动、其他 Agent 厂商(Cursor、Cline、Continue.dev 等)逐渐采纳的<em>开放协议</em>——你为飞书写一个 MCP server,Claude Code 能用、Cursor 也能用、未来其他 Agent 都能用。这是 Anthropic 在 Agent 时代的关键布局,详细在 <a href="#s12">第 12 章</a> 讲。</p>
+
+  <div class="callout note">
+    <div class="label">i 一个常被混淆的概念 · 「MCP server」≠「Skill」</div>
+    <p>有人觉得 lark-mail 既然是个 Skill,飞书的 MCP server 也叫 lark-cli,两个是不是一回事?——不是。<strong>MCP server 是<em>能力提供方</em>,Skill 是<em>能力使用方</em></strong>。<code>lark-cli</code> 这个 MCP server 暴露「发邮件、查日历、找联系人」这些原子能力;<code>lark-mail/SKILL.md</code> 是教 Claude<em>怎么用这些原子能力</em>组装出「给团队发周报」这种业务流程。同一个 MCP server 可以服务多个 Skill(<code>lark-mail</code>、<code>lark-calendar</code>、<code>lark-task</code> 都调 <code>lark-cli</code>),同一个 Skill 也可以用多个 MCP server。两层职责清楚,组合才灵活。</p>
+  </div>
+
+  <h3><span class="pre">8.6</span>遇到一个需求,该用哪把刀 <span class="en">The Decision Flow</span></h3>
+
+  <p class="lead">把前面五节的内容压成一张决策流程图。下次遇到一个新需求,按这张图走一遍,基本不会选错刀。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">问题 1</div>
+      <div class="num">需要访问外部系统?</div>
+      <div class="sub">查 Linear / 读 PostgreSQL / 调内部 API → 配 MCP server</div>
+    </div>
+    <div class="item">
+      <div class="label">问题 2</div>
+      <div class="num">需要强制每次都跑?</div>
+      <div class="sub">commit 前 lint / edit 后 format / 注入上下文 → 写 Hook</div>
+    </div>
+    <div class="item">
+      <div class="label">问题 3</div>
+      <div class="num">需要并行 / 隔离上下文?</div>
+      <div class="sub">3+ 独立子任务 / 大调研 / 探索性发散 → 派 Subagent</div>
+    </div>
+    <div class="item">
+      <div class="label">问题 4</div>
+      <div class="num">教 Claude 怎么做某类活?</div>
+      <div class="sub">按需触发的工作流(发邮件 / 转 PDF) → 写 Skill</div>
+    </div>
+  </div>
+
+  <p>这四个问题不是互斥的。一个复杂场景可能<em>同时</em>触发多个答案——这时四把刀一起用,各管一段。看几个对照例子:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>需求</th><th>该用</th><th>为什么不是别的</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>每次 commit 前自动扫密钥</td>
+          <td><strong>Hook</strong>(PreToolUse)</td>
+          <td>必须强制,模型不能跳过 → 不能只放 Skill</td>
+        </tr>
+        <tr>
+          <td>用统一格式生成 PR 描述</td>
+          <td><strong>Skill</strong></td>
+          <td>跨项目通用流程,按需加载,不是每次都用</td>
+        </tr>
+        <tr>
+          <td>同时调研 5 家竞品的官网</td>
+          <td><strong>Subagent</strong>(并行)</td>
+          <td>5 个子任务彼此独立,各自结果摘要回报,主代理负责整合</td>
+        </tr>
+        <tr>
+          <td>从 Figma 拉最新设计稿</td>
+          <td><strong>MCP</strong>(Figma server)</td>
+          <td>需要触达 Figma 服务,有持久 token,要走标准协议</td>
+        </tr>
+        <tr>
+          <td>把项目部署到 Production</td>
+          <td><strong>Skill + MCP + Hook</strong></td>
+          <td>Skill 教流程、MCP 访问部署系统、Hook 在 deploy 前强制安全扫描</td>
+        </tr>
+        <tr>
+          <td>整理 50 篇论文的核心结论</td>
+          <td><strong>Subagent + Skill</strong></td>
+          <td>Subagent 并行读论文回摘要,Skill 教整合格式</td>
+        </tr>
+        <tr>
+          <td>项目必须用 TypeScript 严格模式</td>
+          <td><strong>CLAUDE.md</strong>(不是 Skill)</td>
+          <td>每次对话都必须知道的硬规则,不该按需加载</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ 反共识 · 「能不能只用一把刀解决所有问题」</div>
+    <p>很多人(尤其是刚接触 Claude Code 的工程师)倾向找一把「万能刀」——只用 Skill / 只用 Subagent / 只用 MCP。这种倾向通常导致工程畸形:<strong>什么都塞 Skill</strong>(Skill 变成 CLAUDE.md 的兄弟)、<strong>什么都开 Subagent</strong>(主任务被 overhead 拖垮)、<strong>什么都走 MCP</strong>(本来 Bash 一行能做的事被包装成 server)。四把刀各有不可替代的位置,正确的姿势是<em>分层组合</em>而不是<em>单点放大</em>。回到上一章 EPCC 框架里看——E 阶段可以用 Subagent 并行探索,P 阶段用 Skill 加载流程模板,C 阶段调 MCP 真正动外部系统,Hook 在每一步前后做强制检查。四个全用上,EPCC 才跑得稳。</p>
+  </div>
+
+  <h3><span class="pre">8.7</span>组合使用 · 完整高级用法 <span class="en">Composing the Four</span></h3>
+
+  <p class="lead">最后看一个完整例子——把四把刀都用上,做一个真实的「自动化发布到 Production」流程。这个例子源自 Anthropic Skilljar 的 Claude Code in Action 课程,展示了高级用法的全貌 [Anthropic Academy 2025c]。</p>
+
+  <h4>场景</h4>
+
+  <p>用户说:「把 main 分支当前的代码发布到 production。」期望 Claude 完成完整的发布流程,包括预检、构建、部署、烟雾测试、回滚预案。</p>
+
+  <h4>四把刀各管一段</h4>
+
+  <p><strong>1. Skill — 教 Claude 怎么做完整发布</strong></p>
+
+  <pre><code>.claude/skills/deploy-prod/SKILL.md
+
+---
+name: deploy-prod
+description: 发布到 production。
+  Use when user mentions 发布、部署、上线、deploy to production、go live
+---
+
+## 标准流程
+1. 预检 — 跑测试、检查依赖、确认 main 是绿的
+2. 派 subagent 并行 — 构建产物、跑回归测试
+3. 调 MCP 走 deploy — 通过 k8s-mcp server 执行
+4. 烟雾测试 — 验证 production 端点
+5. 失败回滚 — 自动 rollback 到上一个 tag</code></pre>
+
+  <p><strong>2. Subagent — 把构建和测试并行跑掉</strong>。流程第二步派两个 subagent:一个跑 build(读源码、生成 artifact、上传到 registry),一个跑回归测试(跑全套 e2e 测试、生成报告)。两件事彼此独立、各跑 5-10 分钟,并行 subagent 把总耗时砍半。主代理拿到两份摘要,继续走第三步。</p>
+
+  <p><strong>3. MCP — 通过 k8s-mcp server 实际操作集群</strong>。Claude 不需要懂 kubectl 的语法,它调 MCP server 暴露的 <code>deploy_to_prod</code> 工具,server 负责把请求翻译成 kubectl apply,管理鉴权、token 轮换、操作日志。同一个 MCP server 可以服务 staging、prod、disaster-recovery 多套集群。</p>
+
+  <p><strong>4. Hook — 在 deploy 前强制跑安全扫描</strong>。<code>settings.json</code> 里挂一个 PreToolUse hook,匹配 MCP 工具 <code>deploy_to_prod</code>,先跑安全扫描脚本(检查镜像漏洞、检查环境变量泄露、检查 RBAC 配置)。扫描失败,Claude 调 MCP 的请求就被 hook 阻断,deploy 根本不会发生。Claude 模型层面不需要懂这个 — Hook 是系统层面的保险。</p>
+
+  <p>这四层叠起来,完整的流程是这样跑的:</p>
+
+  <ul>
+    <li>用户说「发布到 production」</li>
+    <li>Claude 匹配 <code>deploy-prod</code> Skill,加载流程</li>
+    <li>按 Skill 步骤 1 跑预检</li>
+    <li>按步骤 2 派两个 subagent 并行 build + test</li>
+    <li>按步骤 3 调 <code>k8s-mcp::deploy_to_prod</code></li>
+    <li>Hook 触发,跑安全扫描 — 通过</li>
+    <li>MCP server 执行 deploy</li>
+    <li>步骤 4 跑烟雾测试</li>
+    <li>结束,主代理向用户汇报</li>
+  </ul>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器 · 「分层 + 组合」是 Claude Code 工程化的最终形态</div>
+    <p>这一章的所有内容,可以浓缩成一句话:<strong>不要把四把刀当成「四个选项」,要当成「四个层」</strong>。MCP 是底层能力供给、Hook 是策略约束、Subagent 是任务编排、Skill 是工作流封装。一个成熟的 Claude Code 项目通常长这样:.claude 目录下有十几个 Skill 教不同场景的工作流、settings.json 里挂 3-5 个关键 Hook、registers 几个 MCP server 提供外部访问,主代理在跑任务时按需派 Subagent 并行。<em>四层叠合后,Claude Code 不再是一个聊天工具,而是一个被你按团队工程规范定制过的协作平台</em>。</p>
+  </div>
+
+  <h3><span class="pre">8.8</span>这一章给你的判断武器</h3>
+
+  <p class="lead">读完合上,带走以下几个能直接用的判断武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 遇到新需求,先按四问决策</div>
+    <p>「要访问外部系统吗?」→ MCP。「要强制每次都跑吗?」→ Hook。「要并行或隔离上下文吗?」→ Subagent。「要教 Claude 一类工作流吗?」→ Skill。这四问不是互斥的,可以多个都为是,这时就组合用。不要先想「我要写个 Skill」,先想「我要解决什么」,再选对应的刀。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · Skill 跟 CLAUDE.md 的判别标准只有一条</div>
+    <p>这段内容是不是<em>每次对话都必须知道</em>?是 → CLAUDE.md;不是 → Skill。CLAUDE.md 是常驻成本,Skill 是按需成本。把这条想清楚,就不会再把 CLAUDE.md 写成 3000 字的垃圾桶,也不会再把通用上下文塞进 Skill 让所有任务都加载它。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · Subagent 的派发门槛比你想的高得多</div>
+    <p>「单任务预计 5 分钟以上 + 跟其他子任务真的独立 + 主代理只需要总结」三条同时满足,才派 Subagent。不满足任何一条就直接在主代理里串行做。Subagent 是协作工具,不是流程必修——能 Bash 一行解决的事,绝对不开 agent。</p>
+  </div>
+
+  <p>下一章我们换轨,从「自定义机制」转到「Agent 工作流模式」——Anthropic《Building Effective Agents》里总结的几种典型 Agent 架构(Prompt Chaining / Routing / Parallelization / Orchestrator-Workers / Evaluator-Optimizer),这些模式如何跟本章的四把刀配合,在真实工程里搭出可维护的 Agent 系统。这是从「写 Claude Code 配置」迈向「设计 Agent 系统」的关键一跃,详见 <a href="#s13">第 13 章</a>。Skills 概念第一次在产品里出现的时刻,以及它怎么从 Claude Desktop 蔓延到 Claude Code,回看 <a href="#s6">第 6 章</a>;MCP 的协议细节和生态战略,见 <a href="#s12">第 12 章</a>;Agent 跟 Chat 的本质区别和 Agentic Loop 三阶段,在 <a href="#s2">第 2 章</a>。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic, <em>Agent Skills · Engineering Blog</em>, 2025-10 [Anthropic 2025a] · Anthropic, <em>SKILL.md Specification</em>, docs.claude.com, 2025 [Anthropic 2025a] · Anthropic, <em>Introducing the Model Context Protocol</em>, 2024-11 [Anthropic 2024c] · Anthropic, <em>Claude Code Hooks Documentation</em>, docs.claude.com, 2025 [Anthropic Docs 2025b] · Anthropic, <em>Claude Code Subagents</em>, docs.claude.com, 2025 [Anthropic Docs 2025] · Anthropic Skilljar Academy, <em>Introduction to Agent Skills</em> course, 2025 [Anthropic Academy 2025a] · Anthropic Skilljar Academy, <em>Introduction to Subagents</em> course, 2025 [Anthropic Academy 2025b] · Anthropic Skilljar Academy, <em>Claude Code in Action</em> course, 2025 [Anthropic Academy 2025c] · Anthropic, <em>Building Effective Agents</em>, engineering blog, 2024-12.</p>
+
+</div>
+</section>
