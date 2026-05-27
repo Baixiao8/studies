@@ -1,0 +1,387 @@
+<section id="s7" style="border-top: 4px solid var(--c-theory);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">07</span>WORKFLOW · 第四篇 / 第七章</div>
+  <h1 class="section-h">Explore → Plan → Code → Commit · Claude Code 工作流哲学 <span class="en">The EPCC Workflow</span></h1>
+  <p class="section-sub">第 2 章把 Agentic Loop 三阶段讲清楚了——看现场、动手、检查。但「Loop」是抽象描述,真到一台机器前敲键盘时,你需要的是<em>具体步骤</em>。Anthropic 把这个抽象循环落地成了四个动作:Explore(勘察) → Plan(规划) → Code(编码) → Commit(提交),内部简称 EPCC。这一章把 EPCC 每一步拆透,讲清楚为什么前两步不能跳、Plan Mode 到底在防什么、Auto-Accept 到底什么时候才该开。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>程序员第一次用 Claude Code 都想直接「写一个 X」,然后被生成的代码搞得一地鸡毛——风格不对、命名乱套、跟现有架构冲突。EPCC 就是 Anthropic 教程的核心解药:动手之前,先让 Claude<strong>勘察现场</strong>(Explore,只读)、<strong>给出计划</strong>(Plan,审过再放行)、<strong>按计划编码</strong>(Code)、<strong>跑测试再提交</strong>(Commit)。四步合起来,把第 2 章那条「自己撞墙的实习生」拉进一条<em>有 checkpoint 的轨道</em>。这一章的核心判断:跳过 Explore 不是抄近路,是把后面所有步骤的债务都凑齐了再还。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2025 年 3 月 · Anthropic 内部一次 Claude Code 培训</div>
+    <p>2025 年春天,Anthropic 在 Skilljar 上线了《Claude Code 101》和《Claude Code in Action》两门课。课程团队事后复盘时发现一件事——学员里最容易翻车的,不是那些完全没用过 AI 的新手,而是<em>用 ChatGPT 用了两三年的资深玩家</em>。他们带着「我说一句、AI 答一句」的肌肉记忆,把 Claude Code 当聊天框用,结果改出来的代码经常跟项目原有架构冲突、命名风格各种混搭、甚至把测试一并改坏 [Anthropic Academy 2025]。</p>
+    <p>课程团队把这些翻车案例拉了一张时序图,发现一个共同特征:<strong>翻车的人,99% 都跳过了「读现有代码」这一步</strong>。他们觉得 Claude Code 既然能读文件,自己就不用看了——结果是 Claude 读了几个最显眼的文件,看到不一致的命名风格,只挑一种照搬;看到不熟悉的工具函数,绕开自己重写;看到长长的 git log,直接忽略。一个本该 5 分钟的小改动,最后变成 50 分钟的扯皮加 review。</p>
+    <p>Anthropic 工程团队的回应是把内部最常用的工作流抽出来,刻进官方培训:<strong>Explore → Plan → Code → Commit</strong>。前两步加起来通常占整个任务时间的 30%-40%,看似浪费,但能把后两步的返工率压到原来的 1/5 以下。EPCC 不是发明,是把「正经程序员本来就该这么干」的常识,显式地写进 Claude Code 的协作仪式里 [Anthropic Docs 2025]。</p>
+    <p>这一章要讲清楚的,就是这套仪式每一步在做什么、为什么不能跳、以及三种 Approval Mode(Plan / Manual / Auto-Accept)分别配合哪一步。</p>
+  </div>
+
+  <h3><span class="pre">7.1</span>EPCC 全景:四步一线 · <span class="en">The Four-Step Pipeline</span></h3>
+
+  <p class="lead">先把四步排成一条线,看清楚每一步的<em>输入、输出、能用的工具、不能干的事</em>。后面几个小节会一节一节展开。</p>
+
+  <p>EPCC 的本质是把第 2 章的「Gather Context → Take Action → Verify Work」循环,沿时间轴拆成<strong>两个只读阶段 + 两个写入阶段</strong>。只读阶段在前,写入阶段在后,中间留一个让你审计划的 checkpoint。结构上看,像极了软件工程里「先 design review 再写代码」的传统流程——区别是这一切由你跟 Claude 一起在 30 分钟内走完,不需要拉会议。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">PHASE 1</div>
+      <div class="num">Explore</div>
+      <div class="sub">勘察现场 · 只读 · 不写一行代码</div>
+    </div>
+    <div class="item">
+      <div class="label">PHASE 2</div>
+      <div class="num">Plan</div>
+      <div class="sub">出具计划 · 只读 · 你审过再放行</div>
+    </div>
+    <div class="item">
+      <div class="label">PHASE 3</div>
+      <div class="num">Code</div>
+      <div class="sub">按计划编码 · 写入 · 可以 Auto-Accept</div>
+    </div>
+    <div class="item">
+      <div class="label">PHASE 4</div>
+      <div class="num">Commit</div>
+      <div class="sub">跑测试 + 提交 · 写入 · 你验收</div>
+    </div>
+  </div>
+
+  <p>每一步的工具组合不一样,这是 EPCC 跟普通 prompt 工程最大的不同——它不是「换一种问法」,是<em>换一套工具权限</em>。下面这张表是后面几节的索引,看不懂没关系,后面会逐项讲。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>阶段</th><th>主要工具</th><th>能做什么</th><th>不能做什么</th><th>对应 Approval Mode</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Explore</strong></td><td>Read / Glob / Grep / git log</td><td>读文件、找符号、看历史</td><td>写文件、跑命令(改状态)</td><td>Plan Mode(只读)</td></tr>
+        <tr><td><strong>Plan</strong></td><td>同上 + Claude 自己组织输出</td><td>列步骤、列影响面、列风险</td><td>同上</td><td>Plan Mode(只读)</td></tr>
+        <tr><td><strong>Code</strong></td><td>Read / Edit / Write / Bash</td><td>按 Plan 改文件、运行命令</td><td>跳出 Plan 范围做无关改动</td><td>Manual 或 Auto-Accept</td></tr>
+        <tr><td><strong>Commit</strong></td><td>Bash(test / lint / git)</td><td>跑测试、提交、写 message</td><td>跳过测试直接提交</td><td>Manual(关键节点你拍板)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这张表里有一条隐含规律值得先点出来:<strong>权限是逐阶段放开的,不是一上来全部敞开</strong>。Explore 和 Plan 阶段 Claude 没有任何写入权,这是 Plan Mode 本身的设计——Anthropic 在 2025 年中期发布 Plan Mode 时博客里反复强调:「只读」不是限制,是<em>把规划阶段从执行阶段里强行剥离出来</em>的工程手段 [Anthropic Plan Mode 2025]。</p>
+
+  <div class="callout note">
+    <div class="label">i 跟第 3 章「4D 框架」的对应</div>
+    <p>EPCC 是<a href="#s3">第 3 章</a> 4D 框架的工程级展开。对应关系大致是这样:Explore + Plan ≈ <strong>Description</strong>(把意图变成完整描述);Code ≈ <strong>Delegation</strong>(把任务交给 Agent 执行);Commit 前的 verify ≈ <strong>Discernment</strong>(判断输出是否达标);Distillation 则跨越整个 EPCC——从 commit 后的复盘里沉淀经验。4D 是态度层(怎么想),EPCC 是动作层(怎么做)。两层合起来才是完整方法论。</p>
+  </div>
+
+  <h3><span class="pre">7.2</span>① Explore · 勘察现场,不写一行代码 <span class="en">Read Before You Touch</span></h3>
+
+  <p class="lead">Explore 是 EPCC 最反直觉、也最容易被跳过的一步。它的核心动作只有一句:<strong>让 Claude 先把跟任务相关的文件、风格约定、依赖结构、历史变更通读一遍,不许动键盘改任何东西</strong>。</p>
+
+  <p>这一步的产出不是代码,是<em>认知</em>——Claude 对项目的认知、你对 Claude 是否真的理解项目的认知。Anthropic 教程里有一句被反复引用的话:<strong>「If Claude doesn't know what your code looks like, it will write code that looks like nothing in your repo.」</strong>(如果 Claude 不知道你的代码长什么样,它写出来的代码不会像你 repo 里的任何东西。)[Anthropic Academy 2025]</p>
+
+  <h4>Explore 阶段要查清楚的四件事</h4>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>查一 · 相关代码长什么样</h4>
+      <p>用 Read 把跟任务直接相关的文件通读一遍,用 Grep 找出所有引用了关键符号的位置,用 Glob 把同类文件(如 <code>**/*.test.ts</code>)摸出来一个清单。<strong>读到的是「这个 repo 里的人怎么写代码」</strong>——命名风格、错误处理习惯、抽象层级。</p>
+    </div>
+    <div class="card">
+      <h4>查二 · 代码风格 / 项目约定</h4>
+      <p>读 <code>.eslintrc</code>、<code>tsconfig.json</code>、<code>pyproject.toml</code>、<code>CONTRIBUTING.md</code>、<code>README</code>。这些文件里写着<em>团队的工程约定</em>——是用 tabs 还是 spaces、单引号还是双引号、函数命名 camelCase 还是 snake_case。Claude 不读这些就开始写,大概率写出风格混杂的代码。</p>
+    </div>
+    <div class="card">
+      <h4>查三 · git 历史看演化轨迹</h4>
+      <p><code>git log --oneline -n 50</code> 看最近 50 个 commit,<code>git log -p path/to/file</code> 看某文件的演化。<strong>历史能告诉你「这块代码为什么现在长这样」</strong>——是否最近重构过、是否有人踩过坑、是否有未完成的迁移。直接改而不看历史,经常会把别人刚解决的问题又引回来。</p>
+    </div>
+    <div class="card">
+      <h4>查四 · 识别约束和隐形依赖</h4>
+      <p>有没有 feature flag?有没有数据库 schema?有没有跨服务调用?有没有第三方 API 配额?<strong>这些是 Claude 自己 Grep 不容易发现的隐形约束</strong>,需要你在 prompt 里点一下:「这块用了 LaunchDarkly 做 flag,改之前先看一下 flag 配置。」</p>
+    </div>
+  </div>
+
+  <h4>Explore 的典型 prompt 模板</h4>
+
+  <p>Anthropic 官方文档里给了一个推荐的开场方式,大意是:</p>
+
+  <ul>
+    <li>「<strong>不要写任何代码</strong>,先用 Read / Glob / Grep 读完跟任务相关的文件。」</li>
+    <li>「读完之后告诉我:这些文件分别在做什么、关键依赖是谁、最近一次相关改动是什么。」</li>
+    <li>「如果你发现这个任务比我描述的复杂(比如要动多个模块),先告诉我,我再决定是否拆分。」</li>
+  </ul>
+
+  <p>这段 prompt 的关键是<strong>「不要写任何代码」</strong>——这一句话把 Claude 从默认的「跳进去干活」模式拉到「先看清楚」模式。配合 Plan Mode(只读权限),Claude 物理上也写不了文件,双保险。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 跳过 Explore 是错的,不是抄近路</div>
+    <p>很多人觉得「我对自己代码很熟,Explore 不用 Claude 做,我直接告诉它要改什么就行」。这句话在两个地方错:<strong>一,你熟悉的是「你写过的版本」,不是「现在 repo 里的版本」</strong>——你可能记错了上次重构后的接口签名;<strong>二,问题不在你熟不熟悉,在 Claude 熟不熟悉</strong>。Explore 不是给你看的,是给 Claude 装载上下文的过程。你跳过 Explore,等于让 Claude 在<em>它不知道自己缺哪些信息</em>的情况下开始写——这正是 Schwartz 律师案 LLM 编造判例的同一种结构:它会用「看起来对」的代码填补它不知道的部分。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器 · 每次写新功能前,强制让 Claude 先 Explore 一轮</div>
+    <p>在 <code>CLAUDE.md</code>(项目级 prompt 配置)里写一条死规则:<strong>「凡是涉及修改既有代码的任务,Code 阶段之前必须先用 Plan Mode 跑 Explore + Plan,输出一份 plan 让我审。」</strong>这一条加上之后,Claude 默认会先勘察,你不用每次手动叮嘱。新功能从零开始(没有既有代码可冲突)可以跳过 Explore,直接 Plan;但任何「修一下 / 改一下 / 重构一下」类型的任务,Explore 不能省。</p>
+  </div>
+
+  <h3><span class="pre">7.3</span>② Plan · 让 Claude 输出实施计划,你审过再放行 <span class="en">Plan Mode is a Safety Mechanism</span></h3>
+
+  <p class="lead">Plan 阶段紧跟 Explore,常常是连着做的——Claude Explore 完之后直接输出一份计划,等你点头。这一阶段最重要的不是「Claude 怎么写计划」,而是<strong>Plan Mode 本身这个产品形态</strong>:Claude 在 Plan Mode 下<em>物理上没有任何写入权限</em>,它能读、能想、能输出文字,但不能改文件、不能跑 Bash 命令。</p>
+
+  <p>Anthropic 在 2025 年中发布 Plan Mode 时,官方博客里给的定义是:「Plan Mode 是一个只读的规划环境,让 Claude 在不改变任何外部状态的前提下,完整理解任务、设计方案、向用户陈述意图。Claude 只有在用户明确批准计划之后,才会进入 execute 模式获得写入权。」[Anthropic Plan Mode 2025]</p>
+
+  <h4>Plan 阶段的产出物长什么样</h4>
+
+  <p>一份合格的 plan,至少包含下面几块。这不是 Anthropic 强制的格式,但行业里逐渐沉淀的最佳实践大致如此:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>板块</th><th>内容</th><th>为什么需要</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>问题陈述</strong></td><td>用 Claude 自己的话复述任务</td><td>检查它有没有理解错(常常理解错)</td></tr>
+        <tr><td><strong>影响面</strong></td><td>列出会改动的文件、函数、表</td><td>你能立刻看清范围有没有超</td></tr>
+        <tr><td><strong>步骤分解</strong></td><td>3-10 步,每步具体做什么</td><td>给执行阶段一个明确路径图</td></tr>
+        <tr><td><strong>风险 / 边界</strong></td><td>哪里可能出问题、哪些没动</td><td>检查它有没有意识到坑</td></tr>
+        <tr><td><strong>验证策略</strong></td><td>用什么测试 / 什么命令验证</td><td>提前商定 Commit 阶段的标准</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这五项里,<strong>「影响面」和「步骤分解」是你审计划时最该盯的两块</strong>。影响面告诉你 Claude 打算碰多少东西——如果一个本该 2 个文件的任务它列了 12 个文件,大概率它误解了任务;步骤分解告诉你它是不是想清楚了——如果步骤里出现「重写整个 X 模块」这种含糊词,你立刻打回去要它再拆细。</p>
+
+  <h4>Plan 阶段你做的三个决定</h4>
+
+  <ul>
+    <li>✅ <strong>同意原 Plan</strong> — 没问题,放行,进入 Code 阶段</li>
+    <li>✅ <strong>修改 Plan 后放行</strong> — 让 Claude 调整某几步,改完再审,审过再放</li>
+    <li>❌ <strong>拒绝并要求重做</strong> — Claude 显然没理解任务,或方向完全错了,让它重新 Explore</li>
+  </ul>
+
+  <p>这三个决定就是<strong>第 3 章 4D 框架里 Discernment 的具体落地</strong>——你在 Plan 阶段做的是判断,不是劳动。这一步决定了 Code 阶段会不会跑偏。</p>
+
+  <div class="callout note">
+    <div class="label">i Plan Mode 防的是什么</div>
+    <p>Plan Mode 的「只读」不只是工程上的方便,是<em>认知上的强制</em>。回头看<a href="#s2">第 2 章</a>讲的 Agent 危险——「能动手意味着能搞砸」「速度快意味着错误也快」——Plan Mode 用「物理上不让它动手」的方式,把这两个危险隔离在 Code 阶段之前。Claude 在 Plan Mode 下哪怕想做点什么,工具调用也会被拒绝。这是 Anthropic 用产品形态强制工程纪律的典型例子:不靠 prompt 提醒,直接靠权限隔离。</p>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ 常见误解 · 「Plan Mode 是给新手用的,熟练用户不需要」</div>
+    <p>错的。Plan Mode 的价值跟你的熟练度<em>反相关</em>——你越熟练、越自信,越容易跳过 Plan 直接动手,也越容易在大改动上栽跟头。Anthropic 工程团队自己写代码也强制走 Plan 流程,不是因为不熟练 Claude,是因为<strong>Plan 这一步本身就是质量保证机制,跟用的人熟不熟练无关</strong>。把 Plan 当「新手保护轮」是误读——它是「Agent 时代的 design review」,资深和新手都该走。</p>
+  </div>
+
+  <h3><span class="pre">7.4</span>③ Code · Plan 已批,按计划执行 <span class="en">Execute the Approved Plan</span></h3>
+
+  <p class="lead">Code 阶段是 EPCC 里看起来最像「正常用 AI 写代码」的一步——Claude 终于可以写文件、跑命令、改状态了。但跟跳过前两步直接「写代码」相比,这一步的 Claude 是<em>带着已审过的计划</em>在执行,不是带着模糊指令在猜你想要什么。</p>
+
+  <p>Anthropic 教程里把这一步描述为「<strong>execute the approved plan</strong>」——重音在 approved。计划没批之前,Claude 不该写代码;计划批了之后,Claude 应该按计划写,不该擅自扩张。</p>
+
+  <h4>Code 阶段的两个 Approval Mode 选择</h4>
+
+  <p>到了这一步,你要在两种 Approval Mode 之间选一个:</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Manual · 每一步确认</h4>
+      <p>Claude 每次要写文件或跑命令,都弹出来问你「确认吗?」。<strong>用在什么场景</strong>:第一次接触陌生代码库、改的是关键路径、Plan 阶段有几处你心里其实没底。<strong>代价</strong>:慢,每步都打断你。<strong>好处</strong>:几乎不可能跑偏。</p>
+    </div>
+    <div class="card">
+      <h4>Auto-Accept · 自动执行</h4>
+      <p>Claude 按计划往下做,你不用每步点确认,等它跑完通知你。<strong>用在什么场景</strong>:Plan 已经审得很细 + 你信任 Claude 不会胡来 + 任务是常规改动(不是改主分支、不是动数据库 schema)。<strong>代价</strong>:你看不到中间过程,出错才发现。<strong>好处</strong>:快,体验丝滑。</p>
+    </div>
+  </div>
+
+  <h4>Auto-Accept 的使用边界</h4>
+
+  <p>Auto-Accept 是 Claude Code 给熟练用户的提效武器,但用错地方就是放火。下面是几条<em>不能开 Auto-Accept 的硬规则</em>:</p>
+
+  <ul>
+    <li>❌ <strong>Plan Mode 没跑过</strong> — Auto-Accept 必须搭配已审 plan,否则就是放任 Agent 自由发挥</li>
+    <li>❌ <strong>改主分支 / 改数据库 / 改 CI 配置</strong> — 关键路径任何时候都要 Manual</li>
+    <li>❌ <strong>第一次用 Claude 操作这个 repo</strong> — 你还不知道它会怎么写,先 Manual 几轮建立信任</li>
+    <li>✅ <strong>常规 feature 开发 + Plan 审过 + 测试覆盖充分</strong> — 可以放心 Auto-Accept</li>
+    <li>✅ <strong>批量重构 / 批量改名 / 跟既有模式一致的扩展</strong> — Auto-Accept 是最大化提效场景</li>
+  </ul>
+
+  <div class="callout sharp">
+    <div class="label">✕ 最经典的踩雷:Auto-Accept 跨越 Plan 用</div>
+    <p>很多人用一段时间 Claude Code 之后,觉得 Plan Mode 太啰嗦,直接关掉,打开 Auto-Accept,开始「all-in」式狂跑——结果就是 Agent 在没有 plan 约束下自由扩散,改了它觉得「顺便也该改」的东西,把无关代码也改了一通。<strong>Auto-Accept 不能跨越 Plan 用</strong>。Auto-Accept 是「按 plan 执行不打断」,不是「不要 plan 自由发挥」。这两个意思完全相反,但产品体验上很容易被人混为一谈。判断标准只有一句:<em>你刚才有没有审过一份具体的 plan?没有,就不该开 Auto-Accept</em>。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器 · Code 阶段中途介入的两个时机</div>
+    <p>哪怕开了 Auto-Accept,你也应该在两个时机主动介入:<strong>一,Claude 报告它发现新情况时</strong>(比如「这里发现一个跟 Plan 不一致的接口,需要确认」)——这种主动报告是它在求 checkpoint,别忽略;<strong>二,你看到它开始改 Plan 里没列的文件时</strong>——Ctrl-C 打断,问清楚为什么要改,如果合理就更新 Plan,如果不合理就让它退回去。让它自由扩散是 EPCC 失效的开始。</p>
+  </div>
+
+  <h3><span class="pre">7.5</span>④ Commit · 跑测试 + 写 message + 提交 <span class="en">Verify Before You Ship</span></h3>
+
+  <p class="lead">Code 跑完不等于结束,EPCC 的最后一步是 Commit——但这个 Commit 不是 git commit 那一个动作,是一个<strong>包含验证 + 提交的小流程</strong>:跑测试 → 跑 lint → 跑类型检查 → 让 Claude 自己审一遍 diff → 写 commit message → 提交。</p>
+
+  <p>Anthropic 把这一步单独拎出来,而不是塞进 Code 里,是因为这一步的<em>认知模式</em>跟 Code 完全不同——Code 是「我在改」,Commit 是「我刚才改的对不对」。这正是<a href="#s2">第 2 章</a>讲的 Verify Work 阶段,需要用<strong>跟生成过程不同的信号</strong>来验证(跑测试,不是让 LLM 再想一遍)。</p>
+
+  <h4>Commit 阶段的标准动作</h4>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">STEP 1</div>
+      <div class="num">跑测试</div>
+      <div class="sub">npm test / pytest / cargo test — 看是不是绿</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 2</div>
+      <div class="num">跑 lint</div>
+      <div class="sub">eslint / ruff / clippy — 风格是否符合项目</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 3</div>
+      <div class="num">跑类型检查</div>
+      <div class="sub">tsc --noEmit / mypy — 类型有没有断</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 4</div>
+      <div class="num">审 diff</div>
+      <div class="sub">让 Claude 自己看 git diff,陈述改动</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 5</div>
+      <div class="num">写 message</div>
+      <div class="sub">按项目约定的格式(conventional commits 等)</div>
+    </div>
+    <div class="item">
+      <div class="label">STEP 6</div>
+      <div class="num">提交</div>
+      <div class="sub">git commit — 你点头之后才执行</div>
+    </div>
+  </div>
+
+  <h4>让 Claude 审自己 diff 的正确姿势</h4>
+
+  <p>Step 4 这一条特别值得展开。让 Agent 自己审自己 diff,听起来像第 2 章警告过的「用幻觉验证幻觉」——但这里有两个关键差别:<strong>一,Claude 审的是 diff,不是它当时的「意图」</strong>(diff 是客观文本,不是 Claude 的记忆,所以不会被记忆偏差影响);<strong>二,审完是给你看的,不是它自己拍板</strong>(你才是最终验收人)。这样的 self-review 在工程上是<em>有用的辅助</em>,但绝不能替代你自己读 diff。</p>
+
+  <p>典型的 self-review prompt 是这样的:</p>
+
+  <ul>
+    <li>「跑 <code>git diff</code>,把你这次的改动用清单列出来。」</li>
+    <li>「针对每个改动,说明:它实现 Plan 里的哪一步?有没有 Plan 之外的改动?」</li>
+    <li>「列出三个你认为最该被 reviewer 关注的点。」</li>
+  </ul>
+
+  <p>这三句问下来,Claude 会输出一份 self-review,你拿着这份 review 配合自己读 diff——比单纯自己读快得多,也比让 Claude 单方面说「我做完了」可信得多。</p>
+
+  <div class="callout note">
+    <div class="label">i Commit message 的格式选择</div>
+    <p>Anthropic 在公开示例里推荐用 <em>Conventional Commits</em> 格式(<code>feat: ...</code> / <code>fix: ...</code> / <code>refactor: ...</code>),因为这个格式机器可读,方便后续做 changelog 自动化。但更关键的是:<strong>commit message 应该写「为什么」,不只是「做了什么」</strong>。「做了什么」git diff 能告诉你,「为什么」只有 message 能告诉将来的 reader。让 Claude 写 message 时,prompt 里点一句「重点说明这次改动解决了什么问题、采用了什么方案、为什么不选 X 方案」,质量会差出一个量级。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器 · Commit 前的「三色灯」自检</div>
+    <p>Commit 之前问自己三个问题,任何一个红灯都不该提交:<strong>测试灯</strong>(绿了吗?新功能有没有新测试?)、<strong>diff 灯</strong>(改的文件跟 Plan 一致吗?有没有意外改动?)、<strong>message 灯</strong>(message 写清楚为什么了吗?)。三盏灯齐绿才能 commit。养成这个三秒自检的习惯,大部分「commit 了才发现没跑测试」的事故就不会发生。</p>
+  </div>
+
+  <h3><span class="pre">7.6</span>三种 Approval Mode 怎么搭配 EPCC <span class="en">Match the Mode to the Phase</span></h3>
+
+  <p class="lead">前面几节零散提到了 Plan Mode、Manual、Auto-Accept 三种模式,这一节把它们跟 EPCC 阶段的对应关系系统讲清楚。这是 Claude Code 使用上最容易混乱、也最值得搞清楚的一块。</p>
+
+  <p>三种 Approval Mode 不是「越自由越好」的连续光谱,而是<em>各有专属场景</em>的三种工具。下面这张表是核心:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Approval Mode</th><th>Claude 能做什么</th><th>对应 EPCC 阶段</th><th>什么时候该用</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Plan Mode</strong> 只读</td><td>Read / Glob / Grep / 输出文字</td><td>Explore + Plan</td><td>任何任务的前两步,强制走</td></tr>
+        <tr><td><strong>Manual</strong> 每步确认</td><td>Read / Edit / Write / Bash,但每次写入要你点头</td><td>Code(陌生场景)+ Commit</td><td>第一次接触代码库 / 改关键路径 / 高风险操作</td></tr>
+        <tr><td><strong>Auto-Accept</strong> 自动执行</td><td>Read / Edit / Write / Bash,不打断</td><td>Code(熟悉场景)</td><td>Plan 已审 + 任务常规 + 信任已建立</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>典型 EPCC 跑通的 Approval Mode 切换</h4>
+
+  <p>一个标准的 EPCC 流程,Approval Mode 切换大致是这样:</p>
+
+  <ul>
+    <li><strong>开始</strong> → 切到 <strong>Plan Mode</strong>(只读),开始 Explore</li>
+    <li><strong>Explore 完</strong> → 仍在 Plan Mode,让 Claude 输出 Plan</li>
+    <li><strong>Plan 已审</strong> → 退出 Plan Mode,切到 <strong>Manual</strong> 或 <strong>Auto-Accept</strong>(看情况)</li>
+    <li><strong>Code 跑完</strong> → 切回 <strong>Manual</strong>(Commit 阶段关键节点你拍板)</li>
+    <li><strong>测试绿、diff 审过</strong> → Manual 下让 Claude 执行 commit</li>
+  </ul>
+
+  <p>关键节奏是<strong>「严-松-严」</strong>——开头严(Plan Mode 只读)、中间松(Code 阶段允许快速执行)、结尾严(Commit 阶段你拍板)。这跟做实验、做手术、做合同审计的节奏完全一致,不是 Claude Code 的发明,是工程纪律的复用。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 三种最常见的 mode 错配</div>
+    <p><strong>错配一</strong>:Explore 阶段用 Manual,每个 Read 都要确认——Read 本来就是只读的,确认毫无意义,只是浪费时间。Explore 应该走 Plan Mode。<strong>错配二</strong>:Code 阶段还在 Plan Mode 下——Plan Mode 写不了文件,你怎么催 Claude 它都只能输出文字。审完 Plan 必须切走。<strong>错配三</strong>:Commit 阶段开 Auto-Accept——commit 是关键节点,自动执行意味着可能没跑测试就 commit、可能 message 没写清就 commit、可能 push 到主分支了你才反应过来。Commit 必须 Manual。</p>
+  </div>
+
+  <h3><span class="pre">7.7</span>常见错误 · 跳过 Explore、Plan 跑空、Auto-Accept 越界 <span class="en">Three Common Failures</span></h3>
+
+  <p class="lead">把 EPCC 全部讲完之后,这一节专门拎出三种最常见的翻车模式。每一种都见过、都修过、都写进了 Anthropic 官方文档里 [Anthropic Docs 2025]。</p>
+
+  <h4>翻车一 · 跳过 Explore + Plan,直接「写一个 X」</h4>
+
+  <p>这是新手最常见的错。原因是 ChatGPT 用习惯了——一句话丢过去就期待答案。Claude Code 也接受这种用法,但<em>它不该接受的时候你别用</em>。具体后果:</p>
+
+  <ul>
+    <li>❌ 命名风格跟项目原有约定冲突(项目用 <code>userId</code> 它写 <code>user_id</code>)</li>
+    <li>❌ 重新实现了项目里已经存在的工具函数(项目有 <code>logError</code> 它自己写一个 <code>printErr</code>)</li>
+    <li>❌ 用了项目其他地方没用过的依赖(项目都用 <code>axios</code> 它非要写 <code>fetch</code>)</li>
+    <li>❌ 改坏了相邻的逻辑(它没读到旁边那个文件依赖了它要改的函数)</li>
+  </ul>
+
+  <p>修复办法:不跳 Explore。这是没有捷径的事——你不让 Claude 看清楚,它就会写出不一致的东西。Explore 那 5 分钟不是浪费,是后面省下 50 分钟扯皮的入场票。</p>
+
+  <h4>翻车二 · Plan 写得太空,审了等于没审</h4>
+
+  <p>第二种翻车更隐蔽——你确实让 Claude 做了 Plan,但 Plan 写得跟没写一样。典型空 Plan 长这样:</p>
+
+  <ul>
+    <li>❌ <strong>「我会修改 auth 相关代码以支持新的登录方式」</strong>——影响面没列、步骤没拆、风险没识</li>
+    <li>❌ <strong>「我会重构这个模块使其更清晰」</strong>——「更清晰」是空话,具体改什么没说</li>
+    <li>❌ <strong>「步骤一:实现功能。步骤二:跑测试。」</strong>——这种 plan 跟没有一样,Claude 在 plan 里没真的思考</li>
+  </ul>
+
+  <p>修复办法:审 Plan 时,如果看到任何一句话<em>不能让你预判 Claude 接下来会动哪个文件</em>,就把它打回去要 Claude 写具体——「列出你会修改的具体文件路径」「步骤要细到一次只改一处」「告诉我哪一步最有可能出错」。Plan 的价值在密度,不在长度——三行具体的 plan 远胜三十行废话。</p>
+
+  <h4>翻车三 · Auto-Accept 越界用,跨过 Plan 自由发挥</h4>
+
+  <p>第三种翻车是熟练用户的专属——用熟了之后觉得 Plan 啰嗦,Auto-Accept 一开,「reckless mode」(放任模式,Claude Code 内部叫法)启动,然后 Claude 在没 plan 的情况下扩散改动。后果:</p>
+
+  <ul>
+    <li>❌ 改了一堆 Plan 里没提的文件,得手动 revert 大半</li>
+    <li>❌ 跑了一堆不该跑的 Bash 命令(比如把依赖升级到了不兼容的版本)</li>
+    <li>❌ 「自动」commit 出去之后才发现测试根本没跑</li>
+    <li>❌ 修一个 bug 引入了三个新 bug,因为没有 plan 约束扩散面</li>
+  </ul>
+
+  <p>修复办法:Auto-Accept 必须跟一份已审 plan 绑定,这是死规则。在 <code>CLAUDE.md</code> 里写明「Auto-Accept 需在 Plan 已审、且 Plan 中明确列出影响文件后开启」。把这一条规则刻成项目约定,反复念,直到肌肉记忆。</p>
+
+  <div class="callout note">
+    <div class="label">i 一个反直觉的观察 · EPCC 越熟练,越觉得它「不像流程」</div>
+    <p>新手学 EPCC 时会觉得四步很死板、特别像「项目管理流程」。但用熟之后,EPCC 会内化成一种思考习惯——你看到任务的第一反应是「这个需要不需要 Explore」「这一步的 Plan 是不是不够具体」「这里能不能开 Auto-Accept」。<strong>它最终消失成本能,你以为自己没在用 EPCC,但每一步都在用</strong>。这跟开车一样:新手时刻想着「踩离合 → 挂档 → 松离合」,熟练司机不会再想这些,但每个动作仍在精确发生。EPCC 的终点是它对你来说是隐形的。</p>
+  </div>
+
+  <h3><span class="pre">7.8</span>这一章给你的判断武器 <span class="en">Takeaways</span></h3>
+
+  <p class="lead">读完这章,你应该带走以下几个能直接用的判断武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 任何修改既有代码的任务,EPCC 四步不能跳</div>
+    <p>「我熟悉这个 repo」「这个改动很小」「我赶时间」——这些都不是跳 Explore + Plan 的理由。EPCC 不是给你看的流程,是给 Claude 装载上下文的过程。Claude 没装载,你的熟悉、你的小改动、你的紧迫感全都帮不上忙——它仍然会写出风格不一致、跟现有代码冲突的代码。从零开始的新功能(没有既有代码可冲突)是唯一可以省略 Explore 的场景,但 Plan 仍然不能省。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · Auto-Accept 必须跟「已审 Plan」绑定,不能跨越用</div>
+    <p>Auto-Accept 是 Plan 已审之后的提效武器,不是「不要 Plan 的自由模式」。两者搞混会有大账要还。判断标准只有一句:<em>你刚才有没有审过一份具体的 plan,plan 里列了影响文件清单</em>?没有,就回去走 Plan Mode。养成这个反射,Claude Code 给你的 80% 的事故都会消失。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · Commit 阶段必须用「不同信号」验证,不要让 LLM 自己拍板</div>
+    <p>跑测试是不同信号,跑 lint 是不同信号,你自己读 diff 是不同信号。让 Claude 再说一遍「我做完了」<em>不是</em>不同信号——那是用同一个会犯错的模型重复确认。这一条是 EPCC 跟普通「让 AI 干活」最大的工程差别:Verify 必须接外部世界的反馈,不能闭环在 Claude 自己嘴里。</p>
+  </div>
+
+  <p>EPCC 讲完,你掌握了 Claude Code 工作流的<em>骨架</em>。但骨架要长出血肉,还得知道每一步具体用什么工具——Read、Bash、Edit、Task 这四把武器在哪一步该亮哪一把、各自有什么坑。下一章「四把刀」(<a href="#s8">第 8 章</a>)就是把 EPCC 每一步背后的具体工具讲穿,让你从「知道流程」走到「会用工具」。再之后到了第四篇的实战章节,你就具备了独立跑通一个 Claude Code 任务全流程的全部认知。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic Skilljar Academy, <em>Claude Code 101</em> course, 2025 [Anthropic Academy 2025] · Anthropic Skilljar Academy, <em>Claude Code in Action</em> course, 2025 · Anthropic, <em>Claude Code Documentation</em>, 2025-2026 [Anthropic Docs 2025] · Anthropic, <em>Introducing Plan Mode for Claude Code</em>, engineering blog, 2025 [Anthropic Plan Mode 2025] · Anthropic, <em>Building Effective Agents</em>, engineering blog, 2024-12 · Anthropic, <em>Claude Code Best Practices</em>, internal engineering memo cited in Academy materials, 2025 · Conventional Commits specification, conventionalcommits.org, v1.0.0.</p>
+
+</div>
+</section>

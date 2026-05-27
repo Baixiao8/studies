@@ -1,0 +1,164 @@
+<section id="s0" style="border-top: 4px solid var(--c-physio);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">00</span>PREFACE · 前言</div>
+  <h1 class="section-h">为什么要写这本书 <span class="en">Why This Book Exists</span></h1>
+  <p class="section-sub">写之前先讲清楚:这本书是给谁的、为什么要写、不写什么、写它时站在哪里、读它的人应该怎么读。把这五件事先说清楚,后面 14 章就不会跑偏。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>Anthropic 把 22 小时官方课摆在网上,但「看完课」和「学到东西」不是一回事——更多人卡在第一步:不知道 LLM 在想什么,不知道 Claude 跟 ChatGPT 有啥不同,不知道「Agent」和「Chat」的边界在哪里。这本书从「LLM 是个什么东西」讲起,一路走到「怎么用 Claude Code 写完一个功能」,中间不跳级、不假设你会编程、也不靠堆术语唬人。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2026 年 3 月某天 · 你打开了一个网页</div>
+    <p>2026 年 3 月 2 日,Anthropic 开了一个叫 Skilljar Academy 的官方学习平台。18 门课,全免费,带官方证书。看上去是好事——AI 公司开始正经做用户教育了。</p>
+    <p>但点进去之后,你会发现一件尴尬的事:<strong>这 18 门课总时长 22 小时以上,横跨 5 个轨道,每门课的标题都用了大量你不熟的术语</strong>—— Agent Skills、MCP、Subagents、Cowork、Vertex AI、Bedrock、Extended Thinking。光看标题分不出哪个是入门、哪个是进阶,也分不出哪门是「真该学的」、哪门是「让企业刷认证的」。</p>
+    <p>更尴尬的是,即便你硬着头皮挑了一门看完(比如 Claude 101),会发现它在教你怎么<em>使用</em>桌面端的几个按钮——但不会告诉你「LLM 为什么会一本正经胡说八道」「Agent 和 Chat 到底差在哪」「为什么 4D 框架是 Anthropic 反复强调的方法论」。这些<strong>底层认知</strong>分散在不同课里,没有任何一门课会从零讲一遍。</p>
+    <p>这本书就是想填这个洞——把那 22 小时课里真正值钱的「底层认知」抽出来,从最基础的「LLM 是个什么东西」讲起,讲到「Anthropic 整套生态怎么协同」。读完这本书 ≠ 学会写代码,但读完这本书<em>你能跟工程师对话,知道下一步该看哪本书 / 跑哪个 demo / 写哪段 prompt</em>。</p>
+  </div>
+
+  <h3><span class="pre">0.1</span>起源 · 一个反复出现的问题</h3>
+  <p class="lead">这本书的真正起源,是一个反复在不同人嘴里出现的问题:「我想学一下 AI / Claude / Agent 这些东西,但我没那么多时间,也不知道从哪里入手——你能不能给我一份能看下来、看了能学到东西的东西?」</p>
+
+  <p>这个问题里藏着三个限制:</p>
+
+  <ol>
+    <li><strong>没那么多时间</strong> — 不是「一点都没有」,是「不愿意花 22 小时看视频」。一两天集中读 ≈ 可以接受。</li>
+    <li><strong>不知道从哪里入手</strong> — 不是「学不会」,是「看不清地图」。18 门课平铺,看不出主干和支线。</li>
+    <li><strong>看了要学到东西</strong> — 不是「拿个证书」,是「合上书脑子里多了一些可用的概念和判断」。</li>
+  </ol>
+
+  <p>市面上现有的内容,大致分三类——每一类都解决了上面三个限制中的一个,但没人三个都解决。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 现有材料的「漏一格」清单</div>
+    <ul>
+      <li><strong>官方视频课(Skilljar Academy)</strong> — 解决了「学到东西」,但 22 小时太长、没地图、内容散在 18 门。</li>
+      <li><strong>第三方博客汇总(各种「13 门免费课盘点」)</strong> — 解决了「时间」,但只堆课程标题和时长,看完不知道<em>哪门该跳过</em>,更没补充任何课程之外的底层知识。</li>
+      <li><strong>各种 prompt 速查卡 / Claude 技巧合集</strong> — 解决了「快速上手」,但全是技巧没有底层,你照抄出来 prompt 改一改就不会了。</li>
+    </ul>
+  </div>
+
+  <p>这本书想填的洞,是「既有地图、又有底层认知、又能 1-2 天读完」——把 22 小时的核心抽出来重写成 15 章的<strong>深度调研体</strong>,而不是「精华笔记」或「快速入门」。</p>
+
+  <h3><span class="pre">0.2</span>这本书的立场 · 四件事</h3>
+
+  <p>每本书都有自己的预设。把这本书的预设亮出来,读者带着合适的期待来,后面就不会失望或失望到拍桌子。</p>
+
+  <h4>立场一 · 「LLM 怎么工作」比「Claude 怎么操作」重要</h4>
+
+  <p>大多数官方课先教你「点这里、按这个、输入那个」,然后默默假设你已经理解了 LLM 的脾气。这本书反过来——<strong>先花两章让你看清楚 LLM 的四个底层性质</strong>(下一词元预测 · 知识 · 工作记忆 · 可操控性),再去讲产品功能。理解了底层,产品功能你看一眼就会;不理解底层,产品功能学了也只会照抄。</p>
+
+  <h4>立场二 · 「为什么」比「怎么做」走得更远</h4>
+
+  <p>「Anthropic 为什么把 Agentic Loop 拆成 Gather Context → Take Action → Verify Work 三步?」「为什么 Skills 用 markdown 文件而不是 JSON 配置?」「为什么 MCP 把交互拆成 Tools / Resources / Prompts 三种?」<strong>这些「为什么」是设计哲学,不是 API 文档</strong>。理解了为什么,你能在新场景里自己做判断;只学怎么做,场景一变就懵。</p>
+
+  <h4>立场三 · 「整体生态」比「孤立工具」更值钱</h4>
+
+  <p>Claude 不是孤立的聊天机器人,它是一个<em>生态</em>:Chat / Cowork / Code 三件套是入口、Skills 是沉淀机制、Subagents 是切片机制、Hooks 是触发机制、MCP 是外部连接器。<strong>看不到生态全图,你只能局部使用</strong>;看到了,你就能开始组装属于自己的工作流。</p>
+
+  <h4>立场四 · 「敢给判断」比「列举事实」对得起读者</h4>
+
+  <p>这本书会反复出现「我的判断」「我认为」「不要做这件事」这种第一人称的话。不为了立场而立场,是因为<strong>不带判断的中立陈述,等于让读者自己再做一遍工作</strong>。把判断亮出来——错了你可以反驳,对了你可以省时间。读者最不需要的就是「以上几种方法各有优劣,请根据实际情况选择」这种话。</p>
+
+  <h3><span class="pre">0.3</span>这本书不写什么 / 写什么</h3>
+
+  <p>写之前划清边界,免得读者带错的期待来。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>这本书<strong>不写</strong></th><th>这本书<strong>写</strong></th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Transformer 数学推导 / 注意力机制公式</td><td>LLM 工作的四个底层性质,用类比和实操讲清楚(<a href="#s1">第 1 章</a>)</td></tr>
+        <tr><td>Anthropic vs OpenAI vs Google 的商业战</td><td>Anthropic 设计哲学独特在哪里(贯穿全书,尤其 <a href="#s3">第 3 章</a> 4D 框架)</td></tr>
+        <tr><td>Python / 编程语法基础</td><td>不会写代码也能看懂 Claude Code 工作流(<a href="#s7">第 7 章</a>),会写代码的能拿到工程模式(<a href="#s8">第 8 章</a>+)</td></tr>
+        <tr><td>具体某个 API 端点的请求格式</td><td>API 的设计模式 / 缓存策略 / Agent 架构(<a href="#s9">第 9</a>–<a href="#s13">13 章</a>)</td></tr>
+        <tr><td>Claude / GPT / Gemini 的「谁更强」横评</td><td>Anthropic 这套打法的内在一致性(贯穿全书)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>简单说:<strong>这本书写「Anthropic 的认知图景 + Claude 的工程图景」,不写「最快通过 18 门课考试的诀窍」</strong>。如果你的目标是后者,网上 30 分钟搜得到攻略;如果是前者,继续往下看。</p>
+
+  <div class="callout note">
+    <div class="label">i 一个具体的差别</div>
+    <p>如果你想知道「Prompt Caching 命令怎么调用」,看 Anthropic 官方 API 文档。<strong>如果你想知道「为什么 Anthropic 把缓存 TTL 定成 5 分钟而不是别的」「什么时候开缓存反而更贵」「Extended Thinking 模式和 Caching 怎么互动」</strong>——这本书第 10 章会讲。前者是文档,后者是判断。</p>
+  </div>
+
+  <h3><span class="pre">0.4</span>怎么读 · 三种姿势</h3>
+
+  <p>14 章不是必须线性读。下面是三种推荐姿势——按你的时间和目的选。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 姿势一:线性读 · 8-12 小时</div>
+    <p>从前言读到最后一章,一气呵成。适合<em>从零基础到能跟工程师对话</em>的完整路径。最推荐的姿势——前两章打底,后面所有章节都会回头引用。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 姿势二:角色读 · 3-5 小时</div>
+    <p>按你的角色挑章节——产品 / 设计读 1-6 章 + 14 章;后端工程师读 1-2 + 7-13 章;创业者 / 决策者读 1-4 + 14 章。<a href="#s14">第 14 章</a>给了 5 种角色的完整路径表。适合<em>你已经知道自己要什么</em>的人。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 姿势三:议题读 · 1-2 小时</div>
+    <p>带着一个具体问题来——「怎么不被 LLM 骗?」直接读第 1 + 4 章。「Agent 跟 Chat 差在哪?」读第 2 章。「Skills 和 Subagents 怎么选?」读第 8 章。「Prompt Caching 怎么省钱?」读第 10 章。每章都是<em>能独立读懂的单元</em>,不要求线性读完。</p>
+  </div>
+
+  <h3><span class="pre">0.5</span>给谁看 · 读者画像</h3>
+
+  <p>不打算讨好所有人。这本书最适合下面三种读者。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">PRIMARY</div>
+      <div class="num">想入门的人</div>
+      <div class="sub">没用过 Claude / 没写过 prompt / 听过 LLM 但不懂,想一次性补齐</div>
+    </div>
+    <div class="item">
+      <div class="label">SECONDARY</div>
+      <div class="num">PM / 设计师</div>
+      <div class="sub">用过 Claude 但只会 chat,想理解能力边界,跟工程师对话</div>
+    </div>
+    <div class="item">
+      <div class="label">TERTIARY</div>
+      <div class="num">轻度开发者</div>
+      <div class="sub">写过代码但没用过 AI 编码代理,想从「Cursor 用户」变成「真懂 Claude」</div>
+    </div>
+    <div class="item">
+      <div class="label">NOT</div>
+      <div class="num">深度 ML 工程师</div>
+      <div class="sub">写过 transformer 训练代码 / 发过 LLM 论文 — 这本书太浅</div>
+    </div>
+  </div>
+
+  <p>如果你属于「NOT」那一档,这本书底层那两章你大概率会觉得是科普;但产品和工程章节(第 5–13 章)可能还有些 Anthropic 设计哲学层面的判断对你有用。<strong>不要为了「不浪费」而读不属于你画像的书</strong>,这是 4D 框架里 Diligence 的最基本应用——对自己的时间负责。</p>
+
+  <h3><span class="pre">0.6</span>一个最低限度的承诺</h3>
+
+  <p class="lead">合上这本书的那一刻,你会:</p>
+
+  <ul>
+    <li>✅ 看到「LLM 幻觉了」这句话时,能说出至少三种成因和两种防御</li>
+    <li>✅ 看到「这个任务用 Agent 还是 Chat」的问题时,能用 5 个维度给出答案</li>
+    <li>✅ 跟工程师讨论「我们要不要做 Skills 还是 Subagents」时,能给出具体场景对应</li>
+    <li>✅ 看到「Prompt Caching」「Extended Thinking」「MCP」「RAG」「Tool Use」这些词时,知道它们解决什么问题、什么时候不该用</li>
+    <li>✅ 不会因为 Anthropic 出新产品就乱——你能识别它落在生态地图的哪个位置</li>
+  </ul>
+
+  <p>不承诺你能立刻写出生产级 LLM 应用——那需要在这本书之外的实际项目里练。但你会拿到<strong>能让你判断、能让你选择、能让你提对问题的语言</strong>。</p>
+
+  <div class="callout note">
+    <div class="label">i 写作约定</div>
+    <p>书里所有英文术语首次出现都带中文展开(<em>例如 Extended Thinking 深度思考模式</em>)。<code>code 字体</code>用于命令、字段、文件名等「照抄能用」的内容。引用真实文献时用 <code>[Author Year]</code> 格式,不伪造。所有判断带「我」或「这本书」前缀,跟事实陈述区分开。</p>
+  </div>
+
+  <p>翻页,进入第 1 章——LLM 是个什么东西。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic, <em>Claude Skilljar Academy launch</em>, 2026-03 · Anthropic, <em>Building effective agents</em>, blog, 2024-12 · Anthropic, <em>4D Framework for AI Fluency</em> (with Prof. Joseph Feller &amp; Prof. Rick Dakan), 2025 · A. Karpathy, <em>The unreasonable effectiveness of LLMs</em>, talk, 2024.</p>
+
+</div>
+</section>

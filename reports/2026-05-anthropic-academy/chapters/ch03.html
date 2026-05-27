@@ -1,0 +1,363 @@
+<section id="s3" style="border-top: 4px solid var(--c-psych);">
+<div class="container">
+
+  <div class="section-tag"><span class="num">03</span>METHODOLOGY · 方法论篇 / 第三章</div>
+  <h1 class="section-h">4D 框架 · 跟 AI 协作的元方法论 <span class="en">Delegation · Description · Discernment · Diligence</span></h1>
+  <p class="section-sub">前两章讲了 LLM 是什么、Agent 是什么——那都是关于<em>机器</em>的。这一章换边,讲<em>人</em>:跟 AI 协作时,人这一侧到底在做哪几件事?Anthropic 联合两位学者把它压成了四个 D。它不是 prompt 技巧手册,是一组让团队能精确对账的共同语言——下次有人说"这个 AI 输出不对",你能立刻定位是哪一环出了问题。</p>
+
+  <div class="tldr">
+    <div class="label">▼ ELEVATOR PITCH</div>
+    <p>跟 AI 协作时,人做的事可以拆成四块:<strong>Delegation 委派</strong>(决定哪些任务给 AI)、<strong>Description 描述</strong>(把意图讲清楚)、<strong>Discernment 辨别</strong>(判断输出对错)、<strong>Diligence 勤勉</strong>(对结果负责)。这四件事两两组成两个循环——Description-Discernment 循环管单任务,Delegation-Diligence 循环管责任边界。4D 框架不教技巧,它给团队提供共同语言:下次说"这个 prompt 不行",可以精确说"是 Description 不到位,还是 Discernment 没做"。它不是革命性发明,是把已经在做的事命名了——但命名本身,就能解锁组织级的对账能力。</p>
+  </div>
+
+  <div class="callout story">
+    <div class="label">故事 / 2024 年秋 · Cork 大学的一封邮件</div>
+    <p>2024 年秋,爱尔兰国立科克大学(University College Cork)商学院,信息系统教授 Joseph Feller 收到一封来自 Anthropic 的邮件。Anthropic 当时正在筹一门面向所有人的 AI 通识课——不是教程序员怎么调 API,也不是教营销人员怎么写 prompt,而是<strong>教任何一个跟 AI 协作的人,怎么把这件事做明白</strong>。</p>
+    <p>Feller 长期研究开源社区的协作机制,他的合作者 Rick Dakan 是佛罗里达林林学院(Ringling College)的写作教授,常年带学生用 AI 辅助创作。两个人一个研究"群体怎么协作",一个研究"个人怎么跟工具协作",凑在一起回答了 Anthropic 的问题:跟 AI 协作时,人要做的事能不能拆成几个独立的能力?</p>
+    <p>他们最终给出的答案是四个 D。这套框架以 CC-BY 4.0 协议公开发布,2025 年起被 Anthropic 嵌进官方 AI Fluency 课程,在 Skilljar Academy 上对外免费开放。</p>
+    <p>故事的关键不在框架本身有多新——4 个 D 里没有一个是从未被人讨论过的——而在于它<em>把分散在工程师、设计师、产品经理、培训师各自语境里的零散直觉,压成了一张组织能共用的清单</em>。在此之前,公司里说"这个 AI 输出不好",意思可能是 prompt 没写好、可能是任务一开始就不该交给 AI、也可能是审核没做到位。在此之后,这句话被强制要求带上一个 D 的后缀。</p>
+  </div>
+
+  <h3><span class="pre">3.1</span>四个 D 是什么 · <span class="en">The Four Capabilities</span></h3>
+
+  <p class="lead">先把四件事一次说清,后面再分别展开。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">D1</div>
+      <div class="num">Delegation</div>
+      <div class="sub">委派 — 决定哪些任务交给 AI</div>
+    </div>
+    <div class="item">
+      <div class="label">D2</div>
+      <div class="num">Description</div>
+      <div class="sub">描述 — 把意图讲清楚</div>
+    </div>
+    <div class="item">
+      <div class="label">D3</div>
+      <div class="num">Discernment</div>
+      <div class="sub">辨别 — 判断 AI 输出的对错</div>
+    </div>
+    <div class="item">
+      <div class="label">D4</div>
+      <div class="num">Diligence</div>
+      <div class="sub">勤勉 — 对最终结果负责</div>
+    </div>
+  </div>
+
+  <p>这四个 D 的关系不是线性流水线(先 1 再 2 再 3 再 4),而是<strong>两两咬合的两个循环</strong>:</p>
+
+  <ul>
+    <li><strong>Description ↔ Discernment</strong> — 单个任务层:写 prompt(描述意图) → 看输出(辨别对错) → 改 prompt → 再看输出。短循环,以分钟计。</li>
+    <li><strong>Delegation ↔ Diligence</strong> — 责任分工层:挑哪些任务交给 AI(委派) → 上线后看效果和事故(勤勉) → 把不该交的任务收回来 / 把可以放手的任务放出去。长循环,以周或月计。</li>
+  </ul>
+
+  <p>这两个循环相互独立但相互影响。Description 写得再好,如果一开始就不该把这件事交给 AI(Delegation 错了),整个就是浪费。反过来 Delegation 选得很妙、把一项重复劳动交给 AI 处理,但 Description 太粗、Discernment 走过场,产出还是垃圾。</p>
+
+  <div class="callout note">
+    <div class="label">i 框架的真正用处不是"教你怎么用 AI"</div>
+    <p>4D 框架不是技巧清单——它里面没有"prompt 要怎么写"的具体公式,也没有"哪些任务该交给 AI"的现成答案。它的真正用处是<strong>给一群人提供一套对账词汇</strong>:产品经理说"这个功能 AI 化效果不好",技术负责人能立刻反问"你说的是 Description 没讲清,还是 Discernment 跑不通,还是这就不是个该 Delegation 的任务"。在 4D 出现之前,这三种问题被混在一句"AI 不好用"里,谁也吵不出结论。</p>
+  </div>
+
+  <h3><span class="pre">3.2</span>Delegation 委派 · 决定哪些任务给 AI · <span class="en">What to Hand Off</span></h3>
+
+  <p class="lead">委派是四个 D 里位置最靠前、也最容易被跳过的一个。大部分团队上手 AI 的姿势是"先试试看",意思是<em>不挑任务,见什么塞什么</em>——这就是没做 Delegation。</p>
+
+  <p>Delegation 要回答的核心问题只有一个:<strong>这个任务,该不该交给 AI?</strong>展开是三个子问题。</p>
+
+  <h4>子问题一 · 这个任务的失败成本是多少?</h4>
+
+  <p>AI 输出会错。任何把 AI 当生产环节的人,先要算出"错了之后,谁来兜底,代价是什么"。这个代价决定了 Delegation 的方向。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>失败成本</th><th>例子</th><th>建议姿势</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>低 · 错了能秒撤</strong></td><td>给一段文案改语气、把会议记录摘要、生成几个备选标题</td><td>放手让 AI 做,人事后审一眼即可</td></tr>
+        <tr><td><strong>中 · 错了要返工但不爆雷</strong></td><td>第一版代码草稿、第一版 PRD、客户邮件草稿</td><td>AI 出初稿,人做完整修订并对内确认</td></tr>
+        <tr><td><strong>高 · 错了影响外部用户 / 涉及法律或资金</strong></td><td>对外发布的稿件、合规审核、给客户的法律承诺、付款指令</td><td>AI 只能做辅助,关键判断必须人做并签字</td></tr>
+        <tr><td><strong>极高 · 错了不可逆 / 关乎人命</strong></td><td>医疗诊断、刑事司法证据、自动驾驶决策、武器系统</td><td>不交给 AI 当主体决策者,只做信息整理辅助</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>这张表的关键不是"哪个级别能不能用 AI",是<strong>每个级别人介入的深度不同</strong>。低成本任务人可以只做事后抽检,极高成本任务人要在每个节点签字。<a href="#s1">第 1 章</a> 讲过的 Schwartz 律师案,本质就是 Delegation 错位——他把"高失败成本"的工作(法庭引用真实判例)按"低失败成本"的姿势处理(让 AI 自由发挥、不验证)。</p>
+
+  <h4>子问题二 · 这个任务有没有可审性?</h4>
+
+  <p>AI 输出能不能被审,决定了它能不能交。"流畅的废话"是 LLM 默认产出,要把废话筛掉,必须有人或系统能看懂结果对不对。</p>
+
+  <p>有些任务<em>本质上不可审</em>——比如让 AI 给一段视频自动生成 3 小时实时字幕(直播场景),根本来不及看;或者让 AI 在毫秒级延迟里做高频交易决策。这类任务即使想委派,也<strong>没有 Discernment 跟得上</strong>。这种情况要么不交给 AI,要么交了就要接受"出错没救"的代价。</p>
+
+  <h4>子问题三 · 这件事让 AI 做,人会不会失去关键能力?</h4>
+
+  <p>这条不是 Anthropic 课程里最强调的,但 Feller 在课程外的访谈里反复提过——<strong>把一项任务永久外包给 AI,意味着这个组织里相关的人会失去做这件事的肌肉</strong>。三年之后,这个团队会不会因为"AI 不能用了"而集体失能?这条对教育、对培养新人的组织尤其要警惕。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ Delegation 最常见的错位</div>
+    <p>不是"该交的没交",而是"<strong>不该交的全交了</strong>"。一旦团队尝到甜头,会出现"什么都问 AI"的过载倾向——包括团队战略决策、人事评价、客户关系敏感判断这些本不该交给 AI 的事。这种过载一旦形成,Diligence 环节会出现系统性松弛:大家默认 AI 说了算,集体不再为细节负责。比"完全不用 AI"更危险的,是"无差别用 AI"。</p>
+  </div>
+
+  <h3><span class="pre">3.3</span>Description 描述 · 把意图讲清楚 · <span class="en">Saying What You Mean</span></h3>
+
+  <p class="lead">Description 是四个 D 里跟"prompt 工程"重叠度最高的一个,但它比"会写 prompt"宽——它包括<em>你脑子里想要什么、能不能用文字精确还原出来</em>这件事本身。<a href="#s9">第 9 章</a> 会专讲 prompt 技巧,本节只讲 Description 这一<em>能力</em>的内核。</p>
+
+  <p>很多人写 prompt 写不好,根源不是不会用 XML 标签或 few-shot 示例,而是<strong>自己脑子里要什么就没想清楚</strong>。Description 难,难在它强迫人把模糊的直觉显式化。</p>
+
+  <h4>Description 包含的四个层次</h4>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>层次一 · 目标 · What</h4>
+      <p>你要 AI 产出什么?写一段还是写五段?给结论还是给选项?是文档还是表格?目标层最容易写,也最容易写偏——"帮我写个总结"这句话,信息量接近零。明确的目标长这样:"用 200 字总结下面会议记录的三个决议事项,每条决议带上责任人和截止日。"</p>
+    </div>
+    <div class="card">
+      <h4>层次二 · 上下文 · Why & For Whom</h4>
+      <p>这个产出给谁看?为什么要做?背景信息是什么?上下文层是 AI 输出质量翻倍最快的杠杆——同一个目标,告诉 AI "这是给季度董事会看的"和"这是给团队周会快速过一下"的产出会完全不同。<a href="#s1">第 1 章</a> 讲过 LLM 对前文极度敏感,上下文就是在拉它的概率分布到对的轨道。</p>
+    </div>
+    <div class="card">
+      <h4>层次三 · 约束 · Do / Don't</h4>
+      <p>有什么不能做、必须做、绕开哪些雷区?常见约束有字数、风格、术语、禁忌话题、要求引用、要求结构化输出。约束层经常被忽略,直到产出第一次跑偏才补上。Anthropic 推荐的写法:把"do"和"don't"分两块写,人和 AI 都更容易对齐。</p>
+    </div>
+    <div class="card">
+      <h4>层次四 · 评判标准 · How to Tell If Done</h4>
+      <p>这一层最难,但价值最高——<strong>在跑 AI 之前,自己先想清楚"什么样的输出算合格"</strong>。如果你自己都说不出"合格长什么样",AI 输出再好你也判不出对错。这就是 Description 和 Discernment 在这一层会接到——Description 写不出标准,Discernment 就跑不通。</p>
+    </div>
+  </div>
+
+  <h4>Description 的"好做法 vs 坏做法"对比</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>场景</th><th>坏做法</th><th>好做法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>请 AI 改一段文案</td><td>"帮我改一下"</td><td>"这是一段对外发布的产品介绍,目标读者是非技术管理者。把它改得不带技术术语,200 字以内,保留三个产品优势,语气克制不要夸大。"</td></tr>
+        <tr><td>请 AI 写邮件</td><td>"给客户发个邮件道歉"</td><td>"客户因为我们昨晚延迟交付错过了他的发布会。写一封致歉邮件,承认时间错配是我方原因(但不展开技术细节),提一项具体补偿(我会另发给你),邮件不超过 150 字。语气真诚,不要堆形容词。"</td></tr>
+        <tr><td>请 AI 分析数据</td><td>"看看这组数据有什么发现"</td><td>"下面是过去 12 周的周活数据。我想了解最近 4 周的下降是不是季节性的——请对比去年同期同 4 周,如果是季节性的告诉我幅度对得上对不上;如果不是季节性,列出三个最可能的解释方向,标明每个解释需要什么数据进一步验证。"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ Description 的判断标准:能不能给另一个人看</div>
+    <p>检验一段 Description 的最简单方法:把它从 AI 输入框里复制出来,发给一个对这件事不熟的同事,问"你看这个 prompt,能猜出我要什么吗?"如果同事能猜出来,AI 也能;如果同事猜不出来,AI 输出大概率不对你的胃口。这一条是 Description 能力训练最实用的练习——<strong>把 AI 当成一个聪明但对你毫无背景了解的实习生</strong>,你给他的指令是不是足以让他独立做完?</p>
+  </div>
+
+  <h3><span class="pre">3.4</span>Discernment 辨别 · 评估 AI 输出的对错 · <span class="en">Reading the Output</span></h3>
+
+  <p class="lead">Discernment 是四个 D 里被低估最严重的一个。在 ChatGPT 时代之前,人面对的文本基本都来自其他人——人会写错,但不会"系统性地把假的写得像真的"。LLM 不一样,它<a href="#s4">是结构性产出流畅废话的</a>(<a href="#s4">第 4 章</a> 详细讲幻觉),这意味着<strong>读 AI 输出需要一种过去没必要发展的肌肉</strong>:抵抗"流畅 ≠ 正确"的认知陷阱。</p>
+
+  <h4>Discernment 的三种独立判断</h4>
+
+  <p>看一段 AI 输出对不对,要在三个独立维度做判断,缺一个就漏掉一类错误。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">FACT</div>
+      <div class="num">事实层</div>
+      <div class="sub">引用、数据、人名、日期对不对</div>
+    </div>
+    <div class="item">
+      <div class="label">LOGIC</div>
+      <div class="num">逻辑层</div>
+      <div class="sub">推理链有没有跳步 / 自相矛盾</div>
+    </div>
+    <div class="item">
+      <div class="label">FIT</div>
+      <div class="num">适配层</div>
+      <div class="sub">符不符合你的目标 / 受众 / 场景</div>
+    </div>
+    <div class="item">
+      <div class="label">BIAS</div>
+      <div class="num">偏置层</div>
+      <div class="sub">有没有 AI 自带的训练偏见 / 平庸答案</div>
+    </div>
+  </div>
+
+  <p><strong>事实层</strong>是最容易也最常被忽视的——LLM 编引用、编数据、编人物经历的本事比写真实内容还熟练。任何带数字、带引用、带具体姓名的输出,默认要外部验证(<a href="#s4">第 4 章</a> 详讲)。</p>
+
+  <p><strong>逻辑层</strong>需要稍微费点脑子——LLM 在长推理链里会跳步、会自相矛盾、会前面说 A 后面说不是 A。识别这些需要你在脑子里复盘它的推理路径,不能只看结论是不是符合直觉。</p>
+
+  <p><strong>适配层</strong>是 Description 的镜像——Description 是"告诉 AI 你要什么",适配判断是"AI 给的真的是你要的吗"。一段写得漂亮但不符合你受众的稿件,事实和逻辑都没错,但适配度为零,等于不可用。</p>
+
+  <p><strong>偏置层</strong>是最隐蔽的——LLM 因为训练目标是"下一个字最常见",输出会天然偏向<em>训练语料里的中位答案</em>。让它给一份"创新方案",它给的常常是该领域里被讨论烂了的几种思路;让它给"反主流观点",它给的常常是已经被主流接受为"标志性反主流"的那些观点。识破这层偏置,要求你对该领域已经熟到能闻到陈词滥调的味道。</p>
+
+  <h4>Discernment 的"好做法 vs 坏做法"对比</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>场景</th><th>坏做法</th><th>好做法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>AI 给了一份带 5 条引用的报告</td><td>看一眼,觉得"引用很专业",直接用</td><td>抽查至少 2 条引用是否真实存在;关键数字回原始来源核对</td></tr>
+        <tr><td>AI 给了一段推理论证</td><td>看结论符合自己预期就接受</td><td>逐步复盘推理链,问"前提到结论中间这一跳成立吗"</td></tr>
+        <tr><td>AI 给了一段创意方案</td><td>觉得"写得挺好"就采纳</td><td>问自己:这是不是这个领域里前 20% 的人闭着眼也能想到的?如果是,要 AI 再产生 3 个跟这个完全不一样的方向</td></tr>
+        <tr><td>AI 给了一段技术结论</td><td>因为"语气很自信"就采信</td><td>记住 LLM 的"自信"和"正确"没关系(<a href="#s1">第 1 章</a>),自信只意味着这段文本在训练里常见,跟它对错无关</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout sharp">
+    <div class="label">✕ Discernment 训练最大的障碍:流畅性偏好</div>
+    <p>人类大脑对流畅文本有天然好感——读起来顺、用词专业、结构清晰的内容,我们会下意识地觉得"它说得对"。这种偏好在 LLM 出现之前问题不大(人类写流畅东西通常确实懂),在 LLM 出现之后变成了陷阱:<strong>LLM 把"流畅"和"正确"彻底解耦了</strong>。一段编得很专业的虚假法律意见,跟一段真实法律意见,在文本表面看不出差别。Discernment 能力的训练,本质是在脑子里建立一个独立于"读起来顺不顺"的判断回路——这事很反人性,需要刻意练习。</p>
+  </div>
+
+  <h3><span class="pre">3.5</span>Diligence 勤勉 · 对结果负责 · <span class="en">Owning the Outcome</span></h3>
+
+  <p class="lead">Diligence 是四个 D 里跨度最大的一个——它不只是"任务完成那一刻"做的事,而是<strong>对自己使用 AI 这件事整体负责</strong>。包括三个时间尺度:任务前、任务中、任务后。</p>
+
+  <h4>任务前 · 选对 AI 而不是凑合用</h4>
+
+  <p>Diligence 从任务开始之前就启动了。包括:</p>
+
+  <ul>
+    <li>✅ 选合适的模型(Opus 做难推理 / Sonnet 做常规生产 / Haiku 做高吞吐——<a href="#s5">第 5 章</a> 详讲模型选型)</li>
+    <li>✅ 检查任务对数据的处理符不符合公司或个人的隐私 / 合规要求</li>
+    <li>✅ 评估如果 AI 出错,有没有可执行的回滚方案</li>
+    <li>❌ 反例:不管什么任务都用同一个对话框、同一个模型,出问题再说</li>
+  </ul>
+
+  <h4>任务中 · 不当甩手掌柜</h4>
+
+  <p>Diligence 在任务执行中要求:</p>
+
+  <ul>
+    <li>✅ 长任务里 Agent 跑到关键节点要看一眼(<a href="#s2">第 2 章</a> 讲过 Agent 自主性带来的"sleep at the wheel"风险)</li>
+    <li>✅ AI 调用工具改了你的代码 / 文件 / 数据库,改完要看 diff,不是默认接受</li>
+    <li>✅ 对外发出的内容(邮件、报告、文案),AI 写完后人逐句读一遍再发</li>
+    <li>❌ 反例:让 AI 在后台跑了 30 分钟,出来的结果直接拷贝就发出去</li>
+  </ul>
+
+  <h4>任务后 · 对下游负责</h4>
+
+  <p>Diligence 在任务结束后要求:</p>
+
+  <ul>
+    <li>✅ 你的产出会进入别人的工作流——如果是 AI 主笔写的,要让下游知道(诚实标注 AI 参与度)</li>
+    <li>✅ AI 出错后,主动告知受影响方(Schwartz 律师案的反面教材是他事后还在为引用辩护,而不是立刻承认错误)</li>
+    <li>✅ 把这次的事故 / 经验沉淀到团队规则里,让下次有人少踩同样的坑</li>
+    <li>❌ 反例:出了事甩锅给 AI("是 AI 写错了")。AI 不是法律意义上的责任主体,签字的人永远是责任人</li>
+  </ul>
+
+  <div class="callout note">
+    <div class="label">i Diligence 的核心承诺 · 「AI 不能替你承担责任」</div>
+    <p>这是 4D 框架里最严肃的一条。<strong>不管 AI 输出多么完美、多么权威,当它进入你的工作流并被署上你的名字、寄给你的客户、提交给你的法庭时,责任在你身上,不在 AI 身上</strong>。Anthropic 在课程里反复重复这句话——不是道德绑架,是法律事实。Schwartz 律师案的判决书里,法官没有任何一句话责怪 ChatGPT,所有责难都指向 Schwartz 本人。AI 是工具,工具不背锅,签字的人背。这条原则一旦内化,Diligence 自然就有了。</p>
+  </div>
+
+  <h3><span class="pre">3.6</span>两个循环 · 短循环和长循环的咬合 · <span class="en">Two Loops</span></h3>
+
+  <p class="lead">前面分别讲了四个 D,这一节讲它们怎么动起来。</p>
+
+  <h4>短循环 · Description ↔ Discernment</h4>
+
+  <p>这个循环以分钟计,跑在单个任务上。流程:</p>
+
+  <ol>
+    <li>写第一版 Description(目标 / 上下文 / 约束 / 评判标准)</li>
+    <li>AI 产出</li>
+    <li>用 Discernment 的四层判断(事实 / 逻辑 / 适配 / 偏置)读一遍</li>
+    <li>不满意 → 改 Description(通常是约束不够细 / 评判标准没说清)</li>
+    <li>回到第 2 步</li>
+  </ol>
+
+  <p>这个循环里有一个常被忽视的反馈方向——<strong>Discernment 的发现,有时候应该改 Delegation 而不是 Description</strong>。如果你跑了 5 轮短循环结果还不对,可能不是 prompt 没写好,而是这件事根本不该交给 AI(Delegation 错了),或者交给 AI 后人这一侧根本审不动(可审性不足)。</p>
+
+  <h4>长循环 · Delegation ↔ Diligence</h4>
+
+  <p>这个循环以周或月计,跑在团队 / 个人对 AI 整体使用上。流程:</p>
+
+  <ol>
+    <li>挑出一类任务,决定要不要常规化地交给 AI(Delegation)</li>
+    <li>放出去跑一段时间,持续观察(Diligence)</li>
+    <li>定期复盘:这类任务交给 AI 后,质量怎样、成本怎样、有没有事故、人这一侧有没有失去能力</li>
+    <li>根据复盘结果调边界:把不该交的收回来 / 把可以再放手的放出去 / 改进流程</li>
+    <li>回到第 2 步</li>
+  </ol>
+
+  <p>长循环的关键是<strong>定期</strong>。一个团队最容易犯的错是:Delegation 决策做了之后就再也不复盘——三个月前决定"客户邮件初稿交给 AI",三个月后没人再问这件事的质量怎么样。Diligence 在长循环里的核心动作,就是把这种"既定决策"拉出来定期审视。</p>
+
+  <h4>两个循环怎么互相影响</h4>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>短循环里的现象</th><th>可能触发长循环的什么调整</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>同类任务 Description 反复跑 5 轮才能凑合</td><td>这件事可能不该交给 AI(Delegation 收回),或者要做团队级的 prompt 模板沉淀</td></tr>
+        <tr><td>Discernment 持续发现事实层错误</td><td>这件事要加外部验证机制(RAG / Citations / 工具调用),不靠 AI 自己</td></tr>
+        <tr><td>Description 又长又细但 AI 还是飘</td><td>可能模型选错了(用 Haiku 做了该用 Opus 的事),或者上下文窗口接近上限(<a href="#s1">第 1 章</a> 讲过 lost-in-the-middle)</td></tr>
+        <tr><td>团队成员普遍说不出这个任务的"评判标准"</td><td>这件事本质不可审,Delegation 要谨慎</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 一个判断你 4D 用得对不对的简易测试</div>
+    <p>开一次小复盘:让团队成员各自说三个最近用 AI 翻车的瞬间。如果大家描述事故时只能说"AI 不行 / AI 又编了",说明 4D 没建起来——大家没有词汇区分是哪一环出问题。如果大家能说"这次是 Description 漏了适用人群"或"这次是 Delegation 错了、不该让 AI 写法律意见"或"这次是 Discernment 漏看了第三条引用",说明 4D 已经成了共同语言。<strong>这种语言一旦建起来,事故复盘的效率会数量级提升</strong>。</p>
+  </div>
+
+  <h3><span class="pre">3.7</span>4D 的<strong>局限</strong> · 别把它当万能 · <span class="en">Where the Framework Breaks</span></h3>
+
+  <p class="lead">4D 不是革命性发明,也不是覆盖所有 AI 协作场景的万能框架。诚实说出它的边界,比把它神化更有用。</p>
+
+  <h4>局限一 · 它假设 AI 输出能被审</h4>
+
+  <p>Discernment 跑得通的前提,是 AI 输出能被人或系统看到、有时间看、看得懂。在以下场景里这条假设失效:</p>
+
+  <ul>
+    <li>❌ <strong>实时生成场景</strong> · AI 在直播 / 客服会话里实时输出,人来不及审,审完已经发出去了</li>
+    <li>❌ <strong>超长输出</strong> · AI 一次输出 5 万字代码或 100 页报告,逐句审的人力成本比让人重写还高</li>
+    <li>❌ <strong>专业门槛极高的领域</strong> · AI 给医生写诊断建议,基层医生没能力 Discern 顶级专家级别的输出</li>
+  </ul>
+
+  <p>这些场景需要额外的工程机制,不是靠 4D 的"个人能力"层面能解决的——要靠系统层面的多层防御(<a href="#s4">第 4 章</a> 详讲)。</p>
+
+  <h4>局限二 · 它是方法论不是技巧手册</h4>
+
+  <p>读完 4D,你不会变成 prompt 高手——它只告诉你"Description 这件事很重要",不告诉你"prompt 第三行该不该加 XML 标签"。技巧手册看 <a href="#s9">第 9 章</a>。如果你期待 4D 解决具体的 prompt 工程问题,会失望。</p>
+
+  <h4>局限三 · 它过度个人化,缺组织视角</h4>
+
+  <p>4D 的四个 D 都是<em>一个人</em>跟 AI 协作时的能力维度。一个 50 人团队整体用 AI 时,还有几件 4D 不覆盖的事:谁有权决定 Delegation 边界?Description 模板归谁维护?Discernment 出问题谁追责?这些组织层面的问题,Anthropic 的 AI Fluency 课程没系统讲——这是 4D 之外仍待补的工作。</p>
+
+  <h4>局限四 · 它隐含一个乐观假设 · "人能跟上 AI"</h4>
+
+  <p>4D 假设人有能力做 Description 和 Discernment。在 AI 能力快速进化的时代,这个假设的有效期是多久?当 AI 输出在某个领域超过 99% 的人类专家时,普通人怎么 Discern 它的输出?这不是杞人忧天——医疗诊断、法律意见、代码审查已经在出现这种局面。4D 在这个临界点之后要不要改写,Anthropic 自己也没答案。</p>
+
+  <div class="callout sharp">
+    <div class="label">✕ 关于 4D 的诚实评价</div>
+    <p>4D 不是"一组从未有人想过的洞察"。它讲的每件事——交不交给 AI、prompt 怎么写、输出怎么审、责任谁背——都已经在工程师、产品经理、律师、医生各自的领域里被讨论过。它的真正贡献,是<strong>把这些散落在不同领域的零散直觉,压缩成一组任何团队都能上手用的对账词汇</strong>。命名,本身就是一种生产力——给一件没有名字的事起个名字,这件事才能被讨论、被对账、被改进。这就是 4D 框架值钱的地方,也是它<em>仅有的</em>值钱的地方。把它当成"AI 时代必读方法论",是过度包装;把它当成一组让团队能精确对账的词汇,刚刚好。</p>
+  </div>
+
+  <h3><span class="pre">3.8</span>这一章给你的判断武器</h3>
+
+  <p class="lead">读完这章,合上,你应该带走以下几个能直接用的判断武器。</p>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器一 · 出现"AI 不好用"的抱怨时,先逼问对方是哪个 D 出了问题</div>
+    <p>"AI 不好用"这句话信息量为零。强制对方说出后缀:是 Delegation 错位(不该交给 AI 的活)、Description 不到位(没讲清要什么)、Discernment 漏审(输出错了没人接住),还是 Diligence 失守(签字的人没看就发出去了)?这一步过滤之后,大部分"AI 不好用"会变成"这个 prompt 写得不细"或者"这件事本来就不该让 AI 主笔",问题就有解了。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器二 · 跑短循环超过 5 轮还不行时,跳回长循环</div>
+    <p>同一个任务上 Description-Discernment 循环跑 5 轮以上还出不来满意结果,大概率不是 prompt 的事——是 Delegation 阶段就选错了任务,或者是 Discernment 阶段就缺乏判断这件事对错的能力。继续改 prompt 是浪费时间,该退回去重新选任务、或者承认这件事不该交给 AI。</p>
+  </div>
+
+  <div class="callout ops">
+    <div class="label">✓ 武器三 · 把"AI 不能替你背锅"这条贴在脑门上</div>
+    <p>Diligence 的所有条款,归到一句话就是:<strong>签字的人永远是责任人</strong>。Schwartz 律师案的法官没责怪 ChatGPT 一句话,所有责难都指向 Schwartz 本人。AI 是工具,工具不背锅。这条原则一旦内化,你对 AI 输出的态度会自动从"信不信"变成"我能不能为这段输出署上自己的名字"——后者是一个高得多的标准。</p>
+  </div>
+
+  <p>下一章换主题——4D 是协作侧的方法论,讲完<em>人</em>要做什么。接下来讲 AI 这一侧最大、也最被低估的脾气:<strong>幻觉</strong>。<a href="#s4">第 4 章</a> 会把"为什么 LLM 会一本正经胡说"这件事,从机制到防御方法,完整拆一遍——4D 里的 Discernment 之所以这么难,根源就在那里。</p>
+
+  <p class="ref">主要参考:<br>
+  Anthropic, J. Feller (University College Cork), R. Dakan (Ringling College), <em>AI Fluency: Framework &amp; Foundations</em>, CC-BY 4.0, 2025 · Anthropic Skilljar Academy, <em>AI Fluency Course</em>, 2026 · D. Norman, <em>The Design of Everyday Things</em>, 1988(第 2 章的"行动七阶段"是 Description-Discernment 循环的设计学先声)· L. Bainbridge, <em>Ironies of Automation</em>, Automatica, 1983(讲自动化越成熟、操作员的剩余职责越关键的经典)· Mata v. Avianca, S.D.N.Y. 22-cv-1461, 2023(Schwartz 律师案,Diligence 失守的标准案例)· Anthropic, <em>Claude Guidelines for Responsible Deployment</em>, 2025.</p>
+
+</div>
+</section>

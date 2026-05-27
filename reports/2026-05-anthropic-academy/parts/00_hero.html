@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic 与 Claude 深度调研 · 从 LLM 是什么到上手写代码</title>
+<meta name="description" content="一份从零基础起步的 Anthropic 生态深度入门。不为了让你去上 18 门视频课,而是直接把那 22 小时的核心知识用一本书讲透。15 章 · LLM 原理 / 4D 方法论 / 产品全家桶 / Claude Code 工程 / MCP 协议。">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_shared/style.css?v=20260527a">
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css?v=20260527a">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ============= HERO ============= -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">ANTHROPIC DEEP RESEARCH · v1.0 · COMPLETE</div>
+    <h1>
+      Anthropic 与 Claude 深度调研<span class="ital">.</span>
+      <span class="small">LLM 原理 · 方法论 · 产品全家桶 · 编码代理 · MCP 协议 · <em class="ital">A Deep Field Guide</em></span>
+    </h1>
+    <p class="lede">
+      这不是一份课程目录,也不是 prompt 速查卡——是一份<em>把 22 小时官方课压成一本可读的深度调研</em>。
+      Anthropic 在 2026 年开了官方学习平台 Skilljar,18 门免费课横跨 5 个轨道,但视频形式太重、内容散在各课。
+      这本调研换一个写法:<strong>从「LLM 到底是个什么东西」讲起,一直走到「怎么用 Claude Code 写完一个完整功能」</strong>。
+      不需要前置知识、不需要会写代码,但读完你会拿到能跟工程师对话的语言。15 章 · 6 篇。
+    </p>
+
+    <div class="hero-meta">
+      <div class="item">
+        <div class="label">CHAPTERS</div>
+        <div class="value">15<span class="unit">/6 PARTS</span></div>
+        <div class="sub">基础 · 方法论 · 产品 · 编码 · 进阶 · 怎么学</div>
+      </div>
+      <div class="item">
+        <div class="label">VERSION</div>
+        <div class="value">v1.0<span class="unit">SAMPLE</span></div>
+        <div class="sub">2026-05 · 当前 2 章样本,余下 13 章待写</div>
+      </div>
+      <div class="item">
+        <div class="label">DEPTH</div>
+        <div class="value">~70K<span class="unit">words(目标)</span></div>
+        <div class="sub">学术深度 + 工程案例 + 可操作锚点</div>
+      </div>
+      <div class="item">
+        <div class="label">AUDIENCE</div>
+        <div class="value">零基础<span class="unit">readable</span></div>
+        <div class="sub">不需要前置;但工程师也读得到细节</div>
+      </div>
+    </div>
+
+    <div class="hero-toc-section">
+      <div class="hero-toc-label">CHAPTER MAP · 章节地图</div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">前言 <span class="en">PREFACE</span></div>
+        <div class="hero-toc">
+          <a href="#s0" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">PREFACE</span>
+            <div class="title">为什么写这本书 / 怎么读</div>
+            <div class="en">Why This Book Exists</div>
+            <div class="desc">起源 / 立场 / 不写什么 / 写什么 / 三种读法。从「ChatGPT 凭什么火」讲起。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第一篇 LLM 是个什么东西 <span class="en">PART I · WHAT IS AN LLM</span></div>
+        <div class="hero-toc">
+          <a href="#s1" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">CHAPTER 01 · LLM</span>
+            <div class="title">一个字一个字蹦出来的鹦鹉</div>
+            <div class="en">Next Token Prediction · 4 Properties</div>
+            <div class="desc">下一词元预测 · 知识 · 工作记忆 · 可操控性 — 四个性质讲透 LLM 的脾气。</div>
+          </a>
+          <a href="#s2" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">CHAPTER 02 · AGENT</span>
+            <div class="title">什么是 AI Agent · 跟 Chat 的本质区别</div>
+            <div class="en">From Chat to Agent</div>
+            <div class="desc">Agentic Loop 三阶段 · 监工模式 · 为什么 Agent 比 Chat 更强也更危险。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第二篇 跟 AI 协作的方法论 <span class="en">PART II · METHODOLOGY</span></div>
+        <div class="hero-toc">
+          <a href="#s3" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 03 · 4D</span>
+            <div class="title">4D 框架 · 跟 AI 协作的元方法论</div>
+            <div class="en">Delegation · Description · Discernment · Diligence</div>
+            <div class="desc">两个循环 · 一套词汇 · 团队对齐 AI 协作判断的「上位语言」。</div>
+          </a>
+          <a href="#s4" class="card" style="--ch-color: var(--c-injury);">
+            <span class="num">CHAPTER 04 · HALLUCINATION</span>
+            <div class="title">幻觉的真相 · 不是 bug 是 feature</div>
+            <div class="en">Why LLMs Hallucinate</div>
+            <div class="desc">三种典型幻觉 · 怎么识别 · 系统级 + 用户级双层防御。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第三篇 Claude 产品全家桶 <span class="en">PART III · CLAUDE PRODUCTS</span></div>
+        <div class="hero-toc">
+          <a href="#s5" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">CHAPTER 05 · TRIO</span>
+            <div class="title">Chat / Cowork / Code 三件套</div>
+            <div class="en">Three Modes, Three Workflows</div>
+            <div class="desc">从对话框到桌面协作到工程编码,三种模式各自的边界 + 选用决策树。</div>
+          </a>
+          <a href="#s6" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">CHAPTER 06 · DESKTOP</span>
+            <div class="title">Projects / Artifacts / Skills / Connectors</div>
+            <div class="en">The Desktop Stack</div>
+            <div class="desc">长期上下文 · 持续编辑容器 · 能力包 · 外部连接器 — 桌面端这四个部件的工程意义。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第四篇 Claude Code 工程实操 <span class="en">PART IV · CLAUDE CODE</span></div>
+        <div class="hero-toc">
+          <a href="#s7" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">CHAPTER 07 · WORKFLOW</span>
+            <div class="title">Explore → Plan → Code → Commit 工作流</div>
+            <div class="en">The EPCC Workflow</div>
+            <div class="desc">四阶段哲学 · 三种 Approval Mode · 为什么不能跳过 Explore。</div>
+          </a>
+          <a href="#s8" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">CHAPTER 08 · 4 KNIVES</span>
+            <div class="title">Skills / Subagents / Hooks / MCP 四把刀</div>
+            <div class="en">When to Use Which</div>
+            <div class="desc">四个自定义机制的本质区别 · 选型决策树 · 怎么组合用出威力。</div>
+          </a>
+          <a href="#s9" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">CHAPTER 09 · PROMPT</span>
+            <div class="title">Prompt 工程 · 5 条原则 + Extended Thinking</div>
+            <div class="en">Five Rules and Deep Thinking</div>
+            <div class="desc">清晰直接 · 具体明确 · XML 标签 · few-shot · 深度思考模式 — Anthropic 自己的 prompt 指南。</div>
+          </a>
+          <a href="#s10" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">CHAPTER 10 · CACHING</span>
+            <div class="title">Prompt Caching · 把账单降到 1/10</div>
+            <div class="en">Production-Grade Cost Control</div>
+            <div class="desc">缓存机制 · 五条规则 · 何时开何时不开 · Extended Thinking 的成本陷阱。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第五篇 进阶架构 <span class="en">PART V · ADVANCED ARCHITECTURE</span></div>
+        <div class="hero-toc">
+          <a href="#s11" class="card" style="--ch-color: var(--c-recovery);">
+            <span class="num">CHAPTER 11 · RAG</span>
+            <div class="title">RAG · 让 AI 用你的私有数据</div>
+            <div class="en">Retrieval Augmented Generation</div>
+            <div class="desc">分块 · 嵌入 · 检索 · BM25 + 向量 · Contextual Retrieval · 何时不该用 RAG。</div>
+          </a>
+          <a href="#s12" class="card" style="--ch-color: var(--c-recovery);">
+            <span class="num">CHAPTER 12 · MCP</span>
+            <div class="title">MCP 三大原语 · Tools / Resources / Prompts</div>
+            <div class="en">Model Context Protocol</div>
+            <div class="desc">三种交互谁控制 · Sampling/Roots/StreamableHTTP 进阶 · 为什么开放这个协议。</div>
+          </a>
+          <a href="#s13" class="card" style="--ch-color: var(--c-recovery);">
+            <span class="num">CHAPTER 13 · WORKFLOW</span>
+            <div class="title">Agent Workflow 四种模式</div>
+            <div class="en">Parallelization / Chaining / Routing / Agent</div>
+            <div class="desc">四种架构 · 何时选哪种 · 「能用 Workflow 就别用 Agent」的工程原则。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第六篇 怎么继续学 <span class="en">PART VI · LEARNING PATHS</span></div>
+        <div class="hero-toc">
+          <a href="#s14" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 14 · PATHS</span>
+            <div class="title">18 门官方课速查 + 5 种角色路径</div>
+            <div class="en">Skilljar Academy Field Guide</div>
+            <div class="desc">官方 18 门课全景速查表 · 开发者 / 产品 / 教育 / 业务 / 决策者各一条最优路径。</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<main>
