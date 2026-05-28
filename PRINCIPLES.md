@@ -399,3 +399,41 @@ git add . && git commit -m "report: <slug> v1.0" && git push
 
 v5-v6 没认真问 → 1850+ 行听书代码 + 227MB 音频 → 最终砍掉。
 v8.x 每次都先问再做(小节入口 / 自动接下章 / Wake Lock 都过了三问)。
+
+---
+
+## 🏗️ 资产分层(v9.0 反思,2026-05-28)
+
+新加资产时,先想清楚它属于哪一层:
+
+| 层 | 位置 | 范围 | 例子 |
+|---|---|---|---|
+| **L1 机器全局** | `/`, `~/Library/Caches/...` | 全机器所有用户 / 软件 | Python 解释器、git、chromium 二进制、字体 |
+| **L2 工具链全局** | `~/白笑/.tools/` | 跨仓库共享的本地构建工具 | venv(playwright/bs4/lxml)、装一次所有项目共用 |
+| **L3 仓库公共** | `<repo>/_shared/` | 本仓所有子项目共享 | style.css、reader.js、build.py、PRINCIPLES.md |
+| **L4 项目私有** | `<repo>/reports/<slug>/` | 单份内容 | chapters/、parts/、_recaps.json |
+
+### 判断三连问
+
+1. **谁会用?** 全宇宙→L1 / 我多个项目→L2 / 这个仓多个子项目→L3 / 只一个子项目→L4
+2. **跟机器绑定吗?** 编译过的二进制 / 本地配置 / 密钥 → L1/L2 不进 git
+3. **可复现吗?** 用 `requirements.txt` 能装回来 → 不进 git。手写内容 → 必进 git
+
+### 这次反思的起源
+
+直到 v9.0,只设计了 L3 (`_shared/`) 和 L4 (`reports/<slug>/`) 两层,**漏了 L1/L2**。
+症状:每个新仓库 `tools/.venv` 都要重装一次 162 MB 的 Python 包——其实是 L2 资产被错误地放在了 L3 里。
+
+修复:把 venv 提升到 `~/白笑/.tools/venvs/studies-build/`,各仓 `tools/.venv` 改成 symlink 指过去。`tools/setup.sh` 加入「L2 已存在则秒过」逻辑。
+
+### 进 git 检查表
+
+| 文件 | 进 git? | 为什么 |
+|---|---|---|
+| `~/白笑/.tools/` 任何内容 | ❌ | 机器本地资产 |
+| `<repo>/tools/.venv` symlink | ❌ | .gitignore 排除 |
+| `<repo>/tools/requirements.txt` | ✅ | 让别人 / 换机器能复现 venv |
+| `<repo>/tools/setup.sh` | ✅ | 自动化脚本 |
+| `<repo>/_shared/*` | ✅ | 跨子项目共享的代码 |
+| `<repo>/reports/<slug>/index.html` | ❌(A 模式) | build 产物 · CI 在 gh-pages 生成 |
+| `<repo>/reports/<slug>/chapters/*.html` | ✅ | 源文件 |
