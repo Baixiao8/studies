@@ -200,15 +200,30 @@
 # 1. 装配单份报告
 python3 _shared/build.py reports/<slug>
 
-# 2. 打开浏览器预览
+# 2. 自检 · 按八条铁律扫一遍,缺什么直接报错(强烈推荐)
+python3 _shared/check-report.py reports/<slug>
+
+# 3. 打开浏览器预览
 open reports/<slug>/index.html
 
-# 3. 推 Git
+# 4. 推 Git
 git add . && git commit -m "report: <slug> v1.0" && git push
 
-# 4. GitHub Pages 自动部署
+# 5. GitHub Pages 自动部署
 # 配置见 DEPLOY.md
 ```
+
+**自检脚本能拦住的典型遗漏:**
+
+- ❌ hero 漏 sticky-nav 横向章节导航(五件套铁律)
+- ❌ 章节缺 tldr / section-h / section-tag(章首三件套)
+- ❌ build.py 没注入完整 chapter-recap
+- ❌ _recaps.json 条目数跟章节数对不上
+- ❌ callout 类名拼错(`callout-sharp` 应是 `callout sharp`)
+- ❌ 章节缺 p.ref 引用列表
+- ❌ 中文弯引号 / emoji 装饰 / 翻译腔嫌疑(写作禁区)
+
+跑 `python3 _shared/check-report.py --all` 一次性扫所有报告。FAIL 项必须修,WARN 项人工判断。
 
 ---
 
@@ -216,11 +231,14 @@ git add . && git commit -m "report: <slug> v1.0" && git push
 
 - [ ] 新建 `reports/YYYY-MM-<slug>/` 目录
 - [ ] 复制 `parts/00_hero.html`、`99_footer.html` 作为骨架
+- [ ] hero 末尾加 `<nav class="sticky-nav">` 横向章节导航(五件套必备)
 - [ ] 在 chapters/ 下写各章 ch01.html ... chXX.html
 - [ ] 写 `parts/_recaps.json`(每章 5 点回顾)
 - [ ] (可选) 写 `parts/05_intro.html`(3 分钟速览)
 - [ ] (可选) 写 `parts/95_antithesis.html`(反共识索引)
-- [ ] 跑 `build.py`,浏览器验证
+- [ ] 跑 `build.py` 装配
+- [ ] **跑 `check-report.py` 自检,确认所有 FAIL 项归零**
+- [ ] 浏览器验证
 - [ ] 更新 `README.md` 报告索引
 - [ ] git commit + push,自动部署
 
