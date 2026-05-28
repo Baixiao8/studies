@@ -14,8 +14,11 @@ __pycache__/
 .pytest_cache/
 
 # Python 虚拟环境(本地构建工具,不进仓库)
+# 带斜杠匹配目录,不带斜杠匹配符号链接(可指向跨项目共享 venv)
 tools/.venv/
+tools/.venv
 .venv/
+.venv
 
 # Editor
 .vscode/
