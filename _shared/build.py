@@ -385,6 +385,20 @@ if __name__ == '__main__':
     external = '--external' in sys.argv
     build_report(report_dir, external=external)
 
+    # ─── voice-lint · 写作宪法自动检测(软门:报警但不中断 build)───
+    # 路径相对 build.py 算:报告库/运动健康/_shared/build.py → parents[3] = claude
+    import subprocess
+    lint_script = Path(__file__).resolve().parents[3] / '_shared' / 'voice' / 'voice-lint.py'
+    chapters_dir = report_dir / 'chapters'
+    if lint_script.exists() and chapters_dir.is_dir() and '--no-lint' not in sys.argv:
+        print('\n' + '=' * 60)
+        print('[build] voice-lint 写作宪法检测...')
+        r = subprocess.run([sys.executable, str(lint_script), str(chapters_dir)], check=False)
+        if r.returncode != 0:
+            print(f'\n[build] ⚠️ voice-lint: {r.returncode} 处硬违规(见上),建议先改。跳过加 --no-lint')
+        else:
+            print('[build] ✅ voice-lint 通过,无 AI 味硬违规')
+
     # ─── v9.x · 顺便 build EPUB · 若 _shared/build_epub.py 存在 ───
     # 优先用 tools/.venv 里的 Python(有 playwright + bs4),
     # 不管 build.py 自己被哪个 Python 跑都能正常调用。

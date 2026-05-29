@@ -3,27 +3,27 @@
 
   <div class="section-tag"><span class="num">08</span>AGENT EDGE · 问题地图 / 第八章</div>
   <h1 class="section-h">Agent 的边界感:什么时候自动、什么时候问 <span class="en">Agent Boundaries</span></h1>
-  <p class="section-sub">Agent 不是 Chatbot——它是被授权自动执行任务的代理。这一章把 Agent 的"自主性"拆成 5 级、"边界"拆成 4 个维度,看一个核心议题:<em>Agent 什么时候应该自己做、什么时候应该停下来问用户</em>。这是 Agent 时代最微妙的 UX 平衡。</p>
+  <p class="section-sub">Agent 不是 Chatbot——它是被授权自动执行任务的代理。这一章把 Agent 的「自主性」拆成 5 级、「边界」拆成 4 个维度,看一个核心议题:<em>Agent 什么时候应该自己做、什么时候应该停下来问用户</em>。这是 Agent 时代最微妙的 UX 平衡。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>Agent 的可用性 ≠ 自动化程度。最差的 Agent 是"无问无终的自走炮",最好的 Agent 是"知道什么时候该停下来对齐"的协作者。边界感不是限制 Agent,是让用户敢用 Agent。</p>
+    <p>Agent 的可用性 ≠ 自动化程度。最差的 Agent 是「无问无终的自走炮」,最好的 Agent 是「知道什么时候该停下来对齐」的协作者。边界感不是限制 Agent,是让用户敢用 Agent。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / Devin 的演示与现实(2024 年 3 月)</div>
-    <p>2024 年 3 月,Cognition Labs 发布 Devin——"首个 AI 软件工程师"。Demo 视频里,用户给一个模糊需求("修复这个 GitHub issue"),Devin 自己读 issue、写代码、跑测试、提 PR——全程无需人工干预,看起来像科幻片成真。</p>
-    <p>但产品上线后,用户反馈集中在一点:<strong>Devin 太自信了</strong>。它不知道什么时候该停下来问,经常自己拆解任务、自己做决定、自己交付——最后发现走偏了好几英里。用户拿到一个"完成"的结果,但完全不是想要的。</p>
+    <p>2024 年 3 月,Cognition Labs 发布 Devin——「首个 AI 软件工程师」。Demo 视频里,用户给一个模糊需求(「修复这个 GitHub issue」),Devin 自己读 issue、写代码、跑测试、提 PR——全程无需人工干预,看起来像科幻片成真。</p>
+    <p>但产品上线后,用户反馈集中在一点:<strong>Devin 太自信了</strong>。它不知道什么时候该停下来问,经常自己拆解任务、自己做决定、自己交付——最后发现走偏了好几英里。用户拿到一个「完成」的结果,但完全不是想要的。</p>
     <p>Cognition 后来加了 step-by-step approval 模式,允许用户在每一步打断。<em>但这其实承认了一件事:全自动 Agent 在真实场景里不可用,有边界感的半自动才可用</em>。</p>
   </div>
 
   <h3><span class="pre">8.1</span>Agent 不是 Chatbot · 一个定义</h3>
 
-  <p class="lead">"Agent"这个词被大量误用。我们先定义清楚什么算 Agent,什么不算。</p>
+  <p class="lead">「Agent」这个词被大量误用。我们先定义清楚什么算 Agent,什么不算。</p>
 
   <p><strong>Agent 的三个必要特征</strong>:</p>
   <ol>
-    <li><strong>能拆解任务</strong>:从一个高阶意图("订一张明天去上海的高铁票")拆出一串子任务(搜索车次 → 比价 → 选座位 → 付款 → 通知用户)</li>
+    <li><strong>能拆解任务</strong>:从一个高阶意图(「订一张明天去上海的高铁票」)拆出一串子任务(搜索车次 → 比价 → 选座位 → 付款 → 通知用户)</li>
     <li><strong>能调用工具</strong>:不只是文字回复,可以读 / 写文件、调 API、操作浏览器、运行命令</li>
     <li><strong>能多步执行</strong>:不是一问一答,而是连续做完整个任务序列</li>
   </ol>
@@ -73,30 +73,30 @@
 
   <div class="callout sharp">
     <div class="label">✕ 一个反共识</div>
-    <p>不是"越自主越好"。<strong>L3 是当前技术 + UX 平衡的最佳点</strong>——足够自动节省人力,足够受控让用户敢授权。L4-L5 在 2026 年仍是"演示场景",实际生产中用户会要求降级到 L3。<em>产品定位在哪一级,决定整个 UX 形态——不要野心定 L5 但用户体验只有 L1</em>。</p>
+    <p>不是「越自主越好」。<strong>L3 是当前技术 + UX 平衡的最佳点</strong>——足够自动节省人力,足够受控让用户敢授权。L4-L5 在 2026 年仍是「演示场景」,实际生产中用户会要求降级到 L3。<em>产品定位在哪一级,决定整个 UX 形态——不要野心定 L5 但用户体验只有 L1</em>。</p>
   </div>
 
   <h3><span class="pre">8.3</span>Agent 边界的 4 个维度</h3>
 
-  <p class="lead">"边界"不是一个抽象词。它至少有 4 个独立维度,每个都需要单独设计。</p>
+  <p class="lead">「边界」不是一个抽象词。它至少有 4 个独立维度,每个都需要单独设计。</p>
 
   <h4>维度 1 · 功能边界(What can Agent do)</h4>
   <ul>
     <li>写死的能力:Agent 只能做明确允许的事(如 Cursor Agent 只能改代码,不能发邮件)</li>
-    <li>用户配置的能力:用户可以打开 / 关闭某些权限(如 Claude Computer Use 默认禁用"删文件")</li>
+    <li>用户配置的能力:用户可以打开 / 关闭某些权限(如 Claude Computer Use 默认禁用「删文件」)</li>
     <li>动态扩展的能力:用户可以教 Agent 新技能(如 Custom Tools / MCP)</li>
   </ul>
 
   <h4>维度 2 · 资源边界(How much can Agent use)</h4>
   <ul>
-    <li>时间 cap:Agent 最多跑多长时间?(防止"无限循环消耗")</li>
+    <li>时间 cap:Agent 最多跑多长时间?(防止「无限循环消耗」)</li>
     <li>token cap:Agent 最多用多少 token / API 调用?(防止账单失控)</li>
-    <li>外部资源 cap:Agent 最多发多少邮件 / 调多少次 API?(防止"洗版")</li>
+    <li>外部资源 cap:Agent 最多发多少邮件 / 调多少次 API?(防止「洗版」)</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 一个典型案例</div>
-    <p>2023 年有用户给 AutoGPT 一个开放任务,结果它无限循环调用 GPT-4 API,几小时烧掉几百美元——因为没设资源边界。<strong>所有 Agent 产品都必须有"硬性 cap"作为最后防线</strong>。</p>
+    <p>2023 年有用户给 AutoGPT 一个开放任务,结果它无限循环调用 GPT-4 API,几小时烧掉几百美元——因为没设资源边界。<strong>所有 Agent 产品都必须有「硬性 cap」作为最后防线</strong>。</p>
   </div>
 
   <h4>维度 3 · 时间边界(When can Agent act)</h4>
@@ -111,7 +111,7 @@
     <li>Agent 在团队场景下,谁能修改 Agent 的行为?(权限分层)</li>
   </ul>
 
-  <h3><span class="pre">8.4</span>"什么时候停下来问"· Trigger 设计</h3>
+  <h3><span class="pre">8.4</span>「什么时候停下来问」· Trigger 设计</h3>
 
   <p class="lead">这是 Agent UX 最核心、也最难的设计——什么 trigger 应该让 Agent 主动停下来问用户。问太少 = 失控感,问太多 = 失去自动化价值。</p>
 
@@ -122,8 +122,8 @@
     <ol>
       <li><strong>不可逆操作前</strong>——删文件、发邮件、转账、提 PR(merge)、调用外部 API 等无法撤销的动作</li>
       <li><strong>权限超限时</strong>—— Agent 发现要做的事超出当前授权范围(如要访问用户没给权限的目录)</li>
-      <li><strong>关键决策歧义时</strong>—— Agent 拆解任务过程中遇到"两条路都合理"的分叉(如"是写 React 还是 Vue?")</li>
-      <li><strong>资源即将超限时</strong>—— Agent 看到自己已经用了 80% 的 token cap,提前问用户"继续吗"</li>
+      <li><strong>关键决策歧义时</strong>—— Agent 拆解任务过程中遇到「两条路都合理」的分叉(如「是写 React 还是 Vue?」)</li>
+      <li><strong>资源即将超限时</strong>—— Agent 看到自己已经用了 80% 的 token cap,提前问用户「继续吗」</li>
       <li><strong>错误重复发生时</strong>—— Agent 重试 3 次失败后,不该再继续重试,要停下来报告</li>
     </ol>
   </div>
@@ -133,9 +133,9 @@
   <div class="callout sharp">
     <div class="label">✕ 不该问的 3 种场景(否则用户疲劳)</div>
     <ol>
-      <li><strong>低风险中间步骤</strong>——读取文件、运行测试、查询信息这些"探索性"动作不要每步都问</li>
-      <li><strong>已经做过的同类决策</strong>—— Agent 上一步刚问过"用 TypeScript 还是 JavaScript",这一步不要再问</li>
-      <li><strong>用户已经明确表达过的偏好</strong>——用户在 Custom Instructions 里说"我用 TS",Agent 别再问</li>
+      <li><strong>低风险中间步骤</strong>——读取文件、运行测试、查询信息这些「探索性」动作不要每步都问</li>
+      <li><strong>已经做过的同类决策</strong>—— Agent 上一步刚问过「用 TypeScript 还是 JavaScript」,这一步不要再问</li>
+      <li><strong>用户已经明确表达过的偏好</strong>——用户在 Custom Instructions 里说「我用 TS」,Agent 别再问</li>
     </ol>
   </div>
 
@@ -154,11 +154,11 @@
       <tbody>
         <tr><td>自主级别</td><td>L3</td><td>L2-L3</td><td>L3-L4</td></tr>
         <tr><td>边界配置</td><td>写死(不能动金钱 / 不可逆)</td><td>用户配 .cursorrules</td><td>动态(对话指定)</td></tr>
-        <tr><td>停问 trigger</td><td>每个 GUI 操作前都展示意图</td><td>关键节点 + 不可逆前</td><td>较少,容易"自走"</td></tr>
+        <tr><td>停问 trigger</td><td>每个 GUI 操作前都展示意图</td><td>关键节点 + 不可逆前</td><td>较少,容易「自走」</td></tr>
         <tr><td>资源 cap</td><td>有(token + 时间)</td><td>有(per-request)</td><td>有(订阅级)</td></tr>
         <tr><td>撤销机制</td><td>无(依赖系统原生 undo)</td><td>git diff + accept/reject</td><td>有 checkpoint</td></tr>
         <tr><td>核心强项</td><td>透明 + 可控</td><td>开发者友好 + git 兜底</td><td>开放任务覆盖广</td></tr>
-        <tr><td>核心弱点</td><td>速度慢(每步审批)</td><td>不能跨编程外的任务</td><td>有时"自信过头"</td></tr>
+        <tr><td>核心弱点</td><td>速度慢(每步审批)</td><td>不能跨编程外的任务</td><td>有时「自信过头」</td></tr>
       </tbody>
     </table>
   </div>
@@ -166,18 +166,18 @@
   <div class="callout sharp">
     <div class="label">✕ 三家的设计哲学对比</div>
     <ul>
-      <li><strong>Claude Computer Use</strong>:把"透明度"做到极致(每一步都给用户看),代价是速度。Anthropic 选择"宁可慢也不让用户失控"。</li>
-      <li><strong>Cursor Agent</strong>:把"git 兜底"做到极致,代价是局限在代码场景。Cursor 选择"在自己擅长的场景做透,不扩展"。</li>
-      <li><strong>Manus</strong>:把"开放任务覆盖"做到极致,代价是边界感弱。Manus 选择"先扩任务面,边界后补"。</li>
+      <li><strong>Claude Computer Use</strong>:把「透明度」做到极致(每一步都给用户看),代价是速度。Anthropic 选择「宁可慢也不让用户失控」。</li>
+      <li><strong>Cursor Agent</strong>:把「git 兜底」做到极致,代价是局限在代码场景。Cursor 选择「在自己擅长的场景做透,不扩展」。</li>
+      <li><strong>Manus</strong>:把「开放任务覆盖」做到极致,代价是边界感弱。Manus 选择「先扩任务面,边界后补」。</li>
     </ul>
-    <p>三种哲学各有道理。<em>你做 Agent 产品时,要先回答"我赌哪一条"</em>——不能既要透明又要速度又要覆盖,这是不可能三角。</p>
+    <p>三种哲学各有道理。<em>你做 Agent 产品时,要先回答「我赌哪一条」</em>——不能既要透明又要速度又要覆盖,这是不可能三角。</p>
   </div>
 
-  <h3><span class="pre">8.6</span>Agent 时代的"控制感"重构</h3>
+  <h3><span class="pre">8.6</span>Agent 时代的「控制感」重构</h3>
 
-  <p class="lead">第 4 章我们讨论过可控性悖论——AI 越能干,用户越焦虑失控。Agent 时代这个悖论更尖锐,因为 Agent 真的在"自动做事"。</p>
+  <p class="lead">第 4 章我们讨论过可控性悖论——AI 越能干,用户越焦虑失控。Agent 时代这个悖论更尖锐,因为 Agent 真的在「自动做事」。</p>
 
-  <p>新的"控制感"不来自"用户掌握每一步",来自三件事:</p>
+  <p>新的「控制感」不来自「用户掌握每一步」,来自三件事:</p>
 
   <ol>
     <li><strong>知情</strong>—— Agent 在做什么用户能随时看到(step-by-step 反馈)</li>
@@ -191,11 +191,11 @@
 
   <div class="callout you">
     <div class="label">◐ 千图AI 与 Agent 的关系</div>
-    <p>千图AI 当前主要是"单步生成产品"(用户给 prompt → 出图),不是 Agent。但未来如果做"批量生成 / 系列设计 / 自动场景适配"这类工作流,会自然进入 Agent 范畴。</p>
+    <p>千图AI 当前主要是「单步生成产品」(用户给 prompt → 出图),不是 Agent。但未来如果做「批量生成 / 系列设计 / 自动场景适配」这类工作流,会自然进入 Agent 范畴。</p>
     <p><strong>设计提前思考</strong>:</p>
     <ul>
-      <li>如果做"批量生成 100 张产品图",在哪些 trigger 上停下来问用户?(每张都问 = 没意义,完全不问 = 失控。可能的设计:每 10 张展示一批让用户审,继续或调整)</li>
-      <li>如果做"自动场景适配"(同一图自动出小红书 / 抖音 / 朋友圈版本),要给用户"先看一版样本再批量"的 trigger</li>
+      <li>如果做「批量生成 100 张产品图」,在哪些 trigger 上停下来问用户?(每张都问 = 没意义,完全不问 = 失控。可能的设计:每 10 张展示一批让用户审,继续或调整)</li>
+      <li>如果做「自动场景适配」(同一图自动出小红书 / 抖音 / 朋友圈版本),要给用户「先看一版样本再批量」的 trigger</li>
       <li>资源 cap 必须有——按积分 cap、按时间 cap、按数量 cap,防止意外消耗</li>
     </ul>
     <p>详见第 15 章千图AI 体检章节。</p>
@@ -203,11 +203,11 @@
 
   <h3><span class="pre">8.8</span>本章小结</h3>
 
-  <p>Agent 不是"高级 Chatbot",是被授权自动执行任务的代理——它的 UX 设计核心是<strong>边界感</strong>。</p>
+  <p>Agent 不是「高级 Chatbot」,是被授权自动执行任务的代理——它的 UX 设计核心是<strong>边界感</strong>。</p>
 
-  <p><strong>5 级自主性梯度</strong>(L0 推荐 → L5 全自动)给定位提供了坐标;<strong>4 个边界维度</strong>(功能 / 资源 / 时间 / 信任)给设计提供了 checklist;<strong>5 个必停 trigger + 3 个不该停场景</strong>给"什么时候问用户"提供了具体规则。</p>
+  <p><strong>5 级自主性梯度</strong>(L0 推荐 → L5 全自动)给定位提供了坐标;<strong>4 个边界维度</strong>(功能 / 资源 / 时间 / 信任)给设计提供了 checklist;<strong>5 个必停 trigger + 3 个不该停场景</strong>给「什么时候问用户」提供了具体规则。</p>
 
-  <p>Part II 问题地图前 6 章都聚焦"AI 产品独有的功能议题"。下面 2 章(第 9 章多模态、第 10 章 AI 人格)我们换一个视角——看 AI 给"体验关系"带来的新议题。</p>
+  <p>Part II 问题地图前 6 章都聚焦「AI 产品独有的功能议题」。下面 2 章(第 9 章多模态、第 10 章 AI 人格)我们换一个视角——看 AI 给「体验关系」带来的新议题。</p>
 
   <p class="ref">主要参考:<br>
   Cognition Labs Devin 发布与媒体评价, 2024-03 · Anthropic Claude Computer Use 公告 + Safety 文档, 2024-10 · Cursor Agent Mode 文档 · Manus 产品文档与使用反馈 · SAE J3016 自动驾驶分级标准(类比来源)· OpenAI Operator 设计与限制, 2025 · AutoGPT 早期失控案例分析, 2023</p>

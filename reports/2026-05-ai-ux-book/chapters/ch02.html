@@ -3,35 +3,35 @@
 
   <div class="section-tag"><span class="num">02</span>WHY DIFFERENT · 总论篇 / 第二章</div>
   <h1 class="section-h">AI 产品的 UX 为什么不一样? <span class="en">What Makes AI UX Different</span></h1>
-  <p class="section-sub">用 5 组真实产品对比,把"AI 产品的 UX 到底差在哪"变成可看见、可对照的具体差异。这 5 组对比提炼出的 5 个特质,就是 Part II 整张"问题地图"的入口。</p>
+  <p class="section-sub">用 5 组真实产品对比,把「AI 产品的 UX 到底差在哪」变成可看见、可对照的具体差异。这 5 组对比提炼出的 5 个特质,就是 Part II 整张「问题地图」的入口。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>AI 产品的 UX 不是"传统 UX + AI",而是一套需要重新定义的设计语言。Don Norman / Nielsen 启发法没过时,但它们面对的对象变了——验证机制、错解退路、生成式 UI、多步介入、记忆资产,这 5 件事在 GUI 时代都不存在。</p>
+    <p>AI 产品的 UX 不是「传统 UX + AI」,而是一套需要重新定义的设计语言。Don Norman / Nielsen 启发法没过时,但它们面对的对象变了——验证机制、错解退路、生成式 UI、多步介入、记忆资产,这 5 件事在 GUI 时代都不存在。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 两个搜索框</div>
-    <p>打开 Google,搜索"明天上海会下雨吗",你会得到 10 条蓝色链接,最上面通常是中央气象台或天气网,你点进去看一眼天气预报,自己得出结论。</p>
-    <p>打开 Perplexity,搜同样的问题,你会得到:"根据中央气象台 5 月 25 日预报,上海明天(5 月 26 日)多云转阴,傍晚有阵雨可能,气温 18-24°C,建议带伞出门。[1][2][3]"下面是 3 个引用源小卡片。</p>
-    <p><strong>这两个产品都叫"搜索引擎",但它们的 UX 不是同一种 UX</strong>。Google 假设你是"研究者"——我给你链接,你自己判断。Perplexity 假设你是"提问者"——你想要答案,我直接给你,附带证据。</p>
+    <p>打开 Google,搜索「明天上海会下雨吗」,你会得到 10 条蓝色链接,最上面通常是中央气象台或天气网,你点进去看一眼天气预报,自己得出结论。</p>
+    <p>打开 Perplexity,搜同样的问题,你会得到:「根据中央气象台 5 月 25 日预报,上海明天(5 月 26 日)多云转阴,傍晚有阵雨可能,气温 18-24°C,建议带伞出门。[1][2][3]」下面是 3 个引用源小卡片。</p>
+    <p><strong>这两个产品都叫「搜索引擎」,但它们的 UX 不是同一种 UX</strong>。Google 假设你是「研究者」——我给你链接,你自己判断。Perplexity 假设你是「提问者」——你想要答案,我直接给你,附带证据。</p>
   </div>
 
   <p>从 UX 的角度看,从 Google 到 Perplexity 至少多了 5 个全新的设计议题:</p>
 
   <ul>
-    <li>答案的可信度怎么表达?(链接列表是"我不知道你看吧",直接答案是"我知道请信我",后者风险大得多)</li>
+    <li>答案的可信度怎么表达?(链接列表是「我不知道你看吧」,直接答案是「我知道请信我」,后者风险大得多)</li>
     <li>引用怎么呈现?(不引用就是黑盒,引用太多就抢眼球)</li>
-    <li>答案错了怎么办?(链接错是"用户挑的链接错",直接答案错是"系统的责任")</li>
+    <li>答案错了怎么办?(链接错是「用户挑的链接错」,直接答案错是「系统的责任」)</li>
     <li>多轮追问怎么承接?(Google 每次搜索独立,Perplexity 要记住上一次问什么)</li>
-    <li>答案的"温度"和"立场"怎么设计?("建议带伞出门"是一种立场,Google 永远不会给你这种建议)</li>
+    <li>答案的「温度」和「立场」怎么设计?(「建议带伞出门」是一种立场,Google 永远不会给你这种建议)</li>
   </ul>
 
   <p>这就是这一章要回答的问题:<strong>AI 产品和传统产品的 UX,到底差在哪里?</strong>我们用 5 组对比,逐一展开。</p>
 
   <h3><span class="pre">2.1</span>对比 1 · Gmail Smart Compose vs GitHub Copilot</h3>
 
-  <p class="lead">两个产品乍看一样——都是"灰色字预测,Tab 接受"。但 UX 的本质完全不同。</p>
+  <p class="lead">两个产品乍看一样——都是「灰色字预测,Tab 接受」。但 UX 的本质完全不同。</p>
 
   <div class="table-wrap">
     <table>
@@ -53,46 +53,46 @@
   </div>
 
   <div class="callout sharp">
-    <div class="label">✕ 特质 1 · 当 AI 输出超过"用户能秒判"的复杂度,UX 需要重新设计"验证机制"</div>
-    <p>Smart Compose 的"灰色字 + Tab"完全够用,因为用户一眼能判对错。Copilot 也是"Tab 接受",但这个 UX 在长代码补全时其实是有问题的——它鼓励用户<em>不读就接受</em>,这是 Copilot 早期被批评的核心点。</p>
-    <p>后续 Copilot 推出了 Copilot Chat、Inline Chat、PR Review——都是在补"验证机制"这个洞。</p>
+    <div class="label">✕ 特质 1 · 当 AI 输出超过「用户能秒判」的复杂度,UX 需要重新设计「验证机制」</div>
+    <p>Smart Compose 的「灰色字 + Tab」完全够用,因为用户一眼能判对错。Copilot 也是「Tab 接受」,但这个 UX 在长代码补全时其实是有问题的——它鼓励用户<em>不读就接受</em>,这是 Copilot 早期被批评的核心点。</p>
+    <p>后续 Copilot 推出了 Copilot Chat、Inline Chat、PR Review——都是在补「验证机制」这个洞。</p>
   </div>
 
   <h3><span class="pre">2.2</span>对比 2 · Photoshop 抠图 vs Photoroom 一键去背</h3>
 
   <p class="lead">PS 选择魔棒 → 设置容差 → 点击背景 → Shift+点击多选 → 边缘羽化 → 反选 → Delete。学过的人 30 秒搞定,没学过的永远学不会。Photoroom 上传图 → 自动识别主体 → 一键去背。3 秒搞定。</p>
 
-  <p>这看起来是"功能更强",但 UX 上发生的是更深的变化:</p>
+  <p>这看起来是「功能更强」,但 UX 上发生的是更深的变化:</p>
 
   <ul>
-    <li><strong>PS 的 UX 假设</strong>:用户知道自己要做什么操作("我要用魔棒选区域"),软件提供精准工具。</li>
-    <li><strong>Photoroom 的 UX 假设</strong>:用户只知道自己要什么结果("我要去背"),AI 帮用户做出操作。</li>
+    <li><strong>PS 的 UX 假设</strong>:用户知道自己要做什么操作(「我要用魔棒选区域」),软件提供精准工具。</li>
+    <li><strong>Photoroom 的 UX 假设</strong>:用户只知道自己要什么结果(「我要去背」),AI 帮用户做出操作。</li>
   </ul>
 
-  <p>这两种 UX 哲学的差距,是"工具型软件"和"意图型软件"的差距。但意图型软件也有新的 UX 难题:</p>
+  <p>这两种 UX 哲学的差距,是「工具型软件」和「意图型软件」的差距。但意图型软件也有新的 UX 难题:</p>
 
   <ul>
     <li>如果 AI 识别错了主体怎么办?(PS 至少错了你能立刻看到选区重新选,Photoroom 错了你只能重传)</li>
-    <li>用户想精细调整边缘怎么办?(PS 有羽化收缩扩张,Photoroom 早期只有"成功 / 失败"两个状态)</li>
-    <li>批量处理怎么办?(PS 录制动作可以批量,Photoroom 需要重新设计"批量 AI 处理")</li>
+    <li>用户想精细调整边缘怎么办?(PS 有羽化收缩扩张,Photoroom 早期只有「成功 / 失败」两个状态)</li>
+    <li>批量处理怎么办?(PS 录制动作可以批量,Photoroom 需要重新设计「批量 AI 处理」)</li>
   </ul>
 
-  <p>Photoroom 后来加了"细化边缘"、"手动涂抹保留 / 删除"等功能——是在用户"意图被错误理解"时给一个回退通道。</p>
+  <p>Photoroom 后来加了「细化边缘」、「手动涂抹保留 / 删除」等功能——是在用户「意图被错误理解」时给一个回退通道。</p>
 
   <div class="callout sharp">
-    <div class="label">✕ 特质 2 · 必须为"AI 理解错了用户意图"准备一个体面的退路</div>
-    <p>这是从"工具型"到"意图型"软件最大的 UX 升级议题——意图被错解时的优雅降级。</p>
+    <div class="label">✕ 特质 2 · 必须为「AI 理解错了用户意图」准备一个体面的退路</div>
+    <p>这是从「工具型」到「意图型」软件最大的 UX 升级议题——意图被错解时的优雅降级。</p>
   </div>
 
   <h3><span class="pre">2.3</span>对比 3 · Notion 模板 vs Notion AI</h3>
 
-  <p class="lead">传统 Notion:你想做会议纪要,打开模板库选"Meeting Notes"套用。模板是死的,永远是那个结构。Notion AI:你输入"/ai 帮我做一个产品评审会的纪要模板,参与方包括设计师、产品、工程师",Notion AI 现场生成一个适合你具体场景的模板。</p>
+  <p class="lead">传统 Notion:你想做会议纪要,打开模板库选「Meeting Notes」套用。模板是死的,永远是那个结构。Notion AI:你输入「/ai 帮我做一个产品评审会的纪要模板,参与方包括设计师、产品、工程师」,Notion AI 现场生成一个适合你具体场景的模板。</p>
 
-  <p>差距在于"模板"这个概念本身被解构了:</p>
+  <p>差距在于「模板」这个概念本身被解构了:</p>
 
   <ul>
-    <li>传统 Notion 的"模板"是<strong>预先存在的资产</strong>,由模板作者制作</li>
-    <li>Notion AI 的"模板"是<strong>按需生成的实例</strong>,每次都不一样</li>
+    <li>传统 Notion 的「模板」是<strong>预先存在的资产</strong>,由模板作者制作</li>
+    <li>Notion AI 的「模板」是<strong>按需生成的实例</strong>,每次都不一样</li>
   </ul>
 
   <p>这带来一系列 UX 新问题:</p>
@@ -106,13 +106,13 @@
   <p>Notion AI、Claude Artifact、v0 都在面对同样的问题——这就是第 5 章要专门讲的 <strong>「生成式 UI」</strong>。</p>
 
   <div class="callout sharp">
-    <div class="label">✕ 特质 3 · UI 元素从"被设计的资产"变成"被生成的实例"</div>
-    <p>需要全新的"生成 / 修改 / 保存 / 复用"四态设计。</p>
+    <div class="label">✕ 特质 3 · UI 元素从「被设计的资产」变成「被生成的实例」</div>
+    <p>需要全新的「生成 / 修改 / 保存 / 复用」四态设计。</p>
   </div>
 
   <h3><span class="pre">2.4</span>对比 4 · 滴滴打车 vs Cursor Composer</h3>
 
-  <p class="lead">滴滴:点"叫车"→ 系统派单 → 司机接单 → 司机到达 → 上车。每一步都有明确的状态显示,每一步用户都能取消。Cursor Composer:你说"帮我把这个组件的状态管理从 useState 改成 Zustand,并且更新所有使用它的地方",Composer 开始执行:</p>
+  <p class="lead">滴滴:点「叫车」→ 系统派单 → 司机接单 → 司机到达 → 上车。每一步都有明确的状态显示,每一步用户都能取消。Cursor Composer:你说「帮我把这个组件的状态管理从 useState 改成 Zustand,并且更新所有使用它的地方」,Composer 开始执行:</p>
 
   <div class="callout note">
     <div class="label">i Composer 的多步执行典型流程</div>
@@ -126,20 +126,20 @@
 ⠹ 修改 app.tsx 注册 store</pre>
   </div>
 
-  <p>每一步用户都能看,但<strong>用户能"取消"吗?取消的成本是什么?</strong></p>
+  <p>每一步用户都能看,但<strong>用户能「取消」吗?取消的成本是什么?</strong></p>
 
-  <p>如果 Composer 改到第 5 步时用户想取消,前 4 步已经改了的代码怎么办?回滚?保留?滴滴每一步是离散的、可逆的。Cursor Composer 每一步是连续的、相互依赖的——一旦开始改,"回到原状"不是按一个按钮就能实现的。</p>
+  <p>如果 Composer 改到第 5 步时用户想取消,前 4 步已经改了的代码怎么办?回滚?保留?滴滴每一步是离散的、可逆的。Cursor Composer 每一步是连续的、相互依赖的——一旦开始改,「回到原状」不是按一个按钮就能实现的。</p>
 
   <div class="callout sharp">
-    <div class="label">✕ 特质 4 · Agent 自动执行多步任务时,需要全新的"中断 / 回滚 / 介入"设计</div>
-    <p>不能套用传统的"取消"按钮。Cursor 的解法是接入 git——每次 Composer 执行前自动 stage 当前状态,用户可以 git reset 回去。这是把"回滚"外包给了 git。但其他 Agent 产品(让 AI 帮你回邮件、订机票的 Agent)没有 git 这个安全网,怎么办?这是第 8 章要专门讨论的。</p>
+    <div class="label">✕ 特质 4 · Agent 自动执行多步任务时,需要全新的「中断 / 回滚 / 介入」设计</div>
+    <p>不能套用传统的「取消」按钮。Cursor 的解法是接入 git——每次 Composer 执行前自动 stage 当前状态,用户可以 git reset 回去。这是把「回滚」外包给了 git。但其他 Agent 产品(让 AI 帮你回邮件、订机票的 Agent)没有 git 这个安全网,怎么办?这是第 8 章要专门讨论的。</p>
   </div>
 
   <h3><span class="pre">2.5</span>对比 5 · 百度搜索 vs 豆包对话</h3>
 
-  <p class="lead">百度:每次搜索都是独立事件,今天搜"上海餐厅推荐",明天再搜,结果差不多。豆包(或 ChatGPT / Claude / Kimi):你今天告诉豆包"我是素食主义者",明天问"推荐上海餐厅",豆包会自动过滤掉非素食店。</p>
+  <p class="lead">百度:每次搜索都是独立事件,今天搜「上海餐厅推荐」,明天再搜,结果差不多。豆包(或 ChatGPT / Claude / Kimi):你今天告诉豆包「我是素食主义者」,明天问「推荐上海餐厅」,豆包会自动过滤掉非素食店。</p>
 
-  <p>这是"记忆"的引入。但记忆带来的 UX 问题,前所未有:</p>
+  <p>这是「记忆」的引入。但记忆带来的 UX 问题,前所未有:</p>
 
   <ul>
     <li>AI 记住了什么?用户能看到吗?(如果 AI 记错了,用户怎么改?)</li>
@@ -148,11 +148,11 @@
     <li>隐私怎么办?(用户敏感信息,AI 记不记?记多久?)</li>
   </ul>
 
-  <p>ChatGPT 在 2024 年推出 Memory 功能时,专门做了一个"记忆面板"——用户能看到 AI 记住了哪些,可以删除、修改。这是把"AI 的记忆"做成了<strong>可见、可控、可审计</strong>的资产,而不是黑盒。</p>
+  <p>ChatGPT 在 2024 年推出 Memory 功能时,专门做了一个「记忆面板」——用户能看到 AI 记住了哪些,可以删除、修改。这是把「AI 的记忆」做成了<strong>可见、可控、可审计</strong>的资产,而不是黑盒。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 特质 5 · 「上下文 / 记忆」从无变成核心资产</div>
-    <p>需要专门设计可见性、可控性、可移植性。这不只是"加个记忆功能"那么简单,是一个全新的 UX 议题。</p>
+    <p>需要专门设计可见性、可控性、可移植性。这不只是「加个记忆功能」那么简单,是一个全新的 UX 议题。</p>
   </div>
 
   <h3><span class="pre">2.6</span>五个特质 · 对应 Part II 的 8 个议题</h3>
@@ -170,7 +170,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>1. 输出复杂度超过"秒判"</td>
+          <td>1. 输出复杂度超过「秒判」</td>
           <td>用户怎么验证 AI 是对是错?</td>
           <td><strong>第 3 章 信任与幻觉</strong></td>
         </tr>
@@ -198,19 +198,19 @@
     </table>
   </div>
 
-  <p>另外两章(第 9 章多模态、第 10 章 AI 人格)不是从这 5 个对比中长出来的,而是从"AI 产品的体感"长出来的——当 AI 能听能看能说话有性格,UX 议题就从"功能"拓展到"体验关系"。</p>
+  <p>另外两章(第 9 章多模态、第 10 章 AI 人格)不是从这 5 个对比中长出来的,而是从「AI 产品的体感」长出来的——当 AI 能听能看能说话有性格,UX 议题就从「功能」拓展到「体验关系」。</p>
 
   <h3><span class="pre">2.7</span>本章小结 · 经典 UX 启发法的升级路径</h3>
 
-  <p>通过 5 组对比,我们看到 AI 产品的 UX 不是"传统 UX + AI",而是一套需要重新定义的设计语言。经典的 Don Norman / Nielsen 启发法没有过时,但<strong>面对的对象变了</strong>:</p>
+  <p>通过 5 组对比,我们看到 AI 产品的 UX 不是「传统 UX + AI」,而是一套需要重新定义的设计语言。经典的 Don Norman / Nielsen 启发法没有过时,但<strong>面对的对象变了</strong>:</p>
 
   <div class="callout ops">
     <div class="label">✓ 4 条升级路径,贯穿全书</div>
     <ul>
-      <li><strong>当 AI 输出长得用户来不及读完</strong>——"系统状态可见"要升级为"可信度可见"</li>
-      <li><strong>当 AI 自动执行多步</strong>——"用户控制"要升级为"可中断可回滚的协作"</li>
-      <li><strong>当 UI 是被生成的</strong>——"一致性"要升级为"在变化中保持可识别"</li>
-      <li><strong>当 AI 必然出错</strong>——"错误预防"要让位给"错误后能继续"</li>
+      <li><strong>当 AI 输出长得用户来不及读完</strong>——「系统状态可见」要升级为「可信度可见」</li>
+      <li><strong>当 AI 自动执行多步</strong>——「用户控制」要升级为「可中断可回滚的协作」</li>
+      <li><strong>当 UI 是被生成的</strong>——「一致性」要升级为「在变化中保持可识别」</li>
+      <li><strong>当 AI 必然出错</strong>——「错误预防」要让位给「错误后能继续」</li>
     </ul>
   </div>
 

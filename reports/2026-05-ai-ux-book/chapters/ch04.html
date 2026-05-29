@@ -3,18 +3,18 @@
 
   <div class="section-tag"><span class="num">04</span>CONTROL · 问题地图 / 第四章</div>
   <h1 class="section-h">可控性悖论:给用户多大缰绳? <span class="en">The Control Paradox</span></h1>
-  <p class="section-sub">AI 越能干,用户越担心失控——这是航空安全四十年的老教训,也是今天 AI 产品设计师每天遇到的两难。这一章把"可控性"拆成 5 个维度,看行业头部产品的 4 种典型解法,以及"控制不是越多越好"的反面议题。</p>
+  <p class="section-sub">AI 越能干,用户越担心失控——这是航空安全四十年的老教训,也是今天 AI 产品设计师每天遇到的两难。这一章把「可控性」拆成 5 个维度,看行业头部产品的 4 种典型解法,以及「控制不是越多越好」的反面议题。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>可控性不是"给用户控制"或"不给"的二元选择,而是<em>启动 / 过程 / 边界 / 撤销 / 学习</em>五个维度上的独立设计。AI 介入度越高,用户控制感越低,但产品的"想象力"越大——这是 AI 产品设计的核心张力。</p>
+    <p>可控性不是「给用户控制」或「不给」的二元选择,而是<em>启动 / 过程 / 边界 / 撤销 / 学习</em>五个维度上的独立设计。AI 介入度越高,用户控制感越低,但产品的「想象力」越大——这是 AI 产品设计的核心张力。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 大西洋上空 · 2009 年 6 月 1 日</div>
     <p>2009 年 6 月 1 日,法航 447 航班从里约飞往巴黎,在大西洋上空消失。残骸经过两年才被打捞起来,黑匣子还原了事发经过。</p>
-    <p>飞机的"皮托管"(测速装置)被冰晶堵塞,自动驾驶因数据异常自动断开,把操控权交给了飞行员。从这一刻开始的 <strong>4 分钟内</strong>,3 名飞行员持续做出错误操作,导致飞机失速坠海,228 人全部遇难。</p>
-    <p>事后调查报告指出了一个反直觉的结论:<em>正是因为他们平时太依赖自动驾驶,反而在自动驾驶突然交还操控权时手足无措</em>。这个事故现在被 HCI 学界(如 Lisanne Bainbridge 1983 年的经典论文 <em>Ironies of Automation</em>)反复引用——<strong>自动化越强,人在关键时刻的失控就越严重</strong>。这就是"可控性悖论"。</p>
+    <p>飞机的「皮托管」(测速装置)被冰晶堵塞,自动驾驶因数据异常自动断开,把操控权交给了飞行员。从这一刻开始的 <strong>4 分钟内</strong>,3 名飞行员持续做出错误操作,导致飞机失速坠海,228 人全部遇难。</p>
+    <p>事后调查报告指出了一个反直觉的结论:<em>正是因为他们平时太依赖自动驾驶,反而在自动驾驶突然交还操控权时手足无措</em>。这个事故现在被 HCI 学界(如 Lisanne Bainbridge 1983 年的经典论文 <em>Ironies of Automation</em>)反复引用——<strong>自动化越强,人在关键时刻的失控就越严重</strong>。这就是「可控性悖论」。</p>
   </div>
 
   <h3><span class="pre">4.1</span>可控性悖论的两难</h3>
@@ -22,8 +22,8 @@
   <p class="lead">AI 产品的设计师,每天都在两难中拉锯:</p>
 
   <ul>
-    <li><strong>AI 做太少</strong> → 用户问"它有啥用?还要我自己一步步操作"(鸡肋)</li>
-    <li><strong>AI 做太多</strong> → 用户问"它怎么自己做的?我能信吗?要是错了怎么办?"(失控)</li>
+    <li><strong>AI 做太少</strong> → 用户问「它有啥用?还要我自己一步步操作」(鸡肋)</li>
+    <li><strong>AI 做太多</strong> → 用户问「它怎么自己做的?我能信吗?要是错了怎么办?」(失控)</li>
   </ul>
 
   <p>这条线的拉锯,决定了产品的 UX 形态。我们看几个对比:</p>
@@ -49,12 +49,12 @@
 
   <div class="callout sharp">
     <div class="label">✕ 一条规律</div>
-    <p>AI 介入度越高,用户控制感越低,但产品的"想象力"越大。Devin 在 2024 年因 Demo 太炸裂引发轰动,但实际产品落地一直困难——核心原因之一就是用户在"完全失控"状态下不知道该信任 AI 多少。</p>
+    <p>AI 介入度越高,用户控制感越低,但产品的「想象力」越大。Devin 在 2024 年因 Demo 太炸裂引发轰动,但实际产品落地一直困难——核心原因之一就是用户在「完全失控」状态下不知道该信任 AI 多少。</p>
   </div>
 
   <h3><span class="pre">4.2</span>可控性的 5 个维度</h3>
 
-  <p class="lead">把"可控性"拆开看,至少有 5 个独立的维度。做 AI 产品的设计师,要在这 5 个维度上独立做决策——不是"给用户控制权"或"不给"这种二元判断。</p>
+  <p class="lead">把「可控性」拆开看,至少有 5 个独立的维度。做 AI 产品的设计师,要在这 5 个维度上独立做决策——不是「给用户控制权」或「不给」这种二元判断。</p>
 
   <h4>维度 1 · 启动控制(Trigger Control)</h4>
   <p><strong>问题</strong>:AI 什么时候开始介入?由用户主动触发,还是 AI 主动出现?</p>
@@ -65,32 +65,32 @@
   </ul>
   <div class="callout ops">
     <div class="label">✓ 经验</div>
-    <p>低能力 AI 适合"always-on"(错了影响小),高能力 AI 适合"主动触发"(让用户明确表达"我现在要 AI 帮忙")。<strong>Cursor 的成功部分源于它把 Tab 补全做成 always-on(低门槛),把 Composer / Agent 做成主动触发(高授权)——不同能力对应不同触发方式</strong>。</p>
+    <p>低能力 AI 适合「always-on」(错了影响小),高能力 AI 适合「主动触发」(让用户明确表达「我现在要 AI 帮忙」)。<strong>Cursor 的成功部分源于它把 Tab 补全做成 always-on(低门槛),把 Composer / Agent 做成主动触发(高授权)——不同能力对应不同触发方式</strong>。</p>
   </div>
 
   <h4>维度 2 · 过程控制(Process Control)</h4>
   <p><strong>问题</strong>:AI 执行的过程中,用户能不能干预?</p>
   <ul>
     <li><strong>完全不能干预</strong>:AI 开始执行就锁死,做完才给结果(如早期一些 image generator)</li>
-    <li><strong>可中断</strong>:用户能随时停止(如 ChatGPT 的"Stop generating")</li>
+    <li><strong>可中断</strong>:用户能随时停止(如 ChatGPT 的「Stop generating」)</li>
     <li><strong>可修改</strong>:用户能修改 AI 的下一步(如 Cursor Composer 执行中可以发送新指令)</li>
     <li><strong>可逐步审批</strong>:每一步都暂停等用户确认(如 Claude Computer Use 的 step-by-step mode)</li>
   </ul>
   <div class="callout sharp">
-    <div class="label">✕ 至少要给"中断"</div>
-    <p>即便是"完全不能干预"的模型(如纯生图),也应该让用户能中断生成、不浪费 credit。<strong>ChatGPT 早期没有 Stop 按钮是一个典型的设计漏洞,2023 年后才补上</strong>。</p>
+    <div class="label">✕ 至少要给「中断」</div>
+    <p>即便是「完全不能干预」的模型(如纯生图),也应该让用户能中断生成、不浪费 credit。<strong>ChatGPT 早期没有 Stop 按钮是一个典型的设计漏洞,2023 年后才补上</strong>。</p>
   </div>
 
   <h4>维度 3 · 边界控制(Scope Control)</h4>
-  <p><strong>问题</strong>:用户能不能定义"AI 能做哪些事、不能做哪些"?</p>
+  <p><strong>问题</strong>:用户能不能定义「AI 能做哪些事、不能做哪些」?</p>
   <ul>
     <li><strong>写死的边界</strong>:AI 永远不能做某些事(如 Claude 拒绝生成有害内容)</li>
     <li><strong>用户配置的边界</strong>:用户能设置 AI 的行为范围(如 ChatGPT 的 Custom Instructions、Cursor 的 <code>.cursorrules</code>)</li>
-    <li><strong>临时声明的边界</strong>:每次对话开始时说"不要做 X"</li>
+    <li><strong>临时声明的边界</strong>:每次对话开始时说「不要做 X」</li>
   </ul>
   <div class="callout ops">
     <div class="label">✓ 经验 · 三层边界</div>
-    <p>边界配置应该有"全局 + 项目 + 临时"三层。全局是用户偏好("我总是用 TypeScript"),项目是项目级规范("这个 repo 用 React Native"),临时是单次对话的特殊要求("这次别加注释")。<strong>Cursor 用 <code>.cursorrules</code> 文件 + 对话级 system prompt 实现了这一点,这是值得学习的边界控制模式</strong>。</p>
+    <p>边界配置应该有「全局 + 项目 + 临时」三层。全局是用户偏好(「我总是用 TypeScript」),项目是项目级规范(「这个 repo 用 React Native」),临时是单次对话的特殊要求(「这次别加注释」)。<strong>Cursor 用 <code>.cursorrules</code> 文件 + 对话级 system prompt 实现了这一点,这是值得学习的边界控制模式</strong>。</p>
   </div>
 
   <h4>维度 4 · 撤销控制(Reversibility Control)</h4>
@@ -107,21 +107,21 @@
   </div>
 
   <h4>维度 5 · 学习控制(Learning Control)</h4>
-  <p><strong>问题</strong>:AI 会不会从用户的使用中"学坏"?用户能不能控制 AI 学什么?</p>
+  <p><strong>问题</strong>:AI 会不会从用户的使用中「学坏」?用户能不能控制 AI 学什么?</p>
   <ul>
     <li><strong>完全不学习</strong>:AI 是无状态的,每次对话都从零开始(如默认的 ChatGPT)</li>
     <li><strong>静默学习</strong>:AI 在背后学习用户偏好,用户看不到学了啥(早期 Apple Siri)</li>
     <li><strong>可见学习</strong>:AI 学到的东西用户能看、能改(如 ChatGPT Memory 面板)</li>
-    <li><strong>明示学习</strong>:AI 每次学新东西都问用户"我可以记住这个吗?"</li>
+    <li><strong>明示学习</strong>:AI 每次学新东西都问用户「我可以记住这个吗?」</li>
   </ul>
   <div class="callout ops">
     <div class="label">✓ 经验 · 学习必须可见可控</div>
-    <p>ChatGPT 在 2024 年推出 Memory 功能时被很多人批评"隐私担忧",OpenAI 的应对是做了一个<strong>完全透明的 Memory 面板</strong>——用户能看到 AI 记住了什么,能逐条删除。这是把"学习黑盒"做成了"学习白盒",是值得借鉴的模式。</p>
+    <p>ChatGPT 在 2024 年推出 Memory 功能时被很多人批评「隐私担忧」,OpenAI 的应对是做了一个<strong>完全透明的 Memory 面板</strong>——用户能看到 AI 记住了什么,能逐条删除。这是把「学习黑盒」做成了「学习白盒」,是值得借鉴的模式。</p>
   </div>
 
   <h3><span class="pre">4.3</span>典型解法对比 · 行业怎么解可控性?</h3>
 
-  <h4>解法 1 · Cursor 的"三段式介入"</h4>
+  <h4>解法 1 · Cursor 的「三段式介入」</h4>
   <p>Cursor 把 AI 介入分成 3 个梯度,每个梯度有不同的可控性设计:</p>
 
   <div class="table-wrap">
@@ -141,32 +141,32 @@
       </tbody>
     </table>
   </div>
-  <p><strong>精髓</strong>:用户能在 3 个授权强度间无缝切换。低风险任务用 Tab,中风险用 Composer,高风险(或想偷懒)用 Agent。<em>设计师不替用户选择"AI 该多自主",而是把选择权交给用户</em>。</p>
+  <p><strong>精髓</strong>:用户能在 3 个授权强度间无缝切换。低风险任务用 Tab,中风险用 Composer,高风险(或想偷懒)用 Agent。<em>设计师不替用户选择「AI 该多自主」,而是把选择权交给用户</em>。</p>
 
-  <h4>解法 2 · Claude Artifact 的"编辑 - 预览分离"</h4>
-  <p>Claude 在生成代码、网页、图表等"复杂内容"时,会把内容放到一个独立的 Artifact 面板里。这个设计有几个可控性好处:</p>
+  <h4>解法 2 · Claude Artifact 的「编辑 - 预览分离」</h4>
+  <p>Claude 在生成代码、网页、图表等「复杂内容」时,会把内容放到一个独立的 Artifact 面板里。这个设计有几个可控性好处:</p>
   <ul>
-    <li>用户可以<em>只看不接受</em>—— Artifact 默认不会"插入到对话主线"</li>
-    <li>用户可以<em>反复修改</em>——让 Claude"改成蓝色 / 加一个按钮 / 字体放大",每次都更新同一个 Artifact</li>
+    <li>用户可以<em>只看不接受</em>—— Artifact 默认不会「插入到对话主线」</li>
+    <li>用户可以<em>反复修改</em>——让 Claude「改成蓝色 / 加一个按钮 / 字体放大」,每次都更新同一个 Artifact</li>
     <li>用户可以<em>版本对比</em>—— Artifact 保留历史版本,能切换查看</li>
   </ul>
-  <p><strong>精髓</strong>:把"AI 输出"和"用户的工作空间"明确分开,输出永远在"沙盒"里,用户主动决定要不要接受。</p>
+  <p><strong>精髓</strong>:把「AI 输出」和「用户的工作空间」明确分开,输出永远在「沙盒」里,用户主动决定要不要接受。</p>
 
-  <h4>解法 3 · Krea 的"实时参数滑块"</h4>
+  <h4>解法 3 · Krea 的「实时参数滑块」</h4>
   <p>Krea 在生成图像时,提供了大量实时调节滑块——风格强度、相似度、guidance scale 等。用户可以一边看 AI 出图、一边拉滑块调节,AI 实时跟进生成新图。</p>
-  <p><strong>精髓</strong>:把"AI 的内部参数"暴露给用户,让用户感受到"我在驾驶这个模型,不是模型在驾驶我"。<em>这种 UX 适合创意类场景(用户本来就想探索),不适合任务完成类场景(用户只想要结果)。</em></p>
+  <p><strong>精髓</strong>:把「AI 的内部参数」暴露给用户,让用户感受到「我在驾驶这个模型,不是模型在驾驶我」。<em>这种 UX 适合创意类场景(用户本来就想探索),不适合任务完成类场景(用户只想要结果)。</em></p>
 
   <h4>解法 4 · 自动驾驶给我们的教训</h4>
   <p>特斯拉、Waymo、小鹏的辅助驾驶系统,对 AI 产品的可控性设计有一个核心启示:<strong>控制权的交接是危险的</strong>。</p>
   <div class="callout sharp">
     <div class="label">✕ 两个危险时刻</div>
     <ol>
-      <li><strong>AI 主动放手时</strong>(任务做不下去了)——必须告诉用户"我做到第 X 步遇到问题,需要你做这件事"</li>
-      <li><strong>用户主动接手时</strong>(中途介入)—— AI 要立刻停止、不要"抢"控制权、把当前状态完整呈现给用户</li>
+      <li><strong>AI 主动放手时</strong>(任务做不下去了)——必须告诉用户「我做到第 X 步遇到问题,需要你做这件事」</li>
+      <li><strong>用户主动接手时</strong>(中途介入)—— AI 要立刻停止、不要「抢」控制权、把当前状态完整呈现给用户</li>
     </ol>
   </div>
 
-  <h3><span class="pre">4.4</span>可控性的"度" · 太多 vs 太少</h3>
+  <h3><span class="pre">4.4</span>可控性的「度」 · 太多 vs 太少</h3>
 
   <p class="lead">可控性不是越多越好。我们见过两个极端的反例。</p>
 
@@ -174,14 +174,14 @@
   <p>某 AI 写作产品要求用户配置 20 多个参数才能开始写:语气、风格、长度、目标读者、SEO 关键词、语法严格度、emoji 使用率…… 用户填完 20 个参数已经累了,AI 写出来还不一定好。</p>
   <div class="callout ops">
     <div class="label">✓ 反思</div>
-    <p>所有控制点都应该有"合理默认"。让 <strong>90% 的用户什么都不配置就能用,10% 的高级用户能进阶配置</strong>。</p>
+    <p>所有控制点都应该有「合理默认」。让 <strong>90% 的用户什么都不配置就能用,10% 的高级用户能进阶配置</strong>。</p>
   </div>
 
   <h4>极端 2 · 过少控制让用户焦虑</h4>
-  <p>某 AI 简历生成器,用户上传简历后 AI 直接重写,不展示中间过程。生成完了用户看着满意但不敢用——"AI 改了什么我都不知道,万一篡改了关键信息怎么办?"</p>
+  <p>某 AI 简历生成器,用户上传简历后 AI 直接重写,不展示中间过程。生成完了用户看着满意但不敢用——「AI 改了什么我都不知道,万一篡改了关键信息怎么办?」</p>
   <div class="callout ops">
     <div class="label">✓ 反思</div>
-    <p>对"涉及用户重要资产"的 AI 操作,必须给"过程可见 + 修改可逆"两件事。</p>
+    <p>对「涉及用户重要资产」的 AI 操作,必须给「过程可见 + 修改可逆」两件事。</p>
   </div>
 
   <h4>平衡的指导原则</h4>
@@ -206,10 +206,10 @@
   <div class="callout you">
     <div class="label">◐ 千图AI 当前可控性自查</div>
     <ul>
-      <li><strong>启动控制</strong>:✅ 用户主动点"生成"按钮,没有 always-on AI(合理)</li>
-      <li><strong>过程控制</strong>:⚠️ 生成中能取消,但不能"修改下一步",未来要看具体场景需不需要</li>
-      <li><strong>边界控制</strong>:⚠️ 当前缺少"用户配置默认偏好"的入口(比如"我永远要写实风格,不要插画风")</li>
-      <li><strong>撤销控制</strong>:⚠️ 历史生成记录可查,但缺少"会话 / Project"级的组织</li>
+      <li><strong>启动控制</strong>:✅ 用户主动点「生成」按钮,没有 always-on AI(合理)</li>
+      <li><strong>过程控制</strong>:⚠️ 生成中能取消,但不能「修改下一步」,未来要看具体场景需不需要</li>
+      <li><strong>边界控制</strong>:⚠️ 当前缺少「用户配置默认偏好」的入口(比如「我永远要写实风格,不要插画风」)</li>
+      <li><strong>撤销控制</strong>:⚠️ 历史生成记录可查,但缺少「会话 / Project」级的组织</li>
       <li><strong>学习控制</strong>:❌ 目前 AI 不学习用户偏好,未来要做时必须做透明可控</li>
     </ul>
   </div>
@@ -217,7 +217,7 @@
   <p>详细体检和改进建议留到第 15 章。这里先标记几个未来可能踩的坑。</p>
 
   <p class="ref">主要参考:<br>
-  Lisanne Bainbridge, <em>Ironies of Automation</em>, Automatica 19(6), 1983 · BEA, <em>Final Report on Air France 447 Accident</em>, 2012 · Cursor 文档与 changelog · Anthropic Claude Artifact 公告, 2024-06 · Krea AI 产品文档 · OpenAI ChatGPT Memory 公告, 2024-04 · Tesla Autopilot Owner's Manual · NN/g, "Human Control in AI", 2024</p>
+  Lisanne Bainbridge, <em>Ironies of Automation</em>, Automatica 19(6), 1983 · BEA, <em>Final Report on Air France 447 Accident</em>, 2012 · Cursor 文档与 changelog · Anthropic Claude Artifact 公告, 2024-06 · Krea AI 产品文档 · OpenAI ChatGPT Memory 公告, 2024-04 · Tesla Autopilot Owner『s Manual · NN/g, 「Human Control in AI」, 2024</p>
 
 </div>
 </section>

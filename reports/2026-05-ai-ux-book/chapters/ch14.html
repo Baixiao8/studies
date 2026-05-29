@@ -3,7 +3,7 @@
 
   <div class="section-tag"><span class="num">14</span>NEW PRINCIPLES · 重构应用 / 第十四章</div>
   <h1 class="section-h">AI 时代设计十二诫:经典原则的体检与重写 <span class="en">The Twelve Commandments</span></h1>
-  <p class="section-sub">把前 13 章的所有判断,提炼成 12 条可直接落地的设计原则——这是这本书最浓缩的产物。每条原则带"为什么需要 / 怎么落地 / 反面案例"三件套,作为团队做 AI 产品决策时的checklist。</p>
+  <p class="section-sub">把前 13 章的所有判断,提炼成 12 条可直接落地的设计原则——这是这本书最浓缩的产物。每条原则带「为什么需要 / 怎么落地 / 反面案例」三件套,作为团队做 AI 产品决策时的checklist。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
@@ -14,7 +14,7 @@
     <div class="label">故事 / 经典启发法的诞生 · 1988 + 1994</div>
     <p><strong>1988 年</strong>:Don Norman 出版《The Design of Everyday Things》,提出可见性 / 示能 / 反馈 / 映射 / 约束等概念,奠定了现代 UX 的认知基础。</p>
     <p><strong>1994 年</strong>:Jakob Nielsen 总结 10 条可用性启发法,从 249 个可用性问题中归纳出最普适的模式。这 10 条至今是行业 checklist。</p>
-    <p>30 年过去,这套原则面对 ChatGPT / Claude / Cursor / v0 时,大部分仍然适用——但<em>有 4-5 条需要"AI 时代的升级版"</em>,另外有 5-6 条<em>是 Norman / Nielsen 时代根本没有的新议题</em>。我们这一章做两件事:体检 + 重写。</p>
+    <p>30 年过去,这套原则面对 ChatGPT / Claude / Cursor / v0 时,大部分仍然适用——但<em>有 4-5 条需要「AI 时代的升级版」</em>,另外有 5-6 条<em>是 Norman / Nielsen 时代根本没有的新议题</em>。我们这一章做两件事:体检 + 重写。</p>
   </div>
 
   <h3><span class="pre">14.1</span>体检经典 · 三类处理</h3>
@@ -24,18 +24,18 @@
   <h4>类 1 · 完全保留(经典原则仍然适用)</h4>
   <ul>
     <li><strong>简洁美观</strong>(Aesthetic and minimalist design)——更稀缺的注意力时代更适用</li>
-    <li><strong>识别优于回忆</strong>(Recognition rather than recall)—— AI 产品反而要更明确把能力展示出来,不要让用户"猜 AI 能做什么"</li>
+    <li><strong>识别优于回忆</strong>(Recognition rather than recall)—— AI 产品反而要更明确把能力展示出来,不要让用户「猜 AI 能做什么」</li>
     <li><strong>灵活高效</strong>(Flexibility and efficiency of use)——快捷键 / slash command 仍然必要</li>
   </ul>
 
   <h4>类 2 · 需要升级(经典原则要改写)</h4>
   <ul>
-    <li><strong>系统状态可见</strong> → 升级为 <strong>"可信度可见"</strong>(展示对结果的把握程度,不只是结果)</li>
-    <li><strong>用户控制与自由</strong> → 升级为 <strong>"5 维度可控性"</strong>(启动 / 过程 / 边界 / 撤销 / 学习)</li>
-    <li><strong>错误预防</strong> → 升级为 <strong>"错误是主菜"</strong>(AI 错误必然发生,设计要为此而做)</li>
-    <li><strong>一致性</strong> → 升级为 <strong>"变化中保持可识别"</strong>(每次输出不同,但产品规范不变)</li>
-    <li><strong>错误恢复</strong> → 升级为 <strong>"错误后能继续"</strong>(包括部分恢复 / 转人工 / 优雅降级)</li>
-    <li><strong>帮助文档</strong> → 升级为 <strong>"对话即帮助"</strong>(用户直接问 AI,而不是查 docs)</li>
+    <li><strong>系统状态可见</strong> → 升级为 <strong>「可信度可见」</strong>(展示对结果的把握程度,不只是结果)</li>
+    <li><strong>用户控制与自由</strong> → 升级为 <strong>「5 维度可控性」</strong>(启动 / 过程 / 边界 / 撤销 / 学习)</li>
+    <li><strong>错误预防</strong> → 升级为 <strong>「错误是主菜」</strong>(AI 错误必然发生,设计要为此而做)</li>
+    <li><strong>一致性</strong> → 升级为 <strong>「变化中保持可识别」</strong>(每次输出不同,但产品规范不变)</li>
+    <li><strong>错误恢复</strong> → 升级为 <strong>「错误后能继续」</strong>(包括部分恢复 / 转人工 / 优雅降级)</li>
+    <li><strong>帮助文档</strong> → 升级为 <strong>「对话即帮助」</strong>(用户直接问 AI,而不是查 docs)</li>
   </ul>
 
   <h4>类 3 · 全新加入(Norman / Nielsen 时代不存在)</h4>
@@ -44,19 +44,19 @@
     <li><strong>意图层先于操作层</strong>—— AI 产品的新设计起点</li>
     <li><strong>Agent 的边界感</strong>——什么时候自动、什么时候问</li>
     <li><strong>生成式 UI 的四态</strong>——生成中 / 待审批 / 已应用 / 版本切换</li>
-    <li><strong>人格稳定可预测</strong>—— AI 不只是工具,有"性格"</li>
+    <li><strong>人格稳定可预测</strong>—— AI 不只是工具,有「性格」</li>
     <li><strong>上下文是资产</strong>——记忆要可见可控可移植</li>
   </ul>
 
   <h3><span class="pre">14.2</span>重写后的 12 条原则</h3>
 
-  <p class="lead">把升级的 + 新增的合并,加上一些保留的经典精华,提炼成<strong>"AI 时代设计十二诫"</strong>。每条带"为什么 / 怎么落地 / 反面案例"三件套。</p>
+  <p class="lead">把升级的 + 新增的合并,加上一些保留的经典精华,提炼成<strong>「AI 时代设计十二诫」</strong>。每条带「为什么 / 怎么落地 / 反面案例」三件套。</p>
 
   <h4>第 1 诫 · 信任优于可用性</h4>
   <div class="callout note">
     <div class="label">i 第 1 诫</div>
     <p><strong>为什么</strong>:用户不信任 AI 输出,再可用也是负担(第 3 章)。<br>
-    <strong>怎么落地</strong>:可点验引用 + 主动说"不确定" + 关键时刻确认 + 不堆废话 disclaimer。<br>
+    <strong>怎么落地</strong>:可点验引用 + 主动说「不确定」 + 关键时刻确认 + 不堆废话 disclaimer。<br>
     <strong>反面案例</strong>:Schwartz 律师案——ChatGPT 没有任何 UX 让用户意识到引用可能是编的。</p>
   </div>
 
@@ -64,15 +64,15 @@
   <div class="callout note">
     <div class="label">i 第 2 诫</div>
     <p><strong>为什么</strong>:AI 错误必然发生,频率高,用户无法预防(第 6 章)。<br>
-    <strong>怎么落地</strong>:5 类错误对应 4 种兜底机制 + 6 条文案铁律,第一稿设计就回答"出错了用户怎么办"。<br>
-    <strong>反面案例</strong>:ChatGPT 早期"Something went wrong"——对所有错误一视同仁,用户无从下手。</p>
+    <strong>怎么落地</strong>:5 类错误对应 4 种兜底机制 + 6 条文案铁律,第一稿设计就回答「出错了用户怎么办」。<br>
+    <strong>反面案例</strong>:ChatGPT 早期「Something went wrong」——对所有错误一视同仁,用户无从下手。</p>
   </div>
 
-  <h4>第 3 诫 · 必须给"逃生通道"</h4>
+  <h4>第 3 诫 · 必须给「逃生通道」</h4>
   <div class="callout note">
     <div class="label">i 第 3 诫</div>
     <p><strong>为什么</strong>:AI 卡住时,如果用户不能接管,产品就死了(第 13 章)。<br>
-    <strong>怎么落地</strong>:转人工入口可见 + 自助模式切换 + 让用户能"跳出 AI 流"继续工作。<br>
+    <strong>怎么落地</strong>:转人工入口可见 + 自助模式切换 + 让用户能「跳出 AI 流」继续工作。<br>
     <strong>反面案例</strong>:Rabbit R1 没屏幕没键盘,AI 卡住用户只能干等。</p>
   </div>
 
@@ -88,16 +88,16 @@
   <div class="callout note">
     <div class="label">i 第 5 诫</div>
     <p><strong>为什么</strong>:prompt 是 AI 时代的新键盘鼠标(第 7 章)。<br>
-    <strong>怎么落地</strong>:placeholder 不要"Ask anything",要给具体例子 + slash command 限 5-8 个 + custom instructions 透明可控 + prompt 失败时主动追问或对比生成。<br>
+    <strong>怎么落地</strong>:placeholder 不要「Ask anything」,要给具体例子 + slash command 限 5-8 个 + custom instructions 透明可控 + prompt 失败时主动追问或对比生成。<br>
     <strong>反面案例</strong>:Midjourney 早期 Discord 命令式,新手 onboarding 极差。</p>
   </div>
 
   <h4>第 6 诫 · UI 是协作产物 · 设计 4 态</h4>
   <div class="callout note">
     <div class="label">i 第 6 诫</div>
-    <p><strong>为什么</strong>:生成式 UI 时代,UI 元素从"资产"变"实例"(第 5 章)。<br>
+    <p><strong>为什么</strong>:生成式 UI 时代,UI 元素从「资产」变「实例」(第 5 章)。<br>
     <strong>怎么落地</strong>:明确设计 4 种状态——生成中 / 待审批 / 已应用 / 版本切换。默认进入待审批,给用户最后把关机会。<br>
-    <strong>反面案例</strong>:某些生图工具直接把图"应用"到工作流,用户没看清就 commit,后悔无门。</p>
+    <strong>反面案例</strong>:某些生图工具直接把图「应用」到工作流,用户没看清就 commit,后悔无门。</p>
   </div>
 
   <h4>第 7 诫 · Agent 的 5 个必停 trigger</h4>
@@ -119,7 +119,7 @@
   <h4>第 9 诫 · 透明度优于黑盒</h4>
   <div class="callout note">
     <div class="label">i 第 9 诫</div>
-    <p><strong>为什么</strong>:用户对 AI 行为没"心理模型",黑盒 = 不可预测 = 不可信任(第 3 章 + 第 4 章)。<br>
+    <p><strong>为什么</strong>:用户对 AI 行为没「心理模型」,黑盒 = 不可预测 = 不可信任(第 3 章 + 第 4 章)。<br>
     <strong>怎么落地</strong>:暴露 Custom Instructions 给用户 / Memory 面板可审计可删 / 模型版本明示 / 主动说训练数据时效。<br>
     <strong>反面案例</strong>:某些 AI 产品偷偷改 system prompt 让 AI 行为突变,用户困惑。</p>
   </div>
@@ -144,18 +144,18 @@
   <div class="callout note">
     <div class="label">i 第 12 诫</div>
     <p><strong>为什么</strong>:长期看,AI 产品的健康度取决于用户能力是否被增强还是被替代(前言立场 + 第 1 章遗产税)。<br>
-    <strong>怎么落地</strong>:不要"挽留用户"话术 / 不要"打卡连续使用"机制 / 给"了解 AI 做了什么"的入口让用户学习而不只是消费 / 避免过度自动化让用户失去能力。<br>
-    <strong>反面案例</strong>:一些 AI 产品鼓励"每天用 X 小时",指标短期好看,长期用户能力萎缩 → 卸载率高。</p>
+    <strong>怎么落地</strong>:不要「挽留用户」话术 / 不要「打卡连续使用」机制 / 给「了解 AI 做了什么」的入口让用户学习而不只是消费 / 避免过度自动化让用户失去能力。<br>
+    <strong>反面案例</strong>:一些 AI 产品鼓励「每天用 X 小时」,指标短期好看,长期用户能力萎缩 → 卸载率高。</p>
   </div>
 
   <h3><span class="pre">14.3</span>怎么用这 12 诫?</h3>
 
-  <p class="lead">12 诫不是"金科玉律",是<strong>团队做 AI 产品决策时的 checklist</strong>。我们建议三种用法。</p>
+  <p class="lead">12 诫不是「金科玉律」,是<strong>团队做 AI 产品决策时的 checklist</strong>。我们建议三种用法。</p>
 
   <div class="callout ops">
     <div class="label">✓ 12 诫的三种用法</div>
     <ol>
-      <li><strong>做新功能时</strong>——拿这 12 条过一遍,问自己"这个功能符合 / 违反 / 没考虑哪几条"。</li>
+      <li><strong>做新功能时</strong>——拿这 12 条过一遍,问自己「这个功能符合 / 违反 / 没考虑哪几条」。</li>
       <li><strong>做 design review 时</strong>——把这 12 条贴在 review 文档里,逐条 check 别人的方案。</li>
       <li><strong>做 PR / 体验 review 时</strong>——把这 12 条做成 ChatOps 命令(<code>/12-check</code>),自动审 AI 产品的设计提案。</li>
     </ol>
@@ -165,14 +165,14 @@
     <div class="label">✕ 不要做的事</div>
     <ul>
       <li><strong>不要全部 12 条都达 ★★★★★</strong>——这不现实,也不必要。每个产品在不同诫上有不同权重。</li>
-      <li><strong>不要把 12 诫当"通过 / 不通过"判断</strong>——它是讨论框架,不是验收标准。</li>
+      <li><strong>不要把 12 诫当「通过 / 不通过」判断</strong>——它是讨论框架,不是验收标准。</li>
       <li><strong>不要僵化执行</strong>—— 12 诫会随 AI 能力演化,2026 年的版本到 2028 年可能要修改 3-4 条。这是 v0.1。</li>
     </ul>
   </div>
 
   <h3><span class="pre">14.4</span>本章小结</h3>
 
-  <p>12 条原则不是凭空发明,是<strong>前 13 章所有判断的浓缩</strong>。每条都对应具体章节、具体案例、具体反面教材。这本书前面 90% 内容是"为什么这 12 条",这一章是把它们写成可贴在墙上的 checklist。</p>
+  <p>12 条原则不是凭空发明,是<strong>前 13 章所有判断的浓缩</strong>。每条都对应具体章节、具体案例、具体反面教材。这本书前面 90% 内容是「为什么这 12 条」,这一章是把它们写成可贴在墙上的 checklist。</p>
 
   <p>下一章我们做这本书最关键的应用——<strong>用这 12 诫给千图AI 做一次完整 UX 体检</strong>,看我们在每一诫上的得分、问题、改进空间。</p>
 
