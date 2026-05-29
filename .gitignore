@@ -46,6 +46,7 @@ reports/*/*.epub
 !reports/2026-05-marathon/index.html
 !reports/2026-05-skills-building-guide/index.html
 !reports/2026-05-thinking-evolution/index.html
+!reports/2026-05-mailchimp-voice-tone/index.html
 
 # Local config (不要把本地密钥提交)
 .env
