@@ -25,6 +25,7 @@
 |---|---|---|---|---|---|---|
 | **2026-05** | AI 时代的用户体验之书 · 千图AI 内部 UX 读本 · 16 章 4 幕(范式 / 问题地图 / 案例横评 / 千图AI 应用) | ~50K | 1.8h | 🎧 同步 | (无配图) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-ai-ux-book/) |
 | **2026-05** | 思考进化 · Cognitive Evolution · 三部曲资料库(UX 理论卡片 / 大厂工作流 / AI 范式迁移) | (Bento) | — | — | 189 SVG | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-thinking-evolution/) |
+| **2026-05** | Mailchimp Voice and Tone 深度调研 · voice/tone 三层 + X but not Y · 写作工程实验 · newsprint 报刊风 | ~2.4K | 10min | — | — | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-mailchimp-voice-tone/) |
 
 ### III · AI 工程 · AI Engineering
 
