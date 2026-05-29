@@ -1,0 +1,452 @@
+{
+  "corp-apple": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1647892336700-23bbc896a0d1?w=800&q=80&auto=format&fit=crop",
+    "caption": "苹果的工业设计：从空间、光线到材料的整体掌控。",
+    "alt": "Apple Store interior with a black-and-white spiral staircase",
+    "source": "Unsplash · @peihengzhang",
+    "source_page": "https://unsplash.com/photos/a-black-and-white-photo-of-a-spiral-staircase-KPCcUtiUNPE",
+    "license": "Unsplash Free"
+  },
+  "corp-google": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1766371900950-929959f2bb67?w=800&q=80&auto=format&fit=crop",
+    "caption": "Google 总部建筑外彩色 Logo——Material Design 的色彩 DNA。",
+    "alt": "Google headquarters building with the colorful logo",
+    "source": "Unsplash · @caufeux",
+    "source_page": "https://unsplash.com/photos/google-headquarters-building-with-colorful-logo-uPot_64y5Ac",
+    "license": "Unsplash Free"
+  },
+  "corp-microsoft": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1587614297882-0954a02d57f7?w=800&q=80&auto=format&fit=crop",
+    "caption": "Microsoft Surface：企业生产力背后的硬件载体。",
+    "alt": "Gray Microsoft Surface laptop on a clean white table",
+    "source": "Unsplash · @windows",
+    "source_page": "https://unsplash.com/photos/139Uv2t0Ez0",
+    "license": "Unsplash Free"
+  },
+  "corp-meta": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1493497029755-f49c8e9a8bbe?w=800&q=80&auto=format&fit=crop",
+    "caption": "VR 头显——Meta 押注的下一代交互边界。",
+    "alt": "Man wearing a virtual reality headset",
+    "source": "Unsplash · @luxinteraction",
+    "source_page": "https://unsplash.com/photos/xL3xDwWx7_s",
+    "license": "Unsplash Free"
+  },
+  "corp-ibm": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1682559736721-c2e77ff4c650?w=800&q=80&auto=format&fit=crop",
+    "caption": "蓝色巨人的底座：数据中心机柜里的连接秩序。",
+    "alt": "A bunch of wires connected to a server in a data center",
+    "source": "Unsplash · @lightsabercollection",
+    "source_page": "https://unsplash.com/photos/a-bunch-of-wires-that-are-connected-to-a-server-T-IN5o3kxyA",
+    "license": "Unsplash Free"
+  },
+  "corp-airbnb": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1502672023488-70e25813eb80?w=800&q=80&auto=format&fit=crop",
+    "caption": "民宿空间里的「家」感——Airbnb 体验的起点。",
+    "alt": "Brown wooden table and chair beside a bookshelf in a cozy home",
+    "source": "Unsplash · @patrickperkins",
+    "source_page": "https://unsplash.com/photos/brown-wooden-table-and-chair-beside-bookshelf-iRiVzALa4pI",
+    "license": "Unsplash Free"
+  },
+  "corp-netflix": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1717295248302-543d5a49091f?w=800&q=80&auto=format&fit=crop",
+    "caption": "客厅、电视、那抹标志性的红——流媒体的当代仪式。",
+    "alt": "A dark living room with a television and a neon Netflix sign",
+    "source": "Unsplash · @boliviainteligente",
+    "source_page": "https://unsplash.com/photos/a-dark-room-with-a-television-and-a-neon-netflix-sign-0lfV6wbbP20",
+    "license": "Unsplash Free"
+  },
+  "corp-spotify": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1639452125609-76f5aba63353?w=800&q=80&auto=format&fit=crop",
+    "caption": "桌上的耳机——音乐流媒体最沉浸的入口。",
+    "alt": "Close-up of headphones on a desk in dark theme",
+    "source": "Unsplash · @roberttorres_19r",
+    "source_page": "https://unsplash.com/photos/a-close-up-of-a-pair-of-headphones-on-a-desk-_tVTdeeLreA",
+    "license": "Unsplash Free"
+  },
+  "corp-adobe": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1753715613388-7e03410b1dce?w=800&q=80&auto=format&fit=crop",
+    "caption": "设计师在数位板上落笔——Adobe 服务的核心场景。",
+    "alt": "Someone drawing on a tablet at their workspace desk",
+    "source": "Unsplash · @jakubzerdzicki",
+    "source_page": "https://unsplash.com/photos/someone-is-drawing-on-a-tablet-at-their-desk-vhZ8K5Np9mk",
+    "license": "Unsplash Free"
+  },
+  "corp-atlassian": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1746729798021-129315426424?w=800&q=80&auto=format&fit=crop",
+    "caption": "看板上的任务卡——敏捷协作的物理隐喻。",
+    "alt": "People using a kanban board for task management",
+    "source": "Unsplash · @sent1nel4s",
+    "source_page": "https://unsplash.com/photos/people-use-a-kanban-board-for-task-management-WqYgZLbDjhQ",
+    "license": "Unsplash Free"
+  },
+  "corp-figma": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1758876203342-fc14c0bba67c?w=800&q=80&auto=format&fit=crop",
+    "caption": "两位同事围着一块屏幕——Figma 让协作发生在画布里。",
+    "alt": "Two colleagues collaborating on a project at a desk",
+    "source": "Unsplash · @silverkblack",
+    "source_page": "https://unsplash.com/photos/two-colleagues-collaborating-on-a-project-at-a-desk-UUcgVSq2m3g",
+    "license": "Unsplash Free"
+  },
+  "corp-notion": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1761322572550-967ea8c0bfd9?w=800&q=80&auto=format&fit=crop",
+    "caption": "桌面上的纸笔——Notion 把第二大脑数字化的起点。",
+    "alt": "Open notebook with pen and pencils on a wooden desk",
+    "source": "Unsplash · @claybanks",
+    "source_page": "https://unsplash.com/photos/open-notebook-with-pen-and-pencils-on-desk-n9AaeihA9HI",
+    "license": "Unsplash Free"
+  },
+  "corp-openai": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1676272748285-2cee8e35db69?w=800&q=80&auto=format&fit=crop",
+    "caption": "手机屏幕里点亮的 ChatGPT——大模型的第一次大众化亮相。",
+    "alt": "A cell phone with a lit-up ChatGPT screen in the dark",
+    "source": "Unsplash · @freshvanroot",
+    "source_page": "https://unsplash.com/photos/LyI1T85Lry8",
+    "license": "Unsplash Free"
+  },
+  "corp-anthropic": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1748194449456-a6a59f63dcc8?w=800&q=80&auto=format&fit=crop",
+    "caption": "蓝色神经线条勾勒出的大脑——Anthropic 关注的「负责任的智能」。",
+    "alt": "A brain rendered with glowing blue lines on dark background",
+    "source": "Unsplash · @theshubhamdhage",
+    "source_page": "https://unsplash.com/photos/a-brain-displayed-with-glowing-blue-lines-2sz-3NrmZYU",
+    "license": "Unsplash Free"
+  },
+  "corp-bytedance-feishu": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1565350897149-38dfafa81d83?w=800&q=80&auto=format&fit=crop",
+    "caption": "一群人围着笔记本——飞书要服务的协作日常。",
+    "alt": "Group of people gathered around laptops in a team setting",
+    "source": "Unsplash · @vantaymedia",
+    "source_page": "https://unsplash.com/photos/group-of-people-with-laptops-Hh-PIe3qIug",
+    "license": "Unsplash Free"
+  },
+  "corp-bytedance-douyin": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1690883794145-e96486fbe66b?w=800&q=80&auto=format&fit=crop",
+    "caption": "手机屏幕上的社交矩阵——抖音正是这块方寸之地的最大玩家。",
+    "alt": "A close-up of a cell phone with social media app icons",
+    "source": "Unsplash · @julianchrist",
+    "source_page": "https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-social-media-icons-2MBnS4np8i0",
+    "license": "Unsplash Free"
+  },
+  "corp-alibaba-ant": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1754638335063-a1d703da2300?w=800&q=80&auto=format&fit=crop",
+    "caption": "中国街市的商铺密度——蚂蚁/支付宝服务亿万小店的真实底色。",
+    "alt": "A bustling Chinese street with many small shops",
+    "source": "Unsplash · @nihthu",
+    "source_page": "https://unsplash.com/photos/a-street-in-china-with-many-shops-gOanfwg7jDI",
+    "license": "Unsplash Free"
+  },
+  "corp-tencent-cdc": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1710993011836-108ba89ebe51?w=800&q=80&auto=format&fit=crop",
+    "caption": "屏幕上的社交图标——腾讯 CDC 服务的国民级触点。",
+    "alt": "Finger touching a smartphone screen, dark background",
+    "source": "Unsplash · @solenfeyissa",
+    "source_page": "https://unsplash.com/photos/a-close-up-of-a-person-touching-a-cell-phone-GZyELVkOmi0",
+    "license": "Unsplash Free"
+  },
+  "corp-meituan": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1572195577046-2f25894c06fc?w=800&q=80&auto=format&fit=crop",
+    "caption": "骑手与电动车——美团外卖体验的物理终端。",
+    "alt": "Man driving a motor scooter delivering food in the city",
+    "source": "Unsplash · @lucian_alexe",
+    "source_page": "https://unsplash.com/photos/man-driving-motor-scooter-delivering-good-afDu-GuxjjM",
+    "license": "Unsplash Free"
+  },
+  "corp-jd": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1573552991725-c7b115591d04?w=800&q=80&auto=format&fit=crop",
+    "caption": "牛皮纸箱堆栈——京东的「确定性」背后是整套仓配体系。",
+    "alt": "Stack of brown cardboard shipping boxes",
+    "source": "Unsplash · @rhsupplies",
+    "source_page": "https://unsplash.com/photos/2mH3hbrYMac",
+    "license": "Unsplash Free"
+  },
+  "corp-didi": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1714703394135-5edc33aec1b4?w=800&q=80&auto=format&fit=crop",
+    "caption": "夜色中的城市与方向盘——滴滴体验发生的真实场景。",
+    "alt": "A man driving a car at night in the city",
+    "source": "Unsplash · @introspectivedsgn",
+    "source_page": "https://unsplash.com/photos/a-man-driving-a-car-at-night-in-the-city-kSjg-hRNA4g",
+    "license": "Unsplash Free"
+  },
+  "corp-xiaomi": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1560677653-a263662b153b?w=800&q=80&auto=format&fit=crop",
+    "caption": "石面之上的小米黑色手机——极简的「为发烧而生」。",
+    "alt": "Black Xiaomi Android smartphone on rock",
+    "source": "Unsplash · @mateusztxx",
+    "source_page": "https://unsplash.com/photos/black-xiaomi-android-smartphone-on-rock-jZ7NfJ_aITk",
+    "license": "Unsplash Free"
+  },
+  "paradigm-photo-still-canon": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1483519173755-be893fab1f46?w=800&q=80&auto=format&fit=crop",
+    "caption": "人眼的微距特写——所有「人因」研究的起点。",
+    "alt": "Macro photography of a human eye showing iris detail",
+    "source": "Unsplash · @v2osk",
+    "source_page": "https://unsplash.com/photos/macro-photography-of-human-eye-In4XVKhYaiI",
+    "license": "Unsplash Free"
+  },
+  "paradigm-photo-upgraded": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1758626044744-463ce33546a2?w=800&q=80&auto=format&fit=crop",
+    "caption": "人与 AI 共同工作的桌面——经典理论在 AI 时代被「升级」。",
+    "alt": "Person typing on a laptop with an AI gateway logo on screen",
+    "source": "Unsplash · @jolin974658",
+    "source_page": "https://unsplash.com/photos/person-typing-on-laptop-with-ai-gateway-logo-VgJH4ulEzMQ",
+    "license": "Unsplash Free"
+  },
+  "paradigm-photo-deprecated": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1503387837-b154d5074bd2?w=800&q=80&auto=format&fit=crop",
+    "caption": "手工绘图的年代——被时代淘汰的旧体验范式。",
+    "alt": "Person drafting on a blueprint at a workshop desk",
+    "source": "Unsplash · @d_mccullough",
+    "source_page": "https://unsplash.com/photos/person-drafting-on-blueprint--FPFq_trr2Y",
+    "license": "Unsplash Free"
+  },
+  "paradigm-photo-emerging": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1741796127170-eacd847682e7?w=800&q=80&auto=format&fit=crop",
+    "caption": "霓虹与光弧——属于 AI 体验的新范式正在亮起。",
+    "alt": "Purple neon lights creating a futuristic visual",
+    "source": "Unsplash · @loganvoss",
+    "source_page": "https://unsplash.com/photos/purple-neon-lights-create-a-futuristic-visual-_xTul_vIo04",
+    "license": "Unsplash Free"
+  },
+  "A01-fitts-law": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1735639013995-086e648eaa38?w=800&q=80&auto=format&fit=crop",
+    "caption": "手指落向屏幕的瞬间——菲茨定律最直观的应用现场。",
+    "alt": "A wall with sticky notes and a finger touching surface",
+    "source": "Unsplash · @jakubzerdzicki",
+    "source_page": "https://unsplash.com/photos/a-wall-with-a-bunch-of-sticky-notes-on-it-fQOyF0D0cDU",
+    "license": "Unsplash Free"
+  },
+  "A02-hicks-law": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1557499305-bd68d0ad468d?w=800&q=80&auto=format&fit=crop",
+    "caption": "选项越多，决策越久——希克定律的餐桌版。",
+    "alt": "Open food menu papers showing many dish options",
+    "source": "Unsplash · @louishansel",
+    "source_page": "https://unsplash.com/photos/food-menu-papers-lXLct9D-ARE",
+    "license": "Unsplash Free"
+  },
+  "A03-millers-law": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1699275303964-a9a1a8ae8c6b?w=800&q=80&auto=format&fit=crop",
+    "caption": "屏幕上的数字串——人类短时记忆的容量边界。",
+    "alt": "Close up of a cell phone screen displaying numbers",
+    "source": "Unsplash · @kajtek",
+    "source_page": "https://unsplash.com/photos/a-close-up-of-a-cell-phone-screen-with-numbers-on-it-mis7syjThUU",
+    "license": "Unsplash Free"
+  },
+  "A04-peak-end-rule": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1624887009213-040347b804c1?w=800&q=80&auto=format&fit=crop",
+    "caption": "气球上的笑脸——峰终定律里那个「让你记住」的瞬间。",
+    "alt": "Red and yellow smiley face balloon",
+    "source": "Unsplash · @countchris",
+    "source_page": "https://unsplash.com/photos/hQNFPZK8F80",
+    "license": "Unsplash Free"
+  },
+  "B01-gestalt-overview": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1741869218100-42951c3b0568?w=800&q=80&auto=format&fit=crop",
+    "caption": "几何形状构成的极简图——格式塔知觉的视觉范本。",
+    "alt": "Geometric shapes creating an abstract minimalist composition",
+    "source": "Unsplash · @pawel_czerwinski",
+    "source_page": "https://unsplash.com/photos/geometric-shapes-create-an-abstract-minimalist-composition-tnydtQWIr0c",
+    "license": "Unsplash Free"
+  },
+  "C01-norman-principles": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1607710533910-d7cdffd9e593?w=800&q=80&auto=format&fit=crop",
+    "caption": "门把手——Don Norman 用来讨论「示能」的经典物件。",
+    "alt": "Gold door lever on a brown wooden door",
+    "source": "Unsplash · @sneakyhead",
+    "source_page": "https://unsplash.com/photos/gold-door-lever-on-brown-wooden-door-hfiainyla0c",
+    "license": "Unsplash Free"
+  },
+  "D01-nielsen-heuristics": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=800&q=80&auto=format&fit=crop",
+    "caption": "桌前的可用性审视——Nielsen 启发式评估的工作底色。",
+    "alt": "Person writing notes on white paper during UX review",
+    "source": "Unsplash · @uxindo",
+    "source_page": "https://unsplash.com/photos/qC2n6RQU4Vw",
+    "license": "Unsplash Free"
+  },
+  "D04-iso-9241-210": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&q=80&auto=format&fit=crop",
+    "caption": "贴满便利贴的板——以用户为中心的设计的车间现场。",
+    "alt": "Sticky notes pinned on a board for user research synthesis",
+    "source": "Unsplash · @epicantus",
+    "source_page": "https://unsplash.com/photos/zoCDWPuiRuA",
+    "license": "Unsplash Free"
+  },
+  "D06-heuristic-evaluation": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80&auto=format&fit=crop",
+    "caption": "对着屏幕逐条比对——启发式评估专家的姿态。",
+    "alt": "Person using a MacBook Pro reviewing on-screen content",
+    "source": "Unsplash · @glenncarstenspeters",
+    "source_page": "https://unsplash.com/photos/npxXWgQ33ZQ",
+    "license": "Unsplash Free"
+  },
+  "D09-five-user-rule": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1672917187338-7f81ecac3d3f?w=800&q=80&auto=format&fit=crop",
+    "caption": "围桌讨论的小组——Nielsen「5 名用户」可用性测试场景。",
+    "alt": "A small group of people sitting around a white table discussing",
+    "source": "Unsplash · @edikurniawan",
+    "source_page": "https://unsplash.com/photos/a-group-of-people-sitting-around-a-white-table-Mq4wJuX1-OQ",
+    "license": "Unsplash Free"
+  },
+  "F07-empathy-map": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=800&q=80&auto=format&fit=crop",
+    "caption": "用户访谈的记录现场——共情地图的原材料。",
+    "alt": "Person taking research notes on white paper",
+    "source": "Unsplash · @uxindo",
+    "source_page": "https://unsplash.com/photos/qC2n6RQU4Vw",
+    "license": "Unsplash Free"
+  },
+  "F09-jtbd": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1758876203342-fc14c0bba67c?w=800&q=80&auto=format&fit=crop",
+    "caption": "桌前的协作问答——Jobs-to-be-Done 访谈的真实姿态。",
+    "alt": "Two colleagues collaborating across a desk discussing work",
+    "source": "Unsplash · @silverkblack",
+    "source_page": "https://unsplash.com/photos/two-colleagues-collaborating-on-a-project-at-a-desk-UUcgVSq2m3g",
+    "license": "Unsplash Free"
+  },
+  "F10-kano-model": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1669399213378-2853e748f217?w=800&q=80&auto=format&fit=crop",
+    "caption": "图表把功能价值排成层次——Kano 模型背后的可视化语言。",
+    "alt": "A chart visualization showing data layers",
+    "source": "Unsplash · @nickbrunner",
+    "source_page": "https://unsplash.com/photos/chart-5dgXQJ7ezuU",
+    "license": "Unsplash Free"
+  },
+  "G01-heart": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop",
+    "caption": "笔记本上的分析仪表盘——HEART 框架的指标承载体。",
+    "alt": "Graphs of performance analytics on a laptop screen",
+    "source": "Unsplash · @lukechesser",
+    "source_page": "https://unsplash.com/photos/graphs-of-performance-analytics-on-a-laptop-screen-JKUTrJ4vK00",
+    "license": "Unsplash Free"
+  },
+  "G02-sus": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1763729805496-b5dbf7f00c79?w=800&q=80&auto=format&fit=crop",
+    "caption": "拿笔在表格上勾选——SUS 量表的纸面现场。",
+    "alt": "Man signing/filling out a document with a pen",
+    "source": "Unsplash · @jakubzerdzicki",
+    "source_page": "https://unsplash.com/photos/man-signing-a-document-with-a-pen-QI6NLgN5XnM",
+    "license": "Unsplash Free"
+  },
+  "G03-nps": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1580893211123-627e0262be3a?w=800&q=80&auto=format&fit=crop",
+    "caption": "竖起的大拇指——NPS 中那位「推荐者」的具象。",
+    "alt": "A person's right hand giving a thumbs-up gesture",
+    "source": "Unsplash · @sincerelymedia",
+    "source_page": "https://unsplash.com/photos/persons-right-hand-doing-thumbs-up-3KEFp35FVB0",
+    "license": "Unsplash Free"
+  },
+  "G04-csat": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1579600161224-cac5a2971069?w=800&q=80&auto=format&fit=crop",
+    "caption": "黄色的笑脸——CSAT 满意度问卷里最常见的表情符。",
+    "alt": "Yellow smiley face emoji on a gray textile background",
+    "source": "Unsplash · @timmossholder",
+    "source_page": "https://unsplash.com/photos/yellow-smiley-emoji-on-gray-textile-8R-mXppeakM",
+    "license": "Unsplash Free"
+  },
+  "G05-ces": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1737442528819-5526652236e8?w=800&q=80&auto=format&fit=crop",
+    "caption": "用户在笔电上指向图表——CES 衡量的就是这条「轻松」程度。",
+    "alt": "A person pointing at a chart shown on a laptop screen",
+    "source": "Unsplash · @jakubzerdzicki",
+    "source_page": "https://unsplash.com/photos/a-person-pointing-at-a-chart-on-a-laptop-dLZbAuSA_EI",
+    "license": "Unsplash Free"
+  },
+  "H01-microsoft-hai-guidelines": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1758626044744-463ce33546a2?w=800&q=80&auto=format&fit=crop",
+    "caption": "人在键盘上、AI 在屏幕里——HAI 指南要协调的关系。",
+    "alt": "Person typing on a laptop with an AI assistant logo on screen",
+    "source": "Unsplash · @jolin974658",
+    "source_page": "https://unsplash.com/photos/person-typing-on-laptop-with-ai-gateway-logo-VgJH4ulEzMQ",
+    "license": "Unsplash Free"
+  },
+  "H04-xai-five-principles": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1750365920056-d4b4ca73fbaa?w=800&q=80&auto=format&fit=crop",
+    "caption": "灯泡里的大脑——XAI 想做的事：把 AI 的「想法」点亮。",
+    "alt": "AI brain rendered inside a transparent light bulb",
+    "source": "Unsplash · @procopiopi",
+    "source_page": "https://unsplash.com/photos/ai-brain-inside-a-light-bulb-8i9dzwZ_O4I",
+    "license": "Unsplash Free"
+  },
+  "K01-wcag": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1570793005299-c091be91bbad?w=800&q=80&auto=format&fit=crop",
+    "caption": "轮椅使用者——WCAG 守护的真实人群。",
+    "alt": "A woman riding a wheelchair near trees outdoors",
+    "source": "Unsplash · @zachaery",
+    "source_page": "https://unsplash.com/photos/woman-riding-wheelchair-near-trees-0bDd5rZlZmk",
+    "license": "Unsplash Free"
+  },
+  "K03-gb-t-37668": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1758691030826-86a149b6278b?w=800&q=80&auto=format&fit=crop",
+    "caption": "老人在沙发上用手机——GB/T 37668 守护的中国适老化场景。",
+    "alt": "Elderly man using a smartphone while sitting on a couch",
+    "source": "Unsplash · @silverkblack",
+    "source_page": "https://unsplash.com/photos/elderly-man-using-a-smartphone-on-a-couch-4M7HLn1r6ss",
+    "license": "Unsplash Free"
+  },
+  "K06-bank-nine-redlines": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1747506533234-a2c059e0d4ad?w=800&q=80&auto=format&fit=crop",
+    "caption": "中国银行大厦——金融机构「九条红线」的现场背景。",
+    "alt": "A tall Bank of China building against the sky",
+    "source": "Unsplash · @lovistinio",
+    "source_page": "https://unsplash.com/photos/a-tall-unique-bank-of-china-building-sEYsz7CtQgA",
+    "license": "Unsplash Free"
+  },
+  "E15-mystery-shopping": {
+    "type": "image_url",
+    "content": "https://images.unsplash.com/photo-1532795986-dbef1643a596?w=800&q=80&auto=format&fit=crop",
+    "caption": "门店招牌与橱窗——神秘顾客评估的第一现场。",
+    "alt": "Retail storefront with sale signage on the windows",
+    "source": "Unsplash · @justinlim",
+    "source_page": "https://unsplash.com/photos/sale-signage-JKjBsuKpatU",
+    "license": "Unsplash Free"
+  }
+}
