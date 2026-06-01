@@ -1565,3 +1565,6 @@ footer .signature {
 @media (max-width: 480px) {
   .hero::before, .hero::after { display: none; }
 }
+
+/* ─── 听书版专属内容 · 网页一律隐藏,只在 EPUB 听书版(build_epub --audio)显示 ─── */
+.audio-only { display: none; }

@@ -399,20 +399,21 @@ if __name__ == '__main__':
         else:
             print('[build] ✅ voice-lint 通过,无 AI 味硬违规')
 
-    # ─── v9.x · 顺便 build EPUB · 若 _shared/build_epub.py 存在 ───
-    # 优先用 tools/.venv 里的 Python(有 playwright + bs4),
-    # 不管 build.py 自己被哪个 Python 跑都能正常调用。
+    # ─── 顺便生成听书优化 EPUB(默认即听书版,免 playwright;沿用报告目录已有的 epub 名)───
     epub_script = Path(__file__).resolve().parent / 'build_epub.py'
     if epub_script.exists() and '--no-epub' not in sys.argv:
-        venv_py = Path(__file__).resolve().parent.parent / 'tools' / '.venv' / 'bin' / 'python3'
-        py = str(venv_py) if venv_py.exists() else sys.executable
+        existing = sorted(report_dir.glob('*.epub'))
+        out_name = existing[0].name if len(existing) == 1 else None  # 唯一就沿用,尊重用户命名
         print('\n' + '=' * 60)
-        print(f'[build] 顺便生成 EPUB(用 {py})...')
+        print('[build] 顺便生成听书优化 EPUB ...')
         import subprocess
+        cmd = [sys.executable, str(epub_script), str(report_dir)]
+        if out_name:
+            cmd += ['-o', out_name]
         try:
-            result = subprocess.run([py, str(epub_script), str(report_dir)], check=False)
+            result = subprocess.run(cmd, check=False)
             if result.returncode != 0:
-                print('\n[build] ⚠️ EPUB 生成失败(但 HTML 已 OK)')
-                print('         手动跑: tools/.venv/bin/python3 _shared/build_epub.py ' + str(report_dir))
+                print('\n[build] ⚠️ EPUB 生成失败(但 HTML 已 OK),手动跑:')
+                print(f'         python3 _shared/build_epub.py {report_dir} -o <书名>.epub')
         except Exception as e:
             print(f'\n[build] ⚠️ EPUB 调用出错: {e}')

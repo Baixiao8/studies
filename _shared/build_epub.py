@@ -36,10 +36,7 @@ try:
 except ImportError:
     sys.exit("[build_epub] 需要装 bs4: pip install beautifulsoup4 lxml")
 
-try:
-    from playwright.sync_api import sync_playwright
-except ImportError:
-    sys.exit("[build_epub] 需要装 playwright: pip install playwright && playwright install chromium")
+# playwright 惰性导入(只在「看版」渲染 PNG 时需要;听书版 --audio 免此依赖)
 
 
 # ============== 配置 ==============
@@ -62,7 +59,7 @@ REMOVE_SELECTORS = [
 ]
 
 
-def main(report_dir_arg):
+def main(report_dir_arg, visual=False, output_name=None):
     report_dir = Path(report_dir_arg).resolve()
     if not report_dir.is_dir():
         sys.exit(f"[build_epub] 报告目录不存在: {report_dir}")
@@ -92,10 +89,14 @@ def main(report_dir_arg):
         # 收集 inline CSS(用于 SVG/table 渲染时正确解析 var(--c-theory) 等)
         css_content = collect_inline_css(soup)
 
-        # 2. 渲染 SVG / table 为 PNG
-        print(f"  [2/6] 用 Playwright 渲染 SVG / table 为 PNG ...")
-        figure_assets = render_figures(chapters_data, css_content, images_dir)
-        print(f"        渲染 {len(figure_assets)} 张图")
+        # 2. 渲染 SVG / table 为 PNG(默认听书优化跳过,免 Playwright;--visual 才渲染)
+        if visual:
+            print(f"  [2/6] 用 Playwright 渲染 SVG / table 为 PNG ...")
+            figure_assets = render_figures(chapters_data, css_content, images_dir)
+            print(f"        渲染 {len(figure_assets)} 张图")
+        else:
+            figure_assets = []
+            print(f"  [2/6] 听书优化 · 跳过 SVG / table 渲染")
 
         # 3. 拷贝 chapter hero JPG
         print(f"  [3/6] 拷贝章节封面图 ...")
@@ -107,7 +108,7 @@ def main(report_dir_arg):
         chapter_paths = []
         for idx, ch in enumerate(chapters_data, 1):
             path = tmpdir_path / f'chapter{idx:02d}.xhtml'
-            path.write_text(build_chapter_xhtml(ch, idx), encoding='utf-8')
+            path.write_text(build_chapter_xhtml(ch, idx, audio=not visual), encoding='utf-8')
             chapter_paths.append(path)
 
         # 5. 生成 nav.xhtml + content.opf
@@ -123,7 +124,7 @@ def main(report_dir_arg):
 
         # 6. 打包 EPUB
         print(f"  [6/6] 打包 EPUB zip ...")
-        output = report_dir / f'{slug}.epub'
+        output = report_dir / (output_name or f'{slug}.epub')
         package_epub(
             output=output,
             opf_path=opf_path,
@@ -260,6 +261,11 @@ def collect_inline_css(soup):
 
 def render_figures(chapters_data, css_content, images_dir):
     """把所有章节内的 SVG + table 渲染成 PNG"""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        sys.exit("[build_epub] 看版 EPUB 需要 playwright;听书版请加 --audio(免依赖)")
+
     figure_assets = []
     counter = 0
 
@@ -374,8 +380,46 @@ def copy_hero_images(chapters_data, report_dir, images_dir):
 
 # ================== EPUB 文件生成 ==================
 
-def build_chapter_xhtml(ch, idx):
-    """生成单章 xhtml"""
+# audio 模式:被「听书替身」取代的视觉块(替身紧跟其后时,删掉它)
+_AUDIO_VISUAL_CLASSES = ('svg-frame', 'number-strip', 'hero-keypoints',
+                         'grid-3', 'table-wrap', 'fig', 'figure')
+
+
+def _is_visual_block(el):
+    """el 是否「只给眼睛看」的视觉块(听书无意义)"""
+    if el is None or not getattr(el, 'name', None):
+        return False
+    if el.name in ('table', 'svg', 'figure'):
+        return True
+    classes = el.get('class', []) or []
+    return any(c in classes for c in _AUDIO_VISUAL_CLASSES)
+
+
+def apply_audio_substitution(section_clone):
+    """听书版:.audio-only 替身取代紧跟在它前面的视觉块"""
+    for audio_el in section_clone.select('.audio-only'):
+        prev = audio_el.find_previous_sibling()
+        if _is_visual_block(prev):
+            prev.decompose()
+
+
+_AUDIO_ARROWS = re.compile(r'[▸▼▲△▽◆◇●○■□★☆►◄▶◀➤‣»«]')
+
+
+def clean_audio_noise(section_clone):
+    """听书版:清掉装饰符号(▸▼★…)和分隔中点,免得 TTS 念出杂音"""
+    for node in list(section_clone.find_all(string=True)):
+        if node.parent is None:
+            continue
+        s = str(node)
+        s2 = _AUDIO_ARROWS.sub('', s)
+        s2 = s2.replace(' · ', '，').replace(' ·', '').replace('· ', '')
+        if s2 != s:
+            node.replace_with(s2)
+
+
+def build_chapter_xhtml(ch, idx, audio=False):
+    """生成单章 xhtml(audio=True 走听书版:删冗余视觉块/参考文献,留替身)"""
     section = ch['section_html']
 
     # clone 一份做清理,避免 mutate 原 soup
@@ -384,9 +428,17 @@ def build_chapter_xhtml(ch, idx):
         # fallback: bs4 解析出来可能用 html 包,把 section 拿出来
         section_clone = BeautifulSoup(str(section), 'html.parser').find('section')
 
-    for selector in REMOVE_SELECTORS:
+    remove = list(REMOVE_SELECTORS)
+    if audio:
+        # 听书版额外移除:人工标记的冗余视觉块 .no-audio、参考文献 .ref
+        remove += ['.no-audio', '.ref']
+    for selector in remove:
         for el in section_clone.select(selector):
             el.decompose()
+
+    if audio:
+        apply_audio_substitution(section_clone)
+        clean_audio_noise(section_clone)
 
     # 章节 inner HTML
     content_html = ''.join(str(c) for c in section_clone.children).strip()
@@ -507,6 +559,15 @@ def package_epub(output, opf_path, nav_path, chapter_paths, images_dir):
 # ================== 入口 ==================
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        sys.exit("用法: python3 _shared/build_epub.py reports/<slug>")
-    main(sys.argv[1])
+    argv = sys.argv[1:]
+    visual = '--visual' in argv      # 默认听书优化;--visual 产带图看版(需 playwright)
+    output_name = None
+    if '-o' in argv:
+        i = argv.index('-o')
+        output_name = argv[i + 1]
+        del argv[i:i + 2]
+    pos = [a for a in argv if not a.startswith('-')]
+    if len(pos) != 1:
+        sys.exit("用法: python3 _shared/build_epub.py reports/<slug> [-o 输出名.epub] [--visual]\n"
+                 "  默认产听书优化版(免 playwright);--visual 产带图看版")
+    main(pos[0], visual=visual, output_name=output_name)
