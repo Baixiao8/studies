@@ -1,0 +1,3340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>攀岩科学深度调研 · 手指/力学/生理/恐惧/风险/训练</title>
+<meta name="description" content="把攀岩当研究对象拆解的深度调研——从一根手指被迫承重的力学,到前臂力竭的血流真相,到坠落恐惧的神经科学,到一条线路磨几周的心理。聚焦自由攀登(抱石+运动攀)。十二章四个截面。">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Shared stylesheet (design tokens + components + layout) -->
+<style>
+/* === style.css === */
+/* =========================================================
+ * RESEARCH REPORTS · SHARED STYLESHEET v1.0
+ * Design tokens + Typography + Components + Layout
+ *
+ * Used by: all reports/<slug>/index.html
+ * Owner: 白笑 / 报告项目通用基础
+ * ========================================================= */
+
+/* ─── Design Tokens · Newsprint 浅色版 ─────────────────── */
+:root {
+  /* 背景层 · 米黄纸张系列 */
+  --bg: #f0ebdd;
+  --bg-soft: #ebe5d3;
+  --bg-card: #ebe5d3;
+  --bg-deep: #e1d9bf;
+
+  /* 分隔线 · 浅纸张色 + 黑实线 */
+  --line: #c4bca4;
+  --line-strong: #1a1a1a;
+
+  /* 文字三层 · 标题黑 / 正文灰 / 日期灰 */
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #888888;
+
+  /* 报刊红主强调 (替代金色) */
+  --accent: #a8423b;
+  --accent-soft: #7a3530;
+  --accent-deep: #5a2520;
+
+  /* 学科色板 · 印刷低饱和版本 */
+  --c-physio: #1f3a5f;       /* 生理 深蓝 */
+  --c-theory: #a8423b;       /* 力学 报刊红 */
+  --c-session: #7a5230;      /* 训练 印刷棕 */
+  --c-strength: #4a6b3a;     /* 解剖 深绿 */
+  --c-nutrition: #7a5230;    /* 营养 印刷棕 */
+  --c-recovery: #3a6b5c;     /* 恢复 深青 */
+  --c-psych: #5c3a6b;        /* 神经 深紫 */
+  --c-injury: #a8423b;       /* 伤病 红 */
+  --c-race: #a8423b;         /* 极限 红 */
+  --c-post: #1f3a5f;         /* 赛后 深蓝 */
+
+  /* 间距 (8px 基线) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+
+  /* 字号尺度 */
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-base: 15.5px;
+  --fs-md: 17.5px;
+  --fs-lg: 21px;
+  --fs-xl: 32px;
+  --fs-2xl: 52px;
+  --fs-3xl: 84px;
+
+  /* 行高 */
+  --lh-tight: 1.3;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.78;
+
+  /* 字体栈 · 报刊风:标题改无衬线粗体,正文苹方 */
+  --ff-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans SC", sans-serif;
+  --ff-serif: "Inter Tight", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  --ff-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  /* 容器宽度 */
+  --container-max: 1180px;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-sans);
+  line-height: var(--lh-relaxed);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-4); }
+
+/* ─── Typography ─────────────────────────────────────────── */
+p { margin: 8px 0 16px; color: var(--ink); font-size: var(--fs-base); line-height: var(--lh-relaxed); }
+p.lead { font-size: var(--fs-md); color: var(--ink-soft); margin-bottom: 26px; line-height: 1.72; }
+ul { margin: 16px 0 22px 0; padding-left: 22px; }
+ul li { color: var(--ink); margin: 7px 0; font-size: 15px; line-height: 1.72; }
+ul li::marker { color: var(--accent-soft); }
+ol { margin: 16px 0 22px 0; padding-left: 26px; }
+ol li { color: var(--ink); margin: 7px 0; font-size: 15px; line-height: 1.72; }
+ol li::marker { color: var(--accent); font-family: var(--ff-mono); font-weight: 600; }
+
+strong, b { color: var(--accent); font-weight: 600; }
+em { color: var(--ink); font-style: italic; }
+.mono { font-family: var(--ff-mono); font-size: 0.9em; color: var(--ink-soft); }
+
+h3 {
+  font-family: var(--ff-serif);
+  font-weight: 600;
+  font-size: var(--fs-xl);
+  margin: 52px 0 16px;
+  color: var(--ink);
+  letter-spacing: -0.012em;
+  scroll-margin-top: 80px;
+}
+h3 .pre {
+  display: inline-block;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  margin-right: 14px;
+  vertical-align: middle;
+}
+h4 {
+  font-size: 17.5px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 28px 0 10px;
+  letter-spacing: -0.005em;
+}
+
+/* ─── Drop cap (用于章首引导段) ───────────────────────────── */
+.drop-cap::first-letter {
+  font-family: var(--ff-serif);
+  font-size: 64px;
+  font-weight: 600;
+  color: var(--accent);
+  float: left;
+  line-height: 0.9;
+  margin: 6px 10px 0 0;
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.hero {
+  padding: 120px 0 80px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212, 165, 72, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -30%; left: -15%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(74, 111, 165, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero > .container { position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-block;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  border: 1px solid var(--accent-soft);
+  padding: 6px 14px;
+  border-radius: 2px;
+  margin-bottom: 32px;
+}
+.hero h1 {
+  font-family: var(--ff-serif);
+  font-weight: 700;
+  font-size: var(--fs-3xl);
+  line-height: 0.98;
+  letter-spacing: -0.028em;
+  margin-bottom: 16px;
+}
+.hero h1 .ital { font-style: italic; color: var(--accent); font-weight: 600; }
+.hero h1 .small {
+  display: block;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-style: italic;
+  letter-spacing: -0.015em;
+  margin-top: 14px;
+}
+.hero .lede {
+  font-size: 19.5px;
+  color: var(--ink-soft);
+  max-width: 820px;
+  margin: 32px 0 40px;
+  line-height: 1.72;
+}
+.hero .lede em { color: var(--ink); font-style: italic; }
+.hero .lede strong { color: var(--accent); font-weight: 500; }
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 32px 0;
+}
+.hero-meta .item .label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.hero-meta .item .value {
+  font-family: var(--ff-serif);
+  font-size: 36px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  line-height: 1;
+  font-weight: 600;
+}
+.hero-meta .item .value .unit {
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-family: var(--ff-mono);
+  margin-left: 4px;
+}
+.hero-meta .item .sub {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ─── Hero TOC (章节地图) ────────────────────────────────── */
+.hero-toc-section { margin-top: 56px; }
+.hero-toc-label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--ink-faint);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-toc-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.hero-toc-part { margin-bottom: 28px; }
+.hero-toc-part .part-title {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 14px;
+  letter-spacing: -0.005em;
+}
+.hero-toc-part .part-title .en {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+  margin-left: 12px;
+  font-style: normal;
+}
+.hero-toc {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.hero-toc .card {
+  position: relative;
+  padding: 18px 20px 18px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ch-color, var(--accent));
+  border-radius: 4px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  display: block;
+}
+.hero-toc .card:hover {
+  transform: translateX(3px) translateY(-1px);
+  background: #ebe5d3;
+  border-color: var(--ch-color, var(--accent));
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.06);
+}
+.hero-toc .card .num {
+  font-family: var(--ff-mono); font-size: 10.5px;
+  color: var(--ch-color, var(--accent)); letter-spacing: 0.1em;
+  display: block; margin-bottom: 6px; font-weight: 600;
+}
+.hero-toc .card .title {
+  font-size: 17.5px; font-weight: 600; color: var(--ink);
+  line-height: 1.3; margin-bottom: 6px; letter-spacing: -0.005em;
+}
+.hero-toc .card .en {
+  font-size: 11.5px; color: var(--ink-faint); font-style: italic;
+  font-family: var(--ff-serif);
+  margin-bottom: 8px;
+}
+.hero-toc .card .desc { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+
+/* ─── Sticky Nav ─────────────────────────────────────────── */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(240, 235, 221, 0.94);  /* Newsprint 米黄半透明 */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  display: flex;
+  overflow-x: auto;
+  padding: 14px 32px;
+  gap: 4px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-inner a {
+  flex-shrink: 0;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.nav-inner a:hover { color: var(--accent); background: var(--bg-card); }
+.nav-inner a.active { color: var(--accent); background: rgba(212,165,72,0.12); }
+.nav-inner a .num { color: var(--ink-faint); margin-right: 8px; }
+.nav-inner a:hover .num, .nav-inner a.active .num { color: var(--accent-soft); }
+.nav-inner .part-divider {
+  flex-shrink: 0;
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--accent);
+  padding: 6px 16px 6px 8px;
+  letter-spacing: 0.02em;
+  border-left: 1px solid var(--line-strong);
+  margin-left: 8px;
+}
+.nav-inner .part-divider:first-child { border-left: none; margin-left: 0; }
+
+/* ─── Section ────────────────────────────────────────────── */
+section { padding: 80px 0; border-bottom: 1px solid var(--line); position: relative; }
+
+/* ════════════════════════════════════════════════════════════════ */
+/* v6.1 · 移动端性能优化(应对卡顿反馈)                            */
+/* ════════════════════════════════════════════════════════════════ */
+
+/* 1) 章节级 content-visibility + 强 contain
+ *    - content-visibility: auto → 视口外章节跳过 render
+ *    - contain: layout style paint → 章节内部变化不触发外层 reflow
+ *    - contain-intrinsic-size → 占位高度估算,避免滚动跳
+ * 实测 4G iPhone: LCP 3.5s → 1.8s
+ */
+section.chapter {
+  content-visibility: auto;
+  contain: layout style paint;
+  contain-intrinsic-size: 0 2400px;
+}
+
+/* 2) SVG 容器内容懒渲染
+ *    31 个 inline SVG 是首屏次要瓶颈,视口外的跳过 paint 计算
+ */
+.svg-frame {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 360px;
+  contain: layout style;
+}
+
+/* 3) Callout 块独立成渲染单元
+ *    100+ 个 callout 是另一个大头,各自 contain 防止跨块 reflow
+ */
+.callout {
+  contain: layout style;
+}
+
+/* 4) 数据表 / 长 list 也加 contain */
+.table-wrap {
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 280px;
+}
+
+/* 5) Hero 图片 aspect-ratio 预设,防止加载后跳动 */
+.chapter-hero img,
+img[loading="lazy"] {
+  aspect-ratio: 16 / 9;
+  background: var(--bg-card);
+}
+
+/* 6) 移动端额外:禁用一些桌面装饰 + 加大 touch target */
+@media (max-width: 768px) {
+  /* 长正文段落直接 contain,移动 Safari 收益最大 */
+  .container p,
+  .container li {
+    contain: layout style;
+  }
+}
+.section-tag {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.section-tag .num {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 2px 9px;
+  border-radius: 2px;
+  margin-right: 14px;
+  font-weight: 700;
+}
+.section-h {
+  font-family: var(--ff-serif);
+  font-weight: 700;
+  font-size: var(--fs-2xl);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  margin-bottom: 10px;
+}
+.section-h .en {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--ink-soft);
+  margin-left: 16px;
+}
+.section-sub {
+  color: var(--ink-soft);
+  font-size: 17px;
+  max-width: 780px;
+  margin-bottom: 40px;
+  line-height: 1.72;
+}
+
+/* ─── Reading Meta (阅读时间 + 字数) ──────────────────────── */
+.reading-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 18px 0 28px;
+  padding: 10px 0;
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  border-top: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+}
+.reading-meta .meta-item { display: flex; align-items: center; gap: 6px; }
+.reading-meta .meta-item .icon { color: var(--accent-soft); font-size: 12px; }
+.reading-meta .meta-item .value { color: var(--ink-soft); }
+
+/* ─── TLDR ───────────────────────────────────────────────── */
+.tldr {
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-soft) 100%);
+  border-left: 3px solid var(--accent);
+  padding: 26px 30px;
+  margin: 32px 0 44px;
+  border-radius: 0 4px 4px 0;
+}
+.tldr .label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.tldr p {
+  font-family: var(--ff-serif);
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.tldr p em { color: var(--accent); font-style: italic; }
+
+/* ─── Chapter In-page TOC (放在 section 顶部,可点击) ────── */
+.chapter-toc {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin: 0 0 36px;
+}
+.chapter-toc .label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.chapter-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 24px;
+}
+.chapter-toc li {
+  margin: 0;
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.15s ease;
+}
+.chapter-toc li a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  transition: color 0.15s ease;
+}
+.chapter-toc li a:hover { color: var(--accent); }
+.chapter-toc li .num {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  min-width: 28px;
+}
+
+/* ─── Callouts ───────────────────────────────────────────── */
+.callout {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  padding: 24px 28px;
+  margin: 28px 0;
+  border-radius: 0 4px 4px 0;
+}
+.callout .label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.callout .label::before { content: "▶"; color: var(--accent); font-size: 9px; }
+.callout p { margin: 6px 0; line-height: 1.72; }
+.callout.sharp {
+  border-left-color: #b54848;
+  background: linear-gradient(180deg, rgba(181,72,72,0.07) 0%, var(--bg-card) 100%);
+}
+.callout.sharp .label { color: #d57979; }
+.callout.sharp .label::before { content: "✕"; color: #d57979; }
+.callout.ops {
+  border-left-color: var(--c-recovery);
+  background: linear-gradient(180deg, rgba(61,139,110,0.07) 0%, var(--bg-card) 100%);
+}
+.callout.ops .label { color: #6db8a0; }
+.callout.ops .label::before { content: "✓"; color: #6db8a0; }
+.callout.you {
+  border-left-color: var(--c-psych);
+  background: linear-gradient(180deg, rgba(156,75,181,0.09) 0%, var(--bg-card) 100%);
+}
+.callout.you .label { color: #c084d8; }
+.callout.you .label::before { content: "◐"; color: #c084d8; }
+.callout.note { border-left-color: var(--ink-faint); }
+.callout.note .label { color: var(--ink-soft); }
+.callout.note .label::before { content: "i"; font-family: serif; font-style: italic; font-size: 13px; color: var(--ink-soft); }
+
+/* 故事钩子 callout - 章首叙事段 */
+.callout.story {
+  border-left-color: var(--c-nutrition);
+  background: linear-gradient(180deg, rgba(217,122,60,0.08) 0%, var(--bg-card) 100%);
+  font-family: var(--ff-serif);
+}
+.callout.story .label { color: #e89060; }
+.callout.story .label::before { content: "◆"; color: #e89060; }
+.callout.story p {
+  font-size: 17px;
+  line-height: 1.65;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* ─── 白话翻译行 (术语/公式后的人话注解) ─────────── */
+.plain {
+  margin: 10px 0 18px;
+  padding: 12px 16px 12px 44px;
+  background: rgba(168, 66, 59, 0.05);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  position: relative;
+}
+.plain::before {
+  content: "人话";
+  position: absolute;
+  left: 12px;
+  top: 13px;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 2px 6px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  line-height: 1;
+}
+.plain strong { color: var(--ink); font-weight: 600; }
+.plain em { font-style: normal; color: var(--accent); font-weight: 500; }
+
+/* ─── 协议清单 callout (章末操作手册式) ──────────── */
+.callout.protocol {
+  border-left-color: #4a6f8a;
+  background: linear-gradient(180deg, rgba(74,111,138,0.06) 0%, var(--bg-card) 100%);
+  font-family: var(--ff-mono);
+}
+.callout.protocol .label { color: #4a6f8a; }
+.callout.protocol .label::before { content: "▣"; color: #4a6f8a; }
+.callout.protocol h4 {
+  font-family: var(--ff-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 12px 0 10px;
+  letter-spacing: -0.01em;
+}
+.callout.protocol h4:first-of-type { margin-top: 0; }
+.callout.protocol ol,
+.callout.protocol ul {
+  margin: 6px 0 14px;
+  padding-left: 22px;
+}
+.callout.protocol li {
+  font-family: var(--ff-mono);
+  font-size: 13.5px;
+  line-height: 1.78;
+  color: var(--ink);
+  margin: 4px 0;
+}
+.callout.protocol li strong { color: var(--accent); font-weight: 600; }
+.callout.protocol li code,
+.callout.protocol code {
+  font-family: var(--ff-mono);
+  background: rgba(74,111,138,0.10);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.callout.protocol .stop {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(168, 66, 59, 0.08);
+  border-left: 2px solid var(--accent);
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink);
+  border-radius: 0 3px 3px 0;
+}
+.callout.protocol .stop::before {
+  content: "⚠ 何时停 ";
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* ─── 表格行动列样式 ─────────────────────────────── */
+table th.action-col,
+table td.action-col {
+  background: rgba(168, 66, 59, 0.04);
+  border-left: 2px solid rgba(168, 66, 59, 0.3);
+}
+table td.action-col {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+table td.action-col strong { color: var(--accent); }
+
+/* 章末 5 分钟回顾卡片 */
+.chapter-recap {
+  background: linear-gradient(135deg, rgba(212,165,72,0.06) 0%, rgba(74,111,165,0.04) 100%);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin: 48px 0 16px;
+}
+.chapter-recap .label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chapter-recap .label::before { content: "★"; color: var(--accent); font-size: 11px; }
+.chapter-recap h4 {
+  font-family: var(--ff-serif);
+  font-size: 24px;
+  color: var(--ink);
+  margin: 0 0 16px;
+  font-weight: 600;
+  letter-spacing: -0.008em;
+}
+.chapter-recap ol {
+  margin: 0;
+  padding-left: 24px;
+  counter-reset: recap;
+  list-style: none;
+}
+.chapter-recap ol li {
+  position: relative;
+  padding: 8px 0 8px 14px;
+  margin: 0;
+  line-height: 1.7;
+  font-size: 15px;
+  border-bottom: 1px dashed var(--line);
+  counter-increment: recap;
+}
+.chapter-recap ol li:last-child { border-bottom: none; }
+.chapter-recap ol li::before {
+  content: counter(recap, decimal-leading-zero);
+  position: absolute;
+  left: -22px;
+  top: 8px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ─── Cards / Grid ───────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 28px 0; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 28px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 28px 0; }
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 22px 24px;
+}
+.card h4 { margin-top: 0; color: var(--accent); font-size: 16px; letter-spacing: -0.005em; }
+.card p { font-size: 14.5px; line-height: 1.68; }
+.card .big {
+  font-family: var(--ff-serif);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--ink);
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+.card .unit { font-size: 14px; color: var(--ink-soft); font-family: var(--ff-mono); }
+.card .desc { font-size: 13px; color: var(--ink-soft); margin-top: 8px; line-height: 1.6; }
+
+/* ─── Number Strip ───────────────────────────────────────── */
+.number-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 32px 0;
+}
+.number-strip .item { padding: 24px 28px; border-right: 1px solid var(--line); }
+.number-strip .item:last-child { border-right: none; }
+.number-strip .label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.number-strip .num {
+  font-family: var(--ff-serif);
+  font-size: 38px;
+  color: var(--accent);
+  line-height: 1;
+  font-weight: 600;
+}
+.number-strip .sub { font-size: 13px; color: var(--ink-soft); margin-top: 8px; line-height: 1.5; }
+
+/* ─── Table ──────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 14.5px;
+}
+th {
+  text-align: left;
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--ink-faint);
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line-strong);
+  text-transform: uppercase;
+  background: var(--bg-deep);
+}
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  vertical-align: top;
+  line-height: 1.6;
+}
+td.mono-cell { font-family: var(--ff-mono); font-size: 13px; color: var(--accent); }
+tr:hover td { background: var(--bg-deep); }
+
+/* ─── Zone Bar ───────────────────────────────────────────── */
+.zone-bar {
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 16px 0 8px;
+  border: 1px solid var(--line-strong);
+}
+.zone-bar .seg {
+  padding: 14px 16px;
+  color: white;
+  font-size: 12px;
+  font-family: var(--ff-mono);
+  letter-spacing: 0.05em;
+}
+.zone-bar .seg .name { font-weight: 700; font-size: 13px; display: block; margin-bottom: 4px; }
+.zone-bar .seg .pct { opacity: 0.85; }
+
+/* ─── SVG Frame ──────────────────────────────────────────── */
+.svg-frame {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 28px;
+  margin: 36px 0;
+}
+.svg-caption {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-top: 14px;
+}
+svg text { font-family: var(--ff-mono); }
+
+/* ─── Chips ──────────────────────────────────────────────── */
+.chip {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 3px;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  vertical-align: baseline;
+  background: rgba(163, 158, 141, 0.12);
+  color: var(--ink);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+/* Newsprint 浅色背景下,chip 文字必须用深色 */
+.chip.easy      { background: rgba(31, 58, 95, 0.10);   color: #1f3a5f; border-color: rgba(31, 58, 95, 0.3); }
+.chip.tempo     { background: rgba(74, 107, 58, 0.10);  color: #4a6b3a; border-color: rgba(74, 107, 58, 0.3); }
+.chip.interval  { background: rgba(168, 66, 59, 0.10);  color: #a8423b; border-color: rgba(168, 66, 59, 0.3); }
+.chip.long      { background: rgba(58, 107, 92, 0.10);  color: #3a6b5c; border-color: rgba(58, 107, 92, 0.3); }
+.chip.race      { background: rgba(168, 66, 59, 0.14);  color: #a8423b; border-color: rgba(168, 66, 59, 0.4); }
+.chip.strength  { background: rgba(122, 82, 48, 0.10);  color: #7a5230; border-color: rgba(122, 82, 48, 0.3); }
+.chip.recovery  { background: rgba(58, 107, 92, 0.10);  color: #3a6b5c; border-color: rgba(58, 107, 92, 0.3); }
+.chip.mp        { background: rgba(168, 66, 59, 0.12);  color: #a8423b; border-color: rgba(168, 66, 59, 0.35); }
+
+/* ─── Status List ────────────────────────────────────────── */
+.status-list { list-style: none; padding-left: 0; margin: 18px 0; }
+.status-list li {
+  position: relative; padding: 7px 0 7px 32px;
+  line-height: 1.68; border-bottom: 1px dashed var(--line);
+}
+.status-list li:last-child { border-bottom: none; }
+.status-list li::before {
+  position: absolute; left: 0; top: 7px;
+  display: inline-block; width: 22px;
+  font-family: var(--ff-mono);
+  font-size: 14px; font-weight: 600; text-align: center;
+}
+.status-list li.do::before    { content: '\2713'; color: #6ea86e; }
+.status-list li.dont::before  { content: '\2717'; color: #c85050; }
+.status-list li.warn::before  { content: '\26A0'; color: #a8423b; }
+
+/* ─── Metric Cards ───────────────────────────────────────── */
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px; margin: 24px 0;
+}
+.metric-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 16px 18px 16px 20px;
+}
+.metric-card .m-label {
+  font-family: var(--ff-mono);
+  font-size: 10px; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.metric-card .m-value {
+  font-family: var(--ff-serif);
+  font-size: 38px; line-height: 1.05;
+  color: var(--accent); font-weight: 500;
+}
+.metric-card .m-unit {
+  font-family: var(--ff-mono);
+  font-size: 12px; color: var(--ink-soft);
+  margin-left: 4px; letter-spacing: 0.04em;
+}
+.metric-card .m-desc {
+  font-size: 13px; color: var(--ink-soft);
+  line-height: 1.55; margin-top: 8px;
+}
+.metric-card.physio    { border-left-color: var(--c-physio); }
+.metric-card.theory    { border-left-color: var(--c-theory); }
+.metric-card.session   { border-left-color: var(--c-session); }
+.metric-card.strength  { border-left-color: var(--c-strength); }
+.metric-card.recovery  { border-left-color: var(--c-recovery); }
+.metric-card.race      { border-left-color: var(--c-race); }
+.metric-card.nutrition { border-left-color: var(--c-nutrition); }
+.metric-card.psych     { border-left-color: var(--c-psych); }
+.metric-card.injury    { border-left-color: var(--c-injury); }
+
+/* ─── Compare 2-col ──────────────────────────────────────── */
+.compare-2 {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: stretch; margin: 28px 0;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 4px; overflow: hidden;
+}
+.compare-2 .col { padding: 20px 22px; }
+.compare-2 .col.primary { background: rgba(212, 165, 72, 0.04); }
+.compare-2 .divider { width: 1px; background: var(--line-strong); }
+.compare-2 .col h5 {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ─── Reference ──────────────────────────────────────────── */
+.ref {
+  font-family: var(--ff-mono); font-size: 10.5px;
+  color: var(--ink-faint); letter-spacing: 0.04em;
+  margin-left: 4px; opacity: 0.85;
+}
+
+/* ─── Chapter Hero · AI 生成的章节封面插画 ────────────────── */
+.chapter-hero {
+  margin: 0 auto 8px;
+  max-width: 760px;
+  position: relative;
+}
+.chapter-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.chapter-hero figcaption {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+/* 关键数据点网格 · 紧贴 hero 图下方,补充信息密度 */
+.hero-keypoints {
+  max-width: 760px;
+  margin: 0 auto 36px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 0 4px;
+}
+.hero-keypoints .kp {
+  background: var(--bg-card);
+  border-left: 2px solid var(--accent);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-keypoints .kp .kp-tag {
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-weight: 700;
+}
+.hero-keypoints .kp .kp-value {
+  font-family: var(--ff-serif);
+  font-size: 18px;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+.hero-keypoints .kp .kp-value em {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  color: var(--accent);
+  font-style: normal;
+  margin-left: 4px;
+}
+.hero-keypoints .kp .kp-desc {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  line-height: 1.45;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .chapter-hero { margin: 0 0 8px; }
+  .hero-keypoints { grid-template-columns: 1fr 1fr; margin: 0 0 28px; }
+}
+@media (max-width: 460px) {
+  .hero-keypoints { grid-template-columns: 1fr; gap: 8px; }
+  .hero-keypoints .kp { padding: 10px 12px; }
+}
+
+/* ─── Term (术语,带虚线下划线,触发 tooltip) ──────────────── */
+.term {
+  color: var(--ink);
+  border-bottom: 1px dashed var(--ink-faint);
+  cursor: help;
+  position: relative;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.term:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+footer {
+  padding: 80px 0 120px;
+  background: var(--bg-deep);
+}
+footer .lede {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 30px;
+  color: var(--ink);
+  line-height: 1.45;
+  max-width: 720px;
+  margin: 0 auto 60px;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+footer .lede em { color: var(--accent); font-style: italic; }
+footer .credit {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+  margin-top: 40px;
+  text-align: center;
+}
+footer .colophon {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.7;
+}
+footer .colophon h4 {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin: 32px 0 14px;
+}
+
+/* ─── Footer Signature (v8.7 · 单行署名,跟 credit 同视觉) ───── */
+footer .signature {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+  text-align: center;
+  margin: 14px 0 0;
+}
+
+/* ─── Progress Bar ───────────────────────────────────────── */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--accent) 0%, #e8c068 100%);
+  box-shadow: 0 0 8px rgba(212, 165, 72, 0.5);
+  z-index: 9999; transition: width 0.08s linear; will-change: width;
+}
+
+/* ─── Mini-TOC (右侧悬浮章节内目录) ───────────────────────── */
+.mini-toc {
+  position: fixed;
+  top: 110px;
+  right: 24px;
+  width: 220px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  background: rgba(235, 229, 211, 0.95);  /* Newsprint 浅纸张半透明 */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px 18px;
+  z-index: 90;
+  font-size: 12.5px;
+  line-height: 1.55;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-faint) transparent;
+}
+.mini-toc.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+.mini-toc::-webkit-scrollbar { width: 4px; }
+.mini-toc::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+.mini-toc .mini-toc-label {
+  font-family: var(--ff-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.mini-toc .mini-toc-chapter {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  letter-spacing: -0.005em;
+}
+.mini-toc ul { list-style: none; padding: 0; margin: 0; }
+.mini-toc li { margin: 0; padding: 0; }
+.mini-toc li a {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0 5px 10px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+.mini-toc li a:hover {
+  color: var(--ink);
+  border-left-color: var(--ink-faint);
+}
+.mini-toc li.active a {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+.mini-toc li .num {
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  min-width: 32px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+.mini-toc li.active .num { color: var(--accent-soft); }
+
+/* 移动端隐藏 mini-toc */
+@media (max-width: 1280px) {
+  .mini-toc { display: none; }
+}
+
+/* ─── Term Tooltip (术语 hover 浮窗) ──────────────────────── */
+.term-tooltip {
+  position: absolute;
+  z-index: 200;
+  background: #ebe5d3;  /* Newsprint 浅纸张 */
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 14px 16px;
+  max-width: 320px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+.term-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.term-tooltip .tt-name {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.term-tooltip .tt-cn {
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.term-tooltip .tt-def {
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.term-tooltip .tt-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--accent-soft);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.term-tooltip .tt-link:hover { color: var(--accent); }
+
+/* ─── Anti-thesis Index (反共识索引页) ────────────────────── */
+.antithesis-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 28px 0;
+}
+.antithesis-list .anti-item {
+  background: linear-gradient(180deg, rgba(181,72,72,0.07) 0%, var(--bg-card) 100%);
+  border: 1px solid var(--line);
+  border-left: 3px solid #b54848;
+  border-radius: 4px;
+  padding: 22px 26px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.antithesis-list .anti-item:hover {
+  transform: translateX(3px);
+  background: linear-gradient(180deg, rgba(181,72,72,0.12) 0%, var(--bg-card) 100%);
+}
+.antithesis-list .anti-item .anti-chapter {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #d57979;
+  margin-bottom: 8px;
+}
+.antithesis-list .anti-item .anti-title {
+  font-family: var(--ff-serif);
+  font-size: 22px;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: -0.008em;
+}
+.antithesis-list .anti-item .anti-desc {
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.antithesis-list .anti-item .anti-desc em { color: var(--ink); font-style: italic; }
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 880px) {
+  .hero { padding: 80px 0 60px; }
+  .hero h1 { font-size: 56px; }
+  .hero h1 .small { font-size: 26px; }
+  .hero-meta { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .hero-toc { grid-template-columns: 1fr; }
+  .section-h { font-size: 36px; }
+  .section-h .en { display: block; margin-left: 0; font-size: 18px; margin-top: 4px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .number-strip { grid-template-columns: repeat(2, 1fr); }
+  .number-strip .item:nth-child(2) { border-right: none; }
+  .number-strip .item:nth-child(1),
+  .number-strip .item:nth-child(2) { border-bottom: 1px solid var(--line); }
+  .container { padding: 0 20px; }
+  h3 { font-size: 26px; }
+  footer .lede { font-size: 22px; }
+  .compare-2 { grid-template-columns: 1fr; }
+  .compare-2 .divider { width: 100%; height: 1px; }
+  .chapter-toc ol { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+ * MOBILE OPTIMIZATION · 移动端深度优化
+ * 适用于手机阅读 (优先级 > 桌面)
+ * ═══════════════════════════════════════════════════════════ */
+
+/* ─── 表格容器 · 横向滚动 (build.py 自动包 .table-wrap) ── */
+.table-wrap {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 24px 0;
+  border-radius: 4px;
+  /* 滚动提示阴影:右侧渐变暗示有更多内容 */
+  background:
+    linear-gradient(to right, var(--bg-deep) 0%, transparent 20px),
+    linear-gradient(to right, transparent calc(100% - 20px), var(--bg-deep) 100%);
+  background-attachment: local, local;
+  background-repeat: no-repeat;
+}
+.table-wrap table { margin: 0; min-width: 540px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+
+/* ─── SVG 容器 · 小屏横向滚动 ────────────────────────── */
+@media (max-width: 768px) {
+  .svg-frame {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 18px 16px;
+  }
+  .svg-frame svg { min-width: 600px; }
+  .svg-frame::-webkit-scrollbar { height: 4px; }
+  .svg-frame::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+  .svg-caption { margin-top: 16px; padding-bottom: 4px; font-size: 9.5px; }
+}
+
+/* ─── 中等小屏 600px (主流手机) ──────────────────────── */
+@media (max-width: 600px) {
+  .container { padding: 0 16px; }
+
+  /* Hero · 缩字号,去掉部分动画装饰 */
+  .hero { padding: 56px 0 44px; }
+  .hero::before { width: 350px; height: 350px; }
+  .hero::after { width: 400px; height: 400px; }
+  .hero-badge { font-size: 10px; padding: 5px 10px; margin-bottom: 22px; }
+  .hero h1 { font-size: 44px; line-height: 1.0; }
+  .hero h1 .small { font-size: 21px; margin-top: 10px; }
+  .hero .lede { font-size: 16.5px; margin: 24px 0 28px; line-height: 1.65; }
+  .hero-meta { grid-template-columns: 1fr 1fr; gap: 14px; padding: 20px 0; margin: 24px 0; }
+  .hero-meta .item .label { font-size: 9.5px; letter-spacing: 0.18em; margin-bottom: 6px; }
+  .hero-meta .item .value { font-size: 26px; }
+  .hero-meta .item .sub { font-size: 11.5px; }
+
+  /* Hero TOC */
+  .hero-toc-section { margin-top: 36px; }
+  .hero-toc-label { font-size: 9.5px; margin-bottom: 14px; }
+  .hero-toc-part { margin-bottom: 22px; }
+  .hero-toc-part .part-title { font-size: 18px; margin-bottom: 10px; }
+  .hero-toc .card { padding: 14px 16px; min-height: 96px; }
+  .hero-toc .card .num { font-size: 10px; }
+  .hero-toc .card .title { font-size: 15.5px; }
+  .hero-toc .card .en { font-size: 11px; }
+  .hero-toc .card .desc { font-size: 12.5px; line-height: 1.5; }
+
+  /* Section */
+  section { padding: 52px 0; }
+  .section-tag { font-size: 10px; letter-spacing: 0.16em; margin-bottom: 10px; }
+  .section-tag .num { padding: 2px 7px; margin-right: 10px; }
+  .section-h { font-size: 28px; line-height: 1.15; letter-spacing: -0.018em; }
+  .section-h .en { font-size: 15.5px; }
+  .section-sub { font-size: 14.5px; line-height: 1.65; margin-bottom: 24px; }
+
+  /* Body typography */
+  p { font-size: 15px; line-height: 1.72; margin: 8px 0 14px; }
+  p.lead { font-size: 16px; line-height: 1.65; margin-bottom: 20px; }
+  ul li, ol li { font-size: 14.5px; line-height: 1.7; }
+  h3 { font-size: 22px; margin: 40px 0 12px; letter-spacing: -0.01em; }
+  h3 .pre { font-size: 10.5px; margin-right: 10px; }
+  h4 { font-size: 16px; margin: 22px 0 8px; }
+
+  /* TLDR · 衬线大字适当缩 */
+  .tldr { padding: 20px 22px; margin: 24px 0 32px; }
+  .tldr .label { font-size: 9.5px; margin-bottom: 10px; }
+  .tldr p { font-size: 19px; line-height: 1.5; }
+
+  /* Callout */
+  .callout { padding: 18px 20px; margin: 22px 0; }
+  .callout .label { font-size: 9.5px; margin-bottom: 10px; }
+  .callout p { font-size: 14.5px; line-height: 1.68; }
+  .callout.story p { font-size: 15px; line-height: 1.6; }
+
+  /* Chapter recap */
+  .chapter-recap { padding: 22px 22px; margin: 40px 0 16px; }
+  .chapter-recap .label { font-size: 9.5px; margin-bottom: 12px; }
+  .chapter-recap h4 { font-size: 19px; margin: 0 0 12px; }
+  .chapter-recap ol { padding-left: 22px; }
+  .chapter-recap ol li { font-size: 14px; padding: 7px 0 7px 12px; line-height: 1.62; }
+  .chapter-recap ol li::before { left: -20px; font-size: 10px; }
+
+  /* Number strip */
+  .number-strip { grid-template-columns: 1fr 1fr; }
+  .number-strip .item { padding: 18px 18px; }
+  .number-strip .num { font-size: 28px; }
+  .number-strip .label { font-size: 9.5px; letter-spacing: 0.16em; }
+  .number-strip .sub { font-size: 12px; }
+
+  /* Reading meta */
+  .reading-meta {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    font-size: 9.5px;
+    padding: 8px 0;
+    margin: 16px 0 22px;
+  }
+
+  /* Cards */
+  .card { padding: 18px 20px; }
+  .card h4 { font-size: 15px; }
+  .card .big { font-size: 34px; }
+  .card .desc { font-size: 12.5px; }
+  .grid-2, .grid-3, .grid-4 { gap: 14px; }
+
+  /* Metric card */
+  .metric-card { padding: 14px 16px; }
+  .metric-card .m-label { font-size: 9.5px; }
+  .metric-card .m-value { font-size: 30px; }
+  .metric-card .m-desc { font-size: 12.5px; }
+
+  /* Chapter TOC */
+  .chapter-toc { padding: 16px 18px; margin-bottom: 28px; }
+  .chapter-toc .label { font-size: 9.5px; margin-bottom: 10px; }
+  .chapter-toc ol { gap: 4px; }
+  .chapter-toc li { padding: 6px 0; font-size: 13px; line-height: 1.45; }
+  .chapter-toc li a { gap: 8px; padding: 8px 4px; min-height: 32px; }
+  .chapter-toc li .num { font-size: 10.5px; min-width: 26px; }
+
+  /* Sticky nav · 加大触摸区 */
+  .nav-inner { padding: 12px 14px; gap: 2px; }
+  .nav-inner a { padding: 10px 11px; font-size: 11px; min-height: 40px; display: flex; align-items: center; }
+  .nav-inner .part-divider { font-size: 11px; padding: 10px 12px 10px 6px; }
+
+  /* Antithesis index */
+  .antithesis-list { gap: 12px; }
+  .antithesis-list .anti-item { padding: 18px 20px; }
+  .antithesis-list .anti-item .anti-chapter { font-size: 9.5px; margin-bottom: 6px; }
+  .antithesis-list .anti-item .anti-title { font-size: 17.5px; line-height: 1.25; margin-bottom: 8px; }
+  .antithesis-list .anti-item .anti-desc { font-size: 13.5px; line-height: 1.62; }
+
+  /* Footer */
+  footer { padding: 48px 0 64px; }
+  footer .lede { font-size: 19px; margin-bottom: 36px; line-height: 1.45; }
+  footer .colophon { font-size: 13px; padding-top: 32px; }
+  footer .colophon p { font-size: 13px; }
+  footer .colophon h4 { font-size: 9.5px; margin: 24px 0 10px; }
+  footer .signature { font-size: 9.5px; margin-top: 12px; }
+
+  /* Tooltip · 移动端简化定位 */
+  .term-tooltip {
+    max-width: calc(100vw - 32px);
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+  .term-tooltip .tt-name { font-size: 10.5px; }
+  .term-tooltip .tt-cn { font-size: 13.5px; }
+  .term-tooltip .tt-def { font-size: 12px; }
+
+  /* Drop cap 小屏关闭 */
+  .drop-cap::first-letter {
+    font-size: 48px;
+    margin: 4px 8px 0 0;
+  }
+
+  /* Compare 2 */
+  .compare-2 .col { padding: 16px 18px; }
+  .compare-2 .col h5 { font-size: 9.5px; margin-bottom: 10px; }
+
+  /* Status list */
+  .status-list li { font-size: 14px; padding: 6px 0 6px 28px; }
+
+  /* Section background tint (减弱) */
+  .hero::before, .hero::after { opacity: 0.6; }
+}
+
+/* ─── 超小屏 400px (iPhone Mini / SE) ────────────────── */
+@media (max-width: 400px) {
+  .container { padding: 0 14px; }
+  .hero h1 { font-size: 36px; }
+  .hero h1 .small { font-size: 18px; }
+  .section-h { font-size: 24px; }
+  .tldr p { font-size: 17px; }
+  .hero-meta { grid-template-columns: 1fr; gap: 12px; }
+  .hero-meta .item { padding: 8px 0; }
+  .hero-meta .item .value { font-size: 24px; }
+  .number-strip { grid-template-columns: 1fr; }
+  .number-strip .item {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .number-strip .item:last-child { border-bottom: none; }
+  .number-strip .item:nth-child(2) { border-bottom: 1px solid var(--line); }
+  p, ul li, ol li { font-size: 14.5px; }
+  h3 { font-size: 20px; }
+  .callout { padding: 16px 18px; }
+  .callout p { font-size: 14px; }
+  .callout.story p { font-size: 14.5px; }
+  .chapter-recap { padding: 18px 20px; }
+  .chapter-recap h4 { font-size: 17.5px; }
+}
+
+/* ─── Tap target ≥ 44px (Apple HIG / WCAG) ──────────── */
+@media (max-width: 768px) {
+  /* 所有链接/按钮的触摸目标至少 44x44px */
+  a:not(.term):not(.ref) {
+    -webkit-tap-highlight-color: rgba(212, 165, 72, 0.2);
+  }
+  .nav-inner a { min-height: 40px; }
+  .hero-toc .card { min-height: 96px; }
+  .chapter-toc li a { min-height: 36px; }
+}
+
+/* ─── 移动端关闭 Hero 背景渐变(性能) ───────────────── */
+@media (max-width: 480px) {
+  .hero::before, .hero::after { display: none; }
+}
+
+/* ─── 听书版专属内容 · 网页一律隐藏,只在 EPUB 听书版(build_epub --audio)显示 ─── */
+.audio-only { display: none; }
+
+</style>
+<style>
+/* === reader-bootstrap.css === */
+/* ==========================================================================
+ * Reader Bootstrap CSS · 通用公共组件 v8.3
+ * 2026-05-24
+ *
+ * 这是 reader 听书组件的「入口层」样式,inline 在每个报告的 head 里:
+ *   - 章节标题旁的"听这章"pill 按钮(每章 h1.section-h / h2)
+ *   - 小节标题旁的纯图标 mini 入口(每节 h3)
+ *   - overlay 底色保底(避免 reader.css 异步加载期间文字穿透)
+ *
+ * 完整 reader.js / reader.css 仍按需加载(触发后),保持首屏轻量。
+ * ========================================================================== */
+
+/* overlay 底色保底(reader.css 异步加载期间防文字透出) */
+.reader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #f0ebdd;
+  display: none;
+}
+.reader-overlay.open {
+  display: flex;
+}
+
+/* 大章节"听这章"入口 · Apple Pill 风格(带文字) */
+.reader-entry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 14px;
+  padding: 5px 12px 5px 10px;
+  background: rgba(168, 66, 59, 0.07);
+  color: #a8423b;
+  border: 1px solid rgba(168, 66, 59, 0.22);
+  border-radius: 18px;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  vertical-align: 0.2em;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+  letter-spacing: 0.01em;
+  -webkit-tap-highlight-color: transparent;
+}
+.reader-entry-btn:hover {
+  background: rgba(168, 66, 59, 0.13);
+  border-color: rgba(168, 66, 59, 0.45);
+}
+.reader-entry-btn:active {
+  transform: scale(0.97);
+}
+.reader-entry-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* 小节迷你入口(纯图标,更克制) */
+.reader-entry-btn.mini {
+  padding: 4px;
+  margin-left: 8px;
+  width: 26px;
+  height: 26px;
+  justify-content: center;
+  gap: 0;
+  border-radius: 50%;
+  vertical-align: 0.05em;
+}
+.reader-entry-btn.mini svg {
+  width: 13px;
+  height: 13px;
+}
+.reader-entry-btn.mini > span {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .reader-entry-btn {
+    font-size: 12px;
+    padding: 5px 11px 5px 9px;
+    margin-left: 10px;
+  }
+  .reader-entry-btn svg { width: 13px; height: 13px; }
+  .reader-entry-btn.mini {
+    width: 24px;
+    height: 24px;
+    padding: 3px;
+    margin-left: 6px;
+  }
+  .reader-entry-btn.mini svg { width: 12px; height: 12px; }
+}
+
+</style>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+</head>
+<body>
+
+<script>window.__EMBEDDED_GLOSSARY__ = {
+  "VO2max": {
+    "cn": "最大摄氧量",
+    "def": "每分钟每公斤体重最大耗氧量,单位 ml/kg/min。耐力天花板,业余 35-60,精英 70-85。决定于 Fick 方程:VO2 = SV × HR × (a-vO2 diff)。",
+    "chapter": "4.7", "anchor": "s4"
+  },
+  "VO₂max": {
+    "cn": "最大摄氧量",
+    "def": "见 VO2max。每分钟每公斤体重最大耗氧量,ml/kg/min。",
+    "chapter": "4.7", "anchor": "s4"
+  },
+  "RE": {
+    "cn": "跑步经济性",
+    "def": "Running Economy。每公里每公斤体重的耗氧量(ml/kg/km),越低越省油。精英 170-200,业余 220-250。力量训练可提升 4-8%。",
+    "chapter": "4.10", "anchor": "s4"
+  },
+  "LT1": {
+    "cn": "有氧阈/第一乳酸阈",
+    "def": "Lactate Threshold 1。血乳酸首次脱离基线的强度,~2 mmol/L,对应能讲整句话的最高强度。80/20 训练里 Z1-Z2 的上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "LT2": {
+    "cn": "乳酸阈",
+    "def": "Lactate Threshold 2 / AT。血乳酸约 4 mmol/L,能维持 1 小时全力的最高配速,接近半马配速。比 VO2max 更强预测耐力表现。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "AeT": {
+    "cn": "有氧阈",
+    "def": "Aerobic Threshold,等同 LT1/VT1。能讲整句话的最高强度,~75% HRmax,80/20 训练里 Z2 上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "AT": {
+    "cn": "无氧阈",
+    "def": "Anaerobic Threshold,等同 LT2/VT2/RCP。血乳酸 4 mmol/L 切点,约 1 小时全力可维持。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "VT1": {
+    "cn": "第一通气阈",
+    "def": "Ventilatory Threshold 1。通气量首次非线性上升,等同 LT1/AeT。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "VT2": {
+    "cn": "第二通气阈",
+    "def": "Ventilatory Threshold 2 / RCP。通气量第二次跃升,等同 LT2/AT。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "RCP": {
+    "cn": "呼吸补偿点",
+    "def": "Respiratory Compensation Point。通气量与 VCO2 同步骤升的点,等同 VT2/LT2。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "RER": {
+    "cn": "呼吸交换率",
+    "def": "Respiratory Exchange Ratio = VCO2/VO2。反映底物利用:0.7 纯脂肪,1.0 纯糖。",
+    "chapter": "4.6", "anchor": "s4"
+  },
+  "CV": {
+    "cn": "临界速度",
+    "def": "Critical Velocity。理论上可'无限'维持的最高速度,实际约 30-50 分钟,接近 5K 配速。比 LT2 略快 2-5%。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "CP": {
+    "cn": "临界功率",
+    "def": "Critical Power。功率-时间双曲线 (P-CP)×t = W' 中的 CP,理论可持续上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "W'": {
+    "cn": "W prime",
+    "def": "Anaerobic Work Capacity。高于 CP 时可消耗的有限'无氧储备',约 15-25 kJ。耗尽即力竭。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "ATP": {
+    "cn": "三磷酸腺苷",
+    "def": "Adenosine Triphosphate。肌肉收缩的唯一直接能量货币。全身储约 80g,最大强度下 3-5 秒耗尽,必须持续重合成。",
+    "chapter": "4.1", "anchor": "s4"
+  },
+  "PCr": {
+    "cn": "磷酸肌酸",
+    "def": "Phosphocreatine。骨骼肌储 400-500g,通过肌酸激酶催化 PCr+ADP→Cr+ATP 提供 0-10 秒爆发功率。",
+    "chapter": "4.2", "anchor": "s4"
+  },
+  "GRF": {
+    "cn": "地面反作用力",
+    "def": "Ground Reaction Force。脚触地时地面给身体的反作用力,分三个分量:垂直(最大,2-3 BW)、前后向(制动+推进)、内外侧(稳定)。",
+    "chapter": "2.1", "anchor": "s2"
+  },
+  "SLIP": {
+    "cn": "弹簧-质量模型",
+    "def": "Spring-Loaded Inverted Pendulum。跑步力学模型,腿被建模为弹簧,身体重心为质量。腿刚度约 10-30 kN/m。",
+    "chapter": "1.6", "anchor": "s1"
+  },
+  "SSC": {
+    "cn": "拉长-缩短周期",
+    "def": "Stretch-Shortening Cycle。肌-腱单元先离心拉长储能,再同心收缩释能。跑步中跟腱、足弓的'弹簧'机制依赖此循环。",
+    "chapter": "2.7", "anchor": "s2"
+  },
+  "COM": {
+    "cn": "重心",
+    "def": "Center of Mass。跑步时 COM 沿正弦曲线起伏,垂直振幅 6-10 cm。'垂直比' Vertical Ratio = 垂直振幅/步幅,越低越经济。",
+    "chapter": "1.5", "anchor": "s1"
+  },
+  "GCT": {
+    "cn": "触地时间",
+    "def": "Ground Contact Time。脚触地到推离的时长。精英 < 200 ms,业余 250-300 ms。GCT 短 = 触地更高效。",
+    "chapter": "1.4", "anchor": "s1"
+  },
+  "Cadence": {
+    "cn": "步频",
+    "def": "每分钟步数。精英 180-200 spm,业余 160-180。增加步频 5-10% 可减少 overstride 和膝负荷。",
+    "chapter": "1.4", "anchor": "s1"
+  },
+  "RFS": {
+    "cn": "后跟着地",
+    "def": "Rearfoot Strike。约 75-90% 业余跑者着地模式。冲击峰显著,但跟腱负荷小。",
+    "chapter": "1.7", "anchor": "s1"
+  },
+  "MFS": {
+    "cn": "中足着地",
+    "def": "Midfoot Strike。脚掌中部首先触地,冲击峰小,跟腱-小腿负荷适中。",
+    "chapter": "1.7", "anchor": "s1"
+  },
+  "FFS": {
+    "cn": "前掌着地",
+    "def": "Forefoot Strike。仅 1-10% 精英采用。冲击峰几乎消失,但跟腱与小腿负荷显著上升。",
+    "chapter": "1.7", "anchor": "s1"
+  },
+  "Windlass mechanism": {
+    "cn": "绞盘机制",
+    "def": "脚趾背伸时足底筋膜被拉紧,如同绞盘绞紧,把足弓抬起。这是跑步推离时的弹性储能机制。",
+    "chapter": "2.6", "anchor": "s2"
+  },
+  "Lactate shuttle": {
+    "cn": "乳酸穿梭",
+    "def": "George Brooks 提出。乳酸不是废物,是燃料——通过 MCT1/MCT4 转运蛋白在肌肉间、肌肉-心脏、肌肉-肝间穿梭被氧化或再合成。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "Cori cycle": {
+    "cn": "Cori 循环",
+    "def": "肌肉产生的乳酸经血液到肝脏,通过糖异生合成葡萄糖再回到血液。能量上昂贵但维持长跑后期血糖。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "Crossover": {
+    "cn": "交叉点",
+    "def": "Crossover Concept (Brooks 1994)。强度上升时,糖供能首次超过脂肪的强度点,约 50% VO2max。训练让 crossover 右移 = 脂肪利用增强。",
+    "chapter": "4.6", "anchor": "s4"
+  },
+  "FATmax": {
+    "cn": "最大脂肪氧化点",
+    "def": "脂肪绝对氧化速率峰值出现的强度,约 40-60% VO2max。注意是绝对峰值,相对占比峰值在静息。",
+    "chapter": "4.6", "anchor": "s4"
+  },
+  "IMTG": {
+    "cn": "肌内甘油三酯",
+    "def": "Intramuscular Triglyceride。骨骼肌内的脂滴储存,约 300g,通过 HSL/ATGL 酶动员供能,最大氧化率 ~0.7 g/min。",
+    "chapter": "4.5", "anchor": "s4"
+  },
+  "FFA": {
+    "cn": "游离脂肪酸",
+    "def": "Free Fatty Acid。脂肪组织水解释放,通过血液运至肌肉氧化。最大氧化率约 0.4 g/min。",
+    "chapter": "4.5", "anchor": "s4"
+  },
+  "EPOC": {
+    "cn": "运动后过量氧耗",
+    "def": "Excess Post-exercise Oxygen Consumption。运动后持续高摄氧用于恢复 ATP/PCr、清乳酸、再饱和肌红蛋白、降温。",
+    "chapter": "5.15", "anchor": "s5"
+  },
+  "Fick equation": {
+    "cn": "Fick 方程",
+    "def": "VO2 = Q × (a-vO2 diff) = SV × HR × (a-vO2 diff)。把 VO2max 分解为中央(心)+ 外周(肌肉摄氧)两部分。",
+    "chapter": "4.7", "anchor": "s4"
+  },
+  "Hbmass": {
+    "cn": "血红蛋白质量",
+    "def": "Total Hemoglobin Mass。耐力运动员 Hbmass/体重 ~12 g/kg vs 久坐 9。决定氧运输能力,高原训练核心目标。",
+    "chapter": "5.8", "anchor": "s5"
+  },
+  "SV": {
+    "cn": "每搏量",
+    "def": "Stroke Volume。心脏每跳泵血量。静息 70-100 ml,运动 130-200,精英 200+。HIIT 训练显著扩大。",
+    "chapter": "5.3", "anchor": "s5"
+  },
+  "HRmax": {
+    "cn": "最大心率",
+    "def": "HRmax ≈ 208 - 0.7 × 年龄,个体 ±15 bpm。每年下降 ~0.7 bpm,与训练状态无关。",
+    "chapter": "5.4", "anchor": "s5"
+  },
+  "HRR": {
+    "cn": "心率储备",
+    "def": "Heart Rate Reserve = HRmax - HRrest。Karvonen 法的基础,比单看 HRmax 个体化更强。",
+    "chapter": "5.4", "anchor": "s5"
+  },
+  "LRC": {
+    "cn": "呼吸-步态耦合",
+    "def": "Locomotor-Respiratory Coupling。常见 2:1 或 3:1 模式,精英 3:1/4:1。'右脚出气易岔气'的解剖学根源(肝脏下沉)。",
+    "chapter": "5.11", "anchor": "s5"
+  },
+  "Size principle": {
+    "cn": "大小原则",
+    "def": "Henneman 大小原则。运动单元按神经元大小递增募集——慢肌纤维(小 α 神经元)先,快肌(大)后。",
+    "chapter": "7.4", "anchor": "s7"
+  },
+  "CPG": {
+    "cn": "中央模式发生器",
+    "def": "Central Pattern Generator。脊髓内的节律振荡器,跑步'自动驾驶'的神经基础。大脑只发开始/停止,节律由 CPG 维持。",
+    "chapter": "7.2", "anchor": "s7"
+  },
+  "RPE": {
+    "cn": "感知用力",
+    "def": "Rating of Perceived Exertion。Borg 量表 6-20 或 CR10。反映大脑前扣带皮层整合的内外信号,与代谢标志物高度相关。",
+    "chapter": "7.12", "anchor": "s7"
+  },
+  "Central governor": {
+    "cn": "中枢调节器模型",
+    "def": "Tim Noakes 提出。大脑(ACC 前扣带皮层)整合化学+机械+心理信号,主动下调输出以防真正力竭。挑战传统'灾难性疲劳'模型。",
+    "chapter": "7.10", "anchor": "s7"
+  },
+  "BDNF": {
+    "cn": "脑源性神经营养因子",
+    "def": "Brain-Derived Neurotrophic Factor。跑步显著上调,促进海马体新生神经元(neurogenesis)与突触可塑性。",
+    "chapter": "7.15", "anchor": "s7"
+  },
+  "Endocannabinoids": {
+    "cn": "内源大麻素",
+    "def": "anandamide、2-AG。跑者高潮的真正神经化学基础(不是内啡肽)。Fuss 2015 小鼠实验阻断 CB1 受体即消除跑者高潮。",
+    "chapter": "7.14", "anchor": "s7"
+  },
+  "MU": {
+    "cn": "运动单元",
+    "def": "Motor Unit。1 个 α 神经元 + 它支配的所有肌纤维。小 MU(10-100 纤维)控制 I 型,大 MU(500-2000)控制 II 型。",
+    "chapter": "7.3", "anchor": "s7"
+  },
+  "MTU": {
+    "cn": "肌肉-肌腱单元",
+    "def": "Muscle-Tendon Unit。肌腱(被动弹簧)+ 肌肉(主动马达)的耦合,SSC 储释能的力学单元。",
+    "chapter": "3.9", "anchor": "s3"
+  },
+  "Posterior chain": {
+    "cn": "后侧链",
+    "def": "跟腱 → 腓肠肌 → 腘绳肌 → 臀大肌 → 竖脊肌。跑步推进的主要发力链。后侧链薄弱是业余跑者的通病。",
+    "chapter": "3.8", "anchor": "s3"
+  },
+  "TVA": {
+    "cn": "腹横肌",
+    "def": "Transversus Abdominis。腹腔最深层,提供腹内压和深层稳定,跑步中的力量传递通道,与盆底协同。",
+    "chapter": "3.7", "anchor": "s3"
+  },
+  "ITBS": {
+    "cn": "髂胫束综合征",
+    "def": "Iliotibial Band Syndrome。髂胫束在股骨外侧髁摩擦,外侧膝痛、下坡加重。占跑步伤病 5-15%。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "PFPS": {
+    "cn": "髌股关节疼痛综合征",
+    "def": "Patellofemoral Pain Syndrome / 跑者膝。髌骨轨迹异常,占跑步伤病 20%。髋外展弱+VMO 弱+足旋前是主因。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "MTSS": {
+    "cn": "内侧胫骨应力综合征",
+    "def": "Medial Tibial Stress Syndrome / 胫骨夹痛。胫骨内缘骨膜炎。占跑步伤病 13-20%。跑量陡增和旋前过度是主因。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "DOMS": {
+    "cn": "延迟性肌肉酸痛",
+    "def": "Delayed-Onset Muscle Soreness。离心收缩导致的微撕裂 + Ca²⁺ 紊乱 + 炎症。24-48h 出现,4-7 天消失。非乳酸引起。",
+    "chapter": "6.7", "anchor": "s6"
+  },
+  "OTS": {
+    "cn": "过度训练综合征",
+    "def": "Overtraining Syndrome。表现下降+慢性疲劳+心情低落+睡眠紊乱,>2 月恢复。HRV、晨脉、POMS 量表用于早期监测。",
+    "chapter": "11.7", "anchor": "s11"
+  },
+  "ACWR": {
+    "cn": "急慢性负荷比",
+    "def": "Acute-Chronic Workload Ratio = 7d 负荷 / 28d EMA。sweet spot 0.8-1.3,>1.5 风险显著上升。预防伤病的关键监测指标。",
+    "chapter": "11.4", "anchor": "s11"
+  },
+  "Wolff's law": {
+    "cn": "Wolff 定律",
+    "def": "骨随机械应力刺激重塑。跑者骨密度 > 久坐者(但 < 举重者)。应力骨折的力学根源。",
+    "chapter": "6.9", "anchor": "s6"
+  },
+  "Stress fracture": {
+    "cn": "应力骨折",
+    "def": "累积微损伤 > 修复速率。高发胫骨 50% > 跖骨 20% > 股骨颈、骶骨。女性 LEA + 维 D 缺乏是高危因素。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "Tendinopathy": {
+    "cn": "肌腱病",
+    "def": "肌腱退变性病变(不是'炎')。胶原排列紊乱+蛋白多糖沉积。跟腱、髌腱、足底筋膜常见。离心训练是核心治疗。",
+    "chapter": "11.6", "anchor": "s11"
+  },
+  "GAS": {
+    "cn": "一般适应综合征",
+    "def": "General Adaptation Syndrome (Selye)。应激→疲劳→恢复→超量恢复→回归基线。训练的理论基础。",
+    "chapter": "10.1", "anchor": "s10"
+  },
+  "CTL": {
+    "cn": "长期负荷",
+    "def": "Chronic Training Load = 42d EMA 训练负荷。'健身水平'指标。",
+    "chapter": "10.3", "anchor": "s10"
+  },
+  "ATL": {
+    "cn": "急性负荷",
+    "def": "Acute Training Load = 7d EMA 训练负荷。'疲劳水平'指标。",
+    "chapter": "10.3", "anchor": "s10"
+  },
+  "TSB": {
+    "cn": "训练应激平衡",
+    "def": "Training Stress Balance = CTL - ATL。'形态'指标。比赛前应在 +5~+25(清新但不丢健身),重训期 -10~-30。",
+    "chapter": "10.3", "anchor": "s10"
+  },
+  "Polarized training": {
+    "cn": "极化训练",
+    "def": "Seiler 提出。80% 低强度(Z1)+ 5% 中(Z2)+ 15% 高强度(Z3)。元分析中比金字塔训练更有效。",
+    "chapter": "10.6", "anchor": "s10"
+  },
+  "Periodization": {
+    "cn": "周期化",
+    "def": "宏周期(年)→ 中周期(4-6 周)→ 微周期(周)。经典:基础→力量→比赛→过渡。",
+    "chapter": "10.16", "anchor": "s10"
+  },
+  "Taper": {
+    "cn": "减量",
+    "def": "比赛前 2-3 周减容量 40-60%、维持强度。表现提升 1-3%。过度减量 = 脱训。",
+    "chapter": "10.15", "anchor": "s10"
+  },
+  "REDs": {
+    "cn": "运动相对能量缺乏",
+    "def": "Relative Energy Deficiency in Sport (IOC 2014)。低 EA(<30 kcal/kg LBM/d)引发月经紊乱、骨密度↓、激素崩溃。男性同样存在。",
+    "chapter": "8.13", "anchor": "s8"
+  },
+  "LEA": {
+    "cn": "低能量可用性",
+    "def": "Low Energy Availability。能量摄入 - 运动消耗 < 30 kcal/kg 去脂体重 / 天。REDs 的核心机制。",
+    "chapter": "8.13", "anchor": "s8"
+  },
+  "Catecholamines": {
+    "cn": "儿茶酚胺",
+    "def": "肾上腺素 + 去甲肾上腺素。起跑时数十倍上升,动员脂肪+糖原+心率。",
+    "chapter": "8.2", "anchor": "s8"
+  },
+  "Cortisol": {
+    "cn": "皮质醇",
+    "def": "应激激素。运动 30+ 分钟显著上升,调动能量、抑制免疫。慢性升高 = 过训信号。",
+    "chapter": "8.2", "anchor": "s8"
+  },
+  "IGF-1": {
+    "cn": "胰岛素样生长因子-1",
+    "def": "Insulin-like Growth Factor 1。GH 下游的主要效应分子,组织修复 + 肌肉生长。过训时下降。",
+    "chapter": "8.3", "anchor": "s8"
+  },
+  "URTI": {
+    "cn": "上呼吸道感染",
+    "def": "Upper Respiratory Tract Infection。运动免疫 J 曲线:中等运动风险下降,极量运动(>96 km/周)风险上升 2-6 倍。",
+    "chapter": "8.9", "anchor": "s8"
+  },
+  "J-curve": {
+    "cn": "J 曲线",
+    "def": "运动剂量 vs 免疫力/死亡率的 U/J 形关系。久坐和极量都比中等差。",
+    "chapter": "8.9", "anchor": "s8"
+  },
+  "Open window": {
+    "cn": "开窗期",
+    "def": "急性极量运动后免疫力短暂下降 3-72 小时,感染风险升高。",
+    "chapter": "8.8", "anchor": "s8"
+  },
+  "Carb loading": {
+    "cn": "糖原储备",
+    "def": "Carbohydrate Loading。赛前 1-3 天 8-12 g/kg 碳水,扩大肌糖原 50-80%。每 g 糖原结合 3g 水,体重短期增 1-2 kg。",
+    "chapter": "9.10", "anchor": "s9"
+  },
+  "MLSS": {
+    "cn": "最大乳酸稳态",
+    "def": "Maximal Lactate Steady State。可维持血乳酸稳态的最高强度,约等于 LT2。30-60 分钟全力上限。",
+    "chapter": "4.8", "anchor": "s4"
+  },
+  "ACTN3": {
+    "cn": "α-actinin-3 基因",
+    "def": "编码快肌纤维特异结构蛋白。RR(完整)爆发强,XX(截断)偏耐力。西非种群 RR 高频,精英短跑 RR >99%。",
+    "chapter": "12.17", "anchor": "s12"
+  },
+  "ACE gene": {
+    "cn": "ACE 基因",
+    "def": "Angiotensin-Converting Enzyme I/D 多态。I 等位关联耐力心血管,D 等位关联力量爆发。",
+    "chapter": "12.18", "anchor": "s12"
+  },
+  "Sarcopenia": {
+    "cn": "肌少症",
+    "def": "30+ 岁后肌肉量 -1%/年,60+ 加速至 -1.5%/年。II 型纤维选择性丢失。跑步+力量训练对抗。",
+    "chapter": "6.14", "anchor": "s6"
+  },
+  "PGC-1α": {
+    "cn": "PGC-1α 转录共激活因子",
+    "def": "Peroxisome proliferator-activated receptor gamma coactivator 1-alpha。线粒体生物发生主开关,耐力训练核心适应通路。",
+    "chapter": "6.6", "anchor": "s6"
+  },
+  "mTOR": {
+    "cn": "mTOR 通路",
+    "def": "mechanistic Target of Rapamycin。蛋白合成主调控通路。力量训练 + 蛋白摄入激活,衰老使其对刺激钝化('合成代谢抵抗')。",
+    "chapter": "6.14", "anchor": "s6"
+  },
+  "MCT1": {
+    "cn": "单羧酸转运蛋白 1",
+    "def": "Monocarboxylate Transporter 1。慢肌纤维表达高,主动摄取乳酸进入氧化。训练有素者 MCT1 表达上调,乳酸清除能力增强。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "MCT4": {
+    "cn": "单羧酸转运蛋白 4",
+    "def": "Monocarboxylate Transporter 4。快肌纤维表达高,把乳酸输出到细胞外。",
+    "chapter": "4.4", "anchor": "s4"
+  },
+  "GLUT4": {
+    "cn": "葡萄糖转运蛋白 4",
+    "def": "Glucose Transporter 4。胰岛素和肌肉收缩诱导,介导骨骼肌摄取葡萄糖。训练显著上调,改善胰岛素敏感性。",
+    "chapter": "8.3", "anchor": "s8"
+  },
+  "Mitochondrial biogenesis": {
+    "cn": "线粒体生物发生",
+    "def": "线粒体数量+体积+嵴密度的增加。PGC-1α 通路驱动,LSD 和阈值训练是主要刺激。慢成分 VO2 上升的细胞学根源。",
+    "chapter": "6.6", "anchor": "s6"
+  },
+  "Beta-alanine": {
+    "cn": "β-丙氨酸",
+    "def": "肌肽前体,提高肌肉缓冲能力。对 1-4 分钟项目(400-1500m)有效证据,剂量 4-6 g/d × 4-6 周。",
+    "chapter": "9.8", "anchor": "s9"
+  },
+  "Nitrate": {
+    "cn": "硝酸盐",
+    "def": "甜菜根汁富含。在口腔细菌还原为亚硝酸盐 → NO,改善线粒体效率,RE 提升 1-3%。剂量 6.4 mmol 赛前 2-3 小时。",
+    "chapter": "9.8", "anchor": "s9"
+  },
+  "HIIT": {
+    "cn": "高强度间歇训练",
+    "def": "High-Intensity Interval Training。短间歇(30/30、Tabata)或长间歇(3-5 min × 4-6)。主要刺激心脏 SV 和 VO2max。",
+    "chapter": "10.10", "anchor": "s10"
+  },
+  "HERITAGE study": {
+    "cn": "HERITAGE 家族研究",
+    "def": "Bouchard 等 99 家庭 481 人的标准 20 周训练研究。VO2max 改善 0-60%,21 个基因位点解释 49% 变异。",
+    "chapter": "12.16", "anchor": "s12"
+  },
+  "TSS": {
+    "cn": "训练应激评分",
+    "def": "Training Stress Score。基于强度与时间量化训练负荷,1 小时 LT2 = 100 TSS。CTL/ATL/TSB 的基础。",
+    "chapter": "10.2", "anchor": "s10"
+  },
+  "Flow state": {
+    "cn": "心流状态",
+    "def": "Csikszentmihalyi 模型。神经标志:前额叶 hypofrontality + 多巴胺/NE + 内啡肽。跑步是诱发心流的理想活动。",
+    "chapter": "7.16", "anchor": "s7"
+  }
+}
+;</script>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ============= HERO ============= -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">CLIMBING SCIENCE · DEEP RESEARCH · v0.1 · PILOT</div>
+    <h1>
+      攀岩科学深度调研<span class="ital">.</span>
+      <span class="small">手指 · 力学 · 生理 · 恐惧 · 风险 · 训练 · <em class="ital">Inside the Vertical</em></span>
+    </h1>
+    <p class="lede">
+      这不是一本攀岩教程,是一份<em>把攀岩当研究对象拆解的深度调研</em>——攀岩不是把自己拉上去,是把自己贴在墙上;
+      累的不是心肺,是前臂;最难的一手常常不在指尖,在恐惧。从一根手指被迫承重的力学,
+      到前臂力竭的血流真相,到坠落恐惧的神经科学,到一条线路磨上几周的心理结构。<strong>十二章 · 四个截面 · 一个完整系统。</strong>
+      聚焦自由攀登(抱石 + 运动攀)。攀岩不是一个目标,是一个值得被反复研究的研究对象。
+    </p>
+
+    <div class="hero-meta">
+      <div class="item">
+        <div class="label">CHAPTERS</div>
+        <div class="value">12<span class="unit">/4 PARTS</span></div>
+        <div class="sub">身体 · 引擎 · 大脑 · 系统</div>
+      </div>
+      <div class="item">
+        <div class="label">DEPTH</div>
+        <div class="value">130K<span class="unit">words</span></div>
+        <div class="sub">学术深度 · 循证密度 · 反共识标注</div>
+      </div>
+      <div class="item">
+        <div class="label">DIAGRAMS</div>
+        <div class="value">30+<span class="unit">SVG</span></div>
+        <div class="sub">原创矢量图 · 滑车/握法/恐惧曲线</div>
+      </div>
+      <div class="item">
+        <div class="label">DISCIPLINES</div>
+        <div class="value">8<span class="unit">fields</span></div>
+        <div class="sub">力学 · 解剖 · 生理 · 神经 · 心理 · 风险 · 训练 · 演化</div>
+      </div>
+    </div>
+
+    <div class="hero-toc-section">
+      <div class="hero-toc-label">CHAPTER MAP · 章节地图</div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第一篇 身体这台机器 <span class="en">PART I · THE BODY</span></div>
+        <div class="hero-toc">
+          <a href="#s1" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">CHAPTER 01 · MECHANICS</span>
+            <div class="title">攀岩的力学本质</div>
+            <div class="en">Not Pulling, But Sticking</div>
+            <div class="desc">重心管理、三点平衡、对抗力与反向力、为什么脚比手重要——攀岩不是把自己拉上去,是把自己贴在墙上。</div>
+          </a>
+          <a href="#s2" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">CHAPTER 02 · THE FINGERS</span>
+            <div class="title">手指 被迫承重的部位</div>
+            <div class="en">When a Finger Holds a Body</div>
+            <div class="desc">屈肌腱与 A2/A4 滑车系统、弓弦效应的力学放大、抠握 vs 开握、A2 断裂这一头号标志伤——全运动界独一份的负荷。</div>
+          </a>
+          <a href="#s3" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">CHAPTER 03 · BODY TENSION</span>
+            <div class="title">身体张力与发力链</div>
+            <div class="en">From Fingertip to Toe</div>
+            <div class="desc">核心、肩、髋的张力传导,脚法的物理学,手指抓住之后力怎么传下去——张力断在哪里,人就脱落在哪里。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第二篇 引擎与极限 <span class="en">PART II · THE ENGINE</span></div>
+        <div class="hero-toc">
+          <a href="#s4" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">CHAPTER 04 · THE PUMP</span>
+            <div class="title">前臂 pump 的真相</div>
+            <div class="en">Blood, Not Lactate</div>
+            <div class="desc">前臂屈肌的血流闭塞、力量耐力、为什么攀岩累的是前臂不是心肺、间歇恢复的灌注窗口——攀岩独有的局部力竭。</div>
+          </a>
+          <a href="#s5" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">CHAPTER 05 · THREE STRENGTHS</span>
+            <div class="title">力量的三张面孔</div>
+            <div class="en">Max, Power, Endurance</div>
+            <div class="desc">最大指力 / 接触力与爆发力(dyno)/ 力量耐力的区分,以及攀岩最残酷的那条公式——力量-体重比。</div>
+          </a>
+          <a href="#s6" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 06 · MOTOR LEARNING</span>
+            <div class="title">神经与技术</div>
+            <div class="en">Reading the Rock</div>
+            <div class="desc">动作学习与动作记忆、读线(route reading)、本体感觉与脚下精度——攀岩进步主要靠技术学习,不只是靠变强。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第三篇 大脑与风险 <span class="en">PART III · THE MIND &amp; RISK</span></div>
+        <div class="hero-toc">
+          <a href="#s7" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 07 · FEAR</span>
+            <div class="title">恐惧的神经科学</div>
+            <div class="en">The Amygdala on the Wall</div>
+            <div class="desc">坠落恐惧的生理、杏仁核与威胁反应、Honnold 的 fMRI 研究、恐惧管理 vs 鲁莽——做得出的动作,为什么不敢做。</div>
+          </a>
+          <a href="#s8" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">CHAPTER 08 · FLOW</span>
+            <div class="title">心流</div>
+            <div class="en">In the Zone</div>
+            <div class="desc">攀岩为什么是心流最强的运动之一、注意力的收束、压力下的表现稳定性,以及心流与恐惧共用的那条神经通路。</div>
+          </a>
+          <a href="#s9" class="card" style="--ch-color: var(--c-race);">
+            <span class="num">CHAPTER 09 · RISK PHYSICS</span>
+            <div class="title">风险的物理学与决策</div>
+            <div class="en">The Math of Falling</div>
+            <div class="desc">冲坠系数(fall factor)、动力绳的能量吸收、确保物理、抱石落地与 crash pad、事故剖析——风险管理是攀岩 know-how 的一块。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第四篇 训练 · 伤病 · 进化 <span class="en">PART IV · TRAINING &amp; LIMITS</span></div>
+        <div class="hero-toc">
+          <a href="#s10" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">CHAPTER 10 · TRAINING</span>
+            <div class="title">训练科学</div>
+            <div class="en">Building the Engine</div>
+            <div class="desc">指力板(hangboard)协议、Campus board、最大力量 vs 力量耐力的周期化、力量与技术的训练分配、过度训练的信号。</div>
+          </a>
+          <a href="#s11" class="card" style="--ch-color: var(--c-injury);">
+            <span class="num">CHAPTER 11 · INJURY ATLAS</span>
+            <div class="title">攀岩伤病图谱</div>
+            <div class="en">When Tissue Says No</div>
+            <div class="desc">A2 滑车断裂(标志伤)、攀岩肘、肩袖与盂唇、青少年生长板这一被低估的红线、康复与回归攀岩的阶梯。</div>
+          </a>
+          <a href="#s12" class="card" style="--ch-color: var(--c-race);">
+            <span class="num">CHAPTER 12 · VARIATION &amp; LIMITS</span>
+            <div class="title">个体差异与极限</div>
+            <div class="en">The Edge &amp; the Origin</div>
+            <div class="desc">猿臂指数(ape index)、男女差异在攀岩上的特殊性、年龄、顶尖选手的生理标记、攀岩作为人类树栖祖先的演化遗产。</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============= STICKY NAV ============= -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <span class="part-divider">导航</span>
+    <a href="#intro"><span class="num">★</span>速览</a>
+    <span class="part-divider">I · 身体</span>
+    <a href="#s1"><span class="num">01</span>力学</a>
+    <a href="#s2"><span class="num">02</span>手指</a>
+    <a href="#s3"><span class="num">03</span>张力</a>
+    <span class="part-divider">II · 引擎</span>
+    <a href="#s4"><span class="num">04</span>前臂</a>
+    <a href="#s5"><span class="num">05</span>力量</a>
+    <a href="#s6"><span class="num">06</span>技术</a>
+    <span class="part-divider">III · 大脑</span>
+    <a href="#s7"><span class="num">07</span>恐惧</a>
+    <a href="#s8"><span class="num">08</span>心流</a>
+    <a href="#s9"><span class="num">09</span>风险</a>
+    <span class="part-divider">IV · 训练</span>
+    <a href="#s10"><span class="num">10</span>训练</a>
+    <a href="#s11"><span class="num">11</span>伤病</a>
+    <a href="#s12"><span class="num">12</span>极限</a>
+    <span class="part-divider">索引</span>
+    <a href="#antithesis"><span class="num">★</span>反共识</a>
+  </div>
+</nav>
+
+<!-- ============= MAIN CONTENT (chapters injected below) ============= -->
+<main>
+
+
+<section  class="chapter" id="s2" style="border-top: 4px solid var(--c-strength);">
+<div class="container">
+
+  <!-- 关键数据卡片 · 4 个关键数据点 -->
+  <div class="hero-keypoints">
+    <div class="kp">
+      <span class="kp-tag">▸ 这套结构</span>
+      <span class="kp-value"><em>本来不承重</em></span>
+      <p class="kp-desc">手指的肌腱和滑车本职是抓握与触摸 · 攀岩把它借来当承重缆绳</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 放大器</span>
+      <span class="kp-value"><em>A2 滑车</em></span>
+      <p class="kp-desc">手指越弯它扛得越多 · crimp 全抠时受力可达指尖接触力的 3–4 倍</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 那声「啪」</span>
+      <span class="kp-value"><em>A2 断裂</em></span>
+      <p class="kp-desc">350–500 N 之间滑车崩断 · 攀岩头号标志伤 · 弓弦征是签名</p>
+    </div>
+    <div class="kp">
+      <span class="kp-tag">▸ 真正的瓶颈</span>
+      <span class="kp-value"><em>是肌腱不是肌肉</em></span>
+      <p class="kp-desc">滑车肌腱要 6–12 月才变强 · 肌肉只要 4–6 周 · 进步差就在这</p>
+    </div>
+  </div>
+
+  <div class="section-tag"><span class="num">02</span>一根手指能挂住多少体重</div>
+  <h1 class="section-h">你的全身重量,最后压在三节指骨上</h1>
+  <p class="section-sub">上一章讲攀岩怎么把人贴在墙上,讲的是整副身体的力学。这一章往下钻一层:当一个一指节宽的岩点,是你和地面之间唯一的连接,力是怎么从指尖传进前臂的?答案里藏着攀岩最独特、也最容易坏的一套结构——屈肌腱,和按住它的滑车。</p>
+
+  
+  <div class="reading-meta">
+    <div class="meta-item"><span class="icon">◷</span><span class="value">约 14 分钟阅读</span></div>
+    <div class="meta-item"><span class="icon">◆</span><span class="value">4,878 字</span></div>
+    <div class="meta-item"><span class="icon">§</span><span class="value">8 个小节</span></div>
+  </div>
+
+  <details class="chapter-toc" open>
+    <summary class="label" style="cursor:pointer; list-style:none;">▾ 本章 8 节 · 点击跳转</summary>
+    <ol>
+    <li><a href="#s2-h3-1"><span class="num">2.1</span><span class="title">两条缆绳 · 屈肌腱的本职工作</span></a></li>
+    <li><a href="#s2-h3-2"><span class="num">2.2</span><span class="title">滑车 · 把肌腱按在骨头上的纤维环</span></a></li>
+    <li><a href="#s2-h3-3"><span class="num">2.3</span><span class="title">抠还是搭 · 四种握法的力学账</span></a></li>
+    <li><a href="#s2-h3-4"><span class="num">2.4</span><span class="title">放大器 · 弯曲角度怎么把力放大</span></a></li>
+    <li><a href="#s2-h3-5"><span class="num">2.5</span><span class="title">那一声「啪」· A2 断裂的解剖与分级</span></a></li>
+    <li><a href="#s2-h3-6"><span class="num">2.6</span><span class="title">手指会变 · 长期攀岩的适应与代价</span></a></li>
+    <li><a href="#s2-h3-7"><span class="num">2.7</span><span class="title">指力 · 攀岩最强的单一预测因子</span></a></li>
+    <li><a href="#s2-h3-8"><span class="num">2.8</span><span class="title">把这一章收回到墙上</span></a></li>
+    </ol>
+  </details>
+
+  <div class="tldr">
+    <div class="label">▼ 一句话</div>
+    <p>手指本来是用来抓握和触摸的精密工具,攀岩硬把它改成了承重结构。指尖那点接触力,被一套叫滑车的纤维环放大三四倍,压在 A2、A4 两道环上——这是全运动界独一无二的负荷,也是攀岩头号伤病的发源地。</p>
+  </div>
+
+  <p>在任何一个抱石馆待够久,你迟早会听到那个声音:一声清脆的「啪」,像有人折断了一根筷子。紧接着是一句脏话,然后那个人甩着一只手坐到垫子上,脸色发白。十有八九,是 A2 滑车断了——攀岩最标志性的伤。它几乎只发生在攀岩者身上,因为世界上很少有别的事,会让一根手指在一瞬间承受接近全身的重量。</p>
+
+  <p>要讲清这一声「啪」,得先看清手指里那套被借来承重的结构。它不是为攀岩设计的——人的手在进化上是为抓握树枝、操作工具、捏起种子而生的,精密、灵巧、敏感。攀岩做的事,是把这套灵巧系统的负荷上限往死里逼。这一章不打算教你怎么练指力,只想把指尖到前臂这段不到十厘米的力学讲透——它解释了攀岩为什么难,也解释了攀岩者为什么伤手。</p>
+
+  <h3 id="s2-h3-1"><span class="pre">2.1</span>两条缆绳 · 屈肌腱的本职工作</h3>
+  <p class="lead">让手指弯曲、抓住岩点的,是两条从前臂一路拉到指尖的肌腱。它们的肌腹长在前臂,手指本身几乎没有肌肉——你抠住一个点时,真正出力的肌肉在小臂上,手指只是被几根「缆绳」远程拉动的杠杆。</p>
+
+  <p>这两条缆绳是<em>指深屈肌腱</em> (FDP) 和<em>指浅屈肌腱</em> (FDS)。FDP 走得更深、更长,一直止于远节指骨的底部,管的是指尖那一节 (DIP 关节) 的弯曲;FDS 在中途分叉,止于中节指骨,管的是中间那节 (PIP 关节)。两者分工,但在攀岩里几乎总是协同发力——你抠一个点时,前臂里这两组肌肉同时拉紧,把整根手指卷向掌心。</p>
+
+  <p>这就是为什么攀岩累的是前臂而不是手:手指里没多少东西可累,出力和疲劳都发生在前臂的肌腹。这条线索会在 ch04 讲前臂 pump 时接着展开——这里只需记住,手指是被远程操控的承重杆,真正的发动机在小臂。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 400" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="80" y="28" font-size="12" fill="#a8423b" letter-spacing="0.18em">手指侧视 · 屈肌腱与滑车系统</text>
+      <text x="80" y="46" font-size="9.5" fill="#4a4a4a" letter-spacing="0.04em">掌侧(下)是肌腱与滑车 · 背侧(上)是骨 · 力从指尖经滑车传回前臂</text>
+
+      <!-- 骨:掌骨 + 三节指骨(从左到右) -->
+      <!-- 掌骨 MC -->
+      <rect x="90" y="120" width="190" height="46" rx="14" fill="#c4bca4" stroke="#888888" stroke-width="1.2"/>
+      <text x="185" y="110" font-size="10" fill="#4a4a4a" text-anchor="middle">掌骨 MC</text>
+      <!-- 近节指骨 P1 -->
+      <rect x="320" y="118" width="200" height="44" rx="13" fill="#c4bca4" stroke="#888888" stroke-width="1.2"/>
+      <text x="420" y="108" font-size="10" fill="#4a4a4a" text-anchor="middle">近节 P1</text>
+      <!-- 中节指骨 P2 -->
+      <rect x="560" y="120" width="150" height="40" rx="12" fill="#c4bca4" stroke="#888888" stroke-width="1.2"/>
+      <text x="635" y="110" font-size="10" fill="#4a4a4a" text-anchor="middle">中节 P2</text>
+      <!-- 远节指骨 P3(指尖) -->
+      <rect x="750" y="123" width="110" height="34" rx="11" fill="#c4bca4" stroke="#888888" stroke-width="1.2"/>
+      <text x="805" y="110" font-size="10" fill="#4a4a4a" text-anchor="middle">远节 P3</text>
+
+      <!-- 关节标注 -->
+      <g font-size="9" fill="#888888" text-anchor="middle">
+        <text x="300" y="186">MCP</text>
+        <text x="540" y="186">PIP</text>
+        <text x="730" y="186">DIP</text>
+      </g>
+      <circle cx="300" cy="142" r="4" fill="none" stroke="#888888" stroke-width="1"/>
+      <circle cx="540" cy="142" r="4" fill="none" stroke="#888888" stroke-width="1"/>
+      <circle cx="730" cy="142" r="4" fill="none" stroke="#888888" stroke-width="1"/>
+
+      <!-- FDP 肌腱:走到 P3(指尖) -->
+      <path d="M 90 210 L 760 210 Q 800 210 805 180 L 805 158" fill="none" stroke="#a8423b" stroke-width="3"/>
+      <text x="120" y="228" font-size="11" fill="#a8423b">FDP 指深屈肌腱 → 指尖 (DIP)</text>
+
+      <!-- FDS 肌腱:走到 P2,分叉 -->
+      <path d="M 90 240 L 600 240 Q 650 240 655 200 L 655 162" fill="none" stroke="#1f3a5f" stroke-width="2.5"/>
+      <text x="120" y="258" font-size="11" fill="#1f3a5f">FDS 指浅屈肌腱 → 中节 (PIP)</text>
+
+      <!-- 滑车:跨过肌腱的环(A1-A5) -->
+      <!-- A1 (MCP) -->
+      <path d="M 285 205 Q 300 245 315 205" fill="none" stroke="#4a4a4a" stroke-width="2"/>
+      <text x="300" y="290" font-size="10" fill="#4a4a4a" text-anchor="middle">A1</text>
+      <line x1="300" y1="250" x2="300" y2="282" stroke="#c4bca4" stroke-width="0.6"/>
+      <!-- A2 (P1 骨干) — 关键,金色高亮 -->
+      <path d="M 360 202 Q 385 250 410 202" fill="none" stroke="#a8423b" stroke-width="3.5"/>
+      <rect x="352" y="300" width="66" height="22" rx="4" fill="#a8423b" fill-opacity="0.18" stroke="#a8423b" stroke-width="1"/>
+      <text x="385" y="315" font-size="11" fill="#a8423b" text-anchor="middle" font-weight="700">A2</text>
+      <line x1="385" y1="252" x2="385" y2="300" stroke="#a8423b" stroke-width="0.8"/>
+      <!-- A3 (PIP) -->
+      <path d="M 525 202 Q 540 238 555 202" fill="none" stroke="#4a4a4a" stroke-width="2"/>
+      <text x="540" y="290" font-size="10" fill="#4a4a4a" text-anchor="middle">A3</text>
+      <line x1="540" y1="244" x2="540" y2="282" stroke="#c4bca4" stroke-width="0.6"/>
+      <!-- A4 (P2 骨干) — 关键,金色高亮 -->
+      <path d="M 600 200 Q 620 242 640 200" fill="none" stroke="#a8423b" stroke-width="3.5"/>
+      <rect x="587" y="300" width="66" height="22" rx="4" fill="#a8423b" fill-opacity="0.18" stroke="#a8423b" stroke-width="1"/>
+      <text x="620" y="315" font-size="11" fill="#a8423b" text-anchor="middle" font-weight="700">A4</text>
+      <line x1="620" y1="244" x2="620" y2="300" stroke="#a8423b" stroke-width="0.8"/>
+      <!-- A5 (DIP) -->
+      <path d="M 720 200 Q 730 228 740 200" fill="none" stroke="#4a4a4a" stroke-width="2"/>
+      <text x="730" y="285" font-size="10" fill="#4a4a4a" text-anchor="middle">A5</text>
+      <line x1="730" y1="232" x2="730" y2="277" stroke="#c4bca4" stroke-width="0.6"/>
+
+      <!-- 右侧说明 -->
+      <g font-size="10.5" fill="#4a4a4a">
+        <text x="900" y="135">五道环形滑车</text>
+        <text x="900" y="155" fill="#a8423b">A2 · A4 锚在骨干上,</text>
+        <text x="900" y="172" fill="#a8423b">承受全程最大负荷</text>
+        <text x="900" y="195">A1 · A3 · A5 在关节处,</text>
+        <text x="900" y="212">辅助,较少单独崩断</text>
+      </g>
+    </svg>
+    <div class="svg-caption">FIG 2.1 · 手指掌侧的两条屈肌腱与五道环形滑车 · A2(近节)、A4(中节)锚在骨干上,是力学上最吃力的两道 [Schöffl 2003]</div>
+  </div>
+
+  <h3 id="s2-h3-2"><span class="pre">2.2</span>滑车 · 把肌腱按在骨头上的纤维环</h3>
+  <p class="lead">如果只有肌腱,手指弯曲时会出问题。肌腱想走直线,可手指是弯的——一旦用力,肌腱会从弯曲的内侧弹离骨头,像拉满的弓弦从弓背上崩起来。把它按住、让它贴着骨头走的,是一套叫<em>滑车</em> (pulley) 的纤维环。</p>
+
+  <p>每根手指有五道环形滑车,编号 A1 到 A5 (annular,环形),中间还夹着三道更薄的十字滑车 C1–C3。它们是腱鞘增厚形成的纤维带,横跨在肌腱外面,把肌腱牢牢箍在指骨上。力学上最关键的是两道:<strong>A2</strong>,在近节指骨的骨干上;<strong>A4</strong>,在中节指骨的骨干上。这两道不在关节处,而是锚在骨头中段,所以承受的力最大、也最常出事。</p>
+
+  <p>一个家用的比方:钓鱼竿上沿竿身排着一串导线环,把鱼线贴着竿身引导。鱼一拉,竿弯了,鱼线想走两点间的直线(弦),是那些导线环把线拉回贴着弯曲的竿身(弓)。手指的滑车就是这串导线环,肌腱就是鱼线。导线环坏一个,鱼线就在那一段弹离竿身拱起来——这在手指上叫<em>弓弦效应</em> (bowstringing),是滑车断裂最直接的体征。</p>
+
+  <p>滑车这套设计在日常生活里几乎用不到极限——你拧瓶盖、提一桶水,手指负荷再大也是整只手分担,而且通常是开放的握姿。攀岩是少数几件把单根手指、在高度弯曲的姿势下、压到接近力学极限的事。所以滑车损伤在普通人群里罕见到大多数医生一辈子见不到几例,在攀岩人群里却是头号伤。这不是手的缺陷,是攀岩在用一套没为它设计的结构。</p>
+
+  <h3 id="s2-h3-3"><span class="pre">2.3</span>抠还是搭 · 四种握法的力学账</h3>
+  <p class="lead">同一个岩点,你可以用不同的握法去拿,而握法决定了滑车承受多少力。攀岩人嘴里的「crimp」「open hand」不是风格选择,是四套力学完全不同的方案。</p>
+
+  <p>最有代表性的两种是全抠和开握。<em>全抠</em> (full crimp) 是把 PIP 关节(中间那节)屈到 90 度以上、DIP 关节(指尖那节)反而过伸、拇指常压在食指上的姿势——手指几乎攥成一个紧凑的钩子。它能拿住极小、极薄的点,因为接触面集中、指尖能「咬」进岩点边缘。代价是:这个高度屈曲的姿势,让 A2 滑车承受的力远大于指尖真正接触岩石的力。</p>
+
+  <p><em>开握</em> (open hand / drag) 反过来——手指自然伸展、PIP 只是微屈,靠摩擦和指腹搭在点上。它拿不了太薄的边,但同样的指尖接触力下,滑车负荷低得多,而且更依赖 FDP 的绝对力量。第三种是<em>半抠</em> (half crimp),介于两者之间,PIP 约 90 度但 DIP 不过伸,是训练里最通用的标准握姿。第四种是<em>捏</em> (pinch),拇指和其余手指对捏,力学结构又不一样,这里先不展开。</p>
+
+  <p>这里有一个新手几乎都踩过的反共识:<strong>全抠不是最强的握法,是最伤的握法。</strong>很多人以为抠得越紧越有力、越该练全抠,于是逮着点就死抠。但建模和离体实验都指向同一个结论——全抠时 A2 滑车的负荷可以达到指尖接触力的三到四倍 [Vigouroux 2006][Schweizer 2001]。换句话说,你指尖只「咬」了 200 牛,A2 可能正在扛 600 到 800 牛。真正成熟的攀岩者,本能是<em>能开握就开握</em>,把全抠省下来留给那些实在搭不住的小点。开握平时还能顺带练 FDP 的绝对力量,一举两得。</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>握法</th><th>PIP / DIP 关节</th><th>适用岩点</th><th>A2 滑车相对负荷</th><th>受伤风险</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>全抠 Full Crimp</td><td>PIP &gt; 90° / DIP 过伸</td><td>极小、极薄的边</td><td>最高(指尖力 3–4×)</td><td>最高</td></tr>
+      <tr><td>半抠 Half Crimp</td><td>PIP ≈ 90° / DIP 中立</td><td>中小边,训练标准姿</td><td>高</td><td>中–高</td></tr>
+      <tr><td>开握 Open Hand</td><td>PIP 微屈 / DIP 伸展</td><td>大点、圆点、斜面</td><td>较低</td><td>较低</td></tr>
+      <tr><td>捏 Pinch</td><td>拇指对捏</td><td>凸出的捏点</td><td>结构不同(拇指主导)</td><td>中</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 id="s2-h3-4"><span class="pre">2.4</span>放大器 · 弯曲角度怎么把力放大</h3>
+  <p class="lead">为什么全抠的滑车负荷这么高?核心是一个简单的几何:肌腱在滑车处的转折角越大,滑车要承受的合力就越大。这条几何,是理解整章的钥匙。</p>
+
+  <p>把滑车想成一个把肌腱拉向骨头的支点。肌腱从滑车两侧进、出,夹出一个角度。肌腱里的张力 T 是固定的,但滑车承受的合力,取决于这个转折角——肌腱拐得越急(手指越弯),两侧张力的合力指向骨头的分量就越大。几何上,合力大约是 2T·sin(θ/2),θ 是肌腱的转折角。手指伸直时角度小,合力小;全抠时手指拐成钩子,角度逼近甚至超过直角,合力急剧上升。这就是「同样的指尖力,全抠让 A2 扛得多得多」的物理根源。</p>
+
+  <p>这条几何还解释了弓弦效应为什么危险。滑车完好时,它把肌腱按在骨头上,转折发生在很短的距离里,杠杆短;一旦 A2 断了,肌腱失去约束,在那一段弹离骨头拱起来,转折点外移、力臂变长——剩下的滑车要扛的负荷反而更大,于是容易接连崩断,从单滑车损伤滑向多滑车损伤。这是为什么 A2 一旦出事,要立刻停、不能硬撑:你不是在拉伤一道环,是在给整列环加压。</p>
+
+  <div class="svg-frame">
+    <svg viewBox="0 0 1080 420" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+      <text x="80" y="28" font-size="12" fill="#a8423b" letter-spacing="0.18em">弓弦效应 · 滑车完好 vs 断裂</text>
+
+      <!-- ───── 左:滑车完好 ───── -->
+      <text x="270" y="60" font-size="12" fill="#4a6b3a" text-anchor="middle" font-weight="700">滑车完好 · 肌腱贴骨</text>
+      <!-- 骨(弯曲的两节) -->
+      <path d="M 130 150 L 300 150 L 380 230" fill="none" stroke="#888888" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 肌腱:被滑车按住,贴着骨头转折 -->
+      <path d="M 130 178 L 300 178 L 358 236" fill="none" stroke="#a8423b" stroke-width="3.5"/>
+      <!-- 滑车 A2:在转折处把肌腱箍住 -->
+      <ellipse cx="300" cy="170" rx="13" ry="22" fill="none" stroke="#a8423b" stroke-width="3"/>
+      <text x="300" y="125" font-size="11" fill="#a8423b" text-anchor="middle" font-weight="700">A2</text>
+      <!-- 张力箭头 -->
+      <line x1="150" y1="178" x2="115" y2="178" stroke="#a8423b" stroke-width="1.5" marker-end="url(#arrowR)"/>
+      <text x="120" y="200" font-size="10" fill="#a8423b">T</text>
+      <!-- 合力箭头(短,指向骨) -->
+      <line x1="300" y1="178" x2="300" y2="215" stroke="#a8423b" stroke-width="2.5" marker-end="url(#arrowR)"/>
+      <text x="312" y="208" font-size="10" fill="#a8423b">滑车合力(短力臂)</text>
+      <text x="180" y="280" font-size="10" fill="#4a4a4a">转折集中在滑车处 · 力臂短 · 负荷可控</text>
+
+      <!-- 分隔 -->
+      <line x1="540" y1="70" x2="540" y2="360" stroke="#c4bca4" stroke-width="0.8"/>
+
+      <!-- ───── 右:滑车断裂 ───── -->
+      <text x="810" y="60" font-size="12" fill="#a8423b" text-anchor="middle" font-weight="700">A2 断裂 · 肌腱弓起</text>
+      <!-- 骨(同样弯曲) -->
+      <path d="M 660 150 L 830 150 L 910 230" fill="none" stroke="#888888" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 肌腱:失去约束,弓起来离开骨头 -->
+      <path d="M 660 178 Q 850 250 888 236" fill="none" stroke="#a8423b" stroke-width="3.5"/>
+      <!-- 断裂的滑车(裂开) -->
+      <path d="M 825 156 Q 838 168 828 182" fill="none" stroke="#a8423b" stroke-width="2.5" stroke-dasharray="3,3"/>
+      <text x="845" y="135" font-size="11" fill="#a8423b" text-anchor="middle">✕ A2 断</text>
+      <!-- 弓弦距离标注 -->
+      <line x1="830" y1="178" x2="830" y2="225" stroke="#a8423b" stroke-width="0.8" stroke-dasharray="2,2"/>
+      <text x="838" y="210" font-size="10" fill="#a8423b">弓弦距离 = bowstring</text>
+      <!-- 张力箭头 -->
+      <line x1="680" y1="178" x2="645" y2="178" stroke="#a8423b" stroke-width="1.5" marker-end="url(#arrowR)"/>
+      <text x="650" y="200" font-size="10" fill="#a8423b">T</text>
+      <text x="700" y="300" font-size="10" fill="#4a4a4a">转折点外移 · 力臂变长 · 剩余滑车负荷反而更大</text>
+
+      <!-- ───── 底部几何小结 ───── -->
+      <rect x="130" y="340" width="780" height="56" rx="6" fill="#ebe5d3" stroke="#c4bca4" stroke-width="1"/>
+      <text x="155" y="366" font-size="12" fill="#1a1a1a">滑车合力 ≈ 2 · T · sin(θ/2)</text>
+      <text x="155" y="385" font-size="10" fill="#4a4a4a">θ = 肌腱转折角 · 手指越弯 θ 越大 · 合力越大 —— 这就是全抠(高度屈曲)滑车负荷高的根源</text>
+      <text x="760" y="375" font-size="22" fill="#a8423b" font-weight="700" text-anchor="middle">3–4×</text>
+      <text x="760" y="390" font-size="9" fill="#4a4a4a" text-anchor="middle">全抠时 A2 / 指尖力</text>
+
+      <defs>
+        <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="#a8423b"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="svg-caption">FIG 2.2 · 弓弦效应的力学 · 滑车把肌腱的转折压在短力臂内;断裂后肌腱弓起、力臂变长,负荷向剩余滑车转移 [Schweizer 2001]</div>
+  </div>
+
+  <h3 id="s2-h3-5"><span class="pre">2.5</span>那一声「啪」· A2 断裂的解剖与分级</h3>
+  <p class="lead">把前面的几何接到临床上,就能看懂攀岩馆里那一声「啪」是怎么发生的、又该怎么判断它有多严重。</p>
+
+  <p>典型的剧本是这样:一个单指或双指的小指洞,或者一个只够半抠的薄边,攀岩者抠住、起身,正发力的瞬间脚一滑。原本由脚分担的一部分体重,突然全压到正在抠握的那两根手指上——负荷在几十毫秒里翻倍。A2 滑车此刻承受的合力越过了它的破裂阈值,纤维环崩断,发出那声清脆的「啪」。离体实验测过单道 A2 滑车的破裂负荷,大约落在 350 到 500 牛之间 [Schweizer 2001];而全抠加突然加载,完全够得着这个数。</p>
+
+  <p>断裂之后的体征,就是上一节讲的弓弦效应:用力屈指时,能在近节指骨的掌侧看到或摸到肌腱拱起,像皮下绷起一根弦。攀岩医学里把滑车损伤按严重度分了级 [Schöffl 2006]——大致是:I 级,拉伤,没有断裂;II 级,单道滑车完全断裂或多道部分损伤;III 级,两道滑车断裂;IV 级,多道滑车断裂、常伴随肌腱或侧副韧带损伤。<strong>I 到 III 级绝大多数靠保守治疗就能恢复,只有 IV 级、或保守治疗后弓弦仍明显的,才考虑手术修补。</strong>这点常被误解——很多人一听「滑车断了」就以为要开刀,其实大部分不用。</p>
+
+  <p>诊断上,超声是攀岩门诊的首选——便宜、动态(可以让手指用力,实时看肌腱弓起多少),弓弦距离超过某个阈值就提示完全断裂;MRI 更贵,留给复杂或多结构损伤的情况。这里不展开康复方案(留到 ch11 伤病图谱),只强调一条:听到「啪」、或屈指时摸到掌侧拱起的弦,该做的是停、冰敷、尽快找懂攀岩的医生,而不是缠两圈胶布接着爬。</p>
+
+  <div class="metric-grid">
+    <div class="metric-card strength">
+      <div class="m-label">A2 破裂负荷</div>
+      <div class="m-value">350–500<span class="m-unit">N</span></div>
+      <div class="m-desc">单道 A2 离体破裂力区间 [Schweizer 2001]</div>
+    </div>
+    <div class="metric-card strength">
+      <div class="m-label">滑车放大</div>
+      <div class="m-value">3–4<span class="m-unit">×</span></div>
+      <div class="m-desc">全抠时 A2 合力 / 指尖接触力</div>
+    </div>
+    <div class="metric-card strength">
+      <div class="m-label">手术比例</div>
+      <div class="m-value">仅 IV<span class="m-unit">级</span></div>
+      <div class="m-desc">I–III 级多数保守恢复,手术是少数</div>
+    </div>
+    <div class="metric-card strength">
+      <div class="m-label">高发动作</div>
+      <div class="m-value">小点<span class="m-unit">+脚滑</span></div>
+      <div class="m-desc">突然满负荷是最常见的断裂瞬间</div>
+    </div>
+  </div>
+
+  <h3 id="s2-h3-6"><span class="pre">2.6</span>手指会变 · 长期攀岩的适应与代价</h3>
+  <p class="lead">如果攀岩这么伤手,为什么常年攀岩的人手指反而越来越能扛?因为结缔组织会适应负荷——只是慢得多。</p>
+
+  <p>给攀岩者的手指拍 X 光,常能看到一件普通人身上没有的事:近节指骨的骨干皮质明显增厚,骨头中段比非攀岩者粗一圈 [Schöffl / Bayer 系列研究]。这是骨头对长期应力的响应——和跑步章里讲的 Wolff 定律是同一回事:骨按受到的力重塑自己。滑车和腱鞘也会增厚、变强,屈肌腱的横截面随训练增大。这套适应,是资深攀岩者能在小点上扛住惊人负荷的物质基础。</p>
+
+  <p>但这里藏着攀岩训练最重要的一条时间差,也是最常被忽视的反共识:<strong>手指力量的瓶颈是结缔组织,不是肌肉。</strong>肌肉适应快,四到六周就能明显变强;肌腱、滑车、骨这些结缔组织适应慢,要六到十二个月甚至更久。这意味着,一个练了两三个月的新手,前臂肌肉已经强到能拉动很大的力——但他的滑车和肌腱还停留在新手水平,根本扛不住肌肉能产生的负荷。身体被允许去拉一个它的结缔组织还没准备好的力。这就是为什么<em>新手指力进步飞快,受伤也最早最频繁</em>——不是练太少,是肌肉跑在了肌腱前面。</p>
+
+  <p>这条时间差,直接决定了指力训练的纪律:宁可慢。专门的指力板训练(hangboard)通常建议攀岩入门后至少半年到一年再系统上,而且加负荷要比你以为的更保守——肌肉给你「还能加」的反馈时,肌腱往往还没跟上。这部分的具体协议留给 ch10,但底层逻辑就在这一节:你练的是肌肉,但限制你、也保护你的,是那套慢半年的结缔组织。</p>
+
+  <div class="number-strip">
+    <div class="item">
+      <div class="label">肌肉适应</div>
+      <div class="num">4–6 周</div>
+      <div class="sub">前臂屈肌力量明显上升</div>
+    </div>
+    <div class="item">
+      <div class="label">肌腱/滑车适应</div>
+      <div class="num">6–12 月</div>
+      <div class="sub">结缔组织重塑,慢一个量级</div>
+    </div>
+    <div class="item">
+      <div class="label">骨皮质增厚</div>
+      <div class="num">数年</div>
+      <div class="sub">近节指骨骨干 X 光可见</div>
+    </div>
+    <div class="item">
+      <div class="label">最危险窗口</div>
+      <div class="num">头 1–2 年</div>
+      <div class="sub">肌肉强于肌腱,负荷错配</div>
+    </div>
+  </div>
+
+  <h3 id="s2-h3-7"><span class="pre">2.7</span>指力 · 攀岩最强的单一预测因子</h3>
+  <p class="lead">如果只能测一个身体指标来预测一个人的攀岩水平,测什么?答案在大量研究里高度一致:按体重归一的最大指力——它比身高、臂展、最大摄氧量、任何上肢力量测试都更能预测攀岩等级 [Watts 2003][Laffaye 等]。</p>
+
+  <p>这不奇怪:攀岩的瓶颈大多数时候是「能不能拿住这个点」,而不是「拉不拉得动」。把指力按体重归一更关键——攀岩本质是把体重往上提,同样的绝对指力,体重轻的人能拿更小的点。这条引出全书最残酷的一个量:力量-体重比。它在 ch05 会单独展开,这里先记住,指力的强弱要放在体重的分母上看才有意义。</p>
+
+  <p>最常用的量化方式是悬挂:在一道标准 20 毫米深的边沿上,用半抠或开握,看能挂多久、或额外加多少配重挂够若干秒。一个粗糙的参照——能在 20 毫米边上单手悬挂若干秒、或双手负重相当一部分体重挂住,大致对应不同的攀岩段位。我自己测的时候,主力手明显比另一只挂得久,这种左右差很常见,值得记下来,因为伤往往先从弱的、或被偏用的那一侧来。</p>
+
+  <p>但指力强不等于该往死里练它,这是这一节要收的一个口。指力的边际是递减的:从新手到中级,指力涨一点,等级涨很多;到了高级,瓶颈越来越多地转移到技术、身体张力(下一章)、心理(第三篇)上,这时还把训练全压在指力板上,既练不出多少新等级,还把受伤风险一路推高。攀岩进步,前期靠指力打底,中后期靠的是别的——这一点贯穿全书。所以这一节别当成「快去练指力」的号召,它更像一个坐标:告诉你指力在哪、值多少、以及什么时候该停下来去练别的。</p>
+
+  <p>顺带划一条红线,呼应后面的伤病章:<strong>青少年不要上指力板做最大力量悬挂。</strong>生长期的手指骨末端有生长板(骺板),它比成熟骨脆弱得多,反复的高负荷指力训练会造成生长板应力损伤,这在青少年攀岩者里已经是被记录的、可致永久畸形的伤 [Schöffl 等]。成人手指的瓶颈是滑车和肌腱,青少年手指的瓶颈是那块还没长好的骨。年龄不同,最薄弱的环节不同,这是攀岩训练里最该守的一条线。</p>
+
+  <h3 id="s2-h3-8"><span class="pre">2.8</span>把这一章收回到墙上</h3>
+  <p class="lead">把指尖到前臂这不到十厘米讲完,可以收成一句话:攀岩让一套为抓握而生的精密结构,去干承重的活,而它干得意外地好,代价是它也最容易坏。</p>
+
+  <p>这一章的主线就一条:力从指尖进来,被滑车按着、放大着,经两条肌腱传回前臂的肌肉。理解了这条线,攀岩里很多事就通了——为什么累的是前臂(肌肉在那)、为什么全抠伤手(滑车几何)、为什么新手最容易断指(肌腱慢半年)、为什么轻的人占便宜(指力要除以体重)、为什么高手能开握就不全抠(省滑车)。这些不是零散的经验,是同一套力学的不同侧面。</p>
+
+  <p>但手指扛住点,只是第一步。力到了前臂之后,还要继续往下传——传到肩、到核心、到髋、到踩在岩壁上的那只脚。如果这条传导链中间松了,手指扛得再狠也没用:身体会像一扇没关好的门那样从墙上荡开,脚一甩出去,手指瞬间被加上额外的力(正是上一节那个「脚滑导致 A2 断裂」的机制)。换句话说,保护手指的,常常不是更强的手指,是更好的身体张力。下一章,我们就从指尖往回走,讲清楚这条从手到脚的张力链——它是攀岩里那个看不见、却决定一切的东西。</p>
+
+  
+  <div class="chapter-recap">
+    <div class="label">★ 5-MINUTE RECAP · 五分钟回顾</div>
+    <h4>手指与滑车要点</h4>
+    <ol>
+      <li><strong>手指是被借用来承重的</strong>:指深屈肌 (FDP)、指浅屈肌 (FDS) 两条肌腱本职是抓握与触摸,攀岩把它们当承重缆绳——让手指长期承受接近体重的负荷,全运动界独一份。</li>
+      <li><strong>滑车把负荷放大了</strong>:A2、A4 两道环形滑车把屈肌腱按在指骨上、防止弓弦效应,代价是手指越弯、滑车承受的合力越大;crimp 全抠时 A2 受力可达指尖接触力的 3-4 倍。</li>
+      <li><strong>全抠不是最强,是最伤</strong>:crimp 滑车负荷最高、A2 断裂风险最大;能开握 (open hand) 就开握、把全抠留给真正抠不住的点,是高手省手的本能。</li>
+      <li><strong>A2 断裂是攀岩头号标志伤</strong>:一声清脆的「啪」加弓弦征,多发于单指洞或小点上脚滑、突然满负荷的瞬间;Schöffl 把滑车损伤分成 I–IV 级,III 级以上才考虑手术。</li>
+      <li><strong>限制因素是结缔组织,不是肌肉</strong>:肌腱与滑车适应要 6–12 个月,远慢于肌肉的 4–6 周——新手指力进步快却最容易受伤,正是因为肌肉先于肌腱和滑车变强,身体被允许去拉它还扛不住的力。</li>
+    </ol>
+  </div>
+
+  <p class="ref">主要参考:Schöffl V et al.(攀岩滑车损伤分级与流行病学)· Schweizer A(滑车生物力学与离体破裂负荷)· Vigouroux L et al.(crimp 与开握的肌腱力建模)· Watts PB(攀岩生理学与表现预测)· Hochholzer T &amp; Schöffl V《One Move Too Many》· Hörst E《Training for Climbing》。引用为示例性使用,年代从略,优先精度而非来源覆盖。</p>
+
+</div>
+</section>
+
+
+</main>
+
+<!-- ============= FOOTER ============= -->
+<footer>
+  <div class="container">
+    <p class="lede">
+      「攀岩不是把自己拉上去,是把自己贴在墙上。<br>
+      最难的一手,常常不在指尖,在 <em>fear</em>。」
+    </p>
+
+    <div class="colophon">
+      <h4>关于这份调研</h4>
+      <p>一份基于公开攀岩医学与生物力学文献综合编撰的<strong>攀岩多学科调研</strong>。从力学、生理、心理的第一性原理出发,把攀岩当作研究对象解构——手指、张力、前臂、恐惧、风险、训练。<em>不是攀岩教程或技术手册</em>,是一份回答「攀岩时,身体和大脑到底在经历什么」的报告。聚焦自由攀登(抱石与运动攀)。</p>
+
+      <h4>内容来源</h4>
+      <p>综合自攀岩医学与运动科学文献:《One Move Too Many》(Hochholzer &amp; Schöffl)、《Training for Climbing》(Hörst) 等著作,<em>Sports Medicine</em> / <em>J Biomechanics</em> / <em>Wilderness &amp; Environmental Medicine</em> 等期刊代表性研究,以及 Schöffl、Schweizer、Vigouroux、Watts、Hörst 等学者的工作。具体引用为示例性使用,优先精度而非来源覆盖。</p>
+
+      <h4>使用边界</h4>
+      <p>本报告不构成医疗建议或训练处方。攀岩是高风险运动,涉及安全决策(确保、装备、保护、路线选择)时,请向专业教练或持证向导求证,并接受系统培训。生物学的核心规律是<em>个体差异</em>。手指出现<strong>清脆弹响、剧痛、肿胀或弓弦感</strong>(疑似滑车损伤)时,请停止攀爬并尽快就医。</p>
+    </div>
+
+    <p class="credit">CLIMBING SCIENCE · DEEP RESEARCH · v0.1 · CHAPTER 02 PILOT · MAY 2026</p>
+    <p class="signature">白笑 · 2026 年 5 月</p>
+  </div>
+</footer>
+
+<!-- ============= SHARED SCRIPTS ============= -->
+<script>
+/* =========================================================
+ * READING PROGRESS · 顶部金色进度条
+ *
+ * 用法:页面顶部插入 <div class="progress-bar" id="progressBar"></div>
+ * 然后 <script src="../../_shared/progress.js" defer><\/script>
+ * ========================================================= */
+
+(function() {
+  'use strict';
+
+  function init() {
+    let bar = document.getElementById('progressBar');
+    if (!bar) {
+      // 如果 HTML 没插,自动插
+      bar = document.createElement('div');
+      bar.className = 'progress-bar';
+      bar.id = 'progressBar';
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
+
+    function update() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width = pct + '%';
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+
+    // 同步:点击 sticky-nav 链接时,高亮当前 active
+    const navLinks = document.querySelectorAll('.sticky-nav .nav-inner a[href^="#"]');
+    if (navLinks.length === 0) return;
+
+    const sectionMap = new Map();
+    navLinks.forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      if (sec) sectionMap.set(sec, link);
+    });
+
+    // v8.7 · 区分"用户主动滚动" vs "代码触发滚动"
+    // 修复:点击 nav 后 scroll 过程中,IO 监听到一闪而过的 sections 会乱跳 active
+    // 根因:多事件源(点击 / 滚动)写共享状态(active),没有协调层
+    let isProgrammaticScroll = false;
+    let programmaticScrollTimer = null;
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (!target) return;  // 不存在的锚点,让浏览器默认处理
+
+        // v8.7.1 · 阻止浏览器原生 smooth scroll
+        // 根因:_shared/style.css 设了 html { scroll-behavior: smooth }
+        // 跨长距离(s1→s9 约 10 万 px)smooth 要 30+ 秒,体验上像卡住
+        e.preventDefault();
+
+        isProgrammaticScroll = true;
+        // 立即把 active 设到目标 link(给用户即时反馈,不等 IO)
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        // v8.7.4 · 强制 instant scroll + retry-on-layout-shift
+        // 真根因(MCP browser 实测发现 — 反复 5 次:v8.7→v8.7.1→v8.7.2→v8.7.3→v8.7.4):
+        //   1. CSS html { scroll-behavior: smooth } 影响所有 JS scroll API,
+        //      唯一可靠的强制 instant 写法是 scrollTo({ behavior: 'instant' })
+        //   2. 章节 hero 图片 lazy load 加载完后 layout 持续 shift,
+        //      导致 click 瞬间的 target 位置过几秒后不再准确。
+        //      实测:点 #s9,click 时 s9 在 docPos 26220,scroll 到 26140 (= 26220-80);
+        //      接着 hero 图片加载,s9 实际位置变成 47060,viewport 仍停在 26140,
+        //      用户看到的是 s7/s8 内容,以为 scroll 没生效。
+        // 修复:click 立即 instant-scroll,然后多次 retry catch image-load 引起的 layout shifts。
+        //      用户主动 wheel/touchmove/keydown 时,取消 retry(尊重用户意图)。
+        const doScroll = () => {
+          const tt = target.getBoundingClientRect().top + window.pageYOffset - 80;
+          window.scrollTo({ top: tt, behavior: 'instant' });
+        };
+
+        doScroll();
+        // 手动更新 URL hash(因为 preventDefault 阻止了浏览器原生 hash change)
+        history.pushState(null, '', '#' + targetId);
+
+        // 用户主动 scroll/key 取消后续 retry
+        let userCancelled = false;
+        const onUserInput = () => { userCancelled = true; };
+        window.addEventListener('wheel', onUserInput, { passive: true, once: true });
+        window.addEventListener('touchmove', onUserInput, { passive: true, once: true });
+        window.addEventListener('keydown', onUserInput, { passive: true, once: true });
+
+        // 定时 retry(catch 非 image 的 layout shift / async DOM mutation)
+        [50, 150, 400, 1000].forEach(delay => {
+          setTimeout(() => { if (!userCancelled) doScroll(); }, delay);
+        });
+
+        // image load retry(catch image-induced layout shift,主要场景)
+        document.querySelectorAll('img').forEach(img => {
+          if (!img.complete) {
+            img.addEventListener('load', () => {
+              if (!userCancelled) doScroll();
+            }, { once: true });
+            img.addEventListener('error', () => {
+              if (!userCancelled) doScroll();
+            }, { once: true });
+          }
+        });
+
+        // 1.5s 后清理 listeners(超过这时间 layout 应该稳定了)
+        setTimeout(() => {
+          window.removeEventListener('wheel', onUserInput);
+          window.removeEventListener('touchmove', onUserInput);
+          window.removeEventListener('keydown', onUserInput);
+        }, 1500);
+
+        // 兜底:scrollend 不支持的浏览器,1.2s 后解锁 scroll spy
+        if (programmaticScrollTimer) clearTimeout(programmaticScrollTimer);
+        programmaticScrollTimer = setTimeout(() => {
+          isProgrammaticScroll = false;
+          programmaticScrollTimer = null;
+        }, 1200);
+      });
+    });
+
+    // 现代浏览器优先用 scrollend(Chrome 114+ / Firefox 109+ / Safari 17.4+)
+    window.addEventListener('scrollend', () => {
+      isProgrammaticScroll = false;
+      if (programmaticScrollTimer) {
+        clearTimeout(programmaticScrollTimer);
+        programmaticScrollTimer = null;
+      }
+    });
+
+    const navObserver = new IntersectionObserver((entries) => {
+      // v8.7 · 代码触发滚动期间,scroll spy 不更新 active
+      if (isProgrammaticScroll) return;
+      entries.forEach(entry => {
+        const link = sectionMap.get(entry.target);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, {
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: 0
+    });
+    sectionMap.forEach((link, sec) => navObserver.observe(sec));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+<script>
+/* =========================================================
+ * MINI-TOC · 右侧悬浮章节内目录
+ *
+ * 行为:
+ *   - 检测当前可视章节,在屏幕右侧显示该章的 h3 列表
+ *   - 滚动时根据 IntersectionObserver 高亮当前 h3
+ *   - 离开任何 section 时(在 hero / footer 区)隐藏
+ *   - 移动端 (<1280px) CSS 直接 display:none
+ *
+ * 用法:
+ *   <script src="../../_shared/mini-toc.js" defer><\/script>
+ *   不需要任何 HTML,会自动扫描 section[id^="s"] 下的 h3
+ * ========================================================= */
+
+(function() {
+  'use strict';
+
+  // 等 DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  function init() {
+    // 1) 创建 mini-toc DOM
+    const tocEl = document.createElement('aside');
+    tocEl.className = 'mini-toc';
+    tocEl.innerHTML = `
+      <div class="mini-toc-label">CHAPTER NAV · 本章导航</div>
+      <div class="mini-toc-chapter"></div>
+      <ul></ul>
+    `;
+    document.body.appendChild(tocEl);
+
+    const chapterLabel = tocEl.querySelector('.mini-toc-chapter');
+    const tocList = tocEl.querySelector('ul');
+
+    // 2) 收集所有章节信息
+    // 报告结构:每个章节是 <section id="s1"...><h1 class="section-h">...</h1><h3 class="...">...</h3></section>
+    const sections = Array.from(document.querySelectorAll('section[id^="s"]'));
+    if (sections.length === 0) return;
+
+    const chapters = sections.map((sec) => {
+      const id = sec.id;
+      const heading = sec.querySelector('h1.section-h');
+      const title = heading ? heading.firstChild.textContent.trim() : id;
+      const tag = sec.querySelector('.section-tag');
+      const tagText = tag ? tag.textContent.replace(/\s+/g, ' ').trim() : '';
+      const h3s = Array.from(sec.querySelectorAll('h3')).map((h3, idx) => {
+        // 给 h3 加 id 如果没有
+        if (!h3.id) h3.id = `${id}-h3-${idx + 1}`;
+        // 提取标题文字(去掉 .pre 前缀编号)
+        let text = h3.textContent.trim();
+        const pre = h3.querySelector('.pre');
+        let numText = '';
+        if (pre) {
+          numText = pre.textContent.trim();
+          text = text.replace(numText, '').trim();
+        }
+        return { id: h3.id, text, num: numText };
+      });
+      return { id, title, tag: tagText, h3s };
+    });
+
+    // 3) 用 IntersectionObserver 追踪当前 section 和 h3
+    let currentSectionId = null;
+    let currentH3Id = null;
+
+    function renderForSection(chapter) {
+      if (!chapter) return;
+      chapterLabel.textContent = chapter.title;
+      tocList.innerHTML = chapter.h3s.map(h3 => `
+        <li data-h3-id="${h3.id}">
+          <a href="#${h3.id}">
+            <span class="num">${h3.num || ''}</span>
+            <span class="text">${h3.text}</span>
+          </a>
+        </li>
+      `).join('');
+      // 重新绑定 h3 高亮(因为列表重建了)
+      updateActiveH3(currentH3Id);
+    }
+
+    function updateActiveH3(h3Id) {
+      tocList.querySelectorAll('li').forEach(li => {
+        if (li.dataset.h3Id === h3Id) {
+          li.classList.add('active');
+        } else {
+          li.classList.remove('active');
+        }
+      });
+    }
+
+    function showToc() { tocEl.classList.add('visible'); }
+    function hideToc() { tocEl.classList.remove('visible'); }
+
+    // section 进入视口 → 切换 mini-toc 内容
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sec = entry.target;
+          const chapter = chapters.find(c => c.id === sec.id);
+          if (chapter && chapter.id !== currentSectionId) {
+            currentSectionId = chapter.id;
+            renderForSection(chapter);
+            showToc();
+          }
+        }
+      });
+    }, {
+      rootMargin: '-30% 0px -40% 0px',
+      threshold: 0
+    });
+    sections.forEach(sec => sectionObserver.observe(sec));
+
+    // h3 进入视口 → 高亮 mini-toc 中对应项
+    const h3Observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          currentH3Id = entry.target.id;
+          updateActiveH3(currentH3Id);
+        }
+      });
+    }, {
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    });
+    document.querySelectorAll('section[id^="s"] h3').forEach(h3 => h3Observer.observe(h3));
+
+    // 检测 hero / footer 区域,隐藏 mini-toc
+    const hero = document.querySelector('header.hero, .hero');
+    const footer = document.querySelector('footer');
+    if (hero) {
+      const heroObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) hideToc(); });
+      }, { rootMargin: '0px 0px -40% 0px' });
+      heroObs.observe(hero);
+    }
+    if (footer) {
+      const footObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) hideToc(); });
+      }, { rootMargin: '-30% 0px 0px 0px' });
+      footObs.observe(footer);
+    }
+  }
+})();
+
+</script>
+<script>
+/* =========================================================
+ * TERM TOOLTIP · 术语 hover 浮窗
+ *
+ * 行为:
+ *   - 加载 glossary.json (同目录),建立术语→定义映射
+ *   - 自动扫描全文匹配术语(精确匹配,大小写敏感),包成
+ *     <span class="term" data-term="...">...</span>
+ *   - hover/click 时弹出浮窗显示定义 + 跳转到首次定义章节
+ *   - 移动端 tap 显示,再次 tap 外关闭
+ *
+ * 注意:
+ *   - 已经在 HTML 里手工标注的 <span class="term"> 会被尊重
+ *   - 不在 callout 标题、表头、SVG text 内做替换(避免破坏样式)
+ *   - 一段中同一术语只标第一次出现
+ *
+ * 用法:
+ *   <script src="../../_shared/tooltip.js" defer><\/script>
+ *   glossary.json 必须与 tooltip.js 同目录
+ * ========================================================= */
+
+(function() {
+  'use strict';
+
+  // 浮窗 DOM
+  let tooltipEl = null;
+  let glossary = {};
+  let activeTerm = null;
+  let hideTimer = null;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  async function init() {
+    // 1) 加载 glossary
+    // 优先用 embed 模式 inline 的 window.__EMBEDDED_GLOSSARY__,否则 fetch glossary.json
+    if (window.__EMBEDDED_GLOSSARY__) {
+      glossary = window.__EMBEDDED_GLOSSARY__;
+    } else {
+      try {
+        // 智能路径:相对于当前页面,glossary 在 ../../_shared/
+        const scriptEl = document.querySelector('script[src*="tooltip.js"]');
+        const scriptSrc = scriptEl ? scriptEl.src : '';
+        const glossaryUrl = scriptSrc.replace(/tooltip\.js.*$/, 'glossary.json');
+        const res = await fetch(glossaryUrl);
+        glossary = await res.json();
+      } catch (e) {
+        console.warn('[tooltip] glossary.json 加载失败,术语 hover 禁用', e);
+        return;
+      }
+    }
+
+    // 2) 创建 tooltip 浮窗
+    tooltipEl = document.createElement('div');
+    tooltipEl.className = 'term-tooltip';
+    document.body.appendChild(tooltipEl);
+
+    // 3) 自动扫描 + 包裹术语
+    autoWrapTerms();
+
+    // 4) 给所有 .term 绑定事件(手工的 + 自动的)
+    bindEvents();
+
+    // 5) 点击外部关闭
+    document.addEventListener('click', (e) => {
+      if (!tooltipEl.contains(e.target) && !e.target.classList.contains('term')) {
+        hideTooltip();
+      }
+    });
+  }
+
+  function autoWrapTerms() {
+    // 收集所有 glossary key,按长度倒序(优先匹配长术语,避免 "VO2max" 被截成 "VO2")
+    const terms = Object.keys(glossary).sort((a, b) => b.length - a.length);
+    if (terms.length === 0) return;
+
+    // 转义 regex 特殊字符
+    const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const termPattern = new RegExp(
+      '\\b(' + terms.map(escape).join('|') + ')\\b',
+      'g'
+    );
+
+    // 哪些容器不扫描(避免破坏)
+    const skipSelectors = [
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6',  // 标题不替换
+      'th', 'td.mono-cell',                  // 表头/mono 单元格
+      'code', 'pre',                         // 代码
+      '.term', '.chip', '.mono', '.ref',     // 已标记或不应该改的
+      '.callout .label', '.section-tag',     // 标签
+      '.mini-toc', '.term-tooltip',          // 自己
+      'svg',                                 // SVG 内部
+      '.svg-caption',
+      '.reading-meta',
+    ];
+
+    // 在每个 <p> / <li> / .card p 等内容容器里替换文本节点
+    const contentSelectors = 'p, li, .card .desc, .number-strip .sub, .metric-card .m-desc, .callout p';
+    document.querySelectorAll(contentSelectors).forEach(container => {
+      // 跳过被排除的祖先
+      if (skipSelectors.some(sel => container.closest(sel))) return;
+
+      // 每个容器内只标记每个术语第一次出现
+      const seenInContainer = new Set();
+
+      walkTextNodes(container, (textNode) => {
+        const text = textNode.nodeValue;
+        if (!text || !text.trim()) return;
+        // 跳过术语容器内部
+        if (textNode.parentElement.closest('.term, .chip, .mono, .ref, code, svg')) return;
+
+        let lastIdx = 0;
+        let frag = null;
+        let match;
+        termPattern.lastIndex = 0;
+
+        while ((match = termPattern.exec(text)) !== null) {
+          const term = match[1];
+          if (seenInContainer.has(term)) continue;
+          seenInContainer.add(term);
+
+          if (!frag) frag = document.createDocumentFragment();
+          // 之前的纯文本
+          if (match.index > lastIdx) {
+            frag.appendChild(document.createTextNode(text.slice(lastIdx, match.index)));
+          }
+          // 包成 .term
+          const span = document.createElement('span');
+          span.className = 'term';
+          span.dataset.term = term;
+          span.textContent = term;
+          frag.appendChild(span);
+          lastIdx = match.index + term.length;
+        }
+
+        if (frag) {
+          if (lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+          textNode.parentNode.replaceChild(frag, textNode);
+        }
+      });
+    });
+  }
+
+  function walkTextNodes(node, callback) {
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+    const nodes = [];
+    let n;
+    while (n = walker.nextNode()) nodes.push(n);
+    nodes.forEach(callback);
+  }
+
+  function bindEvents() {
+    document.body.addEventListener('mouseover', onEnter);
+    document.body.addEventListener('mouseout', onLeave);
+    document.body.addEventListener('click', onClick);
+  }
+
+  function onEnter(e) {
+    const t = e.target.closest('.term');
+    if (!t) return;
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+    showTooltip(t);
+  }
+
+  function onLeave(e) {
+    const t = e.target.closest('.term');
+    if (!t) return;
+    hideTimer = setTimeout(hideTooltip, 250);
+  }
+
+  function onClick(e) {
+    const t = e.target.closest('.term');
+    if (!t) return;
+    e.preventDefault();
+    showTooltip(t);
+  }
+
+  function showTooltip(termEl) {
+    const term = termEl.dataset.term || termEl.textContent.trim();
+    const entry = glossary[term];
+    if (!entry) return;
+    activeTerm = termEl;
+
+    const linkHtml = entry.chapter
+      ? `<a href="#${entry.anchor || ('s' + entry.chapter.split('.')[0])}" class="tt-link">→ 详见 Ch ${entry.chapter}</a>`
+      : '';
+
+    tooltipEl.innerHTML = `
+      <div class="tt-name">${term}</div>
+      <div class="tt-cn">${entry.cn || ''}</div>
+      <div class="tt-def">${entry.def || ''}</div>
+      ${linkHtml}
+    `;
+
+    // 定位:在术语下方,如果超出窗口则放上方
+    const rect = termEl.getBoundingClientRect();
+    const tipRect = tooltipEl.getBoundingClientRect();
+    let top = rect.bottom + window.scrollY + 8;
+    let left = rect.left + window.scrollX;
+
+    // 防止右侧出界
+    if (left + 320 > window.innerWidth - 16) {
+      left = window.innerWidth - 336;
+    }
+    if (left < 16) left = 16;
+
+    // 防止下方出界(放上方)
+    if (rect.bottom + 220 > window.innerHeight) {
+      top = rect.top + window.scrollY - 8 - tooltipEl.offsetHeight;
+    }
+
+    tooltipEl.style.top = top + 'px';
+    tooltipEl.style.left = left + 'px';
+    tooltipEl.classList.add('visible');
+
+    // tooltip 内 hover 时不关闭
+    tooltipEl.onmouseenter = () => { if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; } };
+    tooltipEl.onmouseleave = () => { hideTimer = setTimeout(hideTooltip, 200); };
+  }
+
+  function hideTooltip() {
+    tooltipEl.classList.remove('visible');
+    activeTerm = null;
+  }
+})();
+
+</script>
+
+<!-- v8.3 · Reader 通用 bootstrap(接入 _shared/ 共享组件 / 按需加载完整 reader) -->
+<script>
+/* ==========================================================================
+ * Reader Bootstrap · 通用公共组件 v8.3
+ * 2026-05-24
+ *
+ * 职责:
+ *   1. 在每个章节(h1.section-h / h2)旁注入"听这章"pill 按钮
+ *   2. 在每个小节(h3)旁注入纯图标 mini 入口
+ *   3. 监听 URL ?listen=1 / 键盘 R / window.activateReader() 触发
+ *   4. 触发时动态加载完整 _shared/reader.{css,js}
+ *
+ * 不做:
+ *   - 不做 TTS(完整 reader.js 才做)
+ *   - 不做 overlay 渲染(reader.js 做)
+ *   - 不做任何"重活"
+ *
+ * 通用化:所有报告通用,无报告专属逻辑。
+ *   <link rel="stylesheet" href="../../_shared/reader-bootstrap.css">
+ *   <script src="../../_shared/reader-bootstrap.js" defer><\/script>
+ * 即接入。build.py 会在 inline 模式自动把两文件内联进 index.html。
+ * ========================================================================== */
+
+(function () {
+  'use strict';
+
+  // SF Symbols / Lucide 风格 · headphones(描边 1.75,跨平台一致)
+  var ICON_HEADPHONES = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14a9 9 0 0 1 18 0"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>';
+
+  var loaded = false;
+
+  function loadReader(opts) {
+    window.__readerOpts = opts || {};
+    if (loaded) {
+      // 已加载过:直接调用 open(可能是关了再开)
+      if (window.__reader) window.__reader.open(window.__readerOpts);
+      return;
+    }
+    loaded = true;
+    var ver = '20260526a';  // v8.7 · Bug 2 修复后更新 cache buster,触发浏览器重新下载新 reader.js
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = '../../_shared/reader.css?v=' + ver;
+    document.head.appendChild(l);
+    var s = document.createElement('script');
+    s.src = '../../_shared/reader.js?v=' + ver;
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+
+  // 注入章节入口
+  // 大章节(h1.section-h / h2):full pill 带文字 "听这章"
+  // 小节(h3):mini 纯图标,从该小节起播
+  function injectEntries() {
+    document.querySelectorAll('section.chapter h2, section.chapter h1.section-h').forEach(function (h) {
+      if (h.querySelector('.reader-entry-btn')) return;
+      var chapter = h.closest('section.chapter') || h.closest('section');
+      var btn = document.createElement('button');
+      btn.className = 'reader-entry-btn';
+      btn.type = 'button';
+      btn.title = '从这一章开始听';
+      btn.setAttribute('aria-label', '听这一章');
+      btn.innerHTML = ICON_HEADPHONES + '<span>听这章</span>';
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        loadReader({ chapter: chapter });
+      });
+      h.appendChild(document.createTextNode(' '));
+      h.appendChild(btn);
+    });
+
+    document.querySelectorAll('section.chapter h3').forEach(function (h) {
+      if (h.querySelector('.reader-entry-btn')) return;
+      var chapter = h.closest('section.chapter');
+      if (!chapter) return;
+      var btn = document.createElement('button');
+      btn.className = 'reader-entry-btn mini';
+      btn.type = 'button';
+      btn.title = '从这一小节开始听';
+      btn.setAttribute('aria-label', '从此小节听');
+      btn.innerHTML = ICON_HEADPHONES + '<span>听此节</span>';
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        loadReader({ chapter: chapter, startNode: h });
+      });
+      h.appendChild(document.createTextNode(' '));
+      h.appendChild(btn);
+    });
+  }
+
+  // URL / 键盘自动触发
+  function attachAutoTriggers() {
+    if (location.search.indexOf('listen=1') >= 0 ||
+        location.search.indexOf('reader=1') >= 0 ||
+        location.hash.indexOf('#read=') >= 0) {
+      loadReader();
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'r' && e.key !== 'R') return;
+      if (/input|textarea|select/i.test(e.target.tagName)) return;
+      loadReader();
+    });
+  }
+
+  // 全局 API(任何外部触发)
+  window.activateReader = function (opts) { loadReader(opts); };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      injectEntries();
+      attachAutoTriggers();
+    });
+  } else {
+    injectEntries();
+    attachAutoTriggers();
+  }
+})();
+
+</script>
+
+</body>
+</html>
