@@ -47,7 +47,7 @@
   <h4>五条红线——任一触发即撤</h4>
   <p>这五条不是发明,是 NOLS / AMGA / 中国登协事故复盘的交集。每条都有可量化的触发阈值,不允许主观打折。</p>
 
-  <table>
+  <table class="no-audio">
     <thead>
       <tr><th>#</th><th>红线</th><th>触发阈值</th><th>为什么是红线</th></tr>
     </thead>
@@ -62,7 +62,7 @@
 
   <p>五条里前四条是「硬指标」(客观可测),第五条是「软指标」(主观但关键)。任一触发即撤,不需要触发两条——多条触发往往意味着已经晚了。</p>
 
-  <div class="svg-frame">
+  <div class="svg-frame no-audio">
     <svg viewBox="0 0 1080 480" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
       <text x="100" y="40" font-size="12" fill="var(--c-race)" letter-spacing="0.18em">撤退决策流程 · GO / NO-GO 五步检查</text>
       <text x="100" y="55" font-size="9" fill="#a39e8d" letter-spacing="0.1em">数据综合 NOLS WMI 决策规范 / 中登协 2023 事故复盘 / Heuristic Traps Project</text>
@@ -173,8 +173,8 @@
 
   <div class="callout you">
     <div class="label">放在你身上 · 距离登顶 1 小时 · 天气变了 · 你想撤,队友想登</div>
-    <p>下面是真实场景的时间轴,你扮演「想撤的那个」。时间轴从 13:30 到 16:00,半小时一格。把这个剧本读一遍,模拟自己怎么应对。</p>
-    <table>
+    <p>设一个真实场景,你扮演「想撤的那个」:距顶只剩一小时,气压一路在跌、远处开始闻雷,队长却一句句「再走 30 分钟看看趋势」「雷还远、我们快」。模拟一下自己会怎么一步步应对。</p>
+    <table class="no-audio">
       <thead>
         <tr><th>时刻</th><th>客观环境</th><th>队伍状态</th><th>你应该做的</th></tr>
       </thead>
@@ -187,7 +187,7 @@
         <tr><td>16:00</td><td>—</td><td>—</td><td>继续撤退到营地或下山 · 写下「复盘:我做了对的」</td></tr>
       </tbody>
     </table>
-    <p><strong>训练价值</strong>:这个剧本里你做的事违反直觉——尤其是「跟撤的人走、不去拉留下的人」。但在山里你不是社工——你救自己是给救援队减负;留下的人由专业救援队带回。<em>这一条是 NOLS 多年沉淀的硬规则</em>。</p>
+    <p><strong>训练价值</strong>:这套应对里有一步格外违反直觉——气压累计跌过雷暴阈值、队伍当场分裂成一半撤一半上时,你该做的是<em>跟撤的人走、不去拉留下的人</em>。但在山里你不是社工——你救自己是给救援队减负;留下的人由专业救援队带回。<em>这一条是 NOLS 多年沉淀的硬规则</em>。</p>
   </div>
 
   <h3><span class="pre">9.3</span>SOS 信号——国际标准 · 五种通用通道</h3>
@@ -207,7 +207,7 @@
 
   <div class="callout ops">
     <div class="label">操作 / SOS 哨子发送 · 60 秒标准动作</div>
-    <p>哨子是最被低估的求救工具——耗体力少、不耗电、不需要学。下面是 60 秒一个完整循环的发送动作。</p>
+    <p>哨子是最被低估的求救工具——耗体力少、不耗电、不需要学。一个完整循环 60 秒,动作分这么几步。</p>
     <ol>
       <li><strong>选位</strong>:站到开阔地或山脊(声音传得最远)· 面朝最可能有人或道路的方向。</li>
       <li><strong>第一组三短</strong>:嘟 1 秒 · 停 1 秒 · 嘟 1 秒 · 停 1 秒 · 嘟 1 秒(共 5 秒)。</li>
@@ -252,7 +252,7 @@
 
   <div class="callout ops">
     <div class="label">操作 / 北斗短报文发送 · 华为 Mate60 流程</div>
-    <p>下面是 Mate60 Pro 在野外失联场景下的标准发送流程。出发前必须实测一次——许多人是在山里第一次打开这个功能,然后才发现没注册或不会用。</p>
+    <p>这是 Mate60 Pro 在野外失联场景下的标准发送流程。出发前必须实测一次——许多人是在山里第一次打开这个功能,然后才发现没注册或不会用。</p>
     <ol>
       <li><strong>出发前(关键!)</strong>:设置 → 移动网络 → 卫星通信 → 开启 · 完成实名认证 · 保存常用紧急联系人(地面锚点 + 12395)。</li>
       <li><strong>失联现场</strong>:走到天空开阔位置(山脊 / 草甸 / 雪地) · 避免树冠和峡谷遮挡。</li>
@@ -284,20 +284,24 @@
     </tbody>
   </table>
 
+  <div class="audio-only">
+    <p>这里有一条选设备时容易踩的红线值得单独记一下:卫星电话和卫星短信里挑大梁的 Iridium 网络,在中国境内属于<strong>不允许私自使用</strong>的频段——也就是说 Iridium 卫星电话、Garmin InReach 这类境外神器,在国内是用不起来的。它们的国产对应是两件:卫星短信对应北斗短报文,卫星电话对应天通。这也是为什么前面反复强调北斗——它不是凑数的国产替代,在境内它几乎是唯一合法可用的那条链路。</p>
+  </div>
+
   <div class="callout sharp">
     <div class="label">反共识 / 卫星电话不是 PLB 的备份 · PLB 才是核心保障</div>
     <p>大多数人买卫星电话作为「高规格的求救保障」,其实是误配。<em>卫星电话需要电池 + 网络 + 操作技能</em>:你在受伤、低温、慌乱、夜里时,要从背包翻出来开机,要寻找信号,要拨号,要清晰表达,要听清回复——每一步都可能失败。<em>PLB 不一样</em>:一键启动(单按钮按 3 秒),COSPAS-SARSAT 卫星接收信号后,你的预登记信息(姓名 / 紧急联系人 / 已知健康问题)直接送达本地 SAR 中心。PLB 设计成「被动定位」——你只要按了,接下来全部由系统处理。当你已经动作能力下降时,PLB 仍能工作。这就是为什么 PLB 是核心保障,卫星电话是补充——顺序反了就是赌命。中国境内的等效是<em>北斗短报文 + 专用 SOS 按键的北斗终端</em>(华大北斗 / 国测北斗 / 部分户外手表内置)——单按钮就能发预登记位置短信。</p>
   </div>
 
   <h4>中国境内的最优配置</h4>
-  <p>境内 3-5 日山地穿越,推荐配置如下,按预算分三档:</p>
+  <p>境内 3-5 日山地穿越,推荐配置按预算分三档:</p>
   <ul>
     <li><strong>低预算(¥0 增量)</strong>:北斗短报文手机(华为 Mate60 / iPhone 14+ 中国版)+ 充电宝 + 备用打火 · 出发前实测并注册。这是 90% 户外人足够的配置。</li>
     <li><strong>中预算(¥3000-5000)</strong>:加一台北斗手表(华为 Watch Ultimate / Mate 系列附带)或专用北斗终端(华大北斗)· 一键 SOS · 防水 · 续航长。</li>
     <li><strong>高预算(¥10000+,境外或专业)</strong>:Garmin InReach Mini 2(境外用)+ ACR ResQLink PLB(全球用)+ 天通卫星终端(境内补充)· 形成「三重冗余」。</li>
   </ul>
 
-  <div class="svg-frame">
+  <div class="svg-frame no-audio">
     <svg viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
       <text x="100" y="38" font-size="12" fill="var(--c-race)" letter-spacing="0.18em">中国卫星通讯方式对比 · 价格 × 可用性 × 操作复杂度</text>
       <text x="100" y="54" font-size="9" fill="#a39e8d" letter-spacing="0.1em">数据综合 北斗三号规范 / COSPAS-SARSAT / Garmin / Iridium 公开资料</text>

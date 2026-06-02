@@ -23,9 +23,9 @@
 
   <p class="lead">Claude Code 的四种自定义机制,从抽象到具体可以这样排:<strong>MCP 是地基</strong>(让 Claude 触达外部世界)、<strong>Hook 是底盘</strong>(让特定动作前后跑强制脚本)、<strong>Subagent 是工位</strong>(让任务在独立上下文里跑)、<strong>Skill 是工作手册</strong>(教 Claude 怎么做某类活)。它们不是替代关系,而是分层关系——一个高级 Claude Code 项目通常四个全用,各管一段。</p>
 
-  <p>先看一张总览表,把四把刀的本质、触发、配置、典型场景一眼对清。</p>
+  <p>四把刀的本质、触发、配置、典型场景,下面五节会一把一把拆开讲透,先把彼此的边界放在心里。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr>
@@ -116,9 +116,9 @@
 
   <h4>一个具体例子:发飞书邮件的 Skill</h4>
 
-  <p>看下面这个真实的 SKILL.md 结构(简化版),感受 Skill 的形态:</p>
+  <p>以一个真实的飞书发邮件 Skill 为例,感受它的形态:一个文件夹,根上放 SKILL.md,旁边可以带模板和脚本;SKILL.md 头部的 frontmatter 声明触发场景,正文写这件事的标准流程——先确认登录态、再查收件人、再按模板发。</p>
 
-  <pre><code>~/.claude/skills/lark-mail/
+  <pre class="no-audio"><code>~/.claude/skills/lark-mail/
 ├── SKILL.md
 ├── templates/
 │   ├── notification.md
@@ -211,11 +211,15 @@ notification 类邮件用 templates/notification.md ...</code></pre>
     </div>
   </div>
 
+  <div class="audio-only">
+    <p>真正用得上的场景大致四类:一是手头有三个以上彼此独立的子模块——不同章节、不同文件块、不同调研子题,这种适合并行派出去同时跑;二是脏活,比如要翻五十个文件就为找一条信息,派出去的分身干完只回报结论,主代理不必把五十个文件全看一遍;三是大输出,长报告分段写,主代理做装配、分身各负责一段;四是探索性发散,先扫一遍代码库回报观察,这种跑完就丢,不必污染主上下文。</p>
+  </div>
+
   <p>这四个场景的共同特征:<strong>任务可切片、产出可摘要、主代理不需要看中间过程</strong>。任何一个不满足,就该重新想要不要开 subagent。</p>
 
   <h4>什么时候 Subagent 反而拖慢</h4>
 
-  <p>Subagent 不是免费的。开一个 subagent 的成本包括:启动延迟、上下文准备、独立 LLM 调用、摘要回传——加起来通常比直接做多 30-60%。所以下面这些场景千万别滥用:</p>
+  <p>Subagent 不是免费的。开一个 subagent 的成本包括:启动延迟、上下文准备、独立 LLM 调用、摘要回传——加起来通常比直接做多 30-60%。所以有这么几类场景千万别滥用:</p>
 
   <ul>
     <li>❌ <strong>简单任务也派 subagent</strong>:「写一个函数」开 subagent、「跑一次测试」开 subagent——这种事直接做更快</li>
@@ -264,6 +268,10 @@ notification 类邮件用 templates/notification.md ...</code></pre>
         <tr><td><code>SubagentStop</code></td><td>某个 subagent 结束时</td><td>验证 subagent 产出格式</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="audio-only">
+    <p>这些挂钩点大致落在一次任务的几个节骨眼上:工具调用之前、工具调用之后、用户每发一条消息时,还有两个收尾位置——Claude 准备结束这一轮回复时,以及某个分身跑完时。前几个用来做权限检查、日志、注入上下文;后两个常用来做最终输出审查,或者验证分身交回来的产出格式对不对。</p>
   </div>
 
   <p>Hook 配置在 <code>settings.json</code> 里。一个典型例子是「commit 前强制跑 lint」——在 <code>PreToolUse</code> 上挂一个 hook,匹配工具是 <code>Bash</code> 且命令含 <code>git commit</code>,跑 <code>npm run lint</code>,失败就阻断 commit 操作。Claude 根本没机会绕过——它发起 commit,事件触发,lint 跑,不过就直接被拦下。</p>
@@ -320,9 +328,9 @@ notification 类邮件用 templates/notification.md ...</code></pre>
 
   <h3><span class="pre">8.6</span>遇到一个需求,该用哪把刀 <span class="en">The Decision Flow</span></h3>
 
-  <p class="lead">把前面五节的内容压成一张决策流程图。下次遇到一个新需求,按这张图走一遍,基本不会选错刀。</p>
+  <p class="lead">把前面五节的内容压成四个递进的问题。下次遇到一个新需求,顺着这四问走一遍,基本不会选错刀。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">问题 1</div>
       <div class="num">需要访问外部系统?</div>
@@ -345,7 +353,7 @@ notification 类邮件用 templates/notification.md ...</code></pre>
     </div>
   </div>
 
-  <p>这四个问题不是互斥的。一个复杂场景可能<em>同时</em>触发多个答案——这时四把刀一起用,各管一段。看几个对照例子:</p>
+  <p>这四个问题不是互斥的。一个复杂场景可能<em>同时</em>触发多个答案——这时四把刀一起用,各管一段。拿几个容易选错的需求对一对就清楚了。</p>
 
   <div class="table-wrap">
     <table>
@@ -392,6 +400,10 @@ notification 类邮件用 templates/notification.md ...</code></pre>
     </table>
   </div>
 
+  <div class="audio-only">
+    <p>几个最容易选错的,值得各点一句:每次 commit 前扫密钥,得用 Hook——因为它必须强制、模型不能跳过,只放进 Skill 就守不住;用统一格式生成 PR 描述,该写 Skill 而不是塞 CLAUDE.md——它是跨项目通用、按需加载,不是每次对话都得知道;反过来,项目必须用 TypeScript 严格模式这种,恰恰要写进 CLAUDE.md——因为它每次对话都得在,不该等场景触发才加载。一句话:看这件事是「强制」「按需」还是「常驻」,刀就选出来了。</p>
+  </div>
+
   <div class="callout sharp">
     <div class="label">✕ 反共识 · 「能不能只用一把刀解决所有问题」</div>
     <p>很多人(尤其是刚接触 Claude Code 的工程师)倾向找一把「万能刀」——只用 Skill / 只用 Subagent / 只用 MCP。这种倾向通常导致工程畸形:<strong>什么都塞 Skill</strong>(Skill 变成 CLAUDE.md 的兄弟)、<strong>什么都开 Subagent</strong>(主任务被 overhead 拖垮)、<strong>什么都走 MCP</strong>(本来 Bash 一行能做的事被包装成 server)。四把刀各有不可替代的位置,正确的姿势是<em>分层组合</em>而不是<em>单点放大</em>。回到上一章 EPCC 框架里看——E 阶段可以用 Subagent 并行探索,P 阶段用 Skill 加载流程模板,C 阶段调 MCP 真正动外部系统,Hook 在每一步前后做强制检查。四个全用上,EPCC 才跑得稳。</p>
@@ -409,7 +421,7 @@ notification 类邮件用 templates/notification.md ...</code></pre>
 
   <p><strong>1. Skill — 教 Claude 怎么做完整发布</strong></p>
 
-  <pre><code>.claude/skills/deploy-prod/SKILL.md
+  <pre class="no-audio"><code>.claude/skills/deploy-prod/SKILL.md
 
 ---
 name: deploy-prod

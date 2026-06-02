@@ -13,7 +13,7 @@
   <div class="callout story">
     <div class="label">故事 / 2024 年 6 月 25 日 · Claude 3.5 Sonnet 发布日</div>
     <p>2024 年 6 月 25 日,Anthropic 发了一篇看起来不大的产品公告。标题里有 Claude 3.5 Sonnet,所有人盯着模型版本号——比上一代 Opus 还强、价格只有五分之一。但博客最后藏着一段几乎被淹没的话:「我们同时推出 Artifacts,一个让 Claude 生成的代码、文档、图表能在对话旁边的窗口里持续存在的容器。」[Anthropic 2024c]</p>
-    <p>这句话当时没几个人在意。直到一个月后,Reddit 和 X 上开始出现一类截图:用户拿 Claude 写了一个 React 组件,Claude 把组件放进右侧的 Artifact 窗口里,用户对着窗口说「这个按钮颜色改深一点」「再加个 hover 动效」「现在把它打包成一个可下载的 HTML」——<strong>每一句对话都在改同一个 Artifact,而不是每次都重新生成一段新代码</strong>。这种「持续在同一个对象上协作」的感觉,跟之前所有 Chat 形态的 AI 都不一样。</p>
+    <p>这句话当时没几个人在意。直到一个月后,Reddit 和 X 上开始出现一类截图:用户拿 Claude 写了一个 React 组件,Claude 把组件放进一个独立的 Artifact 窗口里,用户对着这个窗口说「这个按钮颜色改深一点」「再加个 hover 动效」「现在把它打包成一个可下载的 HTML」——<strong>每一句对话都在改同一个 Artifact,而不是每次都重新生成一段新代码</strong>。这种「持续在同一个对象上协作」的感觉,跟之前所有 Chat 形态的 AI 都不一样。</p>
     <p>三个月后的 9 月 30 日,Anthropic 上线 Projects——把对话、文件、自定义指令打包成一个长期容器,Claude 跨多次对话保持记忆 [Anthropic 2024d]。又过半年,2025 年 5 月 Connectors 上线,Claude 能直接接 Gmail / Calendar / Linear / Notion / GitHub [Anthropic 2025a]。再过五个月,2025 年 10 月 Agent Skills 上线,SKILL.md 成为新的团队知识载体 [Anthropic 2025b]。</p>
     <p>回头看,这四个部件不是同一时刻设计出来的,是 Anthropic 在 18 个月里一点一点把「Claude 怎么从对话工具变成协作平台」想明白的。它们不替代彼此,各管一段——这就是 Anthropic 产品观最不同的一点:不做全局抽象,做正交部件。</p>
   </div>
@@ -33,9 +33,9 @@
 
   <h4>四部件怎么分工</h4>
 
-  <p>把四个部件按「时间维度」和「来源维度」摆开,就能看清它们的正交关系:</p>
+  <p>从「时间维度」和「来源维度」这两个角度去拆,四个部件的正交关系就清楚了:</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">PROJECTS</div>
       <div class="num">长期上下文</div>
@@ -68,7 +68,7 @@
 
   <h4>Projects 的三层结构</h4>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>层级</th><th>装什么</th><th>对应的工程意图</th></tr>
@@ -121,7 +121,7 @@
   <p>有了 Artifacts 之后:</p>
 
   <ul>
-    <li>你说「写个登录页」 → Claude 把代码放进右侧 Artifact 窗口</li>
+    <li>你说「写个登录页」 → Claude 把代码放进一个独立的 Artifact 窗口</li>
     <li>你说「按钮改成蓝色」 → Claude 直接<em>原地编辑</em>那个 Artifact,你看到的是 diff 而不是重抄一遍</li>
     <li>你说「再加个忘记密码链接」 → 同一个 Artifact,版本号 +1</li>
     <li>对话泡泡里只剩下「你跟 Claude 在聊什么」,产物本身在另一个窗口持续演化</li>
@@ -132,7 +132,7 @@
   <div class="grid-2">
     <div class="card">
       <h4>代码与可执行内容</h4>
-      <p>React 组件、HTML/CSS 页面、Python / JavaScript 脚本、SVG 图形——Claude 在 Artifact 窗口里直接渲染并可交互。一个 React 组件改完之后,你能在右侧立刻看到效果,不用复制到自己的环境里跑。</p>
+      <p>React 组件、HTML/CSS 页面、Python / JavaScript 脚本、SVG 图形——Claude 在 Artifact 窗口里直接渲染并可交互。一个 React 组件改完之后,你当场就能看到运行效果,不用复制到自己的环境里跑。</p>
     </div>
     <div class="card">
       <h4>文档与结构化文本</h4>
@@ -192,7 +192,7 @@
 
   <h4>Connectors 跟 MCP 的关系</h4>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>层级</th><th>是什么</th><th>谁来做</th></tr>
@@ -244,7 +244,7 @@
 
   <p>每周一早上 9 点,她在 Claude 里说一句「写本周周报」。Claude 自动:Skill 触发,加载周报模板;Connectors 拉数据,从 Linear 拿任务列表、从 Slack 拿团队消息、从 Drive 拿文档变更;Projects 提供长期背景,知道项目目标和风格;Artifact 生成草稿,小李对着 Artifact 改三轮,定稿。<strong>从 90 分钟压缩到 12 分钟</strong>——这就是四部件配合的杠杆。</p>
 
-  <h4>四部件横向对比表</h4>
+  <h4>四部件横向对比</h4>
 
   <div class="table-wrap">
     <table>
@@ -263,11 +263,15 @@
     </table>
   </div>
 
+  <div class="audio-only">
+    <p>这里有个能帮你建立体感的增量,是四个部件在一个真实用户身上各自的常见数量级。据 Anthropic 自己披露的使用数据,一个人通常配五到二十个 Projects、挂三十到一百个 Skills,而每开一个连接器都意味着一道外部权限,所以连接器一般只开五到十五个;Artifacts 不一样,它是任务级的,一个任务里往往就一两个,随用随建、用完就过去了。记住这个量级差,你大致能判断:哪类部件值得一次配齐长期吃,哪类是临时起意、用完即弃。</p>
+  </div>
+
   <h3><span class="pre">6.7</span>跟 OpenAI / Google 的产品哲学对比 · <span class="en">Different Philosophies</span></h3>
 
   <p class="lead">最后用一节横向对比 Anthropic、OpenAI、Google 三家在「让 AI 长期协作」这件事上的产品选择。这种对比能让你看清 Anthropic 选「四部件」不是技术限制,是产品哲学的主动选择。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>厂商</th><th>长期记忆方案</th><th>外部接入方案</th><th>哲学概括</th></tr>

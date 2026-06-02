@@ -27,7 +27,7 @@
 
   <p>假设你给 Claude 一个 10000 token 的 system prompt(里面是公司 SOP)+ 一条 500 token 的用户问题,Claude 生成 1000 token 答案。一天调 1000 次,system prompt 每次都一样:</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>方案</th><th>第 1 次成本</th><th>第 2-1000 次每次成本</th><th>当天总成本(相对)</th></tr>
@@ -48,9 +48,9 @@
 
   <h3><span class="pre">10.2</span>五条死规则 · 必须先背下来 <span class="en">The Five Hard Rules</span></h3>
 
-  <p class="lead">Caching 的所有踩雷,本质都是不熟悉这五条规则。这一节用一张 number-strip 把它们摆全,后面几节会逐条展开。</p>
+  <p class="lead">Caching 的所有踩雷,本质都是不熟悉这五条规则。先把五条一次摆全,后面几节再逐条展开:必须从消息开头起、最小 1024 token、默认 5 分钟 TTL、首次写入反而贵 25%、要显式打 cache_control。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">RULE 1</div>
       <div class="num">从开头起</div>
@@ -179,7 +179,7 @@
 
   <p>这两个 feature 单独开都没问题,组合开就有惊喜——一个典型场景:</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>配置</th><th>输入 token</th><th>thinking token</th><th>输出 token</th><th>单次成本(相对)</th></tr>
@@ -193,7 +193,7 @@
     </table>
   </div>
 
-  <p>看最后一行——你以为开了 caching 把长 prompt 砍到 10%,实际上 thinking 那 5000 token 是按 100% 原价算的,反而成了主要成本项。<strong>Extended Thinking 不是「免费的更聪明」,是「贵几倍的更聪明」</strong>。</p>
+  <p>最坑的是两个一起开:你以为开了 caching 把长 prompt 砍到一成,实际上 thinking 那 5000 token 是按百分之百原价算的,反而成了主要成本项。<strong>Extended Thinking 不是「免费的更聪明」,是「贵几倍的更聪明」</strong>。</p>
 
   <div class="callout note">
     <div class="label">i 怎么用 Extended Thinking 不被账单咬</div>
@@ -202,11 +202,11 @@
 
   <h3><span class="pre">10.6</span>实战 · Python SDK 标准用法 <span class="en">The Code You Actually Run</span></h3>
 
-  <p class="lead">理论讲完,这一节给一段可以直接 copy 跑通的代码,展示 <code>cache_control</code> 怎么打到 system prompt 和 tools 上。代码基于 Anthropic Python SDK 标准用法,跟官方文档保持一致。</p>
+  <p class="lead">理论讲完,落到能直接跑通的写法上,核心就一件事:<code>cache_control</code> 怎么打到 system prompt 和 tools 上。做法基于 Anthropic Python SDK 标准用法,跟官方文档保持一致。</p>
 
   <p>场景:一个产品咨询 Agent,system prompt 里塞了一份 8000 token 的产品手册,带两个工具(查库存、查订单),需要被频繁调用。</p>
 
-  <pre><code>from anthropic import Anthropic
+  <pre class="no-audio"><code>from anthropic import Anthropic
 
 client = Anthropic()
 

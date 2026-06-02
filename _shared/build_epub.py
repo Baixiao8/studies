@@ -431,7 +431,7 @@ def build_chapter_xhtml(ch, idx, audio=False):
     remove = list(REMOVE_SELECTORS)
     if audio:
         # 听书版额外移除:人工标记的冗余视觉块 .no-audio、参考文献 .ref
-        remove += ['.no-audio', '.ref']
+        remove += ['.no-audio', '.ref', '.pre']  # .pre=小节编号(★.1/4.2),听书念标题即可,不念编号
     for selector in remove:
         for el in section_clone.select(selector):
             el.decompose()

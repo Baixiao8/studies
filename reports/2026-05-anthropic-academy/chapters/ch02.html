@@ -52,7 +52,7 @@
 
   <p>Anthropic 的内部教学材料把这个循环抽成了三个阶段。这三个阶段是理解任何 Agent 产品(Claude Code、Claude Computer Use、Cursor、Devin、Aider……)的统一框架:</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">PHASE 1</div>
       <div class="num">Gather Context</div>
@@ -77,7 +77,7 @@
 
   <p>把这三阶段套到任何 Agent 任务上,都能找到对应:</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>任务</th><th>Gather Context</th><th>Take Action</th><th>Verify Work</th></tr>
@@ -160,7 +160,7 @@
 
   <h4>监工的四个动作</h4>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">SPEC</div>
       <div class="num">立规矩</div>
@@ -183,6 +183,10 @@
     </div>
   </div>
 
+  <div class="audio-only">
+    <p>这套监工动作拆开就是四下,前后是有顺序的。第一下是<strong>立规矩</strong>:动工前先把目标、边界、哪些东西绝对不许碰讲死。第二下是<strong>看现场</strong>:让 Agent 一边干一边把进度报出来,而不是闷头跑完再说。第三下是<strong>拍板</strong>:改主分支、删数据、付钱这种要命的节点,必须停下来等你点头。最后一下是<strong>验收</strong>:别光听它说做完了,得自己核改动、核测试、核有没有连带搞坏别的地方。</p>
+  </div>
+
   <h4>好做法 vs 坏做法</h4>
 
   <ul>
@@ -203,9 +207,9 @@
 
   <h3><span class="pre">2.6</span>什么时候用 Chat · 什么时候用 Agent</h3>
 
-  <p class="lead">现在你有了判断 Chat 跟 Agent 的所有材料,可以做出一张决策表。下面这张表不是穷举,但能覆盖 90% 的日常场景。</p>
+  <p class="lead">现在你有了判断 Chat 跟 Agent 的所有材料,可以把它落成一套判断标准。这套判断不是穷举,但能覆盖 90% 的日常场景。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>任务特征</th><th>用 Chat 还是 Agent</th><th>理由</th></tr>
@@ -225,7 +229,7 @@
     </table>
   </div>
 
-  <p>这张表的底层规律只有一条:<strong>Chat 适合「目标清晰、过程短、纯文本」的事;Agent 适合「目标清晰、过程长、要动外部状态」的事</strong>。任何一头不清晰的任务,都不该上 Agent——目标不清晰用 Agent 会失控,过程短用 Agent 是浪费,纯文本任务用 Agent 是杀鸡用牛刀。</p>
+  <p>这套判断的底层规律只有一条:<strong>Chat 适合「目标清晰、过程短、纯文本」的事;Agent 适合「目标清晰、过程长、要动外部状态」的事</strong>。任何一头不清晰的任务,都不该上 Agent——目标不清晰用 Agent 会失控,过程短用 Agent 是浪费,纯文本任务用 Agent 是杀鸡用牛刀。</p>
 
   <div class="callout note">
     <div class="label">i 一个常被忽略的中间形态 · 「Chat 调一次工具」</div>

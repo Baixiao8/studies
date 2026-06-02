@@ -26,7 +26,7 @@
 
   <h4>一个 bad → good 的对照</h4>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>版本</th><th>prompt 原文</th><th>问题 / 改进</th></tr>
@@ -81,9 +81,9 @@
 
   <h4>一个完整模板</h4>
 
-  <p>Anthropic 官方文档给的标准模板大致长这样:</p>
+  <p>Anthropic 官方文档给的标准模板,大致是把角色场景、任务清单、输出格式、真实数据这四段各自用一个标签包起来。</p>
 
-  <pre><code>&lt;context&gt;
+  <pre class="no-audio"><code>&lt;context&gt;
 你是一位企业合同审阅员,服务于 SaaS 行业的法务团队。
 今天的任务是从客户上传的合同里提取关键条款,供律师快速 review。
 &lt;/context&gt;
@@ -107,7 +107,7 @@
 {这里塞合同正文}
 &lt;/contract&gt;</code></pre>
 
-  <p>这个模板里五个标签各司其职:<code>&lt;context&gt;</code> 给角色和场景(对应 <a href="#s1">第 1 章</a> 可操控性的 ROLE 维度)、<code>&lt;task&gt;</code> 给任务清单、<code>&lt;output_format&gt;</code> 给格式(对应 FORMAT 维度)、<code>&lt;contract&gt;</code> 装真实数据。Claude 看到这种结构会自动把每段当作一个语义单元处理,不会把合同正文当成指令的一部分,也不会把指令当成合同内容。</p>
+  <p>这个模板里五个标签各司其职:<code>&lt;context&gt;</code> 给角色和场景(对应 <a href="#s1">第 1 章</a> 可操控性的 ROLE 维度)、<code>&lt;task&gt;</code> 给任务清单、<code>&lt;output_format&gt;</code> 给格式(对应 FORMAT 维度)、<code>&lt;contract&gt;</code> 装真实数据。Claude 遇到这种标签结构会自动把每段当作一个语义单元处理,不会把合同正文当成指令的一部分,也不会把指令当成合同内容。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · XML 标签是 Claude 时代最便宜的 prompt 升级</div>
@@ -124,16 +124,16 @@
 
   <p>任务:从客服工单中提取「问题类型」标签。</p>
 
-  <p><strong>❌ Zero-shot(零示例)版本:</strong></p>
+  <p><strong>❌ Zero-shot(零示例)版本</strong>:只丢一句「请把下面这条工单分类」,后面直接跟一条工单,不给任何样板。</p>
 
-  <pre><code>请把下面的客服工单分类:
+  <pre class="no-audio"><code>请把下面的客服工单分类:
 &lt;ticket&gt;我昨天买的耳机充不进电了,刚拆开两天&lt;/ticket&gt;</code></pre>
 
-  <p>这种 prompt Claude 可能返回「电池问题」「质量问题」「产品故障」「售后请求」等几种说法,完全不可预测。</p>
+  <p>这么写,Claude 可能返回「电池问题」「质量问题」「产品故障」「售后请求」等好几种说法,完全不可预测。</p>
 
-  <p><strong>✅ Few-shot(带示例)版本:</strong></p>
+  <p><strong>✅ Few-shot(带示例)版本</strong>:在工单前面先摆三组样板,每组都是一条工单配一个标签——登录不上配「登录问题」、不发货配「物流问题」、退款没到账配「退款问题」,然后才把要分类的那条工单递进去。</p>
 
-  <pre><code>请按下面示例的格式给工单分类。
+  <pre class="no-audio"><code>请按下面示例的格式给工单分类。
 
 &lt;example&gt;
 ticket: 这个软件登录不上去,密码也是对的
@@ -153,7 +153,7 @@ label: 退款问题
 &lt;ticket&gt;我昨天买的耳机充不进电了,刚拆开两天&lt;/ticket&gt;
 label:</code></pre>
 
-  <p>这版 prompt 跑 100 次,几乎 100 次都会返回类似「产品质量问题」「硬件故障」这种跟示例风格一致的短标签——格式稳定、长度稳定、用词稳定。</p>
+  <p>这么写,跑 100 次几乎 100 次都会返回类似「产品质量问题」「硬件故障」这种跟样板风格一致的短标签——格式稳定、长度稳定、用词稳定。</p>
 
   <h4>给例子的三条经验</h4>
 
@@ -180,6 +180,10 @@ label:</code></pre>
     </div>
   </div>
 
+  <div class="audio-only">
+    <p>挑示例有四条经验值得记一下。一,几个示例尽量覆盖不同的子类,别全堆成同一种;二,至少留一个去示范边界情况该怎么处理;三,示例和真实输入的字段名、标签、顺序得严丝合缝地一致,差一点都会让 Claude 学歪;四,数量上一到三个最划算,超过五个收益就开始递减,还白白多吃 token。</p>
+  </div>
+
   <div class="callout sharp">
     <div class="label">✕ 反共识 · Few-Shot 不是越多越好</div>
     <p>很多人以为示例越多 Claude 学得越准,实测不是。当任务足够明确(比如分类标签集已经在 prompt 里列出来了),zero-shot 反而比 few-shot 更稳定——因为示例占了上下文却没增加新信息,反而稀释了真正的指令权重。<strong>判断要不要 few-shot 的标准只有一条:你的任务能不能用语言完整描述清楚?能,就别给示例;不能,再给</strong>。比如「按 JSON 输出」可以用语言说清,不需要示例;「按我们公司内部的报告腔调写」就只能给示例,语言没法描述「我们公司的腔调」。</p>
@@ -203,12 +207,12 @@ label:</code></pre>
 
   <div class="callout note">
     <div class="label">i 一个细节 · 别让 CoT 输出污染最终结果</div>
-    <p>如果你的下游系统期望 Claude 直接返回 JSON,但 CoT 让它先写了 300 字推理,JSON 就被推理污染了。解决方案:用 XML 把推理和最终答案严格分开,然后在程序里只取 <code>&lt;answer&gt;</code> 块的内容。例子:</p>
-    <pre><code>请先在 &lt;thinking&gt; 块里分析,
+    <p>如果你的下游系统期望 Claude 直接返回 JSON,但 CoT 让它先写了 300 字推理,JSON 就被推理污染了。解决方案:让它先在一个 thinking 标签里分析、再把 JSON 放进一个 answer 标签,用 XML 把推理和最终答案严格分开。</p>
+    <pre class="no-audio"><code>请先在 &lt;thinking&gt; 块里分析,
 再在 &lt;answer&gt; 块里输出 JSON。
 &lt;thinking&gt;...&lt;/thinking&gt;
 &lt;answer&gt;{...JSON...}&lt;/answer&gt;</code></pre>
-    <p>这样下游只解析 <code>&lt;answer&gt;</code>,推理过程纯供调试,不进入业务逻辑。</p>
+    <p>这么一分,下游程序只解析 answer 标签里的内容,推理过程纯供调试,不进入业务逻辑。</p>
   </div>
 
   <h3><span class="pre">9.6</span>Extended Thinking · Claude 的内部思考预算 <span class="en">Deep Reasoning</span></h3>
@@ -232,6 +236,10 @@ label:</code></pre>
         <tr><td>时延</td><td>跟输出长度成正比</td><td>显著高于普通调用,因为要先跑完思考预算</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="audio-only">
+    <p>两者最实在的差别有三处。一是触发方式:普通 CoT 是在 prompt 里加一句「一步步想」或者塞个 thinking 标签,Extended Thinking 则是在 API 里设一个叫 budget tokens 的思考预算参数。二是计费:CoT 的推理和答案一起算进输出 token,Extended Thinking 的推理 token 单独计、答案另算。三是时延:CoT 跟输出长度成正比,Extended Thinking 因为要先把思考预算跑完,明显更慢。</p>
   </div>
 
   <h4>怎么决定要不要开 Extended Thinking</h4>
@@ -259,9 +267,9 @@ label:</code></pre>
 
   <h3><span class="pre">9.7</span>五原则全景 · <span class="en">Five Principles at a Glance</span></h3>
 
-  <p class="lead">把五条原则拍到一张图里,你随时能拿出来对照自己写的 prompt。</p>
+  <p class="lead">五条原则到这里就齐了——清晰直接、具体明确、XML 分块、给例子、让它先思考。下面紧接着把它们变成你随手能用的判断工具。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">RULE 1</div>
       <div class="num">清晰直接</div>
@@ -289,9 +297,9 @@ label:</code></pre>
     </div>
   </div>
 
-  <h4>五原则 ✅ vs ❌ 对照表</h4>
+  <h4 class="no-audio">五原则 ✅ vs ❌ 对照表</h4>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>原则</th><th>❌ 反面</th><th>✅ 正面</th></tr>

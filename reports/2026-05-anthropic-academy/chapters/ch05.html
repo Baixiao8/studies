@@ -29,7 +29,7 @@
 
   <p>不是看 AI 做什么,而是看<strong>AI 跟「你的电脑」的关系</strong>。三个层次:</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">CHAT</div>
       <div class="num">隔着屏幕</div>
@@ -56,7 +56,7 @@
 
   <div class="callout note">
     <div class="label">i 一个容易被忽视的事实</div>
-    <p>Anthropic 内部并没有把 Chat / Cowork / Code 当成三个独立产品来推。看 2025 年的产品页和发布博客,它们经常出现在同一张大图里——左边是 Chat 区(对话框 + Artifact),中间是 Cowork 区(文件浏览器 + 应用控制),右边是 Code 区(终端 + 仓库视图)。<strong>底层都是同一个 Claude 模型,UI 壳也越来越融合</strong>。把它们说成「三件套」是教学上的简化,实际产品里它们的边界正在被刻意模糊化——你在 Chat 里聊着聊着发现需要动文件,Claude 会问你「要切到 Cowork 模式吗?」。</p>
+    <p>Anthropic 内部并没有把 Chat / Cowork / Code 当成三个独立产品来推。看 2025 年的产品页和发布博客,它们经常被并排摆进同一个画面里——一边是 Chat 区(对话框 + Artifact),挨着是 Cowork 区(文件浏览器 + 应用控制),再过去是 Code 区(终端 + 仓库视图)。<strong>底层都是同一个 Claude 模型,UI 壳也越来越融合</strong>。把它们说成「三件套」是教学上的简化,实际产品里它们的边界正在被刻意模糊化——你在 Chat 里聊着聊着发现需要动文件,Claude 会问你「要切到 Cowork 模式吗?」。</p>
   </div>
 
   <h3><span class="pre">5.2</span>Chat 模式 · 隔着屏幕的对话型 AI <span class="en">The Reflex</span></h3>
@@ -130,7 +130,7 @@
 
   <h4>Cowork 的边界 · 它不擅长什么</h4>
 
-  <p>Cowork 强项是「文件层、应用层、屏幕层」的操作,但它<strong>不是工程化协作工具</strong>。下面这些任务用 Cowork 也能跑,但效率和正确率都低于 Code:</p>
+  <p>Cowork 强项是「文件层、应用层、屏幕层」的操作,但它<strong>不是工程化协作工具</strong>。有几类任务用 Cowork 也能跑,但效率和正确率都低于 Code:</p>
 
   <ul>
     <li>❌ 在一个 200 文件的代码仓里改一个跨多模块的 bug</li>
@@ -164,6 +164,10 @@
     </table>
   </div>
 
+  <div class="audio-only">
+    <p>这五件事——整仓索引、测试感知、git 集成、读 Claude.md 拿长期约定、在终端里原生跑——单看名字容易当成功能差别,真正的分量在它们各自换来什么:测试感知让验证阶段有真实信号,而不是模型自己说改好了;git 集成让每一步都能回滚;Claude.md 让工程上下文跨会话不丢。换句话说,Code 多出来的不是几个按钮,是一整套让 AI 在工程里行得稳、收得住的纪律。</p>
+  </div>
+
   <p>这五条加起来,就是 Code 跟 Cowork 的根本差别。Anthropic 在 Claude Code 101 课程里强调:「Code 是为<em>有 git 仓库、有测试、有工程化规范</em>的项目设计的——不要拿它当通用文件助手用」[Anthropic Academy 2025]。</p>
 
   <h4>Code 最适合的任务画像</h4>
@@ -188,7 +192,7 @@
 
   <h3><span class="pre">5.5</span>三模式横向对比表 · <span class="en">Three Modes at a Glance</span></h3>
 
-  <p class="lead">把三个模式放在一张表里,差别一目了然。这张表建议截图存档——下次拿到一个任务,先看它落在哪一列。</p>
+  <p class="lead">把三个模式沿着同一组维度并排比一遍,差别就清楚了——下次拿到一个任务,心里过一遍它该落在哪一档。</p>
 
   <div class="table-wrap">
     <table>
@@ -215,7 +219,11 @@
     </table>
   </div>
 
-  <p>这张表里最关键的一行是「Agent Loop 深度」——三个模式跑的是同一个 Loop(<a href="#s2">第 2 章</a>讲过的「收集上下文 → 动手 → 验证」),区别只在 Loop 转多少圈、AI 拿到的工具有多少。<strong>Chat 是 0 圈,Cowork 是几圈,Code 是几十圈</strong>。圈数越多,效率越高,但同时风险越大、token 越贵、监工越累。</p>
+  <div class="audio-only">
+    <p>这套对比里,有几个落地的数字值得单独记一下。入口各不一样:Chat 在网页或桌面端的对话区就能用,Cowork 要在桌面端切到对应模式,Code 是在终端里敲一行 <strong>claude</strong> 起。花费也分档:Chat 基本上 Pro 套餐就够,Cowork 重度用得上 Max,Code 跑严肃项目往往要 Max 的五倍档起步。代价是同向放大的——一次任务消耗的 token,从 Chat 的千到万级,到 Cowork 的万到十万级,再到 Code 的十万到百万级,跨了两三个数量级。</p>
+  </div>
+
+  <p>这里最关键的一点,是「Agent Loop 的深度」——三个模式跑的是同一个 Loop(<a href="#s2">第 2 章</a>讲过的「收集上下文 → 动手 → 验证」),区别只在 Loop 转多少圈、AI 拿到的工具有多少。<strong>Chat 是 0 圈,Cowork 是几圈,Code 是几十圈</strong>。圈数越多,效率越高,但同时风险越大、token 越贵、监工越累。</p>
 
   <h3><span class="pre">5.6</span>决策树 · 一个任务该开哪个模式 <span class="en">Pick the Right Mode</span></h3>
 

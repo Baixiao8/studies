@@ -53,6 +53,10 @@
     </div>
   </div>
 
+  <div class="audio-only">
+    <p>这套架构有四个角色,记清楚后面就顺了。<strong>Host 宿主</strong>,是你直接用的那个应用,Claude Desktop、Claude Code、Cursor 都算;<strong>Client 客户端</strong>,是宿主内部那个负责跟服务端通信的模块;<strong>Server 服务端</strong>,是一个独立进程,真正暴露 Tools、Resources、Prompts 这三类能力;<strong>Transport 传输层</strong>,管它俩怎么连——本地走 stdio,远程走 StreamableHTTP,协议本身不关心具体走哪条。</p>
+  </div>
+
   <p>这套架构的好处:<strong>server 一次实现,所有合规的 host 都能用</strong>。坏处:<strong>多了一层进程间通信,本地启动有几百毫秒级开销</strong>。所以判断要不要上 MCP,先看这事值不值得跨进程——本地一个 Bash 一行能做的,绝对不必上 server。</p>
 
   <div class="callout note">
@@ -76,9 +80,9 @@
 
   <h4>一个真实例子</h4>
 
-  <p>看一个查飞书日历的 MCP server,它的 <code>list_events</code> 工具大致长这样:</p>
+  <p>拿一个查飞书日历的 MCP server 来说,它的 <code>list_events</code> 工具,description 会写明这是用来列出某个日期范围内的日程、专门回答「今天有什么会」「下周日程」这类问题,同时点明它不负责创建日程也不负责查空闲;参数则要求传入起止日期,日历 ID 可选、默认主日历。</p>
 
-  <pre><code>{
+  <pre class="no-audio"><code>{
   "name": "list_events",
   "description": "列出指定日期范围内的日程事件。
     用于:用户问『今天有什么会』『下周日程』『还有哪些约』。
@@ -127,10 +131,10 @@
 
   <h4>Resources 和 Tools 的边界判断</h4>
 
-  <p>新手最常问的问题是:既然 Tool 也能读数据,为什么还要 Resources?这两个的区分,本质是「主动权归谁」:</p>
+  <p>新手最常问的问题是:既然 Tool 也能读数据,为什么还要 Resources?这两个的区分,本质是「主动权归谁」。</p>
 
   <div class="table-wrap">
-    <table>
+    <table class="no-audio">
       <thead>
         <tr><th>判别角度</th><th>该用 Tool</th><th>该用 Resource</th></tr>
       </thead>
@@ -164,6 +168,10 @@
     </table>
   </div>
 
+  <div class="audio-only">
+    <p>真要区分这两个,有五个角度可以一条条问下去。一问<strong>谁来触发</strong>:是模型自己判断「我现在得查这个」,还是应用判断「这份东西用户当前肯定要参考」?前者是 Tool,后者是 Resource。二问<strong>多久用一次</strong>:偶尔、按需、看条件的,归 Tool;每次任务都要、全程都得挂着的,归 Resource。三问<strong>数据是什么形态</strong>:是一个动作跑出来的产物比如查询结果,那是 Tool;是一份静态或半静态的参考资料,那是 Resource。四看<strong>典型例子</strong>:按关键词搜文档、拿回结果,是 Tool;一份文件内容、当前选中的代码、一段配置,是 Resource。五看<strong>用户能不能感知</strong>:Tool 的调用过程用户通常看不见,Resource 则会在界面上明摆着让用户知道有哪些可以附加进来。</p>
+  </div>
+
   <p>一个具体对照:VS Code 风格的「读当前打开的文件」该是 Resource(应用知道用户正在编辑哪个文件,主动提供),「搜索整个代码库找某个函数定义」该是 Tool(模型按需触发,搜索关键词由模型决定)。两个都关于「读代码」,但归属不同。</p>
 
   <div class="callout note">
@@ -189,9 +197,9 @@
 
   <h4>一个真实例子</h4>
 
-  <p>假设有个「代码 review」MCP server,它暴露一个 <code>review-pr</code> Prompt:</p>
+  <p>假设有个「代码 review」MCP server,它暴露一个 <code>review-pr</code> Prompt,接收三个参数:仓库、PR 编号是必填的,还有一个可选的「重点关注」,可以填 security、perf 或 style。</p>
 
-  <pre><code>{
+  <pre class="no-audio"><code>{
   "name": "review-pr",
   "description": "对一个 GitHub PR 做完整 code review",
   "arguments": [
@@ -201,9 +209,9 @@
   ]
 }</code></pre>
 
-  <p>用户在 Claude Desktop 输入 <code>/review-pr</code>,UI 弹出表单,用户填 <code>anthropic/foo</code> + <code>1234</code> + <code>security</code>。client 拿到参数,从 server 取出真正的 prompt 模板:</p>
+  <p>用户在 Claude Desktop 输入 <code>/review-pr</code>,UI 弹出表单,用户填好仓库、PR 编号和关注点。client 拿到参数,从 server 取出真正的 prompt 模板——模板里预先写好了一套 review 流程,等着填参数。</p>
 
-  <pre><code>"请对 {repo} 仓库的 #{pr_number} 做 code review,重点关注 {focus}。
+  <pre class="no-audio"><code>"请对 {repo} 仓库的 #{pr_number} 做 code review,重点关注 {focus}。
 步骤:
 1. 用 github_mcp::get_pr 拿到 PR diff
 2. 逐文件分析,检查 {focus} 相关问题
@@ -218,9 +226,9 @@
 
   <h3><span class="pre">12.5</span>三大原语对比 · 「谁控制」是核心区分 <span class="en">The Defining Question</span></h3>
 
-  <p class="lead">把前三节压成一张表。设计 MCP server 时,真正难的不是写代码,是想清楚每一个能力<strong>归哪一类</strong>——归错了,Claude 永远调不到、或者反过来污染工具选择。</p>
+  <p class="lead">把前三节收束成一句话。设计 MCP server 时,真正难的不是写代码,是想清楚每一个能力<strong>归哪一类</strong>——归错了,Claude 永远调不到、或者反过来污染工具选择。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr>
@@ -271,7 +279,7 @@
     </table>
   </div>
 
-  <p>这张表的<strong>「谁控制」</strong>一行,是设计 MCP server 时必须先回答的问题。看到一个能力,问自己:<em>这件事什么时候发生</em>?</p>
+  <p>说到底,<strong>「谁控制」</strong>就是设计 MCP server 时必须先回答的那个问题。看到一个能力,问自己:<em>这件事什么时候发生</em>?</p>
 
   <ul>
     <li>「模型在推理中按需用」 → Tool</li>
@@ -388,7 +396,7 @@
 
   <p>这是最常见的误解,也最容易导致后续判断全错。Function Calling 和 MCP 在<em>形式</em>上确实像——都涉及模型调用外部能力——但它们解决的问题不在一个层级:</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>维度</th><th>Function Calling</th><th>MCP</th></tr>
@@ -427,10 +435,10 @@
 
   <p>原因:Resources 的工作方式是「整份内容塞进上下文」。上下文窗口有上限(200K tokens / ~15 万中文字),一份 100 页的文档塞进来还有余量,但一个有 10 万文档的知识库——绝对塞不下。这时候 RAG 还是必要的:<em>先 embedding 检索找到 top-K 相关片段,再把片段作为 Resource 塞给模型</em>。</p>
 
-  <p>两者的真实关系是<strong>互补</strong>,不是替代:</p>
+  <p>两者的真实关系是<strong>互补</strong>,不是替代。</p>
 
   <div class="table-wrap">
-    <table>
+    <table class="no-audio">
       <thead>
         <tr><th>场景</th><th>数据规模</th><th>推荐方案</th></tr>
       </thead>
@@ -441,6 +449,10 @@
         <tr><td>千万级 / 实时数据</td><td>无论怎么裁都塞不下</td><td>RAG + 数据库 + MCP Tool 暴露查询</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="audio-only">
+    <p>怎么互补,按数据量分四档就清楚了。当前打开的那几份文件,小到占不满上下文三分之一,直接用 Resources 塞进去就行;一个项目的全部代码,塞得下但会占满窗口,这时候精选一部分走 Resources、剩下的靠一个 grep 类的 Tool 按需补;到了公司全部内部文档、百万级片段这个量级,就得上 RAG 向量检索,再用一个 MCP Tool 把检索能力包起来;而千万级甚至实时变动的数据,怎么裁都塞不进上下文,只能 RAG 加数据库,再用 MCP Tool 暴露查询接口。一句话,数据越大,越往检索那头靠。</p>
   </div>
 
   <p>更精准的说法:<strong>MCP 提供了「数据接入的协议层」,RAG 提供了「数据检索的算法层」。两层叠加,各管一段——MCP 解决「LLM 怎么调到数据」,RAG 解决「数据怎么按相关度筛选」</strong>。看到 MCP 出现就预言 RAG 死亡的判断,是混淆了协议层和算法层(第十一章详谈)。</p>

@@ -52,6 +52,10 @@
     </div>
   </div>
 
+  <div class="audio-only">
+    <p>这几条拦路的理由值得点一下:一是钱,每次问都把满窗 tokens 塞进去,API 按量计费,贵;二是慢,输入越长,首字吐出来越拖;三是注意力会被稀释,模型对塞在中间的内容容易漏看,也就是业界说的 lost-in-the-middle;再加一条最硬的——企业知识库动辄几个 GB,窗口再大也根本装不下。</p>
+  </div>
+
   <p>所以工业界采用的方案不是把所有数据塞进窗口,而是<strong>每次只塞跟当前问题最相关的几小段</strong>。怎么判断「最相关」?这就是 RAG 三步流程要回答的问题。</p>
 
   <div class="callout note">
@@ -113,6 +117,10 @@
     </table>
   </div>
 
+  <div class="audio-only">
+    <p>常见的切法大致四种,各有各的脾气。最省事的是按固定 token 数一刀刀切,每五百到一千个 token 切一段、留一点重叠,适合快速搭原型,缺点是容易把一句话拦腰斩断。第二种沿原文的自然分隔走——空行、标题、列表,结构清晰的文章报告最合适,代价是段落长短不齐。第三种按语义切,用嵌入相似度找到话题跳变的地方下刀,对话转录这类没标题的长文用得上,但慢、调参也娇气。第四种是层级分块,大块小块同时存、检索时先粗后细,适合大型知识库,代价是实现复杂、存储翻倍。</p>
+  </div>
+
   <p>实操经验:90% 的项目用<strong>按段落切 + 固定 token 上限 fallback</strong>就够好——遇到 Markdown 标题、空行、列表分隔就切,如果切出来的段落超过 1000 tokens 再按固定长度补切。这套规则简单、稳、可解释。在调过 Anthropic Skilljar 上的 RAG 实验后,基本会回归这一套。</p>
 
   <div class="callout sharp">
@@ -130,7 +138,7 @@
 
   <p>用户提问 → 把问题也用同一个嵌入模型转成向量 → 在向量库里找距离最近的 K 个 chunk(典型 K = 5 ~ 20)→ 把这些 chunk 连同原问题一起拼成 prompt 喂给 Claude → Claude 基于这些块的内容生成答案。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">STEP 1</div>
       <div class="num">Chunk</div>
@@ -153,7 +161,7 @@
     </div>
   </div>
 
-  <p>这就是一个最朴素的 RAG 系统。但工业界很少停在这里——因为光靠向量检索召回的 Top-K 经常不够准,会漏掉一些重要的精确匹配,也会带入不少噪声。下面三节讲的 BM25 混合、Reranking、Contextual Retrieval,都是在这套基础上叠的加固层。</p>
+  <p>这就是一个最朴素的 RAG 系统。但工业界很少停在这里——因为光靠向量检索召回的 Top-K 经常不够准,会漏掉一些重要的精确匹配,也会带入不少噪声。接下来三节讲的 BM25 混合、Reranking、Contextual Retrieval,都是在这套基础上叠的加固层。</p>
 
   <h3><span class="pre">11.3</span>BM25 vs 向量搜索 · 词法和语义的互补 <span class="en">Lexical vs Semantic</span></h3>
 
@@ -198,7 +206,7 @@
   <h4>所以工业标准是 Hybrid Search 混合搜索</h4>
 
   <div class="table-wrap">
-    <table>
+    <table class="no-audio">
       <thead>
         <tr>
           <th>维度</th>
@@ -273,7 +281,7 @@
 
   <h4>典型的 Rerank 流程</h4>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">RECALL</div>
       <div class="num">第一轮</div>
@@ -360,7 +368,11 @@
     </table>
   </div>
 
-  <p>注意第三行那个 49%——这是 Contextual Retrieval 那篇博客最被引用的一个数。它不是「准确率提升 49%」,而是「检索失败率下降 49%」。这两个表述有微妙差别,但都是非常显著的工程提升。叠上 reranking 把失败率压到基线的 33%——也就是<strong>本来三次找错有两次,现在变成三次找错有一次</strong>。</p>
+  <div class="audio-only">
+    <p>这里有个常被忽略的中间台阶值得记一下:还没上 Contextual,光把 BM25 混进向量搜索这一步,Anthropic 实测就已经能把检索失败率压掉约 <strong>三分之一</strong>。也就是说混合搜索本身就是一笔大头收益,Contextual 是在它之上再往下压。</p>
+  </div>
+
+  <p>注意那个 49%——这是 Contextual Retrieval 那篇博客最被引用的一个数。它不是「准确率提升 49%」,而是「检索失败率下降 49%」。这两个表述有微妙差别,但都是非常显著的工程提升。叠上 reranking 把失败率压到基线的 33%——也就是<strong>本来三次找错有两次,现在变成三次找错有一次</strong>。</p>
 
   <h4>怎么实施</h4>
 
@@ -385,7 +397,7 @@
 
   <h3><span class="pre">11.6</span>何时不该用 RAG · 反过来想 <span class="en">When NOT to Use RAG</span></h3>
 
-  <p class="lead">RAG 是个好工具,但不是所有 LLM 应用都该上。下面这几种场景上了 RAG 反而是负担——既增加复杂度,又降低答案质量。</p>
+  <p class="lead">RAG 是个好工具,但不是所有 LLM 应用都该上。有这么几种场景,上了 RAG 反而是负担——既增加复杂度,又降低答案质量。</p>
 
   <h4>场景一 · 知识库太小,直接全塞 prompt 反而更好</h4>
 
@@ -437,7 +449,7 @@
   <p>不对。Anthropic 在 Skilljar Academy 的 RAG 模块里有一组对比实验:中等规模 embedding 模型(1024 维)+ 好的 chunking + Reranker,跑出来的检索 nDCG 比大规模 embedding 模型(3072 维)+ 烂 chunking + 无 Reranker 高出一截。意思是:<em>架构选择比模型选型更重要</em>。</p>
 
   <div class="table-wrap">
-    <table>
+    <table class="no-audio">
       <thead>
         <tr>
           <th>配置组合</th>
@@ -473,7 +485,7 @@
     </table>
   </div>
 
-  <p>注意第二行和第三行——把嵌入模型从中等升到豪华,准确率只升 4%;但从烂工程升到好工程,准确率升 33%。这就是「工程比模型重要」最直观的体现。预算有限的团队应该<strong>先把工程做好,再考虑升级模型</strong>;反过来做,投入产出比极差。</p>
+  <p>把这两组对照拎出来看:同样是好工程,把嵌入模型从中等升到豪华,准确率只升 4%;但反过来,同样用大模型,从烂工程升到好工程,准确率能升 33%。这就是「工程比模型重要」最直观的体现。预算有限的团队应该<strong>先把工程做好,再考虑升级模型</strong>;反过来做,投入产出比极差。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 一句话总结这三条反共识</div>

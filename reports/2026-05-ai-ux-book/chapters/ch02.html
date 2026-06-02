@@ -33,7 +33,7 @@
 
   <p class="lead">两个产品乍看一样——都是「灰色字预测,Tab 接受」。但 UX 的本质完全不同。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr>
@@ -114,9 +114,9 @@
 
   <p class="lead">滴滴:点「叫车」→ 系统派单 → 司机接单 → 司机到达 → 上车。每一步都有明确的状态显示,每一步用户都能取消。Cursor Composer:你说「帮我把这个组件的状态管理从 useState 改成 Zustand,并且更新所有使用它的地方」,Composer 开始执行:</p>
 
-  <div class="callout note">
+  <div class="callout note no-audio">
     <div class="label">i Composer 的多步执行典型流程</div>
-    <pre style="font-family: var(--ff-mono, 'JetBrains Mono', monospace); font-size: 13px; line-height: 1.7; margin: 0;">
+    <pre class="no-audio" style="font-family: var(--ff-mono, 'JetBrains Mono', monospace); font-size: 13px; line-height: 1.7; margin: 0;">
 ✓ 读取 components/UserProfile.tsx
 ✓ 读取 components/UserList.tsx
 ✓ 读取 store/userStore.ts
@@ -157,7 +157,7 @@
 
   <h3><span class="pre">2.6</span>五个特质 · 对应 Part II 的 8 个议题</h3>
 
-  <p class="lead">把上面 5 组对比提炼出的 5 个特质放在一起,可以直接映射到 Part II 的章节安排。</p>
+  <p class="lead">前面 5 组对比提炼出的这 5 个特质,正好能一一对上 Part II 的章节安排。</p>
 
   <div class="table-wrap">
     <table>
@@ -196,6 +196,10 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="audio-only">
+    <p>这五个特质各自接着哪一章,这里一条线串起来,后面想深读的时候照着走就行:验证机制那条,去第三章<strong>信任与幻觉</strong>;意图被错解的退路,落在第四章<strong>可控性悖论</strong>和第六章<strong>错误兜底</strong>;UI 从资产变实例,是第五章<strong>生成式 UI</strong>;多步自动执行的中断和回滚,留给第八章<strong>Agent 的边界感</strong>;记忆这条散见好几章,重点在第七章<strong>提示词作为新交互层</strong>。</p>
   </div>
 
   <p>另外两章(第 9 章多模态、第 10 章 AI 人格)不是从这 5 个对比中长出来的,而是从「AI 产品的体感」长出来的——当 AI 能听能看能说话有性格,UX 议题就从「功能」拓展到「体验关系」。</p>

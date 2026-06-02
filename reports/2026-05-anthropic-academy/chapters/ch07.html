@@ -24,7 +24,7 @@
 
   <p>EPCC 的本质是把第 2 章的「Gather Context → Take Action → Verify Work」循环,沿时间轴拆成<strong>两个只读阶段 + 两个写入阶段</strong>。只读阶段在前,写入阶段在后,中间留一个让你审计划的 checkpoint。结构上看,像极了软件工程里「先 design review 再写代码」的传统流程——区别是这一切由你跟 Claude 一起在 30 分钟内走完,不需要拉会议。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">PHASE 1</div>
       <div class="num">Explore</div>
@@ -47,9 +47,9 @@
     </div>
   </div>
 
-  <p>每一步的工具组合不一样,这是 EPCC 跟普通 prompt 工程最大的不同——它不是「换一种问法」,是<em>换一套工具权限</em>。下面这张表是后面几节的索引,看不懂没关系,后面会逐项讲。</p>
+  <p>每一步的工具组合不一样,这是 EPCC 跟普通 prompt 工程最大的不同——它不是「换一种问法」,是<em>换一套工具权限</em>。这一点后面几节会逐项讲透。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>阶段</th><th>主要工具</th><th>能做什么</th><th>不能做什么</th><th>对应 Approval Mode</th></tr>
@@ -63,7 +63,7 @@
     </table>
   </div>
 
-  <p>这张表里有一条隐含规律值得先点出来:<strong>权限是逐阶段放开的,不是一上来全部敞开</strong>。Explore 和 Plan 阶段 Claude 没有任何写入权,这是 Plan Mode 本身的设计——Anthropic 在 2025 年中期发布 Plan Mode 时博客里反复强调:「只读」不是限制,是<em>把规划阶段从执行阶段里强行剥离出来</em>的工程手段 [Anthropic Plan Mode 2025]。</p>
+  <p>这里有一条隐含规律值得先点出来:<strong>权限是逐阶段放开的,不是一上来全部敞开</strong>。Explore 和 Plan 阶段 Claude 没有任何写入权,这是 Plan Mode 本身的设计——Anthropic 在 2025 年中期发布 Plan Mode 时博客里反复强调:「只读」不是限制,是<em>把规划阶段从执行阶段里强行剥离出来</em>的工程手段 [Anthropic Plan Mode 2025]。</p>
 
   <div class="callout note">
     <div class="label">i 跟第 3 章「4D 框架」的对应</div>
@@ -127,7 +127,7 @@
 
   <h4>Plan 阶段的产出物长什么样</h4>
 
-  <p>一份合格的 plan,至少包含下面几块。这不是 Anthropic 强制的格式,但行业里逐渐沉淀的最佳实践大致如此:</p>
+  <p>一份合格的 plan,至少包含五块。这不是 Anthropic 强制的格式,但行业里逐渐沉淀的最佳实践大致如此:</p>
 
   <div class="table-wrap">
     <table>
@@ -144,7 +144,11 @@
     </table>
   </div>
 
-  <p>这五项里,<strong>「影响面」和「步骤分解」是你审计划时最该盯的两块</strong>。影响面告诉你 Claude 打算碰多少东西——如果一个本该 2 个文件的任务它列了 12 个文件,大概率它误解了任务;步骤分解告诉你它是不是想清楚了——如果步骤里出现「重写整个 X 模块」这种含糊词,你立刻打回去要它再拆细。</p>
+  <div class="audio-only">
+    <p>这五块里有三块容易被忽略,但恰恰是 plan 含金量的所在。头一块是<strong>问题陈述</strong>——让 Claude 用自己的话把任务复述一遍,你立刻能看出它有没有理解错,而它确实常常理解错。再一块是<strong>风险和边界</strong>,逼它说清楚哪里可能出问题、哪些地方它打算不动,这是在检验它有没有意识到坑。最后一块是<strong>验证策略</strong>,提前商定用什么测试、什么命令来收尾,等于把 Commit 阶段的及格线在动手之前就先谈拢。</p>
+  </div>
+
+  <p>剩下两项里,<strong>「影响面」和「步骤分解」是你审计划时最该盯的两块</strong>。影响面告诉你 Claude 打算碰多少东西——如果一个本该 2 个文件的任务它列了 12 个文件,大概率它误解了任务;步骤分解告诉你它是不是想清楚了——如果步骤里出现「重写整个 X 模块」这种含糊词,你立刻打回去要它再拆细。</p>
 
   <h4>Plan 阶段你做的三个决定</h4>
 
@@ -217,7 +221,7 @@
 
   <h4>Commit 阶段的标准动作</h4>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">STEP 1</div>
       <div class="num">跑测试</div>
@@ -278,9 +282,9 @@
 
   <p class="lead">前面几节零散提到了 Plan Mode、Manual、Auto-Accept 三种模式,这一节把它们跟 EPCC 阶段的对应关系系统讲清楚。这是 Claude Code 使用上最容易混乱、也最值得搞清楚的一块。</p>
 
-  <p>三种 Approval Mode 不是「越自由越好」的连续光谱,而是<em>各有专属场景</em>的三种工具。下面这张表是核心:</p>
+  <p>三种 Approval Mode 不是「越自由越好」的连续光谱,而是<em>各有专属场景</em>的三种工具,核心区别就在三件事:Claude 在每种模式下能动什么、对应 EPCC 的哪一步、以及什么时候才该用。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>Approval Mode</th><th>Claude 能做什么</th><th>对应 EPCC 阶段</th><th>什么时候该用</th></tr>

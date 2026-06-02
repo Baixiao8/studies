@@ -20,11 +20,11 @@
 
   <h3><span class="pre">13.1</span>四种模式全景 · <span class="en">The Map of Four</span></h3>
 
-  <p class="lead">先把四种模式摆到一张图上。理解了这张图,你看任何一个号称「多 Agent」的系统,都能立刻判断它属于哪一类、可能在哪里出问题。</p>
+  <p class="lead">先把四种模式整体过一遍。把它们记在脑子里,你听到任何一个号称「多 Agent」的系统,都能立刻判断它属于哪一类、可能在哪里出问题。</p>
 
-  <p>Anthropic 在博客里给四种模式画了示意图,核心区别在于<strong>「谁决定下一步」</strong>和<strong>「步骤是否预设」</strong>这两个维度:</p>
+  <p>Anthropic 在博客里把四种模式摊开讲,核心区别就落在两个维度上——<strong>「谁决定下一步」</strong>,以及<strong>步骤是不是开发者预先设好的</strong>。抓住这两点,后面几节会把四种模式一个一个拆开。</p>
 
-  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  <pre class="no-audio" style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
   ① PARALLELIZATION (并行)
   ─────────────────────────
                   ┌─ agent A ─┐
@@ -50,7 +50,7 @@
        (单 agent 自己在循环里决定下一步用哪个工具)
   </pre>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr>
@@ -95,7 +95,7 @@
 
   <h4>典型场景</h4>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">BATCH</div>
       <div class="num">批量分析</div>
@@ -141,9 +141,9 @@
 
   <p>判断标准:<strong>任务能被切成几个清晰的、依次依赖的阶段,每个阶段单独写 prompt 比塞进一个大 prompt 效果更好</strong>。</p>
 
-  <p>Anthropic 在博客里给的经典例子是<strong>多语言营销文案生成流水线</strong> [Anthropic 2024c]:</p>
+  <p>Anthropic 在博客里给的经典例子是<strong>多语言营销文案生成流水线</strong> [Anthropic 2024c]:先写英文初稿,再逐级翻译、本地化润色、最后格式化输出,一步接一步往下走。</p>
 
-  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  <pre class="no-audio" style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
   阶段 1 · 写英文初稿        →  阶段 2 · 检查初稿是否符合品牌调性
                               ↓ (gate: 不符合就停)
   阶段 3 · 翻译成目标语言     →  阶段 4 · 本地化润色 + 文化检查
@@ -151,7 +151,7 @@
   阶段 5 · 最终格式化输出
   </pre>
 
-  <p>注意里面的「gate(关卡)」——某些步骤之间可以加一个判断:这一步的输出合格吗?不合格就回退或停止。这是 Chaining 的一个重要变种,Anthropic 把它叫做 <em>Prompt Chaining with Gates</em>。</p>
+  <p>这条流水线里还藏着一个关键设计——<strong>gate(关卡)</strong>:某些步骤之间可以加一个判断,这一步的输出合格吗?不合格就回退或停止。这是 Chaining 的一个重要变种,Anthropic 把它叫做 <em>Prompt Chaining with Gates</em>。</p>
 
   <h4>典型场景</h4>
 
@@ -191,7 +191,7 @@
 
   <h4>典型场景</h4>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">CS</div>
       <div class="num">客服分流</div>
@@ -228,7 +228,7 @@
 
   <p>回头看 <a href="#s2">第 2 章</a> 讲过的 Agentic Loop:Gather Context → Take Action → Verify Work → 回到第一步。Agent 模式就是把这个循环交给 LLM 自己跑——不预设循环次数、不预设具体步骤、不预设用哪个工具,完全让 LLM 在每一轮根据当前观察决定下一步。</p>
 
-  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  <pre class="no-audio" style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
   while not done:
       # LLM 看当前上下文,自己决定下一步干什么
       next_step = llm.decide(context, available_tools)
@@ -244,7 +244,7 @@
       context.append(result)
   </pre>
 
-  <p>注意这个循环的「自主性」体现在:Agent 自己决定<em>用不用工具、用哪个工具、用了之后看到结果再决定下一个工具、什么时候判断任务完成、什么时候放弃</em>。没有任何一步是开发者预设的——开发者只给了工具集和目标。</p>
+  <p>这个循环的「自主性」具体体现在:Agent 自己决定<em>用不用工具、用哪个工具、用了之后看到结果再决定下一个工具、什么时候判断任务完成、什么时候放弃</em>。没有任何一步是开发者预设的——开发者只给了工具集和目标。</p>
 
   <h4>典型场景</h4>
 
@@ -302,9 +302,9 @@
 
   <h4>决策流程</h4>
 
-  <p>遇到一个新需求,Anthropic 建议按下面这个流程走:</p>
+  <p>遇到一个新需求,Anthropic 建议你顺着一条从简到繁的阶梯往下问,能在哪一级停住就停住:</p>
 
-  <pre style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
+  <pre class="no-audio" style="font-family: ui-monospace, monospace; font-size: 13px; line-height: 1.6; background: var(--bg-soft, #f8f8f6); padding: 16px; border-radius: 6px; overflow-x: auto;">
   Step 1: 这事一次 LLM 调用能搞定吗?
           能  → 用单次调用 + 好的 prompt,不要搞复杂
           不能 → ↓
@@ -326,6 +326,10 @@
           否  → 回 Step 2 重新拆
   </pre>
 
+  <div class="audio-only">
+    <p>这条阶梯一共五问,从最省事的往下挪:第一,一次 LLM 调用加点上下文能不能搞定?能就到此为止,别折腾。搞不定,再问第二,任务能不能拆成几个互不依赖的子任务?能,就并行。还不行,第三,能不能拆成几个一环扣一环、依次依赖的阶段?能,就串成链式。再不行,第四,输入能不能清楚分成几类、每类该用不同的处理?能,就上路由。前面四问全摇头,才轮到第五问——这事的路径是不是真的没法预先定下来?是,才动用自主代理,而且得先把预算和监控备好。这五问的次序本身就是答案:能在越靠前的那一级停住,系统就越稳、越省、越好查。</p>
+  </div>
+
   <div class="callout ops">
     <div class="label">✓ 一个实操判断 · 「能画出流程图吗」</div>
     <p>遇到一个任务,在动手前试着把它的流程画出来——如果你能在白板上画出清晰的流程图(框 + 箭头),那就是 Workflow,选 Parallel / Chain / Route 中的一种。如果画不出来——任务路径真的会随情况变化、没法预先标出来——才是 Agent。这条标准比任何复杂权衡都直接,Anthropic 内部工程师推 prototype 时常用。</p>
@@ -346,9 +350,9 @@
 
   <h3><span class="pre">13.7</span>四种模式的失败模式总览 · <span class="en">Failure Modes</span></h3>
 
-  <p class="lead">前面每节都讲了各自的失败模式,这一节做个总览,方便你以后回查。</p>
+  <p class="lead">前面每节都讲了各自的失败模式,把它们并到一处看,会发现一个更要紧的共性。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>模式</th><th>典型失败</th><th>预防机制</th></tr>

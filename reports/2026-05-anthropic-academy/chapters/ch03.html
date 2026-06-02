@@ -22,7 +22,7 @@
 
   <p class="lead">先把四件事一次说清,后面再分别展开。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">D1</div>
       <div class="num">Delegation</div>
@@ -69,7 +69,7 @@
 
   <p>AI 输出会错。任何把 AI 当生产环节的人,先要算出"错了之后,谁来兜底,代价是什么"。这个代价决定了 Delegation 的方向。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>失败成本</th><th>例子</th><th>建议姿势</th></tr>
@@ -83,7 +83,7 @@
     </table>
   </div>
 
-  <p>这张表的关键不是"哪个级别能不能用 AI",是<strong>每个级别人介入的深度不同</strong>。低成本任务人可以只做事后抽检,极高成本任务人要在每个节点签字。<a href="#s1">第 1 章</a> 讲过的 Schwartz 律师案,本质就是 Delegation 错位——他把"高失败成本"的工作(法庭引用真实判例)按"低失败成本"的姿势处理(让 AI 自由发挥、不验证)。</p>
+  <p>这里的关键不是「哪个级别能不能用 AI」,是<strong>每个级别人介入的深度不同</strong>。低成本任务人可以只做事后抽检,极高成本任务人要在每个节点签字。<a href="#s1">第 1 章</a> 讲过的 Schwartz 律师案,本质就是 Delegation 错位——他把"高失败成本"的工作(法庭引用真实判例)按"低失败成本"的姿势处理(让 AI 自由发挥、不验证)。</p>
 
   <h4>子问题二 · 这个任务有没有可审性?</h4>
 
@@ -129,7 +129,7 @@
 
   <h4>Description 的"好做法 vs 坏做法"对比</h4>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>场景</th><th>坏做法</th><th>好做法</th></tr>
@@ -155,7 +155,7 @@
 
   <p>看一段 AI 输出对不对,要在三个独立维度做判断,缺一个就漏掉一类错误。</p>
 
-  <div class="number-strip">
+  <div class="number-strip no-audio">
     <div class="item">
       <div class="label">FACT</div>
       <div class="num">事实层</div>
@@ -188,7 +188,7 @@
 
   <h4>Discernment 的"好做法 vs 坏做法"对比</h4>
 
-  <div class="table-wrap">
+  <div class="table-wrap no-audio">
     <table>
       <thead>
         <tr><th>场景</th><th>坏做法</th><th>好做法</th></tr>
@@ -295,6 +295,10 @@
         <tr><td>团队成员普遍说不出这个任务的"评判标准"</td><td>这件事本质不可审,Delegation 要谨慎</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="audio-only">
+    <p>这里还藏着几条好用的对应关系,值得记一下:短循环里冒出来的某个信号,往往是在提醒你去动长循环的某个旋钮。如果总在同一类任务上反复辨别、老是揪出事实层的错,这通常不是再写细一点 prompt 能解决的,该给它配一套不依赖 AI 自证的外部核查——检索增强、引用回链、或者让它去调真实工具。如果意图已经描述得又长又细、AI 还是飘,先别怀疑自己,多半是模型挑小了(拿轻量模型干了该上重型模型的活),或者上下文塞得太满、关键信息沉到了中间。而要是团队里大半人压根说不出某个任务「怎样才算合格」,那就别急着交给 AI——说不出验收标准,等于没人能接住它的错。</p>
   </div>
 
   <div class="callout ops">
