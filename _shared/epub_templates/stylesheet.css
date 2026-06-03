@@ -1,7 +1,19 @@
 @charset "UTF-8";
 
-/* EPUB 内部样式 · 简化 Newsprint 报刊风,适配各 reader
+/* EPUB 内部样式 · v2 简化 Newsprint 报刊风,适配各 reader
    注:EPUB reader 对 CSS 支持差异大,只用核心、稳定的属性 */
+
+/* ─── 设计变量(从网页版 :root 移植,供 inline style / SVG 里 var(--c-xxx) 解析)─── */
+:root {
+  --ink: #1a1a1a; --ink-soft: #4a4a4a; --ink-faint: #888888;
+  --line: #c4bca4; --line-strong: #1a1a1a;
+  --bg: #f0ebdd; --bg-card: #ebe5d3; --bg-deep: #e1d9bf;
+  --accent: #a8423b;
+  --c-theory: #a8423b; --c-injury: #a8423b; --c-race: #a8423b;
+  --c-nutrition: #7a5230; --c-session: #7a5230;
+  --c-physio: #1f3a5f; --c-post: #1f3a5f;
+  --c-psych: #5c3a6b; --c-recovery: #3a6b5c; --c-strength: #4a6b3a;
+}
 
 body {
   font-family: -apple-system, "PingFang SC", "Microsoft YaHei",
@@ -261,4 +273,55 @@ pre {
   color: #6e6e6e;
   font-style: italic;
   margin: 0.5em 0;
+}
+
+/* ─── Number strip(横排卡片;窄屏 reader 自动堆叠为单列)─── */
+.number-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  margin: 1.2em 0;
+}
+.number-strip .item {
+  flex: 1 1 40%;
+  min-width: 8em;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #faf7ef;
+  padding: 0.7em 0.8em;
+}
+.number-strip .item .label {
+  font-family: monospace;
+  font-size: 0.72em;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+.number-strip .item .num {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0.15em 0 0.3em;
+}
+.number-strip .item .sub {
+  font-size: 0.85em;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* ─── 章节标题里的英文副标题(.section-h .en)─── */
+.section-h .en {
+  display: block;
+  font-size: 0.5em;
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: 0.01em;
+  margin-top: 0.35em;
+}
+
+/* ─── 小节编号(可阅读版保留;听书版已删)─── */
+h3 .pre {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 0.4em;
 }

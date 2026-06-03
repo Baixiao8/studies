@@ -1,23 +1,31 @@
 #!/usr/bin/env python3
 """
-BUILD EPUB · v1.0 · 把 reports/<slug>/index.html 装配成 EPUB 电子书
+BUILD EPUB · v2.0 · 把 reports/<slug>/index.html 装配成 EPUB 电子书
+
+三种模式:
+    (默认)      可阅读版 reading-first —— 保留视觉(callout / number-strip / table /
+                inline SVG)+ 书本排版,删听书文字替身。Apple Books / 微信读书里安静读。
+    --audio     听书版 —— 剔视觉块、留 .audio-only 文字替身、净化 TTS 杂音。跑步听书用。
+    --visual    看版 —— 用 Playwright 把 SVG / table 截成 PNG(给不支持 inline SVG 的老 reader)。
 
 用法:
-    tools/.venv/bin/python3 _shared/build_epub.py reports/<slug>
+    python3 _shared/build_epub.py reports/<slug>            # 可阅读版(默认,主产物)
+    python3 _shared/build_epub.py reports/<slug> --audio    # 听书版
+    python3 _shared/build_epub.py reports/<slug> --visual   # 看版(需 playwright)
 
 输入:
     reports/<slug>/index.html       (build.py 装配后的完整 inline HTML)
     reports/<slug>/assets/ch*-hero.jpg
 
 输出:
-    reports/<slug>/<slug>.epub       (1-15 MB,完整书本版 · 含 SVG/table 渲染 PNG)
+    reports/<slug>/<slug>.epub          (可阅读版,主产物)
+    reports/<slug>/<slug>-audio.epub    (--audio)
+    reports/<slug>/<slug>-visual.epub   (--visual)
 
-完整功能:
+共同功能:
   · 章节内容(h1.section-h + h3 + p + callout + tldr + chip)保留
   · 章节封面图 hero JPG 嵌入
-  · inline SVG 用 Playwright 渲染成 PNG 嵌入
-  · <table> 用 Playwright 渲染成 PNG 嵌入
-  · 多级 TOC(章 + 节)→ 微信读书 / Apple Books 听书可跳节点
+  · 多级 TOC(章 + 节)→ 微信读书 / Apple Books 可跳节点
   · 移除运行时 UI(sticky-nav / mini-toc / reader 按钮 / progress-bar)
 """
 
@@ -59,7 +67,7 @@ REMOVE_SELECTORS = [
 ]
 
 
-def main(report_dir_arg, visual=False, output_name=None):
+def main(report_dir_arg, audio=False, visual=False, output_name=None):
     report_dir = Path(report_dir_arg).resolve()
     if not report_dir.is_dir():
         sys.exit(f"[build_epub] 报告目录不存在: {report_dir}")
@@ -69,7 +77,8 @@ def main(report_dir_arg, visual=False, output_name=None):
         sys.exit(f"[build_epub] 找不到 index.html(请先跑 _shared/build.py): {index_html}")
 
     slug = report_dir.name
-    print(f"\n[build_epub] 处理 {slug}")
+    mode_label = '听书版' if audio else ('看版' if visual else '可阅读版')
+    print(f"\n[build_epub] 处理 {slug} · 模式={mode_label}")
 
     # 1. 解析 HTML
     print(f"  [1/6] 解析 HTML ...")
@@ -89,14 +98,16 @@ def main(report_dir_arg, visual=False, output_name=None):
         # 收集 inline CSS(用于 SVG/table 渲染时正确解析 var(--c-theory) 等)
         css_content = collect_inline_css(soup)
 
-        # 2. 渲染 SVG / table 为 PNG(默认听书优化跳过,免 Playwright;--visual 才渲染)
+        # 2. SVG / table 处理:--visual 才用 Playwright 截 PNG;
+        #    可阅读版保留 inline SVG / HTML table(epub3 原生支持),听书版后续剔除
         if visual:
             print(f"  [2/6] 用 Playwright 渲染 SVG / table 为 PNG ...")
             figure_assets = render_figures(chapters_data, css_content, images_dir)
             print(f"        渲染 {len(figure_assets)} 张图")
         else:
             figure_assets = []
-            print(f"  [2/6] 听书优化 · 跳过 SVG / table 渲染")
+            _note = '听书版 · 剔除视觉块' if audio else '可阅读版 · 保留 inline SVG / table'
+            print(f"  [2/6] 跳过 PNG 渲染 ({_note})")
 
         # 3. 拷贝 chapter hero JPG
         print(f"  [3/6] 拷贝章节封面图 ...")
@@ -108,7 +119,7 @@ def main(report_dir_arg, visual=False, output_name=None):
         chapter_paths = []
         for idx, ch in enumerate(chapters_data, 1):
             path = tmpdir_path / f'chapter{idx:02d}.xhtml'
-            path.write_text(build_chapter_xhtml(ch, idx, audio=not visual), encoding='utf-8')
+            path.write_text(build_chapter_xhtml(ch, idx, audio=audio), encoding='utf-8')
             chapter_paths.append(path)
 
         # 5. 生成 nav.xhtml + content.opf
@@ -124,7 +135,15 @@ def main(report_dir_arg, visual=False, output_name=None):
 
         # 6. 打包 EPUB
         print(f"  [6/6] 打包 EPUB zip ...")
-        output = report_dir / (output_name or f'{slug}.epub')
+        if output_name:
+            out_name = output_name
+        elif audio:
+            out_name = f'{slug}-audio.epub'
+        elif visual:
+            out_name = f'{slug}-visual.epub'
+        else:
+            out_name = f'{slug}.epub'   # 可阅读版 = 主产物
+        output = report_dir / out_name
         package_epub(
             output=output,
             opf_path=opf_path,
@@ -419,7 +438,10 @@ def clean_audio_noise(section_clone):
 
 
 def build_chapter_xhtml(ch, idx, audio=False):
-    """生成单章 xhtml(audio=True 走听书版:删冗余视觉块/参考文献,留替身)"""
+    """生成单章 xhtml
+    audio=True  听书版:删视觉块 .no-audio / 参考文献 .ref / 编号 .pre,留 .audio-only 替身 + 净化 TTS
+    audio=False 看/读版:反过来——保留视觉块与编号,删 .audio-only 文字替身(免与视觉块重复)
+    """
     section = ch['section_html']
 
     # clone 一份做清理,避免 mutate 原 soup
@@ -432,6 +454,9 @@ def build_chapter_xhtml(ch, idx, audio=False):
     if audio:
         # 听书版额外移除:人工标记的冗余视觉块 .no-audio、参考文献 .ref
         remove += ['.no-audio', '.ref', '.pre']  # .pre=小节编号(★.1/4.2),听书念标题即可,不念编号
+    else:
+        # 看/读版:删听书文字替身,避免与保留下来的视觉块内容重复
+        remove += ['.audio-only']
     for selector in remove:
         for el in section_clone.select(selector):
             el.decompose()
@@ -560,7 +585,9 @@ def package_epub(output, opf_path, nav_path, chapter_paths, images_dir):
 
 if __name__ == '__main__':
     argv = sys.argv[1:]
-    visual = '--visual' in argv      # 默认听书优化;--visual 产带图看版(需 playwright)
+    audio = '--audio' in argv        # 听书版(剔视觉、留替身、净化 TTS)
+    visual = '--visual' in argv      # 看版(Playwright 截 SVG / table 为 PNG,需 playwright)
+    # 默认(无 flag)= 可阅读版 reading-first
     output_name = None
     if '-o' in argv:
         i = argv.index('-o')
@@ -568,6 +595,8 @@ if __name__ == '__main__':
         del argv[i:i + 2]
     pos = [a for a in argv if not a.startswith('-')]
     if len(pos) != 1:
-        sys.exit("用法: python3 _shared/build_epub.py reports/<slug> [-o 输出名.epub] [--visual]\n"
-                 "  默认产听书优化版(免 playwright);--visual 产带图看版")
-    main(pos[0], visual=visual, output_name=output_name)
+        sys.exit("用法: python3 _shared/build_epub.py reports/<slug> [-o 输出名.epub] [--audio|--visual]\n"
+                 "  默认产可阅读版(免 playwright);--audio 听书版;--visual 带图看版(需 playwright)")
+    if audio and visual:
+        sys.exit("[build_epub] --audio 与 --visual 互斥")
+    main(pos[0], audio=audio, visual=visual, output_name=output_name)

@@ -4,9 +4,9 @@
     "points": [
       "<strong>核心命题</strong>:AI 产品的成败,越来越多地取决于 UX,而不是模型本身——从 ChatGPT 比 GPT-3 网页版火一万倍可以看到。",
       "<strong>四个立场</strong>:UI 让位于意图层 · 信任比可用性更重要 · 错误是主菜不是边角料 · 设计师是新一代系统工程师。",
-      "<strong>本书不写</strong>:模型训练 / 千图AI 功能细节 / AI 商业模式 / 视觉规范 / 全景产品评测。",
-      "<strong>本书写</strong>:AI 产品的 UX 新难题(Part II)· 头部产品怎么解(Part III)· 经典原则怎么改写(Part IV 第 14 章)· 怎么用到千图AI(末章)。",
-      "<strong>读法</strong>:线性读 4-6 小时 / 问题读跳到对应章节 / 案例读从 Part III 倒推。如果只看一章,看末两章千图AI 体检与路线图。"
+      "<strong>本书不写</strong>:模型训练 / 某类产品的功能细节 / AI 商业模式 / 视觉规范 / 全景产品评测。",
+      "<strong>本书写</strong>:AI 产品的 UX 新难题(Part II)· 头部产品怎么解(Part III)· 经典原则怎么改写(Part IV 第 14 章)· 怎么落到一类具体产品(末章)。",
+      "<strong>读法</strong>:线性读 4-6 小时 / 问题读跳到对应章节 / 案例读从 Part III 倒推。如果只看一章,看末两章的体检与路线图。"
     ]
   },
   "s1": {
@@ -66,7 +66,7 @@
       "<strong>4 种兜底机制</strong>:Retry · Partial Recovery · Fallback to Human · Skip &amp; Acknowledge——按错误类型选合适机制。",
       "<strong>错误文案 6 条铁律</strong>:不说 Something went wrong / 不暴露错误码给用户 / 主语用'我'不用'你'/ 下一步动作必须明确 / 可恢复错误不用 modal / 同一错误不要 spam。",
       "<strong>过度承诺的产品错误容忍度低</strong>:Rabbit R1 / Humane Pin 因预期落差被骂死;诚实预期的产品(早期 Claude)出错宽容度高。",
-      "<strong>对千图AI</strong>:错误分类提示 + 局部重绘入口 + 排队预估时间——是 3 个最优 ROI 改进点。"
+      "<strong>给这类产品</strong>:错误分类提示 + 局部重绘入口 + 排队预估时间——是 3 个最优 ROI 改进点。"
     ]
   },
   "s7": {
@@ -74,7 +74,7 @@
     "points": [
       "<strong>prompt 不是输入框</strong>,是新交互层——从命令到对话到意图的三段史。",
       "<strong>分三层</strong>:即时输入(placeholder + slash)+ 用户偏好(custom instructions / Memory)+ 产品策略(system prompt)。",
-      "<strong>Placeholder 8 种写法</strong>:产品越通用越要'放空',越垂直越要'具体例子'——千图AI 适合'试试:[图像 prompt 例子]'。",
+      "<strong>Placeholder 8 种写法</strong>:产品越通用越要'放空',越垂直越要'具体例子'——这类垂直产品适合'试试:[图像 prompt 例子]'。",
       "<strong>Slash command 4 原则</strong>:不超过 10 个 / 命令名用动词 / 必须有 autocomplete / 每条要 hover 说明。",
       "<strong>prompt 失败 4 种兜底</strong>:主动追问 · 注释假设 · prompt 改写建议 · 对比生成——这 4 个组合降低用户 prompt 焦虑最有效。"
     ]
@@ -106,7 +106,7 @@
       "<strong>3 个标杆对比</strong>:Claude 克制+共情 / ChatGPT 直接给方案 / Grok sarcastic 反建制——每种对应不同用户群,没有谁对谁错。",
       "<strong>人格是怎么烙的</strong>:system prompt(策略层)+ RLHF(训练标注员)+ Constitutional AI(自评宪法)+ Fine-tuning(语料微调)。",
       "<strong>情感 3 条边界</strong>:不让 AI 主动表达自我感受 / 不提供治疗式回应 / 不鼓励过度依赖——Sydney 事件是反面教材。",
-      "<strong>对千图AI</strong>:专业克制 + 直接拒绝 + 给替代方案 + 主动给变体——不要做 ChatGPT 式过度热情。"
+      "<strong>给这类产品</strong>:专业克制 + 直接拒绝 + 给替代方案 + 主动给变体——不要做 ChatGPT 式过度热情。"
     ]
   },
   "s11": {
@@ -116,7 +116,7 @@
       "<strong>没有全能冠军</strong>:每家在某个维度做到 ★★★★★,其他维度行业平均——这就是'极致单点'策略。",
       "<strong>核心 insight 1</strong>:用户产物决定 UX 形态——v0 输出代码长得像 IDE,Krea 输出探索长得像画布。",
       "<strong>核心 insight 2</strong>:人格匹配用户群——专业用户偏好 Claude 克制,大众用户偏好 ChatGPT 直接。",
-      "<strong>千图AI 启示</strong>:选'中文场景模板'(学即梦)+ '信任设计'(学 Claude)做极致,其他维度做到行业平均即可。"
+      "<strong>给这类产品的启示</strong>:选'中文场景模板'(学即梦)+ '信任设计'(学 Claude)做极致,其他维度做到行业平均即可。"
     ]
   },
   "s12": {
@@ -136,7 +136,7 @@
       "<strong>Rabbit R1 失败根因</strong>:把用户痛点判断错(用户讨厌的不是'打开 APP'而是'被推送骚扰'),后面所有 UX 都白做。",
       "<strong>Humane Pin 失败根因</strong>:押宝'反屏幕'哲学,但视觉信息密度比语音高 10 倍,用户不接受。",
       "<strong>Sydney 失败根因</strong>:给消费级 AI 设计'有趣人格'= 不可预测 = 失控风险——商业 AI 不要追求人格惊喜。",
-      "<strong>4 类失败模式</strong>:过度承诺 / 能力虚标 / UX 漏掉关键场景 / 缺乏边界感——千图AI 8 条避坑清单见正文。"
+      "<strong>4 类失败模式</strong>:过度承诺 / 能力虚标 / UX 漏掉关键场景 / 缺乏边界感——这类产品的 8 条避坑清单见正文。"
     ]
   },
   "s14": {
@@ -150,23 +150,23 @@
     ]
   },
   "s15": {
-    "title": "千图AI 体检要点 · FACT-CHECK",
+    "title": "自我体检框架要点",
     "points": [
-      "<strong>基于外部观察的诊断</strong>,白笑团队必须验证现状描述。整体得分约 6.5/10,跟同期国内产品同水位。",
-      "<strong>5 条主要缺口</strong>:信任设计(5/10)/ 错误兜底(5/10)/ prompt 体验(6/10)/ 透明度(5/10)/ 上下文资产(4/10)——ROI 最高的改进方向。",
-      "<strong>4 条优势</strong>:逃生通道(7/10)/ 预览态(7/10)/ 撤销底线(7/10)/ 让人更聪明(7/10)——产品护城河,继续保持。",
-      "<strong>4 个核心场景</strong>:生成新图缺场景模板 / 改图缺局部重绘入口 / 历史缺派生树 / 失败缺分类提示——这是下一章路线图的输入。",
-      "<strong>下一步</strong>:团队内部走查 + 跟实际产品 / 商业团队对齐,再决定哪些建议进路线图。"
+      "<strong>这是一套通用诊断框架</strong>,把它当体检表而不是某款产品的成绩单,落到具体产品请结合实际验证。这类产品整体多在及格线上下,差距在能不能把一两条做到顶尖。",
+      "<strong>5 类常见缺口</strong>:信任设计(约 5/10)/ 错误兜底(约 5/10)/ prompt 体验(约 6/10)/ 透明度(约 5/10)/ 上下文资产(约 4/10)——ROI 最高的改进方向。",
+      "<strong>4 类典型强项</strong>:逃生通道(约 7/10)/ 预览态(约 7/10)/ 撤销底线(约 7/10)/ 让人更聪明(约 7/10)——护城河,继续保持。",
+      "<strong>4 个核心场景</strong>:生成新图缺场景模板 / 改图缺局部重绘入口 / 历史缺派生树 / 失败缺分类提示——这是下一章演进路径的输入。",
+      "<strong>下一步</strong>:照这张体检表做一次内部走查,结合自己产品的实际数据验证,再决定哪些进演进计划。"
     ]
   },
   "s16": {
-    "title": "千图AI 路线图要点 · FACT-CHECK",
+    "title": "演进路径要点",
     "points": [
-      "<strong>90 天 5 个 Quick Win</strong>:中文场景模板 + 错误分类 + 模型透明 + AI 自评 + 局部重绘入口——工程量小,用户感知强。",
-      "<strong>180 天 3 个中型改造</strong>:派生树历史 + Memory 偏好 + Projects 概念——填上下文资产缺口。",
-      "<strong>365 天 2 个大型重构</strong>:场景化 Agent 工作流 + 多模态输入(语音/图)——战略级跃迁。",
+      "<strong>近期 · 5 个 Quick Win</strong>:中文场景模板 + 错误分类 + 模型透明 + AI 自评 + 局部重绘入口——工程量小,用户感知强,优先做。",
+      "<strong>中期 · 3 个中型改造</strong>:派生树历史 + Memory 偏好 + Projects 概念——填上下文资产缺口。",
+      "<strong>远期 · 2 个大型重构</strong>:场景化 Agent 工作流 + 多模态输入(语音/图)——战略级跃迁。",
       "<strong>5 件主动不做的事</strong>:不做过度热情人格 / 不做 AI 全自动 / 不做情感陪伴 / 不做打卡机制 / 不在所有维度赶上同行(选极致单点)。",
-      "<strong>4 条执行建议</strong>:每个 QW 一个 owner / AI UX 双周会 / 每月 12 诫复盘 / 把本书放团队文档区作设计评审论证依据。"
+      "<strong>4 条执行建议</strong>:每个 Quick Win 一个 owner / 设 AI UX 双周会 / 每月用 12 诫复盘 / 把这套框架作设计评审的论证依据。"
     ]
   }
 }

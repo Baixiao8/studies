@@ -1,50 +1,51 @@
 <section id="s15" style="border-top: 4px solid var(--c-session);">
 <div class="container">
 
-  <div class="section-tag"><span class="num">15</span>QIANTU AUDIT · 重构应用 / 第十五章</div>
-  <h1 class="section-h">千图AI 的 UX 体检:用 12 诫给我们自己打分 <span class="en">Qiantu AI Audit</span></h1>
-  <p class="section-sub">把第 14 章的 12 诫作为坐标,把千图AI 当前产品作为对象,做一次系统性 UX 体检——逐诫打分、定位问题、关联到具体产品场景。这一章是<em>全书最值钱的部分</em>,因为它把所有理论翻译成对自己产品的具体诊断。</p>
+  <div class="section-tag"><span class="num">15</span>SELF-AUDIT · 重构应用 / 第十五章</div>
+  <h1 class="section-h">给自己的产品做一次 UX 体检:用 12 诫逐条打分 <span class="en">Self-Audit Framework</span></h1>
+  <p class="section-sub">把第 14 章的 12 诫(twelve commandments,十二条 AI 产品 UX 原则)当成坐标系,对照着给你自己的产品做一次系统性 UX 体检——逐诫打分、定位问题、关联到具体场景。这一章是<em>全书最能直接动手的部分</em>,因为它把前面的理论翻译成一套可复用的诊断动作。下面以中文 AIGC(AI-Generated Content,AI 生成内容)设计工具这类产品为例走一遍,你可以照着同样的维度审自己的产品。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>千图AI 在 12 诫上的整体得分约 6.5/10——核心生成能力扎实,但<em>信任设计、错误兜底、prompt 体验、Agent 边界感、人格设计</em>这 5 条有明显缺口。改进 ROI 最高的是<strong>「中文场景模板 + prompt 失败兜底 + 错误分类提示」</strong>三件套,这是下一章路线图的核心。</p>
+    <p>中文 AIGC 设计工具这类产品,在 12 诫上往往是同一个画像:<em>核心生成能力</em>已经扎实,但<em>信任设计、错误兜底、prompt 体验、Agent 边界感、人格设计</em>这 5 条普遍是缺口。改进 ROI(return on investment,投入产出比)最高的常常是<strong>「中文场景模板 + prompt 失败兜底 + 错误分类提示」</strong>这三件套——这也是下一章演进路径里优先做的部分。</p>
   </div>
 
   <div class="callout sharp">
-    <div class="label">✕ FACT-CHECK 警告 · 必读</div>
-    <p><strong>这一章的诊断基于以下信息源</strong>:</p>
+    <div class="label">✕ 怎么用这一章 · 必读</div>
+    <p><strong>下面这套诊断框架的归纳来源</strong>:</p>
     <ul>
-      <li>白笑授权的项目背景资料(<code>CLAUDE.md</code> / <code>designknowledge.md</code> / <code>迭代记录.md</code>)</li>
-      <li>对千图AI 同类产品的 UX 对比(第 11 章 6 款内容生成类产品)</li>
+      <li>对同类内容生成产品的公开 UX 观察(第 11 章 6 款内容生成类产品)</li>
       <li>对 AI 产品通用 UX 模式的总结(Part II + Part III)</li>
     </ul>
-    <p><strong>但本章作者(Claude × 白笑共写)<em>没有直接使用过千图AI 完整产品</em></strong>。所有「千图AI 当前现状」的描述都基于上述间接信息,可能与实际产品存在偏差。</p>
-    <p><strong>请白笑(以及千图AI 团队读者)做两件事</strong>:</p>
+    <p><strong>它给的是「这类产品普遍长什么样」的<em>共性画像</em>,不是任何一款具体产品的实测结论。</strong>每款产品的真实状态,只有团队自己的数据和用户反馈说了算。所以请把这一章当成一张<em>体检表</em>,而不是一张已经填好的成绩单。</p>
+    <p><strong>对照自己的产品时,做两件事</strong>:</p>
     <ol>
-      <li>读这一章时随时<em>修正与实际不符的描述</em>(可以在 GitHub issue 或文档批注)</li>
-      <li>对「建议改进项」判断时,优先信任你们的内部数据 / 用户反馈,不是这一章的外部推测</li>
+      <li>逐条<em>用实测替换共性描述</em>——框架里说「这类产品常缺 X」,你要确认自己的产品到底缺不缺</li>
+      <li>给「改进方向」排序时,以你自己的用户数据为准,不要照搬框架里的优先级</li>
     </ol>
   </div>
 
   <h3><span class="pre">15.1</span>体检方法论 · 4 步流程</h3>
 
-  <p class="lead">这次体检按 4 步流程做,每条诫都过一遍。</p>
+  <p class="lead">体检按 4 步流程做,每条诫都过一遍。这套流程对任何 AI 产品都通用,换个产品照样能跑。</p>
 
   <ol>
-    <li><strong>对照诫的「怎么落地」标准</strong>,描述千图AI 当前状态</li>
+    <li><strong>对照诫的「怎么落地」标准</strong>,描述产品当前状态</li>
     <li><strong>打分 0-10</strong>(0 = 完全没做 / 10 = 行业标杆)</li>
     <li><strong>定位关键缺口</strong>(具体场景 / 具体页面)</li>
-    <li><strong>给出改进建议</strong>(可落地动作)</li>
+    <li><strong>给出改进方向</strong>(可落地动作)</li>
   </ol>
 
-  <p>分数仅是「内部相对参考」,不是行业横评。同诫不同产品的对比见 Part III。</p>
+  <p>分数只是「自我相对参考」,用来看自己哪条强哪条弱,不是行业横评。同诫不同产品的横向对比见 Part III。</p>
 
-  <h3><span class="pre">15.2</span>12 诫得分总览</h3>
+  <h3><span class="pre">15.2</span>12 诫典型水位总览</h3>
+
+  <p>下面这张表是中文 AIGC 设计工具这类产品的<em>典型画像</em>——多数同类产品在每条诫上大致落在哪个水位、缺口通常出在哪。它是给你打分时的参照系:对着自己的产品逐条核,看你比这个典型水位高还是低。<strong>表里的分数是「这类产品常见的水位」,不是某款具体产品的实测分,别当成成绩单照抄。</strong></p>
 
   <div class="table-wrap no-audio">
     <table>
       <thead>
-        <tr><th>诫</th><th>原则</th><th>当前得分</th><th>主要缺口</th></tr>
+        <tr><th>诫</th><th>原则</th><th>典型水位</th><th>常见缺口</th></tr>
       </thead>
       <tbody>
         <tr><td>1</td><td>信任优于可用性</td><td>5/10</td><td>无「模型版本/参数透明」,无「出图质量自评」</td></tr>
@@ -64,62 +65,62 @@
   </div>
 
   <div class="audio-only">
-    <p>逐诫过下来,后面优势和缺口两节会把多数诫展开讲,但有三条容易被一笔带过,先在这儿交代清楚。第六诫 UI 协作四态,千图AI 拿六分,做得不差,卡在历史还是一长串平铺记录、没有版本派生的脉络。第七诫 Agent 必停,暂时不打分——产品现在基本是单步生成,还没走到 Agent 那一步,等做了再回头评。第十一诫人格匹配,也是六分,工具型的克制人格本身没问题,缺的是一套统一的语气词典,让它说话前后一致。</p>
+    <p>逐诫过下来,后面优势和缺口两节会把多数诫展开讲,但有三条容易被一笔带过,先在这儿交代清楚。第六诫 UI 协作四态,这类产品典型在六分上下,做得不差,卡在历史还是一长串平铺记录、没有版本派生的脉络。第七诫 Agent 必停,这类产品多半还不适用——核心还是单步生成,没走到 Agent 那一步,等做了再回头评。第十一诫人格匹配,也常在六分,工具型的克制人格本身没问题,缺的是一套统一的语气词典,让它说话前后一致。</p>
   </div>
 
   <div class="callout note">
-    <div class="label">i 整体平均 ~ 6.5 / 10</div>
-    <p>不算坏,跟同期内容生成类产品(即梦 / 通义万相 / Krea)在同一水位。<em>但这是「够用」的水位,不是「赢」的水位</em>。要做赢家,至少要在 1-2 诫达到 ★★★★★(参见第 11 章「极致单点」启示)。</p>
+    <div class="label">i 这类产品的整体水位 · 多在及格线上下</div>
+    <p>把 12 诫平均下来,中文 AIGC 设计工具这类产品通常停在「刚过及格」这一档——不算坏,几款主流内容生成产品(即梦 / 通义万相 / Krea)大体都在这个水位。<em>但这是「够用」的水位,不是「赢」的水位</em>。要做赢家,至少要在 1-2 诫做到 ★★★★★(参见第 11 章「极致单点」启示)。如果你给自己产品打完分也落在这一档,说明你和大盘齐平——真正的差距在你能不能挑一两条做到顶尖。</p>
   </div>
 
   <h3><span class="pre">15.3</span>优势分析 · 哪几诫做得好</h3>
 
-  <p class="lead">先看强项,这是产品的护城河,要继续保持。</p>
+  <p class="lead">先看这类产品通常的强项——这几条往往是图像生成产品的天然护城河,值得守住。</p>
 
-  <h4>优势 1 · 第 3 诫(逃生通道)· 7/10</h4>
-  <p>千图AI 的核心生成失败时,用户能「重生 / 改 prompt / 改风格 / 下载原图自己改」——多条退路。这比 Rabbit R1 那种「卡住只能等」的产品好得多。</p>
-  <p><strong>但可以更好</strong>:加上「局部重绘」(inpaint)入口的可见度——目前用户喜欢 70% 的图时,主流操作是「重生」而不是「改剩下 30%」。这就让 ROI 不优化。</p>
+  <h4>典型强项 1 · 第 3 诫(逃生通道)· 多在 7/10</h4>
+  <p>这类产品的核心生成失败时,用户一般能「重生 / 改 prompt / 改风格 / 下载原图自己改」——多条退路。这比 Rabbit R1 那种「卡住只能等」的产品好得多。</p>
+  <p><strong>但还能更好</strong>:把「局部重绘」(inpaint,只重画选中区域而不重生整张)入口做得更显眼——用户喜欢一张图的 70% 时,主流操作往往是「重生」而不是「只改剩下 30%」,白白浪费一次生成的 ROI。</p>
 
-  <h4>优势 2 · 第 4 诫(预览态)· 7/10</h4>
-  <p>生成的图天然在「预览态」——用户主动下载才算 commit。这个好习惯是图像产品的天然优势。</p>
-  <p><strong>但可以更好</strong>:涉及「分享到社区 / 发布为模板 / 提交评审」等公开行为时,缺「二次确认 + 公开影响提示」。</p>
+  <h4>典型强项 2 · 第 4 诫(预览态)· 多在 7/10</h4>
+  <p>生成的图天然处在「预览态」——用户主动下载才算 commit(确认提交)。这个好习惯是图像产品的天然优势,这类产品基本都占着。</p>
+  <p><strong>但还能更好</strong>:涉及「分享到社区 / 发布为模板 / 提交评审」等公开行为时,大多缺「二次确认 + 公开影响提示」。</p>
 
-  <h4>优势 3 · 第 8 诫(撤销底线)· 7/10</h4>
-  <p>历史记录可查,生成不会「消失」。</p>
-  <p><strong>但可以更好</strong>:历史是「平铺列表」形态——用户基于第 3 张图 refine 得到第 5 张,这种<em>派生关系</em>不可见。学 Krea 的 canvas 派生树。</p>
+  <h4>典型强项 3 · 第 8 诫(撤销底线)· 多在 7/10</h4>
+  <p>历史记录可查,生成不会「消失」,这是这类产品的常规配置。</p>
+  <p><strong>但还能更好</strong>:历史多是「平铺列表」形态——用户基于第 3 张图 refine(微调精修)得到第 5 张,这种<em>派生关系</em>看不见。可以学 Krea 的 canvas 派生树。</p>
 
-  <h4>优势 4 · 第 12 诫(让人更聪明)· 7/10</h4>
-  <p>没有「打卡 / 连续签到 / 沉迷诱导」机制,健康度高。</p>
-  <p><strong>但可以更好</strong>:加「prompt 教学」——当用户写出好结果时,主动展示「这张图为什么生成得好(关键 prompt 词分析)」,让用户学到能迁移的技巧。</p>
+  <h4>典型强项 4 · 第 12 诫(让人更聪明)· 多在 7/10</h4>
+  <p>这类工具型产品一般没有「打卡 / 连续签到 / 沉迷诱导」机制,健康度高。</p>
+  <p><strong>但还能更好</strong>:加「prompt 教学」——当用户写出好结果时,主动展示「这张图为什么生成得好(关键 prompt 词分析)」,让用户学到能迁移的技巧。</p>
 
   <h3><span class="pre">15.4</span>缺口分析 · 哪几诫缺口最大</h3>
 
-  <p class="lead">下面 5 条是 ROI 最高的改进项,推荐优先做。</p>
+  <p class="lead">下面 5 类是这类产品最常见、改进 ROI 也最高的缺口。每一类都给「这类产品常踩的坑」和「通用改进方向」两面,你可以照着核自己的产品。</p>
 
-  <h4>缺口 1 · 第 1 诫(信任)· 5/10</h4>
+  <h4>问题类型 1 · 第 1 诫(信任)· 常在 5/10</h4>
 
   <div class="callout sharp">
-    <div class="label">✕ 当前问题</div>
+    <div class="label">✕ 这类产品常踩的坑</div>
     <ul>
       <li>生成图旁边没有「这张图相对你 prompt 的契合度评估」</li>
-      <li>没有明示当前用的模型版本(用户不知道用的是即梦 5.0 还是 4.0)</li>
-      <li>多张生成结果之间,没有「我们推荐选这张」的引导</li>
+      <li>不明示当前用的模型版本(用户不知道用的是某模型的 5.0 还是 4.0)</li>
+      <li>多张生成结果之间,没有「推荐选这张」的引导</li>
     </ul>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 改进建议</div>
+    <div class="label">✓ 通用改进方向</div>
     <ol>
       <li><strong>给每张图标「AI 自评分」</strong>(prompt 匹配度 / 美观度 / 安全度 三档),让用户秒判</li>
-      <li><strong>明示模型版本</strong>(底部小字「由 千图AI v3.2 生成」)</li>
-      <li><strong>多图推荐</strong>(在 4 张备选里给「我们更推荐这张」的小标记 + 理由)</li>
+      <li><strong>明示模型版本</strong>(底部小字标清「由哪个模型的哪个版本生成」)</li>
+      <li><strong>多图推荐</strong>(在多张备选里给「更推荐这张」的小标记 + 理由)</li>
     </ol>
   </div>
 
-  <h4>缺口 2 · 第 2 诫(错误兜底)· 5/10</h4>
+  <h4>问题类型 2 · 第 2 诫(错误兜底)· 常在 5/10</h4>
 
   <div class="callout sharp">
-    <div class="label">✕ 当前问题</div>
+    <div class="label">✕ 这类产品常踩的坑</div>
     <ul>
       <li>「生成失败」提示过于通用,用户不知道是 GPU 排队 / prompt 触发安全 / 模型本身波动</li>
       <li>内容安全拦截时,不告诉用户具体触发了哪个关键词</li>
@@ -128,7 +129,7 @@
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 改进建议</div>
+    <div class="label">✓ 通用改进方向</div>
     <ol>
       <li><strong>错误分类提示</strong>(用 5 类错误模板:系统级 / 输出级 / 理解级 / 边界级 / 时间级)</li>
       <li><strong>安全拦截具体到关键词</strong>(在不暴露内部规则的前提下,给用户改的方向)</li>
@@ -136,19 +137,19 @@
     </ol>
   </div>
 
-  <h4>缺口 3 · 第 5 诫(prompt 体验)· 6/10</h4>
+  <h4>问题类型 3 · 第 5 诫(prompt 体验)· 常在 6/10</h4>
 
   <div class="callout sharp">
-    <div class="label">✕ 当前问题</div>
+    <div class="label">✕ 这类产品常踩的坑</div>
     <ul>
-      <li>placeholder 通用化(「请输入您的需求」),不引导中文用户</li>
+      <li>placeholder(输入框占位提示)通用化(「请输入您的需求」),不引导中文用户</li>
       <li>缺「中文场景模板库」(对比即梦「电商海报 / 公众号封面 / 抖音封面」等模板入口)</li>
       <li>prompt 失败后,缺「自动改写建议」</li>
     </ul>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 改进建议</div>
+    <div class="label">✓ 通用改进方向</div>
     <ol>
       <li><strong>场景化 placeholder</strong>(「试试:为新年活动设计一张红金主调的海报」)</li>
       <li><strong>建中文场景模板库</strong>(电商主图 / 公众号封面 / 朋友圈背景 / PPT 配图 / 微信表情等),用户选场景再填关键字</li>
@@ -156,10 +157,10 @@
     </ol>
   </div>
 
-  <h4>缺口 4 · 第 9 诫(透明度)· 5/10</h4>
+  <h4>问题类型 4 · 第 9 诫(透明度)· 常在 5/10</h4>
 
   <div class="callout sharp">
-    <div class="label">✕ 当前问题</div>
+    <div class="label">✕ 这类产品常踩的坑</div>
     <ul>
       <li>用户不知道当前用的什么模型 / 版本 / 参数</li>
       <li>「AI 改写 prompt」(如果有的话)是黑盒,用户看不到 AI 把自己的 prompt 改成了什么</li>
@@ -168,7 +169,7 @@
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 改进建议</div>
+    <div class="label">✓ 通用改进方向</div>
     <ol>
       <li><strong>结果旁边展示「生成参数」</strong>(模型 + 风格 + seed + guidance),可点开看详情</li>
       <li><strong>暴露 prompt 改写</strong>(如果 AI 内部改写了用户 prompt,展示「原始 prompt → 实际使用的 prompt」)</li>
@@ -176,10 +177,10 @@
     </ol>
   </div>
 
-  <h4>缺口 5 · 第 10 诫(上下文资产)· 4/10</h4>
+  <h4>问题类型 5 · 第 10 诫(上下文资产)· 常在 4/10</h4>
 
   <div class="callout sharp">
-    <div class="label">✕ 当前问题</div>
+    <div class="label">✕ 这类产品常踩的坑</div>
     <ul>
       <li>AI 不学习用户偏好——用户每次都要重写「我要写实风格」等基础偏好</li>
       <li>项目化(Projects)概念缺失——用户做同一个项目的不同图,系统不知道这是一组</li>
@@ -188,7 +189,7 @@
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 改进建议</div>
+    <div class="label">✓ 通用改进方向</div>
     <ol>
       <li><strong>加 Memory / Custom Instructions</strong>(用户能设置「我永远要写实风格 / 永远不要插画风 / 永远生成 4 张」等全局偏好)</li>
       <li><strong>加 Projects 概念</strong>(类似 ChatGPT Projects / Claude Projects——一个项目下的所有生成共享上下文)</li>
@@ -198,7 +199,7 @@
 
   <h3><span class="pre">15.5</span>具体场景体检 · 4 个核心流程</h3>
 
-  <p class="lead">把抽象诫拉到具体场景,看千图AI 的 4 个核心流程各自有什么 UX 问题。</p>
+  <p class="lead">把抽象诫拉到具体场景,看这类产品的 4 个核心流程各自常出什么 UX 问题。这 4 个流程几乎是所有 AIGC 设计工具的标配,你的产品大概率也有——照着核一遍即可。</p>
 
   <h4>场景 1 · 「生成新图」流程</h4>
   <ul>
@@ -230,17 +231,17 @@
 
   <h3><span class="pre">15.6</span>体检小结</h3>
 
-  <p>千图AI 在 12 诫上的整体得分 ~ <strong>6.5/10</strong>——核心生成能力扎实,但<strong>5 条主要缺口</strong>(信任 / 错误兜底 / prompt 体验 / 透明度 / 上下文资产)是改进 ROI 最高的方向。</p>
+  <p>中文 AIGC 设计工具这类产品在 12 诫上的整体水位<strong>多在及格线上下</strong>——核心生成能力扎实,但<strong>5 类主要缺口</strong>(信任 / 错误兜底 / prompt 体验 / 透明度 / 上下文资产)是改进 ROI 最高的方向。你给自己产品打完分,大概率也是「核心稳、这 5 处弱」的画像。</p>
 
-  <p><strong>4 个具体场景</strong>(新图 / 改图 / 历史 / 失败)各自有可立刻动手的改进点。这些改进的具体顺序、时间、所需投入,见下一章<strong>千图AI 90/180/365 天改进路线图</strong>。</p>
+  <p><strong>4 个具体场景</strong>(新图 / 改图 / 历史 / 失败)各自有可立刻动手的改进点。这些改进按什么优先级、什么节奏推进,见下一章<strong>这类产品的演进路径建议</strong>。</p>
 
   <div class="callout you">
-    <div class="label">◐ 再次强调 · FACT-CHECK</div>
-    <p>这一章的所有「当前现状」描述都基于外部观察,可能与实际产品存在偏差。<em>建议白笑组织一次内部走查</em>,把本章的「得分 / 缺口 / 场景」逐条对照实际产品验证,再决定哪些建议进入路线图。</p>
+    <div class="label">◐ 再次强调 · 怎么用这张体检表</div>
+    <p>这一章给的是「这类产品普遍长什么样」的共性画像,不是任何一款具体产品的实测结论,可能与你的产品实际状态有出入。<em>建议照着这张体检表组织一次内部走查</em>,把「水位 / 缺口 / 场景」逐条对照自己产品验证,再决定哪些改进值得排进演进路径。</p>
   </div>
 
   <p class="ref">主要参考:<br>
-  本书第 1-14 章的所有论述 · 千图AI <code>CLAUDE.md</code> / <code>designknowledge.md</code> / <code>迭代记录.md</code>(项目内部资料)· 即梦 / 通义万相 / Krea 公开产品文档(对照参考)· Microsoft HAX Toolkit Audit Methodology, 2019</p>
+  本书第 1-14 章的所有论述 · 即梦 / 通义万相 / Krea 公开产品文档(对照参考)· Microsoft HAX Toolkit Audit Methodology, 2019</p>
 
 </div>
 </section>
