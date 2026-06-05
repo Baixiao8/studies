@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跑步科学 · 知识复盘</title>
+<style>
+  :root{
+    --indigo:#4f46e5; --indigo-soft:#eef2ff;
+    --green:#16a34a; --green-soft:#e8f7ee;
+    --orange:#ea7317; --orange-soft:#fff1e3;
+    --ink:#1f2233; --ink-soft:#5b5f73; --line:#e6e7ef;
+    --paper:#fbfbfe; --card:#ffffff;
+    --r:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"PingFang SC","Nunito","Inter",-apple-system,sans-serif;
+    background:var(--paper); color:var(--ink);
+    line-height:1.75; -webkit-font-smoothing:antialiased;
+    padding:32px 18px 80px;
+  }
+  .wrap{max-width:820px;margin:0 auto}
+  .kicker{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.04em;
+    color:var(--indigo);background:var(--indigo-soft);padding:6px 14px;border-radius:999px;margin-bottom:16px}
+  h1{font-size:34px;font-weight:900;letter-spacing:-.01em;line-height:1.25;margin-bottom:14px}
+  h1 .em{color:var(--indigo)}
+  .sub{font-size:16px;color:var(--ink-soft);max-width:640px}
+  .meta{margin-top:18px;font-size:13px;color:var(--ink-soft)}
+
+  section{margin-top:44px}
+  h2{font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--ink-soft);
+    text-transform:none;margin-bottom:6px}
+  .h2big{font-size:24px;font-weight:900;color:var(--ink);letter-spacing:-.01em;margin-bottom:18px;line-height:1.3}
+
+  .card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);
+    padding:22px 24px;box-shadow:0 4px 0 var(--line);margin-bottom:16px}
+
+  /* 知识架构链 */
+  .chain{display:flex;flex-direction:column;gap:0}
+  .chain .node{background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+    padding:14px 18px;box-shadow:0 3px 0 var(--line);display:flex;align-items:baseline;gap:12px}
+  .chain .node b{font-size:16px;font-weight:800}
+  .chain .node span{font-size:14px;color:var(--ink-soft)}
+  .chain .arrow{align-self:center;color:var(--indigo);font-weight:900;font-size:18px;padding:5px 0}
+
+  /* 旧→新 认知卡 */
+  .flip{border-left:5px solid var(--orange)}
+  .flip .old{font-size:14px;color:var(--ink-soft);text-decoration:line-through;text-decoration-color:#cfd2e0}
+  .flip .new{font-size:17px;font-weight:800;margin-top:4px}
+  .flip .new b{color:var(--green)}
+  .flip .why{font-size:14.5px;color:var(--ink-soft);margin-top:8px}
+  .flip .src{font-size:12.5px;color:var(--indigo);font-weight:700;margin-top:8px}
+
+  /* 四问 */
+  .q{border-left:5px solid var(--indigo)}
+  .q .label{font-size:13px;font-weight:800;color:var(--indigo);margin-bottom:6px}
+  .q p{font-size:15.5px}
+  .q p+p{margin-top:10px}
+  .q strong{color:var(--ink);font-weight:800}
+
+  /* 行动清单 */
+  .todo{border-left:5px solid var(--green)}
+  .todo ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .todo li{display:flex;gap:12px;font-size:15.5px}
+  .todo li .tick{flex:none;width:22px;height:22px;border-radius:7px;background:var(--green-soft);
+    color:var(--green);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:3px}
+  .todo li b{font-weight:800}
+  .todo li .n{color:var(--ink-soft);font-size:14px}
+
+  .spine{display:grid;grid-template-columns:1fr;gap:8px}
+  .spine .row{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .spine .row:last-child{border-bottom:none}
+  .spine .ch{flex:none;width:54px;font-weight:800;color:var(--indigo);font-size:14px}
+  .spine .txt{font-size:15px}
+  .pill{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:999px;margin-right:6px}
+  .pill.mech{background:var(--indigo-soft);color:var(--indigo)}
+  .pill.phys{background:var(--green-soft);color:var(--green)}
+  .pill.intg{background:var(--orange-soft);color:var(--orange)}
+
+  footer{margin-top:48px;padding-top:22px;border-top:1.5px solid var(--line);
+    font-size:13px;color:var(--ink-soft)}
+  .em-line{font-weight:800;color:var(--ink);font-size:17px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="kicker">读完一本书的沉淀</span>
+    <h1>跑步科学,<span class="em">其实只讲了一件事</span></h1>
+    <p class="sub">这是给我自己的一页复盘——把《跑步科学深度调研》七万多字读完之后,真正改掉我脑子里哪几个错念头、又能怎么用到 sub-3 上。不是摘要,是「我学到了什么、为什么之前想错了、下一步动手改什么」。</p>
+    <div class="meta">来源:跑步科学深度调研(12 章 · 力学/生理/整合) · 复盘人:白笑 · 全马 PR 3:20,目标 sub-3</div>
+  </header>
+
+  <section>
+    <h2>知识架构</h2>
+    <div class="h2big">十二章不是十二个话题,是一个系统的十二个切面</div>
+    <p class="sub" style="margin-bottom:18px">读之前我以为这是一本「跑步知识合集」,读完才看清:它讲的是<strong>一条环环相扣的链子</strong>。任何一节都不是孤立的——你怎么跑,决定要烧多少能量;烧什么,决定怎么恢复;恢复得怎样,决定能练多狠;练了多少,身体才照着改多少。明白这条链,比记住任何单点都值钱。</p>
+    <div class="chain">
+      <div class="node"><b>力学</b><span>你怎么跑——弹簧、受控的摔倒、后侧链</span></div>
+      <div class="arrow">↓ 决定要烧多少能量</div>
+      <div class="node"><b>能量代谢</b><span>烧糖还是烧脂——三系统耦合,乳酸是燃料</span></div>
+      <div class="arrow">↓ 决定怎么恢复</div>
+      <div class="node"><b>生理适应</b><span>心肺、肌骨、神经、内分泌——各有各的时间常数</span></div>
+      <div class="arrow">↓ 决定能不能加量</div>
+      <div class="node"><b>训练负荷</b><span>80/20、ACWR——刺激与恢复的对比</span></div>
+      <div class="arrow">↓ 决定身体怎么变</div>
+      <div class="node"><b>适应 / 伤病 / 极限</b><span>还得上债就变强,还不上就受伤</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>章节骨架</h2>
+    <div class="h2big">十二句话,把整本书拎起来</div>
+    <div class="card spine">
+      <div class="row"><span class="ch">CH1</span><span class="txt"><span class="pill mech">力学</span>跑步不是快走,是一次相变:走路是钟摆,跑步是弹簧</span></div>
+      <div class="row"><span class="ch">CH2</span><span class="txt"><span class="pill mech">力学</span>跑步是受控的摔倒,真正推进你的是臀大肌不是小腿</span></div>
+      <div class="row"><span class="ch">CH3</span><span class="txt"><span class="pill mech">力学</span>后侧链是发动机,链子只在最弱的那一环断</span></div>
+      <div class="row"><span class="ch">CH4</span><span class="txt"><span class="pill phys">生理</span>表现 = 发动机大小 × 能撑多久 × 多省油;乳酸是燃料</span></div>
+      <div class="row"><span class="ch">CH5</span><span class="txt"><span class="pill phys">生理</span>最大摄氧量由心脏定,乳酸阈由外周定,两者要分开练</span></div>
+      <div class="row"><span class="ch">CH6</span><span class="txt"><span class="pill phys">生理</span>肌腱比肌肉慢十倍,这个时间差就是伤病的根</span></div>
+      <div class="row"><span class="ch">CH7</span><span class="txt"><span class="pill phys">生理</span>疲劳是大脑提前踩的刹车,不是肌肉真的没力气</span></div>
+      <div class="row"><span class="ch">CH8</span><span class="txt"><span class="pill phys">生理</span>免疫力像一条曲线,中等跑量最护身,练过头反伤</span></div>
+      <div class="row"><span class="ch">CH9</span><span class="txt"><span class="pill intg">整合</span>撞墙不是没能量,是供能的功率跟不上</span></div>
+      <div class="row"><span class="ch">CH10</span><span class="txt"><span class="pill intg">整合</span>八成跑得慢,才换来两成能跑得快</span></div>
+      <div class="row"><span class="ch">CH11</span><span class="txt"><span class="pill intg">整合</span>最能预测受伤的是跑量的变化速度,不是跑量本身</span></div>
+      <div class="row"><span class="ch">CH12</span><span class="txt"><span class="pill intg">整合</span>到了超长距离,女性甚至可能反超男性</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>认知翻案</h2>
+    <div class="h2big">七个被这本书改掉的错念头</div>
+
+    <div class="card flip">
+      <div class="old">旧念头:乳酸是跑累的元凶,所以要少产乳酸</div>
+      <div class="new">其实乳酸是<b>燃料</b>,心肌抢着烧它,占自己燃料的三到四成</div>
+      <div class="why">让我累的是氢离子堆积加大脑下调输出。所谓「乳酸阈训练」练的从来不是少产乳酸,是把清除乳酸的那根管子练粗。</div>
+      <div class="src">1907 年的假说,80 年代被同位素示踪推翻</div>
+    </div>
+
+    <div class="card flip">
+      <div class="old">旧念头:跑步伤膝盖,跑多了迟早废</div>
+      <div class="new">其实跑步<b>护膝</b>:业余跑者关节炎率 3.5%,久坐的人 10.2%</div>
+      <div class="why">软骨靠一压一松的循环载荷才活得健康,久坐才是它真正的敌人。只有到精英级累积量,风险才掉头上升——是条 U 形曲线。</div>
+      <div class="src">Alentorn-Geli 2017 系统综述</div>
+    </div>
+
+    <div class="card flip">
+      <div class="old">旧念头:撞墙是因为能量用光了</div>
+      <div class="new">其实是<b>功率不足</b>:脂肪还存着九万千卡,但烧得不够快</div>
+      <div class="why">脂肪的最大氧化速率只够七分配速。要跑进四五分,必须有糖原顶着;糖原一到临界,大脑就主动下调输出。预防靠的是补给的「进货速度」,不是身上存了多少。</div>
+      <div class="src">能量代谢章 · carb-load + 每小时 60–120 克双糖</div>
+    </div>
+
+    <div class="card flip">
+      <div class="old">旧念头:跑不动了就是肌肉到极限了</div>
+      <div class="new">其实是<b>大脑的保护</b>:中枢调节器在你真力竭前就收了油门</div>
+      <div class="why">所谓「意志力突破」,多半只是把这个安全余量动了几个百分点,不是真的超越生理极限。决定你跑多远的那个人,坐在脑子里,不在腿里。</div>
+      <div class="src">Noakes 中枢调节器模型 · Marcora 心理疲劳实验</div>
+    </div>
+
+    <div class="card flip">
+      <div class="old">旧念头:跑量越大越快,每天均匀堆量最好</div>
+      <div class="new">其实要<b>八成慢、两成快</b>:极化,而不是天天泡在灰区</div>
+      <div class="why">精英八成时间在真正的轻松区,业余通病是把这八成跑成不快不慢的中间灰区——又累又不长进。身体要的是刺激和恢复的剧烈对比,不是天天中等。</div>
+      <div class="src">Seiler 极化训练 80/20</div>
+    </div>
+
+    <div class="card flip">
+      <div class="old">旧念头:只要别突然跑太多,跑量大点没事</div>
+      <div class="new">其实最危险的是<b>跑量的变化速度</b>,不是绝对跑量</div>
+      <div class="why">常年稳定每周八十公里的人可以一直跑,从三十突然蹦到六十的人风险陡升——哪怕绝对量小得多。急慢性负荷比落在 0.8–1.3 最安全,过 1.5 风险翻倍。伤不是踩坏的,是某一周修复欠了债。</div>
+      <div class="src">Gabbett 2016 · ACWR</div>
+    </div>
+
+    <div class="card flip">
+      <div class="old">旧念头:破三就是跑步这件事的最高目标</div>
+      <div class="new">其实<b>跑得最快和活得最久,不是同一条路</b></div>
+      <div class="why">破三要每周八十到一百二十公里、严格周期化、扛着升高的伤病风险——这是把表现榨到最大的剂量。要健康的话,每周三十公里慢跑加两次力量就吃掉八成以上的好处。两个目标,两套剂量,得先想清楚自己追哪个。</div>
+      <div class="src">个体差异章 · 表现剂量 vs 健康剂量</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>复盘四问</h2>
+    <div class="h2big">读完之后,我逼自己回答的四个问题</div>
+
+    <div class="card q">
+      <div class="label">一 · 预期 vs 实际,差在哪</div>
+      <p>我本来想找几条「怎么练能更快」的干货。结果最值钱的不是新方法,是<strong>把一堆「我以为我懂」的常识纠正过来</strong>——乳酸、撞墙、伤膝、疲劳,我脑子里装的几乎全是 1970 年以前的旧假说。真正的收获是认知被刷新,不是清单被加长。</p>
+    </div>
+
+    <div class="card q">
+      <div class="label">二 · 根因:为什么我会信错这么久</div>
+      <p>因为旧假说<strong>顺嘴、好记、有画面感</strong>——「乳酸让肌肉变酸所以累」比真相好懂太多,1907 年提出后统治了七十年,到今天还印在跑表 App 里。常识总是滞后于研究三五十年。我吃亏在:把「听起来合理」当成了「被验证过」。</p>
+    </div>
+
+    <div class="card q">
+      <div class="label">三 · 一条能带走的规律</div>
+      <p>下次听到一个「听起来很合理」的运动建议,先问一句:<strong>这个共识的循证基础是哪一年的研究?</strong>——答案有时会是 1907。另外两条配套的:<strong>剂量决定一切</strong>(同一件事,中等有益、极量反伤,免疫、软骨、表现都是曲线不是直线);<strong>别孤立优化单个变量</strong>,跑步是耦合系统,链子只在最弱处断。</p>
+    </div>
+
+    <div class="card q">
+      <div class="label">四 · 我的 sub-3,具体要改什么</div>
+      <p>这本书让我把目标从「多跑」换成「跑对结构 + 还得上债」。不再纠结控制不了的蹬地和落地姿势,改盯几个真能拧的旋钮——见下面的清单。最关键的一条转变:<strong>把训练和恢复当成一笔有进有出的账</strong>,而不是单纯堆里程。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>行动清单</h2>
+    <div class="h2big">给我自己的 sub-3 待办</div>
+    <div class="card todo">
+      <ul>
+        <li><span class="tick">1</span><span><b>八成跑量压进真正的轻松区。</b> <span class="n">别再把慢跑跑成灰区;用心率和配速卡住,初期会慢得不甘心,几周后阈值会松。</span></span></li>
+        <li><span class="tick">2</span><span><b>盯住周跑量的变化速度,不只看总量。</b> <span class="n">让急慢性负荷比待在 0.8–1.3,绝不为赶进度让某一周猛加。</span></span></li>
+        <li><span class="tick">3</span><span><b>每周两次力量训练,雷打不动。</b> <span class="n">重磅低次数 + 离心,练神经驱动和肌腱刚度,跑步经济性能提 4–8%,几乎不增重。</span></span></li>
+        <li><span class="tick">4</span><span><b>补给按「功率」喝,不按「饿不饿」。</b> <span class="n">用表计时,每小时六十克以上;30 公里后哪怕不饿也逼自己再补一根。</span></span></li>
+        <li><span class="tick">5</span><span><b>补我这条链最弱的那环。</b> <span class="n">大概率是比目鱼肌和臀肌——先做单腿提踵和臀桥自测,缺哪补哪,别只练镜子里那几块。</span></span></li>
+        <li><span class="tick">6</span><span><b>用 Coros 盯三条可穿戴代理的趋势。</b> <span class="n">步频(约 178)、垂直振幅、触地时间——看几周的走向,不看单次数值;跑量在涨它们却集体变差,就退一步。</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p class="em-line">这本书最反直觉、也最该记住的一句:跑不动几乎从来不是肌肉的极限,是大脑替你收了帆。</p>
+    <p style="margin-top:12px">复盘归档 · 跑步科学深度调研 · 七万多字 / 十二章 · 写于读毕当日</p>
+  </footer>
+
+</div>
+</body>
+</html>

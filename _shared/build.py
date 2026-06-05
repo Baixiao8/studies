@@ -185,7 +185,7 @@ def upgrade_final_note_to_recap(html: str, recap_data: dict, chapter_id: str) ->
     recap = recap_data[chapter_id]
     recap_html = f'''
   <div class="chapter-recap">
-    <div class="label">★ 5-MINUTE RECAP · 五分钟回顾</div>
+    <div class="label">五分钟回顾</div>
     <h4>{recap['title']}</h4>
     <ol>
 {chr(10).join(f"      <li>{point}</li>" for point in recap['points'])}

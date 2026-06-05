@@ -422,7 +422,7 @@ def apply_audio_substitution(section_clone):
             prev.decompose()
 
 
-_AUDIO_ARROWS = re.compile(r'[▸▼▲△▽◆◇●○■□★☆►◄▶◀➤‣»«]')
+_AUDIO_ARROWS = re.compile(r'[▸▼▲△▽◆◇●○■□★☆►◄▶◀➤‣»«→←↑↓⟶⟵↦⇒➔➜]')
 
 
 def clean_audio_noise(section_clone):
@@ -460,6 +460,12 @@ def build_chapter_xhtml(ch, idx, audio=False):
     for selector in remove:
         for el in section_clone.select(selector):
             el.decompose()
+
+    # 拆链接 · epub 里跨章锚点(#sX)是死链(目标 id 在别的 xhtml 文件里),且微信读书
+    # TTS 跳过链接文字不朗读 → 整段听不见(白笑跑步听书的硬障碍)。把所有 <a> unwrap:
+    # 保留内容(文字/子元素)、只去掉链接壳。两种模式都做——死链对阅读版也无意义。
+    for a in list(section_clone.find_all('a')):
+        a.unwrap()
 
     if audio:
         apply_audio_substitution(section_clone)
