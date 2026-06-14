@@ -10,14 +10,14 @@
     <dc:publisher>Studies · Deep Research Archive</dc:publisher>
     <dc:rights>仅供个人学习使用</dc:rights>
     <meta property="dcterms:modified">{{ modified }}</meta>
-  </metadata>
+{{ cover_meta }}  </metadata>
   <manifest>
     <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
     <item id="css" href="styles/main.css" media-type="text/css"/>
-    {{ chapter_items }}
+{{ cover_manifest }}    {{ chapter_items }}
     {{ image_items }}
   </manifest>
   <spine>
-    {{ spine_items }}
+{{ cover_spine }}    {{ spine_items }}
   </spine>
 </package>

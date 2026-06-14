@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>看懂 AI · 从大模型、提示词到智能体的一本深度入门</title>
+<meta name="description" content="一本写给普通人的 AI 入门书——从大模型怎么学会说话、为什么会胡说,到提示词怎么写、怎么让 AI 真正干活。深度但不绕,看完会用也看得明白。22 节精炼版。">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../_shared/style.css?v=20260610a">
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css?v=20260610a">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ============= HERO ============= -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">AI 入门 · 精炼版 · v1.0 全稿</div>
+    <h1>
+      看懂 AI<span class="ital">.</span>
+      <span class="small">大模型 · 提示词 · 智能体 —— 一本给普通人的深度入门</span>
+    </h1>
+    <p class="lede">
+      你每天都在用它,却未必真懂它。
+      它怎么学会说话的?为什么有时一本正经地胡说?
+      凭什么一句话改个写法,它就答得好十倍?
+      <strong>这本书不堆术语,也不糊弄你</strong>——
+      把 AI 这件事,从里到外讲到你能自己判断、自己上手。
+      看完,你既会用,也看得明白它在干什么。
+    </p>
+
+    <div class="hero-meta no-audio">
+      <div class="item">
+        <div class="label">篇章</div>
+        <div class="value">22<span class="unit">/ 5 篇</span></div>
+        <div class="sub">认识 · 大模型 · 提示词 · 应用 · 素养</div>
+      </div>
+      <div class="item">
+        <div class="label">体量</div>
+        <div class="value">~5.3<span class="unit">万字</span></div>
+        <div class="sub">精炼版 · 深浅平衡 · 一口气读得完</div>
+      </div>
+      <div class="item">
+        <div class="label">读者</div>
+        <div class="value">零基础<span class="unit">起步</span></div>
+        <div class="sub">不需要编程 · 偶有一点上手演示</div>
+      </div>
+      <div class="item">
+        <div class="label">基调</div>
+        <div class="value">懂行老友<span class="unit">同伴腔</span></div>
+        <div class="sub">坐你对面,把事讲明白</div>
+      </div>
+    </div>
+
+    <div class="hero-toc-section no-audio">
+      <div class="hero-toc-label">章节地图 · 全书 22 节</div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">前言</div>
+        <div class="hero-toc">
+          <a href="#s0" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">前言</span>
+            <div class="title">这本书想带你到哪</div>
+            <div class="desc">为什么又一本 AI 书 · 它跟刷短视频学 AI 有什么不一样 · 三种读法。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第一篇 · 先把 AI 是什么搞懂</div>
+        <div class="hero-toc">
+          <a href="#s1" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">第 1 节</span>
+            <div class="title">AI、机器学习、大模型,到底什么关系</div>
+            <div class="desc">三个最常被搞混的词,一次理清。套娃关系,不是并列。</div>
+          </a>
+          <a href="#s2" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">第 2 节</span>
+            <div class="title">机器是怎么「学会」东西的</div>
+            <div class="desc">训练 = 看海量例子、自己找规律。不写一行公式,讲透直觉。</div>
+          </a>
+          <a href="#s3" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">第 3 节</span>
+            <div class="title">为什么这一轮 AI 这么不一样</div>
+            <div class="desc">从「人写死规则」到「机器自己学规律」· 大模型的「大」是哪三样。</div>
+          </a>
+          <a href="#s4" class="card" style="--ch-color: var(--c-physio);">
+            <span class="num">第 4 节</span>
+            <div class="title">一段极简史:从图灵测试到 ChatGPT 引爆</div>
+            <div class="desc">六十年三起三落,给你一张坐标,知道我们站在哪。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第二篇 · 看懂大语言模型(LLM)</div>
+        <div class="hero-toc">
+          <a href="#s5" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">第 5 节</span>
+            <div class="title">它不是在查菜谱,是在炒菜</div>
+            <div class="desc">大模型就是个凭手感炒菜的厨子,一步步下料。这是整本书的钥匙。</div>
+          </a>
+          <a href="#s6" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">第 6 节</span>
+            <div class="title">它眼里的世界不是字,是 token</div>
+            <div class="desc">token(词元)是模型的最小单位。为什么它会数错字母、算错数。</div>
+          </a>
+          <a href="#s7" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">第 7 节</span>
+            <div class="title">为什么它会一本正经地胡说八道</div>
+            <div class="desc">幻觉不是 bug,是接龙机制的副产品。怎么一眼识别、怎么防。</div>
+          </a>
+          <a href="#s8" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">第 8 节</span>
+            <div class="title">上下文窗口:它的「短期记忆」有多长</div>
+            <div class="desc">为什么聊久了它会忘、会跑偏 · 长文档喂进去要注意什么。</div>
+          </a>
+          <a href="#s9" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">第 9 节</span>
+            <div class="title">它是怎么被「教出来」的</div>
+            <div class="desc">预训练 → 微调 → 对齐三步走,用人话讲完,不碰数学。</div>
+          </a>
+          <a href="#s10" class="card" style="--ch-color: var(--c-psych);">
+            <span class="num">第 10 节</span>
+            <div class="title">同一个问题,为什么答案每次不一样</div>
+            <div class="desc">温度与随机性 · 什么时候要它稳、什么时候要它放得开。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第三篇 · 学会跟 AI 说话(提示词)</div>
+        <div class="hero-toc">
+          <a href="#s11" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">第 11 节</span>
+            <div class="title">提示词:你不是在搜索,是在点单</div>
+            <div class="desc">同一个模型,会不会问的人,拿到的是两个东西。</div>
+          </a>
+          <a href="#s12" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">第 12 节</span>
+            <div class="title">一条好提示词的五个零件</div>
+            <div class="desc">角色 · 任务 · 背景 · 格式 · 约束。拆开看,照着拼。</div>
+          </a>
+          <a href="#s13" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">第 13 节</span>
+            <div class="title">立刻能用的四个套路</div>
+            <div class="desc">给例子 · 让它一步步想 · 让它扮角色 · 给它打个样。</div>
+          </a>
+          <a href="#s14" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">第 14 节</span>
+            <div class="title">一次点不准,就边吃边调</div>
+            <div class="desc">不憋完美一单:指着改 · 让它复述 · 反过来让它帮你写单。</div>
+          </a>
+          <a href="#s15" class="card" style="--ch-color: var(--c-session);">
+            <span class="num">第 15 节</span>
+            <div class="title">常见翻车与修法,外加一套能直接抄的模板</div>
+            <div class="desc">烂提示词 vs 好提示词同题对照,一套能直接抄的模板库。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第四篇 · 让 AI 真正干活(应用)</div>
+        <div class="hero-toc">
+          <a href="#s16" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">第 16 节</span>
+            <div class="title">不止聊天:把 AI 接进你的事</div>
+            <div class="desc">一张工具地图:对话 · 写作 · 画图 · 编程 · 本地部署,各管什么。</div>
+          </a>
+          <a href="#s17" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">第 17 节</span>
+            <div class="title">RAG:把你家的菜谱递给厨子</div>
+            <div class="desc">检索增强:先查你的资料再回答 · 拖个 PDF 进聊天框就能体验。</div>
+          </a>
+          <a href="#s18" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">第 18 节</span>
+            <div class="title">Agent:从按单炒菜到替你办一桌席</div>
+            <div class="desc">智能体跟「聊天」差在哪 · 它能干什么 · 边界在哪。</div>
+          </a>
+          <a href="#s19" class="card" style="--ch-color: var(--c-strength);">
+            <span class="num">第 19 节</span>
+            <div class="title">多模态:看图、画图、语音、视频</div>
+            <div class="desc">不只是文字 · 怎么挑工具、怎么把几样组合起来用。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">第五篇 · 用得明白也用得安全(素养)</div>
+        <div class="hero-toc">
+          <a href="#s20" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">第 20 节</span>
+            <div class="title">AI 会取代我吗</div>
+            <div class="desc">能力边界与协作姿势 · 把它当什么用,才不被它替掉。</div>
+          </a>
+          <a href="#s21" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">第 21 节</span>
+            <div class="title">三个必须知道的坑:幻觉、偏见、隐私与版权</div>
+            <div class="desc">你喂进去的东西去哪了 · 怎么判断它说得对不对。</div>
+          </a>
+          <a href="#s22" class="card" style="--ch-color: var(--c-theory);">
+            <span class="num">第 22 节</span>
+            <div class="title">AI 时代怎么学习,以及下一步往哪走</div>
+            <div class="desc">把它当老师、同事、工具 · 入门之后往哪走。</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-toc-part">
+        <div class="part-title">附录</div>
+        <div class="hero-toc">
+          <a href="#s23" class="card" style="--ch-color: var(--c-recovery);">
+            <span class="num">附录</span>
+            <div class="title">工具清单与术语表</div>
+            <div class="desc">放手边查的:按用途挑工具的地图 · 全书术语的人话对照表。</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main>

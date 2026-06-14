@@ -114,6 +114,22 @@ def main(report_dir_arg, audio=False, visual=False, output_name=None):
         hero_assets = copy_hero_images(chapters_data, report_dir, images_dir)
         print(f"        拷贝 {len(hero_assets)} 张封面图")
 
+        # 3.5 书级封面(约定:assets/cover.jpg|jpeg|png 存在即嵌为 EPUB 封面)
+        cover = None
+        cover_xhtml_path = None
+        for ext, mt in (('jpg', 'image/jpeg'), ('jpeg', 'image/jpeg'), ('png', 'image/png')):
+            src = report_dir / 'assets' / f'cover.{ext}'
+            if src.exists():
+                name = f'cover.{ext}'
+                shutil.copy(src, images_dir / name)
+                cover = {'name': name, 'media_type': mt}
+                cover_xhtml_path = tmpdir_path / 'cover.xhtml'
+                cover_xhtml_path.write_text(build_cover_xhtml(name), encoding='utf-8')
+                print(f"        嵌入书级封面: {name}")
+                break
+        if not cover:
+            print(f"        无 assets/cover.* · 跳过书级封面")
+
         # 4. 生成每章 xhtml
         print(f"  [4/6] 生成章节 xhtml ...")
         chapter_paths = []
@@ -129,7 +145,7 @@ def main(report_dir_arg, audio=False, visual=False, output_name=None):
 
         opf_path = tmpdir_path / 'content.opf'
         opf_path.write_text(
-            build_content_opf(metadata, chapters_data, figure_assets + hero_assets),
+            build_content_opf(metadata, chapters_data, figure_assets + hero_assets, cover=cover),
             encoding='utf-8'
         )
 
@@ -150,6 +166,7 @@ def main(report_dir_arg, audio=False, visual=False, output_name=None):
             nav_path=nav_path,
             chapter_paths=chapter_paths,
             images_dir=images_dir,
+            cover_xhtml_path=cover_xhtml_path,
         )
 
     size_mb = output.stat().st_size / 1024 / 1024
@@ -514,8 +531,8 @@ def build_nav_xhtml(chapters_data):
     return template.replace('{{ toc_entries }}', toc_entries)
 
 
-def build_content_opf(metadata, chapters_data, image_assets):
-    """生成 OPF manifest + spine"""
+def build_content_opf(metadata, chapters_data, image_assets, cover=None):
+    """生成 OPF manifest + spine · cover = {'name','media_type'} 或 None"""
     chapter_items = []
     spine_items = []
     for idx in range(1, len(chapters_data) + 1):
@@ -548,6 +565,17 @@ def build_content_opf(metadata, chapters_data, image_assets):
             f'    <item id="{item_id}" href="images/{name}" media-type="{media_type}"/>'
         )
 
+    # 封面(EPUB3 properties="cover-image" + EPUB2 meta name=cover 双兼容)
+    cover_meta = cover_manifest = cover_spine = ''
+    if cover:
+        cover_meta = '    <meta name="cover" content="cover-image"/>\n'
+        cover_manifest = (
+            f'    <item id="cover-image" href="images/{cover["name"]}" '
+            f'media-type="{cover["media_type"]}" properties="cover-image"/>\n'
+            f'    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>\n'
+        )
+        cover_spine = '    <itemref idref="cover" linear="yes"/>\n'
+
     template = (EPUB_TEMPLATES / 'content.opf.tmpl').read_text(encoding='utf-8')
     return template \
         .replace('{{ identifier }}', metadata['identifier']) \
@@ -555,12 +583,31 @@ def build_content_opf(metadata, chapters_data, image_assets):
         .replace('{{ date }}', metadata['date']) \
         .replace('{{ description }}', xml_escape(metadata['description'])) \
         .replace('{{ modified }}', metadata['modified']) \
+        .replace('{{ cover_meta }}', cover_meta) \
+        .replace('{{ cover_manifest }}', cover_manifest) \
+        .replace('{{ cover_spine }}', cover_spine) \
         .replace('{{ chapter_items }}', '\n'.join(chapter_items)) \
         .replace('{{ image_items }}', '\n'.join(image_items)) \
         .replace('{{ spine_items }}', '\n'.join(spine_items))
 
 
-def package_epub(output, opf_path, nav_path, chapter_paths, images_dir):
+def build_cover_xhtml(image_name):
+    """生成全幅封面页 xhtml"""
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<!DOCTYPE html>\n'
+        '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">\n'
+        '<head>\n  <meta charset="UTF-8"/>\n  <title>封面</title>\n'
+        '  <style>html,body{margin:0;padding:0;height:100%}'
+        'body{text-align:center}'
+        'img{height:100%;max-width:100%;object-fit:contain}</style>\n'
+        '</head>\n<body epub:type="cover" xmlns:epub="http://www.idpf.org/2007/ops">\n'
+        f'  <img src="images/{image_name}" alt="封面"/>\n'
+        '</body>\n</html>\n'
+    )
+
+
+def package_epub(output, opf_path, nav_path, chapter_paths, images_dir, cover_xhtml_path=None):
     """打包成 EPUB zip"""
     if output.exists():
         output.unlink()
@@ -577,6 +624,8 @@ def package_epub(output, opf_path, nav_path, chapter_paths, images_dir):
         # OEBPS
         zf.write(opf_path, 'OEBPS/content.opf')
         zf.write(nav_path, 'OEBPS/nav.xhtml')
+        if cover_xhtml_path:
+            zf.write(cover_xhtml_path, 'OEBPS/cover.xhtml')
         zf.write(EPUB_TEMPLATES / 'stylesheet.css', 'OEBPS/styles/main.css')
 
         for ch_path in chapter_paths:
