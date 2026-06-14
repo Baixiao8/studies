@@ -60,9 +60,11 @@ jobs:
         run: playwright install chromium --with-deps
 
       # ─── 4. Build all reports(HTML + EPUB)───────────────
+      # 容错:单个报告构建失败只跳过它,不连累整站部署
+      # (例如某报告 parts/ 未提交 → build.py 崩 → 以前 set -e 会带崩全站)
       - name: Build all reports
         run: |
-          set -e
+          FAILED=""
           for slug_dir in reports/*/; do
             slug=$(basename "$slug_dir")
             # 跳过下划线开头的目录(如 _legacy)
@@ -70,9 +72,17 @@ jobs:
             # 必须有 chapters/ 才认为是 report
             if [ ! -d "$slug_dir/chapters" ]; then continue; fi
             echo "::group::Building $slug"
-            python3 _shared/build.py "$slug_dir"
+            if python3 _shared/build.py "$slug_dir"; then
+              echo "$slug build OK"
+            else
+              echo "::warning title=Build skipped::$slug 构建失败,已跳过(不会部署该报告)"
+              FAILED="$FAILED $slug"
+            fi
             echo "::endgroup::"
           done
+          if [ -n "$FAILED" ]; then
+            echo "::warning title=Reports skipped::以下报告构建失败被跳过:$FAILED"
+          fi
 
       # ─── 5. 准备 deploy 目录 ──────────────────────────────
       # gh-pages 分支只放 Pages 需要的:首页 + reports/<slug>/index.html + .epub + assets/
