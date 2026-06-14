@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>STUDIES · 深度研究档案</title>
+<script>/* 主题早执行 · 防闪白 · 读全局偏好(同源 localStorage,报告页共享同一个键) */(function(){try{var t=localStorage.getItem('studies-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="description" content="一个持续累积的深度研究档案 · 跑步科学 · 康复科学 · Marathon Manual">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,6 +26,32 @@
     --red: #a8423b;
     --blue: #1f3a5f;
   }
+
+  /* ─── 暗黑主题 · 全局偏好(localStorage 同源共享,色值取自报告暗色原版)─── */
+  [data-theme="dark"] {
+    --paper: #0e0e0c;
+    --paper-soft: #1a1a17;
+    --paper-deep: #2e2e29;
+    --ink: #e8e4d8;
+    --ink-soft: #c8c4b8;
+    --ink-mid: #a39e8d;
+    --ink-tertiary: #8a8678;
+    --ink-faint: #6a665a;
+    --line: #52524a;
+    --line-soft: #2e2e29;
+    --red: #d57979;
+    --blue: #8fb8df;
+  }
+  [data-theme="dark"] body::before { opacity: 0.3; }
+  [data-theme="dark"] .report-card:hover { background: rgba(255,255,255,0.04); }
+
+  /* 主题切换按钮 */
+  .theme-toggle {
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; padding: 0 0 0 10px; line-height: 1;
+    vertical-align: -1px; opacity: 0.6; transition: opacity 0.15s ease;
+  }
+  .theme-toggle:hover { opacity: 1; }
 
   html { -webkit-font-smoothing: antialiased; }
 
@@ -361,6 +388,73 @@
     .report-body h2 { font-size: 26px; }
     .section-divider::after { font-size: 9px; padding: 0 12px; }
   }
+
+  /* ─── 封面墙 Cover Grid ─── */
+  .cover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+    gap: 40px 26px;
+    margin-top: 4px;
+  }
+  .cover-item { display: flex; flex-direction: column; }
+  .cover-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--paper-deep);
+    border: 1px solid rgba(0,0,0,0.10);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.16), 0 8px 18px rgba(0,0,0,0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .cover-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover-item:hover .cover-thumb {
+    transform: translateY(-5px);
+    box-shadow: 0 9px 0 rgba(0,0,0,0.18), 0 14px 26px rgba(0,0,0,0.18);
+  }
+  .cover-title {
+    font-family: "Inter Tight", "PingFang SC", sans-serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    margin: 14px 0 8px;
+  }
+  .cover-item:hover .cover-title { color: var(--red); }
+  .cover-tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .cover-tags .tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--ink-tertiary);
+    background: var(--paper-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 3px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+  .cover-tags .tag.hot { color: var(--red); border-color: var(--red); background: transparent; }
+  .cover-epub {
+    margin-top: 9px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-tertiary);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .cover-epub:hover { color: var(--red); }
+  @media (max-width: 600px) {
+    .cover-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    .cover-title { font-size: 14.5px; }
+  }
+
 </style>
 </head>
 <body>
@@ -370,7 +464,7 @@
   <div class="masthead-mini">
     <div>STUDIES · DEEP RESEARCH ARCHIVE</div>
     <div class="center">EST. 2026 · v9.0</div>
-    <div>白笑 · 编</div>
+    <div>白笑 · 编 <button class="theme-toggle" id="themeToggle" aria-label="切换深浅主题" title="切换深浅主题">🌙</button></div>
   </div>
 
   <!-- =========== HERO =========== -->
@@ -397,266 +491,96 @@
     4. 完全新主题(非运动科学):新建 section,从 <hr class="section-divider"> 开始,放 .report-list 容器
   -->
 
-  <div class="report-list">
+  <div class="cover-grid">
 
     <!-- 跑步科学 -->
-    <article class="report-card" data-href="reports/2026-05-running-science/">
-      <div class="report-meta-left">
-        <div class="kicker">RUNNING · 跑步</div>
-        <div class="date">2026 · 05 · v2.0</div>
-      </div>
-      <div class="report-body">
-        <h2>跑步科学深度调研</h2>
-        <p class="subtitle">力学 / 生理 / 神经 / 训练 / 伤病 / 极限 — 把跑步当作研究对象的全景解构</p>
-        <div class="stats">
-          <span>70K 字</span>
-          <span class="divider">·</span>
-          <span>3.5 h 阅读</span>
-          <span class="divider">·</span>
-          <span>12 章</span>
-          <span class="divider">·</span>
-          <span>🎧 听书</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-        <a class="epub-btn" href="reports/2026-05-running-science/2026-05-running-science.epub" download>📥 EPUB</a>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-running-science/"><img src="reports/2026-05-running-science/assets/cover.jpg" alt="跑步科学深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-running-science/">跑步科学深度调研</a>
+      <div class="cover-tags"><span class="tag">70K 字</span><span class="tag">3.5 h 阅读</span><span class="tag">12 章</span></div>
+      <a class="cover-epub" href="reports/2026-05-running-science/2026-05-running-science.epub" download>📥 EPUB</a>
+    </div>
 
     <!-- 康复科学 -->
-    <article class="report-card" data-href="reports/2026-05-rehab-science/">
-      <div class="report-meta-left">
-        <div class="kicker">REHAB · 康复</div>
-        <div class="date">2026 · 05 · v1.0</div>
-      </div>
-      <div class="report-body">
-        <h2>康复科学深度调研</h2>
-        <p class="subtitle">组织修复 / 疼痛 / 评估 / 八大伤区 / 回归赛场 — 把损伤当作可被设计的生物学过程</p>
-        <div class="stats">
-          <span>220K 字</span>
-          <span class="divider">·</span>
-          <span>10.4 h 阅读</span>
-          <span class="divider">·</span>
-          <span>12 章</span>
-          <span class="divider">·</span>
-          <span>🎧 听书</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-        <a class="epub-btn" href="reports/2026-05-rehab-science/2026-05-rehab-science.epub" download>📥 EPUB</a>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-rehab-science/"><img src="reports/2026-05-rehab-science/assets/cover.jpg" alt="康复科学深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-rehab-science/">康复科学深度调研</a>
+      <div class="cover-tags"><span class="tag">220K 字</span><span class="tag">10.4 h 阅读</span><span class="tag">12 章</span></div>
+      <a class="cover-epub" href="reports/2026-05-rehab-science/2026-05-rehab-science.epub" download>📥 EPUB</a>
+    </div>
 
     <!-- 野外生存 -->
-    <article class="report-card" data-href="reports/2026-05-outdoor-survival/">
-      <div class="report-meta-left">
-        <div class="kicker">WILDERNESS · 野外生存</div>
-        <div class="date">2026 · 05 · v1.0</div>
-      </div>
-      <div class="report-body">
-        <h2>野外生存深度调研</h2>
-        <p class="subtitle">水 / 火 / 食 / 宿 / 行 / 救 — 把「在野外活着回来」当作研究对象的中国温带山地林区版</p>
-        <div class="stats">
-          <span>120K 字</span>
-          <span class="divider">·</span>
-          <span>5.7 h 阅读</span>
-          <span class="divider">·</span>
-          <span>12 章</span>
-          <span class="divider">·</span>
-          <span>🎧 听书</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-        <a class="epub-btn" href="reports/2026-05-outdoor-survival/2026-05-outdoor-survival.epub" download>📥 EPUB</a>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-outdoor-survival/"><img src="reports/2026-05-outdoor-survival/assets/cover.jpg" alt="野外生存深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-outdoor-survival/">野外生存深度调研</a>
+      <div class="cover-tags"><span class="tag">120K 字</span><span class="tag">5.7 h 阅读</span><span class="tag">12 章</span></div>
+      <a class="cover-epub" href="reports/2026-05-outdoor-survival/2026-05-outdoor-survival.epub" download>📥 EPUB</a>
+    </div>
 
     <!-- Marathon · 全马备战 -->
-    <article class="report-card" data-href="reports/2026-05-marathon/">
-      <div class="report-meta-left">
-        <div class="kicker">MARATHON · 全马备战</div>
-        <div class="date">2026 · 05 · v4.0</div>
-      </div>
-      <div class="report-body">
-        <h2>Marathon Manual</h2>
-        <p class="subtitle">面向冲击全马 sub-3 的中级跑者的运动科学技术手册 — 23 周上马 2026 sub-3 备战版</p>
-        <div class="stats">
-          <span>10 大模块</span>
-          <span class="divider">·</span>
-          <span>33 张 SVG 图表</span>
-          <span class="divider">·</span>
-          <span>VDOT × 配速大表</span>
-          <span class="divider">·</span>
-          <span>ACWR 仪表盘</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-marathon/"><img src="reports/2026-05-marathon/assets/cover.jpg" alt="Marathon Manual" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-marathon/">Marathon Manual</a>
+      <div class="cover-tags"><span class="tag">10 大模块</span><span class="tag">33 张 SVG 图表</span><span class="tag">VDOT × 配速大表</span></div>
+    </div>
 
   </div>
 
   <!-- =========== II · UX & PRODUCT =========== -->
   <hr class="section-divider" data-label="◆ II · UX &amp; Product · 用户体验与产品">
 
-  <div class="report-list">
+  <div class="cover-grid">
 
     <!-- Mailchimp Voice and Tone -->
-    <article class="report-card" data-href="reports/2026-05-mailchimp-voice-tone/">
-      <div class="report-meta-left">
-        <div class="kicker">写作方法论 · UX 写作</div>
-        <div class="date">2026 · 05 · v1.0</div>
-      </div>
-      <div class="report-body">
-        <h2>Mailchimp Voice and Tone 深度调研</h2>
-        <p class="subtitle">voice/tone 三层 / X but not Y 定义法 / 四步落地 — 写作工程实验 · newsprint 报刊风</p>
-        <div class="stats">
-          <span>~2.4K 字</span>
-          <span class="divider">·</span>
-          <span>10 min 阅读</span>
-          <span class="divider">·</span>
-          <span>5 节</span>
-          <span class="divider">·</span>
-          <span>报刊风</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-mailchimp-voice-tone/"><img src="reports/2026-05-mailchimp-voice-tone/assets/cover.jpg" alt="Mailchimp Voice and Tone 深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-mailchimp-voice-tone/">Mailchimp Voice and Tone 深度调研</a>
+      <div class="cover-tags"><span class="tag">~2.4K 字</span><span class="tag">10 min 阅读</span><span class="tag">5 节</span></div>
+    </div>
 
     <!-- AI UX 之书 -->
-    <article class="report-card" data-href="reports/2026-05-ai-ux-book/">
-      <div class="report-meta-left">
-        <div class="kicker">AI UX · 用户体验</div>
-        <div class="date">2026 · 05 · v1.0</div>
-      </div>
-      <div class="report-body">
-        <h2>AI 时代的用户体验之书</h2>
-        <p class="subtitle">范式跃迁 / 信任与幻觉 / Agent 边界 / 设计十二诫 — 给千图AI 团队的内部 UX 读本</p>
-        <div class="stats">
-          <span>~50K 字</span>
-          <span class="divider">·</span>
-          <span>1.8 h 阅读</span>
-          <span class="divider">·</span>
-          <span>16 章 + 前言</span>
-          <span class="divider">·</span>
-          <span>🎧 听书</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-        <a class="epub-btn" href="reports/2026-05-ai-ux-book/2026-05-ai-ux-book.epub" download>📥 EPUB</a>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-ai-ux-book/"><img src="reports/2026-05-ai-ux-book/assets/cover.jpg" alt="AI 时代的用户体验之书" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-ai-ux-book/">AI 时代的用户体验之书</a>
+      <div class="cover-tags"><span class="tag">~50K 字</span><span class="tag">1.8 h 阅读</span><span class="tag">16 章 + 前言</span></div>
+      <a class="cover-epub" href="reports/2026-05-ai-ux-book/2026-05-ai-ux-book.epub" download>📥 EPUB</a>
+    </div>
 
     <!-- 思考进化 · Cognitive Evolution -->
-    <article class="report-card" data-href="reports/2026-05-thinking-evolution/">
-      <div class="report-meta-left">
-        <div class="kicker">COGNITIVE · 思维进化</div>
-        <div class="date">2026 · 05 · v0.1</div>
-      </div>
-      <div class="report-body">
-        <h2>思考进化 · Cognitive Evolution</h2>
-        <p class="subtitle">三部曲资料库 — UX 理论卡片 / 大厂工作流 / AI 范式迁移 — 单页交互式知识库</p>
-        <div class="stats">
-          <span>162 理论卡</span>
-          <span class="divider">·</span>
-          <span>22 家大厂</span>
-          <span class="divider">·</span>
-          <span>189 SVG</span>
-          <span class="divider">·</span>
-          <span>Bento Box</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-thinking-evolution/"><img src="reports/2026-05-thinking-evolution/assets/cover.jpg" alt="思考进化 · Cognitive Evolution" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-thinking-evolution/">思考进化 · Cognitive Evolution</a>
+      <div class="cover-tags"><span class="tag">162 理论卡</span><span class="tag">22 家大厂</span><span class="tag">189 SVG</span></div>
+    </div>
 
   </div>
 
   <!-- =========== III · AI ENGINEERING =========== -->
   <hr class="section-divider" data-label="◆ III · AI Engineering · AI 工程">
 
-  <div class="report-list">
+  <div class="cover-grid">
 
     <!-- 看懂 AI · 入门书 -->
-    <article class="report-card" data-href="reports/2026-06-ai-primer/">
-      <div class="report-meta-left">
-        <div class="kicker">AI 入门 · 看懂 AI</div>
-        <div class="date">2026 · 06 · v1.0</div>
-      </div>
-      <div class="report-body">
-        <h2>看懂 AI</h2>
-        <p class="subtitle">大模型 / 提示词 / 智能体 — 一本给普通人的深度入门,用做饭的比方把 AI 从里到外讲明白</p>
-        <div class="stats">
-          <span>5.6 万字</span>
-          <span class="divider">·</span>
-          <span>22 节 + 附录</span>
-          <span class="divider">·</span>
-          <span>零基础起步</span>
-          <span class="divider">·</span>
-          <span>🎧 听书</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-        <a class="epub-btn" href="reports/2026-06-ai-primer/2026-06-ai-primer.epub" download>📥 EPUB</a>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-06-ai-primer/"><img src="reports/2026-06-ai-primer/assets/cover.jpg" alt="看懂 AI" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-06-ai-primer/">看懂 AI</a>
+      <div class="cover-tags"><span class="tag">5.6 万字</span><span class="tag">22 节 + 附录</span><span class="tag">零基础起步</span></div>
+      <a class="cover-epub" href="reports/2026-06-ai-primer/2026-06-ai-primer.epub" download>📥 EPUB</a>
+    </div>
 
     <!-- Anthropic 与 Claude 深度调研 -->
-    <article class="report-card" data-href="reports/2026-05-anthropic-academy/">
-      <div class="report-meta-left">
-        <div class="kicker">ANTHROPIC · AI 全景</div>
-        <div class="date">2026 · 05 · v1.0</div>
-      </div>
-      <div class="report-body">
-        <h2>Anthropic 与 Claude 深度调研</h2>
-        <p class="subtitle">LLM 原理 / 方法论 / 产品全家桶 / 编码代理 / MCP 协议 — A Deep Field Guide</p>
-        <div class="stats">
-          <span>14 章</span>
-          <span class="divider">·</span>
-          <span>Claude 全景</span>
-          <span class="divider">·</span>
-          <span>MCP 协议</span>
-          <span class="divider">·</span>
-          <span>编码代理</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-anthropic-academy/"><img src="reports/2026-05-anthropic-academy/assets/cover.jpg" alt="Anthropic 与 Claude 深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-anthropic-academy/">Anthropic 与 Claude 深度调研</a>
+      <div class="cover-tags"><span class="tag">14 章</span><span class="tag">Claude 全景</span><span class="tag">MCP 协议</span></div>
+    </div>
 
     <!-- Skills 构建指南 -->
-    <article class="report-card" data-href="reports/2026-05-skills-building-guide/">
-      <div class="report-meta-left">
-        <div class="kicker">SKILLS · Claude 能力包</div>
-        <div class="date">2026 · 05 · v0.3</div>
-      </div>
-      <div class="report-body">
-        <h2>Skills 构建指南 · 中文化对照</h2>
-        <p class="subtitle">Anthropic《Building Skills for Claude》中文化对照本 — 6 章 + 3 附录的能力包指南</p>
-        <div class="stats">
-          <span>7 章</span>
-          <span class="divider">·</span>
-          <span>单文件 SPA</span>
-          <span class="divider">·</span>
-          <span>概念中译</span>
-          <span class="divider">·</span>
-          <span>原句保留</span>
-        </div>
-      </div>
-      <div class="report-cta">
-        <div class="cta-text">阅 读 →</div>
-      </div>
-    </article>
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-skills-building-guide/"><img src="reports/2026-05-skills-building-guide/assets/cover.jpg" alt="Skills 构建指南 · 中文化对照" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-skills-building-guide/">Skills 构建指南 · 中文化对照</a>
+      <div class="cover-tags"><span class="tag">7 章</span><span class="tag">单文件 SPA</span><span class="tag">概念中译</span></div>
+    </div>
 
   </div>
 
@@ -695,6 +619,22 @@
       btn.setAttribute('download', h2.textContent.trim() + '.epub');
     }
   });
+
+  // ─── 主题切换 + 持久化 · 全局开关(写 localStorage,报告页读同一个键自动跟随)───
+  (function(){
+    var btn = document.getElementById('themeToggle');
+    function sync(){
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (btn) btn.textContent = dark ? '☀️' : '🌙';
+    }
+    sync();
+    if (btn) btn.addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('studies-theme', next); } catch(e){}
+      sync();
+    });
+  })();
 </script>
 </body>
 </html>
