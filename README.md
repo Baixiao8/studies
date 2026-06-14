@@ -8,6 +8,18 @@
 
 ---
 
+## ⚠️ 动手前必读(给 AI / 协作)
+
+> AI 工作流的「门牌」——动手前扫一眼,堵掉最常踩的坑。背后原理见 `../../_shared/AI-COLLAB.md`。
+
+- **写 / 改报告** → 读 `PRINCIPLES.md`(结构骨架)+ `../../_shared/voice/`(文字风格,**凌驾** PRINCIPLES 旧组件)。voice-lint 判硬违规的:装饰 callout(sharp/note/story)、英中混排 section-tag、h1 英文副标。
+- **派 writer agent** → 范例**只认 `reports/2026-05-running-science/`**(voice-lint 源码点名的黄金样板,0 违规);**别用 `reports/2026-05-ai-ux-book`**(旧风格遗稿,自带 callout 框 + 英中混排)。
+- **改 `_shared/` 脚本**(build.py / build_epub.py 等) → 先扫 `docs/` + `CHANGELOG.md` 有没有相关决策(epub 取舍见 `docs/PRD-epub-export-analysis.md`)。
+- **交付前** → 跑 `../../_shared/voice/voice-lint.py <文件>` 硬违规清零;**别信 agent 自评,主 agent 亲验**。
+- **权威文档清单**:`PRINCIPLES.md`(结构)· `../../_shared/voice/`(风格)· `docs/*`(决策)· `../CONVENTIONS.md`(仓库级)· `../../_shared/AI-COLLAB.md`(协作原理)。
+
+---
+
 ## 报告列表
 
 ### I · 运动科学 · Sport Science
