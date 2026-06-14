@@ -2,25 +2,25 @@
 """
 BUILD EPUB · v2.0 · 把 reports/<slug>/index.html 装配成 EPUB 电子书
 
-三种模式:
-    (默认)      可阅读版 reading-first —— 保留视觉(callout / number-strip / table /
-                inline SVG)+ 书本排版,删听书文字替身。Apple Books / 微信读书里安静读。
+模式:
+    (默认)      可阅读版 —— 书本排版 + 保留视觉块;含图章节用 Playwright 把 SVG / table
+                截成 PNG(各 reader 显示一致 · 白笑定的方向),无图 / playwright 缺失时退回 inline。
+    --inline    可阅读版但强制 inline SVG —— 不截图,矢量清晰 / 体积小 / 免 playwright,
+                代价是老 reader 可能变形。
     --audio     听书版 —— 剔视觉块、留 .audio-only 文字替身、净化 TTS 杂音。跑步听书用。
-    --visual    看版 —— 用 Playwright 把 SVG / table 截成 PNG(给不支持 inline SVG 的老 reader)。
 
 用法:
-    python3 _shared/build_epub.py reports/<slug>            # 可阅读版(默认,主产物)
+    python3 _shared/build_epub.py reports/<slug>            # 可阅读版(默认 · 含图截 PNG)
+    python3 _shared/build_epub.py reports/<slug> --inline   # 可阅读版 · 图用 inline SVG(免 playwright)
     python3 _shared/build_epub.py reports/<slug> --audio    # 听书版
-    python3 _shared/build_epub.py reports/<slug> --visual   # 看版(需 playwright)
 
 输入:
     reports/<slug>/index.html       (build.py 装配后的完整 inline HTML)
     reports/<slug>/assets/ch*-hero.jpg
 
 输出:
-    reports/<slug>/<slug>.epub          (可阅读版,主产物)
-    reports/<slug>/<slug>-audio.epub    (--audio)
-    reports/<slug>/<slug>-visual.epub   (--visual)
+    reports/<slug>/<slug>.epub          (可阅读版 · 主产物 · 默认 PNG / --inline 则 inline)
+    reports/<slug>/<slug>-audio.epub    (--audio · 听书版)
 
 共同功能:
   · 章节内容(h1.section-h + h3 + p + callout + tldr + chip)保留
@@ -67,7 +67,7 @@ REMOVE_SELECTORS = [
 ]
 
 
-def main(report_dir_arg, audio=False, visual=False, output_name=None):
+def main(report_dir_arg, audio=False, inline=False, output_name=None):
     report_dir = Path(report_dir_arg).resolve()
     if not report_dir.is_dir():
         sys.exit(f"[build_epub] 报告目录不存在: {report_dir}")
@@ -77,7 +77,7 @@ def main(report_dir_arg, audio=False, visual=False, output_name=None):
         sys.exit(f"[build_epub] 找不到 index.html(请先跑 _shared/build.py): {index_html}")
 
     slug = report_dir.name
-    mode_label = '听书版' if audio else ('看版' if visual else '可阅读版')
+    mode_label = '听书版' if audio else ('可阅读版·inline' if inline else '可阅读版·PNG')
     print(f"\n[build_epub] 处理 {slug} · 模式={mode_label}")
 
     # 1. 解析 HTML
@@ -98,15 +98,25 @@ def main(report_dir_arg, audio=False, visual=False, output_name=None):
         # 收集 inline CSS(用于 SVG/table 渲染时正确解析 var(--c-theory) 等)
         css_content = collect_inline_css(soup)
 
-        # 2. SVG / table 处理:--visual 才用 Playwright 截 PNG;
-        #    可阅读版保留 inline SVG / HTML table(epub3 原生支持),听书版后续剔除
-        if visual:
-            print(f"  [2/6] 用 Playwright 渲染 SVG / table 为 PNG ...")
-            figure_assets = render_figures(chapters_data, css_content, images_dir)
-            print(f"        渲染 {len(figure_assets)} 张图")
+        # 2. SVG / table 处理:可阅读版默认把图截成 PNG(各 reader 一致,白笑定的方向);
+        #    --inline 强制保留 inline SVG;听书版后续剔视觉块,不需要图。
+        figure_assets = []
+        want_png = (not audio) and (not inline)
+        if want_png:
+            # 只 SVG 截 PNG(reader 对 inline SVG 支持参差);table 一律保持 inline
+            # ——HTML 表格 reader 支持好 + 文字活 / 可 reflow,烧成图反而文字死、宽表看不清。
+            has_svg = any(ch['section_html'].find('svg') for ch in chapters_data)
+            if not has_svg:
+                print(f"  [2/6] 无 SVG · 表格 / 卡片保持 inline(免 PNG 渲染)")
+            elif _playwright_available():
+                print(f"  [2/6] 用 Playwright 渲染 SVG 为 PNG(表格保持 inline)...")
+                figure_assets = render_figures(chapters_data, css_content, images_dir)
+                print(f"        渲染 {len(figure_assets)} 张 SVG")
+            else:
+                print(f"  [2/6] ⚠️ 有 SVG 但未装 playwright → 退回 inline SVG"
+                      f"(要 PNG 请装 playwright,见 docs/EPUB-BUILD.md)")
         else:
-            figure_assets = []
-            _note = '听书版 · 剔除视觉块' if audio else '可阅读版 · 保留 inline SVG / table'
+            _note = '听书版 · 剔除视觉块' if audio else '可阅读版 --inline · 保留 inline SVG / table'
             print(f"  [2/6] 跳过 PNG 渲染 ({_note})")
 
         # 3. 拷贝 chapter hero JPG
@@ -155,10 +165,8 @@ def main(report_dir_arg, audio=False, visual=False, output_name=None):
             out_name = output_name
         elif audio:
             out_name = f'{slug}-audio.epub'
-        elif visual:
-            out_name = f'{slug}-visual.epub'
         else:
-            out_name = f'{slug}.epub'   # 可阅读版 = 主产物
+            out_name = f'{slug}.epub'   # 可阅读版(PNG / inline 同名)= 主产物
         output = report_dir / out_name
         package_epub(
             output=output,
@@ -295,8 +303,22 @@ def collect_inline_css(soup):
 
 # ================== Playwright 渲染 ==================
 
+def _playwright_available():
+    """检测 playwright + chromium 是否就绪(可阅读版默认要截 PNG,缺则回退 inline)"""
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        return False
+    try:
+        with sync_playwright() as p:
+            p.chromium.launch().close()
+        return True
+    except Exception:
+        return False
+
+
 def render_figures(chapters_data, css_content, images_dir):
-    """把所有章节内的 SVG + table 渲染成 PNG"""
+    """把所有章节内的 SVG 渲染成 PNG(table 不截 · 保持 inline,reader 支持好、文字活)"""
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
@@ -312,7 +334,7 @@ def render_figures(chapters_data, css_content, images_dir):
         for ch_idx, ch in enumerate(chapters_data, 1):
             section = ch['section_html']
 
-            # 找所有 SVG(嵌在 figure 里的也算)
+            # 只截 SVG(嵌在 figure 里的也算);table 不截,保持 inline
             svgs = section.find_all('svg')
             for svg in svgs:
                 counter += 1
@@ -321,16 +343,6 @@ def render_figures(chapters_data, css_content, images_dir):
                 if render_element_to_png(page, str(svg), css_content, png_path):
                     figure_assets.append({'name': name, 'kind': 'svg'})
                     replace_with_img(svg, f'images/{name}', alt='Figure')
-
-            # 找所有 table
-            tables = section.find_all('table')
-            for table in tables:
-                counter += 1
-                name = f'fig-ch{ch_idx:02d}-{counter:03d}.png'
-                png_path = images_dir / name
-                if render_element_to_png(page, str(table), css_content, png_path):
-                    figure_assets.append({'name': name, 'kind': 'table'})
-                    replace_with_img(table, f'images/{name}', alt='Table')
 
         browser.close()
 
@@ -641,8 +653,8 @@ def package_epub(output, opf_path, nav_path, chapter_paths, images_dir, cover_xh
 if __name__ == '__main__':
     argv = sys.argv[1:]
     audio = '--audio' in argv        # 听书版(剔视觉、留替身、净化 TTS)
-    visual = '--visual' in argv      # 看版(Playwright 截 SVG / table 为 PNG,需 playwright)
-    # 默认(无 flag)= 可阅读版 reading-first
+    inline = '--inline' in argv      # 可阅读版但图用 inline SVG(免 playwright)
+    # 默认(无 flag)= 可阅读版,含图自动截 PNG(白笑定的方向),playwright 缺则回退 inline
     output_name = None
     if '-o' in argv:
         i = argv.index('-o')
@@ -650,8 +662,8 @@ if __name__ == '__main__':
         del argv[i:i + 2]
     pos = [a for a in argv if not a.startswith('-')]
     if len(pos) != 1:
-        sys.exit("用法: python3 _shared/build_epub.py reports/<slug> [-o 输出名.epub] [--audio|--visual]\n"
-                 "  默认产可阅读版(免 playwright);--audio 听书版;--visual 带图看版(需 playwright)")
-    if audio and visual:
-        sys.exit("[build_epub] --audio 与 --visual 互斥")
-    main(pos[0], audio=audio, visual=visual, output_name=output_name)
+        sys.exit("用法: python3 _shared/build_epub.py reports/<slug> [-o 输出名.epub] [--audio|--inline]\n"
+                 "  默认产可阅读版(含图截 PNG · 主产物);--inline 图用 inline SVG;--audio 听书版")
+    if audio and inline:
+        sys.exit("[build_epub] --audio 与 --inline 互斥")
+    main(pos[0], audio=audio, inline=inline, output_name=output_name)
