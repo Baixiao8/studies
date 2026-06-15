@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>越野跑科学 · 白笑</title>
+<meta name="description" content="写给大众越野跑者的深度科普:从第一次上山到跑完一百公里,把山地怎么改写身体的每一条规则讲清楚——上下坡力学、超长生理、补给、海拔、装备、训练、伤病与完赛策略。">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Shared stylesheet (design tokens + components + layout) -->
+<link rel="stylesheet" href="../../_shared/style.css?v=20260522b">
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css?v=20260524c">
+<!-- 《越野跑科学》专属调色:岩灰纸底 + olive/volt(覆盖共享报刊红主题) -->
+<style>
+:root{
+  --bg:#e7e6de; --bg-soft:#e0ded3; --bg-card:#e0ded3; --bg-deep:#d7d5c6;
+  --line:#c3c2b3;
+  --accent:#5f7320; --accent-soft:#4e5f1a; --accent-deep:#38440f;
+  --c-theory:#5f7320; --c-injury:#5f7320; --c-race:#5f7320;
+  --volt:#93b327; --alarm:#b35a2a;
+}
+.bk-hero{ padding:90px 24px 64px; border-bottom:1px solid var(--line); }
+.bk-hero-inner{ max-width:var(--container-max); margin:0 auto; }
+.bk-kicker{ font-family:var(--ff-mono); font-size:12px; letter-spacing:0.14em; color:var(--ink-faint); margin-bottom:22px; }
+.bk-title{ font-family:var(--ff-sans); font-weight:800; font-size:clamp(48px,9vw,92px); line-height:1.02; color:var(--ink); margin:0; letter-spacing:0.02em; }
+.bk-rule{ width:80px; height:5px; background:var(--accent); margin:24px 0 22px; }
+.bk-sub{ font-size:18px; line-height:1.7; color:var(--ink-soft); max-width:640px; margin:0 0 24px; }
+.bk-author{ font-size:15px; color:var(--ink-faint); margin:0; }
+.bk-toc{ max-width:var(--container-max); margin:48px auto 36px; padding:0 24px; }
+.bk-toc-head{ font-family:var(--ff-sans); font-weight:700; font-size:24px; color:var(--ink); margin-bottom:8px; padding-bottom:14px; border-bottom:2px solid var(--accent); }
+.bk-toc-part{ font-family:var(--ff-mono); font-size:13px; letter-spacing:0.1em; color:var(--accent); margin:26px 0 6px; font-weight:600; }
+.bk-toc-item{ display:flex; align-items:baseline; gap:16px; padding:11px 6px; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink); }
+.bk-toc-item:hover{ background:var(--bg-soft); }
+.bk-toc-num{ font-family:var(--ff-serif); font-weight:600; font-size:15px; color:var(--accent); min-width:30px; }
+.bk-toc-title{ font-size:16.5px; line-height:1.4; }
+</style>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="bk-hero">
+  <div class="bk-hero-inner">
+    <div class="bk-kicker">训练 · 补给 · 恢复 · 完赛 — 一本写给大众越野跑者的书</div>
+    <h1 class="bk-title">越野跑科学</h1>
+    <div class="bk-rule"></div>
+    <p class="bk-sub">从第一次上山,到跑完一百公里。把山地怎么改写身体的每一条规则,讲给你听。</p>
+    <p class="bk-author">白笑 著</p>
+  </div>
+</header>
+
+<nav class="bk-toc">
+  <div class="bk-toc-head">目录</div>
+  <div class="bk-toc-part">序</div>
+  <a class="bk-toc-item" href="#s0"><span class="bk-toc-num">序</span><span class="bk-toc-title">山,会教你重新做人</span></a>
+  <div class="bk-toc-part">第一篇 · 地形篇</div>
+  <a class="bk-toc-item" href="#s1"><span class="bk-toc-num">01</span><span class="bk-toc-title">上坡:弹簧被关掉那一刻,你变回一台纯做功的机器</span></a>
+  <a class="bk-toc-item" href="#s2"><span class="bk-toc-num">02</span><span class="bk-toc-title">下坡:你的大腿是一副会磨损的刹车片</span></a>
+  <a class="bk-toc-item" href="#s3"><span class="bk-toc-num">03</span><span class="bk-toc-title">脚下的功夫:在乱石上,你的脚比眼睛先看见路</span></a>
+  <div class="bk-toc-part">第二篇 · 引擎篇</div>
+  <a class="bk-toc-item" href="#s4"><span class="bk-toc-num">04</span><span class="bk-toc-title">配速死了:山里的码表,是块会说谎的表</span></a>
+  <a class="bk-toc-item" href="#s5"><span class="bk-toc-num">05</span><span class="bk-toc-title">把脂肪点着:超长距离烧的是另一种柴</span></a>
+  <a class="bk-toc-item" href="#s6"><span class="bk-toc-num">06</span><span class="bk-toc-title">一口随身带的灶,和它会罢工的胃</span></a>
+  <a class="bk-toc-item" href="#s7"><span class="bk-toc-num">07</span><span class="bk-toc-title">稀薄的空气:海拔每涨一千米,你都得重新做人</span></a>
+  <a class="bk-toc-item" href="#s8"><span class="bk-toc-num">08</span><span class="bk-toc-title">喊停的那个人,在第二个夜里开始撒谎</span></a>
+  <div class="bk-toc-part">第三篇 · 山野篇</div>
+  <a class="bk-toc-item" href="#s9"><span class="bk-toc-num">09</span><span class="bk-toc-title">脚上的接口:一双越野鞋,和十根可能变黑的脚趾甲</span></a>
+  <a class="bk-toc-item" href="#s10"><span class="bk-toc-num">10</span><span class="bk-toc-title">背上的家当:一套让你活着回来的系统</span></a>
+  <div class="bk-toc-part">第四篇 · 完赛篇</div>
+  <a class="bk-toc-item" href="#s11"><span class="bk-toc-num">11</span><span class="bk-toc-title">怎么把一座山,练进腿里</span></a>
+  <a class="bk-toc-item" href="#s12"><span class="bk-toc-num">12</span><span class="bk-toc-title">伤不是摔出来的,是债欠出来的</span></a>
+  <a class="bk-toc-item" href="#s13"><span class="bk-toc-num">13</span><span class="bk-toc-title">完赛学:一场二十小时的赛,是一百个小决定攒出来的</span></a>
+  <a class="bk-toc-item" href="#s14"><span class="bk-toc-num">14</span><span class="bk-toc-title">山的尽头:每个人都有自己那条上限线</span></a>
+  <div class="bk-toc-part">附</div>
+  <a class="bk-toc-item" href="#s99"><span class="bk-toc-num">★</span><span class="bk-toc-title">使用说明与声明</span></a>
+</nav>
+
+<!-- ============= MAIN CONTENT (chapters injected below) ============= -->
+<main>

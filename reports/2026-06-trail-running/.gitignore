@@ -1,0 +1,8 @@
+# 内部工作文档 — 不进公开仓库(留在本地 iCloud)
+/OUTLINE.md
+/WRITER_BRIEF.md
+/AUDIT.md
+/投稿邮件草稿.md
+/preview-*.html
+# 封面源(渲染用,产物 cover.png 已提交供 CI build_epub)
+/assets/cover-src.html
