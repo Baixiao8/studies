@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户体验之书 · The UX Book</title>
+<meta name="description" content="《用户体验之书》— 162 条定律 × 22 家大厂工作流 × AI 时代范式迁移。用户体验类岗位必读手册。">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.svg">
+<link rel="mask-icon" href="/icon.svg" color="#0d2240">
+<meta name="theme-color" content="#0d2240">
+<meta property="og:title" content="《用户体验之书》· The UX Book">
+<meta property="og:description" content="162 条定律 × 22 家大厂工作流 × AI 时代范式迁移">
+<meta property="og:image" content="https://uxlaws.wwei.ai/icon.svg">
+<meta property="og:url" content="https://uxlaws.wwei.ai">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d2240;
+    --navy-2: #142e54;
+    --navy-3: #1e3a66;
+    --gold: #d4a948;
+    --gold-soft: #e8c878;
+    --cream: #f5efe2;
+    --ink: #1a2238;
+    --gray-1: #f7f6f3;
+    --gray-2: #ebe9e3;
+    --gray-3: #b9b5ab;
+    --gray-4: #6b6859;
+    --accent-rose: #c46a5e;
+    --accent-sage: #6e8a73;
+    --accent-blue: #4a7ca6;
+    --r-sm: 6px; --r-md: 12px; --r-lg: 18px;
+    --shadow-1: 0 1px 3px rgba(13,34,64,.05), 0 2px 8px rgba(13,34,64,.08);
+    --shadow-2: 0 6px 30px rgba(13,34,64,.18);
+    --max-w: 1280px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--gray-1);color:var(--ink);
+    font-family:"Noto Serif SC","Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--navy-2);text-decoration:none;border-bottom:1px solid var(--gold-soft)}
+  a:hover{color:var(--gold)}
+
+  /* === BOOK COVER HEADER === */
+  .cover{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,var(--navy-3) 100%);
+    color:var(--cream);
+    padding:3rem 1.5rem 2.5rem;
+    border-bottom:4px solid var(--gold);
+    position:relative;
+    overflow:hidden;
+  }
+  .cover::before{
+    content:"";position:absolute;top:-50%;right:-15%;width:60%;height:200%;
+    background:radial-gradient(circle,rgba(212,169,72,.12) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .cover-inner{max-width:var(--max-w);margin:0 auto;position:relative;z-index:1}
+  .cover-eyebrow{
+    font-family:"Fraunces",serif;font-style:italic;
+    font-size:.95rem;color:var(--gold-soft);letter-spacing:.08em;margin-bottom:.6rem;
+  }
+  .cover-title{
+    font-family:"Noto Serif SC",serif;font-weight:900;
+    font-size:clamp(2.4rem,5vw,4rem);
+    margin:0;line-height:1.1;letter-spacing:-.02em;color:var(--cream);
+  }
+  .cover-en{
+    font-family:"Fraunces",serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.3rem,2vw,1.7rem);color:var(--gold-soft);margin-top:.3rem;
+  }
+  .cover-sub{
+    font-family:"Noto Serif SC",serif;font-weight:400;
+    font-size:1.05rem;color:rgba(245,239,226,.85);margin-top:1rem;max-width:680px;line-height:1.7;
+  }
+  .cover-meta{
+    display:flex;gap:1.6rem;margin-top:1.6rem;flex-wrap:wrap;
+    font-family:"Inter",sans-serif;font-size:.82rem;color:rgba(245,239,226,.6);
+  }
+  .cover-meta b{color:var(--gold-soft);font-weight:600}
+
+  /* === TOP TAB NAV === */
+  .tabs{
+    background:white;border-bottom:1px solid var(--gray-2);
+    position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(255,255,255,.92);
+  }
+  .tabs-inner{
+    max-width:var(--max-w);margin:0 auto;padding:0 1.5rem;
+    display:flex;gap:.2rem;align-items:center;
+  }
+  .tab{
+    padding:1rem .8rem;font-family:"Noto Serif SC",serif;font-weight:600;font-size:.98rem;
+    color:var(--gray-4);border-bottom:3px solid transparent;cursor:pointer;
+    transition:all .15s;user-select:none;display:flex;align-items:baseline;gap:.4rem;
+  }
+  .tab:hover{color:var(--navy)}
+  .tab.active{color:var(--navy);border-bottom-color:var(--gold)}
+  .tab .num{font-family:"Fraunces",serif;font-style:italic;color:var(--gold);font-weight:400;font-size:.78rem}
+  .tab .count{font-family:"Inter",sans-serif;font-size:.7rem;opacity:.5;font-weight:400}
+
+  /* === FILTER TOOLBAR (theory tab only) === */
+  .toolbar{
+    background:white;border-bottom:1px solid var(--gray-2);padding:.9rem 1.5rem;
+  }
+  .toolbar-inner{
+    max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  }
+  .search-box{flex:1 1 280px;position:relative;max-width:380px}
+  .search-box input{
+    width:100%;padding:.55rem 1rem .55rem 2.2rem;border:1px solid var(--gray-2);
+    border-radius:999px;font-size:.92rem;font-family:inherit;background:var(--gray-1);transition:all .15s;
+  }
+  .search-box input:focus{
+    outline:none;border-color:var(--navy-2);background:white;box-shadow:0 0 0 4px rgba(13,34,64,.08);
+  }
+  .search-box::before{
+    content:"🔍";position:absolute;left:.8rem;top:50%;transform:translateY(-50%);
+    opacity:.5;font-size:.8rem;
+  }
+  .stats{font-family:"Inter",sans-serif;font-size:.82rem;color:var(--gray-4)}
+  .stats b{color:var(--navy);font-weight:700}
+
+  /* === CATEGORY CHIPS === */
+  .chips{
+    max-width:var(--max-w);margin:1.2rem auto 0;padding:0 1.5rem;
+    display:flex;flex-wrap:wrap;gap:.5rem;
+  }
+  .chip{
+    padding:.35rem .85rem;border-radius:999px;border:1px solid var(--gray-2);background:white;
+    color:var(--gray-4);font-size:.82rem;font-family:"Inter",sans-serif;cursor:pointer;
+    transition:all .15s;user-select:none;
+  }
+  .chip:hover{color:var(--navy);border-color:var(--gray-3)}
+  .chip.active{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+  .chip .count{margin-left:.4rem;opacity:.6;font-size:.75rem}
+
+  /* === MAIN GRID === */
+  .grid-wrap{max-width:var(--max-w);margin:1.5rem auto 4rem;padding:0 1.5rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem}
+  .card{
+    background:white;border:1px solid var(--gray-2);border-radius:var(--r-md);
+    padding:1.2rem 1.2rem 1rem;cursor:pointer;transition:all .2s;
+    display:flex;flex-direction:column;min-height:200px;position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;width:4px;height:100%;
+    background:var(--gold);opacity:0;transition:opacity .2s;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:var(--navy-3)}
+  .card:hover::before{opacity:1}
+  .card-cat{
+    font-family:"Inter",sans-serif;font-size:.7rem;color:var(--gold);
+    text-transform:uppercase;letter-spacing:.08em;font-weight:600;
+  }
+  .card-cn{
+    font-family:"Noto Serif SC",serif;font-weight:700;font-size:1.25rem;
+    color:var(--navy);margin:.35rem 0 .1rem;line-height:1.3;
+  }
+  .card-en{
+    font-family:"Fraunces",serif;font-style:italic;font-size:.85rem;color:var(--gray-4);margin-bottom:.7rem;
+  }
+  .card-oneliner{color:var(--ink);font-size:.9rem;line-height:1.55;flex:1;margin-bottom:.8rem}
+  .card-foot{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:"Inter",sans-serif;font-size:.72rem;color:var(--gray-3);
+    padding-top:.6rem;border-top:1px dashed var(--gray-2);
+  }
+  .card-foot .author{color:var(--gray-4)}
+  .badge-training{
+    background:var(--gold);color:var(--navy);padding:.12rem .5rem;
+    border-radius:999px;font-weight:700;font-size:.65rem;
+  }
+  .badge-diff{color:var(--gray-4);font-size:.7rem}
+
+  /* === COMPANY CARD === */
+  .corp-card{
+    background:white;border:1px solid var(--gray-2);border-radius:var(--r-md);
+    padding:1.4rem 1.4rem 1.1rem;cursor:pointer;transition:all .2s;
+    display:flex;flex-direction:column;min-height:230px;position:relative;
+  }
+  .corp-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:var(--accent-blue)}
+  .corp-region{
+    font-family:"Inter",sans-serif;font-size:.7rem;color:var(--accent-blue);
+    text-transform:uppercase;letter-spacing:.08em;font-weight:600;
+  }
+  .corp-name{
+    font-family:"Noto Serif SC",serif;font-weight:700;font-size:1.55rem;
+    color:var(--navy);margin:.3rem 0 .15rem;line-height:1.2;
+  }
+  .corp-en{
+    font-family:"Fraunces",serif;font-style:italic;font-size:.95rem;color:var(--gray-4);margin-bottom:.7rem;
+  }
+  .corp-ds{
+    font-family:"Inter",sans-serif;font-size:.78rem;color:var(--navy-2);
+    background:var(--gray-1);padding:.25rem .7rem;border-radius:999px;display:inline-block;margin-bottom:.7rem;
+  }
+  .corp-summary{font-size:.9rem;line-height:1.6;color:var(--ink);flex:1}
+  .corp-foot{
+    display:flex;justify-content:space-between;align-items:baseline;margin-top:.8rem;
+    font-family:"Inter",sans-serif;font-size:.72rem;color:var(--gray-3);
+    padding-top:.6rem;border-top:1px dashed var(--gray-2);
+  }
+
+  /* === PARADIGM SECTION === */
+  .paradigm-hero{
+    background:var(--navy);color:var(--cream);padding:2.5rem 1.5rem;border-radius:var(--r-lg);
+    margin-bottom:2rem;text-align:center;
+  }
+  .paradigm-hero h2{
+    font-family:"Noto Serif SC",serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 .8rem;
+  }
+  .paradigm-hero p{max-width:720px;margin:0 auto;line-height:1.8;font-size:1rem;color:rgba(245,239,226,.85)}
+  .paradigm-sections{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:1.5rem}
+  .paradigm-subtitle{font-family:"Fraunces",serif;font-style:italic;color:var(--gold-soft);font-size:1.05rem;margin:.5rem 0 .8rem}
+  .paradigm-framing{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0 0 1.5rem}
+  .pf-block{background:white;border-radius:var(--r-md);padding:1.2rem 1.4rem;border-left:4px solid var(--gold)}
+  .pf-imp{border-left-color:var(--accent-rose)}
+  .pf-k{font-family:"Inter",sans-serif;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.4rem}
+  .pf-imp .pf-k{color:var(--accent-rose)}
+  .pf-v{font-size:.95rem;line-height:1.75;color:var(--ink)}
+  .advice-list{display:flex;flex-direction:column;gap:.6rem;margin-top:.8rem}
+  .advice-item{display:flex;gap:.8rem;background:white;border:1px solid var(--gray-2);border-radius:var(--r-md);padding:.9rem 1.1rem;align-items:baseline}
+  .advice-num{flex:0 0 auto;font-family:"Fraunces",serif;font-style:italic;color:var(--gold);font-size:1.4rem;font-weight:600;line-height:1}
+  .advice-text{flex:1;font-size:.95rem;line-height:1.7}
+  @media (max-width:720px){.paradigm-framing{grid-template-columns:1fr}}
+  .paradigm-block{
+    background:white;border:1px solid var(--gray-2);border-radius:var(--r-md);padding:1.5rem 1.4rem;
+  }
+  .paradigm-block h3{
+    font-family:"Noto Serif SC",serif;font-weight:700;font-size:1.2rem;
+    color:var(--navy);margin:0 0 .4rem;
+  }
+  .paradigm-block .pintro{font-size:.88rem;color:var(--gray-4);line-height:1.6;margin-bottom:1rem}
+  .pitem{
+    background:var(--gray-1);border:1px solid var(--gray-2);border-radius:var(--r-md);
+    padding:.95rem 1.1rem;margin-bottom:.7rem;transition:all .15s;
+  }
+  .pitem:hover{border-color:var(--gold-soft);background:white}
+  .pitem:last-child{margin-bottom:0}
+  .pitem-name{
+    font-family:"Noto Serif SC",serif;font-weight:700;color:var(--navy);font-size:1rem;
+  }
+  .pitem-verdict{
+    display:inline-block;font-family:"Inter",sans-serif;font-size:.7rem;font-weight:700;
+    padding:.12rem .55rem;border-radius:999px;margin-left:.5rem;vertical-align:middle;
+  }
+  .pitem > div:first-child{margin-bottom:.55rem;padding-bottom:.45rem;border-bottom:1px dashed var(--gray-2)}
+  .v-alive{background:var(--accent-sage);color:white}
+  .v-upgrade{background:var(--accent-blue);color:white}
+  .v-deprecated{background:var(--accent-rose);color:white}
+  .v-emerging{background:var(--gold);color:var(--navy)}
+  .pitem-reason{font-size:.85rem;color:var(--gray-4);margin-top:.25rem;line-height:1.55}
+  .pitem-row{display:flex;gap:.8rem;font-size:.88rem;line-height:1.65;margin-top:.45rem;align-items:baseline}
+  .prow-k{flex:0 0 76px;font-family:"Inter",sans-serif;font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;font-weight:700;padding-top:.15rem}
+  .prow-v{flex:1;color:var(--ink)}
+  .prow-after{color:var(--accent-sage);font-weight:500}
+  /* paradigm block tighten spacing */
+  .paradigm-block{padding:1.3rem 1.4rem!important}
+  .paradigm-block h3{margin-bottom:.3rem!important}
+  .paradigm-block .pintro{margin-bottom:1rem!important}
+  .prow-chip{display:inline-block;background:var(--gray-1);border:1px solid var(--gray-2);color:var(--navy);padding:.1rem .5rem;border-radius:99px;font-size:.78rem;margin:.1rem .2rem .1rem 0}
+  .prow-cite{display:inline-block;margin-top:.5rem;font-family:"Inter",sans-serif;font-size:.75rem;color:var(--accent-blue);border:none}
+
+  /* === SOURCES / APPENDIX === */
+  .sources-toc{
+    display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;
+  }
+  .sources-toc a{
+    padding:.4rem .9rem;background:white;border:1px solid var(--gray-2);border-radius:999px;
+    color:var(--navy);font-family:"Inter",sans-serif;font-size:.82rem;
+  }
+  .src-group{background:white;border:1px solid var(--gray-2);border-radius:var(--r-md);padding:1.4rem 1.5rem;margin-bottom:1rem}
+  .src-group h3{font-family:"Noto Serif SC",serif;font-weight:700;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;display:inline-block}
+  .src-group ul{margin:0;padding-left:0;list-style:none}
+  .src-group li{padding:.4rem 0;font-size:.88rem;line-height:1.55}
+  .src-group li::before{content:"📖 ";opacity:.6}
+
+  /* === DRAWER (shared) === */
+  .drawer-mask{
+    position:fixed;inset:0;background:rgba(13,34,64,.5);backdrop-filter:blur(2px);
+    opacity:0;pointer-events:none;transition:opacity .2s;z-index:100;
+  }
+  .drawer-mask.open{opacity:1;pointer-events:all}
+  .drawer{
+    position:fixed;top:0;right:0;height:100vh;width:min(780px,95vw);background:var(--gray-1);
+    transform:translateX(100%);transition:transform .25s cubic-bezier(.4,.0,.2,1);
+    z-index:101;overflow-y:auto;box-shadow:var(--shadow-2);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer-close{
+    position:sticky;top:0;z-index:5;background:var(--gray-1);padding:.8rem 1.5rem;
+    border-bottom:1px solid var(--gray-2);display:flex;justify-content:space-between;align-items:center;
+    font-family:"Inter",sans-serif;font-size:.8rem;color:var(--gray-4);
+  }
+  .drawer-close button{
+    background:none;border:1px solid var(--gray-2);border-radius:999px;padding:.35rem .8rem;
+    cursor:pointer;font-size:.78rem;font-family:inherit;color:var(--gray-4);
+  }
+  .drawer-close button:hover{background:var(--navy);color:white;border-color:var(--navy)}
+  .drawer-body{padding:1.5rem 2rem 4rem}
+
+  .d-cat{font-family:"Inter",sans-serif;font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+  .d-title-cn{font-family:"Noto Serif SC",serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.4rem);margin:.3rem 0 .2rem;color:var(--navy);line-height:1.2}
+  .d-title-en{font-family:"Fraunces",serif;font-style:italic;font-size:1.15rem;color:var(--gray-4);margin-bottom:1rem}
+  .d-meta{display:flex;gap:1.2rem;font-family:"Inter",sans-serif;font-size:.85rem;color:var(--gray-4);flex-wrap:wrap;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--gray-2)}
+  .d-meta b{color:var(--navy);font-weight:600}
+  .d-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1.2rem}
+  .d-tag{background:var(--gray-1);border:1px solid var(--gray-2);color:var(--navy);padding:.18rem .55rem;border-radius:99px;font-size:.74rem;font-family:"Inter",sans-serif}
+  .d-oneliner,.d-summary{
+    font-family:"Noto Serif SC",serif;font-size:1.15rem;font-weight:600;color:var(--navy);
+    background:white;border-left:4px solid var(--gold);padding:1rem 1.2rem;margin-bottom:1.4rem;line-height:1.6;border-radius:0 var(--r-sm) var(--r-sm) 0;
+  }
+  .d-section{margin-bottom:1.8rem}
+  .d-h3{
+    font-family:"Inter",sans-serif;font-size:.82rem;color:var(--gold);
+    text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:.6rem;
+    padding-bottom:.3rem;border-bottom:1px dotted var(--gray-3);
+    display:flex;align-items:center;gap:.45rem;
+  }
+  .h-icon{width:1em;height:1em;flex:0 0 1em;color:var(--gold);stroke:currentColor;display:inline-block;vertical-align:middle}
+  .d-h3 .h-icon{width:16px;height:16px}
+  .d-principle,.d-text{font-size:.96rem;line-height:1.78;color:var(--ink)}
+  .d-formula{
+    font-family:"Fraunces","JetBrains Mono",monospace;font-style:italic;
+    background:var(--navy);color:var(--gold-soft);padding:.9rem 1.1rem;border-radius:var(--r-sm);
+    margin:.8rem 0;font-size:1rem;text-align:center;
+  }
+  .d-list{margin:0;padding-left:0;list-style:none}
+  .d-list li{position:relative;padding:.35rem 0 .35rem 1.5rem;font-size:.92rem;line-height:1.65}
+  .d-list li::before{content:"◆";position:absolute;left:0;top:.45rem;color:var(--gold);font-size:.65rem}
+  .d-list.pitfalls li::before{content:"⚠";color:var(--accent-rose)}
+  .d-list.use-when li::before{content:"▸";color:var(--accent-sage)}
+  .d-list.controversies li::before{content:"❗";color:var(--accent-rose)}
+  .d-list.lessons li::before{content:"✓";color:var(--accent-sage)}
+
+  .d-examples{display:flex;flex-direction:column;gap:.7rem}
+  .d-ex{background:white;border:1px solid var(--gray-2);border-radius:var(--r-sm);padding:.8rem 1rem}
+  .d-ex-ctx{display:inline-block;background:var(--navy);color:var(--gold-soft);font-family:"Inter",sans-serif;font-size:.68rem;padding:.15rem .55rem;border-radius:999px;margin-bottom:.4rem;letter-spacing:.04em}
+  .d-ex-desc{font-size:.9rem;line-height:1.6}
+  .d-related{display:flex;flex-wrap:wrap;gap:.4rem}
+  .d-related a{background:white;border:1px solid var(--gray-2);color:var(--navy);padding:.3rem .7rem;border-radius:999px;font-size:.8rem;font-family:"Inter",sans-serif;cursor:pointer;border-bottom:1px solid var(--gray-2)}
+  .d-related a:hover{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+
+  .d-sources{flex-direction:column}
+  .d-sources li{font-size:.85rem;padding-left:0;border-bottom:1px solid var(--gray-2)}
+  .d-sources li::before{content:"📖";padding-right:.3rem}
+
+  /* Company drawer specifics */
+  .d-stage{background:white;border:1px solid var(--gray-2);border-radius:var(--r-sm);padding:.8rem 1rem;margin-bottom:.5rem}
+  .d-stage h4{margin:0 0 .25rem;font-family:"Noto Serif SC",serif;color:var(--navy);font-size:.95rem;font-weight:700}
+  .d-stage p{margin:.2rem 0;font-size:.86rem;line-height:1.55}
+  .d-stage .deliv{color:var(--accent-sage);font-family:"Inter",sans-serif;font-size:.72rem;font-style:italic}
+  .d-project{background:white;border:1px solid var(--gray-2);border-radius:var(--r-sm);padding:.8rem 1rem;margin-bottom:.5rem}
+  .d-project .pyear{color:var(--gold);font-family:"Fraunces",serif;font-weight:600;font-style:italic}
+  .d-project h4{margin:.1rem 0;font-family:"Noto Serif SC",serif;color:var(--navy);font-size:.98rem}
+  .d-mottos{display:flex;flex-wrap:wrap;gap:.4rem}
+  .d-mottos span{background:var(--cream);color:var(--navy);padding:.3rem .7rem;border-radius:var(--r-sm);font-size:.85rem;font-family:"Fraunces",serif;font-style:italic}
+
+  /* === FIGURES === */
+  .fig{margin:0;padding:0}
+  .fig svg, .fig img{display:block;max-width:100%;height:auto;border-radius:var(--r-sm)}
+  .fig figcaption{
+    font-family:"Inter",sans-serif;font-size:.78rem;color:var(--gray-4);
+    margin-top:.5rem;text-align:center;line-height:1.5;font-style:italic;
+  }
+  .fig-thumb{margin-bottom:.7rem}
+  .fig-thumb svg, .fig-thumb img{
+    width:100%;height:100px;object-fit:cover;background:var(--gray-1);
+    border:1px solid var(--gray-2);border-radius:var(--r-sm);
+  }
+  .fig-large{margin:1rem 0;padding:1rem;background:white;border:1px solid var(--gray-2);border-radius:var(--r-md)}
+  .fig-large svg, .fig-large img{max-width:680px;margin:0 auto}
+  .fig-inline svg, .fig-inline img{max-width:100%;border:1px solid var(--gray-2)}
+  .corp-logo{
+    position:absolute;top:.9rem;right:.9rem;width:48px;height:48px;
+    background:white;border-radius:50%;padding:.5rem;
+    box-shadow:0 2px 6px rgba(13,34,64,.08);
+  }
+  .corp-logo img, .corp-logo svg{width:100%;height:100%;object-fit:contain}
+  .fig-corp-hero{
+    display:flex;justify-content:center;align-items:center;
+    background:var(--gray-1);border:1px solid var(--gray-2);border-radius:var(--r-md);
+    padding:2rem 1rem;margin:.5rem 0 1.2rem;
+  }
+  .fig-corp-hero img, .fig-corp-hero svg{max-height:120px;width:auto}
+  .fig-corp-hero figcaption{margin-top:.8rem;font-size:.8rem}
+  .card-has-fig{padding-top:.8rem}
+
+  /* === PHOTO HERO === */
+  .photo-hero{margin:0 0 1.5rem;padding:0;border-radius:var(--r-md);overflow:hidden;position:relative}
+  .photo-hero img{display:block;width:100%;height:auto;max-height:260px;object-fit:cover;background:var(--gray-1)}
+  .photo-hero figcaption{
+    position:absolute;bottom:0;left:0;right:0;padding:.6rem 1rem;
+    background:linear-gradient(to top,rgba(13,34,64,.85),rgba(13,34,64,.0));
+    color:var(--cream);font-family:"Inter",sans-serif;font-size:.78rem;display:flex;
+    justify-content:space-between;align-items:flex-end;gap:1rem;line-height:1.5;
+  }
+  .photo-hero .ph-cap{flex:1;font-family:"Noto Serif SC",serif;font-weight:500;font-size:.86rem;color:var(--cream)}
+  .photo-hero .ph-src{color:var(--gold-soft);font-size:.7rem;white-space:nowrap}
+  .photo-hero .ph-src a{color:var(--gold-soft);border:none}
+  .photo-theory img{max-height:200px}
+  .photo-corp img{max-height:240px}
+  .photo-para img{max-height:180px}
+
+  /* === EMPTY / LOADING === */
+  .empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--gray-4)}
+  .empty h3{font-family:"Noto Serif SC",serif;color:var(--navy);font-weight:700}
+  .empty.loading h3::after{content:" …";animation:dots 1.4s infinite}
+  @keyframes dots{0%{content:" …"}33%{content:" ··"}66%{content:" ··"}}
+
+  /* Coming soon banner */
+  .coming-soon{
+    text-align:center;padding:5rem 2rem;color:var(--gray-4);max-width:680px;margin:0 auto;
+  }
+  .coming-soon h2{font-family:"Noto Serif SC",serif;color:var(--navy);font-weight:700;font-size:1.8rem}
+  .coming-soon p{line-height:1.8}
+
+  /* Section visibility */
+  .section{display:none}
+  .section.active{display:block}
+
+  /* === FOOTER === */
+  .footer{
+    background:var(--navy);color:rgba(245,239,226,.6);padding:2rem 1.5rem;text-align:center;
+    font-family:"Inter",sans-serif;font-size:.82rem;border-top:1px solid var(--navy-3);
+  }
+  .footer a{color:var(--gold-soft)}
+
+  @media (max-width:720px){
+    .cover{padding:2rem 1rem 1.5rem}
+    .toolbar,.chips,.grid-wrap{padding-left:1rem;padding-right:1rem}
+    .drawer-body{padding:1.2rem 1.3rem 3rem}
+    .tabs-inner{overflow-x:auto;padding:0 1rem}
+    .tab{padding:.8rem .5rem;font-size:.88rem;white-space:nowrap}
+    .paradigm-sections{grid-template-columns:1fr}
+  }
+
+  /* Print mode for PDF */
+  @media print{
+    .tabs,.toolbar,.chips,.drawer,.drawer-mask,.footer{display:none!important}
+    .grid{grid-template-columns:1fr 1fr;gap:.5rem}
+    .card{break-inside:avoid;page-break-inside:avoid}
+    body{background:white}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">UX Encyclopedia · 用户体验类岗位必读书籍 · v0.2</div>
+    <h1 class="cover-title">用户体验之书</h1>
+    <div class="cover-en">The UX Book</div>
+    <p class="cover-sub">162 条定律 × 22 家大厂工作流 × AI 时代范式迁移 — 一本"翻得开、找得到、用得上"的全景手册。</p>
+    <div class="cover-meta">
+      <span>第一部 · 理论卡片 <b id="m-theory">—</b></span>
+      <span>第二部 · 大厂工作流 <b id="m-corp">—</b></span>
+      <span>第三部 · 范式迁移 <b id="m-paradigm">—</b></span>
+      <span>附录 · 引用来源 <b id="m-src">—</b></span>
+      <span>编纂 · <b>千图网 Wayne</b></span>
+      <span>更新 · 2026-05-12</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner">
+    <div class="tab active" data-tab="theory"><span class="num">I.</span>理论卡片 <span class="count" id="t-theory">—</span></div>
+    <div class="tab" data-tab="corp"><span class="num">II.</span>大厂工作流 <span class="count" id="t-corp">—</span></div>
+    <div class="tab" data-tab="paradigm"><span class="num">III.</span>AI 范式迁移</div>
+    <div class="tab" data-tab="sources"><span class="num">附.</span>引用来源</div>
+    <div class="tab" data-tab="about"><span class="num">·</span>关于这本书</div>
+  </div>
+</nav>
+
+<!-- ============== PART I · THEORY CARDS ============== -->
+<section class="section active" data-section="theory">
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <div class="search-box"><input type="text" id="search" placeholder="搜索定律名 / 提出者 / 关键词…"/></div>
+      <div class="stats">当前显示 <b id="shown-count">0</b> 张</div>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+  <div class="grid-wrap"><div class="grid" id="grid"><div class="empty loading"><h3>载入第一部 · 理论卡片</h3></div></div></div>
+</section>
+
+<!-- ============== PART II · INDUSTRY PLAYBOOKS ============== -->
+<section class="section" data-section="corp">
+  <div class="chips" id="corp-chips"></div>
+  <div class="grid-wrap"><div class="grid" id="corp-grid"><div class="empty"><h3>第二部即将上线</h3><p>22 家大厂工作流研究中（5 个 agent 联网调研）。回来再看。</p></div></div></div>
+</section>
+
+<!-- ============== PART III · PARADIGM SHIFT ============== -->
+<section class="section" data-section="paradigm">
+  <div class="grid-wrap" style="max-width:1080px"><div id="paradigm-body">
+    <div class="empty"><h3>第三部即将上线</h3><p>AI 时代范式迁移专题撰写中。回来再看。</p></div>
+  </div></div>
+</section>
+
+<!-- ============== APPENDIX · SOURCES ============== -->
+<section class="section" data-section="sources">
+  <div class="grid-wrap" style="max-width:980px"><div id="sources-body">
+    <div class="empty"><h3>附录建设中</h3><p>引用源将在第二/三部完成后聚合输出。</p></div>
+  </div></div>
+</section>
+
+<!-- ============== ABOUT ============== -->
+<section class="section" data-section="about">
+  <div class="grid-wrap" style="max-width:760px"><div class="coming-soon" style="text-align:left;padding:2rem 0">
+    <h2>关于《用户体验之书》</h2>
+    <p style="font-size:1rem">这是一本试图覆盖"全部用户体验相关定律 / 框架 / 方法 / 大厂工作流 / AI 时代范式迁移"的全景手册。它不替代任何一本经典著作（Don Norman、Jakob Nielsen、Krug、Cooper），而是充当"索引"——告诉你某个理论叫什么、来自哪个学科、在什么场景该用、银行/AI 时代有什么具体落点、可以延伸去看哪本书或哪场演讲。</p>
+    <p style="font-size:1rem">三部内容：</p>
+    <ul style="font-size:1rem;line-height:1.9">
+      <li><b>第一部 · 理论卡片（162 张）</b> — 12 大类，从菲茨定律到 Dark Patterns，每张一页</li>
+      <li><b>第二部 · 大厂工作流（22 家）</b> — Apple/Google/Microsoft/IBM/字节/阿里/腾讯…等的设计组织、工作流、AI 升级</li>
+      <li><b>第三部 · AI 时代范式迁移</b> — 哪些经典仍鲜活，哪些被升级，哪些被替代，哪些全新涌现</li>
+      <li><b>附录</b> — 全部引用来源（论文 / 书籍 / 播客 / 演讲 / 官博）</li>
+    </ul>
+    <p style="font-size:1rem">编纂：<b>千图网 Wayne</b>。数据驱动 / 单一事实源 (SSOT)：<code>cards.v0.1.json</code> + <code>companies.v0.1.json</code> + <code>paradigm.json</code>。</p>
+    <p style="font-size:1rem;color:var(--gray-4)">这本书会持续生长。每次新增/更正都会更新本网页与对应的 Notion 数据库。</p>
+  </div></div>
+</section>
+
+<div class="drawer-mask" id="mask"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-close"><span id="drawer-id"></span><button id="close-btn">关闭 ✕</button></div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<footer class="footer">
+  <div>《用户体验之书》v0.2 · 数据驱动 · SSOT: cards.v0.1.json + companies.v0.1.json + paradigm.json</div>
+  <div style="margin-top:.4rem">由千图网 Wayne 编纂 · <a href="https://uxlaws.wwei.ai">uxlaws.wwei.ai</a> · 这是一本持续生长的必读手册</div>
+</footer>
+
+<script>
+const CATEGORIES=["心理学定律","视觉感知","设计原则","可用性原则","研究方法","方法论框架","指标评估","AI时代","行为说服","信息架构","行业规范","伦理黑暗模式"];
+const REGION_ORDER=["国际","中国"];
+
+let allCards=[], allCorps=[], paradigmData=null, figures={}, photos={};
+let activeCategory="全部", activeRegion="全部", searchQ="";
+let activeTab="theory";
+
+async function loadAll(){
+  // Theory cards (required)
+  try{
+    const r=await fetch('cards.v0.1.json');
+    allCards=await r.json();
+  }catch(e){console.warn('cards load failed',e);allCards=[]}
+
+  // Companies (optional, may not exist yet)
+  try{
+    const r=await fetch('companies.v0.1.json');
+    if(r.ok) allCorps=await r.json();
+  }catch(e){allCorps=[]}
+
+  // Paradigm (optional)
+  try{
+    const r=await fetch('paradigm.json');
+    if(r.ok) paradigmData=await r.json();
+  }catch(e){paradigmData=null}
+
+  // Figures library (optional)
+  try{
+    const r=await fetch('figures.v0.1.json');
+    if(r.ok) figures=await r.json();
+  }catch(e){figures={}}
+
+  // Unsplash hero photos (optional)
+  try{
+    const r=await fetch('unsplash.v0.1.json');
+    if(r.ok) photos=await r.json();
+  }catch(e){photos={}}
+
+  updateCovers();
+  renderTheory();
+  renderCorps();
+  renderParadigm();
+  renderSources();
+}
+
+// === SECTION ICONS === (16px stroke, project-tone)
+const ICONS={
+  "原理详述":"<path d='M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12c1 1 2 2 2 4h4c0-2 1-3 2-4a7 7 0 0 0-4-12z'/>",
+  "要点":"<path d='M5 5h14M5 12h14M5 19h14'/>",
+  "适用应用场景":"<circle cx='12' cy='12' r='9'/><circle cx='12' cy='12' r='5'/><circle cx='12' cy='12' r='1.5' fill='currentColor'/>",
+  "适合应用场景":"<circle cx='12' cy='12' r='9'/><circle cx='12' cy='12' r='5'/><circle cx='12' cy='12' r='1.5' fill='currentColor'/>",
+  "实战案例":"<path d='M4 6h16v12H4z'/><path d='M8 10h8M8 14h5'/>",
+  "常见陷阱":"<path d='M12 3 2 21h20L12 3z'/><path d='M12 10v5M12 18v.1'/>",
+  "相关卡片":"<circle cx='6' cy='12' r='2.5'/><circle cx='18' cy='6' r='2.5'/><circle cx='18' cy='18' r='2.5'/><path d='M8 11l8-4M8 13l8 4'/>",
+  "权威来源":"<path d='M4 4h12a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z'/><path d='M7 8h8M7 12h8M7 16h5'/>",
+  "设计理念":"<path d='M12 21s-7-5-7-11a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 6-7 11-7 11z'/>",
+  "设计组织":"<circle cx='9' cy='8' r='3'/><circle cx='17' cy='10' r='2.5'/><path d='M3 21c0-3 3-5 6-5s6 2 6 5M14 21c0-2 2-4 4-4s4 2 4 4'/>",
+  "关键人物":"<circle cx='12' cy='8' r='4'/><path d='M4 22c0-5 4-8 8-8s8 3 8 8'/>",
+  "经典工作流":"<rect x='3' y='4' width='5' height='5' rx='1'/><rect x='16' y='4' width='5' height='5' rx='1'/><rect x='3' y='15' width='5' height='5' rx='1'/><rect x='16' y='15' width='5' height='5' rx='1'/><path d='M8 6.5h8M8 17.5h8M5.5 9v6M18.5 9v6'/>",
+  "AI 时代升级":"<path d='M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2'/><circle cx='12' cy='12' r='5'/>",
+  "仍在沿用的旧理论":"<circle cx='12' cy='12' r='9'/><path d='M12 7v5l3 3'/>",
+  "已被替代/升级":"<path d='M3 7h14l-3-3M21 17H7l3 3'/>",
+  "代表项目":"<path d='M5 21V4M5 4l10 1v9L5 13'/>",
+  "文化口号":"<path d='M6 17V8c0-2 1-3 3-3M14 17V8c0-2 1-3 3-3'/><path d='M5 17h4v3H5zM13 17h4v3h-4z'/>",
+  "对中国团队的启示":"<circle cx='12' cy='12' r='2'/><path d='M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4'/>",
+  "争议与批评":"<path d='M21 12c0 5-4 9-9 9s-9-4-9-9 4-9 9-9c2 0 4 .5 5.5 1.5'/><path d='M12 8v5M12 16v.1'/>",
+  "必读资源":"<path d='M4 4h7v16H4zM13 4h7v16h-7z'/><path d='M7 8h2M7 12h2M16 8h2M16 12h2'/>",
+  "中文学习路径":"<path d='M3 12h13M16 6l6 6-6 6'/>",
+  "适合应用场景 ":"<circle cx='12' cy='12' r='9'/>"
+};
+function sectionIcon(label){
+  if(!label) return '';
+  // strip parenthetical counts like 要点（5）
+  const key=String(label).replace(/（[^）]*）|\([^)]*\)|\s+\d+\s*$/g,'').trim();
+  const path=ICONS[key]||ICONS[label];
+  if(!path) return '';
+  return `<svg class="h-icon" viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>${path}</svg>`;
+}
+function injectIcons(root){
+  if(!root) return;
+  root.querySelectorAll('.d-h3').forEach(el=>{
+    if(el.querySelector('.h-icon')) return;
+    const txt=(el.textContent||'').trim();
+    const icon=sectionIcon(txt);
+    if(icon) el.insertAdjacentHTML('afterbegin', icon);
+  });
+}
+
+// === FIGURE RENDERER ===
+function renderFigure(id, opts={}){
+  const fig = figures[id];
+  if(!fig) return '';
+  const size = opts.size || 'large'; // 'thumb' / 'large' / 'inline'
+  const wrap = (inner) => `<figure class="fig fig-${size}">${inner}${opts.caption!==false&&fig.caption?`<figcaption>${fig.caption}</figcaption>`:''}</figure>`;
+  if(fig.type === 'svg'){
+    return wrap(fig.content);
+  }
+  if(fig.type === 'image_url' || fig.type === 'icon_cdn'){
+    return wrap(`<img src="${fig.content}" alt="${fig.alt||fig.caption||''}" loading="lazy"/>`);
+  }
+  return '';
+}
+
+// === PHOTO HERO RENDERER ===
+function renderPhoto(id, opts={}){
+  const p=photos[id]; if(!p) return '';
+  const cls=opts.cls||'photo-hero';
+  return `<figure class="${cls}"><img src="${p.content}" alt="${p.alt||p.caption||''}" loading="lazy"/>${p.caption||p.source?`<figcaption><span class="ph-cap">${p.caption||''}</span>${p.source?`<span class="ph-src">${p.source}${p.source_page?` · <a href="${p.source_page}" target="_blank">↗</a>`:''}</span>`:''}</figcaption>`:''}</figure>`;
+}
+
+function updateCovers(){
+  document.getElementById('m-theory').textContent=allCards.length;
+  document.getElementById('m-corp').textContent=allCorps.length;
+  document.getElementById('m-paradigm').textContent=paradigmData?'4 节':'—';
+  document.getElementById('t-theory').textContent=allCards.length;
+  document.getElementById('t-corp').textContent=allCorps.length;
+  let srcCount=0;
+  allCards.forEach(c=>srcCount+=(c.sources||[]).length);
+  allCorps.forEach(c=>srcCount+=(c.must_read||[]).length);
+  if(paradigmData) srcCount+=(paradigmData.must_read||[]).length;
+  document.getElementById('m-src').textContent=srcCount+'+';
+}
+
+// === Tabs ===
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    activeTab=t.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));
+    document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.dataset.section===activeTab));
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+});
+
+// === THEORY ===
+function renderTheoryChips(){
+  const counts={};
+  allCards.forEach(c=>counts[c.category]=(counts[c.category]||0)+1);
+  const chips=document.getElementById('chips');
+  const all=[['全部',allCards.length],...CATEGORIES.map(c=>[c,counts[c]||0])];
+  chips.innerHTML=all.map(([c,n])=>`<span class="chip ${c===activeCategory?'active':''}" data-cat="${c}">${c}<span class="count">${n}</span></span>`).join('');
+  chips.querySelectorAll('.chip').forEach(el=>el.onclick=()=>{activeCategory=el.dataset.cat;renderTheoryChips();renderTheory()});
+}
+function renderTheory(){
+  renderTheoryChips();
+  const grid=document.getElementById('grid');
+  if(!allCards.length){grid.innerHTML='<div class="empty"><h3>载入中…</h3></div>';return}
+  const filtered=allCards.filter(c=>{
+    if(activeCategory!=="全部"&&c.category!==activeCategory)return false;
+    if(searchQ){
+      const q=searchQ.toLowerCase();
+      const hay=(c.name_cn+' '+c.name_en+' '+(c.aliases||[]).join(' ')+' '+(c.originator||'')+' '+c.one_liner+' '+(c.tags||[]).join(' ')).toLowerCase();
+      if(!hay.includes(q))return false;
+    }
+    return true;
+  });
+  document.getElementById('shown-count').textContent=filtered.length;
+  if(!filtered.length){grid.innerHTML='<div class="empty"><h3>没有匹配的卡片</h3><p>试试别的关键词或切换分类</p></div>';return}
+  grid.innerHTML=filtered.map(c=>`
+    <article class="card${figures[c.id]?' card-has-fig':''}" data-id="${c.id}">
+      ${figures[c.id]?`<div class="card-thumb">${renderFigure(c.id,{size:'thumb',caption:false})}</div>`:''}
+      <div class="card-cat">${c.category}${c.in_training?' · <span class="badge-training">培训种子</span>':''}</div>
+      <div class="card-cn">${c.name_cn}</div>
+      <div class="card-en">${c.name_en}</div>
+      <div class="card-oneliner">${c.one_liner}</div>
+      <div class="card-foot">
+        <span class="author">${c.originator||'—'}${c.year?' · '+c.year:''}</span>
+        <span class="badge-diff">${c.difficulty||''}</span>
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.card').forEach(el=>el.onclick=()=>openTheoryDrawer(el.dataset.id));
+}
+document.getElementById('search').oninput=e=>{searchQ=e.target.value;renderTheory()};
+
+function openTheoryDrawer(id){
+  const c=allCards.find(x=>x.id===id);if(!c)return;
+  document.getElementById('drawer-id').textContent=c.id;
+  const body=document.getElementById('drawer-body');
+  body.innerHTML=`
+    ${photos[c.id]?renderPhoto(c.id,{cls:'photo-hero photo-theory'}):''}
+    <div class="d-cat">${c.category}${c.in_training?' · 培训种子':''}</div>
+    <h2 class="d-title-cn">${c.name_cn}</h2>
+    <div class="d-title-en">${c.name_en}${c.aliases?.length?' · '+c.aliases.join(' / '):''}</div>
+    <div class="d-meta">
+      ${c.originator?`<span>提出者 · <b>${c.originator}</b></span>`:''}
+      ${c.year?`<span>年代 · <b>${c.year}</b></span>`:''}
+      ${c.origin_field?`<span>源出 · <b>${c.origin_field}</b></span>`:''}
+      ${c.difficulty?`<span>难度 · <b>${c.difficulty}</b></span>`:''}
+    </div>
+    <div class="d-oneliner">${c.one_liner}</div>
+    ${c.tags?.length?`<div class="d-tags">${c.tags.map(t=>`<span class="d-tag">${t}</span>`).join('')}</div>`:''}
+    ${figures[c.id]?`<div class="d-section">${renderFigure(c.id,{size:'large'})}</div>`:''}
+    <div class="d-section"><div class="d-h3">原理详述</div><div class="d-principle">${(c.principle||'').replace(/\n/g,'<br>')}</div>${c.formula?`<div class="d-formula">${c.formula}</div>`:''}</div>
+    ${c.key_points?.length?`<div class="d-section"><div class="d-h3">要点（${c.key_points.length}）</div><ul class="d-list">${c.key_points.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+    ${c.use_when?.length?`<div class="d-section"><div class="d-h3">适合应用场景</div><ul class="d-list use-when">${c.use_when.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+    ${c.examples?.length?`<div class="d-section"><div class="d-h3">实战案例</div><div class="d-examples">${c.examples.map(e=>`<div class="d-ex"><span class="d-ex-ctx">${e.context}</span><div class="d-ex-desc">${e.description}</div></div>`).join('')}</div></div>`:''}
+    ${c.pitfalls?.length?`<div class="d-section"><div class="d-h3">常见陷阱</div><ul class="d-list pitfalls">${c.pitfalls.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+    ${c.related_ids?.length?`<div class="d-section"><div class="d-h3">相关卡片</div><div class="d-related">${c.related_ids.map(rid=>{const r=allCards.find(x=>x.id===rid);return r?`<a data-rid="${rid}">${r.name_cn}</a>`:`<a class="missing" title="未收录">${rid}</a>`}).join('')}</div></div>`:''}
+    ${c.sources?.length?`<div class="d-section"><div class="d-h3">权威来源</div><ul class="d-list d-sources">${c.sources.map(s=>`<li>${s.url?`<a href="${s.url}" target="_blank">${s.title}</a>`:s.title}${s.author?` — ${s.author}`:''}${s.type?` <span style="opacity:.5;font-size:.75rem;">[${s.type}]</span>`:''}</li>`).join('')}</ul></div>`:''}
+  `;
+  body.querySelectorAll('a[data-rid]').forEach(a=>a.onclick=e=>{e.preventDefault();openTheoryDrawer(a.dataset.rid);body.scrollTo({top:0,behavior:'smooth'})});
+  injectIcons(body);
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('mask').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+// === COMPANIES (Part II) ===
+function renderCorps(){
+  const grid=document.getElementById('corp-grid');
+  const chips=document.getElementById('corp-chips');
+  if(!allCorps.length){
+    chips.innerHTML='';
+    grid.innerHTML='<div class="empty"><h3>第二部数据未就位</h3><p>5 个 agent 仍在后台采集 22 家大厂工作流。完成后此处会自动出现。</p></div>';
+    return;
+  }
+  // Region filter chips
+  const rcounts={};
+  allCorps.forEach(c=>rcounts[c.region]=(rcounts[c.region]||0)+1);
+  chips.innerHTML=[['全部',allCorps.length],...REGION_ORDER.map(r=>[r,rcounts[r]||0])].map(([r,n])=>
+    `<span class="chip ${r===activeRegion?'active':''}" data-region="${r}">${r}<span class="count">${n}</span></span>`
+  ).join('');
+  chips.querySelectorAll('.chip').forEach(el=>el.onclick=()=>{activeRegion=el.dataset.region;renderCorps()});
+
+  const filtered=allCorps.filter(c=>activeRegion==="全部"||c.region===activeRegion);
+  grid.innerHTML=filtered.map(c=>`
+    <article class="corp-card" data-id="${c.id}">
+      ${figures[c.id]?`<div class="corp-logo">${renderFigure(c.id,{size:'logo',caption:false})}</div>`:''}
+      <div class="corp-region">${c.region} · ${c.industry||''}</div>
+      <div class="corp-name">${c.company_cn}</div>
+      <div class="corp-en">${c.company_en}</div>
+      ${c.design_system?.name?`<span class="corp-ds">设计系统 · ${c.design_system.name}</span>`:''}
+      <div class="corp-summary">${(c.summary||'').slice(0,180)}${c.summary?.length>180?'…':''}</div>
+      <div class="corp-foot">
+        <span>${c.founded?'创立 '+c.founded:''}</span>
+        <span>${c.must_read?.length||0} 篇推荐阅读 →</span>
+      </div>
+    </article>`).join('');
+  grid.querySelectorAll('.corp-card').forEach(el=>el.onclick=()=>openCorpDrawer(el.dataset.id));
+}
+
+function openCorpDrawer(id){
+  const c=allCorps.find(x=>x.id===id);if(!c)return;
+  document.getElementById('drawer-id').textContent=c.id;
+  const body=document.getElementById('drawer-body');
+  body.innerHTML=`
+    ${photos[c.id]?renderPhoto(c.id,{cls:'photo-hero photo-corp'}):''}
+    <div class="d-cat">${c.region} · ${c.industry||''}</div>
+    <h2 class="d-title-cn">${c.company_cn}</h2>
+    <div class="d-title-en">${c.company_en}${c.founded?' · since '+c.founded:''}</div>
+    ${c.design_system?.name?`<div class="d-meta"><span>设计系统 · <b>${c.design_system.name}</b>${c.design_system.url?` <a href="${c.design_system.url}" target="_blank">↗</a>`:''}</span>${c.design_system.version?`<span>版本 · <b>${c.design_system.version}</b></span>`:''}${c.design_system.open_source?'<span style="color:var(--accent-sage)">开源</span>':''}</div>`:''}
+    ${figures[c.id]?`<div class="d-section">${renderFigure(c.id,{size:'corp-hero'})}</div>`:''}
+    <div class="d-summary">${c.summary||''}</div>
+
+    ${c.design_philosophy?.length?`<div class="d-section"><div class="d-h3">设计理念</div><ul class="d-list">${c.design_philosophy.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+
+    ${(c.design_org?.size||c.design_org?.structure)?`<div class="d-section"><div class="d-h3">设计组织</div><ul class="d-list">${c.design_org.size?`<li><b>规模</b> — ${c.design_org.size}</li>`:''}${c.design_org.structure?`<li><b>结构</b> — ${c.design_org.structure}</li>`:''}</ul></div>`:''}
+
+    ${c.design_org?.key_people?.length?`<div class="d-section"><div class="d-h3">关键人物</div><ul class="d-list">${c.design_org.key_people.map(p=>`<li><b>${p.name}</b>${p.role?' — '+p.role:''}${p.tenure?` <span style="opacity:.6">(${p.tenure})</span>`:''}${p.url?` <a href="${p.url}" target="_blank">↗</a>`:''}</li>`).join('')}</ul></div>`:''}
+
+    ${c.classic_workflow?.stages?.length?`<div class="d-section"><div class="d-h3">经典工作流</div>${c.classic_workflow.stages.map(s=>`<div class="d-stage"><h4>${s.name}</h4><p>${s.description}</p>${s.deliverable?`<p class="deliv">交付物 · ${s.deliverable}</p>`:''}</div>`).join('')}${c.classic_workflow.signature_practice?`<p style="margin-top:.8rem;font-size:.9rem"><b>标志性实践 · </b>${c.classic_workflow.signature_practice}</p>`:''}</div>`:''}
+
+    ${c.ai_era_evolution?`<div class="d-section"><div class="d-h3">AI 时代升级</div>
+      ${c.ai_era_evolution.process_changes?.length?`<p style="margin-top:.6rem;font-weight:600">流程变化</p><ul class="d-list">${c.ai_era_evolution.process_changes.map(p=>`<li>${p}</li>`).join('')}</ul>`:''}
+      ${c.ai_era_evolution.internal_ai_tools?.length?`<p style="margin-top:.6rem;font-weight:600">内部 AI 工具</p><ul class="d-list">${c.ai_era_evolution.internal_ai_tools.map(p=>`<li>${p}</li>`).join('')}</ul>`:''}
+      ${c.ai_era_evolution.role_changes?.length?`<p style="margin-top:.6rem;font-weight:600">角色变化</p><ul class="d-list">${c.ai_era_evolution.role_changes.map(p=>`<li>${p}</li>`).join('')}</ul>`:''}
+      ${c.ai_era_evolution.new_artifacts?.length?`<p style="margin-top:.6rem;font-weight:600">新交付物</p><ul class="d-list">${c.ai_era_evolution.new_artifacts.map(p=>`<li>${p}</li>`).join('')}</ul>`:''}
+    </div>`:''}
+
+    ${c.still_in_use?.length?`<div class="d-section"><div class="d-h3">仍在沿用的旧理论</div><ul class="d-list">${c.still_in_use.map(p=>`<li><b>${p.theory}</b> — ${p.reason}</li>`).join('')}</ul></div>`:''}
+
+    ${c.deprecated_or_replaced?.length?`<div class="d-section"><div class="d-h3">已被替代/升级</div><ul class="d-list pitfalls">${c.deprecated_or_replaced.map(p=>`<li><b>${p.old}</b> → ${p.new}<br><span style="opacity:.7;font-size:.85rem">${p.reason||''}</span></li>`).join('')}</ul></div>`:''}
+
+    ${c.signature_projects?.length?`<div class="d-section"><div class="d-h3">代表项目</div>${c.signature_projects.map(p=>`<div class="d-project"><span class="pyear">${p.year}</span> · <h4 style="display:inline">${p.name}</h4><p style="font-size:.88rem;margin:.2rem 0">${p.what}</p>${p.why_it_matters?`<p style="font-size:.82rem;color:var(--gray-4);margin:.1rem 0">为什么重要 · ${p.why_it_matters}</p>`:''}</div>`).join('')}</div>`:''}
+
+    ${c.cultural_motto?.length?`<div class="d-section"><div class="d-h3">文化口号</div><div class="d-mottos">${c.cultural_motto.map(m=>`<span>"${m}"</span>`).join('')}</div></div>`:''}
+
+    ${c.lessons_for_others?.length?`<div class="d-section"><div class="d-h3">对中国团队的启示</div><ul class="d-list lessons">${c.lessons_for_others.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+
+    ${c.controversies?.length?`<div class="d-section"><div class="d-h3">争议与批评</div><ul class="d-list controversies">${c.controversies.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+
+    ${c.must_read?.length?`<div class="d-section"><div class="d-h3">必读资源（${c.must_read.length}）</div><ul class="d-list d-sources">${c.must_read.map(s=>`<li>${s.url?`<a href="${s.url}" target="_blank">${s.title}</a>`:s.title}${s.author?` — ${s.author}`:''}${s.type?` <span style="opacity:.5;font-size:.75rem">[${s.type}]</span>`:''}${s.year?` <span style="opacity:.5;font-size:.75rem">· ${s.year}</span>`:''}${s.notes?`<br><span style="opacity:.7;font-size:.82rem">${s.notes}</span>`:''}</li>`).join('')}</ul></div>`:''}
+
+    ${c.chinese_learning_path?.length?`<div class="d-section"><div class="d-h3">中文学习路径</div><ul class="d-list">${c.chinese_learning_path.map(p=>`<li>${p}</li>`).join('')}</ul></div>`:''}
+  `;
+  injectIcons(body);
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('mask').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+// === PARADIGM (Part III) ===
+function renderParadigm(){
+  const root=document.getElementById('paradigm-body');
+  if(!paradigmData){root.innerHTML='<div class="empty"><h3>第三部数据未就位</h3><p>AI 范式迁移专题撰写中。完成后此处会自动出现。</p></div>';return}
+  const verdictClass={"完全成立":"v-alive","升级":"v-upgrade","让位":"v-deprecated","新增":"v-emerging","still":"v-alive","upgraded":"v-upgrade","deprecated":"v-deprecated","emerging":"v-emerging"};
+  root.innerHTML=`
+    <div class="paradigm-hero">
+      <h2>${paradigmData.title||'AI 时代的范式迁移'}</h2>
+      ${paradigmData.subtitle?`<div class="paradigm-subtitle">${paradigmData.subtitle}</div>`:''}
+      <p>${paradigmData.tldr||''}</p>
+    </div>
+    ${paradigmData.framing?`<div class="paradigm-framing">
+      ${paradigmData.framing.thesis?`<div class="pf-block"><div class="pf-k">核心论点 · Thesis</div><div class="pf-v">${paradigmData.framing.thesis}</div></div>`:''}
+      ${paradigmData.framing.implication?`<div class="pf-block pf-imp"><div class="pf-k">对中国设计师的含义</div><div class="pf-v">${paradigmData.framing.implication}</div></div>`:''}
+    </div>`:''}
+    ${figures['paradigm-overview']?`<div style="margin-bottom:1.5rem">${renderFigure('paradigm-overview',{size:'large'})}</div>`:''}
+    <div class="paradigm-sections">${(paradigmData.sections||[]).map(s=>{
+      const figId = 'paradigm-' + s.id;
+      const renderItem = (it) => {
+        const verdictTag = it.verdict?`<span class="pitem-verdict ${verdictClass[s.id]||verdictClass[it.verdict]||'v-alive'}">${it.verdict}</span>`:'';
+        const head = `<div><span class="pitem-name">${it.name_cn||it.theory_id||''}</span>${verdictTag}</div>`;
+        let body = '';
+        if(s.id==='still-canon'){
+          body = `
+            ${it.why_alive?`<div class="pitem-row"><span class="prow-k">为什么依然成立</span><span class="prow-v">${it.why_alive}</span></div>`:''}
+            ${it.ai_amplification?`<div class="pitem-row"><span class="prow-k">AI 时代放大</span><span class="prow-v">${it.ai_amplification}</span></div>`:''}`;
+        } else if(s.id==='upgraded'){
+          body = `
+            ${it.before_ai?`<div class="pitem-row"><span class="prow-k">AI 之前</span><span class="prow-v">${it.before_ai}</span></div>`:''}
+            ${it.after_ai?`<div class="pitem-row"><span class="prow-k">AI 之后</span><span class="prow-v prow-after">${it.after_ai}</span></div>`:''}
+            ${it.upgrade_essence?`<div class="pitem-row"><span class="prow-k">升级实质</span><span class="prow-v">${it.upgrade_essence}</span></div>`:''}`;
+        } else if(s.id==='deprecated'){
+          body = `
+            ${it.deprecated_because?`<div class="pitem-row"><span class="prow-k">为什么让位</span><span class="prow-v">${it.deprecated_because}</span></div>`:''}
+            ${it.replacement?`<div class="pitem-row"><span class="prow-k">被什么替代</span><span class="prow-v prow-after">${it.replacement}</span></div>`:''}
+            ${it.human_role_left?`<div class="pitem-row"><span class="prow-k">人还做什么</span><span class="prow-v">${it.human_role_left}</span></div>`:''}`;
+        } else if(s.id==='emerging'){
+          body = `
+            ${it.essence?`<div class="pitem-row"><span class="prow-k">本质</span><span class="prow-v">${it.essence}</span></div>`:''}
+            ${it.core_patterns?.length?`<div class="pitem-row"><span class="prow-k">核心模式</span><span class="prow-v">${it.core_patterns.map(p=>`<span class="prow-chip">${p}</span>`).join(' ')}</span></div>`:''}
+            ${it.anchor_product?`<div class="pitem-row"><span class="prow-k">标杆产品</span><span class="prow-v prow-after">${it.anchor_product}</span></div>`:''}`;
+        }
+        const cite = it.citation_url?`<a class="prow-cite" href="${it.citation_url}" target="_blank">查看引用 ↗</a>`:'';
+        return `<div class="pitem">${head}${body}${cite}</div>`;
+      };
+      const photoId = 'paradigm-photo-' + s.id;
+      return `
+      <div class="paradigm-block">
+        ${photos[photoId]?renderPhoto(photoId,{cls:'photo-hero photo-para'}):''}
+        <h3>${s.title}</h3>
+        <p class="pintro">${s.intro||''}</p>
+        ${figures[figId]?`<div style="margin:.6rem 0 1rem">${renderFigure(figId,{size:'inline'})}</div>`:''}
+        ${(s.items||[]).map(renderItem).join('')}
+      </div>`;
+    }).join('')}
+    </div>
+    ${paradigmData.matrix?.length?`<div style="margin-top:2rem"><h3 style="font-family:'Noto Serif SC',serif;color:var(--navy)">范式迁移对照表</h3><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;background:white;border:1px solid var(--gray-2);border-radius:var(--r-md);font-size:.88rem"><thead><tr style="background:var(--navy);color:var(--cream)"><th style="padding:.6rem 1rem;text-align:left">领域</th><th style="padding:.6rem 1rem;text-align:left">AI 之前</th><th style="padding:.6rem 1rem;text-align:left">AI 之后</th><th style="padding:.6rem 1rem;text-align:left">判定</th></tr></thead><tbody>${paradigmData.matrix.map(m=>`<tr style="border-bottom:1px solid var(--gray-2)"><td style="padding:.6rem 1rem"><b>${m.domain}</b></td><td style="padding:.6rem 1rem">${m.before_ai}</td><td style="padding:.6rem 1rem">${m.after_ai}</td><td style="padding:.6rem 1rem"><span class="pitem-verdict ${verdictClass[m.verdict]||'v-alive'}">${m.verdict}</span></td></tr>`).join('')}</tbody></table></div></div>`:''}
+    ${paradigmData.key_quotes?.length?`<div style="margin-top:2rem"><h3 style="font-family:'Noto Serif SC',serif;color:var(--navy)">关键引言</h3>${paradigmData.key_quotes.map(q=>`<blockquote style="background:white;border-left:4px solid var(--gold);padding:1rem 1.2rem;margin:.8rem 0;border-radius:0 var(--r-sm) var(--r-sm) 0"><p style="font-family:'Noto Serif SC',serif;font-weight:600;color:var(--navy);font-size:1.05rem;margin:0">"${q.text}"</p><div style="font-size:.82rem;color:var(--gray-4);margin-top:.5rem">— ${q.author}${q.source?'，'+q.source:''}${q.url?` <a href="${q.url}" target="_blank">↗</a>`:''}</div></blockquote>`).join('')}</div>`:''}
+    ${paradigmData.advice_for_chinese_designers?.length?`<div style="margin-top:2rem"><h3 style="font-family:'Noto Serif SC',serif;color:var(--navy)">对中国设计师的 ${paradigmData.advice_for_chinese_designers.length} 条具体建议</h3><div class="advice-list">${paradigmData.advice_for_chinese_designers.map((a,i)=>`<div class="advice-item"><span class="advice-num">${String(i+1).padStart(2,'0')}</span><span class="advice-text">${a}</span></div>`).join('')}</div></div>`:''}
+    ${paradigmData.must_read?.length?`<div style="margin-top:2rem"><h3 style="font-family:'Noto Serif SC',serif;color:var(--navy)">范式迁移 · ${paradigmData.must_read.length} 篇必读</h3><ul class="d-list d-sources" style="margin:.6rem 0">${paradigmData.must_read.map(s=>`<li>${s.url?`<a href="${s.url}" target="_blank">${s.title}</a>`:s.title}${s.author?` — ${s.author}`:''}${s.type?` <span style="opacity:.5;font-size:.75rem">[${s.type}]</span>`:''}${s.year?` <span style="opacity:.5;font-size:.75rem">· ${s.year}</span>`:''}${s.notes?`<br><span style="opacity:.7;font-size:.82rem">${s.notes}</span>`:''}</li>`).join('')}</ul></div>`:''}
+  `;
+}
+
+// === SOURCES (Appendix) ===
+function renderSources(){
+  const root=document.getElementById('sources-body');
+  if(!allCards.length && !allCorps.length){root.innerHTML='<div class="empty"><h3>附录建设中</h3></div>';return}
+  // Aggregate sources by category
+  const grouped={"第一部 · 理论卡片":[],"第二部 · 大厂工作流":[],"第三部 · 范式迁移":[]};
+  allCards.forEach(c=>(c.sources||[]).forEach(s=>grouped["第一部 · 理论卡片"].push({...s,from:c.name_cn})));
+  allCorps.forEach(c=>(c.must_read||[]).forEach(s=>grouped["第二部 · 大厂工作流"].push({...s,from:c.company_cn})));
+  if(paradigmData?.must_read) paradigmData.must_read.forEach(s=>grouped["第三部 · 范式迁移"].push({...s,from:"范式迁移"}));
+
+  // TOC
+  const toc=Object.keys(grouped).filter(k=>grouped[k].length).map((k,i)=>`<a href="#src-g-${i}">${k} · ${grouped[k].length}</a>`).join('');
+  let html=`<div class="sources-toc">${toc}</div>`;
+
+  Object.entries(grouped).forEach(([title,arr],i)=>{
+    if(!arr.length) return;
+    // Dedupe by title+url
+    const seen=new Set(); const uniq=[];
+    arr.forEach(s=>{
+      const k=(s.title||'')+'|'+(s.url||'');
+      if(!seen.has(k)){seen.add(k);uniq.push(s)}
+    });
+    html+=`<div class="src-group" id="src-g-${i}"><h3>${title} · ${uniq.length} 条</h3><ul>`;
+    uniq.forEach(s=>{
+      html+=`<li>${s.url?`<a href="${s.url}" target="_blank">${s.title}</a>`:`<b>${s.title}</b>`}${s.author?` — ${s.author}`:''}${s.type?` <span style="opacity:.5;font-size:.78rem">[${s.type}]</span>`:''}${s.year?` <span style="opacity:.5;font-size:.78rem">· ${s.year}</span>`:''} <span style="opacity:.55;font-size:.78rem">引自《${s.from}》</span></li>`;
+    });
+    html+=`</ul></div>`;
+  });
+  root.innerHTML=html;
+}
+
+// === Drawer close handlers ===
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('mask').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('close-btn').onclick=closeDrawer;
+document.getElementById('mask').onclick=closeDrawer;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+loadAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思考进化 · Cognitive Evolution</title>
+<meta name="description" content="思考进化 — 一份关于人如何思考、思考方式如何演化的研究档案。">
+<meta name="theme-color" content="#F2F2F7">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bg:#F2F2F7;
+    --card:#FFFFFF;
+    --ink:#1C1C1E;
+    --ink-2:#3C3C43;
+    --ink-3:#8E8E93;
+    --ink-4:#C7C7CC;
+    --line:#F2F2F7;
+    --blue:#007AFF;
+    --r:18px;
+    --shadow:0 2px 12px rgba(0,0,0,.07);
+    --shadow-hover:0 6px 24px rgba(0,0,0,.10);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue","PingFang SC","Hiragino Sans GB",sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  a{color:inherit;text-decoration:none}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:3.5rem 1.5rem 5rem;
+  }
+
+  /* === HEADER === */
+  .head{margin-bottom:2rem}
+  .head .eb{
+    color:var(--ink-3);
+    font-size:.82rem;
+    letter-spacing:.04em;
+    font-weight:500;
+    margin-bottom:.3rem;
+  }
+  .head h1{
+    font-size:clamp(1.9rem,3vw,2.4rem);
+    font-weight:700;
+    letter-spacing:-.025em;
+    margin:0;
+    line-height:1.15;
+  }
+  .head .sub{
+    color:var(--ink-2);
+    font-size:1.02rem;
+    margin-top:.5rem;
+    max-width:620px;
+  }
+
+  /* === BENTO GRID === */
+  .bento{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:minmax(170px,auto);
+    gap:1rem;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:var(--r);
+    box-shadow:var(--shadow);
+    padding:1.5rem 1.6rem;
+    display:flex;
+    flex-direction:column;
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  a.card,.card.tap{cursor:pointer}
+  a.card:hover,.card.tap:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-hover);
+  }
+
+  /* sizes */
+  .s-2x2{grid-column:span 2;grid-row:span 2}
+  .s-2x1{grid-column:span 2}
+  .s-1x2{grid-row:span 2}
+
+  /* === TEXT TOKENS === */
+  .eb{
+    color:var(--ink-3);
+    font-size:.74rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-weight:600;
+  }
+  .t{
+    font-size:1.55rem;
+    font-weight:700;
+    letter-spacing:-.015em;
+    margin:.45rem 0 .15rem;
+    line-height:1.2;
+  }
+  .en{
+    color:var(--ink-3);
+    font-size:.92rem;
+    font-weight:400;
+    letter-spacing:-.005em;
+  }
+  .desc{
+    color:var(--ink-2);
+    font-size:.95rem;
+    margin-top:.7rem;
+    line-height:1.55;
+  }
+  .foot{
+    margin-top:auto;
+    padding-top:1rem;
+    color:var(--ink-3);
+    font-size:.82rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .arrow{
+    width:24px;height:24px;
+    border-radius:50%;
+    background:var(--bg);
+    color:var(--ink-2);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:.9rem;
+    transition:background .2s,color .2s;
+  }
+  a.card:hover .arrow{background:var(--ink);color:white}
+
+  /* === HERO === */
+  .hero .t{
+    font-size:clamp(2.4rem,4vw,3.2rem);
+    margin-top:1.2rem;
+    letter-spacing:-.03em;
+  }
+  .hero .en{font-size:1.15rem;margin-top:.15rem}
+  .hero .desc{font-size:1.02rem;margin-top:.9rem;max-width:36ch}
+  .hero .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.6rem;
+    margin-top:auto;
+    padding-top:1.4rem;
+    border-top:1px solid var(--line);
+  }
+  .hero .stat .n{
+    font-size:1.55rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;
+  }
+  .hero .stat .l{color:var(--ink-3);font-size:.78rem;margin-top:.2rem}
+
+  /* === DARK CARD === */
+  .dark{background:var(--ink);color:white}
+  .dark .eb{color:rgba(255,255,255,.55)}
+  .dark .en{color:rgba(255,255,255,.55)}
+  .dark .desc{color:rgba(255,255,255,.78)}
+  .dark .foot{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.1)}
+  .dark .arrow{background:rgba(255,255,255,.12);color:white}
+  .dark .lst{margin-top:1.1rem;padding:0;list-style:none}
+  .dark .lst li{
+    padding:.55rem 0;
+    border-top:1px solid rgba(255,255,255,.1);
+    font-size:.92rem;
+    color:rgba(255,255,255,.85);
+  }
+  .dark .lst li:first-child{border-top:none}
+  .dark .lst li b{color:white;font-weight:600;margin-right:.4rem}
+
+  /* === BLUE CTA === */
+  .blue{background:var(--blue);color:white}
+  .blue .eb{color:rgba(255,255,255,.7)}
+  .blue .desc{color:rgba(255,255,255,.88)}
+  .blue .foot{color:rgba(255,255,255,.75)}
+  .blue .arrow{background:rgba(255,255,255,.2);color:white}
+  a.card.blue:hover .arrow{background:white;color:var(--blue)}
+
+  /* === SMALL STAT CARD === */
+  .mini{justify-content:flex-start}
+  .mini .num{
+    font-family:"SF Pro Display","SF Pro Text",-apple-system,sans-serif;
+    font-size:2.2rem;
+    font-weight:700;
+    letter-spacing:-.025em;
+    line-height:1;
+    margin-top:.5rem;
+  }
+  .mini .lbl{
+    font-size:1.05rem;
+    font-weight:600;
+    margin-top:.55rem;
+    color:var(--ink);
+  }
+  .mini .sm{
+    color:var(--ink-3);
+    font-size:.82rem;
+    margin-top:.3rem;
+  }
+  .mini .tag{
+    margin-top:auto;
+    align-self:flex-start;
+    background:var(--bg);
+    color:var(--ink-2);
+    font-size:.72rem;
+    font-weight:500;
+    padding:.25rem .65rem;
+    border-radius:99px;
+  }
+
+  /* === DOT INDICATOR === */
+  .dot{
+    width:8px;height:8px;border-radius:50%;
+    display:inline-block;margin-right:.45rem;
+    background:var(--blue);
+    vertical-align:middle;
+  }
+  .dot.amber{background:#FF9F0A}
+  .dot.gray{background:var(--ink-4)}
+
+  /* === RESPONSIVE === */
+  @media (max-width:960px){
+    .bento{grid-template-columns:repeat(2,1fr)}
+    .s-2x2{grid-column:span 2;grid-row:span 2}
+    .s-1x2{grid-column:span 1;grid-row:span 2}
+    .s-2x1{grid-column:span 2}
+  }
+  @media (max-width:560px){
+    .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+    .s-2x2,.s-1x2,.s-2x1{grid-column:span 1;grid-row:auto}
+    .wrap{padding:2rem 1rem 3rem}
+    .hero .t{font-size:2.2rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="head">
+    <div class="eb">Cognitive Evolution · v0.1</div>
+    <h1>思考进化</h1>
+    <p class="sub">一份关于人如何思考、思考方式如何演化的研究档案。</p>
+  </header>
+
+  <main class="bento">
+
+    <!-- (1) Hero · 2×2 -->
+    <section class="card hero s-2x2">
+      <div class="eb">研究档案 · 持续更新</div>
+      <h2 class="t">思考进化</h2>
+      <div class="en">Cognitive Evolution</div>
+      <p class="desc">从一阶推理到系统性思考，从单人决策到集体智慧，从工具使用到与 AI 共生 — 三辑内容，记录人类思考方式的演化路径。</p>
+      <div class="stats">
+        <div class="stat"><div class="n">3</div><div class="l">辑</div></div>
+        <div class="stat"><div class="n">v0.1</div><div class="l">当前版本</div></div>
+        <div class="stat"><div class="n">2026</div><div class="l">启动</div></div>
+      </div>
+    </section>
+
+    <!-- (2) 思维模型 · 2×1 -->
+    <a class="card s-2x1" href="#vol-1">
+      <div class="eb">第一辑 · Mental Models</div>
+      <h3 class="t">思维模型</h3>
+      <div class="en">解构高质量思考背后的可迁移工具</div>
+      <p class="desc">奥卡姆剃刀、第一性原理、二阶效应、贝叶斯更新 — 那些反复出现在不同领域顶尖头脑里的思考模具。</p>
+      <div class="foot">
+        <span><span class="dot"></span>规划中</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <!-- (3) 思想家档案 · 2×1 -->
+    <a class="card s-2x1" href="#vol-2">
+      <div class="eb">第二辑 · Thinkers</div>
+      <h3 class="t">思想家档案</h3>
+      <div class="en">塑造现代思考方式的人</div>
+      <p class="desc">从苏格拉底的诘问到芒格的格栅理论，从费曼的可视化到 Karpathy 的"用 AI 当杠杆"— 22 位思想家，每人一张档案卡。</p>
+      <div class="foot">
+        <span><span class="dot amber"></span>准备中</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <!-- (4) AI 时代 · 1×2 深色 -->
+    <section class="card dark s-1x2">
+      <div class="eb">第三辑</div>
+      <h3 class="t" style="color:white">AI 时代</h3>
+      <div class="en">人类思考的延伸还是替代？</div>
+      <p class="desc">当 LLM 能在 5 秒里给出"看起来合理"的答案，思考的稀缺资源从"信息获取"变成"判断与验证"。</p>
+      <ul class="lst">
+        <li><b>·</b>提示词是新的写作</li>
+        <li><b>·</b>Agent 是新的下属</li>
+        <li><b>·</b>验证是新的核心技能</li>
+        <li><b>·</b>品味是新的护城河</li>
+      </ul>
+    </section>
+
+    <!-- (5) 认知偏差 · 1×1 -->
+    <a class="card mini" href="#biases">
+      <div class="eb">第一辑 · 子集</div>
+      <div class="num">01</div>
+      <div class="lbl">认知偏差</div>
+      <div class="sm">那些反复犯的思考错误</div>
+      <span class="tag">规划中</span>
+    </a>
+
+    <!-- (6) 决策框架 · 1×1 -->
+    <a class="card mini" href="#frameworks">
+      <div class="eb">第一辑 · 子集</div>
+      <div class="num">02</div>
+      <div class="lbl">决策框架</div>
+      <div class="sm">在不确定下做选择</div>
+      <span class="tag">规划中</span>
+    </a>
+
+    <!-- (7) 学习方法 · 1×1 -->
+    <a class="card mini" href="#learning">
+      <div class="eb">第一辑 · 子集</div>
+      <div class="num">03</div>
+      <div class="lbl">学习方法</div>
+      <div class="sm">如何让知识真的留下来</div>
+      <span class="tag">规划中</span>
+    </a>
+
+    <!-- (8) Archive CTA · 1×1 蓝 -->
+    <a class="card blue" href="archive.html">
+      <div class="eb">参考资料</div>
+      <h3 class="t" style="color:white">UX 资料库</h3>
+      <p class="desc">原始 162 张 UX 定律 / 22 家大厂工作流 / AI 范式迁移卡片。</p>
+      <div class="foot">
+        <span>打开档案</span>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <!-- (9) About · 2×1 -->
+    <section class="card s-2x1">
+      <div class="eb">About</div>
+      <h3 class="t">关于这份档案</h3>
+      <p class="desc">不是教科书，而是一份持续生长的研究笔记。每张卡片都会标明来源、争议点、待验证项；不追求穷尽，只追求"想得清楚一点"。</p>
+      <div class="foot">
+        <span>更新 · 2026-05-22</span>
+        <span>v0.1</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>
