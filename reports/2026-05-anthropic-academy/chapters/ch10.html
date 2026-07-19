@@ -3,52 +3,52 @@
 
   <div class="section-tag"><span class="num">10</span>COST · 第四篇 / 第十章</div>
   <h1 class="section-h">Prompt Caching · 把账单降到 1/10 <span class="en">Production-Grade Cost Control</span></h1>
-  <p class="section-sub">前面九章把模型怎么想、Agent 怎么跑、prompt 怎么写都讲完了——到这一章换个维度,讲一个不浪漫但要命的东西:钱。任何把 Claude 接到生产环境的人,第一周就会被账单吓一跳。Anthropic 在 2024 年发布的 Prompt Caching 是把这笔账单砍到 1/10 的核心机制,本章拆开它的工作原理、五条使用规则、跟 Extended Thinking 的成本陷阱,以及三种最常见的误用。</p>
+  <p class="section-sub">前面九章把模型怎么想、Agent 怎么跑、prompt 怎么写都讲完了——到这一章换个维度，讲一个不浪漫但要命的东西：钱。任何把 Claude 接到生产环境的人，第一周就会被账单吓一跳。Anthropic 在 2024 年发布的 Prompt Caching 是把这笔账单砍到 1/10 的核心机制，本章拆开它的工作原理、五条使用规则、跟 Extended Thinking 的成本陷阱，以及三种最常见的误用。</p>
 
   <div class="tldr">
     <div class="label">▼ 三十秒看懂这一章</div>
-    <p>Prompt Caching 干一件事:把 prompt 里<em>重复出现的前缀</em>(长 system prompt、工具定义、检索片段)缓存在 Anthropic 服务端,下次请求只算「新增部分」的 token,缓存命中部分按原价 10% 计费。听上去美好,但有五条死规则——必须从消息开头开始、最小 1024 token、5 分钟 TTL、缓存创建反而比原价贵 25%、要显式打 <code>cache_control</code>。开对了月账单从 10 万降到 1 万;开错了反而比不开还贵。<strong>这一章的判断:caching 不是「越多越好」,是「热路径上才开」</strong>。</p>
+    <p>Prompt Caching 干一件事：把 prompt 里<em>重复出现的前缀</em>（长 system prompt、工具定义、检索片段）缓存在 Anthropic 服务端，下次请求只算「新增部分」的 token，缓存命中部分按原价 10% 计费。听上去美好，但有五条死规则——必须从消息开头开始、最小 1024 token、5 分钟 TTL、缓存创建反而比原价贵 25%、要显式打 <code>cache_control</code>。开对了月账单从 10 万降到 1 万；开错了反而比不开还贵。<strong>这一章的判断：caching 不是「越多越好」，是「热路径上才开」</strong>。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2024 年 8 月 14 日 · Anthropic 发布 Prompt Caching beta</div>
-    <p>2024 年 8 月 14 日,Anthropic 在官方博客发了一篇标题平淡的公告:《Prompt caching with Claude》。文章本体只有几屏,但底下挂了三张定价表和一个 5 分钟 TTL 的说明 [Anthropic Prompt Caching 2024]。这一晚,北美的 AI 工程师群组开始疯转——因为有人算了一下,他们公司基于 Claude 跑的客服 Agent,每条对话要附带一份 12000 token 的 SOP 手册,每天 50 万条对话,光这一块的 token 成本就是六位数美元。Caching 一开,这部分降到原来的 10%,公司一个月省的钱够再雇两个工程师。</p>
-    <p>后续几周,社区开始反过来吐槽——一些人开了 caching 之后账单反而<em>更贵</em>了。原因是他们的应用场景是「一次性长 prompt 查询」,每次 prompt 都不一样,缓存写入费 1.25 倍照付,命中率 0%,纯亏 25%。Anthropic 在文档里加了一段醒目的警告:<strong>「Caching is only economical when the cached prefix is reused.」</strong>(只有缓存前缀被复用,caching 才划算。)</p>
-    <p>到 2025 年中,Anthropic 又加了一个 1 小时 TTL 的付费选项,把 5 分钟之外的「中频复用」场景也覆盖进来。同期 Skilljar Academy 上线的《Building with the Claude API》课程,把 prompt caching 列为「生产环境必学的三个 API feature 之一」(另两个是 streaming 和 batch processing)[Anthropic Academy 2025]。这一章要讲清楚的,就是这套机制每个旋钮的意义,以及怎么判断要不要拧。</p>
+    <p>2024 年 8 月 14 日，Anthropic 在官方博客发了一篇标题平淡的公告：《Prompt caching with Claude》。文章本体只有几屏，但底下挂了三张定价表和一个 5 分钟 TTL 的说明 [Anthropic Prompt Caching 2024]。这一晚，北美的 AI 工程师群组开始疯转——因为有人算了一下，他们公司基于 Claude 跑的客服 Agent，每条对话要附带一份 12000 token 的 SOP 手册，每天 50 万条对话，光这一块的 token 成本就是六位数美元。Caching 一开，这部分降到原来的 10%，公司一个月省的钱够再雇两个工程师。</p>
+    <p>后续几周，社区开始反过来吐槽——一些人开了 caching 之后账单反而<em>更贵</em>了。原因是他们的应用场景是「一次性长 prompt 查询」，每次 prompt 都不一样，缓存写入费 1.25 倍照付，命中率 0%，纯亏 25%。Anthropic 在文档里加了一段醒目的警告：<strong>「Caching is only economical when the cached prefix is reused.」</strong>（只有缓存前缀被复用，caching 才划算。）</p>
+    <p>到 2025 年中，Anthropic 又加了一个 1 小时 TTL 的付费选项，把 5 分钟之外的「中频复用」场景也覆盖进来。同期 Skilljar Academy 上线的《Building with the Claude API》课程，把 prompt caching 列为「生产环境必学的三个 API feature 之一」（另两个是 streaming 和 batch processing）[Anthropic Academy 2025]。这一章要讲清楚的，就是这套机制每个旋钮的意义，以及怎么判断要不要拧。</p>
   </div>
 
-  <h3><span class="pre">10.1</span>机制 · 缓存的不是答案,是 prefix 计算 <span class="en">What Actually Gets Cached</span></h3>
+  <h3><span class="pre">10.1</span>机制 · 缓存的不是答案，是 prefix 计算 <span class="en">What Actually Gets Cached</span></h3>
 
-  <p class="lead">第一个要纠正的误解:Prompt Caching 不是缓存「答案」——你问同样的问题,Claude 仍然要重新生成回答。它缓存的是 <strong>prompt 前缀经过模型 transformer 层之后的中间计算状态</strong>。下次请求带着同样的前缀过来,这部分计算可以跳过,只需要对新增的「后缀部分」做计算。</p>
+  <p class="lead">第一个要纠正的误解：Prompt Caching 不是缓存「答案」——你问同样的问题，Claude 仍然要重新生成回答。它缓存的是 <strong>prompt 前缀经过模型 transformer 层之后的中间计算状态</strong>。下次请求带着同样的前缀过来，这部分计算可以跳过，只需要对新增的「后缀部分」做计算。</p>
 
-  <p>从计费视角看更直观:一次请求的 token 成本现在分成三段——<em>缓存写入</em>(cache write)、<em>缓存命中</em>(cache read)、<em>新增 token</em>。Sonnet 4.5 / Opus 4.7 当前的定价大致是:缓存写入 = 原价 × 1.25(贵 25%);缓存命中 = 原价 × 0.10(便宜 90%);新增 token = 原价(不变)[Anthropic Pricing 2026]。</p>
+  <p>从计费视角看更直观：一次请求的 token 成本现在分成三段——<em>缓存写入</em>(cache write)、<em>缓存命中</em>(cache read)、<em>新增 token</em>。Sonnet 4.5 / Opus 4.7 当前的定价大致是：缓存写入 = 原价 × 1.25（贵 25%）；缓存命中 = 原价 × 0.10（便宜 90%）；新增 token = 原价（不变）[Anthropic Pricing 2026]。</p>
 
   <h4>一个具体例子</h4>
 
-  <p>假设你给 Claude 一个 10000 token 的 system prompt(里面是公司 SOP)+ 一条 500 token 的用户问题,Claude 生成 1000 token 答案。一天调 1000 次,system prompt 每次都一样:</p>
+  <p>假设你给 Claude 一个 10000 token 的 system prompt（里面是公司 SOP）+ 一条 500 token 的用户问题，Claude 生成 1000 token 答案。一天调 1000 次，system prompt 每次都一样：</p>
 
   <div class="table-wrap no-audio">
     <table>
       <thead>
-        <tr><th>方案</th><th>第 1 次成本</th><th>第 2-1000 次每次成本</th><th>当天总成本(相对)</th></tr>
+        <tr><th>方案</th><th>第 1 次成本</th><th>第 2-1000 次每次成本</th><th>当天总成本（相对）</th></tr>
       </thead>
       <tbody>
         <tr><td>不开 caching</td><td>10000 输入 + 1000 输出</td><td>10000 输入 + 1000 输出</td><td>100% 基准</td></tr>
-        <tr><td>开 caching</td><td>10000 × 1.25(写入)+ 1000 输出</td><td>10000 × 0.10(命中)+ 500 输入 + 1000 输出</td><td>约 15% — 省掉 85%</td></tr>
+        <tr><td>开 caching</td><td>10000 × 1.25（写入）+ 1000 输出</td><td>10000 × 0.10（命中）+ 500 输入 + 1000 输出</td><td>约 15% — 省掉 85%</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>第一次请求贵了 25%,但从第二次开始,前缀那 10000 token 只按 10% 计费,日均下来节省接近 85%。规模越大、前缀越长、复用频率越高,省得越多。这是为什么客服 Agent、长文档问答、多轮对话这三个场景是 caching 最大的受益者。</p>
+  <p>第一次请求贵了 25%，但从第二次开始，前缀那 10000 token 只按 10% 计费，日均下来节省接近 85%。规模越大、前缀越长、复用频率越高，省得越多。这是为什么客服 Agent、长文档问答、多轮对话这三个场景是 caching 最大的受益者。</p>
 
   <div class="callout note">
     <div class="label">i 跟 GPU 上的 KV cache 不是一回事</div>
-    <p>很多人看到 caching 第一反应是「这不就是 transformer 推理时本来就有的 KV cache 吗」——不是。GPU 上的 KV cache 是<em>单次推理内部</em>的状态复用,请求结束就丢;Anthropic 的 Prompt Caching 是<strong>跨请求的服务端持久化</strong>,把前缀的中间表示存在服务端 5 分钟(或 1 小时),让多个独立请求复用。两者发生在不同的层次,机制不同、生命周期不同、计费方式不同。把它们混为一谈,会导致对成本和延迟的预估全错。</p>
+    <p>很多人看到 caching 第一反应是「这不就是 transformer 推理时本来就有的 KV cache 吗」——不是。GPU 上的 KV cache 是<em>单次推理内部</em>的状态复用，请求结束就丢；Anthropic 的 Prompt Caching 是<strong>跨请求的服务端持久化</strong>，把前缀的中间表示存在服务端 5 分钟（或 1 小时），让多个独立请求复用。两者发生在不同的层次，机制不同、生命周期不同、计费方式不同。把它们混为一谈，会导致对成本和延迟的预估全错。</p>
   </div>
 
   <h3><span class="pre">10.2</span>五条死规则 · 必须先背下来 <span class="en">The Five Hard Rules</span></h3>
 
-  <p class="lead">Caching 的所有踩雷,本质都是不熟悉这五条规则。先把五条一次摆全,后面几节再逐条展开:必须从消息开头起、最小 1024 token、默认 5 分钟 TTL、首次写入反而贵 25%、要显式打 cache_control。</p>
+  <p class="lead">Caching 的所有踩雷，本质都是不熟悉这五条规则。先把五条一次摆全，后面几节再逐条展开：必须从消息开头起、最小 1024 token、默认 5 分钟 TTL、首次写入反而贵 25%、要显式打 cache_control。</p>
 
   <div class="number-strip no-audio">
     <div class="item">
@@ -78,133 +78,133 @@
     </div>
   </div>
 
-  <h4>规则一深讲:为什么必须从开头起</h4>
+  <h4>规则一深讲：为什么必须从开头起</h4>
 
-  <p>Prompt Caching 是基于<em>前缀匹配</em>的——服务端拿到一个请求,会从消息开头开始逐 token 比对历史缓存,一旦发现不一致就停止匹配,后续 token 全部按新输入算。这意味着:</p>
+  <p>Prompt Caching 是基于<em>前缀匹配</em>的——服务端拿到一个请求，会从消息开头开始逐 token 比对历史缓存，一旦发现不一致就停止匹配，后续 token 全部按新输入算。这意味着：</p>
 
   <ul>
-    <li>✅ <strong>改 prompt 末尾不影响缓存</strong> — 前面的 system + tools + 历史对话仍然命中,只有新增部分按原价</li>
-    <li>❌ <strong>改 prompt 开头一个字,后面所有缓存全废</strong> — 哪怕只换了一个空格,从那个 token 之后全部按原价重算</li>
-    <li>❌ <strong>system prompt 里塞个时间戳就毁掉</strong> — <code>"当前时间: 2026-05-27 14:32:01"</code> 每次都不一样,放在前面就 0% 命中</li>
+    <li>✅ <strong>改 prompt 末尾不影响缓存</strong> — 前面的 system + tools + 历史对话仍然命中，只有新增部分按原价</li>
+    <li>❌ <strong>改 prompt 开头一个字，后面所有缓存全废</strong> — 哪怕只换了一个空格，从那个 token 之后全部按原价重算</li>
+    <li>❌ <strong>system prompt 里塞个时间戳就毁掉</strong> — <code>"当前时间: 2026-05-27 14:32:01"</code> 每次都不一样，放在前面就 0% 命中</li>
   </ul>
 
-  <p>这条规则决定了 prompt 的<em>结构</em>必须重排:<strong>稳定的放前面,易变的放后面</strong>。Anthropic 推荐的标准布局是 system prompt → tools → 长文档/RAG 片段 → 对话历史 → 当前 user message,稳定性逐段递减。</p>
+  <p>这条规则决定了 prompt 的<em>结构</em>必须重排：<strong>稳定的放前面，易变的放后面</strong>。Anthropic 推荐的标准布局是 system prompt → tools → 长文档/RAG 片段 → 对话历史 → 当前 user message，稳定性逐段递减。</p>
 
-  <h4>规则三深讲:5 分钟 TTL 的真实含义</h4>
+  <h4>规则三深讲：5 分钟 TTL 的真实含义</h4>
 
-  <p>「5 分钟」不是从首次写入算 5 分钟就过期,而是<em>从最后一次命中算 5 分钟</em>——只要 5 分钟内有请求命中,TTL 就会刷新延长。这意味着一个高频被用的缓存可以无限延寿,只要每 5 分钟内至少有一次请求。但一个偶尔被用的缓存(比如每 10 分钟一次)就会反复过期、反复写入、反复付 1.25 倍写入费,得不偿失。</p>
+  <p>「5 分钟」不是从首次写入算 5 分钟就过期，而是<em>从最后一次命中算 5 分钟</em>——只要 5 分钟内有请求命中，TTL 就会刷新延长。这意味着一个高频被用的缓存可以无限延寿，只要每 5 分钟内至少有一次请求。但一个偶尔被用的缓存（比如每 10 分钟一次）就会反复过期、反复写入、反复付 1.25 倍写入费，得不偿失。</p>
 
-  <p>1 小时 TTL 是 2025 年加的付费选项,适用于<em>中频复用</em>场景——比如一个内部知识库 Agent,工作时段每小时被问几次。多付的钱要换算一下,通常超过 4-5 次复用就划算,低于这个还不如默认 5 分钟 [Anthropic Extended Cache 2025]。</p>
+  <p>1 小时 TTL 是 2025 年加的付费选项，适用于<em>中频复用</em>场景——比如一个内部知识库 Agent，工作时段每小时被问几次。多付的钱要换算一下，通常超过 4-5 次复用就划算，低于这个还不如默认 5 分钟 [Anthropic Extended Cache 2025]。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 最常见的初学者错误 · 在 system prompt 开头写时间戳 / 用户名</div>
-    <p>「亲爱的 [user_name],今天是 [date]——」这种模板化开头,如果时间或用户名每次不一样,等于把缓存击穿在第二个 token 上。<strong>所有动态变量必须从前缀里挪到后面去</strong>,放到当前 user message 的末尾,或者作为变量注入到 system 的<em>最后</em>一段(而不是开头)。结构上,你要把 prompt 想成一个三明治:稳定的底面包(system + tools)→ 半稳定的夹心(对话历史)→ 易变的顶面包(当前 user message),caching 从底面包开始,沿稳定的部分一路命中,在易变的部分自然结束。</p>
+    <p>「亲爱的 [user_name]，今天是 [date]——」这种模板化开头，如果时间或用户名每次不一样，等于把缓存击穿在第二个 token 上。<strong>所有动态变量必须从前缀里挪到后面去</strong>，放到当前 user message 的末尾，或者作为变量注入到 system 的<em>最后</em>一段（而不是开头）。结构上，你要把 prompt 想成一个三明治：稳定的底面包（system + tools）→ 半稳定的夹心（对话历史）→ 易变的顶面包（当前 user message），caching 从底面包开始，沿稳定的部分一路命中，在易变的部分自然结束。</p>
   </div>
 
   <h3><span class="pre">10.3</span>什么时候开 · 三种高 ROI 场景 <span class="en">When Caching Pays Off</span></h3>
 
-  <p class="lead">不是所有 Claude 应用都该开 caching。这一节给你三种「开了就赚」的标准场景,以及判断标准。</p>
+  <p class="lead">不是所有 Claude 应用都该开 caching。这一节给你三种「开了就赚」的标准场景，以及判断标准。</p>
 
   <div class="grid-2">
     <div class="card">
       <h4>场景一 · 长 system prompt + 多轮对话</h4>
-      <p>客服 Agent、教学助手、知识库问答——典型特征是 system prompt 写得很长(几千到上万 token),每个用户聊一聊就是十几二十轮。这种场景下,system prompt 在 5 分钟 TTL 内被命中几十次,caching 节省接近 90%。<strong>这是 caching 设计时的第一目标场景</strong>。</p>
+      <p>客服 Agent、教学助手、知识库问答——典型特征是 system prompt 写得很长（几千到上万 token），每个用户聊一聊就是十几二十轮。这种场景下，system prompt 在 5 分钟 TTL 内被命中几十次，caching 节省接近 90%。<strong>这是 caching 设计时的第一目标场景</strong>。</p>
     </div>
     <div class="card">
       <h4>场景二 · 工具定义 + Agent 多步执行</h4>
-      <p>用 <a href="#s8">第 8 章</a> 讲的 Claude 工具调用搭 Agent,工具定义通常几千 token,一次 Agentic Loop 里要被读 5-20 次。给 tools 字段打 <code>cache_control</code>,工具定义部分按 10% 计费。Anthropic 在内部测 Claude Code 时,tools 的 caching 是显著的成本项。</p>
+      <p>用 <a href="#s8">第 8 章</a> 讲的 Claude 工具调用搭 Agent，工具定义通常几千 token，一次 Agentic Loop 里要被读 5-20 次。给 tools 字段打 <code>cache_control</code>，工具定义部分按 10% 计费。Anthropic 在内部测 Claude Code 时，tools 的 caching 是显著的成本项。</p>
     </div>
     <div class="card">
       <h4>场景三 · 长文档分段问答</h4>
-      <p>RAG(<a href="#s11">第 11 章</a>)场景:把检索到的长文档片段作为 context,用户连续问几个相关问题。文档片段在 5 分钟内被复用几次,caching 把这部分压到 10%。Anthropic 自己的 Projects 功能背后大概率用了类似机制。</p>
+      <p>RAG（<a href="#s11">第 11 章</a>）场景：把检索到的长文档片段作为 context，用户连续问几个相关问题。文档片段在 5 分钟内被复用几次，caching 把这部分压到 10%。Anthropic 自己的 Projects 功能背后大概率用了类似机制。</p>
     </div>
     <div class="card">
       <h4>场景四 · Few-shot 例子库</h4>
-      <p>把几十个示例(input/output 对)放在 system 里给 Claude 学。这一段 few-shot 通常 5000-20000 token,如果调用频率高,caching 是必开。例子库越稳定、调用越频繁,caching 收益越大——这正是 <a href="#s9">第 9 章</a> 推荐的 prompt 工程模式的天然搭配。</p>
+      <p>把几十个示例（input/output 对）放在 system 里给 Claude 学。这一段 few-shot 通常 5000-20000 token，如果调用频率高，caching 是必开。例子库越稳定、调用越频繁，caching 收益越大——这正是 <a href="#s9">第 9 章</a> 推荐的 prompt 工程模式的天然搭配。</p>
     </div>
   </div>
 
   <h4>判断标准 · 一条简单公式</h4>
 
-  <p>对于一段长度为 N token 的前缀,5 分钟内调用次数为 K,是否开 caching 的判断:</p>
+  <p>对于一段长度为 N token 的前缀，5 分钟内调用次数为 K，是否开 caching 的判断：</p>
 
   <ul>
     <li>不开 caching 的总成本 ≈ <strong>K × N × 原价</strong></li>
     <li>开 caching 的总成本 ≈ <strong>N × 1.25 × 原价 + (K-1) × N × 0.10 × 原价</strong></li>
-    <li>令两者相等,解出临界 K ≈ <strong>1.28</strong></li>
+    <li>令两者相等，解出临界 K ≈ <strong>1.28</strong></li>
   </ul>
 
-  <p>也就是说,理论上只要前缀在 5 分钟 TTL 内被命中超过 1-2 次,caching 就开始划算;超过 5 次,节省接近 80%;超过 20 次,几乎是「免费用」。所以判断标准简化成一句话:<strong>「这段前缀在 5 分钟内会不会被重用两次以上?」</strong>会,就开。</p>
+  <p>也就是说，理论上只要前缀在 5 分钟 TTL 内被命中超过 1-2 次，caching 就开始划算；超过 5 次，节省接近 80%；超过 20 次，几乎是「免费用」。所以判断标准简化成一句话：<strong>「这段前缀在 5 分钟内会不会被重用两次以上？」</strong>会，就开。</p>
 
   <h3><span class="pre">10.4</span>什么时候不开 · 四种反场景 <span class="en">When Caching Hurts You</span></h3>
 
-  <p class="lead">前一节是「开了就赚」,这一节是反过来——四种「开了亏钱」的场景,工程上要主动绕开。</p>
+  <p class="lead">前一节是「开了就赚」，这一节是反过来——四种「开了亏钱」的场景，工程上要主动绕开。</p>
 
   <h4>反场景一 · 一次性查询</h4>
 
-  <p>用户问一个问题,Claude 回一个答案,会话就结束了。这种场景下没有「下一次」复用,缓存写入费 1.25 倍照付,命中率 0%,纯亏 25%。<strong>批处理 / 一次性脚本 / 个人偶尔问问题,默认不开 caching</strong>。Anthropic 提供的 batch API 是这类场景的正解(50% 折扣,但是异步),跟 caching 是两条不同的优化路径,不要混。</p>
+  <p>用户问一个问题，Claude 回一个答案，会话就结束了。这种场景下没有「下一次」复用，缓存写入费 1.25 倍照付，命中率 0%，纯亏 25%。<strong>批处理 / 一次性脚本 / 个人偶尔问问题，默认不开 caching</strong>。Anthropic 提供的 batch API 是这类场景的正解（50% 折扣，但是异步），跟 caching 是两条不同的优化路径，不要混。</p>
 
   <h4>反场景二 · prompt 短于 1024 token</h4>
 
-  <p>这是规则二的硬限制——Sonnet / Opus 必须至少 1024 token 才能缓存(Haiku 是 2048)。短 prompt 即使打了 <code>cache_control</code>,服务端也会忽略,直接按原价计费。所以「小型工具调用」「短 system + 短 user」这种场景下,caching 字段是空操作,既不省也不亏(但容易让你误以为开了)。判断方法:看 API 返回的 <code>usage</code> 里有没有 <code>cache_creation_input_tokens</code> 大于 0,如果是 0,说明没真的缓存上。</p>
+  <p>这是规则二的硬限制——Sonnet / Opus 必须至少 1024 token 才能缓存（Haiku 是 2048）。短 prompt 即使打了 <code>cache_control</code>，服务端也会忽略，直接按原价计费。所以「小型工具调用」「短 system + 短 user」这种场景下，caching 字段是空操作，既不省也不亏（但容易让你误以为开了）。判断方法：看 API 返回的 <code>usage</code> 里有没有 <code>cache_creation_input_tokens</code> 大于 0，如果是 0，说明没真的缓存上。</p>
 
   <h4>反场景三 · 前缀变动频繁</h4>
 
-  <p>有些应用场景看起来像高频复用,但 prompt 前缀其实每次都微变——比如:</p>
+  <p>有些应用场景看起来像高频复用，但 prompt 前缀其实每次都微变——比如：</p>
 
   <ul>
-    <li>❌ system 开头写「现在是 [时间戳]」——每次时间不一样,缓存击穿在第二 token</li>
-    <li>❌ system 里嵌入「用户 ID: [user_id]」在前面——每个用户都不一样,命中率 0%</li>
+    <li>❌ system 开头写「现在是 [时间戳]」——每次时间不一样，缓存击穿在第二 token</li>
+    <li>❌ system 里嵌入「用户 ID: [user_id]」在前面——每个用户都不一样，命中率 0%</li>
     <li>❌ tools 字段每次按用户权限动态裁剪——工具列表序列化后 byte 级不一致</li>
   </ul>
 
-  <p>这些场景理论上能复用(同一用户),但实际上跨用户、跨请求的随机性破坏了前缀稳定性。修复办法:<strong>把动态变量从前缀里挪到 user message 末尾</strong>(规则一的应用),或者按用户 ID 分桶维护多个缓存。</p>
+  <p>这些场景理论上能复用（同一用户），但实际上跨用户、跨请求的随机性破坏了前缀稳定性。修复办法：<strong>把动态变量从前缀里挪到 user message 末尾</strong>（规则一的应用），或者按用户 ID 分桶维护多个缓存。</p>
 
   <h4>反场景四 · 复用频率低于 5 分钟 TTL</h4>
 
-  <p>每 10 分钟才被调一次的低频 prompt——缓存每次都过期,每次都重新写入付 1.25 倍,命中率近 0%。这种情况下不如不开 caching,或者升级到 1 小时 TTL(但 1 小时 TTL 的写入费更贵,需要算清楚临界复用次数)。判断方法:在生产环境跑一周,看 <code>cache_read_input_tokens</code> / <code>cache_creation_input_tokens</code> 的比值——低于 1:1 说明命中率不到一半,要么换 TTL 要么关 caching。</p>
+  <p>每 10 分钟才被调一次的低频 prompt——缓存每次都过期，每次都重新写入付 1.25 倍，命中率近 0%。这种情况下不如不开 caching，或者升级到 1 小时 TTL（但 1 小时 TTL 的写入费更贵，需要算清楚临界复用次数）。判断方法：在生产环境跑一周，看 <code>cache_read_input_tokens</code> / <code>cache_creation_input_tokens</code> 的比值——低于 1:1 说明命中率不到一半，要么换 TTL 要么关 caching。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 反共识 · 「缓存命中率 100% 是最优」 — 错</div>
-    <p>命中率是个相对指标,绝对成本节省才是目标。一个调用频率极低的 prompt 哪怕做到 100% 命中,省下来的钱可能比写入费多付的还少。反过来,一个高频调用的 prompt 哪怕命中率只有 60%,绝对节省也可能是六位数美元。<strong>不要追求命中率的虚荣指标,看月账单的实际下降</strong>。Anthropic 在 API console 里提供了 cache hit 和实际节省的统计——按那个看,不要按直觉。</p>
+    <p>命中率是个相对指标，绝对成本节省才是目标。一个调用频率极低的 prompt 哪怕做到 100% 命中，省下来的钱可能比写入费多付的还少。反过来，一个高频调用的 prompt 哪怕命中率只有 60%，绝对节省也可能是六位数美元。<strong>不要追求命中率的虚荣指标，看月账单的实际下降</strong>。Anthropic 在 API console 里提供了 cache hit 和实际节省的统计——按那个看，不要按直觉。</p>
   </div>
 
   <h3><span class="pre">10.5</span>Extended Thinking 的成本陷阱 · <span class="en">The Hidden Bill of Reasoning</span></h3>
 
-  <p class="lead">Extended Thinking 是 Claude 4 系列引入的「显式推理」模式——开了之后,Claude 会先输出一段不可见的 thinking 内容(用 <code>&lt;thinking&gt;</code> 块包裹),再生成最终回答。在复杂推理任务上质量显著提升,但成本上有一个所有人初次接触都会踩的陷阱:<strong>thinking tokens 也算 token,而且不能被 cache</strong>。</p>
+  <p class="lead">Extended Thinking 是 Claude 4 系列引入的「显式推理」模式——开了之后，Claude 会先输出一段不可见的 thinking 内容（用 <code>&lt;thinking&gt;</code> 块包裹），再生成最终回答。在复杂推理任务上质量显著提升，但成本上有一个所有人初次接触都会踩的陷阱：<strong>thinking tokens 也算 token，而且不能被 cache</strong>。</p>
 
-  <p>Anthropic 在 Extended Thinking 的发布博客里把这一点写得很清楚,但很多人没注意:thinking 内容是模型每次重新「想」出来的,具有不可复现的随机性,所以服务端不缓存这部分。<strong>每次请求,thinking tokens 都按原价计费,数量还往往很大</strong>(简单问题几百,复杂任务几千到上万)[Anthropic Extended Thinking 2025]。</p>
+  <p>Anthropic 在 Extended Thinking 的发布博客里把这一点写得很清楚，但很多人没注意：thinking 内容是模型每次重新「想」出来的，具有不可复现的随机性，所以服务端不缓存这部分。<strong>每次请求，thinking tokens 都按原价计费，数量还往往很大</strong>（简单问题几百，复杂任务几千到上万）[Anthropic Extended Thinking 2025]。</p>
 
-  <h4>组合陷阱:Extended Thinking + 长 prompt</h4>
+  <h4>组合陷阱：Extended Thinking + 长 prompt</h4>
 
-  <p>这两个 feature 单独开都没问题,组合开就有惊喜——一个典型场景:</p>
+  <p>这两个 feature 单独开都没问题，组合开就有惊喜——一个典型场景：</p>
 
   <div class="table-wrap no-audio">
     <table>
       <thead>
-        <tr><th>配置</th><th>输入 token</th><th>thinking token</th><th>输出 token</th><th>单次成本(相对)</th></tr>
+        <tr><th>配置</th><th>输入 token</th><th>thinking token</th><th>输出 token</th><th>单次成本（相对）</th></tr>
       </thead>
       <tbody>
         <tr><td>普通模式 + 短 prompt</td><td>500</td><td>0</td><td>500</td><td>1×</td></tr>
         <tr><td>普通模式 + 长 prompt 不开 cache</td><td>10000</td><td>0</td><td>500</td><td>约 10×</td></tr>
-        <tr><td>普通模式 + 长 prompt 开 cache(命中)</td><td>10000(按 10% 计)</td><td>0</td><td>500</td><td>约 2×</td></tr>
-        <tr><td>Extended Thinking + 长 prompt 开 cache</td><td>10000(按 10% 计)</td><td><strong>5000(原价)</strong></td><td>500</td><td>约 7×</td></tr>
+        <tr><td>普通模式 + 长 prompt 开 cache（命中）</td><td>10000（按 10% 计）</td><td>0</td><td>500</td><td>约 2×</td></tr>
+        <tr><td>Extended Thinking + 长 prompt 开 cache</td><td>10000（按 10% 计）</td><td><strong>5000（原价）</strong></td><td>500</td><td>约 7×</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>最坑的是两个一起开:你以为开了 caching 把长 prompt 砍到一成,实际上 thinking 那 5000 token 是按百分之百原价算的,反而成了主要成本项。<strong>Extended Thinking 不是「免费的更聪明」,是「贵几倍的更聪明」</strong>。</p>
+  <p>最坑的是两个一起开：你以为开了 caching 把长 prompt 砍到一成，实际上 thinking 那 5000 token 是按百分之百原价算的，反而成了主要成本项。<strong>Extended Thinking 不是「免费的更聪明」，是「贵几倍的更聪明」</strong>。</p>
 
   <div class="callout note">
     <div class="label">i 怎么用 Extended Thinking 不被账单咬</div>
-    <p>三条经验:<strong>一,只在真正需要复杂推理的请求上开</strong>——简单事实查询、格式化输出、模板化任务别开。<strong>二,配合 thinking budget 参数</strong>(API 里能限制 thinking 最大 token 数),给个上限避免它失控漫游。<strong>三,先用 Sonnet 4.5 + Extended Thinking 试,效果不够再切 Opus 4.7</strong>——Opus 的 thinking 单价更高,踩雷代价更大。Anthropic 文档里专门有一节叫《Cost considerations for Extended Thinking》,生产前必读。</p>
+    <p>三条经验：<strong>一，只在真正需要复杂推理的请求上开</strong>——简单事实查询、格式化输出、模板化任务别开。<strong>二，配合 thinking budget 参数</strong>（API 里能限制 thinking 最大 token 数），给个上限避免它失控漫游。<strong>三，先用 Sonnet 4.5 + Extended Thinking 试，效果不够再切 Opus 4.7</strong>——Opus 的 thinking 单价更高，踩雷代价更大。Anthropic 文档里专门有一节叫《Cost considerations for Extended Thinking》，生产前必读。</p>
   </div>
 
   <h3><span class="pre">10.6</span>实战 · Python SDK 标准用法 <span class="en">The Code You Actually Run</span></h3>
 
-  <p class="lead">理论讲完,落到能直接跑通的写法上,核心就一件事:<code>cache_control</code> 怎么打到 system prompt 和 tools 上。做法基于 Anthropic Python SDK 标准用法,跟官方文档保持一致。</p>
+  <p class="lead">理论讲完，落到能直接跑通的写法上，核心就一件事：<code>cache_control</code> 怎么打到 system prompt 和 tools 上。做法基于 Anthropic Python SDK 标准用法，跟官方文档保持一致。</p>
 
-  <p>场景:一个产品咨询 Agent,system prompt 里塞了一份 8000 token 的产品手册,带两个工具(查库存、查订单),需要被频繁调用。</p>
+  <p>场景：一个产品咨询 Agent,system prompt 里塞了一份 8000 token 的产品手册，带两个工具（查库存、查订单），需要被频繁调用。</p>
 
   <pre class="no-audio"><code>from anthropic import Anthropic
 
@@ -280,59 +280,59 @@ ask("订单 ORD-12345 现在什么状态?")
   <h4>三个细节值得点出</h4>
 
   <ul>
-    <li><strong>cache_control 打在最后一个要缓存的内容块上</strong> — 它的作用是「从这里及之前的内容都缓存」,不是「只缓存这一块」。所以 tools 列表里打在最后一个工具上,等于覆盖全部 tools</li>
-    <li><strong>type 目前只有 <code>ephemeral</code></strong> — 5 分钟 TTL 默认值。如果要 1 小时 TTL,加 <code>"ttl": "1h"</code>(需要付费层级支持)</li>
-    <li><strong>最多 4 个 breakpoint</strong> — 一次请求里最多打 4 个 <code>cache_control</code>,通常的分布是:system 一个、tools 一个、长文档一个、对话历史一个。超过 4 个会报错</li>
+    <li><strong>cache_control 打在最后一个要缓存的内容块上</strong> — 它的作用是「从这里及之前的内容都缓存」，不是「只缓存这一块」。所以 tools 列表里打在最后一个工具上，等于覆盖全部 tools</li>
+    <li><strong>type 目前只有 <code>ephemeral</code></strong> — 5 分钟 TTL 默认值。如果要 1 小时 TTL，加 <code>"ttl": "1h"</code>（需要付费层级支持）</li>
+    <li><strong>最多 4 个 breakpoint</strong> — 一次请求里最多打 4 个 <code>cache_control</code>，通常的分布是：system 一个、tools 一个、长文档一个、对话历史一个。超过 4 个会报错</li>
   </ul>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · 生产环境 caching 健康度自检</div>
-    <p>每条请求的 <code>usage</code> 里有四个数:<code>input_tokens</code>(新增)、<code>cache_creation_input_tokens</code>(写入)、<code>cache_read_input_tokens</code>(命中)、<code>output_tokens</code>(输出)。把这四个数打到 metrics 里,看一周的趋势——<strong>cache_read / (cache_read + cache_creation) 这个比值越接近 1,说明命中率越高,caching 越赚</strong>。如果一周下来这个比值低于 0.5,说明你的复用模式有问题,要么是 prompt 变动太频繁,要么是调用频率低于 5 分钟 TTL,得回去查规则一和规则三。</p>
+    <p>每条请求的 <code>usage</code> 里有四个数：<code>input_tokens</code>（新增）、<code>cache_creation_input_tokens</code>（写入）、<code>cache_read_input_tokens</code>（命中）、<code>output_tokens</code>（输出）。把这四个数打到 metrics 里，看一周的趋势——<strong>cache_read / (cache_read + cache_creation) 这个比值越接近 1，说明命中率越高，caching 越赚</strong>。如果一周下来这个比值低于 0.5，说明你的复用模式有问题，要么是 prompt 变动太频繁，要么是调用频率低于 5 分钟 TTL，得回去查规则一和规则三。</p>
   </div>
 
   <h3><span class="pre">10.7</span>三个反共识 · 别被直觉带偏 <span class="en">Three Counterintuitive Truths</span></h3>
 
-  <p class="lead">Caching 这套机制有几个表面合理但其实错的直觉,拎出来单独讲。读完这一节,你应该能在团队讨论时挡住几次错决策。</p>
+  <p class="lead">Caching 这套机制有几个表面合理但其实错的直觉，拎出来单独讲。读完这一节，你应该能在团队讨论时挡住几次错决策。</p>
 
   <h4>反共识一 · 「命中率越高越好」</h4>
 
-  <p>前面 10.4 节已经点过:命中率是相对指标,<strong>绝对成本节省才是目标</strong>。一个被调一万次但每次复用 100 次的高频 prompt,即使命中率「只有」90%,绝对节省是六位数;一个被调十次但每次都复用的低频 prompt,即使命中率 100%,绝对节省只有几美分。看 dashboard 时<em>用美元金额排序,不要用命中率排序</em>——这一条对团队 review 的优先级影响很大。</p>
+  <p>前面 10.4 节已经点过：命中率是相对指标，<strong>绝对成本节省才是目标</strong>。一个被调一万次但每次复用 100 次的高频 prompt，即使命中率「只有」90%，绝对节省是六位数；一个被调十次但每次都复用的低频 prompt，即使命中率 100%，绝对节省只有几美分。看 dashboard 时<em>用美元金额排序，不要用命中率排序</em>——这一条对团队 review 的优先级影响很大。</p>
 
   <h4>反共识二 · 「TTL 越长越好」</h4>
 
-  <p>1 小时 TTL 听上去比 5 分钟 TTL 好,但前者要额外付费(写入费更贵)。判断公式跟开不开 caching 同理:<strong>1 小时内的复用次数,要够偿付 1 小时 TTL 比 5 分钟 TTL 多付的钱</strong>。Anthropic 的建议是先用默认 5 分钟跑两周,看 metrics,只有那些「确实每 10-30 分钟被调用一次」的低频但稳定模式才升级到 1 小时——其他的要么保持 5 分钟,要么干脆关掉 caching。</p>
+  <p>1 小时 TTL 听上去比 5 分钟 TTL 好，但前者要额外付费（写入费更贵）。判断公式跟开不开 caching 同理：<strong>1 小时内的复用次数，要够偿付 1 小时 TTL 比 5 分钟 TTL 多付的钱</strong>。Anthropic 的建议是先用默认 5 分钟跑两周，看 metrics，只有那些「确实每 10-30 分钟被调用一次」的低频但稳定模式才升级到 1 小时——其他的要么保持 5 分钟，要么干脆关掉 caching。</p>
 
   <h4>反共识三 · 「Prompt Caching 等同于 KV cache」</h4>
 
-  <p>10.1 节的 callout 已经点过,这里再单独强调:这是 API 层抽象,不是 GPU 上的 KV cache。两者的<em>生命周期、计费、可见性、控制方式</em>都不同。一个直接后果是:你不能假设 caching 命中会带来「延迟显著下降」——延迟改善是有的(prefill 阶段计算量减少),但不像直觉里 KV cache 那样大;主要收益是<strong>成本</strong>,不是<strong>延迟</strong>。如果团队 review 时有人说「开 caching 是为了让响应更快」,这话错了——是为了让账单更小。</p>
+  <p>10.1 节的 callout 已经点过，这里再单独强调：这是 API 层抽象，不是 GPU 上的 KV cache。两者的<em>生命周期、计费、可见性、控制方式</em>都不同。一个直接后果是：你不能假设 caching 命中会带来「延迟显著下降」——延迟改善是有的（prefill 阶段计算量减少），但不像直觉里 KV cache 那样大；主要收益是<strong>成本</strong>，不是<strong>延迟</strong>。如果团队 review 时有人说「开 caching 是为了让响应更快」，这话错了——是为了让账单更小。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 还有一条反共识 · 「写入费 1.25 倍不算什么」</div>
-    <p>这个 25% 的写入溢价,在「调一次就丢」的场景下是<em>纯亏的 25%</em>——不是「省一点」是「贵 25%」。很多团队上线时图省事,在所有请求上都打 cache_control,以为不命中也无所谓——其实<em>每条不命中的请求都比不开 caching 贵 25%</em>。如果你的应用里有一半请求是一次性查询,这部分等于持续在多付钱。判断是否该打 cache_control 的标准只有一个:<strong>「这段 prefix 在 5 分钟内大概率会被复用两次以上吗?」</strong>不确定就先别打,跑一段时间看 metrics 再决定。</p>
+    <p>这个 25% 的写入溢价，在「调一次就丢」的场景下是<em>纯亏的 25%</em>——不是「省一点」是「贵 25%」。很多团队上线时图省事，在所有请求上都打 cache_control，以为不命中也无所谓——其实<em>每条不命中的请求都比不开 caching 贵 25%</em>。如果你的应用里有一半请求是一次性查询，这部分等于持续在多付钱。判断是否该打 cache_control 的标准只有一个：<strong>「这段 prefix 在 5 分钟内大概率会被复用两次以上吗？」</strong>不确定就先别打，跑一段时间看 metrics 再决定。</p>
   </div>
 
   <h3><span class="pre">10.8</span>这一章给你的判断武器 <span class="en">Takeaways</span></h3>
 
-  <p class="lead">读完这章,合上书,你应该带走以下三个能直接拿去用的判断武器。</p>
+  <p class="lead">读完这章，合上书，你应该带走以下三个能直接拿去用的判断武器。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器一 · 把 prompt 重排成「稳定→易变」三明治结构</div>
-    <p>system + tools + 长文档(稳定底层)→ 对话历史(半稳定)→ 当前 user message + 动态变量(易变顶层)。所有动态变量(时间戳、用户名、user_id)都从前缀里挪到末尾。这一条做完,caching 的命中率会从 0% 跳到 80% 以上——其他所有优化都基于这条结构。如果项目里目前 system prompt 开头还有「现在是 [date]」,先回去改这个,改完再谈别的。</p>
+    <p>system + tools + 长文档（稳定底层）→ 对话历史（半稳定）→ 当前 user message + 动态变量（易变顶层）。所有动态变量（时间戳、用户名、user_id）都从前缀里挪到末尾。这一条做完，caching 的命中率会从 0% 跳到 80% 以上——其他所有优化都基于这条结构。如果项目里目前 system prompt 开头还有「现在是 [date]」，先回去改这个，改完再谈别的。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器二 · 用「5 分钟内复用 ≥ 2 次」做开 / 不开判断</div>
-    <p>不是所有 prompt 都该开 caching。判断标准简化成一句:这段 prefix 在 5 分钟内会不会被复用两次以上?会,开;不会,关。批处理任务、一次性查询、用户偶尔提问类应用,默认关 caching——开了反而每次多付 25%。<a href="#s1">第 1 章</a>讲过 LLM 是个概率引擎,这里再加一句:caching 也是个概率游戏——你赌的是 prefix 会被复用,赌赢省 90%,赌输亏 25%。下注前看清牌。</p>
+    <p>不是所有 prompt 都该开 caching。判断标准简化成一句：这段 prefix 在 5 分钟内会不会被复用两次以上？会，开；不会，关。批处理任务、一次性查询、用户偶尔提问类应用，默认关 caching——开了反而每次多付 25%。<a href="#s1">第 1 章</a>讲过 LLM 是个概率引擎，这里再加一句：caching 也是个概率游戏——你赌的是 prefix 会被复用，赌赢省 90%，赌输亏 25%。下注前看清牌。</p>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 武器三 · Extended Thinking 跟 caching 不是叠加优化,thinking tokens 不能 cache</div>
-    <p>看到「Extended Thinking + Prompt Caching 双开」的项目方案,先问一句:thinking 的 token 大概多少?如果是每条几千上万,那 caching 省下来的 90% 大概率被 thinking 的原价抵消掉。<strong>Extended Thinking 是「贵几倍的更聪明」,不是「更聪明的免费午餐」</strong>。要么用 thinking budget 限上限,要么只在真正需要复杂推理的请求上开——其他场景关掉。</p>
+    <div class="label">✓ 武器三 · Extended Thinking 跟 caching 不是叠加优化，thinking tokens 不能 cache</div>
+    <p>看到「Extended Thinking + Prompt Caching 双开」的项目方案，先问一句：thinking 的 token 大概多少？如果是每条几千上万，那 caching 省下来的 90% 大概率被 thinking 的原价抵消掉。<strong>Extended Thinking 是「贵几倍的更聪明」，不是「更聪明的免费午餐」</strong>。要么用 thinking budget 限上限，要么只在真正需要复杂推理的请求上开——其他场景关掉。</p>
   </div>
 
-  <p>Prompt Caching 讲完,你掌握了 Claude API 生产环境最有杠杆的成本优化武器。但 caching 解决的是「重复部分」的成本,prompt 里另一大块——动态注入的<em>检索内容</em>——还没讲。检索内容怎么组装、怎么排序、怎么不毒化模型?这是 <a href="#s11">第 11 章 RAG</a> 要解决的问题。RAG 跟 caching 是一对天然搭档:RAG 决定塞什么进去,caching 决定塞进去的部分怎么省钱。两者合在一起,才是生产级 Claude 应用的完整工程图。</p>
+  <p>Prompt Caching 讲完，你掌握了 Claude API 生产环境最有杠杆的成本优化武器。但 caching 解决的是「重复部分」的成本，prompt 里另一大块——动态注入的<em>检索内容</em>——还没讲。检索内容怎么组装、怎么排序、怎么不毒化模型？这是 <a href="#s11">第 11 章 RAG</a> 要解决的问题。RAG 跟 caching 是一对天然搭档：RAG 决定塞什么进去，caching 决定塞进去的部分怎么省钱。两者合在一起，才是生产级 Claude 应用的完整工程图。</p>
 
-  <p class="ref">主要参考:<br>
+  <p class="ref">主要参考：<br>
   Anthropic, <em>Prompt caching with Claude</em>, engineering blog, 2024-08 [Anthropic Prompt Caching 2024] · Anthropic, <em>Prompt caching</em>, API documentation, 2024-2026 · Anthropic, <em>Extended prompt caching (1-hour TTL)</em>, API documentation update, 2025 [Anthropic Extended Cache 2025] · Anthropic, <em>Extended thinking</em>, model card and API documentation, 2025 [Anthropic Extended Thinking 2025] · Anthropic Skilljar Academy, <em>Building with the Claude API</em>, prompt caching module, 2025 [Anthropic Academy 2025] · Anthropic, <em>Pricing</em>, official pricing page, accessed 2026 [Anthropic Pricing 2026] · Anthropic Python SDK, github.com/anthropics/anthropic-sdk-python, v0.x documentation, 2026.</p>
 
 </div>

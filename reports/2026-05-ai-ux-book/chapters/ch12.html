@@ -2,20 +2,20 @@
 <div class="container">
 
   <div class="section-tag"><span class="num">12</span>DEVTOOLS · 案例横评 / 第十二章</div>
-  <h1 class="section-h">AI 辅助生产力对比组:同一个问题的 4 种不同解法 <span class="en">AI DevTools Comparison</span></h1>
-  <p class="section-sub">Cursor / GitHub Copilot / Bolt / Lovable——四款 AI 辅助生产力工具,服务相似用户(工程师 / 半工程师),但 UX 选择截然不同。这一章不是「评开发工具」,是看「同一个 AI 能力(写代码)在不同的产品形态下,UX 会被设计成完全不同的东西」——这对设计类 AI 产品同样是一组对照启示。</p>
+  <h1 class="section-h">AI 辅助生产力对比组：同一个问题的 4 种不同解法 <span class="en">AI DevTools Comparison</span></h1>
+  <p class="section-sub">Cursor / GitHub Copilot / Bolt / Lovable——四款 AI 辅助生产力工具，服务相似用户（工程师 / 半工程师），但 UX 选择截然不同。这一章不是「评开发工具」，是看「同一个 AI 能力（写代码）在不同的产品形态下，UX 会被设计成完全不同的东西」——这对设计类 AI 产品同样是一组对照启示。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>4 个产品 = 4 种「AI 介入级别」的精准对应:Copilot 是 L1(单步建议),Cursor 是 L2-L3(短链到长链可切换),Bolt 是 L4(端到端 app),Lovable 是 L3(UI-first 半自动)。<em>这 4 个产品共同证明:AI 产品 UX 没有「通用方案」,必须先选定「介入级别」再设计</em>。</p>
+    <p>4 个产品 = 4 种「AI 介入级别」的精准对应：Copilot 是 L1（单步建议），Cursor 是 L2-L3（短链到长链可切换），Bolt 是 L4（端到端 app），Lovable 是 L3（UI-first 半自动）。<em>这 4 个产品共同证明：AI 产品 UX 没有「通用方案」，必须先选定「介入级别」再设计</em>。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2021-2026 五年开发者 AI 工具进化</div>
-    <p><strong>2021 年 6 月</strong>:GitHub Copilot 公测,把 AI 代码补全做成 IDE 插件。模式是 L1——AI 建议,用户审批。</p>
-    <p><strong>2023 年</strong>:Cursor 诞生,把 Copilot 模式扩展到「多文件改」(Composer),走到 L2-L3。同时给 Agent mode 升到 L3。</p>
-    <p><strong>2024 年</strong>:Bolt 出现,目标用户从「工程师」扩展到「产品经理 / 设计师」,做 prompt-to-app,走到 L4。Lovable 同期切 UI-first 路径。</p>
-    <p><strong>2025-2026 年</strong>:四个产品共存,各占细分。<em>它们的差异不是「模型谁更强」——基础模型很多用同一个,差异在 UX 选择</em>。</p>
+    <p><strong>2021 年 6 月</strong>:GitHub Copilot 公测，把 AI 代码补全做成 IDE 插件。模式是 L1——AI 建议，用户审批。</p>
+    <p><strong>2023 年</strong>:Cursor 诞生，把 Copilot 模式扩展到「多文件改」（Composer），走到 L2-L3。同时给 Agent mode 升到 L3。</p>
+    <p><strong>2024 年</strong>:Bolt 出现，目标用户从「工程师」扩展到「产品经理 / 设计师」，做 prompt-to-app，走到 L4。Lovable 同期切 UI-first 路径。</p>
+    <p><strong>2025-2026 年</strong>：四个产品共存，各占细分。<em>它们的差异不是「模型谁更强」——基础模型很多用同一个，差异在 UX 选择</em>。</p>
   </div>
 
   <h3><span class="pre">12.1</span>横评维度 · 6 个开发场景的关键问题</h3>
@@ -26,7 +26,7 @@
         <tr><th>维度</th><th>评什么</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>1 · 介入级别</strong></td><td>L1-L5 自主性梯度(第 8 章)</td></tr>
+        <tr><td><strong>1 · 介入级别</strong></td><td>L1-L5 自主性梯度（第 8 章）</td></tr>
         <tr><td><strong>2 · 用户群</strong></td><td>纯工程师 vs 半工程师 vs 非工程师</td></tr>
         <tr><td><strong>3 · 撤销机制</strong></td><td>git diff / checkpoint / version / undo</td></tr>
         <tr><td><strong>4 · 验证机制</strong></td><td>能不能跑测试 / 看预览 / live deploy</td></tr>
@@ -37,41 +37,41 @@
   </div>
 
   <div class="audio-only">
-    <p>横评一共从六个角度切:AI 介入到哪一级、服务的是哪类用户、改坏了怎么撤、改完怎么验证、能不能多人一起 review、新手上手有多难。接下来四个产品我们主要顺着前四个角度逐个过;协作和学习曲线这两条留个伏笔——它们恰恰是这几款工具至今都还没做透的地方。</p>
+    <p>横评一共从六个角度切：AI 介入到哪一级、服务的是哪类用户、改坏了怎么撤、改完怎么验证、能不能多人一起 review、新手上手有多难。接下来四个产品我们主要顺着前四个角度逐个过；协作和学习曲线这两条留个伏笔——它们恰恰是这几款工具至今都还没做透的地方。</p>
   </div>
 
   <h3><span class="pre">12.2</span>GitHub Copilot · 极简渐进 + IDE 原生</h3>
 
-  <p class="lead">Copilot 是这个赛道的「祖师」,2021 年定义了「AI 代码补全」的产品形态。</p>
+  <p class="lead">Copilot 是这个赛道的「祖师」，2021 年定义了「AI 代码补全」的产品形态。</p>
 
   <ul>
-    <li><strong>介入级别</strong>:L1(inline 补全)→ L2(Copilot Chat)→ L3(Workspace + Agent,2024 后)</li>
-    <li><strong>用户群</strong>:纯工程师,IDE 用户</li>
+    <li><strong>介入级别</strong>:L1（inline 补全）→ L2(Copilot Chat)→ L3（Workspace + Agent,2024 后）</li>
+    <li><strong>用户群</strong>：纯工程师，IDE 用户</li>
     <li><strong>撤销机制</strong>:Esc 拒绝补全 / git 兜底</li>
-    <li><strong>验证机制</strong>:运行用户原生 IDE 的 build / test</li>
-    <li><strong>核心 UX 选择</strong>:不抢戏——AI 是 IDE 的辅助层,不是主角。灰色字补全 + Tab 接受这套基础范式至今没变</li>
+    <li><strong>验证机制</strong>：运行用户原生 IDE 的 build / test</li>
+    <li><strong>核心 UX 选择</strong>：不抢戏——AI 是 IDE 的辅助层，不是主角。灰色字补全 + Tab 接受这套基础范式至今没变</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>Copilot 的「<strong>不抢戏</strong>「是它能存活的核心——它没改 IDE 工作流,只是在缝隙里加 AI。这种」渐进式 AI 化「是企业用户最容易接受的路径。<em>启示:面向已有工作流的用户,AI 应该作为「增强」,不是「替代」</em>。</p>
+    <p>Copilot 的「<strong>不抢戏</strong>「是它能存活的核心——它没改 IDE 工作流，只是在缝隙里加 AI。这种」渐进式 AI 化「是企业用户最容易接受的路径。<em>启示：面向已有工作流的用户，AI 应该作为「增强」，不是「替代」</em>。</p>
   </div>
 
   <h3><span class="pre">12.3</span>Cursor · 多介入级别可切换</h3>
 
-  <p class="lead">Cursor 的核心创新不是某个功能,是<strong>「让用户在 3 个 AI 介入级别间无缝切换」</strong>(第 4 章详细讨论过)。</p>
+  <p class="lead">Cursor 的核心创新不是某个功能，是<strong>「让用户在 3 个 AI 介入级别间无缝切换」</strong>（第 4 章详细讨论过）。</p>
 
   <ul>
     <li><strong>介入级别</strong>:Tab(L1)/ Composer(L2-L3)/ Agent(L3-L4)三梯度</li>
-    <li><strong>用户群</strong>:工程师 + 部分半工程师</li>
+    <li><strong>用户群</strong>：工程师 + 部分半工程师</li>
     <li><strong>撤销机制</strong>:git diff 完整集成 + accept/reject 每个 hunk</li>
-    <li><strong>验证机制</strong>:用户自跑 IDE / terminal</li>
-    <li><strong>核心 UX 选择</strong>:把 IDE fork 后重做,完全围绕 AI 重设计交互——这是高风险高回报的策略,赌「AI 工作流足够不同,值得专用 IDE」</li>
+    <li><strong>验证机制</strong>：用户自跑 IDE / terminal</li>
+    <li><strong>核心 UX 选择</strong>：把 IDE fork 后重做，完全围绕 AI 重设计交互——这是高风险高回报的策略，赌「AI 工作流足够不同，值得专用 IDE」</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>Cursor 的成功验证了「<strong>AI-native 工具有市场</strong>「——用户愿意离开 VS Code 用一个」为 AI 重设计「的 IDE。但代价是: Cursor 用户基本只能用 Cursor,不能切回 VS Code(因为 Cursor 特有的功能 VS Code 没有)。这是 vendor lock-in。<em>启示:做 AI-native 产品要敢「重做」工作流,不要怕「破坏现有习惯」——但要承诺持续投入</em>。</p>
+    <p>Cursor 的成功验证了「<strong>AI-native 工具有市场</strong>「——用户愿意离开 VS Code 用一个」为 AI 重设计「的 IDE。但代价是： Cursor 用户基本只能用 Cursor，不能切回 VS Code（因为 Cursor 特有的功能 VS Code 没有）。这是 vendor lock-in。<em>启示：做 AI-native 产品要敢「重做」工作流，不要怕「破坏现有习惯」——但要承诺持续投入</em>。</p>
   </div>
 
   <h3><span class="pre">12.4</span>Bolt · 把「app 生成」做成消费品</h3>
@@ -79,33 +79,33 @@
   <p class="lead">StackBlitz Bolt 把目标用户从「工程师」拉到「任何会描述需求的人」。介入级别直接跳到 L4。</p>
 
   <ul>
-    <li><strong>介入级别</strong>:L4(给一个 prompt,出端到端 app)</li>
-    <li><strong>用户群</strong>:产品经理 / 设计师 / 创业者(可以读代码但写不深)</li>
-    <li><strong>撤销机制</strong>:Checkpoint 系统(每次大改一个 checkpoint,可回滚)</li>
-    <li><strong>验证机制</strong>:右侧实时预览 + 一键 deploy</li>
-    <li><strong>核心 UX 选择</strong>:把「看代码」降权,把「看结果」升权——大多数用户不需要懂代码,看 app 跑起来即可</li>
+    <li><strong>介入级别</strong>:L4（给一个 prompt，出端到端 app）</li>
+    <li><strong>用户群</strong>：产品经理 / 设计师 / 创业者（可以读代码但写不深）</li>
+    <li><strong>撤销机制</strong>:Checkpoint 系统（每次大改一个 checkpoint，可回滚）</li>
+    <li><strong>验证机制</strong>：右侧实时预览 + 一键 deploy</li>
+    <li><strong>核心 UX 选择</strong>：把「看代码」降权，把「看结果」升权——大多数用户不需要懂代码，看 app 跑起来即可</li>
   </ul>
 
   <div class="callout sharp">
     <div class="label">✕ Bolt 的两难</div>
-    <p>Bolt 想服务「非工程师」,但<strong>当 AI 生成的 app 出 bug 时,非工程师无法 debug</strong>——他们只能让 Bolt 自己修,修不好就卡住。这是当前 prompt-to-app 类产品的共同瓶颈:目标用户没有「兜底能力」。<em>启示:做 L4-L5 产品时,要预设「AI 卡住时用户该怎么办」——要么提供 fallback 到人,要么给「逃逸到工程师」的入口</em>。</p>
+    <p>Bolt 想服务「非工程师」，但<strong>当 AI 生成的 app 出 bug 时，非工程师无法 debug</strong>——他们只能让 Bolt 自己修，修不好就卡住。这是当前 prompt-to-app 类产品的共同瓶颈：目标用户没有「兜底能力」。<em>启示：做 L4-L5 产品时，要预设「AI 卡住时用户该怎么办」——要么提供 fallback 到人，要么给「逃逸到工程师」的入口</em>。</p>
   </div>
 
   <h3><span class="pre">12.5</span>Lovable · UI 优先 + 强 figma 感</h3>
 
-  <p class="lead">Lovable 跟 Bolt 同期出现,选了一条更「设计师友好」的路径——UI 优先,后端可选。</p>
+  <p class="lead">Lovable 跟 Bolt 同期出现，选了一条更「设计师友好」的路径——UI 优先，后端可选。</p>
 
   <ul>
-    <li><strong>介入级别</strong>:L3(给一个 UI 描述,出可交互前端;后端可选)</li>
-    <li><strong>用户群</strong>:设计师 / UI/UX 工作者 / 产品经理</li>
-    <li><strong>撤销机制</strong>:版本历史 + section-level edit</li>
-    <li><strong>验证机制</strong>:右侧实时 web 预览</li>
-    <li><strong>核心 UX 选择</strong>:把「UI 调整」做成 Figma 般的精细操作——可以选中某个元素让 AI 单独改它,而不是整页重生</li>
+    <li><strong>介入级别</strong>:L3（给一个 UI 描述，出可交互前端；后端可选）</li>
+    <li><strong>用户群</strong>：设计师 / UI/UX 工作者 / 产品经理</li>
+    <li><strong>撤销机制</strong>：版本历史 + section-level edit</li>
+    <li><strong>验证机制</strong>：右侧实时 web 预览</li>
+    <li><strong>核心 UX 选择</strong>：把「UI 调整」做成 Figma 般的精细操作——可以选中某个元素让 AI 单独改它，而不是整页重生</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>Lovable 的差异化在「<strong>精细到元素级别的 AI 编辑</strong>「——它假设设计师不需要」重生整页「,而是」我喜欢这个布局,但这个按钮改成红色「。这种」局部编辑「的颗粒度是它跟 Bolt 的关键差异。<em>启示:做设计类 AI 工具,「局部编辑」比「整体重生」更重要——设计师的工作流就是局部精调</em>。</p>
+    <p>Lovable 的差异化在「<strong>精细到元素级别的 AI 编辑</strong>「——它假设设计师不需要」重生整页「，而是」我喜欢这个布局，但这个按钮改成红色「。这种」局部编辑「的颗粒度是它跟 Bolt 的关键差异。<em>启示：做设计类 AI 工具，「局部编辑」比「整体重生」更重要——设计师的工作流就是局部精调</em>。</p>
   </div>
 
   <h3><span class="pre">12.6</span>横评矩阵 · 4 个产品的位置</h3>
@@ -123,7 +123,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td><strong>Copilot</strong></td><td>L1 → L3</td><td>纯工程师</td><td>Esc / git</td><td>IDE 自跑</td><td>IDE 原生,不抢戏</td></tr>
+        <tr><td><strong>Copilot</strong></td><td>L1 → L3</td><td>纯工程师</td><td>Esc / git</td><td>IDE 自跑</td><td>IDE 原生，不抢戏</td></tr>
         <tr><td><strong>Cursor</strong></td><td>L1 ↔ L3 可切换</td><td>工程师</td><td>git diff + accept/reject</td><td>IDE 自跑</td><td>AI-native IDE</td></tr>
         <tr><td><strong>Bolt</strong></td><td>L4</td><td>产品 / 设计师 / 创业者</td><td>Checkpoint</td><td>预览 + Deploy</td><td>「prompt 出 app」</td></tr>
         <tr><td><strong>Lovable</strong></td><td>L3 UI-first</td><td>设计师 / PM</td><td>版本 + 元素级编辑</td><td>预览</td><td>元素级局部编辑</td></tr>
@@ -133,30 +133,30 @@
 
   <div class="callout sharp">
     <div class="label">✕ 4 个产品共同证明一件事</div>
-    <p>「AI 辅助生产力」不是一个赛道,是 4 个不同的赛道:<strong>AI 增强既有工作流</strong>(Copilot)、<strong>AI-native 重做工作流</strong>(Cursor)、<strong>AI 端到端产物</strong>(Bolt)、<strong>AI 精细局部编辑</strong>(Lovable)。每一个赛道服务不同用户、有不同的护城河。<em>没有谁能「全要」</em>。</p>
+    <p>「AI 辅助生产力」不是一个赛道，是 4 个不同的赛道：<strong>AI 增强既有工作流</strong>(Copilot)、<strong>AI-native 重做工作流</strong>(Cursor)、<strong>AI 端到端产物</strong>(Bolt)、<strong>AI 精细局部编辑</strong>(Lovable)。每一个赛道服务不同用户、有不同的护城河。<em>没有谁能「全要」</em>。</p>
   </div>
 
   <h3><span class="pre">12.7</span>给这类产品的 3 条启示</h3>
 
-  <p class="lead">设计类 AI 工具不是 IDE,但工作流设计思维高度可借鉴。</p>
+  <p class="lead">设计类 AI 工具不是 IDE，但工作流设计思维高度可借鉴。</p>
 
   <div class="callout ops">
-    <div class="label">✓ 从 4 个 DevTools 提炼,给这类产品的 3 条启示</div>
+    <div class="label">✓ 从 4 个 DevTools 提炼，给这类产品的 3 条启示</div>
     <ol>
-      <li><strong>明确「介入级别定位」</strong>。Cursor 的 3 梯度切换是个启发:设计类 AI 工具是否要做「快速生图(L1)→ 多张备选(L2)→ 系列设计自动化(L3-L4)」的梯度?用户能在不同任务复杂度下选合适的 AI 介入级别。</li>
-      <li><strong>学习 Lovable 的「局部编辑」</strong>。当用户生成一张图喜欢 70%,他要的是「改其中的 30%」,不是「整张重生」。<em>Inpaint / 局部重绘的 UX 入口必须做得跟「重生」按钮一样显眼</em>——这是设计师的核心工作流。</li>
-      <li><strong>不要走 Bolt 的「完全自动化」陷阱</strong>。给用户「逃逸到精细控制」的入口——当 AI 不达期望时,用户能切到「自己拉滑块 / 改 prompt 关键字 / 局部 inpaint」。<em>L4 不能没有 L1-L2 的退路</em>。</li>
+      <li><strong>明确「介入级别定位」</strong>。Cursor 的 3 梯度切换是个启发：设计类 AI 工具是否要做「快速生图（L1）→ 多张备选（L2）→ 系列设计自动化（L3-L4）」的梯度？用户能在不同任务复杂度下选合适的 AI 介入级别。</li>
+      <li><strong>学习 Lovable 的「局部编辑」</strong>。当用户生成一张图喜欢 70%，他要的是「改其中的 30%」，不是「整张重生」。<em>Inpaint / 局部重绘的 UX 入口必须做得跟「重生」按钮一样显眼</em>——这是设计师的核心工作流。</li>
+      <li><strong>不要走 Bolt 的「完全自动化」陷阱</strong>。给用户「逃逸到精细控制」的入口——当 AI 不达期望时，用户能切到「自己拉滑块 / 改 prompt 关键字 / 局部 inpaint」。<em>L4 不能没有 L1-L2 的退路</em>。</li>
     </ol>
   </div>
 
   <h3><span class="pre">12.8</span>本章小结</h3>
 
-  <p>4 款 AI 辅助生产力工具不是「竞品」,是<strong>4 个不同介入级别的精准对应</strong>。它们共同证明:AI 产品 UX 的第一个设计决策,是<em>「我的产品在 L1-L5 哪个级别」</em>——级别不同,工作流、用户群、撤销机制、验证方式都不同。</p>
+  <p>4 款 AI 辅助生产力工具不是「竞品」，是<strong>4 个不同介入级别的精准对应</strong>。它们共同证明：AI 产品 UX 的第一个设计决策，是<em>「我的产品在 L1-L5 哪个级别」</em>——级别不同，工作流、用户群、撤销机制、验证方式都不同。</p>
 
-  <p>下一章我们换一个视角——<strong>失败考古</strong>。看 Rabbit R1 / Humane AI Pin / 早期 Bing Chat 三个备受关注但落地失败的 AI 产品,提炼「AI 产品做砸的 N 种姿势」。失败的教训比成功的案例更值钱。</p>
+  <p>下一章我们换一个视角——<strong>失败考古</strong>。看 Rabbit R1 / Humane AI Pin / 早期 Bing Chat 三个备受关注但落地失败的 AI 产品，提炼「AI 产品做砸的 N 种姿势」。失败的教训比成功的案例更值钱。</p>
 
-  <p class="ref">主要参考:<br>
-  GitHub Copilot 公告 + Roadmap, 2021-2026 · Cursor changelog + 创始人访谈 · StackBlitz Bolt 发布博客 + 媒体评测, 2024 · Lovable 产品文档与用户社区, 2024-2026 · 各产品 reddit / Hacker News 用户反馈集锦 · GitClear, <em>AI-Assisted Code Quality Research</em>, 2024</p>
+  <p class="ref">主要参考：<br>
+  GitHub Copilot 公告 + Roadmap, 2021-2026 · Cursor changelog + 创始人访谈 · StackBlitz Bolt 发布博客 + 媒体评测， 2024 · Lovable 产品文档与用户社区， 2024-2026 · 各产品 reddit / Hacker News 用户反馈集锦 · GitClear, <em>AI-Assisted Code Quality Research</em>, 2024</p>
 
 </div>
 </section>

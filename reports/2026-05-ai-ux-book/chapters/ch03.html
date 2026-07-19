@@ -2,35 +2,35 @@
 <div class="container">
 
   <div class="section-tag"><span class="num">03</span>TRUST · 问题地图 / 第三章</div>
-  <h1 class="section-h">信任与幻觉:当系统会说瞎话时怎么设计 <span class="en">Trust &amp; Hallucinations</span></h1>
-  <p class="section-sub">幻觉不是 bug,是 LLM 的结构性特征。设计 AI 产品时,UX 的核心任务不是「消除幻觉」,是「帮用户判断哪些输出可信」——并且把这个判断的成本降到最低。这一章我们系统地看 5 种主流的「信任 UX 模式」,以及它们的适用边界。</p>
+  <h1 class="section-h">信任与幻觉：当系统会说瞎话时怎么设计 <span class="en">Trust &amp; Hallucinations</span></h1>
+  <p class="section-sub">幻觉不是 bug，是 LLM 的结构性特征。设计 AI 产品时，UX 的核心任务不是「消除幻觉」，是「帮用户判断哪些输出可信」——并且把这个判断的成本降到最低。这一章我们系统地看 5 种主流的「信任 UX 模式」，以及它们的适用边界。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>在 GUI 时代可用性是底线;在 AI 时代<em>信任</em>才是底线。可点验引用 + 主动说不知道 + 关键时刻确认 + 不堆废话 disclaimer + 可审计记忆——这是行业最佳实践的黄金组合。</p>
+    <p>在 GUI 时代可用性是底线；在 AI 时代<em>信任</em>才是底线。可点验引用 + 主动说不知道 + 关键时刻确认 + 不堆废话 disclaimer + 可审计记忆——这是行业最佳实践的黄金组合。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 纽约 · 2023 年 6 月</div>
-    <p>纽约律师 Steven Schwartz 用 ChatGPT 准备了一份法律文书,引用了 6 个判例支持他的论点。文书提交给法院后,对方律师查不到这些判例。法官也查不到。原因是—— <strong>这 6 个判例全都是 ChatGPT 编出来的</strong>。案件名、法官名、判决日期、引用编号,一切看起来都很真实,但全部不存在。</p>
-    <p>Schwartz 被罚款 5000 美元,案件被驳回,职业生涯严重受损。事后他向法庭解释:「我以为 ChatGPT 是一个超级搜索引擎。」这件事被全球媒体报道,成了「AI 幻觉」问题的标志性事件。</p>
-    <p>但对我们做产品的人来说,更值得问的问题是:<em>ChatGPT 当时的 UX,有没有做任何努力让 Schwartz 意识到「这些判例可能是编的」?</em>答案是:几乎没有。<strong>Schwartz 案是一次 UX 失败,不只是用户的轻信</strong>。</p>
+    <p>纽约律师 Steven Schwartz 用 ChatGPT 准备了一份法律文书，引用了 6 个判例支持他的论点。文书提交给法院后，对方律师查不到这些判例。法官也查不到。原因是—— <strong>这 6 个判例全都是 ChatGPT 编出来的</strong>。案件名、法官名、判决日期、引用编号，一切看起来都很真实，但全部不存在。</p>
+    <p>Schwartz 被罚款 5000 美元，案件被驳回，职业生涯严重受损。事后他向法庭解释：「我以为 ChatGPT 是一个超级搜索引擎。」这件事被全球媒体报道，成了「AI 幻觉」问题的标志性事件。</p>
+    <p>但对我们做产品的人来说，更值得问的问题是：<em>ChatGPT 当时的 UX，有没有做任何努力让 Schwartz 意识到「这些判例可能是编的」？</em>答案是：几乎没有。<strong>Schwartz 案是一次 UX 失败，不只是用户的轻信</strong>。</p>
   </div>
 
-  <h3><span class="pre">3.1</span>什么是幻觉?为什么 LLM 必然会幻觉?</h3>
+  <h3><span class="pre">3.1</span>什么是幻觉？为什么 LLM 必然会幻觉？</h3>
 
-  <p class="lead">幻觉(Hallucination)是 AI 领域的专门术语:<strong>模型生成了看似合理但实际错误或不存在的内容</strong>。幻觉不是「bug」,是 LLM 的<em>结构性特征</em>。</p>
+  <p class="lead">幻觉（Hallucination）是 AI 领域的专门术语：<strong>模型生成了看似合理但实际错误或不存在的内容</strong>。幻觉不是「bug」，是 LLM 的<em>结构性特征</em>。</p>
 
-  <p>原因是:</p>
+  <p>原因是：</p>
 
   <ol>
-    <li><strong>LLM 的本质是「下一个 token 的概率分布」</strong>——它不「知道」事实,它只「生成」看起来像事实的内容</li>
-    <li><strong>训练目标是「流畅」而不是「正确」</strong>——模型被优化成「说人话」,但「人话」不等于「对的话」</li>
-    <li><strong>训练数据不可能覆盖所有事实</strong>——模型不知道的事,它会「猜」,猜出来的东西通常看起来很真</li>
-    <li><strong>没有「我不知道」的强训练信号</strong>——早期 LLM 几乎从不说「我不知道」,因为训练数据里也很少有人这么说</li>
+    <li><strong>LLM 的本质是「下一个 token 的概率分布」</strong>——它不「知道」事实，它只「生成」看起来像事实的内容</li>
+    <li><strong>训练目标是「流畅」而不是「正确」</strong>——模型被优化成「说人话」，但「人话」不等于「对的话」</li>
+    <li><strong>训练数据不可能覆盖所有事实</strong>——模型不知道的事，它会「猜」，猜出来的东西通常看起来很真</li>
+    <li><strong>没有「我不知道」的强训练信号</strong>——早期 LLM 几乎从不说「我不知道」，因为训练数据里也很少有人这么说</li>
   </ol>
 
-  <p>幻觉有几种典型类型,做产品时要分别处理:</p>
+  <p>幻觉有几种典型类型，做产品时要分别处理：</p>
 
   <div class="table-wrap">
     <table>
@@ -42,43 +42,43 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td><strong>事实幻觉</strong></td><td>编造历史事件、人物经历</td><td>中(可以 Google 验证)</td></tr>
-        <tr><td><strong>引用幻觉</strong></td><td>编造论文、判例、新闻链接</td><td>低(链接打不开就露馅)</td></tr>
-        <tr><td><strong>数字幻觉</strong></td><td>报错统计数字、价格、日期</td><td><strong>高(用户经常没意识到)</strong></td></tr>
-        <tr><td><strong>逻辑幻觉</strong></td><td>推理链条断裂、自相矛盾</td><td><strong>极高(需要专业知识)</strong></td></tr>
-        <tr><td><strong>指令幻觉</strong></td><td>编造软件功能、API 接口</td><td>中(试了不存在就知道)</td></tr>
+        <tr><td><strong>事实幻觉</strong></td><td>编造历史事件、人物经历</td><td>中（可以 Google 验证）</td></tr>
+        <tr><td><strong>引用幻觉</strong></td><td>编造论文、判例、新闻链接</td><td>低（链接打不开就露馅）</td></tr>
+        <tr><td><strong>数字幻觉</strong></td><td>报错统计数字、价格、日期</td><td><strong>高（用户经常没意识到）</strong></td></tr>
+        <tr><td><strong>逻辑幻觉</strong></td><td>推理链条断裂、自相矛盾</td><td><strong>极高（需要专业知识）</strong></td></tr>
+        <tr><td><strong>指令幻觉</strong></td><td>编造软件功能、API 接口</td><td>中（试了不存在就知道）</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="audio-only">
-    <p>这几类里,真正值得做产品的人警惕的,是用户自己最难抓出来的那两种。引用幻觉其实最善良——编的论文、判例、链接,一点开打不开就露馅了。事实幻觉也还好,随手能查证。但数字幻觉(报错一个统计值、一个价格)和逻辑幻觉(推理链悄悄断掉、自相矛盾)往往溜得过去,前者用户根本没意识到要核对,后者得有专业知识才看得出。所以信任 UX 的力气,优先该花在这两类上。</p>
+    <p>这几类里，真正值得做产品的人警惕的，是用户自己最难抓出来的那两种。引用幻觉其实最善良——编的论文、判例、链接，一点开打不开就露馅了。事实幻觉也还好，随手能查证。但数字幻觉（报错一个统计值、一个价格）和逻辑幻觉（推理链悄悄断掉、自相矛盾）往往溜得过去，前者用户根本没意识到要核对，后者得有专业知识才看得出。所以信任 UX 的力气，优先该花在这两类上。</p>
   </div>
 
   <div class="callout note">
     <div class="label">i 对图像生成类产品而言</div>
-    <p>以某国产 AI 设计平台这类图像生成工具为例,「幻觉」表现为<em>生成图像和用户意图不符</em>——要求「5 个人围坐」画出 6 个人,要求「红色裙子」画成粉色。机制略有不同,但 UX 议题一致:<strong>用户怎么知道模型这次是否靠谱?</strong></p>
+    <p>以某国产 AI 设计平台这类图像生成工具为例，「幻觉」表现为<em>生成图像和用户意图不符</em>——要求「5 个人围坐」画出 6 个人，要求「红色裙子」画成粉色。机制略有不同，但 UX 议题一致：<strong>用户怎么知道模型这次是否靠谱？</strong></p>
   </div>
 
   <h3><span class="pre">3.2</span>信任的三个层次</h3>
 
-  <p class="lead">做信任 UX,要分清楚「信任」是分层的,不是一个单一概念。</p>
+  <p class="lead">做信任 UX，要分清楚「信任」是分层的，不是一个单一概念。</p>
 
   <div class="number-strip no-audio">
     <div class="item">
       <div class="label">LAYER 1</div>
       <div class="num">任务级</div>
-      <div class="sub">「这次输出对吗?」</div>
+      <div class="sub">「这次输出对吗？」</div>
     </div>
     <div class="item">
       <div class="label">LAYER 2</div>
       <div class="num">系统级</div>
-      <div class="sub">「这个产品大概率靠谱吗?」</div>
+      <div class="sub">「这个产品大概率靠谱吗？」</div>
     </div>
     <div class="item">
       <div class="label">LAYER 3</div>
       <div class="num">模型级</div>
-      <div class="sub">「AI 这个东西能信吗?」</div>
+      <div class="sub">「AI 这个东西能信吗？」</div>
     </div>
     <div class="item">
       <div class="label">∑</div>
@@ -88,93 +88,93 @@
   </div>
 
   <div class="audio-only">
-    <p>分层具体是这么分的。第一层是任务级,回答的是「这次输出到底对不对」;第二层是系统级,问的是「这个产品整体大概率靠不靠谱」;第三层是模型级,问的是「AI 这个东西本身能不能信」。三层是叠加的,缺了任何一层,用户的信任都会整个崩掉。接下来这几个产品,各自主攻的就是其中一层。</p>
+    <p>分层具体是这么分的。第一层是任务级，回答的是「这次输出到底对不对」；第二层是系统级，问的是「这个产品整体大概率靠不靠谱」；第三层是模型级，问的是「AI 这个东西本身能不能信」。三层是叠加的，缺了任何一层，用户的信任都会整个崩掉。接下来这几个产品，各自主攻的就是其中一层。</p>
   </div>
 
-  <p>不同产品的「信任战场」不同:</p>
+  <p>不同产品的「信任战场」不同：</p>
 
   <ul>
     <li><strong>Perplexity</strong> 的战场在 Layer 1——每次回答都要让你能立刻验证</li>
-    <li><strong>ChatGPT</strong> 的战场在 Layer 2——让你建立「它平时靠谱,偶尔出错」的整体印象</li>
+    <li><strong>ChatGPT</strong> 的战场在 Layer 2——让你建立「它平时靠谱，偶尔出错」的整体印象</li>
     <li><strong>Apple Intelligence</strong> 的战场在 Layer 3——通过「在设备本地运行」「不上传云端」建立 AI 技术本身的信任感</li>
   </ul>
 
   <div class="callout ops">
     <div class="label">✓ 图像生成类产品的信任主战场</div>
-    <p>像某国产 AI 设计平台这类工具,主战场在 Layer 1 + Layer 2:每次生图都要让用户能快速判断好坏,并且让「该平台大部分时候出图质量稳定」沉淀成产品口碑。Layer 3 主要靠行业大势,不是这类产品的主战场。</p>
+    <p>像某国产 AI 设计平台这类工具，主战场在 Layer 1 + Layer 2：每次生图都要让用户能快速判断好坏，并且让「该平台大部分时候出图质量稳定」沉淀成产品口碑。Layer 3 主要靠行业大势，不是这类产品的主战场。</p>
   </div>
 
   <h3><span class="pre">3.3</span>表达可信度的 5 种 UX 模式</h3>
 
-  <p class="lead">如果「幻觉是必然的」,那 UX 的核心任务就变成了:帮用户区分「哪些输出可信、哪些不可信」,并把这个判断的成本降到最低。主流 AI 产品在过去 3 年发展出了 5 种典型模式。</p>
+  <p class="lead">如果「幻觉是必然的」，那 UX 的核心任务就变成了：帮用户区分「哪些输出可信、哪些不可信」，并把这个判断的成本降到最低。主流 AI 产品在过去 3 年发展出了 5 种典型模式。</p>
 
-  <h4>模式 1 · Confidence Display(置信度显示)</h4>
+  <h4>模式 1 · Confidence Display（置信度显示）</h4>
   <p>直接把模型的置信度数字 / 颜色 / 强度展示出来。</p>
   <ul>
-    <li><strong>正面案例</strong>:GitHub Copilot 早期会用灰色字代表「低置信」补全,黑色字代表「高置信」;Adobe Generative Fill 会给生成的图加「细节饱满度」提示;一些医疗 AI 会显示「诊断置信度:92%」。</li>
+    <li><strong>正面案例</strong>:GitHub Copilot 早期会用灰色字代表「低置信」补全，黑色字代表「高置信」；Adobe Generative Fill 会给生成的图加「细节饱满度」提示；一些医疗 AI 会显示「诊断置信度：92%」。</li>
   </ul>
   <div class="callout sharp">
     <div class="label">✕ Confidence 显示的三个坑</div>
     <ul>
-      <li>直接显示置信度数字(「95%」)对普通用户没有意义—— 95% 是高是低?</li>
+      <li>直接显示置信度数字（「95%」）对普通用户没有意义—— 95% 是高是低？</li>
       <li>用户会<strong>过度信任高置信结果</strong>——心理学上叫「automation bias」</li>
       <li>模型的「置信度」经常和「准确率」不挂钩—— LLM 经常对错的事很自信</li>
     </ul>
   </div>
 
-  <h4>模式 2 · Citation(引用 / 溯源)</h4>
-  <p>把生成内容的来源标注出来,用户可以点进去验证。</p>
+  <h4>模式 2 · Citation（引用 / 溯源）</h4>
+  <p>把生成内容的来源标注出来，用户可以点进去验证。</p>
   <ul>
-    <li><strong>正面案例</strong>:Perplexity 每个段落后面跟 [1][2][3],每个数字 hover 出来源;Claude 在做 web 搜索时会在回答里嵌入引用链接;Notion AI Q&amp;A 会显示「答案来自这 3 个文档」,并 highlight 出处。</li>
+    <li><strong>正面案例</strong>:Perplexity 每个段落后面跟 [1][2][3]，每个数字 hover 出来源；Claude 在做 web 搜索时会在回答里嵌入引用链接；Notion AI Q&amp;A 会显示「答案来自这 3 个文档」，并 highlight 出处。</li>
   </ul>
   <div class="callout sharp">
     <div class="label">✕ Citation 的三个坑</div>
     <ul>
-      <li>引用本身也可能是幻觉(早期 Bing Chat 会引用不存在的网页)</li>
-      <li>引用源不可信(引用了一个营销稿当作权威)</li>
-      <li>引用太多让答案碎片化(每句话都带 [1],读起来累)</li>
+      <li>引用本身也可能是幻觉（早期 Bing Chat 会引用不存在的网页）</li>
+      <li>引用源不可信（引用了一个营销稿当作权威）</li>
+      <li>引用太多让答案碎片化（每句话都带 [1]，读起来累）</li>
     </ul>
   </div>
-  <p><strong>关键设计判断</strong>:引用的目的不是「显得权威」,而是<em>让用户能快速验证</em>。如果点击引用要 3 步才能看到原文,引用就是装饰;如果一 hover 就出原文片段,引用才是真功能。<strong>Perplexity 的引用 hover-card 是行业标杆</strong>。</p>
+  <p><strong>关键设计判断</strong>：引用的目的不是「显得权威」，而是<em>让用户能快速验证</em>。如果点击引用要 3 步才能看到原文，引用就是装饰；如果一 hover 就出原文片段，引用才是真功能。<strong>Perplexity 的引用 hover-card 是行业标杆</strong>。</p>
 
-  <h4>模式 3 · Source Transparency(来源透明)</h4>
-  <p>不只是「有引用」,而是让用户<em>了解 AI 在用什么知识、什么时候的知识</em>。</p>
+  <h4>模式 3 · Source Transparency（来源透明）</h4>
+  <p>不只是「有引用」，而是让用户<em>了解 AI 在用什么知识、什么时候的知识</em>。</p>
   <ul>
-    <li><strong>正面案例</strong>:ChatGPT 在回答中明确说「我的训练数据截止 2024 年 4 月」;Claude 在被问到时间敏感问题时主动说「我没有实时数据,建议你查 X」;Perplexity 会标记每个引用源的「日期」。</li>
+    <li><strong>正面案例</strong>:ChatGPT 在回答中明确说「我的训练数据截止 2024 年 4 月」；Claude 在被问到时间敏感问题时主动说「我没有实时数据，建议你查 X」；Perplexity 会标记每个引用源的「日期」。</li>
   </ul>
-  <p><strong>关键判断</strong>:透明度不是「自证清白」,是<em>帮用户调整使用预期</em>。当用户知道 AI 不掌握 5 月之后的事,他自然不会用 AI 查最新新闻。</p>
+  <p><strong>关键判断</strong>：透明度不是「自证清白」，是<em>帮用户调整使用预期</em>。当用户知道 AI 不掌握 5 月之后的事，他自然不会用 AI 查最新新闻。</p>
 
-  <h4>模式 4 · Disclaimer(免责声明)</h4>
+  <h4>模式 4 · Disclaimer（免责声明）</h4>
   <p>在易出错的输出旁边加警告语。</p>
   <div class="callout sharp">
     <div class="label">✕ 典型反面案例 · 永远在底部的废话 disclaimer</div>
     <ul>
-      <li>永远在最下面有一行小字 「ChatGPT can make mistakes. Check important info.」——用户已经免疫,等于没说</li>
-      <li>医疗 AI 默认加「本回答不构成医疗建议,请咨询医生」——没人看</li>
+      <li>永远在最下面有一行小字 「ChatGPT can make mistakes. Check important info.」——用户已经免疫，等于没说</li>
+      <li>医疗 AI 默认加「本回答不构成医疗建议，请咨询医生」——没人看</li>
     </ul>
   </div>
   <ul>
-    <li><strong>正面案例</strong>:Claude 在被问到法律 / 医疗等高风险问题时,会在<em>回答开头</em>明确说「这是一般性信息,不是专业建议」;Perplexity 在不确定的事实旁边会用问号图标;一些金融 AI 在给投资建议时,会强制弹窗「你要继续吗?」而不是只放一行小字。</li>
+    <li><strong>正面案例</strong>:Claude 在被问到法律 / 医疗等高风险问题时，会在<em>回答开头</em>明确说「这是一般性信息，不是专业建议」；Perplexity 在不确定的事实旁边会用问号图标；一些金融 AI 在给投资建议时，会强制弹窗「你要继续吗？」而不是只放一行小字。</li>
   </ul>
-  <p><strong>关键判断</strong>:免责声明的<strong>位置 + 频率 + 视觉权重</strong>决定它有没有用。永远在底部用灰色小字 = 没用。在高风险输出的<em>旁边、用差异化视觉、强制看见</em> = 有用。</p>
+  <p><strong>关键判断</strong>：免责声明的<strong>位置 + 频率 + 视觉权重</strong>决定它有没有用。永远在底部用灰色小字 = 没用。在高风险输出的<em>旁边、用差异化视觉、强制看见</em> = 有用。</p>
 
-  <h4>模式 5 · Verify-before-Act(执行前验证)</h4>
-  <p>当 AI 要执行一个不可逆操作(发邮件、转账、删除文件),强制要求用户最后确认。</p>
+  <h4>模式 5 · Verify-before-Act（执行前验证）</h4>
+  <p>当 AI 要执行一个不可逆操作（发邮件、转账、删除文件），强制要求用户最后确认。</p>
   <ul>
-    <li><strong>正面案例</strong>:Claude Computer Use 在执行任何「破坏性」操作前会停下来问用户;Cursor Composer 改完代码后默认要求用户点 「Accept」 才生效;Notion AI 在生成内容后默认进入「预览状态」,用户主动点「插入」才进入正文。</li>
+    <li><strong>正面案例</strong>:Claude Computer Use 在执行任何「破坏性」操作前会停下来问用户；Cursor Composer 改完代码后默认要求用户点 「Accept」 才生效；Notion AI 在生成内容后默认进入「预览状态」，用户主动点「插入」才进入正文。</li>
   </ul>
   <div class="callout sharp">
     <div class="label">✕ Verify 的两个反面</div>
     <ul>
       <li>对低风险操作也要求确认 = 让用户疲劳</li>
-      <li>确认弹窗变成「OK」按钮的肌肉记忆,用户不读就点</li>
+      <li>确认弹窗变成「OK」按钮的肌肉记忆，用户不读就点</li>
     </ul>
   </div>
-  <p><strong>关键判断</strong>:Verify 的成本要和操作的不可逆程度匹配。<em>低风险用 inline 预览,高风险用强制确认,灾难性用二次输入</em>(比如让用户敲「DELETE」才能删库)。</p>
+  <p><strong>关键判断</strong>:Verify 的成本要和操作的不可逆程度匹配。<em>低风险用 inline 预览，高风险用强制确认，灾难性用二次输入</em>（比如让用户敲「DELETE」才能删库）。</p>
 
-  <h3><span class="pre">3.4</span>各产品对比 · 信任 UX 谁做得最好?</h3>
+  <h3><span class="pre">3.4</span>各产品对比 · 信任 UX 谁做得最好？</h3>
 
-  <p class="lead">把头部产品的信任 UX 摆到一处横评,谁强谁弱很快就分出来了。</p>
+  <p class="lead">把头部产品的信任 UX 摆到一处横评，谁强谁弱很快就分出来了。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -190,28 +190,28 @@
       </thead>
       <tbody>
         <tr><td><strong>Perplexity</strong></td><td>中</td><td>★★★★★</td><td>★★★★</td><td>中</td><td>N/A</td></tr>
-        <tr><td><strong>ChatGPT</strong></td><td>弱</td><td>★★★(搜索模式)</td><td>★★★</td><td>弱(底部小字)</td><td>★★★(Operator)</td></tr>
-        <tr><td><strong>Claude</strong></td><td>弱</td><td>★★★★</td><td>★★★★</td><td>★★★★(主动说不确定)</td><td>★★★★★(Computer Use)</td></tr>
-        <tr><td><strong>Notion AI</strong></td><td>N/A</td><td>★★★★(文档内引用)</td><td>★★★</td><td>中</td><td>★★★★(预览态默认)</td></tr>
-        <tr><td><strong>GitHub Copilot</strong></td><td>★★★★(灰字暗示)</td><td>N/A</td><td>★★★</td><td>中</td><td>★★★(默认 inline)</td></tr>
+        <tr><td><strong>ChatGPT</strong></td><td>弱</td><td>★★★（搜索模式）</td><td>★★★</td><td>弱（底部小字）</td><td>★★★(Operator)</td></tr>
+        <tr><td><strong>Claude</strong></td><td>弱</td><td>★★★★</td><td>★★★★</td><td>★★★★（主动说不确定）</td><td>★★★★★(Computer Use)</td></tr>
+        <tr><td><strong>Notion AI</strong></td><td>N/A</td><td>★★★★（文档内引用）</td><td>★★★</td><td>中</td><td>★★★★（预览态默认）</td></tr>
+        <tr><td><strong>GitHub Copilot</strong></td><td>★★★★（灰字暗示）</td><td>N/A</td><td>★★★</td><td>中</td><td>★★★（默认 inline）</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 信任 UX 的黄金组合(行业最佳实践综合)</div>
+    <div class="label">✓ 信任 UX 的黄金组合（行业最佳实践综合）</div>
     <ol>
-      <li><strong>结果旁边有可点验的引用</strong>(Perplexity 风格)</li>
-      <li><strong>AI 主动说「我不确定 / 我不知道」</strong>(Claude 风格)</li>
-      <li><strong>关键时刻强制确认,普通时刻 inline 预览</strong>(Claude Computer Use 风格)</li>
-      <li><strong>没有底部废话型 disclaimer,只在高风险时刻才 disclaim</strong>(Claude 风格)</li>
-      <li><strong>让用户能审计 AI 的记忆和上下文</strong>(ChatGPT Memory 风格)</li>
+      <li><strong>结果旁边有可点验的引用</strong>（Perplexity 风格）</li>
+      <li><strong>AI 主动说「我不确定 / 我不知道」</strong>（Claude 风格）</li>
+      <li><strong>关键时刻强制确认，普通时刻 inline 预览</strong>（Claude Computer Use 风格）</li>
+      <li><strong>没有底部废话型 disclaimer，只在高风险时刻才 disclaim</strong>（Claude 风格）</li>
+      <li><strong>让用户能审计 AI 的记忆和上下文</strong>（ChatGPT Memory 风格）</li>
     </ol>
   </div>
 
   <h3><span class="pre">3.5</span>警惕「过度信任 UX」</h3>
 
-  <p class="lead">最后必须说一个反面议题:<strong>信任 UX 不是越多越好</strong>。如果每次输出都让用户验证、每次都弹引用、每次都强制确认——用户会<em>疲劳</em>,进入「机械点击 OK」状态,反而让 UX 失效。</p>
+  <p class="lead">最后必须说一个反面议题：<strong>信任 UX 不是越多越好</strong>。如果每次输出都让用户验证、每次都弹引用、每次都强制确认——用户会<em>疲劳</em>，进入「机械点击 OK」状态，反而让 UX 失效。</p>
 
   <p>平衡的关键是<strong>根据「输出的可逆性 × 错误成本」来分级</strong>:</p>
 
@@ -231,18 +231,18 @@
   </div>
 
   <div class="audio-only">
-    <p>这个分级可以顺着一条线来记:操作越容易撤回、错了越没代价,信任 UX 就越该退到后台。像推荐个表情符号,改起来零成本,什么都不用加。往上一档,写邮件草稿这种,给个 inline 小提示就够。再往上,生成报告改起来麻烦了,配上引用加预览态。到了自动把邮件发给客户这种发出去就收不回的,得强制确认再加引用。最狠的一档是删账户、转账这类灾难性又不可逆的——这时候就该逼用户亲手敲一遍确认字样,让他没法靠肌肉记忆一路点过去。一句话,验证的成本要跟操作的不可逆程度对齐。</p>
+    <p>这个分级可以顺着一条线来记：操作越容易撤回、错了越没代价，信任 UX 就越该退到后台。像推荐个表情符号，改起来零成本，什么都不用加。往上一档，写邮件草稿这种，给个 inline 小提示就够。再往上，生成报告改起来麻烦了，配上引用加预览态。到了自动把邮件发给客户这种发出去就收不回的，得强制确认再加引用。最狠的一档是删账户、转账这类灾难性又不可逆的——这时候就该逼用户亲手敲一遍确认字样，让他没法靠肌肉记忆一路点过去。一句话，验证的成本要跟操作的不可逆程度对齐。</p>
   </div>
 
   <div class="callout you">
-    <div class="label">◐ 对这类产品的简短建议(详见第 15 章)</div>
-    <p>图像生成的「错误成本」中等(生成不好就重生成,时间和点数浪费但没灾难),可逆性中等(生成出来不喜欢可以重新生成,但可能丢了灵感)。所以这类产品的信任 UX 应该<strong>集中在 inline 预览 + 轻量「重生成」成本提示</strong>,而不是每张图都让用户走一道确认流。</p>
+    <div class="label">◐ 对这类产品的简短建议（详见第 15 章）</div>
+    <p>图像生成的「错误成本」中等（生成不好就重生成，时间和点数浪费但没灾难），可逆性中等（生成出来不喜欢可以重新生成，但可能丢了灵感）。所以这类产品的信任 UX 应该<strong>集中在 inline 预览 + 轻量「重生成」成本提示</strong>，而不是每张图都让用户走一道确认流。</p>
   </div>
 
-  <p>详细应用建议留到第 15 章「这类产品体检」章节展开。下一章我们讨论一个紧密相关的议题—— <strong>可控性悖论</strong>:当 AI 越能干,用户越焦虑「我还掌握着这件事吗」。信任和控制是 AI 产品 UX 的两条主腿,缺一不可。</p>
+  <p>详细应用建议留到第 15 章「这类产品体检」章节展开。下一章我们讨论一个紧密相关的议题—— <strong>可控性悖论</strong>：当 AI 越能干，用户越焦虑「我还掌握着这件事吗」。信任和控制是 AI 产品 UX 的两条主腿，缺一不可。</p>
 
-  <p class="ref">主要参考:<br>
-  Mata v. Avianca, Inc., S.D.N.Y. 22-cv-1461, 2023(Schwartz 律师案)· OpenAI ChatGPT Memory 公告, 2024-04 · Anthropic Claude Computer Use 公告, 2024-10 · Perplexity AI 设计规范 · NN/g, <em>AI Hallucinations</em>, 2024 · Google PAIR Guidebook, "Explainability + Trust" · Microsoft HAX Toolkit, 2019</p>
+  <p class="ref">主要参考：<br>
+  Mata v. Avianca, Inc., S.D.N.Y. 22-cv-1461, 2023（Schwartz 律师案）· OpenAI ChatGPT Memory 公告， 2024-04 · Anthropic Claude Computer Use 公告， 2024-10 · Perplexity AI 设计规范 · NN/g, <em>AI Hallucinations</em>, 2024 · Google PAIR Guidebook, "Explainability + Trust" · Microsoft HAX Toolkit, 2019</p>
 
 </div>
 </section>

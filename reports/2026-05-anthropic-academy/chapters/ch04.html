@@ -3,27 +3,27 @@
 
   <div class="section-tag"><span class="num">04</span>FOUNDATION · 第一篇 / 第四章</div>
   <h1 class="section-h">幻觉的真相 · 不是 bug 是 feature <span class="en">Why LLMs Hallucinate</span></h1>
-  <p class="section-sub">在 <a href="#s1">第 1 章</a> 已经把幻觉拆到了机制层——下一词元预测 + 隐式知识 + 注意力分布 + 可操控性,四个性质冲突时,胡说就是结构性产出。这一章往下挖一层:幻觉具体有几种形态、Anthropic 在系统层怎么挡、你在用户层怎么挡、为什么"等模型变好"是错的指望。</p>
+  <p class="section-sub">在 <a href="#s1">第 1 章</a> 已经把幻觉拆到了机制层——下一词元预测 + 隐式知识 + 注意力分布 + 可操控性，四个性质冲突时，胡说就是结构性产出。这一章往下挖一层：幻觉具体有几种形态、Anthropic 在系统层怎么挡、你在用户层怎么挡、为什么"等模型变好"是错的指望。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>幻觉不是 LLM 写错了,是它在按"下一个最可能的字"的目标函数<em>正确地工作</em>——只是这个目标函数里压根没有"真实性"这一项。它有三种典型形态:编事实、错推理、瞎自信。系统级靠 RAG / Citations / Tool Use / Constitutional AI 四层防御挡一部分;用户级靠"罕见事实警惕"和外部验证挡剩下的。最反共识的一条:<strong>模型越强,幻觉不会消失,只会更难发现</strong>——因为它编得越来越像真的。所以防幻觉永远是系统设计问题,不是模型进化问题。</p>
+    <p>幻觉不是 LLM 写错了，是它在按"下一个最可能的字"的目标函数<em>正确地工作</em>——只是这个目标函数里压根没有"真实性"这一项。它有三种典型形态：编事实、错推理、瞎自信。系统级靠 RAG / Citations / Tool Use / Constitutional AI 四层防御挡一部分；用户级靠"罕见事实警惕"和外部验证挡剩下的。最反共识的一条：<strong>模型越强，幻觉不会消失，只会更难发现</strong>——因为它编得越来越像真的。所以防幻觉永远是系统设计问题，不是模型进化问题。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2024 年 2 月 · 不列颠哥伦比亚省民事仲裁庭</div>
-    <p>Jake Moffatt 的祖母刚去世。他打开加拿大航空官网订一张赶回家奔丧的机票,顺手点开右下角的客服聊天机器人,问:"我能不能先按全价买,事后申请丧亲折扣?"chatbot 客客气气地答:"可以,航班结束后 90 天内提交申请,我们会按差价退给你。"</p>
-    <p>他买票、飞回、提交申请。加拿大航空拒赔。客服解释:"丧亲折扣必须事先申请,这是官网政策页一直写的。"Moffatt 把 chatbot 的截图甩出来。加航的回应让所有人愣了一下——"<em>chatbot 是一个独立的法律实体,它的回答不代表加拿大航空</em>。"</p>
-    <p>2024 年 2 月,BC 省民事仲裁庭判决:这种说辞荒谬,chatbot 是加拿大航空网站的一部分,其输出对公司具有法律约束力。加航赔了 812 加元(差价 + 手续费 + 利息)。</p>
-    <p>这个案子在 LLM 圈被低估了。<a href="#s1">第 1 章</a> 讲的 Schwartz 律师案是"用户被 LLM 骗",Moffatt 案是<strong>企业被自己部署的 LLM 反咬一口</strong>——你把一个会编话的模型摆在客服位置上,它编出来的话,从此就是你公司的承诺。这是企业级 AI 部署里最贵的一课,贵到能让任何一个 CTO 重新审视"为什么我们必须在幻觉上做系统级防御"。</p>
-    <p class="ref">参考:Moffatt v. Air Canada, BCCRT 149, 2024 年 2 月 14 日判决.</p>
+    <p>Jake Moffatt 的祖母刚去世。他打开加拿大航空官网订一张赶回家奔丧的机票，顺手点开右下角的客服聊天机器人，问："我能不能先按全价买，事后申请丧亲折扣？"chatbot 客客气气地答："可以，航班结束后 90 天内提交申请，我们会按差价退给你。"</p>
+    <p>他买票、飞回、提交申请。加拿大航空拒赔。客服解释："丧亲折扣必须事先申请，这是官网政策页一直写的。"Moffatt 把 chatbot 的截图甩出来。加航的回应让所有人愣了一下——"<em>chatbot 是一个独立的法律实体，它的回答不代表加拿大航空</em>。"</p>
+    <p>2024 年 2 月，BC 省民事仲裁庭判决：这种说辞荒谬，chatbot 是加拿大航空网站的一部分，其输出对公司具有法律约束力。加航赔了 812 加元（差价 + 手续费 + 利息）。</p>
+    <p>这个案子在 LLM 圈被低估了。<a href="#s1">第 1 章</a> 讲的 Schwartz 律师案是"用户被 LLM 骗",Moffatt 案是<strong>企业被自己部署的 LLM 反咬一口</strong>——你把一个会编话的模型摆在客服位置上，它编出来的话，从此就是你公司的承诺。这是企业级 AI 部署里最贵的一课，贵到能让任何一个 CTO 重新审视"为什么我们必须在幻觉上做系统级防御"。</p>
+    <p class="ref">参考：Moffatt v. Air Canada, BCCRT 149, 2024 年 2 月 14 日判决.</p>
   </div>
 
   <h3><span class="pre">4.1</span>先把"幻觉"这个词拆开 · <span class="en">Anatomy of a Hallucination</span></h3>
 
-  <p class="lead">日常说的"AI 幻觉"是个筐,什么都往里装——它说错一个年份是幻觉,它推理错一步是幻觉,它一本正经胡说也是幻觉。但这三种东西的<strong>生成机制、危害方式、防御手段完全不同</strong>,如果不区分,你就没法系统地挡。</p>
+  <p class="lead">日常说的"AI 幻觉"是个筐，什么都往里装——它说错一个年份是幻觉，它推理错一步是幻觉，它一本正经胡说也是幻觉。但这三种东西的<strong>生成机制、危害方式、防御手段完全不同</strong>，如果不区分，你就没法系统地挡。</p>
 
-  <p>本章用三分法:<strong>事实型 / 推理型 / 自信型</strong>。这不是学术分类(学界还在争,Huang 2023 / Ji 2023 各有版本),是为了让你能<em>对症下药</em>——看一眼某次幻觉属于哪种,就知道用哪种防御。</p>
+  <p>本章用三分法：<strong>事实型 / 推理型 / 自信型</strong>。这不是学术分类（学界还在争，Huang 2023 / Ji 2023 各有版本），是为了让你能<em>对症下药</em>——看一眼某次幻觉属于哪种，就知道用哪种防御。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -45,8 +45,8 @@
         <tr>
           <td><strong>推理型</strong><br><span class="en">Reasoning</span></td>
           <td>多步计算的中间步骤、逻辑链的某一跳、看似严密但跳了关键步</td>
-          <td>把 17×23 算成 481(实际是 391)· 三段论里偷换主词 · 看似推导其实倒果为因</td>
-          <td>Tool Use(计算器/代码)· Chain-of-Thought · 复核</td>
+          <td>把 17×23 算成 481（实际是 391）· 三段论里偷换主词 · 看似推导其实倒果为因</td>
+          <td>Tool Use（计算器/代码）· Chain-of-Thought · 复核</td>
         </tr>
         <tr>
           <td><strong>自信型</strong><br><span class="en">Confidence</span></td>
@@ -58,65 +58,65 @@
     </table>
   </div>
 
-  <p>三种形态经常在<em>同一次回答</em>里同时出现。Schwartz 那 6 个判例就是<strong>事实 + 自信</strong>的复合产物——既编了案号,又自信回答"这些都是真的,可查"。本章后面三个子节,各自针对一种形态展开。</p>
+  <p>三种形态经常在<em>同一次回答</em>里同时出现。Schwartz 那 6 个判例就是<strong>事实 + 自信</strong>的复合产物——既编了案号，又自信回答"这些都是真的，可查"。本章后面三个子节，各自针对一种形态展开。</p>
 
   <div class="callout note">
     <div class="label">i 为什么我不把"创意写作"算成幻觉</div>
-    <p>让 LLM 写小说,它编了一个虚构人物——这不是幻觉,是它在做你让它做的事。<strong>幻觉的定义里有一个隐含前提:用户期待的是真实信息,但 LLM 给了虚构信息</strong>。期待对齐了,就不是幻觉;期待错位了,才是。所以"幻觉"本质是<em>使用场景层面的</em>问题,不是模型本身的问题——这一点在 <a href="#s9">第 9 章</a> 讲 Prompt 时还会回来。</p>
+    <p>让 LLM 写小说，它编了一个虚构人物——这不是幻觉，是它在做你让它做的事。<strong>幻觉的定义里有一个隐含前提：用户期待的是真实信息，但 LLM 给了虚构信息</strong>。期待对齐了，就不是幻觉；期待错位了，才是。所以"幻觉"本质是<em>使用场景层面的</em>问题，不是模型本身的问题——这一点在 <a href="#s9">第 9 章</a> 讲 Prompt 时还会回来。</p>
   </div>
 
   <h3><span class="pre">4.2</span>事实型幻觉 · 长尾分布是元凶 <span class="en">Factual Hallucination</span></h3>
 
-  <p class="lead">事实型是公众最熟悉的一种——编名字、编日期、编引用、编 URL。它最显眼,因为一查就穿;它也最危险,因为编得像真的时一般人不会去查。</p>
+  <p class="lead">事实型是公众最熟悉的一种——编名字、编日期、编引用、编 URL。它最显眼，因为一查就穿；它也最危险，因为编得像真的时一般人不会去查。</p>
 
   <h4>它怎么生成的</h4>
 
-  <p>回到 <a href="#s1">第 1 章</a> 讲的 LLM 知识形态:训练语料里出现得越多的事实,统计基础越扎实;出现得越少的事实,统计基础越薄弱。问题在于 LLM <em>不会拒绝回答</em>——即使统计基础薄到几乎没有,它仍然按"前文之后最可能出现的字"往下蹦,蹦出来的就是一段看起来像那种事实的文本。</p>
+  <p>回到 <a href="#s1">第 1 章</a> 讲的 LLM 知识形态：训练语料里出现得越多的事实，统计基础越扎实；出现得越少的事实，统计基础越薄弱。问题在于 LLM <em>不会拒绝回答</em>——即使统计基础薄到几乎没有，它仍然按"前文之后最可能出现的字"往下蹦，蹦出来的就是一段看起来像那种事实的文本。</p>
 
-  <p>这跟一个学生考开卷考试很像:他翻书翻到熟悉的题,答得又准又快;翻到没复习过的题,他<em>不会交白卷</em>——他会按"这种题通常这么答"的模板编一个,因为他知道空着也是零分,编一个还可能蒙对。LLM 的目标函数让它必须输出,所以它永远会编。</p>
+  <p>这跟一个学生考开卷考试很像：他翻书翻到熟悉的题，答得又准又快；翻到没复习过的题，他<em>不会交白卷</em>——他会按"这种题通常这么答"的模板编一个，因为他知道空着也是零分，编一个还可能蒙对。LLM 的目标函数让它必须输出，所以它永远会编。</p>
 
-  <h4>事实分两种,幻觉率差几个数量级</h4>
+  <h4>事实分两种，幻觉率差几个数量级</h4>
 
   <div class="grid-2">
     <div class="card">
       <h4>头部事实 · LLM 准确率 ≈ 95%+</h4>
-      <p>训练语料里出现过几万到几亿次的常识——美国第一任总统、水的化学式、牛顿三定律、《红楼梦》的作者。这种事实在 LLM 内部有非常强的统计锚点,跨多次重问也一致。可以信。</p>
+      <p>训练语料里出现过几万到几亿次的常识——美国第一任总统、水的化学式、牛顿三定律、《红楼梦》的作者。这种事实在 LLM 内部有非常强的统计锚点，跨多次重问也一致。可以信。</p>
     </div>
     <div class="card">
       <h4>长尾事实 · LLM 编造率高到不能用</h4>
-      <p>某个特定案号、某个非著名学者的某篇论文页码、某本小说第几章第几段、某地 2017 年的失业率精确小数、某条 GitHub 仓库的 commit hash。这些事实统计基础薄,但 LLM 不会承认"我不知道",它会按那一类信息的格式编一个。<strong>它编的频率随着事实稀有度成倍上升</strong>。</p>
+      <p>某个特定案号、某个非著名学者的某篇论文页码、某本小说第几章第几段、某地 2017 年的失业率精确小数、某条 GitHub 仓库的 commit hash。这些事实统计基础薄，但 LLM 不会承认"我不知道"，它会按那一类信息的格式编一个。<strong>它编的频率随着事实稀有度成倍上升</strong>。</p>
     </div>
     <div class="card">
-      <h4>"看起来"是头部,实际是长尾</h4>
-      <p>最隐蔽的一类。问"爱因斯坦说过什么关于教育的话"——爱因斯坦是头部,但他到底关于教育说过的<em>那句具体的话</em>是长尾。LLM 会编一句"听起来像爱因斯坦风格"的语录,准确度低到惊人。互联网上一大半"名人名言"是这么造出来的。</p>
+      <h4>"看起来"是头部，实际是长尾</h4>
+      <p>最隐蔽的一类。问"爱因斯坦说过什么关于教育的话"——爱因斯坦是头部，但他到底关于教育说过的<em>那句具体的话</em>是长尾。LLM 会编一句"听起来像爱因斯坦风格"的语录，准确度低到惊人。互联网上一大半"名人名言"是这么造出来的。</p>
     </div>
     <div class="card">
       <h4>"精确数字"是长尾的重灾区</h4>
-      <p>问"中国 2019 年 GDP",它能给个大概对的数;问"中国 2019 年 GDP 精确到亿元",它会给一个看起来精确实际编造的数。<strong>越精确的数字,越接近长尾,越容易编</strong>——这是判断一条数据要不要外部核验的一个粗粒度规则。</p>
+      <p>问"中国 2019 年 GDP"，它能给个大概对的数；问"中国 2019 年 GDP 精确到亿元"，它会给一个看起来精确实际编造的数。<strong>越精确的数字，越接近长尾，越容易编</strong>——这是判断一条数据要不要外部核验的一个粗粒度规则。</p>
     </div>
   </div>
 
   <div class="callout sharp">
     <div class="label">✕ 反直觉的一条 · 「LLM 给了 URL」不等于「URL 存在」</div>
-    <p>很多人不知道:LLM 给的 URL 经常是它自己<em>按 URL 的格式编出来</em>的——域名是真的,路径是按那个网站常见的路径模式凑的,但具体那个页面不存在。Anthropic 自己的文档里专门强调过这一点(<em>Reducing hallucinations</em>, 2024)。<strong>任何 LLM 给的链接,在你真的点开之前,都要假设它可能是编的</strong>。Citations API(<a href="#cite-4-2-1">4.5</a> 详讲)就是为了在系统层面挡这个问题。</p>
+    <p>很多人不知道：LLM 给的 URL 经常是它自己<em>按 URL 的格式编出来</em>的——域名是真的，路径是按那个网站常见的路径模式凑的，但具体那个页面不存在。Anthropic 自己的文档里专门强调过这一点（<em>Reducing hallucinations</em>, 2024）。<strong>任何 LLM 给的链接，在你真的点开之前，都要假设它可能是编的</strong>。Citations API（<a href="#cite-4-2-1">4.5</a> 详讲）就是为了在系统层面挡这个问题。</p>
   </div>
 
-  <h3><span class="pre">4.3</span>推理型幻觉 · 它不会算数,只会"看起来在算" <span class="en">Reasoning Hallucination</span></h3>
+  <h3><span class="pre">4.3</span>推理型幻觉 · 它不会算数，只会"看起来在算" <span class="en">Reasoning Hallucination</span></h3>
 
-  <p class="lead">事实型至少有"客观真假"可以查。推理型更阴险——它的中间步骤<em>看起来都对</em>,但合起来结论是错的。或者反过来,结论对了,但中间过程是凑出来配合结论的。</p>
+  <p class="lead">事实型至少有"客观真假"可以查。推理型更阴险——它的中间步骤<em>看起来都对</em>，但合起来结论是错的。或者反过来，结论对了，但中间过程是凑出来配合结论的。</p>
 
   <h4>一个经典例子</h4>
 
-  <p>2023 年很多人发过同一个截图:问 GPT-4「17×23 等于多少」,它答 481。让它一步步算:</p>
+  <p>2023 年很多人发过同一个截图：问 GPT-4「17×23 等于多少」，它答 481。让它一步步算：</p>
 
   <div class="callout note">
     <div class="label">i LLM 的"推理过程"实录</div>
     <p>「让我们一步步计算。17 × 23 = 17 × (20 + 3) = (17 × 20) + (17 × 3) = 340 + 51 = 391。所以 17 × 23 = <strong>481</strong>。」</p>
   </div>
 
-  <p>你注意到了——中间步骤是对的(340 + 51 确实等于 391),但最后那一行<em>不是从中间步骤推出来的</em>。LLM 在写中间步骤时蹦出了 391,在写结论时蹦出了 481,这两个数<strong>之间没有计算关系</strong>,只有"在这种 chain-of-thought 句式之后,通常会出现一个三位数"的统计关系。</p>
+  <p>你注意到了——中间步骤是对的（340 + 51 确实等于 391），但最后那一行<em>不是从中间步骤推出来的</em>。LLM 在写中间步骤时蹦出了 391，在写结论时蹦出了 481，这两个数<strong>之间没有计算关系</strong>，只有"在这种 chain-of-thought 句式之后，通常会出现一个三位数"的统计关系。</p>
 
-  <p>这是推理型幻觉最核心的特征:<strong>推理链不是真的在推理,是在生成"看起来像推理"的文本</strong>。每一步的字都对得起前一步的字,但整条链不一定真的逻辑收敛。Chain-of-Thought 缓解但不解决这个问题——它让推理链更长、更细,但底层机制还是字字相蹦。</p>
+  <p>这是推理型幻觉最核心的特征：<strong>推理链不是真的在推理，是在生成"看起来像推理"的文本</strong>。每一步的字都对得起前一步的字，但整条链不一定真的逻辑收敛。Chain-of-Thought 缓解但不解决这个问题——它让推理链更长、更细，但底层机制还是字字相蹦。</p>
 
   <h4>三种典型的推理型幻觉</h4>
 
@@ -129,68 +129,68 @@
     <div class="item">
       <div class="label">JUMP</div>
       <div class="num">跳步</div>
-      <div class="sub">A → B → C 漏掉 B,但读起来不像漏</div>
+      <div class="sub">A → B → C 漏掉 B，但读起来不像漏</div>
     </div>
     <div class="item">
       <div class="label">SWAP</div>
       <div class="num">偷换</div>
-      <div class="sub">三段论中途换了主词或定义,但措辞流畅</div>
+      <div class="sub">三段论中途换了主词或定义，但措辞流畅</div>
     </div>
     <div class="item">
       <div class="label">FAKE</div>
       <div class="num">伪推导</div>
-      <div class="sub">先有结论,再"补"中间过程</div>
+      <div class="sub">先有结论，再"补"中间过程</div>
     </div>
   </div>
 
   <div class="audio-only">
-    <p>除了刚说的算错和先有结论再补过程,推理型还有两种更难抓的形态。一种是<strong>跳步</strong>——从 A 到 C 中间那一跳本该有 B,它直接略过了,可读起来一点都不像漏了步。另一种是<strong>偷换</strong>——三段论说着说着,某个词的定义或主语被悄悄换掉了,但措辞顺得让你察觉不到。这两种都不靠算错,靠的是逻辑链上你不留神就滑过去的那一处。</p>
+    <p>除了刚说的算错和先有结论再补过程，推理型还有两种更难抓的形态。一种是<strong>跳步</strong>——从 A 到 C 中间那一跳本该有 B，它直接略过了，可读起来一点都不像漏了步。另一种是<strong>偷换</strong>——三段论说着说着，某个词的定义或主语被悄悄换掉了，但措辞顺得让你察觉不到。这两种都不靠算错，靠的是逻辑链上你不留神就滑过去的那一处。</p>
   </div>
 
   <h4>怎么挡 · Tool Use 是唯一根治</h4>
 
-  <p>推理型的根本解法不是让 LLM "更聪明地推理",是<strong>让它别自己推理</strong>。算数交给计算器,统计交给 Python,数据库查询交给 SQL,代码检验交给执行器。这就是 Anthropic 反复强调的 <em>Tool Use</em>(工具调用,在 <a href="#s8">第 8 章</a> 详讲)——LLM 负责理解意图、生成调用、解读结果,真正的"计算"交给确定性工具。</p>
+  <p>推理型的根本解法不是让 LLM "更聪明地推理"，是<strong>让它别自己推理</strong>。算数交给计算器，统计交给 Python，数据库查询交给 SQL，代码检验交给执行器。这就是 Anthropic 反复强调的 <em>Tool Use</em>（工具调用，在 <a href="#s8">第 8 章</a> 详讲）——LLM 负责理解意图、生成调用、解读结果，真正的"计算"交给确定性工具。</p>
 
   <div class="callout ops">
     <div class="label">✓ 一条立刻能用的规则</div>
-    <p>任何让 LLM 输出<em>具体数字</em>的任务——预算、报表、统计分析、利率计算、概率估计——都要走 Tool Use(让它写 Python 在 sandbox 跑,或调你的 API)。Claude Opus 4.7 的 <code>code_execution</code> 工具在 Claude.ai 和 API 都开放了,2026 年 1 月起官方推荐:涉及计算就开 code execution,不要让 LLM 心算。<strong>"它直接给我算了一个数"在生产环境就是个雷</strong>。</p>
+    <p>任何让 LLM 输出<em>具体数字</em>的任务——预算、报表、统计分析、利率计算、概率估计——都要走 Tool Use（让它写 Python 在 sandbox 跑，或调你的 API）。Claude Opus 4.7 的 <code>code_execution</code> 工具在 Claude.ai 和 API 都开放了，2026 年 1 月起官方推荐：涉及计算就开 code execution，不要让 LLM 心算。<strong>"它直接给我算了一个数"在生产环境就是个雷</strong>。</p>
   </div>
 
   <h3><span class="pre">4.4</span>自信型幻觉 · 它分不清"知道"和"会说" <span class="en">Confidence Hallucination</span></h3>
 
-  <p class="lead">前两种是<em>它说错了</em>。第三种最棘手——<em>它对自己说错这件事毫无察觉</em>,还附赠一句"我确定"。</p>
+  <p class="lead">前两种是<em>它说错了</em>。第三种最棘手——<em>它对自己说错这件事毫无察觉</em>，还附赠一句"我确定"。</p>
 
-  <h4>校准是个技术词,但解释起来很简单</h4>
+  <h4>校准是个技术词，但解释起来很简单</h4>
 
-  <p>统计学里有个概念叫<strong>校准</strong>(calibration):一个预测系统给出"80% 把握"的事,长期下来如果真有 80% 发生,那它是<em>校准的</em>;如果只有 50% 发生,那它<em>过度自信</em>。</p>
+  <p>统计学里有个概念叫<strong>校准</strong>(calibration)：一个预测系统给出"80% 把握"的事，长期下来如果真有 80% 发生，那它是<em>校准的</em>；如果只有 50% 发生，那它<em>过度自信</em>。</p>
 
-  <p>LLM 在自信度上严重过度自信。它内部的下一词元概率分布,跟事实正确率之间<strong>没有可靠的对应关系</strong>。它说"我确定"、"已验证"、"这是公开记录",这些字本身就是从概率分布里采样的——LLM 没有一个独立的"自我评估"模块在背后跟事实较劲。Bender 等人在 Stochastic Parrots 那篇里把这点说得很直白:LLM 没有可被验证的"信念"(belief),只有可被采样的"措辞"(form)。</p>
+  <p>LLM 在自信度上严重过度自信。它内部的下一词元概率分布，跟事实正确率之间<strong>没有可靠的对应关系</strong>。它说"我确定"、"已验证"、"这是公开记录"，这些字本身就是从概率分布里采样的——LLM 没有一个独立的"自我评估"模块在背后跟事实较劲。Bender 等人在 Stochastic Parrots 那篇里把这点说得很直白：LLM 没有可被验证的"信念"(belief)，只有可被采样的"措辞"(form)。</p>
 
   <h4>一个让人难受的实验</h4>
 
-  <p>OpenAI 2023 年 GPT-4 system card 里报告过一个数:问 GPT-4 一组带标准答案的问题,让它同时给"答案"和"我对答案有多确定(0-100%)"。结果——它说"95% 确定"的那些答案,实际正确率只有约 65%。说"50% 确定"的,正确率反而能到 55%。<strong>自信度和正确率的相关系数很弱,部分区间甚至是反的</strong>。</p>
+  <p>OpenAI 2023 年 GPT-4 system card 里报告过一个数：问 GPT-4 一组带标准答案的问题，让它同时给"答案"和"我对答案有多确定（0-100%）"。结果——它说"95% 确定"的那些答案，实际正确率只有约 65%。说"50% 确定"的，正确率反而能到 55%。<strong>自信度和正确率的相关系数很弱，部分区间甚至是反的</strong>。</p>
 
-  <p>这意味着一件让人很不舒服的事:<strong>你不能用 LLM 的语气强弱来判断它说的对不对</strong>。它说"嗯,这个我不太确定,可能是…"时,你以为是模糊的,实际正确率不一定低;它说"这是确凿的事实,有据可查"时,你以为是可靠的,实际正确率不一定高。</p>
+  <p>这意味着一件让人很不舒服的事：<strong>你不能用 LLM 的语气强弱来判断它说的对不对</strong>。它说"嗯，这个我不太确定，可能是…"时，你以为是模糊的，实际正确率不一定低；它说"这是确凿的事实，有据可查"时，你以为是可靠的，实际正确率不一定高。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 用户最容易踩的雷 · 拿 LLM 的语气当置信度</div>
-    <p>这是新手 LLM 用户最大的盲区。我们在跟人打交道时,语气强弱是一个很好的置信度信号——专家说"我确定"时一般真的确定。但 LLM 的"我确定"是<em>训练里学来的人类口头禅</em>,不带任何内部确定性。<strong>它的措辞跟它的可靠性是两套独立的系统</strong>。任何依赖语气判断真伪的人,都会被它的自信骗到。这一条在企业部署时尤其要写进员工培训——别相信 chatbot 的语气,只相信外部可验证的事实。</p>
+    <p>这是新手 LLM 用户最大的盲区。我们在跟人打交道时，语气强弱是一个很好的置信度信号——专家说"我确定"时一般真的确定。但 LLM 的"我确定"是<em>训练里学来的人类口头禅</em>，不带任何内部确定性。<strong>它的措辞跟它的可靠性是两套独立的系统</strong>。任何依赖语气判断真伪的人，都会被它的自信骗到。这一条在企业部署时尤其要写进员工培训——别相信 chatbot 的语气，只相信外部可验证的事实。</p>
   </div>
 
   <h4>Anthropic 在自信型上做了什么</h4>
 
-  <p>Claude 在自信型上的表现明显好于其他主流模型,有两层来源:</p>
+  <p>Claude 在自信型上的表现明显好于其他主流模型，有两层来源：</p>
 
   <ul>
-    <li><strong>Constitutional AI 的诚实原则</strong>(Bai 2022)——Claude 在训练时被反复强化"对不确定的事要说不确定",这导致它比 GPT 更常说"我不确定"、"这点我无法核实"、"建议你查一下原文"。这不是 Claude 真的"知道"自己不确定,是它的<em>表达偏置</em>被往诚实方向拉了。</li>
-    <li><strong>2025-2026 的校准训练</strong>——Anthropic 2025 年 10 月发的 <em>Modeling sycophancy and calibration</em> 报告(由 Alignment 团队公开),专门讲怎么用 RLHF 让 Claude 在不确定时降低措辞强度。结果是 Claude Opus 4.7 比 4.1 在"自信度-正确率"相关系数上提升了一截。</li>
+    <li><strong>Constitutional AI 的诚实原则</strong>(Bai 2022)——Claude 在训练时被反复强化"对不确定的事要说不确定"，这导致它比 GPT 更常说"我不确定"、"这点我无法核实"、"建议你查一下原文"。这不是 Claude 真的"知道"自己不确定，是它的<em>表达偏置</em>被往诚实方向拉了。</li>
+    <li><strong>2025-2026 的校准训练</strong>——Anthropic 2025 年 10 月发的 <em>Modeling sycophancy and calibration</em> 报告（由 Alignment 团队公开），专门讲怎么用 RLHF 让 Claude 在不确定时降低措辞强度。结果是 Claude Opus 4.7 比 4.1 在"自信度-正确率"相关系数上提升了一截。</li>
   </ul>
 
-  <p>但要清楚:<strong>这是缓解,不是根治</strong>。Claude 仍然会自信地编,只是比同代其他模型少。任何企业部署都不能依赖"Claude 比较诚实"这一条作为唯一防御。</p>
+  <p>但要清楚：<strong>这是缓解，不是根治</strong>。Claude 仍然会自信地编，只是比同代其他模型少。任何企业部署都不能依赖"Claude 比较诚实"这一条作为唯一防御。</p>
 
   <h3><span class="pre">4.5</span>系统级防御 · 四层挡墙 <span class="en">System-Level Defenses</span></h3>
 
-  <p class="lead">三种形态理解完,接下来说防御。系统级防御指的是<em>在你产品/工程层面做的设计</em>,不依赖用户警惕、也不依赖模型自觉。Anthropic 主推的有四层。</p>
+  <p class="lead">三种形态理解完，接下来说防御。系统级防御指的是<em>在你产品/工程层面做的设计</em>，不依赖用户警惕、也不依赖模型自觉。Anthropic 主推的有四层。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -207,25 +207,25 @@
           <td><strong>底层</strong></td>
           <td>Constitutional AI 训练阶段对齐</td>
           <td>自信型 + 部分事实型</td>
-          <td>Anthropic(你用不上,但要知道)</td>
+          <td>Anthropic（你用不上，但要知道）</td>
         </tr>
         <tr>
           <td><strong>知识层</strong></td>
           <td>RAG 检索增强</td>
           <td>事实型</td>
-          <td>你的工程团队(<a href="#s11">第 11 章</a> 详讲)</td>
+          <td>你的工程团队（<a href="#s11">第 11 章</a> 详讲）</td>
         </tr>
         <tr>
           <td><strong>引用层</strong></td>
           <td>Citations API 强制溯源</td>
           <td>事实型 + 自信型</td>
-          <td>你的工程团队(下文 4.5.2)</td>
+          <td>你的工程团队（下文 4.5.2）</td>
         </tr>
         <tr>
           <td><strong>计算层</strong></td>
           <td>Tool Use 替代心算</td>
           <td>推理型</td>
-          <td>你的工程团队(<a href="#s8">第 8 章</a>)</td>
+          <td>你的工程团队（<a href="#s8">第 8 章</a>）</td>
         </tr>
       </tbody>
     </table>
@@ -233,106 +233,106 @@
 
   <h4 id="cite-4-2-1">4.5.1 · 底层 · Constitutional AI</h4>
 
-  <p>Anthropic 2022 年的 Constitutional AI 论文(Bai et al.)讲的方法是:在 RLHF 阶段,用一组明文写的"宪法原则"(比如"对不确定的事要标注不确定")来训练模型自我评估、自我修正。这降低了 Claude 的<em>底层</em>幻觉率——尤其是自信型——因为模型默认就被拉向"宁可说不知道也不要编"的方向。</p>
+  <p>Anthropic 2022 年的 Constitutional AI 论文（Bai et al.）讲的方法是：在 RLHF 阶段，用一组明文写的"宪法原则"（比如"对不确定的事要标注不确定"）来训练模型自我评估、自我修正。这降低了 Claude 的<em>底层</em>幻觉率——尤其是自信型——因为模型默认就被拉向"宁可说不知道也不要编"的方向。</p>
 
-  <p>这一层你完全用不上(它是 Anthropic 的训练流程),但你得知道它存在,因为它解释了一个观察:<strong>同样 prompt 下,Claude 比 GPT 更常承认不知道</strong>。这不是巧合,是 Constitutional AI 的产出。</p>
+  <p>这一层你完全用不上（它是 Anthropic 的训练流程），但你得知道它存在，因为它解释了一个观察：<strong>同样 prompt 下，Claude 比 GPT 更常承认不知道</strong>。这不是巧合，是 Constitutional AI 的产出。</p>
 
   <h4>4.5.2 · 引用层 · Citations</h4>
 
-  <p>2026 年初 Anthropic 把 Citations API 全面开放(<em>Anthropic, Citations API documentation, 2026</em>)。它的设计很简单:你把一批源文档喂给 Claude 一起处理,Claude 生成回答时,<em>每一句陈述都必须带一个指向源文档具体段落的引用 ID</em>。如果它生成的句子在源文档里找不到依据,API 会标出来。</p>
+  <p>2026 年初 Anthropic 把 Citations API 全面开放（<em>Anthropic, Citations API documentation, 2026</em>）。它的设计很简单：你把一批源文档喂给 Claude 一起处理，Claude 生成回答时，<em>每一句陈述都必须带一个指向源文档具体段落的引用 ID</em>。如果它生成的句子在源文档里找不到依据，API 会标出来。</p>
 
-  <p>这一层对事实型幻觉极有效——因为它把 LLM 的输出从"自由生成"变成"必须有出处的生成"。如果模型想编一个事实,系统会发现没有对应源,可以拒绝渲染或加警告标。</p>
+  <p>这一层对事实型幻觉极有效——因为它把 LLM 的输出从"自由生成"变成"必须有出处的生成"。如果模型想编一个事实，系统会发现没有对应源，可以拒绝渲染或加警告标。</p>
 
   <div class="callout ops">
     <div class="label">✓ Citations 的正确部署姿势</div>
-    <p>不要把 Citations 当成"加个引用就完事"。它真正的价值是<strong>反向倒逼你的数据流——只有"已经被纳入知识库的源文档"才能被引用,LLM 编不进去</strong>。所以部署 Citations 之前,先想清楚:这个产品的"权威源"是什么、维护在哪、更新频率多少。Citations 是个出口约束,但它倒推回去会改变你整个产品的内容架构。任何一个生产级 AI 应用,Citations 都应该是默认配置,不是可选项。</p>
+    <p>不要把 Citations 当成"加个引用就完事"。它真正的价值是<strong>反向倒逼你的数据流——只有"已经被纳入知识库的源文档"才能被引用，LLM 编不进去</strong>。所以部署 Citations 之前，先想清楚：这个产品的"权威源"是什么、维护在哪、更新频率多少。Citations 是个出口约束，但它倒推回去会改变你整个产品的内容架构。任何一个生产级 AI 应用，Citations 都应该是默认配置，不是可选项。</p>
   </div>
 
   <h4>4.5.3 · 知识层 · RAG</h4>
 
-  <p>RAG(Retrieval-Augmented Generation,检索增强生成)的核心思路:不让 LLM 凭记忆答,在生成前先用向量检索 / 全文检索 / 知识图谱拉出最相关的原始资料,塞进上下文窗口,让 LLM 基于这些<em>外部当下</em>的资料生成回答。</p>
+  <p>RAG（Retrieval-Augmented Generation，检索增强生成）的核心思路：不让 LLM 凭记忆答，在生成前先用向量检索 / 全文检索 / 知识图谱拉出最相关的原始资料，塞进上下文窗口，让 LLM 基于这些<em>外部当下</em>的资料生成回答。</p>
 
-  <p>RAG 是事实型幻觉的<strong>主战场防御</strong>。它把"训练里学过没"这个问题转化成"检索系统能不能找到",而检索系统的可靠性可以用工程手段衡量、调试、优化——这跟"LLM 自己记得不记得"完全不是一个层级的问题。</p>
+  <p>RAG 是事实型幻觉的<strong>主战场防御</strong>。它把"训练里学过没"这个问题转化成"检索系统能不能找到"，而检索系统的可靠性可以用工程手段衡量、调试、优化——这跟"LLM 自己记得不记得"完全不是一个层级的问题。</p>
 
-  <p>RAG 系统怎么搭,涉及 chunking 策略、嵌入模型选择、检索召回率、rerank 等大量工程细节,放在 <a href="#s11">第 11 章</a> 单独展开。这里只记住一条:<strong>没上 RAG 的 LLM 应用,事实型幻觉就是无解的</strong>。</p>
+  <p>RAG 系统怎么搭，涉及 chunking 策略、嵌入模型选择、检索召回率、rerank 等大量工程细节，放在 <a href="#s11">第 11 章</a> 单独展开。这里只记住一条：<strong>没上 RAG 的 LLM 应用，事实型幻觉就是无解的</strong>。</p>
 
   <h4>4.5.4 · 计算层 · Tool Use</h4>
 
-  <p>上一节已经讲过:推理型幻觉的根治不是让 LLM 推理更强,是让它别自己算。代码执行、API 调用、数据库查询、计算器——全部交给确定性工具,LLM 只负责生成调用参数和解读结果。这一层 Anthropic 在 Claude Opus 4.7 已经做得相当成熟,<a href="#s8">第 8 章</a> 会从工程角度讲怎么部署。</p>
+  <p>上一节已经讲过：推理型幻觉的根治不是让 LLM 推理更强，是让它别自己算。代码执行、API 调用、数据库查询、计算器——全部交给确定性工具，LLM 只负责生成调用参数和解读结果。这一层 Anthropic 在 Claude Opus 4.7 已经做得相当成熟，<a href="#s8">第 8 章</a> 会从工程角度讲怎么部署。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 四层缺一不可 · 任何单层都挡不住所有幻觉</div>
-    <p>常见错误是"我上了 RAG,应该够了吧"。不够——RAG 只挡事实型,推理型还是会算错;Tool Use 也只挡推理型,事实型还是会编。<strong>四层是组合拳,缺哪层都漏哪种幻觉</strong>。一个生产级 AI 应用的最小配置应该是:RAG(知识来源)+ Citations(出处约束)+ Tool Use(计算 / 查询)+ 你选用了一个 Constitutional 训练过的底层模型。这套配齐之后,你的幻觉率能压到一个企业能接受的范围;少一层,都会在某个角落出事故。</p>
+    <p>常见错误是"我上了 RAG，应该够了吧"。不够——RAG 只挡事实型，推理型还是会算错；Tool Use 也只挡推理型，事实型还是会编。<strong>四层是组合拳，缺哪层都漏哪种幻觉</strong>。一个生产级 AI 应用的最小配置应该是：RAG（知识来源）+ Citations（出处约束）+ Tool Use（计算 / 查询）+ 你选用了一个 Constitutional 训练过的底层模型。这套配齐之后，你的幻觉率能压到一个企业能接受的范围；少一层，都会在某个角落出事故。</p>
   </div>
 
   <h3><span class="pre">4.6</span>用户级防御 · 你能立刻做的事 <span class="en">User-Level Defenses</span></h3>
 
-  <p class="lead">系统级防御是工程团队的事。但你作为用户,在<em>下一次跟 Claude/ChatGPT 对话</em>时,有几条立刻能用的判断武器——这是 <a href="#s3">第 3 章</a> 4D 框架里 <strong>Discernment(辨别)</strong>这一项的具体应用。</p>
+  <p class="lead">系统级防御是工程团队的事。但你作为用户，在<em>下一次跟 Claude/ChatGPT 对话</em>时，有几条立刻能用的判断武器——这是 <a href="#s3">第 3 章</a> 4D 框架里 <strong>Discernment（辨别）</strong>这一项的具体应用。</p>
 
   <h4>武器一 · 罕见事实警惕原则</h4>
 
-  <p>核心判断:<strong>这个事实在公开互联网上出现的频率,粗估一下</strong>。出现得多(常识、教科书内容、热门事件)→ LLM 大概率准;出现得少(具体案号、小众论文、精确数字、地方性事件)→ LLM 大概率编。</p>
+  <p>核心判断：<strong>这个事实在公开互联网上出现的频率，粗估一下</strong>。出现得多（常识、教科书内容、热门事件）→ LLM 大概率准；出现得少（具体案号、小众论文、精确数字、地方性事件）→ LLM 大概率编。</p>
 
-  <p>实操规则:</p>
+  <p>实操规则：</p>
 
   <ul>
     <li>✅ 让 LLM 解释一个广为人知的概念 → 用</li>
-    <li>✅ 让 LLM 改写、总结、翻译、润色 → 用(这些不依赖外部事实)</li>
-    <li>✅ 让 LLM 写代码 / 写 SQL / 推导思路 → 用(可以测试验证)</li>
-    <li>❌ 让 LLM 给具体引用 / 案号 / URL / 精确统计数字 → 不能信,必须外部验证</li>
-    <li>❌ 让 LLM 评价一个具体的(非著名的)人、产品、公司 → 不能信</li>
+    <li>✅ 让 LLM 改写、总结、翻译、润色 → 用（这些不依赖外部事实）</li>
+    <li>✅ 让 LLM 写代码 / 写 SQL / 推导思路 → 用（可以测试验证）</li>
+    <li>❌ 让 LLM 给具体引用 / 案号 / URL / 精确统计数字 → 不能信，必须外部验证</li>
+    <li>❌ 让 LLM 评价一个具体的（非著名的）人、产品、公司 → 不能信</li>
     <li>❌ 让 LLM 复述某本特定书的某一段、某个研究的某条数据 → 不能信</li>
   </ul>
 
   <h4>武器二 · 多次重问 + 不同 prompt 复述</h4>
 
-  <p>同一个事实问题,换三种说法问 LLM:</p>
+  <p>同一个事实问题，换三种说法问 LLM:</p>
 
   <ul>
-    <li>"X 是哪一年发生的?"</li>
+    <li>"X 是哪一年发生的？"</li>
     <li>"请告诉我 X 这件事的具体年份。"</li>
-    <li>"X 发生在 1953 年对吗?"(故意给一个错的年份)</li>
+    <li>"X 发生在 1953 年对吗？"（故意给一个错的年份）</li>
   </ul>
 
-  <p>如果三次回答稳定一致,这条事实大概率是真的(模型对它有稳定的统计锚点)。如果三次回答各不相同,或者你给错的年份它顺水推舟说"对",这条事实大概率是它在编。</p>
+  <p>如果三次回答稳定一致，这条事实大概率是真的（模型对它有稳定的统计锚点）。如果三次回答各不相同，或者你给错的年份它顺水推舟说"对"，这条事实大概率是它在编。</p>
 
   <div class="callout note">
     <div class="label">i 这条规则背后的机制</div>
-    <p>LLM 对真实存在的事实有<em>稳定的概率峰</em>——多次采样会反复落在同一个答案上。对编造的事实,它的概率分布平,每次采样落点不同。所以"一致性测试"是个粗糙但有效的真伪过滤。Anthropic 自己在 prompt engineering 文档里也推荐这一招,叫 <em>self-consistency check</em>。</p>
+    <p>LLM 对真实存在的事实有<em>稳定的概率峰</em>——多次采样会反复落在同一个答案上。对编造的事实，它的概率分布平，每次采样落点不同。所以"一致性测试"是个粗糙但有效的真伪过滤。Anthropic 自己在 prompt engineering 文档里也推荐这一招，叫 <em>self-consistency check</em>。</p>
   </div>
 
   <h4>武器三 · 关键决策永远要外部验证</h4>
 
-  <p>不管 LLM 说得多自信、多详细、多有"看起来像引用"的引用,只要这件事涉及<strong>有法律后果、有钱、有不可逆操作</strong>,必须做外部验证:</p>
+  <p>不管 LLM 说得多自信、多详细、多有"看起来像引用"的引用，只要这件事涉及<strong>有法律后果、有钱、有不可逆操作</strong>，必须做外部验证：</p>
 
   <ul>
-    <li>法律 / 合规 → 查官方法规库,问律师</li>
-    <li>医疗 → 查 UpToDate / 文献,问医生</li>
-    <li>财务 / 税务 → 查官方文件,问会计</li>
+    <li>法律 / 合规 → 查官方法规库，问律师</li>
+    <li>医疗 → 查 UpToDate / 文献，问医生</li>
+    <li>财务 / 税务 → 查官方文件，问会计</li>
     <li>具体数字进报表 → 查原始数据源</li>
     <li>引用进论文 / 报告 → 把每个引用在 Google Scholar 重新搜一次</li>
   </ul>
 
-  <p>这听起来"啰嗦",但 Schwartz 律师案、Moffatt 案、还有 2024 年密歇根大学一位教授把 ChatGPT 编的论文引用直接放进发表稿件被撤稿的事件——都是栽在这一条上。<strong>LLM 不是用来跳过验证的,是用来加速验证的</strong>。这两件事的差别就是事故和工具的差别。</p>
+  <p>这听起来"啰嗦"，但 Schwartz 律师案、Moffatt 案、还有 2024 年密歇根大学一位教授把 ChatGPT 编的论文引用直接放进发表稿件被撤稿的事件——都是栽在这一条上。<strong>LLM 不是用来跳过验证的，是用来加速验证的</strong>。这两件事的差别就是事故和工具的差别。</p>
 
   <div class="callout ops">
     <div class="label">✓ 一个能直接用的判断流程</div>
     <ul>
-      <li>第一步:这件事属于头部事实还是长尾事实?长尾就提高警惕。</li>
-      <li>第二步:LLM 给的"语气"有多自信?越自信越要警惕(自信不是证据)。</li>
-      <li>第三步:这件事的后果是不是不可逆?可逆就允许出错,不可逆就外部验证。</li>
-      <li>第四步:如果还不放心,换 prompt 重问两次看一致性。</li>
+      <li>第一步：这件事属于头部事实还是长尾事实？长尾就提高警惕。</li>
+      <li>第二步：LLM 给的"语气"有多自信？越自信越要警惕（自信不是证据）。</li>
+      <li>第三步：这件事的后果是不是不可逆？可逆就允许出错，不可逆就外部验证。</li>
+      <li>第四步：如果还不放心，换 prompt 重问两次看一致性。</li>
     </ul>
-    <p>把这四步内化成肌肉记忆,你的"被 AI 幻觉坑到"的概率会下降一个数量级。这就是 4D 框架里 Discernment 的实操形态。</p>
+    <p>把这四步内化成肌肉记忆，你的"被 AI 幻觉坑到"的概率会下降一个数量级。这就是 4D 框架里 Discernment 的实操形态。</p>
   </div>
 
-  <h3><span class="pre">4.7</span>反共识 · 模型越强,幻觉越难发现 <span class="en">The Counterintuitive Truth</span></h3>
+  <h3><span class="pre">4.7</span>反共识 · 模型越强，幻觉越难发现 <span class="en">The Counterintuitive Truth</span></h3>
 
-  <p class="lead">最后讲一条让很多人不舒服、但 Anthropic 自己人也认的判断——<strong>更强的模型不会让幻觉消失,只会让幻觉更难被发现</strong>。这条直接决定了你看待"AI 进步"这件事的姿势。</p>
+  <p class="lead">最后讲一条让很多人不舒服、但 Anthropic 自己人也认的判断——<strong>更强的模型不会让幻觉消失，只会让幻觉更难被发现</strong>。这条直接决定了你看待"AI 进步"这件事的姿势。</p>
 
   <h4>为什么会这样</h4>
 
-  <p>把 GPT-3.5 时代的幻觉,跟 Claude Opus 4.7、GPT-5 这一代的幻觉对照着想一遍:</p>
+  <p>把 GPT-3.5 时代的幻觉，跟 Claude Opus 4.7、GPT-5 这一代的幻觉对照着想一遍：</p>
 
   <div class="table-wrap">
     <table>
@@ -361,8 +361,8 @@
         </tr>
         <tr>
           <td>编造的代码</td>
-          <td>调用不存在的 API,编译就报错</td>
-          <td>调用风格符合该库,但参数或行为是编的,跑出来才报错</td>
+          <td>调用不存在的 API，编译就报错</td>
+          <td>调用风格符合该库，但参数或行为是编的，跑出来才报错</td>
         </tr>
         <tr>
           <td>识别难度</td>
@@ -374,10 +374,10 @@
   </div>
 
   <div class="audio-only">
-    <p>这两代之间的差距,正是「破绽怎么消失」的过程。早年编一条论文引用,作者名拼错、期刊乱起、年份对不上;如今作者是该领域真存在的学者、期刊是真期刊、年份也合理。编案号从前格式都不对,如今完全符合法院的编号规则。编数据从前数量级离谱,如今不光合理,还跟周围的真数据保持同一种风格。连编代码都变了——从前调一个不存在的接口,编译当场报错;如今调用风格活像那个库,只是参数或行为是编的,得真跑起来才露馅。于是识别难度跟着抬高:从前一个常识检查就能逮住,如今你必须真去外部数据源比对才行。</p>
+    <p>这两代之间的差距，正是「破绽怎么消失」的过程。早年编一条论文引用，作者名拼错、期刊乱起、年份对不上；如今作者是该领域真存在的学者、期刊是真期刊、年份也合理。编案号从前格式都不对，如今完全符合法院的编号规则。编数据从前数量级离谱，如今不光合理，还跟周围的真数据保持同一种风格。连编代码都变了——从前调一个不存在的接口，编译当场报错；如今调用风格活像那个库，只是参数或行为是编的，得真跑起来才露馅。于是识别难度跟着抬高：从前一个常识检查就能逮住，如今你必须真去外部数据源比对才行。</p>
   </div>
 
-  <p>这不是 Anthropic 或 OpenAI 没努力——他们都在压幻觉率(Claude 4.7 的事实型基准测试比 4.1 提升约 30%)。但<strong>幻觉率下降的同时,剩下那部分幻觉的"逼真度"反而上升了</strong>。原因很简单:模型学得更好,意味着它生成的所有文本——包括编的——都更符合真实文本的分布,所以表面上更难分辨。</p>
+  <p>这不是 Anthropic 或 OpenAI 没努力——他们都在压幻觉率（Claude 4.7 的事实型基准测试比 4.1 提升约 30%）。但<strong>幻觉率下降的同时，剩下那部分幻觉的"逼真度"反而上升了</strong>。原因很简单：模型学得更好，意味着它生成的所有文本——包括编的——都更符合真实文本的分布，所以表面上更难分辨。</p>
 
   <h4>这意味着什么</h4>
 
@@ -390,7 +390,7 @@
     <div class="item">
       <div class="label">DESIGN</div>
       <div class="num">系统设计</div>
-      <div class="sub">防御必须做在外面,不在模型里</div>
+      <div class="sub">防御必须做在外面，不在模型里</div>
     </div>
     <div class="item">
       <div class="label">CULTURE</div>
@@ -405,42 +405,42 @@
   </div>
 
   <div class="audio-only">
-    <p>顺着这个判断,还有两件落到操作层的事容易被忽略。一是<strong>使用文化</strong>——「AI 给的东西要验证」这条得正式写进团队的操作规范,而不是停在嘴上提醒;靠自觉是靠不住的。二是<strong>事后审计</strong>——每一个高风险的输出都留一条可追溯的日志,这样万一出了事,你能回头查到是哪一步信了不该信的东西。这两件都不靠模型,靠的是你把流程搭起来。</p>
+    <p>顺着这个判断，还有两件落到操作层的事容易被忽略。一是<strong>使用文化</strong>——「AI 给的东西要验证」这条得正式写进团队的操作规范，而不是停在嘴上提醒；靠自觉是靠不住的。二是<strong>事后审计</strong>——每一个高风险的输出都留一条可追溯的日志，这样万一出了事，你能回头查到是哪一步信了不该信的东西。这两件都不靠模型，靠的是你把流程搭起来。</p>
   </div>
 
   <div class="callout sharp">
     <div class="label">✕ 一句话总结这一章 · 也是这本书最贵的一条判断</div>
-    <p>幻觉<strong>是 LLM 在按它的目标函数正确工作时的副产品</strong>,不是它"不小心"出的错。所以幻觉防御永远是<em>系统设计问题</em>,不是<em>模型进化问题</em>。指望模型变好就能去掉幻觉的人,会在 2027 年、2028 年继续被同一类事故反复教育。指望系统设计就能压住幻觉的人,从今天就可以把这个问题降到可控范围。这两条路一头是被动等,一头是主动建——结果差几个数量级。</p>
+    <p>幻觉<strong>是 LLM 在按它的目标函数正确工作时的副产品</strong>，不是它"不小心"出的错。所以幻觉防御永远是<em>系统设计问题</em>，不是<em>模型进化问题</em>。指望模型变好就能去掉幻觉的人，会在 2027 年、2028 年继续被同一类事故反复教育。指望系统设计就能压住幻觉的人，从今天就可以把这个问题降到可控范围。这两条路一头是被动等，一头是主动建——结果差几个数量级。</p>
   </div>
 
   <h3><span class="pre">4.8</span>这一章给你的判断武器</h3>
 
-  <p class="lead">合上这章,你应该带走以下几把武器。</p>
+  <p class="lead">合上这章，你应该带走以下几把武器。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器一 · 幻觉三分法 · 看一眼就知道用哪种防御</div>
-    <p>事实型 → RAG + Citations + 外部查;推理型 → Tool Use + 复核;自信型 → 不要相信 LLM 的语气,只相信外部可验证的事实。同一次回答里可能三种叠加,要分开挡。</p>
+    <p>事实型 → RAG + Citations + 外部查；推理型 → Tool Use + 复核；自信型 → 不要相信 LLM 的语气，只相信外部可验证的事实。同一次回答里可能三种叠加，要分开挡。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器二 · 头部事实 vs 长尾事实 · 一个粗粒度真伪过滤</div>
-    <p>问头部事实(常识、热门、教科书)可以信;问长尾事实(具体案号、精确数字、小众引用)默认不信,必须外部验证。"看起来精确"等于"接近长尾",越精确越要警惕。</p>
+    <p>问头部事实（常识、热门、教科书）可以信；问长尾事实（具体案号、精确数字、小众引用）默认不信，必须外部验证。"看起来精确"等于"接近长尾"，越精确越要警惕。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器三 · 系统级四层挡墙 · 任何生产级 AI 应用的最小配置</div>
-    <p>Constitutional 训练的底层模型 + RAG 知识层 + Citations 引用层 + Tool Use 计算层。少一层都漏。在做任何 AI 产品决策时,先核对四层齐不齐。</p>
+    <p>Constitutional 训练的底层模型 + RAG 知识层 + Citations 引用层 + Tool Use 计算层。少一层都漏。在做任何 AI 产品决策时，先核对四层齐不齐。</p>
   </div>
 
   <div class="callout you">
     <div class="label">→ 给你 · 下一次跟 Claude 对话时</div>
-    <p>试一次这个练习:把这一章里你不太相信的一个具体说法——比如 "Air Canada 赔了 812 加元"、比如 "Claude 4.7 比 4.1 事实型基准提升约 30%"——拿去问 Claude 让它给具体出处,然后<em>真的去查那个出处</em>。你会很快感受到 4.6 节四步判断流程的肌肉记忆怎么长出来。这种练习每周做两三次,半年后你对 LLM 输出的"嗅觉"会强到自己都意外。</p>
+    <p>试一次这个练习：把这一章里你不太相信的一个具体说法——比如 "Air Canada 赔了 812 加元"、比如 "Claude 4.7 比 4.1 事实型基准提升约 30%"——拿去问 Claude 让它给具体出处，然后<em>真的去查那个出处</em>。你会很快感受到 4.6 节四步判断流程的肌肉记忆怎么长出来。这种练习每周做两三次，半年后你对 LLM 输出的"嗅觉"会强到自己都意外。</p>
   </div>
 
-  <p>下一章我们换个尺度——讲 Anthropic 自己的故事。前 4 章拆的是 LLM 这台机器,但<em>这台机器为什么是这副样子、为什么是 Anthropic 在做这副样子</em>,要去 2021 年那场从 OpenAI 出走的事件里找答案。Anthropic 的产品形态、Claude 的"个性"、Constitutional AI 的存在,都不是技术决策的产出,是一组关于"AI 该怎么造"的判断的产出。下一章把这组判断讲清楚。</p>
+  <p>下一章我们换个尺度——讲 Anthropic 自己的故事。前 4 章拆的是 LLM 这台机器，但<em>这台机器为什么是这副样子、为什么是 Anthropic 在做这副样子</em>，要去 2021 年那场从 OpenAI 出走的事件里找答案。Anthropic 的产品形态、Claude 的"个性"、Constitutional AI 的存在，都不是技术决策的产出，是一组关于"AI 该怎么造"的判断的产出。下一章把这组判断讲清楚。</p>
 
-  <p class="ref">主要参考:<br>
-  Mata v. Avianca, S.D.N.Y. 22-cv-1461 (Schwartz 律师案), 2023 · Moffatt v. Air Canada, BCCRT 149, 2024 · E. Bender et al., <em>On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?</em>, FAccT 2021 · Y. Bai et al., <em>Constitutional AI: Harmlessness from AI Feedback</em>, Anthropic, 2022 · L. Huang et al., <em>A Survey on Hallucination in Large Language Models</em>, arXiv 2311.05232, 2023 · Z. Ji et al., <em>Survey of Hallucination in Natural Language Generation</em>, ACM Computing Surveys, 2023 · OpenAI, <em>GPT-4 System Card</em>, 2023 · Anthropic, <em>Reducing hallucinations</em>, docs.anthropic.com, 2024 · Anthropic, <em>Citations API documentation</em>, 2026 · Anthropic Alignment Team, <em>Modeling sycophancy and calibration</em>, anthropic.com, 2025-10.</p>
+  <p class="ref">主要参考：<br>
+  Mata v. Avianca, S.D.N.Y. 22-cv-1461 （Schwartz 律师案）， 2023 · Moffatt v. Air Canada, BCCRT 149, 2024 · E. Bender et al., <em>On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?</em>, FAccT 2021 · Y. Bai et al., <em>Constitutional AI: Harmlessness from AI Feedback</em>, Anthropic, 2022 · L. Huang et al., <em>A Survey on Hallucination in Large Language Models</em>, arXiv 2311.05232, 2023 · Z. Ji et al., <em>Survey of Hallucination in Natural Language Generation</em>, ACM Computing Surveys, 2023 · OpenAI, <em>GPT-4 System Card</em>, 2023 · Anthropic, <em>Reducing hallucinations</em>, docs.anthropic.com, 2024 · Anthropic, <em>Citations API documentation</em>, 2026 · Anthropic Alignment Team, <em>Modeling sycophancy and calibration</em>, anthropic.com, 2025-10.</p>
 
 </div>
 </section>

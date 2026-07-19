@@ -2,24 +2,24 @@
 <div class="container">
 
   <div class="section-tag"><span class="num">09</span>MULTIMODAL · 问题地图 / 第九章</div>
-  <h1 class="section-h">多模态融合:语音 + 视觉 + 手势 + 文本 <span class="en">Multimodal Fusion</span></h1>
-  <p class="section-sub">AI 不再只是文字进文字出。当 GPT-4V 能看图、Whisper 能听音、Vision Pro 能识别手势、Sora 能生成视频——UX 不再是「二维界面」,而是多模态协奏的体验编排。这一章看模态切换的 4 个新议题、4 种典型的多模态产品形态、以及「模态选择」本身的设计学问。</p>
+  <h1 class="section-h">多模态融合：语音 + 视觉 + 手势 + 文本 <span class="en">Multimodal Fusion</span></h1>
+  <p class="section-sub">AI 不再只是文字进文字出。当 GPT-4V 能看图、Whisper 能听音、Vision Pro 能识别手势、Sora 能生成视频——UX 不再是「二维界面」，而是多模态协奏的体验编排。这一章看模态切换的 4 个新议题、4 种典型的多模态产品形态、以及「模态选择」本身的设计学问。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>多模态不是「加更多输入方式」,是<em>让用户在每个场景用最自然的模态</em>。最大的设计难题不在「识别准不准」,而在「模态切换的接缝」——从文字切到语音、从语音切到手势,接缝粗糙的多模态产品比单模态产品更难用。</p>
+    <p>多模态不是「加更多输入方式」，是<em>让用户在每个场景用最自然的模态</em>。最大的设计难题不在「识别准不准」，而在「模态切换的接缝」——从文字切到语音、从语音切到手势，接缝粗糙的多模态产品比单模态产品更难用。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / Vision Pro · 2024 年 2 月</div>
-    <p>Apple Vision Pro 发布会上,Tim Cook 演示了一个看似简单的动作:用户戴上头显,用<em>眼睛看</em>一个 App 图标,然后用<em>手指捏合</em>选中——没有手柄、没有触控、没有键盘。<strong>「看 + 捏」</strong>成了空间计算时代的新交互词汇。</p>
-    <p>但用户拿到 Vision Pro 试用后,反馈集中在两点:第一,长时间盯着选物体眼睛累;第二,需要输入文字时仍然要召唤虚拟键盘,「看 + 捏」输入比触屏慢 3 倍。</p>
-    <p>Apple 给出的解决方案不是「让眼睛更准」,而是<strong>无缝接入 iPhone 键盘 + Mac 键盘</strong>——当用户需要输入长文字时,直接切到熟悉的物理键盘。<em>这就是多模态 UX 的核心智慧:不要试图用一种模态解决所有问题,要让用户在最合适的模态间无缝切换</em>。</p>
+    <p>Apple Vision Pro 发布会上，Tim Cook 演示了一个看似简单的动作：用户戴上头显，用<em>眼睛看</em>一个 App 图标，然后用<em>手指捏合</em>选中——没有手柄、没有触控、没有键盘。<strong>「看 + 捏」</strong>成了空间计算时代的新交互词汇。</p>
+    <p>但用户拿到 Vision Pro 试用后，反馈集中在两点：第一，长时间盯着选物体眼睛累；第二，需要输入文字时仍然要召唤虚拟键盘，「看 + 捏」输入比触屏慢 3 倍。</p>
+    <p>Apple 给出的解决方案不是「让眼睛更准」，而是<strong>无缝接入 iPhone 键盘 + Mac 键盘</strong>——当用户需要输入长文字时，直接切到熟悉的物理键盘。<em>这就是多模态 UX 的核心智慧：不要试图用一种模态解决所有问题，要让用户在最合适的模态间无缝切换</em>。</p>
   </div>
 
   <h3><span class="pre">9.1</span>「多模态」是什么 · 拆开看</h3>
 
-  <p class="lead">「多模态」被滥用得很厉害。我们先把它拆开,看清楚 AI 产品里至少有 6 种模态在玩。</p>
+  <p class="lead">「多模态」被滥用得很厉害。我们先把它拆开，看清楚 AI 产品里至少有 6 种模态在玩。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -42,82 +42,82 @@
   </div>
 
   <div class="audio-only">
-    <p>这 6 种模态,各自都已经有立住了的代表。文字不用多说,GPT、Claude、Gemini 就是。语音这条,输入端是 Whisper,输出端是 Eleven Labs 和 ChatGPT 的语音。静态视觉,也就是看图和出图,代表是 GPT-4V、Claude Vision 和 Midjourney。动态视觉是视频进视频出,Gemini 的实时视频、Sora、Veo 都在这条线上。第五种是手势和空间,靠眼动、手势、头部姿态来操作,代表是 Vision Pro 和 Quest。第六种最容易被漏掉——动作,让 AI 直接去操作系统、自动跑浏览器,Claude 的 Computer Use 和 Operator 就是这一类。</p>
+    <p>这 6 种模态，各自都已经有立住了的代表。文字不用多说，GPT、Claude、Gemini 就是。语音这条，输入端是 Whisper，输出端是 Eleven Labs 和 ChatGPT 的语音。静态视觉，也就是看图和出图，代表是 GPT-4V、Claude Vision 和 Midjourney。动态视觉是视频进视频出，Gemini 的实时视频、Sora、Veo 都在这条线上。第五种是手势和空间，靠眼动、手势、头部姿态来操作，代表是 Vision Pro 和 Quest。第六种最容易被漏掉——动作，让 AI 直接去操作系统、自动跑浏览器，Claude 的 Computer Use 和 Operator 就是这一类。</p>
   </div>
 
   <p>「多模态产品」 = 同一个 AI 能处理 2 种以上模态。但不同模态的<em>组合方式</em>差异巨大。</p>
 
   <h3><span class="pre">9.2</span>4 种典型的多模态产品形态</h3>
 
-  <h4>形态 1 · 「看图说话」型(图入文出)</h4>
-  <p>用户上传图片,AI 用文字回答。最简单的多模态。</p>
+  <h4>形态 1 · 「看图说话」型（图入文出）</h4>
+  <p>用户上传图片，AI 用文字回答。最简单的多模态。</p>
   <ul>
     <li><strong>典型</strong>:GPT-4V / Claude Vision / Gemini</li>
-    <li><strong>UX 议题</strong>:上传 affordance(拖拽 / 选图标 / 截图粘贴),识别失败兜底(图模糊 / 分辨率低)</li>
+    <li><strong>UX 议题</strong>：上传 affordance（拖拽 / 选图标 / 截图粘贴），识别失败兜底（图模糊 / 分辨率低）</li>
   </ul>
 
-  <h4>形态 2 · 「说话写文」型(语入文出 + 语出)</h4>
-  <p>用户说话,AI 文字 + 语音回答。对话型 AI 的语音化。</p>
+  <h4>形态 2 · 「说话写文」型（语入文出 + 语出）</h4>
+  <p>用户说话，AI 文字 + 语音回答。对话型 AI 的语音化。</p>
   <ul>
-    <li><strong>典型</strong>:ChatGPT Voice / Claude Voice(规划中) / 豆包 / Pi</li>
-    <li><strong>UX 议题</strong>:打断机制(用户说话时要不要立刻停 TTS)、噪音环境、声纹识别、语速控制</li>
+    <li><strong>典型</strong>:ChatGPT Voice / Claude Voice（规划中） / 豆包 / Pi</li>
+    <li><strong>UX 议题</strong>：打断机制（用户说话时要不要立刻停 TTS）、噪音环境、声纹识别、语速控制</li>
   </ul>
 
-  <h4>形态 3 · 「实时视频」型(视频流入 + 多模态出)</h4>
-  <p>用户开摄像头,AI 实时看到环境,可以指导 / 描述 / 翻译。</p>
+  <h4>形态 3 · 「实时视频」型（视频流入 + 多模态出）</h4>
+  <p>用户开摄像头，AI 实时看到环境，可以指导 / 描述 / 翻译。</p>
   <ul>
     <li><strong>典型</strong>:Gemini Live Video / Meta Ray-Ban / Google Astra(Demo)</li>
-    <li><strong>UX 议题</strong>:何时唤起 / 何时休眠、隐私边界(摄像头一直开)、延迟敏感性、注意力管理</li>
+    <li><strong>UX 议题</strong>：何时唤起 / 何时休眠、隐私边界（摄像头一直开）、延迟敏感性、注意力管理</li>
   </ul>
 
-  <h4>形态 4 · 「空间手势」型(眼 + 手 + 头)</h4>
-  <p>头显设备,用眼神 + 手势 + 头部姿态作为输入。</p>
+  <h4>形态 4 · 「空间手势」型（眼 + 手 + 头）</h4>
+  <p>头显设备，用眼神 + 手势 + 头部姿态作为输入。</p>
   <ul>
     <li><strong>典型</strong>:Vision Pro / Quest 3</li>
-    <li><strong>UX 议题</strong>:无物理反馈(用户没有「按下感」)、长时间使用疲劳、输入精度 vs 自然性</li>
+    <li><strong>UX 议题</strong>：无物理反馈（用户没有「按下感」）、长时间使用疲劳、输入精度 vs 自然性</li>
   </ul>
 
   <h3><span class="pre">9.3</span>模态切换的 4 个新 UX 议题</h3>
 
-  <p class="lead">多模态最难的不是「支持每种模态」,是「在模态之间无缝切换」。这是单模态产品根本不需要考虑的议题。</p>
+  <p class="lead">多模态最难的不是「支持每种模态」，是「在模态之间无缝切换」。这是单模态产品根本不需要考虑的议题。</p>
 
   <h4>议题 1 · 何时切换 · 用户主动 vs 系统自动</h4>
 
   <div class="callout sharp">
     <div class="label">✕ 自动切换的两难</div>
     <ul>
-      <li><strong>自动切换的好处</strong>:用户不用思考,体验流畅(如 ChatGPT 自动识别用户是想要文字还是想要图)</li>
-      <li><strong>自动切换的坏处</strong>:切错了用户挫败感强(本来想要文字回答,AI 突然生成一张图占用 5 秒)</li>
+      <li><strong>自动切换的好处</strong>：用户不用思考，体验流畅（如 ChatGPT 自动识别用户是想要文字还是想要图）</li>
+      <li><strong>自动切换的坏处</strong>：切错了用户挫败感强（本来想要文字回答，AI 突然生成一张图占用 5 秒）</li>
     </ul>
-    <p><strong>折中</strong>:默认让用户主动切换(明确按钮),自动切换只用在「高置信场景」。<em>不要为了「AI 智能」过度自动化模态选择</em>。</p>
+    <p><strong>折中</strong>：默认让用户主动切换（明确按钮），自动切换只用在「高置信场景」。<em>不要为了「AI 智能」过度自动化模态选择</em>。</p>
   </div>
 
   <h4>议题 2 · 切换的视觉 / 听觉指示</h4>
-  <p>用户在文字对话中突然 AI 开始播放语音——必须有明确的视觉指示(波形 / 灯环 / TTS 图标),否则用户以为是系统出错。</p>
+  <p>用户在文字对话中突然 AI 开始播放语音——必须有明确的视觉指示（波形 / 灯环 / TTS 图标），否则用户以为是系统出错。</p>
 
   <h4>议题 3 · 多模态的「主线」</h4>
-  <p>同一段对话产生了文字 + 图片 + 语音,用户后来回看历史,什么是「主线」?</p>
+  <p>同一段对话产生了文字 + 图片 + 语音，用户后来回看历史，什么是「主线」？</p>
   <ul>
-    <li>ChatGPT 的做法:对话流按时间线排,所有产物嵌入</li>
-    <li>Claude 的做法:Artifact 单独存,对话流是「链接到 Artifact」</li>
-    <li>Vision Pro 的做法:空间锚定(把不同模态产物锚到房间不同位置)</li>
+    <li>ChatGPT 的做法：对话流按时间线排，所有产物嵌入</li>
+    <li>Claude 的做法：Artifact 单独存，对话流是「链接到 Artifact」</li>
+    <li>Vision Pro 的做法：空间锚定（把不同模态产物锚到房间不同位置）</li>
   </ul>
 
   <h4>议题 4 · 模态降级</h4>
-  <p>用户当前模态不可用怎么办?(开车不能看屏幕、安静场合不能播语音、暗光下摄像头看不清)</p>
+  <p>用户当前模态不可用怎么办？（开车不能看屏幕、安静场合不能播语音、暗光下摄像头看不清）</p>
 
   <div class="callout ops">
     <div class="label">✓ 模态降级的设计原则</div>
     <ol>
       <li><strong>检测场景</strong>—— GPS 看到在车里 / 麦克风听到嘈杂 / 时间是深夜——主动建议切换</li>
       <li><strong>提供等价替代</strong>——不能播语音时改用震动通知 / 视觉高亮</li>
-      <li><strong>不丢失内容</strong>——降级模态时,原内容要保留(语音 → 文字 transcript)</li>
+      <li><strong>不丢失内容</strong>——降级模态时，原内容要保留（语音 → 文字 transcript）</li>
     </ol>
   </div>
 
   <h3><span class="pre">9.4</span>「模态选择」本身的设计学问</h3>
 
-  <p class="lead">不是所有任务都该上多模态。最强的产品判断,是知道<em>哪些场景该坚持单模态</em>。</p>
+  <p class="lead">不是所有任务都该上多模态。最强的产品判断，是知道<em>哪些场景该坚持单模态</em>。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -129,49 +129,49 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>写代码 / 写正式文档</td><td>文字</td><td>需要精确,语音容易出错</td></tr>
-        <tr><td>brainstorm / 漫谈</td><td>语音</td><td>降低门槛,说比打快</td></tr>
+        <tr><td>写代码 / 写正式文档</td><td>文字</td><td>需要精确，语音容易出错</td></tr>
+        <tr><td>brainstorm / 漫谈</td><td>语音</td><td>降低门槛，说比打快</td></tr>
         <tr><td>讲解视觉内容</td><td>图 + 语音</td><td>双轨同时输入信息量大</td></tr>
         <tr><td>步行 / 通勤场景</td><td>语音 → 语音</td><td>不占用眼睛和手</td></tr>
         <tr><td>识别物体 / 翻译标语</td><td>摄像头 → 文字 / 语音</td><td>视觉是天然输入</td></tr>
-        <tr><td>长内容阅读</td><td>文字(+ 可选 TTS)</td><td>视觉可跳读,音频强制线性</td></tr>
+        <tr><td>长内容阅读</td><td>文字（+ 可选 TTS）</td><td>视觉可跳读，音频强制线性</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="audio-only">
-    <p>把这层判断落到几类具体任务上,规律就清楚了。写代码、写正式文档,老老实实用文字——这种活儿要的是精确,语音一出错代价就大。漫谈、头脑风暴反过来,用语音最舒服,说本来就比打字快、门槛也低。要讲解一段画面内容,图配着语音最好,两条轨道一起喂进来信息量才够。走路、通勤这种场景,语音进语音出,正好把手和注意力都解放出来。要认个东西、翻译一句招牌,自然是摄像头先上。而有一类容易被忽略——读长内容,其实该回到文字,顶多挂个可选的朗读;道理在于<strong>文字能让人随意跳读、回看,音频却把你按在一条线性的轨道上,想往回翻一句都难</strong>。</p>
+    <p>把这层判断落到几类具体任务上，规律就清楚了。写代码、写正式文档，老老实实用文字——这种活儿要的是精确，语音一出错代价就大。漫谈、头脑风暴反过来，用语音最舒服，说本来就比打字快、门槛也低。要讲解一段画面内容，图配着语音最好，两条轨道一起喂进来信息量才够。走路、通勤这种场景，语音进语音出，正好把手和注意力都解放出来。要认个东西、翻译一句招牌，自然是摄像头先上。而有一类容易被忽略——读长内容，其实该回到文字，顶多挂个可选的朗读；道理在于<strong>文字能让人随意跳读、回看，音频却把你按在一条线性的轨道上，想往回翻一句都难</strong>。</p>
   </div>
 
   <div class="callout sharp">
     <div class="label">✕ 一个常见误区</div>
-    <p>很多 AI 产品上来就声称「全模态」,结果每个模态都做得半吊子。<strong>更智慧的做法</strong>:先确定核心模态做到极致(如 ChatGPT 的文字、Midjourney 的图、Pi 的语音),再扩展次要模态作为辅助。<em>多模态是「乘法」不是「加法」——每多一个模态,设计复杂度翻倍</em>。</p>
+    <p>很多 AI 产品上来就声称「全模态」，结果每个模态都做得半吊子。<strong>更智慧的做法</strong>：先确定核心模态做到极致（如 ChatGPT 的文字、Midjourney 的图、Pi 的语音），再扩展次要模态作为辅助。<em>多模态是「乘法」不是「加法」——每多一个模态，设计复杂度翻倍</em>。</p>
   </div>
 
-  <h3><span class="pre">9.5</span>AI 图像生成产品的多模态思考(详见第 15 章)</h3>
+  <h3><span class="pre">9.5</span>AI 图像生成产品的多模态思考（详见第 15 章）</h3>
 
   <div class="callout you">
-    <div class="label">◐ 以某国产 AI 设计平台为例:当前 vs 未来的多模态布局</div>
-    <p><strong>当前</strong>:这类平台主要是「文字 + 图片」双向(用户文字 prompt → AI 出图;用户上传图 → AI 改图)。这是图像生成产品的标配。</p>
+    <div class="label">◐ 以某国产 AI 设计平台为例：当前 vs 未来的多模态布局</div>
+    <p><strong>当前</strong>：这类平台主要是「文字 + 图片」双向（用户文字 prompt → AI 出图；用户上传图 → AI 改图）。这是图像生成产品的标配。</p>
     <p><strong>可拓展的多模态</strong>:</p>
     <ul>
-      <li><strong>语音输入 prompt</strong>:用户在移动端说「给我画一只在月球的橘猫」,比打字快。低成本高 ROI,适合先上。</li>
-      <li><strong>图片输入 prompt</strong>(已有):上传参考图让 AI 模仿风格。可以做得更顺(目前流程稍重)。</li>
-      <li><strong>视频输出</strong>(未来):同 prompt 生成短视频。技术上 Sora 等已经在做,这类产品是否加入要看战略定位。</li>
-      <li><strong>移动端摄像头</strong>:对着实物拍照让 AI 出「同款风格设计」。垂直场景(电商 / 装修)可能有用。</li>
+      <li><strong>语音输入 prompt</strong>：用户在移动端说「给我画一只在月球的橘猫」，比打字快。低成本高 ROI，适合先上。</li>
+      <li><strong>图片输入 prompt</strong>（已有）：上传参考图让 AI 模仿风格。可以做得更顺（目前流程稍重）。</li>
+      <li><strong>视频输出</strong>（未来）：同 prompt 生成短视频。技术上 Sora 等已经在做，这类产品是否加入要看战略定位。</li>
+      <li><strong>移动端摄像头</strong>：对着实物拍照让 AI 出「同款风格设计」。垂直场景（电商 / 装修）可能有用。</li>
     </ul>
-    <p><strong>判断建议</strong>:不要全模态铺开。优先 <em>语音输入</em>(降使用门槛)和 <em>图片输入优化</em>(强化已有)。详见第 15 章。</p>
+    <p><strong>判断建议</strong>：不要全模态铺开。优先 <em>语音输入</em>（降使用门槛）和 <em>图片输入优化</em>（强化已有）。详见第 15 章。</p>
   </div>
 
   <h3><span class="pre">9.6</span>本章小结</h3>
 
-  <p>多模态不是给产品加更多输入按钮,而是<strong>让用户在每个场景用最自然的模态</strong>。6 种模态、4 种典型产品形态、4 个切换议题——这套坐标系帮你避免「全模态都做半吊子」的常见陷阱。</p>
+  <p>多模态不是给产品加更多输入按钮，而是<strong>让用户在每个场景用最自然的模态</strong>。6 种模态、4 种典型产品形态、4 个切换议题——这套坐标系帮你避免「全模态都做半吊子」的常见陷阱。</p>
 
-  <p>最关键的判断:<strong>多模态是乘法不是加法</strong>。先把核心模态做到极致,再用辅助模态弥补场景空白。</p>
+  <p>最关键的判断：<strong>多模态是乘法不是加法</strong>。先把核心模态做到极致，再用辅助模态弥补场景空白。</p>
 
-  <p>下一章 AI 人格与情感设计——当 AI 不只是工具,而是「有性格、能共情」的对话伙伴,UX 议题从「功能」扩展到「关系」。</p>
+  <p>下一章 AI 人格与情感设计——当 AI 不只是工具，而是「有性格、能共情」的对话伙伴，UX 议题从「功能」扩展到「关系」。</p>
 
-  <p class="ref">主要参考:<br>
+  <p class="ref">主要参考：<br>
   Apple Vision Pro Human Interface Guidelines, 2024 · OpenAI GPT-4V System Card, 2023 · Anthropic Claude Vision 文档 · Google Astra Demo, 2024-05 · Meta Ray-Ban Smart Glasses 文档 · NN/g, <em>Multimodal Interaction Patterns</em>, 2024 · Don Norman, "Hands-Free Interfaces", 2018</p>
 
 </div>

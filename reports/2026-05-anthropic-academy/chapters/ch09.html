@@ -3,26 +3,26 @@
 
   <div class="section-tag"><span class="num">09</span>PROMPT · 第四篇 / 第九章</div>
   <h1 class="section-h">Prompt 工程的五条原则 <span class="en">Five Rules and Deep Thinking</span></h1>
-  <p class="section-sub">如果说 <a href="#s1">第 1 章</a> 第四性质「可操控性」是理论,那这一章就是实操。Anthropic 在官方文档、Skilljar 课程、内部教学里反复讲的 prompt 工程,被压缩成五条原则——它们不是技巧清单,是「写清晰需求」的工程化语言。再加上 Extended Thinking 这一层,你拿到的就是 Claude 时代写 prompt 的完整工具箱。</p>
+  <p class="section-sub">如果说 <a href="#s1">第 1 章</a> 第四性质「可操控性」是理论，那这一章就是实操。Anthropic 在官方文档、Skilljar 课程、内部教学里反复讲的 prompt 工程，被压缩成五条原则——它们不是技巧清单，是「写清晰需求」的工程化语言。再加上 Extended Thinking 这一层，你拿到的就是 Claude 时代写 prompt 的完整工具箱。</p>
 
   <div class="tldr">
     <div class="label">▼ 三十秒看懂这一章</div>
-    <p>写 prompt 的关键不是「会说魔法咒语」,是把「需求」翻译成 Claude 能稳定解码的格式。Anthropic 给的五条原则——清晰直接、具体明确、XML 标签、给例子、让它先思考——本质都是把「你脑子里的隐含约束」摊到纸面上。Extended Thinking 是 Claude Opus 4.7 之后的新武器:你给一笔思考预算,Claude 在内部推理完再回答,适合数学、多步逻辑、代码审查。学会用「五条原则 + 思考预算」这套组合,prompt 失败率会下来一个数量级。</p>
+    <p>写 prompt 的关键不是「会说魔法咒语」，是把「需求」翻译成 Claude 能稳定解码的格式。Anthropic 给的五条原则——清晰直接、具体明确、XML 标签、给例子、让它先思考——本质都是把「你脑子里的隐含约束」摊到纸面上。Extended Thinking 是 Claude Opus 4.7 之后的新武器：你给一笔思考预算，Claude 在内部推理完再回答，适合数学、多步逻辑、代码审查。学会用「五条原则 + 思考预算」这套组合，prompt 失败率会下来一个数量级。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2024 年 3 月 · Anthropic 官方 Prompt 指南公开发布</div>
-    <p>2024 年 3 月,Anthropic 把内部用了一年多的 prompt 写作规范公开到了 docs.anthropic.com,起名《Prompt Engineering Guide》。在此之前,「怎么给 Claude 写 prompt」这件事散落在 Discord、博客、Tweet 里,各种民间偏方层出不穷——「在 prompt 末尾加 think step by step」「让 Claude 假装自己是某领域专家」「重复三遍重要事项」⋯⋯</p>
-    <p>Anthropic 这份指南做了一件简单的事:把这些偏方归纳成五条可教可学的原则,并且每一条都附了 bad → good 的对照样本。指南上线第一周,GitHub 上的 Claude 应用层项目就出现一批 PR,标题写着 <em>refactor prompts following anthropic guidelines</em>,改完之后任务成功率普遍上升 20-40 个百分点。</p>
-    <p>这份指南后来被嵌入到 Anthropic Skilljar 学院的「Building with the Claude API」课程里,成为开发者上手 Claude 的第一节正课 [Anthropic 2024]。它不教你魔法咒语——它教你怎么把模糊需求写成 Claude 能稳定解码的格式。这一章把这五条原则展开讲,并补上 Extended Thinking 这一新维度。</p>
-    <p>讲清楚之前,先看一个真实案例。某家做法律 SaaS 的初创公司,最早写的 prompt 是「<em>请帮我总结这份合同的关键条款</em>」。任务跑 100 次,有时返回 3 条要点、有时返回 15 条、有时夹杂一段免责声明、有时把当事人姓名也漏掉。换成「<em>你是一位企业合同审阅员。请从下面 &lt;contract&gt; 里提取 5 类信息:当事人、生效日期、付款条款、违约条款、解约条款。每类用一句话总结,输出 JSON,key 用上述五个英文名词,缺失填 null。&lt;/contract&gt;</em>」之后,同样 100 次跑下来,格式完全统一,缺失率从 30% 降到 2%。这之间的差距不在模型,在 prompt——五条原则全用上了。</p>
+    <p>2024 年 3 月，Anthropic 把内部用了一年多的 prompt 写作规范公开到了 docs.anthropic.com，起名《Prompt Engineering Guide》。在此之前，「怎么给 Claude 写 prompt」这件事散落在 Discord、博客、Tweet 里，各种民间偏方层出不穷——「在 prompt 末尾加 think step by step」「让 Claude 假装自己是某领域专家」「重复三遍重要事项」⋯⋯</p>
+    <p>Anthropic 这份指南做了一件简单的事：把这些偏方归纳成五条可教可学的原则，并且每一条都附了 bad → good 的对照样本。指南上线第一周，GitHub 上的 Claude 应用层项目就出现一批 PR，标题写着 <em>refactor prompts following anthropic guidelines</em>，改完之后任务成功率普遍上升 20-40 个百分点。</p>
+    <p>这份指南后来被嵌入到 Anthropic Skilljar 学院的「Building with the Claude API」课程里，成为开发者上手 Claude 的第一节正课 [Anthropic 2024]。它不教你魔法咒语——它教你怎么把模糊需求写成 Claude 能稳定解码的格式。这一章把这五条原则展开讲，并补上 Extended Thinking 这一新维度。</p>
+    <p>讲清楚之前，先看一个真实案例。某家做法律 SaaS 的初创公司，最早写的 prompt 是「<em>请帮我总结这份合同的关键条款</em>」。任务跑 100 次，有时返回 3 条要点、有时返回 15 条、有时夹杂一段免责声明、有时把当事人姓名也漏掉。换成「<em>你是一位企业合同审阅员。请从下面 &lt;contract&gt; 里提取 5 类信息：当事人、生效日期、付款条款、违约条款、解约条款。每类用一句话总结，输出 JSON,key 用上述五个英文名词，缺失填 null。&lt;/contract&gt;</em>」之后，同样 100 次跑下来，格式完全统一，缺失率从 30% 降到 2%。这之间的差距不在模型，在 prompt——五条原则全用上了。</p>
   </div>
 
   <h3><span class="pre">9.1</span>第一条 · 清晰直接 <span class="en">Be Clear and Direct</span></h3>
 
-  <p class="lead">Anthropic 把这条放第一位是有原因的:在所有失败 prompt 里,占比最大的不是技巧用错,是<strong>把任务、约束、产出三件事没说在前面</strong>。</p>
+  <p class="lead">Anthropic 把这条放第一位是有原因的：在所有失败 prompt 里，占比最大的不是技巧用错，是<strong>把任务、约束、产出三件事没说在前面</strong>。</p>
 
-  <p>「清晰直接」翻译成具体行为有三条:一是<em>任务放最前面</em>,不要前情提要绕半天;二是<em>不要假设 Claude 知道你的潜台词</em>,你脑子里的隐含约束,要落到纸面;三是<em>用祈使句,不用疑问句</em>,「请提取 X」比「你能帮我看看 X 吗」更稳定。</p>
+  <p>「清晰直接」翻译成具体行为有三条：一是<em>任务放最前面</em>，不要前情提要绕半天；二是<em>不要假设 Claude 知道你的潜台词</em>，你脑子里的隐含约束，要落到纸面；三是<em>用祈使句，不用疑问句</em>，「请提取 X」比「你能帮我看看 X 吗」更稳定。</p>
 
   <h4>一个 bad → good 的对照</h4>
 
@@ -34,13 +34,13 @@
       <tbody>
         <tr>
           <td>❌ bad</td>
-          <td>「最近我在研究客户反馈,你看看这些数据能告诉我什么?」</td>
-          <td>任务模糊 — Claude 不知道你要分类、要打分、还是要写报告;前情提要占了一半字数,真正的指令藏在末尾</td>
+          <td>「最近我在研究客户反馈，你看看这些数据能告诉我什么？」</td>
+          <td>任务模糊 — Claude 不知道你要分类、要打分、还是要写报告；前情提要占了一半字数，真正的指令藏在末尾</td>
         </tr>
         <tr>
           <td>✅ good</td>
-          <td>「把下面 30 条客户反馈按情感分成三类(正面 / 中立 / 负面),每类各列 3 条最具代表性的原文,并各用一句话总结该类客户的核心诉求。」</td>
-          <td>任务、数量、产出格式都说在前面;祈使句开头,无歧义</td>
+          <td>「把下面 30 条客户反馈按情感分成三类（正面 / 中立 / 负面），每类各列 3 条最具代表性的原文，并各用一句话总结该类客户的核心诉求。」</td>
+          <td>任务、数量、产出格式都说在前面；祈使句开头，无歧义</td>
         </tr>
       </tbody>
     </table>
@@ -48,40 +48,40 @@
 
   <div class="callout sharp">
     <div class="label">✕ 一个反直觉的事实 · 越长越好是错的</div>
-    <p>很多人写 prompt 像写 RFP——先来一段公司介绍、再交代背景、再说明动机,最后才说要干嘛。Claude 在长上下文下注意力会变稀(回头看 <a href="#s1">第 1 章</a> lost-in-the-middle),你 200 字的前情提要不仅没帮助,反而稀释了真正指令的权重。<strong>清晰直接 ≠ 长篇大论</strong>。能 50 字说清,不要写 200 字。Anthropic 在官方指南里用了一句话总结:「If a new employee with no context could follow your prompt, you've written a good prompt」——一个完全没上下文的新员工能跟着你的 prompt 干活,这才算写清楚了。</p>
+    <p>很多人写 prompt 像写 RFP——先来一段公司介绍、再交代背景、再说明动机，最后才说要干嘛。Claude 在长上下文下注意力会变稀（回头看 <a href="#s1">第 1 章</a> lost-in-the-middle），你 200 字的前情提要不仅没帮助，反而稀释了真正指令的权重。<strong>清晰直接 ≠ 长篇大论</strong>。能 50 字说清，不要写 200 字。Anthropic 在官方指南里用了一句话总结：「If a new employee with no context could follow your prompt, you've written a good prompt」——一个完全没上下文的新员工能跟着你的 prompt 干活，这才算写清楚了。</p>
   </div>
 
   <h3><span class="pre">9.2</span>第二条 · 具体明确 <span class="en">Be Specific</span></h3>
 
-  <p class="lead">「清晰直接」是把任务说在前面,「具体明确」是把任务说得不可能误解。这两条经常被混为一谈,但其实是两层——前者解决「Claude 不知道你要干什么」,后者解决「Claude 知道大概要干什么,但不知道你要哪种版本」。</p>
+  <p class="lead">「清晰直接」是把任务说在前面，「具体明确」是把任务说得不可能误解。这两条经常被混为一谈，但其实是两层——前者解决「Claude 不知道你要干什么」，后者解决「Claude 知道大概要干什么，但不知道你要哪种版本」。</p>
 
-  <p>具体明确翻译成行为有四个动作:<strong>给字数 / 给格式 / 给场景 / 给反例</strong>。</p>
+  <p>具体明确翻译成行为有四个动作：<strong>给字数 / 给格式 / 给场景 / 给反例</strong>。</p>
 
   <h4>四个动作各举一例</h4>
 
   <ul>
-    <li><strong>给字数</strong> — ❌「写一段产品介绍」 → ✅「写一段产品介绍,正文 80-100 中文字,不要标题,不要分段」</li>
-    <li><strong>给格式</strong> — ❌「列出关键风险」 → ✅「列出 5 个关键风险,每条用 Markdown 二级标题写风险名(8 字以内),下面用 1 行说明影响、1 行说明缓解」</li>
-    <li><strong>给场景</strong> — ❌「翻译这段技术文档」 → ✅「把这段 React 文档翻译成中文,读者是有 3 年前端经验但刚接触 React 的工程师,保留 React API 名称不译,不要把 `useState` 翻成「使用状态」」</li>
-    <li><strong>给反例</strong> — ❌「写得自然一点」 → ✅「写得自然一点,不要用「赋能」「闭环」「生态」这种词,也不要用「让我们一起」「在这个快速变化的时代」这种开场」</li>
+    <li><strong>给字数</strong> — ❌「写一段产品介绍」 → ✅「写一段产品介绍，正文 80-100 中文字，不要标题，不要分段」</li>
+    <li><strong>给格式</strong> — ❌「列出关键风险」 → ✅「列出 5 个关键风险，每条用 Markdown 二级标题写风险名（8 字以内），下面用 1 行说明影响、1 行说明缓解」</li>
+    <li><strong>给场景</strong> — ❌「翻译这段技术文档」 → ✅「把这段 React 文档翻译成中文，读者是有 3 年前端经验但刚接触 React 的工程师，保留 React API 名称不译，不要把 `useState` 翻成「使用状态」」</li>
+    <li><strong>给反例</strong> — ❌「写得自然一点」 → ✅「写得自然一点，不要用「赋能」「闭环」「生态」这种词，也不要用「让我们一起」「在这个快速变化的时代」这种开场」</li>
   </ul>
 
-  <p>这四个动作里最被低估的是<em>给反例</em>。Anthropic 的官方文档反复强调:告诉 Claude 「不要做什么」往往比告诉它「要做什么」更省事——尤其当你心里其实有一个具体的反面例子时,直接把那个例子写进 prompt,Claude 会绕开它 [Anthropic Docs 2024]。</p>
+  <p>这四个动作里最被低估的是<em>给反例</em>。Anthropic 的官方文档反复强调：告诉 Claude 「不要做什么」往往比告诉它「要做什么」更省事——尤其当你心里其实有一个具体的反面例子时，直接把那个例子写进 prompt,Claude 会绕开它 [Anthropic Docs 2024]。</p>
 
   <div class="callout note">
-    <div class="label">i 一个常见误区 · 「我说得越笼统,Claude 越能自由发挥」</div>
-    <p>恰恰相反。<strong>笼统的 prompt 不会让 Claude 自由发挥,只会让它退到训练里那条最「平均」的路径上</strong>——也就是你最讨厌的那种 ChatGPT 腔。回头看 <a href="#s1">第 1 章</a> 第一性质:Claude 输出的是「在你的 prompt 之后,训练语料里最可能出现的字」。你 prompt 模糊,它就走平均;你 prompt 具体,它才有依据偏离平均。<strong>个性来自约束,不来自放任</strong>。这一条在写文案、写代码、做翻译时都成立。</p>
+    <div class="label">i 一个常见误区 · 「我说得越笼统，Claude 越能自由发挥」</div>
+    <p>恰恰相反。<strong>笼统的 prompt 不会让 Claude 自由发挥，只会让它退到训练里那条最「平均」的路径上</strong>——也就是你最讨厌的那种 ChatGPT 腔。回头看 <a href="#s1">第 1 章</a> 第一性质：Claude 输出的是「在你的 prompt 之后，训练语料里最可能出现的字」。你 prompt 模糊，它就走平均；你 prompt 具体，它才有依据偏离平均。<strong>个性来自约束，不来自放任</strong>。这一条在写文案、写代码、做翻译时都成立。</p>
   </div>
 
   <h3><span class="pre">9.3</span>第三条 · 用 XML 标签把上下文分块 <span class="en">Use XML Tags</span></h3>
 
-  <p class="lead">这是 Anthropic 跟其他厂商最不一样的一条建议——在 prompt 里用 <code>&lt;tag&gt;...&lt;/tag&gt;</code> 这种 XML 风格标签,把不同性质的内容分开。原因不是「XML 比 Markdown 高级」,是<strong>Claude 在训练时大量见过 XML 标签结构</strong>,它知道 <code>&lt;context&gt;</code> 里的内容跟 <code>&lt;task&gt;</code> 里的内容性质不一样。</p>
+  <p class="lead">这是 Anthropic 跟其他厂商最不一样的一条建议——在 prompt 里用 <code>&lt;tag&gt;...&lt;/tag&gt;</code> 这种 XML 风格标签，把不同性质的内容分开。原因不是「XML 比 Markdown 高级」，是<strong>Claude 在训练时大量见过 XML 标签结构</strong>，它知道 <code>&lt;context&gt;</code> 里的内容跟 <code>&lt;task&gt;</code> 里的内容性质不一样。</p>
 
-  <p>这条对长 prompt 的稳定性提升尤其明显——当你的 prompt 里同时塞着「背景资料」「任务指令」「输出格式」「示例」「上一轮对话」时,把它们各自用标签包起来,Claude 解码错位的概率会大幅下降。</p>
+  <p>这条对长 prompt 的稳定性提升尤其明显——当你的 prompt 里同时塞着「背景资料」「任务指令」「输出格式」「示例」「上一轮对话」时，把它们各自用标签包起来，Claude 解码错位的概率会大幅下降。</p>
 
   <h4>一个完整模板</h4>
 
-  <p>Anthropic 官方文档给的标准模板,大致是把角色场景、任务清单、输出格式、真实数据这四段各自用一个标签包起来。</p>
+  <p>Anthropic 官方文档给的标准模板，大致是把角色场景、任务清单、输出格式、真实数据这四段各自用一个标签包起来。</p>
 
   <pre class="no-audio"><code>&lt;context&gt;
 你是一位企业合同审阅员,服务于 SaaS 行业的法务团队。
@@ -107,31 +107,31 @@
 {这里塞合同正文}
 &lt;/contract&gt;</code></pre>
 
-  <p>这个模板里五个标签各司其职:<code>&lt;context&gt;</code> 给角色和场景(对应 <a href="#s1">第 1 章</a> 可操控性的 ROLE 维度)、<code>&lt;task&gt;</code> 给任务清单、<code>&lt;output_format&gt;</code> 给格式(对应 FORMAT 维度)、<code>&lt;contract&gt;</code> 装真实数据。Claude 遇到这种标签结构会自动把每段当作一个语义单元处理,不会把合同正文当成指令的一部分,也不会把指令当成合同内容。</p>
+  <p>这个模板里五个标签各司其职：<code>&lt;context&gt;</code> 给角色和场景（对应 <a href="#s1">第 1 章</a> 可操控性的 ROLE 维度）、<code>&lt;task&gt;</code> 给任务清单、<code>&lt;output_format&gt;</code> 给格式（对应 FORMAT 维度）、<code>&lt;contract&gt;</code> 装真实数据。Claude 遇到这种标签结构会自动把每段当作一个语义单元处理，不会把合同正文当成指令的一部分，也不会把指令当成合同内容。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · XML 标签是 Claude 时代最便宜的 prompt 升级</div>
-    <p>如果你现有的 prompt 是一段连续的纯文本,把它拆成 3-5 个 XML 标签的版本,改造成本不到 10 分钟,稳定性提升能有 15-30%。这是所有 prompt 改造里 ROI 最高的一步。Anthropic 内部把这条原则跟其他四条放在一个等级——不是可选优化,是基础配置。</p>
+    <p>如果你现有的 prompt 是一段连续的纯文本，把它拆成 3-5 个 XML 标签的版本，改造成本不到 10 分钟，稳定性提升能有 15-30%。这是所有 prompt 改造里 ROI 最高的一步。Anthropic 内部把这条原则跟其他四条放在一个等级——不是可选优化，是基础配置。</p>
   </div>
 
   <h3><span class="pre">9.4</span>第四条 · 给例子 <span class="en">Few-Shot Examples</span></h3>
 
-  <p class="lead">前面三条都在讲「怎么描述任务」。第四条换了思路——<strong>不描述,直接给样本</strong>。Few-Shot Prompting 在 GPT-3 时代就被证明有效,Anthropic 把它定为 Claude prompt 工程的第四条核心原则 [Brown 2020] [Anthropic Docs 2024]。</p>
+  <p class="lead">前面三条都在讲「怎么描述任务」。第四条换了思路——<strong>不描述，直接给样本</strong>。Few-Shot Prompting 在 GPT-3 时代就被证明有效，Anthropic 把它定为 Claude prompt 工程的第四条核心原则 [Brown 2020] [Anthropic Docs 2024]。</p>
 
-  <p>给例子的本质是:你想让 Claude 输出的格式 / 风格 / 思路如果难以用语言描述,就给它 1-3 个完整的 input → output 示例,Claude 会从这些示例里学到「这种输入,该这种输出」的统计模式。</p>
+  <p>给例子的本质是：你想让 Claude 输出的格式 / 风格 / 思路如果难以用语言描述，就给它 1-3 个完整的 input → output 示例，Claude 会从这些示例里学到「这种输入，该这种输出」的统计模式。</p>
 
   <h4>一个真实任务的对照</h4>
 
-  <p>任务:从客服工单中提取「问题类型」标签。</p>
+  <p>任务：从客服工单中提取「问题类型」标签。</p>
 
-  <p><strong>❌ Zero-shot(零示例)版本</strong>:只丢一句「请把下面这条工单分类」,后面直接跟一条工单,不给任何样板。</p>
+  <p><strong>❌ Zero-shot（零示例）版本</strong>：只丢一句「请把下面这条工单分类」，后面直接跟一条工单，不给任何样板。</p>
 
   <pre class="no-audio"><code>请把下面的客服工单分类:
 &lt;ticket&gt;我昨天买的耳机充不进电了,刚拆开两天&lt;/ticket&gt;</code></pre>
 
-  <p>这么写,Claude 可能返回「电池问题」「质量问题」「产品故障」「售后请求」等好几种说法,完全不可预测。</p>
+  <p>这么写，Claude 可能返回「电池问题」「质量问题」「产品故障」「售后请求」等好几种说法，完全不可预测。</p>
 
-  <p><strong>✅ Few-shot(带示例)版本</strong>:在工单前面先摆三组样板,每组都是一条工单配一个标签——登录不上配「登录问题」、不发货配「物流问题」、退款没到账配「退款问题」,然后才把要分类的那条工单递进去。</p>
+  <p><strong>✅ Few-shot（带示例）版本</strong>：在工单前面先摆三组样板，每组都是一条工单配一个标签——登录不上配「登录问题」、不发货配「物流问题」、退款没到账配「退款问题」，然后才把要分类的那条工单递进去。</p>
 
   <pre class="no-audio"><code>请按下面示例的格式给工单分类。
 
@@ -153,7 +153,7 @@ label: 退款问题
 &lt;ticket&gt;我昨天买的耳机充不进电了,刚拆开两天&lt;/ticket&gt;
 label:</code></pre>
 
-  <p>这么写,跑 100 次几乎 100 次都会返回类似「产品质量问题」「硬件故障」这种跟样板风格一致的短标签——格式稳定、长度稳定、用词稳定。</p>
+  <p>这么写，跑 100 次几乎 100 次都会返回类似「产品质量问题」「硬件故障」这种跟样板风格一致的短标签——格式稳定、长度稳定、用词稳定。</p>
 
   <h4>给例子的三条经验</h4>
 
@@ -161,7 +161,7 @@ label:</code></pre>
     <div class="item">
       <div class="label">DIVERSITY</div>
       <div class="num">覆盖多样性</div>
-      <div class="sub">3 个示例要尽量覆盖不同子类,不要全是同一种</div>
+      <div class="sub">3 个示例要尽量覆盖不同子类，不要全是同一种</div>
     </div>
     <div class="item">
       <div class="label">EDGE</div>
@@ -176,48 +176,48 @@ label:</code></pre>
     <div class="item">
       <div class="label">COUNT</div>
       <div class="num">1-3 个最划算</div>
-      <div class="sub">超过 5 个收益递减,且会吃 token 预算</div>
+      <div class="sub">超过 5 个收益递减，且会吃 token 预算</div>
     </div>
   </div>
 
   <div class="audio-only">
-    <p>挑示例有四条经验值得记一下。一,几个示例尽量覆盖不同的子类,别全堆成同一种;二,至少留一个去示范边界情况该怎么处理;三,示例和真实输入的字段名、标签、顺序得严丝合缝地一致,差一点都会让 Claude 学歪;四,数量上一到三个最划算,超过五个收益就开始递减,还白白多吃 token。</p>
+    <p>挑示例有四条经验值得记一下。一，几个示例尽量覆盖不同的子类，别全堆成同一种；二，至少留一个去示范边界情况该怎么处理；三，示例和真实输入的字段名、标签、顺序得严丝合缝地一致，差一点都会让 Claude 学歪；四，数量上一到三个最划算，超过五个收益就开始递减，还白白多吃 token。</p>
   </div>
 
   <div class="callout sharp">
     <div class="label">✕ 反共识 · Few-Shot 不是越多越好</div>
-    <p>很多人以为示例越多 Claude 学得越准,实测不是。当任务足够明确(比如分类标签集已经在 prompt 里列出来了),zero-shot 反而比 few-shot 更稳定——因为示例占了上下文却没增加新信息,反而稀释了真正的指令权重。<strong>判断要不要 few-shot 的标准只有一条:你的任务能不能用语言完整描述清楚?能,就别给示例;不能,再给</strong>。比如「按 JSON 输出」可以用语言说清,不需要示例;「按我们公司内部的报告腔调写」就只能给示例,语言没法描述「我们公司的腔调」。</p>
+    <p>很多人以为示例越多 Claude 学得越准，实测不是。当任务足够明确（比如分类标签集已经在 prompt 里列出来了），zero-shot 反而比 few-shot 更稳定——因为示例占了上下文却没增加新信息，反而稀释了真正的指令权重。<strong>判断要不要 few-shot 的标准只有一条：你的任务能不能用语言完整描述清楚？能，就别给示例；不能，再给</strong>。比如「按 JSON 输出」可以用语言说清，不需要示例；「按我们公司内部的报告腔调写」就只能给示例，语言没法描述「我们公司的腔调」。</p>
   </div>
 
   <h3><span class="pre">9.5</span>第五条 · 让它先思考 <span class="en">Chain-of-Thought</span></h3>
 
-  <p class="lead">前面四条都在讲「怎么写 prompt」。第五条换了维度——<strong>引导 Claude 在给最终答案之前,先把推理过程写出来</strong>。这就是著名的 Chain-of-Thought(CoT,思维链),由 Google Brain 的 Wei 等人在 NeurIPS 2022 论文里系统化提出 [Wei 2022]。</p>
+  <p class="lead">前面四条都在讲「怎么写 prompt」。第五条换了维度——<strong>引导 Claude 在给最终答案之前，先把推理过程写出来</strong>。这就是著名的 Chain-of-Thought（CoT，思维链），由 Google Brain 的 Wei 等人在 NeurIPS 2022 论文里系统化提出 [Wei 2022]。</p>
 
-  <p>CoT 之所以有效,机制要回到 <a href="#s1">第 1 章</a> 第一性质:LLM 一字一字蹦,每个字基于前面所有字算概率。如果你逼它在写答案之前先写 200 字的推理过程,那这 200 字会进入它的「前文」,让它写答案那一刻的概率分布,被推理过程拉到更接近正确轨道上。机制是统计,效果像思考。</p>
+  <p>CoT 之所以有效，机制要回到 <a href="#s1">第 1 章</a> 第一性质：LLM 一字一字蹦，每个字基于前面所有字算概率。如果你逼它在写答案之前先写 200 字的推理过程，那这 200 字会进入它的「前文」，让它写答案那一刻的概率分布，被推理过程拉到更接近正确轨道上。机制是统计，效果像思考。</p>
 
   <h4>触发 CoT 的三种写法</h4>
 
   <ul>
-    <li><strong>魔咒式</strong> — 直接在 prompt 末尾加「Let's think step by step」或「让我们一步步分析」。简单粗暴,但对复杂任务有效</li>
-    <li><strong>结构化</strong> — 在 XML 里加 <code>&lt;thinking&gt;</code> 块,要求 Claude 先在里面写推理过程,再在 <code>&lt;answer&gt;</code> 块写最终答案</li>
-    <li><strong>提问式</strong> — 不直接要答案,先问「这个问题涉及哪几个关键因素?各因素之间什么关系?」,让 Claude 把分析框架自己摆出来,再问最终结论</li>
+    <li><strong>魔咒式</strong> — 直接在 prompt 末尾加「Let's think step by step」或「让我们一步步分析」。简单粗暴，但对复杂任务有效</li>
+    <li><strong>结构化</strong> — 在 XML 里加 <code>&lt;thinking&gt;</code> 块，要求 Claude 先在里面写推理过程，再在 <code>&lt;answer&gt;</code> 块写最终答案</li>
+    <li><strong>提问式</strong> — 不直接要答案，先问「这个问题涉及哪几个关键因素？各因素之间什么关系？」，让 Claude 把分析框架自己摆出来，再问最终结论</li>
   </ul>
 
-  <p>这三种写法的本质都一样——<em>把「直接产出答案」拆成「先产出推理,再产出答案」两步</em>。在数学题、多步推理、代码审查、合同审阅这类任务上,CoT 能把准确率提升 10-30 个百分点 [Wei 2022]。</p>
+  <p>这三种写法的本质都一样——<em>把「直接产出答案」拆成「先产出推理，再产出答案」两步</em>。在数学题、多步推理、代码审查、合同审阅这类任务上，CoT 能把准确率提升 10-30 个百分点 [Wei 2022]。</p>
 
   <div class="callout note">
     <div class="label">i 一个细节 · 别让 CoT 输出污染最终结果</div>
-    <p>如果你的下游系统期望 Claude 直接返回 JSON,但 CoT 让它先写了 300 字推理,JSON 就被推理污染了。解决方案:让它先在一个 thinking 标签里分析、再把 JSON 放进一个 answer 标签,用 XML 把推理和最终答案严格分开。</p>
+    <p>如果你的下游系统期望 Claude 直接返回 JSON，但 CoT 让它先写了 300 字推理，JSON 就被推理污染了。解决方案：让它先在一个 thinking 标签里分析、再把 JSON 放进一个 answer 标签，用 XML 把推理和最终答案严格分开。</p>
     <pre class="no-audio"><code>请先在 &lt;thinking&gt; 块里分析,
 再在 &lt;answer&gt; 块里输出 JSON。
 &lt;thinking&gt;...&lt;/thinking&gt;
 &lt;answer&gt;{...JSON...}&lt;/answer&gt;</code></pre>
-    <p>这么一分,下游程序只解析 answer 标签里的内容,推理过程纯供调试,不进入业务逻辑。</p>
+    <p>这么一分，下游程序只解析 answer 标签里的内容，推理过程纯供调试，不进入业务逻辑。</p>
   </div>
 
   <h3><span class="pre">9.6</span>Extended Thinking · Claude 的内部思考预算 <span class="en">Deep Reasoning</span></h3>
 
-  <p class="lead">CoT 是用户在 prompt 里要求 Claude 「显式」思考。<strong>Extended Thinking</strong> 是 Claude Opus 4.7 之后引入的另一层机制——你给一笔「思考预算」(token 数),Claude 在内部跑推理(用户看不到),用完预算再产出最终回答。这不是普通 CoT,是模型层面的新能力。</p>
+  <p class="lead">CoT 是用户在 prompt 里要求 Claude 「显式」思考。<strong>Extended Thinking</strong> 是 Claude Opus 4.7 之后引入的另一层机制——你给一笔「思考预算」（token 数），Claude 在内部跑推理（用户看不到），用完预算再产出最终回答。这不是普通 CoT，是模型层面的新能力。</p>
 
   <p>Anthropic 在 2025 年的 Extended Thinking 发布博客里把它定位成「Claude 时代的 deep reasoning 接口」——适合数学证明、多步代码审查、复杂决策、长合同审阅这类需要「先想清楚再说」的任务 [Anthropic 2025]。</p>
 
@@ -230,39 +230,39 @@ label:</code></pre>
       </thead>
       <tbody>
         <tr><td>触发方式</td><td>prompt 里加「step by step」或 <code>&lt;thinking&gt;</code> 标签</td><td>API 参数 <code>thinking.budget_tokens</code> 设思考预算</td></tr>
-        <tr><td>推理可见性</td><td>推理过程作为输出的一部分返回</td><td>推理过程默认不返回,可选 summary 模式</td></tr>
-        <tr><td>消耗 token</td><td>推理 + 答案都算输出 token</td><td>推理 token 单独计费,答案 token 另算</td></tr>
+        <tr><td>推理可见性</td><td>推理过程作为输出的一部分返回</td><td>推理过程默认不返回，可选 summary 模式</td></tr>
+        <tr><td>消耗 token</td><td>推理 + 答案都算输出 token</td><td>推理 token 单独计费，答案 token 另算</td></tr>
         <tr><td>适用任务</td><td>所有需要分步推理的任务</td><td>复杂、模糊、需要权衡多因素的任务</td></tr>
-        <tr><td>时延</td><td>跟输出长度成正比</td><td>显著高于普通调用,因为要先跑完思考预算</td></tr>
+        <tr><td>时延</td><td>跟输出长度成正比</td><td>显著高于普通调用，因为要先跑完思考预算</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="audio-only">
-    <p>两者最实在的差别有三处。一是触发方式:普通 CoT 是在 prompt 里加一句「一步步想」或者塞个 thinking 标签,Extended Thinking 则是在 API 里设一个叫 budget tokens 的思考预算参数。二是计费:CoT 的推理和答案一起算进输出 token,Extended Thinking 的推理 token 单独计、答案另算。三是时延:CoT 跟输出长度成正比,Extended Thinking 因为要先把思考预算跑完,明显更慢。</p>
+    <p>两者最实在的差别有三处。一是触发方式：普通 CoT 是在 prompt 里加一句「一步步想」或者塞个 thinking 标签，Extended Thinking 则是在 API 里设一个叫 budget tokens 的思考预算参数。二是计费：CoT 的推理和答案一起算进输出 token,Extended Thinking 的推理 token 单独计、答案另算。三是时延：CoT 跟输出长度成正比，Extended Thinking 因为要先把思考预算跑完，明显更慢。</p>
   </div>
 
   <h4>怎么决定要不要开 Extended Thinking</h4>
 
-  <p>Anthropic 官方建议用三条标准筛选:</p>
+  <p>Anthropic 官方建议用三条标准筛选：</p>
 
   <ul>
-    <li><strong>任务需要权衡多个因素</strong> — 例如「设计一个能同时满足成本、安全、性能三个约束的方案」,开</li>
-    <li><strong>任务有「先看再想」的依赖</strong> — 例如「读完这份 80 页报告再回答里面的隐藏矛盾」,开</li>
-    <li><strong>任务的错误代价高于额外耗时</strong> — 例如「审一份合同里有没有埋雷条款」,开</li>
-    <li><strong>任务简单且明确</strong> — 例如「把这句翻译成英文」「列出我说的 5 个产品的名字」,不开,浪费 token 又慢</li>
+    <li><strong>任务需要权衡多个因素</strong> — 例如「设计一个能同时满足成本、安全、性能三个约束的方案」，开</li>
+    <li><strong>任务有「先看再想」的依赖</strong> — 例如「读完这份 80 页报告再回答里面的隐藏矛盾」，开</li>
+    <li><strong>任务的错误代价高于额外耗时</strong> — 例如「审一份合同里有没有埋雷条款」，开</li>
+    <li><strong>任务简单且明确</strong> — 例如「把这句翻译成英文」「列出我说的 5 个产品的名字」，不开，浪费 token 又慢</li>
   </ul>
 
-  <p>典型的 budget_tokens 设置:简单复杂任务 5K-10K、中等复杂任务 10K-30K、高复杂任务 30K-100K。超过 100K 收益递减,且时延会接近一分钟级别,要权衡。</p>
+  <p>典型的 budget_tokens 设置：简单复杂任务 5K-10K、中等复杂任务 10K-30K、高复杂任务 30K-100K。超过 100K 收益递减，且时延会接近一分钟级别，要权衡。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · 用 Extended Thinking + CoT 提示叠加</div>
-    <p>Extended Thinking 不是 CoT 的替代品,是补充。最强的组合是:<strong>在 API 调用里开 Extended Thinking 设一笔预算,同时在 prompt 里仍然写「先在 &lt;thinking&gt; 里分析再给 &lt;answer&gt;」</strong>。前者给 Claude 内部推理空间,后者强制它把关键推理结果暴露给你做调试。这种叠加在生产环境的复杂任务里(法律、医疗、金融决策辅助)是事实标准。</p>
+    <p>Extended Thinking 不是 CoT 的替代品，是补充。最强的组合是：<strong>在 API 调用里开 Extended Thinking 设一笔预算，同时在 prompt 里仍然写「先在 &lt;thinking&gt; 里分析再给 &lt;answer&gt；」</strong>。前者给 Claude 内部推理空间，后者强制它把关键推理结果暴露给你做调试。这种叠加在生产环境的复杂任务里（法律、医疗、金融决策辅助）是事实标准。</p>
   </div>
 
   <div class="callout sharp">
     <div class="label">✕ 一个新坑 · Extended Thinking 不能解决「目标不清」的问题</div>
-    <p>很多人遇到 Claude 答得不好,第一反应是「开 Extended Thinking 让它想更久」——常常没用。如果 prompt 里目标本身就模糊,Claude 想 10 分钟也得不到正确答案,只是把同一段废话翻来覆去琢磨。<strong>Extended Thinking 是给「目标清晰但路径复杂」的任务用的,不是给「目标都没说清楚」的任务用的</strong>。这跟 <a href="#s2">第 2 章</a> Agent 那条道理同源——目标不清楚就上更强的工具,只会把错误放大得更彻底。</p>
+    <p>很多人遇到 Claude 答得不好，第一反应是「开 Extended Thinking 让它想更久」——常常没用。如果 prompt 里目标本身就模糊，Claude 想 10 分钟也得不到正确答案，只是把同一段废话翻来覆去琢磨。<strong>Extended Thinking 是给「目标清晰但路径复杂」的任务用的，不是给「目标都没说清楚」的任务用的</strong>。这跟 <a href="#s2">第 2 章</a> Agent 那条道理同源——目标不清楚就上更强的工具，只会把错误放大得更彻底。</p>
   </div>
 
   <h3><span class="pre">9.7</span>五原则全景 · <span class="en">Five Principles at a Glance</span></h3>
@@ -307,33 +307,33 @@ label:</code></pre>
       <tbody>
         <tr>
           <td><strong>9.1 清晰直接</strong></td>
-          <td>「我最近在想⋯⋯你觉得呢?」(任务藏在第三句)</td>
-          <td>「请把下面 X 分成 3 类,每类 ⋯⋯」(任务在第一句)</td>
+          <td>「我最近在想⋯⋯你觉得呢？」（任务藏在第三句）</td>
+          <td>「请把下面 X 分成 3 类，每类 ⋯⋯」（任务在第一句）</td>
         </tr>
         <tr>
           <td><strong>9.2 具体明确</strong></td>
           <td>「写一段介绍」</td>
-          <td>「写 80 字介绍,口语化,不用「赋能」「闭环」这种词」</td>
+          <td>「写 80 字介绍，口语化，不用「赋能」「闭环」这种词」</td>
         </tr>
         <tr>
           <td><strong>9.3 XML 分块</strong></td>
-          <td>「这是合同 ⋯⋯ 帮我提取 ⋯⋯ 输出 JSON」(一段流式文本)</td>
+          <td>「这是合同 ⋯⋯ 帮我提取 ⋯⋯ 输出 JSON」（一段流式文本）</td>
           <td><code>&lt;context&gt;&lt;task&gt;&lt;output&gt;&lt;contract&gt;</code> 四块分明</td>
         </tr>
         <tr>
           <td><strong>9.4 给例子</strong></td>
-          <td>「请按这种风格写」(没有示例)</td>
-          <td>「<code>&lt;example&gt;input → output&lt;/example&gt;</code> ×3,然后处理新输入」</td>
+          <td>「请按这种风格写」（没有示例）</td>
+          <td>「<code>&lt;example&gt;input → output&lt;/example&gt;</code> ×3，然后处理新输入」</td>
         </tr>
         <tr>
           <td><strong>9.5 让它先思考</strong></td>
-          <td>「这道题答案是?」(直接要结论)</td>
-          <td>「先在 <code>&lt;thinking&gt;</code> 分析,再在 <code>&lt;answer&gt;</code> 给结论」</td>
+          <td>「这道题答案是？」（直接要结论）</td>
+          <td>「先在 <code>&lt;thinking&gt;</code> 分析，再在 <code>&lt;answer&gt;</code> 给结论」</td>
         </tr>
         <tr>
           <td><strong>Extended Thinking</strong></td>
-          <td>不区分任务难度,所有调用都开高预算</td>
-          <td>简单任务关掉,复杂任务设 10K-50K budget</td>
+          <td>不区分任务难度，所有调用都开高预算</td>
+          <td>简单任务关掉，复杂任务设 10K-50K budget</td>
         </tr>
       </tbody>
     </table>
@@ -341,37 +341,37 @@ label:</code></pre>
 
   <h3><span class="pre">9.8</span>这一章给你的判断武器</h3>
 
-  <p class="lead">读完这章,你应该带走以下几个能直接用的判断武器。</p>
+  <p class="lead">读完这章，你应该带走以下几个能直接用的判断武器。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器一 · 任何 prompt 写完先做「五条体检」</div>
-    <p>合上 prompt,在脑子里走一遍:一,任务在前 30 字内说清了吗?二,字数 / 格式 / 场景 / 反例给了至少两个吗?三,长内容用 XML 标签分块了吗?四,如果格式不好描述,有没有给 1-3 个示例?五,是不是多步推理任务,要不要加 thinking?五条都过,prompt 算合格;每漏一条,失败率上升一档。这套体检的成本是 30 秒,收益是少改 5 轮 prompt。</p>
+    <p>合上 prompt，在脑子里走一遍：一，任务在前 30 字内说清了吗？二，字数 / 格式 / 场景 / 反例给了至少两个吗？三，长内容用 XML 标签分块了吗？四，如果格式不好描述，有没有给 1-3 个示例？五，是不是多步推理任务，要不要加 thinking？五条都过，prompt 算合格；每漏一条，失败率上升一档。这套体检的成本是 30 秒，收益是少改 5 轮 prompt。</p>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 武器二 · prompt 失败时,先诊断「漏了哪条原则」</div>
-    <p>Claude 输出不稳定?多半是 9.2 漏了——没给字数 / 格式。Claude 输出风格错位?多半是 9.4 漏了——没给示例。Claude 在长内容里抓不住重点?多半是 9.3 漏了——没用 XML 分块。Claude 在多步推理上犯错?多半是 9.5 漏了——没让它先思考。<strong>把五条原则当 checklist,而不是技巧清单</strong>——失败时按图索骥找漏点,比凭感觉重写 prompt 高效得多。</p>
+    <div class="label">✓ 武器二 · prompt 失败时，先诊断「漏了哪条原则」</div>
+    <p>Claude 输出不稳定？多半是 9.2 漏了——没给字数 / 格式。Claude 输出风格错位？多半是 9.4 漏了——没给示例。Claude 在长内容里抓不住重点？多半是 9.3 漏了——没用 XML 分块。Claude 在多步推理上犯错？多半是 9.5 漏了——没让它先思考。<strong>把五条原则当 checklist，而不是技巧清单</strong>——失败时按图索骥找漏点，比凭感觉重写 prompt 高效得多。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器三 · 把昂贵 prompt 拆成廉价 prompt</div>
-    <p>有时候 prompt 写得越好,token 消耗越高(因为加了 XML、加了示例、加了 thinking)。生产环境要算成本,可以反向操作:把高频简单任务的 prompt 精简成最小可行版本(20-50 token),只在错误率上升到不能接受时,再加回某条原则。一般顺序是先去掉 few-shot 示例,再去掉 XML 标签,最后才去掉 thinking 提示——示例最贵,thinking 最便宜。详见 <a href="#s10">第 10 章</a> Caching 部分。</p>
+    <p>有时候 prompt 写得越好，token 消耗越高（因为加了 XML、加了示例、加了 thinking）。生产环境要算成本，可以反向操作：把高频简单任务的 prompt 精简成最小可行版本（20-50 token），只在错误率上升到不能接受时，再加回某条原则。一般顺序是先去掉 few-shot 示例，再去掉 XML 标签，最后才去掉 thinking 提示——示例最贵，thinking 最便宜。详见 <a href="#s10">第 10 章</a> Caching 部分。</p>
   </div>
 
   <div class="callout sharp">
     <div class="label">✕ 反共识三连</div>
-    <p><strong>一 · 「prompt 工程会死,模型会越来越能自己理解」</strong> — 不会。模型变强,你能写更模糊的 prompt 也能跑通,但「写清晰需求」的稀缺性反而上升——因为这一层从模型转移到了产品和系统设计,是更值钱的能力,不是更不值钱。<strong>二 · 「越长越好,塞越多上下文 Claude 越准」</strong> — 错。Claude 在长 context 下注意力会变稀(lost-in-the-middle),无关上下文会稀释关键指令。<strong>三 · 「Few-Shot 永远管用」</strong> — 错。任务足够明确时 zero-shot 反而稳定;示例只在「难以用语言描述风格 / 格式」时才必要。</p>
+    <p><strong>一 · 「prompt 工程会死，模型会越来越能自己理解」</strong> — 不会。模型变强，你能写更模糊的 prompt 也能跑通，但「写清晰需求」的稀缺性反而上升——因为这一层从模型转移到了产品和系统设计，是更值钱的能力，不是更不值钱。<strong>二 · 「越长越好，塞越多上下文 Claude 越准」</strong> — 错。Claude 在长 context 下注意力会变稀（lost-in-the-middle），无关上下文会稀释关键指令。<strong>三 · 「Few-Shot 永远管用」</strong> — 错。任务足够明确时 zero-shot 反而稳定；示例只在「难以用语言描述风格 / 格式」时才必要。</p>
   </div>
 
   <h4>跟前面章节怎么串</h4>
 
-  <p>这一章的五原则是 <a href="#s1">第 1 章</a> 第四性质「可操控性」的实操版——ROLE / FORMAT / EXAMPLE / CONSTRAINT 四个维度,对应这一章的「context 标签 / output_format 标签 / example 标签 / 反例条款」。如果第 1 章给的是地图,这一章给的是路线。</p>
+  <p>这一章的五原则是 <a href="#s1">第 1 章</a> 第四性质「可操控性」的实操版——ROLE / FORMAT / EXAMPLE / CONSTRAINT 四个维度，对应这一章的「context 标签 / output_format 标签 / example 标签 / 反例条款」。如果第 1 章给的是地图，这一章给的是路线。</p>
 
-  <p>这一章的工程化结构,跟 <a href="#s3">第 3 章</a> 4D 框架的 Discuss 阶段最接近——在 Agent 真正动手之前,先把意图、约束、产出格式落到纸面,是 Discuss 阶段的核心动作。一份好 prompt 就是一份微型的 Discuss 产物。</p>
+  <p>这一章的工程化结构，跟 <a href="#s3">第 3 章</a> 4D 框架的 Discuss 阶段最接近——在 Agent 真正动手之前，先把意图、约束、产出格式落到纸面，是 Discuss 阶段的核心动作。一份好 prompt 就是一份微型的 Discuss 产物。</p>
 
-  <p>下一章我们换个维度——Prompt 写好了,怎么让它跑得更快、更便宜?这就是 <a href="#s10">第 10 章</a> Prompt Caching 要讲的话题。Caching 不是模型层的优化,是工程层的杠杆——同一段 prompt 复用 1000 次,可以把成本压到原来的 10%,这是生产环境里 prompt 工程师必须懂的一层。</p>
+  <p>下一章我们换个维度——Prompt 写好了，怎么让它跑得更快、更便宜？这就是 <a href="#s10">第 10 章</a> Prompt Caching 要讲的话题。Caching 不是模型层的优化，是工程层的杠杆——同一段 prompt 复用 1000 次，可以把成本压到原来的 10%，这是生产环境里 prompt 工程师必须懂的一层。</p>
 
-  <p class="ref">主要参考:<br>
+  <p class="ref">主要参考：<br>
   Anthropic, <em>Prompt Engineering Guide</em>, docs.anthropic.com, 2024 [Anthropic Docs 2024] · Anthropic Skilljar Academy, <em>Building with the Claude API</em> course, prompt engineering module, 2024-2025 [Anthropic 2024] · Anthropic, <em>Claude Extended Thinking</em>, engineering blog, 2025 [Anthropic 2025] · J. Wei et al., <em>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</em>, NeurIPS 2022 [Wei 2022] · T. Brown et al., <em>Language Models are Few-Shot Learners</em>, NeurIPS 2020 [Brown 2020] · Anthropic, <em>Claude API documentation</em>, 2026.</p>
 
 </div>

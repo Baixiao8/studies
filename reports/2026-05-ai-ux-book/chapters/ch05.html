@@ -2,50 +2,50 @@
 <div class="container">
 
   <div class="section-tag"><span class="num">05</span>GENERATIVE UI · 问题地图 / 第五章</div>
-  <h1 class="section-h">生成式 UI:界面本身在被生成 <span class="en">Generative UI</span></h1>
-  <p class="section-sub">UI 元素从「被设计的资产」变成「按需生成的实例」——这是 AI 时代独有的、设计史上前所未有的局面。这一章我们把「生成式 UI」拆成 4 种形态、4 种状态、4 个标杆产品,看清楚这件事的边界在哪。</p>
+  <h1 class="section-h">生成式 UI：界面本身在被生成 <span class="en">Generative UI</span></h1>
+  <p class="section-sub">UI 元素从「被设计的资产」变成「按需生成的实例」——这是 AI 时代独有的、设计史上前所未有的局面。这一章我们把「生成式 UI」拆成 4 种形态、4 种状态、4 个标杆产品，看清楚这件事的边界在哪。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>设计师不再「画完所有界面」,而是<em>设计「AI 怎么帮用户生成合适的界面」</em>。生成式 UI 的核心难题不在「生成」,在「生成之后」——修改、保存、复用、版本管理,这四件事 GUI 时代根本不需要回答。</p>
+    <p>设计师不再「画完所有界面」，而是<em>设计「AI 怎么帮用户生成合适的界面」</em>。生成式 UI 的核心难题不在「生成」，在「生成之后」——修改、保存、复用、版本管理，这四件事 GUI 时代根本不需要回答。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 旧金山 · 2023 年 10 月</div>
-    <p>Vercel 在 2023 年 10 月发布 v0。第一个 Demo 是这样的:用户在输入框打一句「a pricing page for a SaaS,3 tiers,monthly/yearly toggle」,几秒内屏幕上就出来一个完整的定价页 UI——三档套餐卡片、月付/年付切换、CTA 按钮,所有交互细节都齐全。</p>
-    <p>更关键的是接下来一步:用户点「Refine」,输入「make the middle tier highlighted with a 『Most popular』 badge」,UI 实时更新——中间那张卡多了一个金色徽章。再输入「add a comparison table below」,下方出现功能对比表。<strong>整个过程没人写一行代码,没人打开 Figma</strong>。</p>
-    <p>这是设计史上从未有过的事:<em>UI 不再是产品团队预先设计好交付给用户的资产,而是用户与 AI 协作即兴产生的实例</em>。每次产生都不一样,每次都可以接着改。设计师的工作语义从此发生了根本变化。</p>
+    <p>Vercel 在 2023 年 10 月发布 v0。第一个 Demo 是这样的：用户在输入框打一句「a pricing page for a SaaS,3 tiers,monthly/yearly toggle」，几秒内屏幕上就出来一个完整的定价页 UI——三档套餐卡片、月付/年付切换、CTA 按钮，所有交互细节都齐全。</p>
+    <p>更关键的是接下来一步：用户点「Refine」，输入「make the middle tier highlighted with a 『Most popular』 badge」，UI 实时更新——中间那张卡多了一个金色徽章。再输入「add a comparison table below」，下方出现功能对比表。<strong>整个过程没人写一行代码，没人打开 Figma</strong>。</p>
+    <p>这是设计史上从未有过的事：<em>UI 不再是产品团队预先设计好交付给用户的资产，而是用户与 AI 协作即兴产生的实例</em>。每次产生都不一样，每次都可以接着改。设计师的工作语义从此发生了根本变化。</p>
   </div>
 
-  <h3><span class="pre">5.1</span>什么叫「生成式 UI」?边界在哪里?</h3>
+  <h3><span class="pre">5.1</span>什么叫「生成式 UI」？边界在哪里？</h3>
 
-  <p class="lead">不是所有「AI 生成的内容」都叫生成式 UI。先把这个词的边界划清楚,避免把所有 AI 产品都套进去。</p>
+  <p class="lead">不是所有「AI 生成的内容」都叫生成式 UI。先把这个词的边界划清楚，避免把所有 AI 产品都套进去。</p>
 
-  <p><strong>狭义定义</strong>:由 AI 即时生成的、用户可与之交互的<em>界面元素</em>(component / page / layout),并且这些元素可以被用户继续修改、保存、复用。</p>
+  <p><strong>狭义定义</strong>：由 AI 即时生成的、用户可与之交互的<em>界面元素</em>(component / page / layout)，并且这些元素可以被用户继续修改、保存、复用。</p>
 
-  <p>按这个定义,以下都是生成式 UI:</p>
+  <p>按这个定义，以下都是生成式 UI:</p>
   <ul>
     <li>v0 / Bolt 生成的完整网页 / 应用</li>
-    <li>Claude Artifact 生成的可交互组件(图表、计算器、小游戏)</li>
+    <li>Claude Artifact 生成的可交互组件（图表、计算器、小游戏）</li>
     <li>ChatGPT Canvas 生成的可编辑文档 / 代码块</li>
     <li>Notion AI 生成的页面模板</li>
   </ul>
 
-  <p>以下<em>不是</em>生成式 UI(虽然也是 AI 生成):</p>
+  <p>以下<em>不是</em>生成式 UI（虽然也是 AI 生成）：</p>
   <ul>
-    <li>ChatGPT 生成的纯文本回答(没有交互界面元素)</li>
-    <li>Midjourney 生成的图像(静态资产,不能「再编辑成蓝色」)</li>
-    <li>Gmail Smart Compose 补全的句子(嵌入式输入辅助,不是独立界面)</li>
+    <li>ChatGPT 生成的纯文本回答（没有交互界面元素）</li>
+    <li>Midjourney 生成的图像（静态资产，不能「再编辑成蓝色」）</li>
+    <li>Gmail Smart Compose 补全的句子（嵌入式输入辅助，不是独立界面）</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 关键判断</div>
-    <p>判断一个产物是不是生成式 UI,看一个标准:<strong>用户能不能用自然语言指令对它做下一步修改?</strong>能 = 是。不能(只能从头重生成) = 不是。这条标准比「它长得像不像 UI」更可靠。</p>
+    <p>判断一个产物是不是生成式 UI，看一个标准：<strong>用户能不能用自然语言指令对它做下一步修改？</strong>能 = 是。不能（只能从头重生成） = 不是。这条标准比「它长得像不像 UI」更可靠。</p>
   </div>
 
   <h3><span class="pre">5.2</span>生成式 UI 的 4 种形态</h3>
 
-  <p class="lead">主流 AI 产品对「AI 生成的 UI 该放在哪」给出了 4 种不同的答案,各有适用场景。</p>
+  <p class="lead">主流 AI 产品对「AI 生成的 UI 该放在哪」给出了 4 种不同的答案，各有适用场景。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -62,7 +62,7 @@
           <td><strong>Sidebar Canvas</strong></td>
           <td>Claude Artifact / Cursor Canvas</td>
           <td>对话主线右侧独立面板</td>
-          <td>复杂内容(代码、图表)长期占用屏幕</td>
+          <td>复杂内容（代码、图表）长期占用屏幕</td>
         </tr>
         <tr>
           <td><strong>Floating Artifact</strong></td>
@@ -74,7 +74,7 @@
           <td><strong>Inline Component</strong></td>
           <td>Perplexity Pro Search 结果卡 / Bing Chat 答案块</td>
           <td>嵌入在对话气泡内</td>
-          <td>结构化轻量信息(天气 / 股价 / 表格)</td>
+          <td>结构化轻量信息（天气 / 股价 / 表格）</td>
         </tr>
         <tr>
           <td><strong>Full-page Generation</strong></td>
@@ -88,43 +88,43 @@
 
   <div class="callout sharp">
     <div class="label">✕ 一个反直觉的发现</div>
-    <p>形态选择和「AI 能力大小」无关,和「输出复杂度」有关。Claude 同样的能力,生成短代码用 inline,生成完整应用用 Artifact;ChatGPT 同样的模型,生成 markdown 用 floating,生成网页要切到 Canvas。<strong>形态是被「内容尺寸」驱动的,不是被「模型能力」驱动的</strong>。设计师做生成式 UI 决策时,第一个问题应该是「用户产物有多大」,而不是「我的模型有多强」。</p>
+    <p>形态选择和「AI 能力大小」无关，和「输出复杂度」有关。Claude 同样的能力，生成短代码用 inline，生成完整应用用 Artifact;ChatGPT 同样的模型，生成 markdown 用 floating，生成网页要切到 Canvas。<strong>形态是被「内容尺寸」驱动的，不是被「模型能力」驱动的</strong>。设计师做生成式 UI 决策时，第一个问题应该是「用户产物有多大」，而不是「我的模型有多强」。</p>
   </div>
 
   <h3><span class="pre">5.3</span>生成式 UI 的 4 种状态设计</h3>
 
-  <p class="lead">真正难的不是「生成出来」,是「生成之后」。接下来这 4 种状态在传统 UI 设计里根本不存在,生成式 UI 必须明确每一种状态的视觉、交互、可逆性。</p>
+  <p class="lead">真正难的不是「生成出来」，是「生成之后」。接下来这 4 种状态在传统 UI 设计里根本不存在，生成式 UI 必须明确每一种状态的视觉、交互、可逆性。</p>
 
-  <h4>状态 1 · 生成中(Generating)</h4>
-  <p>AI 正在 stream 出 UI,用户看着它一行一行被画出来。这是用户对「AI 在工作」的最直观感受。</p>
+  <h4>状态 1 · 生成中（Generating）</h4>
+  <p>AI 正在 stream 出 UI，用户看着它一行一行被画出来。这是用户对「AI 在工作」的最直观感受。</p>
   <ul>
-    <li><strong>视觉</strong>:骨架闪烁(skeleton)+ 流式光标 / 字符逐个显示</li>
-    <li><strong>交互</strong>:能不能中断?能不能边生成边修改?(v0 不能,Bolt 能)</li>
-    <li><strong>反馈</strong>:进度显示(已生成 N 个组件 / 已写 M 行)</li>
+    <li><strong>视觉</strong>：骨架闪烁（skeleton）+ 流式光标 / 字符逐个显示</li>
+    <li><strong>交互</strong>：能不能中断？能不能边生成边修改？（v0 不能，Bolt 能）</li>
+    <li><strong>反馈</strong>：进度显示（已生成 N 个组件 / 已写 M 行）</li>
   </ul>
 
-  <h4>状态 2 · 待审批(Pending Review)</h4>
-  <p>AI 生成完了,但还没「应用」——还在「沙盒」里。用户决定接受、拒绝、还是继续改。</p>
+  <h4>状态 2 · 待审批（Pending Review）</h4>
+  <p>AI 生成完了，但还没「应用」——还在「沙盒」里。用户决定接受、拒绝、还是继续改。</p>
   <ul>
-    <li><strong>视觉</strong>:差异化背景(浅灰 / 虚线边框)表示「还没生效」</li>
+    <li><strong>视觉</strong>：差异化背景（浅灰 / 虚线边框）表示「还没生效」</li>
     <li><strong>交互</strong>:Accept / Reject / Regenerate / Refine 四个核心动作</li>
-    <li><strong>关键判断</strong>:默认是 Accept 还是 Pending?<em>Cursor Composer 默认 Pending(必须用户点 Accept),Notion AI 默认 Pending(预览态)</em>——这是 AI 产品的「信任默认值」。</li>
+    <li><strong>关键判断</strong>：默认是 Accept 还是 Pending?<em>Cursor Composer 默认 Pending（必须用户点 Accept），Notion AI 默认 Pending（预览态）</em>——这是 AI 产品的「信任默认值」。</li>
   </ul>
 
-  <h4>状态 3 · 已应用(Applied)</h4>
-  <p>用户接受了,内容融入到主工作流(对话主线 / 文档主体 / 代码 repo)。但这个「应用」是可逆的吗?</p>
+  <h4>状态 3 · 已应用（Applied）</h4>
+  <p>用户接受了，内容融入到主工作流（对话主线 / 文档主体 / 代码 repo）。但这个「应用」是可逆的吗？</p>
   <ul>
-    <li><strong>关键问题</strong>:Apply 之后能不能 undo?到什么粒度?</li>
-    <li><strong>Cursor 解法</strong>:全部 apply 后通过 git diff 回滚</li>
-    <li><strong>Claude Artifact 解法</strong>:Artifact 应用到对话历史,但 Artifact 自身保留版本树</li>
+    <li><strong>关键问题</strong>:Apply 之后能不能 undo？到什么粒度？</li>
+    <li><strong>Cursor 解法</strong>：全部 apply 后通过 git diff 回滚</li>
+    <li><strong>Claude Artifact 解法</strong>:Artifact 应用到对话历史，但 Artifact 自身保留版本树</li>
   </ul>
 
-  <h4>状态 4 · 版本切换(Versioning)</h4>
-  <p>用户让 AI 改了 5 次,产生了 5 个版本。怎么对比?怎么切换?怎么保留某一版当「主版本」?</p>
+  <h4>状态 4 · 版本切换（Versioning）</h4>
+  <p>用户让 AI 改了 5 次，产生了 5 个版本。怎么对比？怎么切换？怎么保留某一版当「主版本」？</p>
   <ul>
-    <li><strong>ChatGPT Canvas</strong>:左右箭头切换历史版本,默认显示最新</li>
-    <li><strong>Claude Artifact</strong>:版本号下拉菜单,可切换任意历史版本</li>
-    <li><strong>v0</strong>:每次生成是独立的「chat thread」,版本之间不直接对比,要 fork 出新分支</li>
+    <li><strong>ChatGPT Canvas</strong>：左右箭头切换历史版本，默认显示最新</li>
+    <li><strong>Claude Artifact</strong>：版本号下拉菜单，可切换任意历史版本</li>
+    <li><strong>v0</strong>：每次生成是独立的「chat thread」，版本之间不直接对比，要 fork 出新分支</li>
   </ul>
 
   <div class="callout ops">
@@ -132,8 +132,8 @@
     <ol>
       <li><strong>每个状态都要有明确的视觉区分</strong>——用户一眼能看出「现在是生成中 / 待审批 / 已应用」</li>
       <li><strong>默认进入「待审批」而不是「已应用」</strong>——给用户最后的把关机会</li>
-      <li><strong>版本切换是「高级用户」功能</strong>——不要默认占用主屏空间,但要让重度用户能找到</li>
-      <li><strong>「接受 / 拒绝」的 affordance 要足够强</strong>——按钮要大、要明显,不能藏在菜单里</li>
+      <li><strong>版本切换是「高级用户」功能</strong>——不要默认占用主屏空间，但要让重度用户能找到</li>
+      <li><strong>「接受 / 拒绝」的 affordance 要足够强</strong>——按钮要大、要明显，不能藏在菜单里</li>
     </ol>
   </div>
 
@@ -156,7 +156,7 @@
         <tr><td>修改方式</td><td>Refine 对话</td><td>Inline 编辑 + 对话</td><td>对话修改 + 局部 select</td><td>对话 + 直接编辑文档</td></tr>
         <tr><td>版本管理</td><td>Chat fork</td><td>Checkpoint 系统</td><td>版本号下拉</td><td>左右箭头切换</td></tr>
         <tr><td>导出方式</td><td>"Copy to Code"</td><td>直接 Deploy / Pull</td><td>Publish 链接</td><td>导出为 Doc</td></tr>
-        <tr><td>核心强项</td><td>组件库丰富</td><td>真实可运行</td><td>类型广泛(图/代码/游戏)</td><td>写作流畅</td></tr>
+        <tr><td>核心强项</td><td>组件库丰富</td><td>真实可运行</td><td>类型广泛（图/代码/游戏）</td><td>写作流畅</td></tr>
       </tbody>
     </table>
   </div>
@@ -165,38 +165,38 @@
     <div class="label">✕ 对比中能看出的隐含哲学</div>
     <ul>
       <li><strong>v0</strong> 把生成式 UI 当作「UI Designer 的 prompt-to-mockup 工具」——产物是「代码片段供你 copy」</li>
-      <li><strong>Bolt</strong> 把生成式 UI 当作「独立产品」,生成的东西可直接 deploy 给真实用户</li>
-      <li><strong>Claude</strong> 把生成式 UI 当作「对话的副产品」,Artifact 服务于对话目的</li>
-      <li><strong>ChatGPT Canvas</strong> 把生成式 UI 当作「协作文档」,和用户共同编辑</li>
+      <li><strong>Bolt</strong> 把生成式 UI 当作「独立产品」，生成的东西可直接 deploy 给真实用户</li>
+      <li><strong>Claude</strong> 把生成式 UI 当作「对话的副产品」，Artifact 服务于对话目的</li>
+      <li><strong>ChatGPT Canvas</strong> 把生成式 UI 当作「协作文档」，和用户共同编辑</li>
     </ul>
-    <p>没有谁对谁错——服务的「用户目的」不同。这给我们一个启示:<strong>做生成式 UI 之前,先问「用户拿到这个 UI 做什么」</strong>。</p>
+    <p>没有谁对谁错——服务的「用户目的」不同。这给我们一个启示：<strong>做生成式 UI 之前，先问「用户拿到这个 UI 做什么」</strong>。</p>
   </div>
 
-  <h3><span class="pre">5.5</span>图像生成产品的应用思考(详见第 15 章)</h3>
+  <h3><span class="pre">5.5</span>图像生成产品的应用思考（详见第 15 章）</h3>
 
-  <p class="lead">图像生成产品(如某国产 AI 设计平台这类工具)严格说不属于「生成式 UI」的典型场景——它生成的是图像,不是界面。但生成式 UI 的 <em>4 种状态设计</em> 直接适用于图像生成场景。</p>
+  <p class="lead">图像生成产品（如某国产 AI 设计平台这类工具）严格说不属于「生成式 UI」的典型场景——它生成的是图像，不是界面。但生成式 UI 的 <em>4 种状态设计</em> 直接适用于图像生成场景。</p>
 
   <div class="callout you">
     <div class="label">◐ 图像生成产品现状对照四态</div>
     <ul>
-      <li><strong>生成中</strong>:✅ 普遍有 loading 状态,但往往缺「边生成边可中断」</li>
-      <li><strong>待审批</strong>:⚠️ 生成的图常直接展示在结果区,没有明确的「沙盒」概念。用户喜欢 → 下载,不喜欢 → 重新生成。<em>但缺一个「草稿 / 已采纳」的区分</em></li>
-      <li><strong>已应用</strong>:⚠️ 用户下载即「应用」,但这类 SaaS 多数没有「工作流落地」,所以「应用」概念弱</li>
-      <li><strong>版本切换</strong>:✅ 历史记录通常可查,但多是「列表」而不是「树」——用户在第 3 张图基础上 refine,得到第 4 张,这种「派生关系」目前往往不可见</li>
+      <li><strong>生成中</strong>:✅ 普遍有 loading 状态，但往往缺「边生成边可中断」</li>
+      <li><strong>待审批</strong>:⚠️ 生成的图常直接展示在结果区，没有明确的「沙盒」概念。用户喜欢 → 下载，不喜欢 → 重新生成。<em>但缺一个「草稿 / 已采纳」的区分</em></li>
+      <li><strong>已应用</strong>:⚠️ 用户下载即「应用」，但这类 SaaS 多数没有「工作流落地」，所以「应用」概念弱</li>
+      <li><strong>版本切换</strong>:✅ 历史记录通常可查，但多是「列表」而不是「树」——用户在第 3 张图基础上 refine，得到第 4 张，这种「派生关系」目前往往不可见</li>
     </ul>
-    <p><strong>主要差距</strong>:版本派生树(图像生成是典型的「基于上次再改」场景,Krea 已经做了 canvas 派生)。详细体检与改进建议见第 15 章。</p>
+    <p><strong>主要差距</strong>：版本派生树（图像生成是典型的「基于上次再改」场景，Krea 已经做了 canvas 派生）。详细体检与改进建议见第 15 章。</p>
   </div>
 
   <h3><span class="pre">5.6</span>本章小结</h3>
 
-  <p>生成式 UI 是 AI 时代独有的设计议题——<strong>UI 从「被设计的资产」变成「被生成的实例」</strong>。这件事不是给传统 UX 加一个生成按钮,是要重新设计 4 种以前不存在的状态:生成中 / 待审批 / 已应用 / 版本切换。</p>
+  <p>生成式 UI 是 AI 时代独有的设计议题——<strong>UI 从「被设计的资产」变成「被生成的实例」</strong>。这件事不是给传统 UX 加一个生成按钮，是要重新设计 4 种以前不存在的状态：生成中 / 待审批 / 已应用 / 版本切换。</p>
 
-  <p>4 种主流形态(Sidebar / Floating / Inline / Full-page)各有适用边界,选择应该由「内容尺寸 + 用户目的」驱动,而不是「模型能力」驱动。</p>
+  <p>4 种主流形态（Sidebar / Floating / Inline / Full-page）各有适用边界，选择应该由「内容尺寸 + 用户目的」驱动，而不是「模型能力」驱动。</p>
 
-  <p>下一章我们讨论一个紧密相关的议题——<strong>错误兜底</strong>。生成式 UI 不可能每次都生成对的,生成错了之后用户怎么继续,是另一个 AI 时代独有的设计难题。</p>
+  <p>下一章我们讨论一个紧密相关的议题——<strong>错误兜底</strong>。生成式 UI 不可能每次都生成对的，生成错了之后用户怎么继续，是另一个 AI 时代独有的设计难题。</p>
 
-  <p class="ref">主要参考:<br>
-  Vercel v0 文档与发布博客, 2023-10 起 · StackBlitz Bolt.new 文档 · Anthropic Claude Artifact 公告, 2024-06 · OpenAI ChatGPT Canvas 公告, 2024-10 · NN/g, <em>Generative UI Design Patterns</em>, 2024 · Notion AI 产品文档</p>
+  <p class="ref">主要参考：<br>
+  Vercel v0 文档与发布博客， 2023-10 起 · StackBlitz Bolt.new 文档 · Anthropic Claude Artifact 公告， 2024-06 · OpenAI ChatGPT Canvas 公告， 2024-10 · NN/g, <em>Generative UI Design Patterns</em>, 2024 · Notion AI 产品文档</p>
 
 </div>
 </section>

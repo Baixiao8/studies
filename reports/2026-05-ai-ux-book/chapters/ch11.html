@@ -3,23 +3,23 @@
 
   <div class="section-tag"><span class="num">11</span>GENERATIVE · 案例横评 / 第十一章</div>
   <h1 class="section-h">内容生成类 X-Ray:6 款头部产品的 UX 设计选择 <span class="en">Generative Products X-Ray</span></h1>
-  <p class="section-sub">把 Part II 的 8 个问题地图议题作为评估坐标,把 6 款内容生成类头部产品(Claude / v0 / Krea / 即梦 / 通义万相 / Midjourney)放到同一套维度上对比。对某国产 AI 设计平台这类产品来说,这是最直接的对标研究——同类产品,同样的问题,看头部怎么解、自己能学什么。</p>
+  <p class="section-sub">把 Part II 的 8 个问题地图议题作为评估坐标，把 6 款内容生成类头部产品（Claude / v0 / Krea / 即梦 / 通义万相 / Midjourney）放到同一套维度上对比。对某国产 AI 设计平台这类产品来说，这是最直接的对标研究——同类产品，同样的问题，看头部怎么解、自己能学什么。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>6 个产品 6 种解法,没有一个「全能冠军」——每家都是<em>极致单点</em>赢的:Claude 赢在「信任 + Artifact 编辑」,v0 赢在「代码即 UI」,Krea 赢在「实时画布」,即梦赢在「中文场景」,通义万相赢在「企业级稳定」,Midjourney 赢在「风格统一」。这类产品该学的不是「全部学」,是<em>挑 1-2 个最匹配自己的极致单点做到位</em>。</p>
+    <p>6 个产品 6 种解法，没有一个「全能冠军」——每家都是<em>极致单点</em>赢的：Claude 赢在「信任 + Artifact 编辑」，v0 赢在「代码即 UI」，Krea 赢在「实时画布」，即梦赢在「中文场景」，通义万相赢在「企业级稳定」，Midjourney 赢在「风格统一」。这类产品该学的不是「全部学」，是<em>挑 1-2 个最匹配自己的极致单点做到位</em>。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2022-2025 三年内容生成爆发</div>
-    <p>2022 年 8 月 Stable Diffusion 开源,引爆图像生成。同年 11 月 ChatGPT 引爆文本生成。2023 年 v0 / Krea 出现,把生成扩展到 UI / 实时画布。2024 年 Sora / Veo 把视频生成推到产品级。2025 年生成式 UI / 多模态生成成为大厂标配。</p>
-    <p>三年时间,「内容生成 AI」从科研论文走进了几亿用户的日常工具栏。但<strong>留下来的产品有共同特征</strong>:它们都不是「全能型」,而是在某个具体场景做到极致——v0 服务前端原型、Krea 服务实时探索、Midjourney 服务艺术风格、Claude Artifact 服务结构化内容。</p>
-    <p>这一章我们逐个拆解,看每家的 UX 设计选择,以及背后的产品哲学。</p>
+    <p>2022 年 8 月 Stable Diffusion 开源，引爆图像生成。同年 11 月 ChatGPT 引爆文本生成。2023 年 v0 / Krea 出现，把生成扩展到 UI / 实时画布。2024 年 Sora / Veo 把视频生成推到产品级。2025 年生成式 UI / 多模态生成成为大厂标配。</p>
+    <p>三年时间，「内容生成 AI」从科研论文走进了几亿用户的日常工具栏。但<strong>留下来的产品有共同特征</strong>：它们都不是「全能型」，而是在某个具体场景做到极致——v0 服务前端原型、Krea 服务实时探索、Midjourney 服务艺术风格、Claude Artifact 服务结构化内容。</p>
+    <p>这一章我们逐个拆解，看每家的 UX 设计选择，以及背后的产品哲学。</p>
   </div>
 
   <h3><span class="pre">11.1</span>横评维度 · 6 个评估坐标</h3>
 
-  <p class="lead">基于 Part II 的 8 章议题,我们提炼 6 个最关键的评估维度,用同一套维度看每个产品。</p>
+  <p class="lead">基于 Part II 的 8 章议题，我们提炼 6 个最关键的评估维度，用同一套维度看每个产品。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -38,7 +38,7 @@
   </div>
 
   <div class="audio-only">
-    <p>这六把尺子,后面每款产品都拿它们各量一遍,记住它们大概是什么就好:一是信任设计,会不会标引用、敢不敢承认不确定;二是可控性,从启动到撤销用户能插手多少;三是生成产物的形态,东西生成出来摆在哪、怎么摆;四是错误兜底,出错了能重试还是只能干瞪眼;五是 prompt 体验,用户敢不敢下手、知不知道该写什么;六是人格和主动性,语气克制还是热情、主动给多少建议。</p>
+    <p>这六把尺子，后面每款产品都拿它们各量一遍，记住它们大概是什么就好：一是信任设计，会不会标引用、敢不敢承认不确定；二是可控性，从启动到撤销用户能插手多少；三是生成产物的形态，东西生成出来摆在哪、怎么摆；四是错误兜底，出错了能重试还是只能干瞪眼；五是 prompt 体验，用户敢不敢下手、知不知道该写什么；六是人格和主动性，语气克制还是热情、主动给多少建议。</p>
   </div>
 
   <h3><span class="pre">11.2</span>Claude · 信任 + Artifact 双引擎</h3>
@@ -46,107 +46,107 @@
   <p class="lead">Anthropic 的 Claude 是当前「专业人士首选」——这个标签的形成几乎全靠 UX 设计。</p>
 
   <ul>
-    <li><strong>信任设计 ★★★★★</strong>:主动说「不知道」 / Computer Use 每步审批 / 高风险场景主动 disclaimer</li>
+    <li><strong>信任设计 ★★★★★</strong>：主动说「不知道」 / Computer Use 每步审批 / 高风险场景主动 disclaimer</li>
     <li><strong>可控性 ★★★★</strong>:Artifact 编辑预览分离 / 对话可中断 / Projects 边界配置</li>
-    <li><strong>生成产物 ★★★★★</strong>:Sidebar Artifact 形态做到行业标杆,版本历史 + 可发布</li>
-    <li><strong>错误兜底 ★★★★</strong>:主动给替代方案,不只是 retry</li>
-    <li><strong>prompt 体验 ★★★</strong>:placeholder 中规中矩,Custom Instructions 透明可控</li>
-    <li><strong>人格 ★★★★★</strong>:克制 + 共情 + 反问 + 不确定表达,5 件套全是行业模范</li>
+    <li><strong>生成产物 ★★★★★</strong>:Sidebar Artifact 形态做到行业标杆，版本历史 + 可发布</li>
+    <li><strong>错误兜底 ★★★★</strong>：主动给替代方案，不只是 retry</li>
+    <li><strong>prompt 体验 ★★★</strong>:placeholder 中规中矩，Custom Instructions 透明可控</li>
+    <li><strong>人格 ★★★★★</strong>：克制 + 共情 + 反问 + 不确定表达，5 件套全是行业模范</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>Claude 的差异化不在「模型最强」,在「<strong>UX 把『让用户信任』做到极致</strong>「。每一个 disclaimer、每一次反问、每一处主动暴露不确定——都在加强」这个 AI 是可靠的「的整体感。<em>这类产品学 Claude,应该学的是「信任设计的颗粒度」,不是「Artifact 这种形态」</em>。</p>
+    <p>Claude 的差异化不在「模型最强」，在「<strong>UX 把『让用户信任』做到极致</strong>「。每一个 disclaimer、每一次反问、每一处主动暴露不确定——都在加强」这个 AI 是可靠的「的整体感。<em>这类产品学 Claude，应该学的是「信任设计的颗粒度」，不是「Artifact 这种形态」</em>。</p>
   </div>
 
   <h3><span class="pre">11.3</span>v0 · 把「生成」做成「工程师友好」</h3>
 
-  <p class="lead">Vercel v0 的核心 insight 是:<strong>UI 生成的最终产物是代码,不是图片</strong>。这个判断决定了所有 UX 设计。</p>
+  <p class="lead">Vercel v0 的核心 insight 是：<strong>UI 生成的最终产物是代码，不是图片</strong>。这个判断决定了所有 UX 设计。</p>
 
   <ul>
-    <li><strong>信任设计 ★★★</strong>:生成的代码用户看得到、可 copy、可 fork——代码本身是最强 citation</li>
-    <li><strong>可控性 ★★★★</strong>:Refine 对话可迭代,fork chat 创建分支</li>
-    <li><strong>生成产物 ★★★★★</strong>:Full-page 形态,生成即可预览即可下载</li>
-    <li><strong>错误兜底 ★★★</strong>:生成失败可重试,但缺「局部修复」机制</li>
-    <li><strong>prompt 体验 ★★★★</strong>:placeholder「What can I help you ship?」明确边界 + 大量 starter examples</li>
-    <li><strong>人格 ★★★</strong>:中性专业,不抢戏</li>
+    <li><strong>信任设计 ★★★</strong>：生成的代码用户看得到、可 copy、可 fork——代码本身是最强 citation</li>
+    <li><strong>可控性 ★★★★</strong>:Refine 对话可迭代，fork chat 创建分支</li>
+    <li><strong>生成产物 ★★★★★</strong>:Full-page 形态，生成即可预览即可下载</li>
+    <li><strong>错误兜底 ★★★</strong>：生成失败可重试，但缺「局部修复」机制</li>
+    <li><strong>prompt 体验 ★★★★</strong>:placeholder「What can I help you ship？」明确边界 + 大量 starter examples</li>
+    <li><strong>人格 ★★★</strong>：中性专业，不抢戏</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>v0 的成功来自<strong>「用户产物精准定位」</strong>——它不输出「设计图」(那是 Figma 的事),它输出「可运行代码」。这让 v0 自然嵌入工程师工作流。<em>启示:垂直 AI 产品的核心定位题是「用户拿到我的产物之后做什么」,而不是「我的 AI 能力有多强」</em>。</p>
+    <p>v0 的成功来自<strong>「用户产物精准定位」</strong>——它不输出「设计图」（那是 Figma 的事），它输出「可运行代码」。这让 v0 自然嵌入工程师工作流。<em>启示：垂直 AI 产品的核心定位题是「用户拿到我的产物之后做什么」，而不是「我的 AI 能力有多强」</em>。</p>
   </div>
 
   <h3><span class="pre">11.4</span>Krea · 实时画布 + 参数滑块的极致</h3>
 
-  <p class="lead">Krea 走了另一条路:<strong>不让用户写完美 prompt,让用户在画布上拽参数</strong>。</p>
+  <p class="lead">Krea 走了另一条路：<strong>不让用户写完美 prompt，让用户在画布上拽参数</strong>。</p>
 
   <ul>
-    <li><strong>信任设计 ★★★</strong>:实时显示当前参数对结果的影响,用户能直观看到 cause-effect</li>
-    <li><strong>可控性 ★★★★★</strong>:把模型内部参数(guidance scale / strength / seed)全部暴露成滑块,可控性维度顶级</li>
-    <li><strong>生成产物 ★★★★</strong>:Canvas 形态,支持图层 / 派生 / 并行多版本</li>
-    <li><strong>错误兜底 ★★</strong>:错了主要靠「换参数重生」,没有结构化错误分类</li>
-    <li><strong>prompt 体验 ★★★★</strong>:Prompt assistant 主动提升,大量 starter prompts</li>
-    <li><strong>人格 ★★★</strong>:工具感强,不强调对话</li>
+    <li><strong>信任设计 ★★★</strong>：实时显示当前参数对结果的影响，用户能直观看到 cause-effect</li>
+    <li><strong>可控性 ★★★★★</strong>：把模型内部参数（guidance scale / strength / seed）全部暴露成滑块，可控性维度顶级</li>
+    <li><strong>生成产物 ★★★★</strong>:Canvas 形态，支持图层 / 派生 / 并行多版本</li>
+    <li><strong>错误兜底 ★★</strong>：错了主要靠「换参数重生」，没有结构化错误分类</li>
+    <li><strong>prompt 体验 ★★★★</strong>:Prompt assistant 主动提升，大量 starter prompts</li>
+    <li><strong>人格 ★★★</strong>：工具感强，不强调对话</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>Krea 把「创意探索」做到极致——<strong>用户不需要「写对 prompt」,只需要「试不同参数组合」</strong>。这个 UX 哲学完全反 ChatGPT 的「对话式 prompt」。<em>启示:对创意类生成场景,「参数拉杆 + 实时预览」比「prompt 优化」更接近创作者直觉</em>。这类产品在 inpaint(局部重绘) / variation(变体衍生)场景值得学习这个。</p>
+    <p>Krea 把「创意探索」做到极致——<strong>用户不需要「写对 prompt」，只需要「试不同参数组合」</strong>。这个 UX 哲学完全反 ChatGPT 的「对话式 prompt」。<em>启示：对创意类生成场景，「参数拉杆 + 实时预览」比「prompt 优化」更接近创作者直觉</em>。这类产品在 inpaint（局部重绘） / variation（变体衍生）场景值得学习这个。</p>
   </div>
 
-  <h3><span class="pre">11.5</span>即梦(字节)· 中文场景的工业级</h3>
+  <h3><span class="pre">11.5</span>即梦（字节）· 中文场景的工业级</h3>
 
-  <p class="lead">字节即梦面向中文创作场景(电商 / 营销 / 短视频),用户画像跟这类国产 AI 设计平台高度重合,值得最仔细看。</p>
+  <p class="lead">字节即梦面向中文创作场景（电商 / 营销 / 短视频），用户画像跟这类国产 AI 设计平台高度重合，值得最仔细看。</p>
 
   <ul>
-    <li><strong>信任设计 ★★★</strong>:模型版本明示(即梦 5.0 vs 4.0),不同版本能力差异透明</li>
-    <li><strong>可控性 ★★★★</strong>:批量生成 / 风格锁定 / 角色一致性等中文场景常用功能完善</li>
-    <li><strong>生成产物 ★★★★</strong>:多版本并列展示,默认 4 张 + 可放大</li>
-    <li><strong>错误兜底 ★★★</strong>:内容安全拦截相对清晰,但仍有「为什么拦」模糊的情况</li>
-    <li><strong>prompt 体验 ★★★★</strong>:有大量中文场景模板(「电商海报 / 公众号封面 / 抖音封面」),降低中文用户门槛</li>
-    <li><strong>人格 ★★★</strong>:工具型,无过度对话</li>
+    <li><strong>信任设计 ★★★</strong>：模型版本明示（即梦 5.0 vs 4.0），不同版本能力差异透明</li>
+    <li><strong>可控性 ★★★★</strong>：批量生成 / 风格锁定 / 角色一致性等中文场景常用功能完善</li>
+    <li><strong>生成产物 ★★★★</strong>：多版本并列展示，默认 4 张 + 可放大</li>
+    <li><strong>错误兜底 ★★★</strong>：内容安全拦截相对清晰，但仍有「为什么拦」模糊的情况</li>
+    <li><strong>prompt 体验 ★★★★</strong>：有大量中文场景模板（「电商海报 / 公众号封面 / 抖音封面」），降低中文用户门槛</li>
+    <li><strong>人格 ★★★</strong>：工具型，无过度对话</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>即梦的「工业级稳定」 + 「中文场景模板」是这类产品最直接的竞品。<strong>它的核心 UX 优势在「场景模板」</strong>——用户不需要从零写 prompt,选场景后填关键字即可。<em>启示:这类产品该有自己的「中文场景模板库」作为前端入口,降低用户 prompt 焦虑</em>。</p>
+    <p>即梦的「工业级稳定」 + 「中文场景模板」是这类产品最直接的竞品。<strong>它的核心 UX 优势在「场景模板」</strong>——用户不需要从零写 prompt，选场景后填关键字即可。<em>启示：这类产品该有自己的「中文场景模板库」作为前端入口，降低用户 prompt 焦虑</em>。</p>
   </div>
 
-  <h3><span class="pre">11.6</span>通义万相(阿里)· 企业级稳定 + API 友好</h3>
+  <h3><span class="pre">11.6</span>通义万相（阿里）· 企业级稳定 + API 友好</h3>
 
   <p class="lead">阿里通义万相走的是 ToB / 企业级路线——稳定 / 可控 / API 友好是核心 UX 取向。</p>
 
   <ul>
-    <li><strong>信任设计 ★★★★</strong>:输出附「模型版本 + 参数 record」,便于审计 / 复现</li>
-    <li><strong>可控性 ★★★★</strong>:批量 API / 参数 fine-tune / 风格预设 完善</li>
-    <li><strong>生成产物 ★★★</strong>:主要给 API 用户,Web 端 UI 相对保守</li>
-    <li><strong>错误兜底 ★★★</strong>:API 错误码完善,但 Web UX 错误提示一般</li>
-    <li><strong>prompt 体验 ★★★</strong>:中文 prompt 优化强,但模板化程度不如即梦</li>
-    <li><strong>人格 N/A</strong>:工具型,无对话人格</li>
+    <li><strong>信任设计 ★★★★</strong>：输出附「模型版本 + 参数 record」，便于审计 / 复现</li>
+    <li><strong>可控性 ★★★★</strong>：批量 API / 参数 fine-tune / 风格预设 完善</li>
+    <li><strong>生成产物 ★★★</strong>：主要给 API 用户，Web 端 UI 相对保守</li>
+    <li><strong>错误兜底 ★★★</strong>:API 错误码完善，但 Web UX 错误提示一般</li>
+    <li><strong>prompt 体验 ★★★</strong>：中文 prompt 优化强，但模板化程度不如即梦</li>
+    <li><strong>人格 N/A</strong>：工具型，无对话人格</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>通义万相是「企业开发者」取向,这跟这类产品的「设计师 / 营销人员」取向不同——但它的<strong>「可审计 / 可复现」</strong>设计值得借鉴,尤其是这类产品的企业版(B 端)场景。</p>
+    <p>通义万相是「企业开发者」取向，这跟这类产品的「设计师 / 营销人员」取向不同——但它的<strong>「可审计 / 可复现」</strong>设计值得借鉴，尤其是这类产品的企业版（B 端）场景。</p>
   </div>
 
   <h3><span class="pre">11.7</span>Midjourney · 风格统一的极致</h3>
 
-  <p class="lead">Midjourney 走的是「艺术风格化」路线——它的产物有强烈的「MJ 感」,不像普通图像生成那么「中性」。</p>
+  <p class="lead">Midjourney 走的是「艺术风格化」路线——它的产物有强烈的「MJ 感」，不像普通图像生成那么「中性」。</p>
 
   <ul>
-    <li><strong>信任设计 ★★</strong>:没有引用 / 置信度概念,但产物风格强烈让用户对「质量」有预期</li>
-    <li><strong>可控性 ★★★</strong>:--ar / --style / --chaos 等 Discord 命令参数,极客向</li>
-    <li><strong>生成产物 ★★★★</strong>:默认 4 张,upscale / variation 可派生</li>
-    <li><strong>错误兜底 ★★</strong>:早期「Job Failed」很差,v6 后改善</li>
-    <li><strong>prompt 体验 ★★</strong>:Discord 原生,无 placeholder 概念,新手门槛高</li>
-    <li><strong>人格 N/A</strong>:命令式,无人格</li>
+    <li><strong>信任设计 ★★</strong>：没有引用 / 置信度概念，但产物风格强烈让用户对「质量」有预期</li>
+    <li><strong>可控性 ★★★</strong>:--ar / --style / --chaos 等 Discord 命令参数，极客向</li>
+    <li><strong>生成产物 ★★★★</strong>：默认 4 张，upscale / variation 可派生</li>
+    <li><strong>错误兜底 ★★</strong>：早期「Job Failed」很差，v6 后改善</li>
+    <li><strong>prompt 体验 ★★</strong>:Discord 原生，无 placeholder 概念，新手门槛高</li>
+    <li><strong>人格 N/A</strong>：命令式，无人格</li>
   </ul>
 
   <div class="callout note">
     <div class="label">i 核心 insight</div>
-    <p>Midjourney 的差异化在「<strong>独家的视觉风格</strong>「——它训练数据偏艺术 / 摄影,产物有 MJ 标签般的辨识度。这是<em>模型差异化</em>带来的 UX 优势,不是 UX 设计本身的胜利。但它告诉我们:<strong>模型差异化 + 极简 UX</strong> 也是一条路。<em>这类产品如果在某个垂直风格(如中国传统美学 / 企业 PPT 美学)做到独家,UX 复杂度可以降低</em>。</p>
+    <p>Midjourney 的差异化在「<strong>独家的视觉风格</strong>「——它训练数据偏艺术 / 摄影，产物有 MJ 标签般的辨识度。这是<em>模型差异化</em>带来的 UX 优势，不是 UX 设计本身的胜利。但它告诉我们：<strong>模型差异化 + 极简 UX</strong> 也是一条路。<em>这类产品如果在某个垂直风格（如中国传统美学 / 企业 PPT 美学）做到独家，UX 复杂度可以降低</em>。</p>
   </div>
 
   <h3><span class="pre">11.8</span>横评矩阵 · 六款产品一次看全</h3>
@@ -179,22 +179,22 @@
   <h3><span class="pre">11.9</span>给这类产品的 3 条最关键启示</h3>
 
   <div class="callout ops">
-    <div class="label">✓ 从 6 个产品提炼,给这类产品的 3 条启示</div>
+    <div class="label">✓ 从 6 个产品提炼，给这类产品的 3 条启示</div>
     <ol>
-      <li><strong>极致单点 &gt; 全面平庸</strong>。没有任何一家在所有维度满分,赢家都是某个单点做到 ★★★★★。<em>这类产品该选 1-2 个维度做极致——建议是「中文场景模板」(学即梦)和「信任设计」(学 Claude)</em>。</li>
-      <li><strong>用户产物决定 UX 形态</strong>。v0 输出代码 → 长得像 IDE;Krea 输出探索 → 长得像画布;Midjourney 输出艺术品 → 长得像 Discord。<em>这类产品的用户产物是「营销 / 设计场景的图」,UX 应该长得像「场景化生成工具」,不是通用对话框</em>。</li>
-      <li><strong>人格匹配用户群</strong>。Claude 的克制对应专业用户,即梦 / 通义的工具感对应中文创作者。<em>这类产品的用户是设计师 / 营销人员,人格应该靠「专业 + 克制 + 给选项」,不要走 ChatGPT 的「过度热情」</em>。</li>
+      <li><strong>极致单点 &gt; 全面平庸</strong>。没有任何一家在所有维度满分，赢家都是某个单点做到 ★★★★★。<em>这类产品该选 1-2 个维度做极致——建议是「中文场景模板」（学即梦）和「信任设计」（学 Claude）</em>。</li>
+      <li><strong>用户产物决定 UX 形态</strong>。v0 输出代码 → 长得像 IDE;Krea 输出探索 → 长得像画布；Midjourney 输出艺术品 → 长得像 Discord。<em>这类产品的用户产物是「营销 / 设计场景的图」，UX 应该长得像「场景化生成工具」，不是通用对话框</em>。</li>
+      <li><strong>人格匹配用户群</strong>。Claude 的克制对应专业用户，即梦 / 通义的工具感对应中文创作者。<em>这类产品的用户是设计师 / 营销人员，人格应该靠「专业 + 克制 + 给选项」，不要走 ChatGPT 的「过度热情」</em>。</li>
     </ol>
   </div>
 
   <h3><span class="pre">11.10</span>本章小结</h3>
 
-  <p>6 款内容生成类头部产品,6 种 UX 哲学,没有标准答案。横评的价值不是评出「谁最好」,而是看到<strong>同一个问题(8 章议题)在不同产品上展开的多样性</strong>。</p>
+  <p>6 款内容生成类头部产品，6 种 UX 哲学，没有标准答案。横评的价值不是评出「谁最好」，而是看到<strong>同一个问题（8 章议题）在不同产品上展开的多样性</strong>。</p>
 
-  <p>下一章我们看一个紧密相关但用户群完全不同的赛道——<strong>AI 辅助生产力对比组</strong>(Cursor / Copilot / Bolt / Lovable)。它们解的问题部分跟内容生成相同(都是生成 UI / 代码),但用户群是开发者,UX 取向有显著不同。</p>
+  <p>下一章我们看一个紧密相关但用户群完全不同的赛道——<strong>AI 辅助生产力对比组</strong>(Cursor / Copilot / Bolt / Lovable)。它们解的问题部分跟内容生成相同（都是生成 UI / 代码），但用户群是开发者，UX 取向有显著不同。</p>
 
-  <p class="ref">主要参考:<br>
-  各产品官方文档与发布日志(Claude / v0 / Krea / 即梦 / 通义万相 / Midjourney)· 各产品 reddit / 即刻 / X 用户反馈集锦, 2024-2026 · NN/g, <em>Generative AI Patterns</em>, 2024</p>
+  <p class="ref">主要参考：<br>
+  各产品官方文档与发布日志（Claude / v0 / Krea / 即梦 / 通义万相 / Midjourney）· 各产品 reddit / 即刻 / X 用户反馈集锦， 2024-2026 · NN/g, <em>Generative AI Patterns</em>, 2024</p>
 
 </div>
 </section>

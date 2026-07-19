@@ -3,37 +3,37 @@
 
   <div class="section-tag"><span class="num">06</span>PRODUCT · 第三篇 / 第六章</div>
   <h1 class="section-h">Projects / Artifacts / Skills / Connectors 桌面端四部件 <span class="en">The Desktop Stack</span></h1>
-  <p class="section-sub">第 5 章讲完三件套(Claude.ai · Claude Code · API),你可能以为产品篇就结束了。但 Claude 桌面端真正让长期协作变成可能的,是横跨这三个壳的四个部件:Projects 长期上下文容器 / Artifacts 持续编辑容器 / Skills 团队知识包 / Connectors 外部世界接口。理解这四个部件怎么配合,才理解 Claude 从「单次对话工具」升级成「长期协作平台」的工程实现。</p>
+  <p class="section-sub">第 5 章讲完三件套（Claude.ai · Claude Code · API），你可能以为产品篇就结束了。但 Claude 桌面端真正让长期协作变成可能的，是横跨这三个壳的四个部件：Projects 长期上下文容器 / Artifacts 持续编辑容器 / Skills 团队知识包 / Connectors 外部世界接口。理解这四个部件怎么配合，才理解 Claude 从「单次对话工具」升级成「长期协作平台」的工程实现。</p>
 
   <div class="tldr">
     <div class="label">▼ 三十秒看懂这一章</div>
-    <p>Anthropic 把「让 Claude 记住你」这件事拆成四个独立部件,而不是做一个 OpenAI Memory 那样的全局记忆。Projects 装长期上下文,Artifacts 装持续输出物,Skills 装重复工作流,Connectors 装外部数据接口。四个部件互补不替代——你可以只用其中一两个,也可以全部组合。这种「组件式记忆」是 Anthropic 跟其他厂商最不同的产品哲学:不替你决定记什么,把记忆的层级显式摆出来,让你自己装配。</p>
+    <p>Anthropic 把「让 Claude 记住你」这件事拆成四个独立部件，而不是做一个 OpenAI Memory 那样的全局记忆。Projects 装长期上下文，Artifacts 装持续输出物，Skills 装重复工作流，Connectors 装外部数据接口。四个部件互补不替代——你可以只用其中一两个，也可以全部组合。这种「组件式记忆」是 Anthropic 跟其他厂商最不同的产品哲学：不替你决定记什么，把记忆的层级显式摆出来，让你自己装配。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2024 年 6 月 25 日 · Claude 3.5 Sonnet 发布日</div>
-    <p>2024 年 6 月 25 日,Anthropic 发了一篇看起来不大的产品公告。标题里有 Claude 3.5 Sonnet,所有人盯着模型版本号——比上一代 Opus 还强、价格只有五分之一。但博客最后藏着一段几乎被淹没的话:「我们同时推出 Artifacts,一个让 Claude 生成的代码、文档、图表能在对话旁边的窗口里持续存在的容器。」[Anthropic 2024c]</p>
-    <p>这句话当时没几个人在意。直到一个月后,Reddit 和 X 上开始出现一类截图:用户拿 Claude 写了一个 React 组件,Claude 把组件放进一个独立的 Artifact 窗口里,用户对着这个窗口说「这个按钮颜色改深一点」「再加个 hover 动效」「现在把它打包成一个可下载的 HTML」——<strong>每一句对话都在改同一个 Artifact,而不是每次都重新生成一段新代码</strong>。这种「持续在同一个对象上协作」的感觉,跟之前所有 Chat 形态的 AI 都不一样。</p>
-    <p>三个月后的 9 月 30 日,Anthropic 上线 Projects——把对话、文件、自定义指令打包成一个长期容器,Claude 跨多次对话保持记忆 [Anthropic 2024d]。又过半年,2025 年 5 月 Connectors 上线,Claude 能直接接 Gmail / Calendar / Linear / Notion / GitHub [Anthropic 2025a]。再过五个月,2025 年 10 月 Agent Skills 上线,SKILL.md 成为新的团队知识载体 [Anthropic 2025b]。</p>
-    <p>回头看,这四个部件不是同一时刻设计出来的,是 Anthropic 在 18 个月里一点一点把「Claude 怎么从对话工具变成协作平台」想明白的。它们不替代彼此,各管一段——这就是 Anthropic 产品观最不同的一点:不做全局抽象,做正交部件。</p>
+    <p>2024 年 6 月 25 日，Anthropic 发了一篇看起来不大的产品公告。标题里有 Claude 3.5 Sonnet，所有人盯着模型版本号——比上一代 Opus 还强、价格只有五分之一。但博客最后藏着一段几乎被淹没的话：「我们同时推出 Artifacts，一个让 Claude 生成的代码、文档、图表能在对话旁边的窗口里持续存在的容器。」[Anthropic 2024c]</p>
+    <p>这句话当时没几个人在意。直到一个月后，Reddit 和 X 上开始出现一类截图：用户拿 Claude 写了一个 React 组件，Claude 把组件放进一个独立的 Artifact 窗口里，用户对着这个窗口说「这个按钮颜色改深一点」「再加个 hover 动效」「现在把它打包成一个可下载的 HTML」——<strong>每一句对话都在改同一个 Artifact，而不是每次都重新生成一段新代码</strong>。这种「持续在同一个对象上协作」的感觉，跟之前所有 Chat 形态的 AI 都不一样。</p>
+    <p>三个月后的 9 月 30 日，Anthropic 上线 Projects——把对话、文件、自定义指令打包成一个长期容器，Claude 跨多次对话保持记忆 [Anthropic 2024d]。又过半年，2025 年 5 月 Connectors 上线，Claude 能直接接 Gmail / Calendar / Linear / Notion / GitHub [Anthropic 2025a]。再过五个月，2025 年 10 月 Agent Skills 上线，SKILL.md 成为新的团队知识载体 [Anthropic 2025b]。</p>
+    <p>回头看，这四个部件不是同一时刻设计出来的，是 Anthropic 在 18 个月里一点一点把「Claude 怎么从对话工具变成协作平台」想明白的。它们不替代彼此，各管一段——这就是 Anthropic 产品观最不同的一点：不做全局抽象，做正交部件。</p>
   </div>
 
   <h3><span class="pre">6.1</span>为什么需要四个部件 · <span class="en">Why Four, Not One</span></h3>
 
-  <p class="lead">最直观的疑问是——为什么不做一个「Claude 自动记住所有」的全局记忆,要拆成四个?回答这个问题,要回到第 1 章讲过的工作记忆性质。</p>
+  <p class="lead">最直观的疑问是——为什么不做一个「Claude 自动记住所有」的全局记忆，要拆成四个？回答这个问题，要回到第 1 章讲过的工作记忆性质。</p>
 
-  <p>LLM 的工作记忆是上下文窗口,200K tokens 是硬上限。「让 Claude 跨对话记住你」这件事在物理上不可能——下一次对话开始时,上下文窗口被清空,模型完全不记得你是谁。所有看起来像「记忆」的产品功能,本质都是<strong>把上次的关键信息自动塞回这次的上下文窗口</strong>。这是个工程问题,不是模型问题。</p>
+  <p>LLM 的工作记忆是上下文窗口，200K tokens 是硬上限。「让 Claude 跨对话记住你」这件事在物理上不可能——下一次对话开始时，上下文窗口被清空，模型完全不记得你是谁。所有看起来像「记忆」的产品功能，本质都是<strong>把上次的关键信息自动塞回这次的上下文窗口</strong>。这是个工程问题，不是模型问题。</p>
 
-  <p>一旦你接受「记忆是工程,不是能力」,下一个问题就来了:<em>每次塞什么进去</em>?这才是 Anthropic 跟 OpenAI 在产品哲学上分叉的地方。</p>
+  <p>一旦你接受「记忆是工程，不是能力」，下一个问题就来了：<em>每次塞什么进去</em>？这才是 Anthropic 跟 OpenAI 在产品哲学上分叉的地方。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 反共识 · OpenAI Memory vs Anthropic 四部件</div>
-    <p>OpenAI 的 Memory 是一个全局开关——开了之后,ChatGPT 在所有对话里都会自动记下「关于你」的事实,下次自动召回。听起来很方便,但代价是<strong>用户失去了对「记忆什么」的控制权</strong>。它可能记下你随口的一句吐槽,也可能漏掉你认真想保留的偏好。Anthropic 选了相反的路:把记忆显式拆成四种容器,每种容器有明确边界。<em>Projects 装这个项目相关的长期上下文,Artifacts 装这次任务的持续产物,Skills 装你团队的重复工作流,Connectors 装实时外部数据</em>。这种拆法的代价是用户要学习四个概念,但好处是你永远知道 Claude 在「记什么、从哪记的」——可控性大于自动化,这就是 Anthropic 产品观的底色。</p>
+    <p>OpenAI 的 Memory 是一个全局开关——开了之后，ChatGPT 在所有对话里都会自动记下「关于你」的事实，下次自动召回。听起来很方便，但代价是<strong>用户失去了对「记忆什么」的控制权</strong>。它可能记下你随口的一句吐槽，也可能漏掉你认真想保留的偏好。Anthropic 选了相反的路：把记忆显式拆成四种容器，每种容器有明确边界。<em>Projects 装这个项目相关的长期上下文，Artifacts 装这次任务的持续产物，Skills 装你团队的重复工作流，Connectors 装实时外部数据</em>。这种拆法的代价是用户要学习四个概念，但好处是你永远知道 Claude 在「记什么、从哪记的」——可控性大于自动化，这就是 Anthropic 产品观的底色。</p>
   </div>
 
   <h4>四部件怎么分工</h4>
 
-  <p>从「时间维度」和「来源维度」这两个角度去拆,四个部件的正交关系就清楚了:</p>
+  <p>从「时间维度」和「来源维度」这两个角度去拆，四个部件的正交关系就清楚了：</p>
 
   <div class="number-strip no-audio">
     <div class="item">
@@ -58,13 +58,13 @@
     </div>
   </div>
 
-  <p>这四个部件不是层级关系,是<strong>四个独立的存储 / 调用机制,可以单独用、可以叠加用</strong>。一个最丰富的 Claude 使用场景可能同时用上所有四个:在一个 Projects 里、对着一个 Artifact 干活、调用了几个 Skills、连接了几个 Connectors 拉取数据。但你也可以只用 Artifacts、不开 Projects,完全合法。</p>
+  <p>这四个部件不是层级关系，是<strong>四个独立的存储 / 调用机制，可以单独用、可以叠加用</strong>。一个最丰富的 Claude 使用场景可能同时用上所有四个：在一个 Projects 里、对着一个 Artifact 干活、调用了几个 Skills、连接了几个 Connectors 拉取数据。但你也可以只用 Artifacts、不开 Projects，完全合法。</p>
 
   <h3><span class="pre">6.2</span>Projects 项目 · 把上下文打包 <span class="en">Long-Term Context Container</span></h3>
 
-  <p class="lead">Projects 是 Claude.ai 在 2024 年 9 月推出的第一个「长期容器」。它的核心承诺只有一句:<strong>在这个项目里的对话,共享同一份长期上下文</strong>。每开一次新对话,Claude 自动把项目里的文件、自定义指令、过往关键对话塞回上下文窗口的开头。</p>
+  <p class="lead">Projects 是 Claude.ai 在 2024 年 9 月推出的第一个「长期容器」。它的核心承诺只有一句：<strong>在这个项目里的对话，共享同一份长期上下文</strong>。每开一次新对话，Claude 自动把项目里的文件、自定义指令、过往关键对话塞回上下文窗口的开头。</p>
 
-  <p>不要把 Projects 想成「聊天记录文件夹」——那是它最浅的用法。Projects 的真正杀手锏在于它由三层东西组成,而每一层都对应一种工程意图。</p>
+  <p>不要把 Projects 想成「聊天记录文件夹」——那是它最浅的用法。Projects 的真正杀手锏在于它由三层东西组成，而每一层都对应一种工程意图。</p>
 
   <h4>Projects 的三层结构</h4>
 
@@ -74,57 +74,57 @@
         <tr><th>层级</th><th>装什么</th><th>对应的工程意图</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>System Prompt(项目级指令)</strong></td><td>「你是一位资深康复理疗师,回答时要分循证等级,术语首次出现给中英对照」</td><td>把「Claude 在这个项目里应该是谁」固化下来,避免每次对话都重复声明</td></tr>
-        <tr><td><strong>Project Knowledge(项目文件)</strong></td><td>PDF 文档、Markdown 笔记、CSV 数据、过往关键代码片段</td><td>把跨对话需要反复引用的资料放进来,Claude 在每次对话开头自动检索</td></tr>
-        <tr><td><strong>Conversations(对话历史)</strong></td><td>这个项目下所有过往对话的标题和摘要</td><td>避免「上次跟你聊的 XX 你忘了吗」这种事,Claude 能召回过去做过的决定</td></tr>
+        <tr><td><strong>System Prompt（项目级指令）</strong></td><td>「你是一位资深康复理疗师，回答时要分循证等级，术语首次出现给中英对照」</td><td>把「Claude 在这个项目里应该是谁」固化下来，避免每次对话都重复声明</td></tr>
+        <tr><td><strong>Project Knowledge（项目文件）</strong></td><td>PDF 文档、Markdown 笔记、CSV 数据、过往关键代码片段</td><td>把跨对话需要反复引用的资料放进来，Claude 在每次对话开头自动检索</td></tr>
+        <tr><td><strong>Conversations（对话历史）</strong></td><td>这个项目下所有过往对话的标题和摘要</td><td>避免「上次跟你聊的 XX 你忘了吗」这种事，Claude 能召回过去做过的决定</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>三层加起来,效果是什么?举个具体场景。你在写一本运动康复手册,开了一个 Projects 叫「跑步康复书 v4」。System Prompt 写了术语规范、风格基调、目标读者画像。Project Knowledge 里放了 12 篇核心论文 PDF、3 份已经写完的章节、1 份大纲。每次开新对话写一个新章节,Claude 自动知道:你是谁、你想写给谁、术语怎么处理、前面写过什么、当前章节在大纲里的位置。<em>所有「描述上下文」的胶水时间被压缩到几乎为零</em>——这跟第 2 章讲的 Agent 形态优势是一回事,只是 Projects 解决的是「跨对话级别」的胶水。</p>
+  <p>三层加起来，效果是什么？举个具体场景。你在写一本运动康复手册，开了一个 Projects 叫「跑步康复书 v4」。System Prompt 写了术语规范、风格基调、目标读者画像。Project Knowledge 里放了 12 篇核心论文 PDF、3 份已经写完的章节、1 份大纲。每次开新对话写一个新章节，Claude 自动知道：你是谁、你想写给谁、术语怎么处理、前面写过什么、当前章节在大纲里的位置。<em>所有「描述上下文」的胶水时间被压缩到几乎为零</em>——这跟第 2 章讲的 Agent 形态优势是一回事，只是 Projects 解决的是「跨对话级别」的胶水。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 反共识 · 大多数人在用 Projects 的方式是错的</div>
-    <p>Anthropic 自己的数据显示:有 60% 以上的 Projects 用户,把 Projects 当成「聊天记录归档夹」——只是把相关对话归在一起,没配 System Prompt,没传 Project Knowledge [Anthropic 2025c]。这等于花钱买了一辆跑车,只用来从家开到便利店。Projects 的真正杠杆在三层加起来的复合效应——<strong>没有 System Prompt 的 Projects,跟普通对话窗口没差别;没有 Project Knowledge 的 Projects,Claude 还是只能看你这次打的字</strong>。要拿到 Projects 的全部价值,三层都得配。</p>
+    <p>Anthropic 自己的数据显示：有 60% 以上的 Projects 用户，把 Projects 当成「聊天记录归档夹」——只是把相关对话归在一起，没配 System Prompt，没传 Project Knowledge [Anthropic 2025c]。这等于花钱买了一辆跑车，只用来从家开到便利店。Projects 的真正杠杆在三层加起来的复合效应——<strong>没有 System Prompt 的 Projects，跟普通对话窗口没差别；没有 Project Knowledge 的 Projects,Claude 还是只能看你这次打的字</strong>。要拿到 Projects 的全部价值，三层都得配。</p>
   </div>
 
   <h4>Projects 的工程实现</h4>
 
-  <p>Projects 在底层做了什么?Anthropic 的工程博客 [Anthropic 2025c] 给出了一个简化的描述:</p>
+  <p>Projects 在底层做了什么？Anthropic 的工程博客 [Anthropic 2025c] 给出了一个简化的描述：</p>
 
   <ul>
-    <li>每次在 Projects 里发起新对话,系统先把 System Prompt 塞到上下文窗口最前面</li>
-    <li>然后用 <strong>RAG(检索增强生成)</strong>从 Project Knowledge 里捞出跟当前问题最相关的几个片段,塞进窗口</li>
-    <li>再附上过往对话的摘要索引(不是全文,是摘要 + 标题),让 Claude 知道「这个项目讨论过哪些话题」</li>
+    <li>每次在 Projects 里发起新对话，系统先把 System Prompt 塞到上下文窗口最前面</li>
+    <li>然后用 <strong>RAG（检索增强生成）</strong>从 Project Knowledge 里捞出跟当前问题最相关的几个片段，塞进窗口</li>
+    <li>再附上过往对话的摘要索引（不是全文，是摘要 + 标题），让 Claude 知道「这个项目讨论过哪些话题」</li>
     <li>最后才接你这次的输入</li>
   </ul>
 
-  <p>这就是为什么 Project Knowledge 不能塞太多东西——RAG 检索质量在文件数 100 个以下表现最好,超过 200 个后开始稀释。Anthropic 官方推荐每个 Projects 的 Knowledge 总量控制在 30-50 个文件以内,单个文件不超过 30 万 tokens [Anthropic Docs 2026]。</p>
+  <p>这就是为什么 Project Knowledge 不能塞太多东西——RAG 检索质量在文件数 100 个以下表现最好，超过 200 个后开始稀释。Anthropic 官方推荐每个 Projects 的 Knowledge 总量控制在 30-50 个文件以内，单个文件不超过 30 万 tokens [Anthropic Docs 2026]。</p>
 
   <h3><span class="pre">6.3</span>Artifacts 工件 · 内容跟对话分离 <span class="en">Persistent Content Container</span></h3>
 
-  <p class="lead">Artifacts 是 2024 年 6 月跟 Claude 3.5 Sonnet 一起发布的功能,设计哲学只有一句:<strong>AI 生成的内容不应该被埋在对话流里,应该有自己的容器,可以被持续编辑</strong>。</p>
+  <p class="lead">Artifacts 是 2024 年 6 月跟 Claude 3.5 Sonnet 一起发布的功能，设计哲学只有一句：<strong>AI 生成的内容不应该被埋在对话流里，应该有自己的容器，可以被持续编辑</strong>。</p>
 
-  <p>这听起来像个小改动,但反映了一个深层的产品判断——Anthropic 在 Artifacts 发布博客里写得很清楚:「在 ChatGPT 时代,我们让用户把所有东西都装进对话泡泡。但当用户开始用 Claude 写代码、写文档、做图表时,这些产物天然有自己的生命周期,跟对话的颗粒度不一致。Artifacts 是把这两层分开」[Anthropic 2024c]。</p>
+  <p>这听起来像个小改动，但反映了一个深层的产品判断——Anthropic 在 Artifacts 发布博客里写得很清楚：「在 ChatGPT 时代，我们让用户把所有东西都装进对话泡泡。但当用户开始用 Claude 写代码、写文档、做图表时，这些产物天然有自己的生命周期，跟对话的颗粒度不一致。Artifacts 是把这两层分开」[Anthropic 2024c]。</p>
 
   <h4>Artifacts 解决的具体问题</h4>
 
-  <p>在没有 Artifacts 之前,用 Claude 写一个网页是这样的:</p>
+  <p>在没有 Artifacts 之前，用 Claude 写一个网页是这样的：</p>
 
   <ul>
     <li>你说「写个登录页」 → Claude 在对话里输出 200 行 HTML</li>
-    <li>你说「按钮改成蓝色」 → Claude 重新输出 200 行 HTML,只是改了一行</li>
-    <li>你说「再加个忘记密码链接」 → Claude 重新输出 200 行 HTML,还得你自己对比哪里变了</li>
-    <li>滚 10 屏对话后,你彻底不知道现在哪个版本是最新的</li>
+    <li>你说「按钮改成蓝色」 → Claude 重新输出 200 行 HTML，只是改了一行</li>
+    <li>你说「再加个忘记密码链接」 → Claude 重新输出 200 行 HTML，还得你自己对比哪里变了</li>
+    <li>滚 10 屏对话后，你彻底不知道现在哪个版本是最新的</li>
   </ul>
 
-  <p>有了 Artifacts 之后:</p>
+  <p>有了 Artifacts 之后：</p>
 
   <ul>
     <li>你说「写个登录页」 → Claude 把代码放进一个独立的 Artifact 窗口</li>
-    <li>你说「按钮改成蓝色」 → Claude 直接<em>原地编辑</em>那个 Artifact,你看到的是 diff 而不是重抄一遍</li>
-    <li>你说「再加个忘记密码链接」 → 同一个 Artifact,版本号 +1</li>
-    <li>对话泡泡里只剩下「你跟 Claude 在聊什么」,产物本身在另一个窗口持续演化</li>
+    <li>你说「按钮改成蓝色」 → Claude 直接<em>原地编辑</em>那个 Artifact，你看到的是 diff 而不是重抄一遍</li>
+    <li>你说「再加个忘记密码链接」 → 同一个 Artifact，版本号 +1</li>
+    <li>对话泡泡里只剩下「你跟 Claude 在聊什么」，产物本身在另一个窗口持续演化</li>
   </ul>
 
   <h4>Artifacts 支持的内容类型</h4>
@@ -132,36 +132,36 @@
   <div class="grid-2">
     <div class="card">
       <h4>代码与可执行内容</h4>
-      <p>React 组件、HTML/CSS 页面、Python / JavaScript 脚本、SVG 图形——Claude 在 Artifact 窗口里直接渲染并可交互。一个 React 组件改完之后,你当场就能看到运行效果,不用复制到自己的环境里跑。</p>
+      <p>React 组件、HTML/CSS 页面、Python / JavaScript 脚本、SVG 图形——Claude 在 Artifact 窗口里直接渲染并可交互。一个 React 组件改完之后，你当场就能看到运行效果，不用复制到自己的环境里跑。</p>
     </div>
     <div class="card">
       <h4>文档与结构化文本</h4>
-      <p>Markdown 文档、Mermaid 图表、长文写作。Artifact 提供「编辑模式」和「预览模式」,你可以像用普通文档编辑器一样选中某段让 Claude 重写。</p>
+      <p>Markdown 文档、Mermaid 图表、长文写作。Artifact 提供「编辑模式」和「预览模式」，你可以像用普通文档编辑器一样选中某段让 Claude 重写。</p>
     </div>
     <div class="card">
       <h4>数据与可视化</h4>
-      <p>表格数据、Chart.js 图表、D3 可视化。把一份 CSV 丢进对话,让 Claude 在 Artifact 里画图,图变成可下载、可分享的独立产物。</p>
+      <p>表格数据、Chart.js 图表、D3 可视化。把一份 CSV 丢进对话，让 Claude 在 Artifact 里画图，图变成可下载、可分享的独立产物。</p>
     </div>
     <div class="card">
-      <h4>跨 Artifact 协作(2025 年新增)</h4>
-      <p>2025 年中,Anthropic 上线了 Artifact 之间相互引用——一个 React 组件 Artifact 可以引用另一个 CSS Artifact,改 CSS 时组件自动更新。这把单文件 Artifact 升级成了「迷你工程」。</p>
+      <h4>跨 Artifact 协作（2025 年新增）</h4>
+      <p>2025 年中，Anthropic 上线了 Artifact 之间相互引用——一个 React 组件 Artifact 可以引用另一个 CSS Artifact，改 CSS 时组件自动更新。这把单文件 Artifact 升级成了「迷你工程」。</p>
     </div>
   </div>
 
   <div class="callout note">
     <div class="label">i 设计哲学 · 「容器」是 Anthropic 产品观的核心隐喻</div>
-    <p>注意 Artifacts、Projects、Skills 都被设计成「容器」——一个有边界、有版本、可独立操作的东西。这不是巧合。Anthropic 的产品观跟 OpenAI 最大的区别在于:OpenAI 倾向于把所有东西捏成一个无缝的对话流(Memory 也是 invisible 的),Anthropic 倾向于把每个抽象单独立成容器,让用户能<em>看见、操作、组合</em>。这种「容器化产品观」的代价是认知成本上升,好处是可控性、可解释性、可组合性大幅提升——这跟 Constitutional AI 的设计哲学(回看 <a href="#s1">第 1 章</a>)一脉相承,都是「显式优于隐式」。</p>
+    <p>注意 Artifacts、Projects、Skills 都被设计成「容器」——一个有边界、有版本、可独立操作的东西。这不是巧合。Anthropic 的产品观跟 OpenAI 最大的区别在于：OpenAI 倾向于把所有东西捏成一个无缝的对话流（Memory 也是 invisible 的），Anthropic 倾向于把每个抽象单独立成容器，让用户能<em>看见、操作、组合</em>。这种「容器化产品观」的代价是认知成本上升，好处是可控性、可解释性、可组合性大幅提升——这跟 Constitutional AI 的设计哲学（回看 <a href="#s1">第 1 章</a>）一脉相承，都是「显式优于隐式」。</p>
   </div>
 
   <h3><span class="pre">6.4</span>Skills 能力包 · 团队知识装进 Claude <span class="en">Skill Packages</span></h3>
 
-  <p class="lead">Skills 是 2025 年 10 月发布的功能,也是四部件里最年轻、被讨论得最热烈的一个。它的核心定义只有一句:<strong>一个 Skill = 一个文件夹 + 一个 SKILL.md。Claude 在合适场景下自动加载这个文件夹里的指令和资源</strong>。</p>
+  <p class="lead">Skills 是 2025 年 10 月发布的功能，也是四部件里最年轻、被讨论得最热烈的一个。它的核心定义只有一句：<strong>一个 Skill = 一个文件夹 + 一个 SKILL.md。Claude 在合适场景下自动加载这个文件夹里的指令和资源</strong>。</p>
 
-  <p>这听起来跟 System Prompt 没差别。差别在三点:</p>
+  <p>这听起来跟 System Prompt 没差别。差别在三点：</p>
 
   <ol>
-    <li><strong>Skill 是「按需加载」的</strong>——只有 Claude 判断当前任务匹配 SKILL.md 描述时,才把 Skill 里的内容塞进上下文窗口。System Prompt 是「永远加载」的</li>
-    <li><strong>Skill 是「可复用 + 可分享」的</strong>——一个 Skill 可以跨 Projects 使用,也可以打包发给团队成员、放进公司知识库。System Prompt 绑死在一个 Projects 里</li>
+    <li><strong>Skill 是「按需加载」的</strong>——只有 Claude 判断当前任务匹配 SKILL.md 描述时，才把 Skill 里的内容塞进上下文窗口。System Prompt 是「永远加载」的</li>
+    <li><strong>Skill 是「可复用 + 可分享」的</strong>——一个 Skill 可以跨 Projects 使用，也可以打包发给团队成员、放进公司知识库。System Prompt 绑死在一个 Projects 里</li>
     <li><strong>Skill 可以包含「可执行资源」</strong>——SKILL.md 里可以引用 Python 脚本、模板文件、外部工具调用。Claude 加载 Skill 时把这些资源一起带进上下文</li>
   </ol>
 
@@ -171,24 +171,24 @@
 
   <ul>
     <li><strong>YAML frontmatter</strong> — 给 Skill 名字、描述、触发条件。Claude 用这段判断「当前任务要不要加载这个 Skill」</li>
-    <li><strong>Skill 主体</strong> — Markdown 写的指令,告诉 Claude 「遇到 X 场景时按 Y 步骤处理」</li>
-    <li><strong>引用的文件 / 工具</strong> — 可以是同目录下的模板、脚本、配置;Claude 在执行 Skill 时会自动加载</li>
+    <li><strong>Skill 主体</strong> — Markdown 写的指令，告诉 Claude 「遇到 X 场景时按 Y 步骤处理」</li>
+    <li><strong>引用的文件 / 工具</strong> — 可以是同目录下的模板、脚本、配置；Claude 在执行 Skill 时会自动加载</li>
   </ul>
 
-  <p>一个真实例子:Anthropic 内部的 brand-guidelines Skill。它告诉 Claude:「写涉及 Anthropic 品牌的内容时,用这些官方色值、这套字体、这些视觉规范。」当用户在 Claude 里画一张涉及 Anthropic logo 的卡片时,这个 Skill 自动被触发,Claude 输出的设计直接符合品牌规范——<strong>用户不需要每次都重新解释「Anthropic 的颜色是什么」</strong>。这就是 Skill 的杠杆:把「团队反复要解释的事」沉淀成一个文件夹,放进 Claude 的工具箱,从此自动生效。</p>
+  <p>一个真实例子：Anthropic 内部的 brand-guidelines Skill。它告诉 Claude：「写涉及 Anthropic 品牌的内容时，用这些官方色值、这套字体、这些视觉规范。」当用户在 Claude 里画一张涉及 Anthropic logo 的卡片时，这个 Skill 自动被触发，Claude 输出的设计直接符合品牌规范——<strong>用户不需要每次都重新解释「Anthropic 的颜色是什么」</strong>。这就是 Skill 的杠杆：把「团队反复要解释的事」沉淀成一个文件夹，放进 Claude 的工具箱，从此自动生效。</p>
 
   <div class="callout ops">
     <div class="label">✓ Skills 的「双层加载」机制</div>
-    <p>Anthropic 在 Skilljar Academy 课程里讲过一个常被忽视的细节:Claude 加载 Skill 是分两步的。<strong>第一步,Claude 只看 SKILL.md 的 frontmatter(几十个字),判断要不要加载</strong>——这一步 token 消耗极小,所以你可以在 Claude 里挂上几百个 Skills 不影响性能。<strong>第二步,只有匹配的 Skill 才被加载主体内容</strong>——这时才消耗 token。这种「轻量索引 + 按需加载」的设计,让 Skills 实质上成了一个可无限扩展的知识库系统,而不是一堆挤占上下文窗口的指令。</p>
+    <p>Anthropic 在 Skilljar Academy 课程里讲过一个常被忽视的细节：Claude 加载 Skill 是分两步的。<strong>第一步，Claude 只看 SKILL.md 的 frontmatter（几十个字），判断要不要加载</strong>——这一步 token 消耗极小，所以你可以在 Claude 里挂上几百个 Skills 不影响性能。<strong>第二步，只有匹配的 Skill 才被加载主体内容</strong>——这时才消耗 token。这种「轻量索引 + 按需加载」的设计，让 Skills 实质上成了一个可无限扩展的知识库系统，而不是一堆挤占上下文窗口的指令。</p>
   </div>
 
   <p>Skills 的完整讲解会在 <a href="#s8">第 8 章「四把刀」</a>里展开——包括怎么写一个高质量的 SKILL.md、怎么设计触发条件、怎么避免 Skill 之间冲突、Anthropic 自己用 Skills 替代了哪些过去靠工程团队维护的工作流。这一章先把它在「四部件」里的位置摆清楚。</p>
 
   <h3><span class="pre">6.5</span>Connectors 连接器 · 接住外部世界 <span class="en">External Data Bridges</span></h3>
 
-  <p class="lead">Connectors 是 2025 年 5 月上线的功能,本质很简单:<strong>Anthropic 官方维护的一组预置工具,让 Claude 能直接读 Gmail、Calendar、Linear、Slack、Notion、GitHub 等主流 SaaS 应用的数据</strong>。</p>
+  <p class="lead">Connectors 是 2025 年 5 月上线的功能，本质很简单：<strong>Anthropic 官方维护的一组预置工具，让 Claude 能直接读 Gmail、Calendar、Linear、Slack、Notion、GitHub 等主流 SaaS 应用的数据</strong>。</p>
 
-  <p>这听起来像 ChatGPT 的 Plugins,但底层完全不同。Connectors 是 MCP 协议(Model Context Protocol)的「官方应用商店版」——Anthropic 把社区里成熟的 MCP server 包装成开箱即用的连接器,放在 Claude.ai 的设置面板里,用户一键开启即可。</p>
+  <p>这听起来像 ChatGPT 的 Plugins，但底层完全不同。Connectors 是 MCP 协议（Model Context Protocol）的「官方应用商店版」——Anthropic 把社区里成熟的 MCP server 包装成开箱即用的连接器，放在 Claude.ai 的设置面板里，用户一键开启即可。</p>
 
   <h4>Connectors 跟 MCP 的关系</h4>
 
@@ -198,14 +198,14 @@
         <tr><th>层级</th><th>是什么</th><th>谁来做</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>MCP 协议</strong></td><td>Anthropic 2024 年底开源的工具调用协议,定义了 LLM 怎么跟外部工具通信</td><td>开源标准,任何人可实现</td></tr>
-        <tr><td><strong>MCP Server</strong></td><td>实现 MCP 协议的具体程序,比如「Gmail MCP Server」「Notion MCP Server」</td><td>社区 + 厂商各自贡献,数百个已发布</td></tr>
-        <tr><td><strong>Connectors</strong></td><td>Anthropic 在 Claude.ai 上预置的、官方维护的一批 MCP Server,用户一键开启</td><td>Anthropic 官方挑选 + 包装</td></tr>
+        <tr><td><strong>MCP 协议</strong></td><td>Anthropic 2024 年底开源的工具调用协议，定义了 LLM 怎么跟外部工具通信</td><td>开源标准，任何人可实现</td></tr>
+        <tr><td><strong>MCP Server</strong></td><td>实现 MCP 协议的具体程序，比如「Gmail MCP Server」「Notion MCP Server」</td><td>社区 + 厂商各自贡献，数百个已发布</td></tr>
+        <tr><td><strong>Connectors</strong></td><td>Anthropic 在 Claude.ai 上预置的、官方维护的一批 MCP Server，用户一键开启</td><td>Anthropic 官方挑选 + 包装</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>所以 Connectors 不是「新东西」,是 MCP 这个底层协议的「官方精选商店」。一个不在官方 Connectors 列表里的 SaaS 应用,只要有人写了对应的 MCP Server,你也能在 Claude Desktop 里手动接入——只是需要点配置工作。MCP 协议本身的完整讲解在 <a href="#s12">第 12 章</a>。</p>
+  <p>所以 Connectors 不是「新东西」，是 MCP 这个底层协议的「官方精选商店」。一个不在官方 Connectors 列表里的 SaaS 应用，只要有人写了对应的 MCP Server，你也能在 Claude Desktop 里手动接入——只是需要点配置工作。MCP 协议本身的完整讲解在 <a href="#s12">第 12 章</a>。</p>
 
   <h4>主流 Connectors 一览</h4>
 
@@ -218,31 +218,31 @@
     <li><strong>销售与运营</strong> — HubSpot、Salesforce、Apollo、Outreach、Zoominfo</li>
   </ul>
 
-  <p>这个列表会持续增长。Anthropic 在 2025 年 11 月的更新里宣布,Connectors 已覆盖 70+ 主流 SaaS 应用,这个数字预计 2026 年突破 200 [Anthropic 2025d]。</p>
+  <p>这个列表会持续增长。Anthropic 在 2025 年 11 月的更新里宣布，Connectors 已覆盖 70+ 主流 SaaS 应用，这个数字预计 2026 年突破 200 [Anthropic 2025d]。</p>
 
   <div class="callout note">
-    <div class="label">i 一个被低估的细节 · Connectors 是「读」优先,「写」谨慎</div>
-    <p>大部分 Connectors 默认只开了「读」权限——Claude 能查 Gmail、能查 Calendar、能查 Linear,但不能未经确认就发邮件、删事件、关任务。要让 Claude 能写,你得在设置里单独开「Write」权限,而且每个写操作 Claude 都会在对话里明确告诉你「我要做 X,确认吗」。这是回到 <a href="#s2">第 2 章</a>「监工模式」的工程实现——Anthropic 把「关键节点拍板」做进了 Connectors 的默认流程,而不是依赖用户记得提醒 Claude。</p>
+    <div class="label">i 一个被低估的细节 · Connectors 是「读」优先，「写」谨慎</div>
+    <p>大部分 Connectors 默认只开了「读」权限——Claude 能查 Gmail、能查 Calendar、能查 Linear，但不能未经确认就发邮件、删事件、关任务。要让 Claude 能写，你得在设置里单独开「Write」权限，而且每个写操作 Claude 都会在对话里明确告诉你「我要做 X，确认吗」。这是回到 <a href="#s2">第 2 章</a>「监工模式」的工程实现——Anthropic 把「关键节点拍板」做进了 Connectors 的默认流程，而不是依赖用户记得提醒 Claude。</p>
   </div>
 
   <h3><span class="pre">6.6</span>四部件配合的真实场景 · <span class="en">When All Four Click</span></h3>
 
-  <p class="lead">单独讲每个部件,你只能理解它们各自的能力边界。要看到它们的复合杠杆,得看一个把四个都用上的真实场景。</p>
+  <p class="lead">单独讲每个部件，你只能理解它们各自的能力边界。要看到它们的复合杠杆，得看一个把四个都用上的真实场景。</p>
 
   <h4>场景 · 一个产品经理的「项目周报」工作流</h4>
 
-  <p>设想一个产品经理小李,她要每周交一份项目周报。在没有 Claude 之前,她的工作流是:打开 Linear 看本周完成的任务、开 Slack 翻团队动态、打开 Notion 看产品文档、在 Google Docs 里写周报、贴图、发给老板。前后 90 分钟。</p>
+  <p>设想一个产品经理小李，她要每周交一份项目周报。在没有 Claude 之前，她的工作流是：打开 Linear 看本周完成的任务、开 Slack 翻团队动态、打开 Notion 看产品文档、在 Google Docs 里写周报、贴图、发给老板。前后 90 分钟。</p>
 
-  <p>用上 Claude 四部件之后,她的工作流变成:</p>
+  <p>用上 Claude 四部件之后，她的工作流变成：</p>
 
   <ol>
-    <li><strong>Projects</strong> — 她建了一个「项目 X 周报」Projects,System Prompt 里写了「我是项目 X 的 PM,我的周报要包含进度、风险、下周计划三个部分,语气直接、不要装饰词」。Project Knowledge 里放了项目 OKR、过往周报、利益相关方画像</li>
+    <li><strong>Projects</strong> — 她建了一个「项目 X 周报」Projects,System Prompt 里写了「我是项目 X 的 PM，我的周报要包含进度、风险、下周计划三个部分，语气直接、不要装饰词」。Project Knowledge 里放了项目 OKR、过往周报、利益相关方画像</li>
     <li><strong>Connectors</strong> — 她开了 Linear、Slack、Google Drive 三个 Connector。Claude 能直接读这周的 Linear 任务、Slack 频道、Drive 文档</li>
     <li><strong>Skills</strong> — 她装了团队内部一个叫「project-x-weekly」的 Skill,SKILL.md 写了周报的固定结构模板、措辞规范、必须包含的指标</li>
-    <li><strong>Artifacts</strong> — 她让 Claude 把周报草稿写进一个 Artifact,在 Artifact 里反复改,而不是在对话里来回滚屏</li>
+    <li><strong>Artifacts</strong> — 她让 Claude 把周报草稿写进一个 Artifact，在 Artifact 里反复改，而不是在对话里来回滚屏</li>
   </ol>
 
-  <p>每周一早上 9 点,她在 Claude 里说一句「写本周周报」。Claude 自动:Skill 触发,加载周报模板;Connectors 拉数据,从 Linear 拿任务列表、从 Slack 拿团队消息、从 Drive 拿文档变更;Projects 提供长期背景,知道项目目标和风格;Artifact 生成草稿,小李对着 Artifact 改三轮,定稿。<strong>从 90 分钟压缩到 12 分钟</strong>——这就是四部件配合的杠杆。</p>
+  <p>每周一早上 9 点，她在 Claude 里说一句「写本周周报」。Claude 自动：Skill 触发，加载周报模板；Connectors 拉数据，从 Linear 拿任务列表、从 Slack 拿团队消息、从 Drive 拿文档变更；Projects 提供长期背景，知道项目目标和风格；Artifact 生成草稿，小李对着 Artifact 改三轮，定稿。<strong>从 90 分钟压缩到 12 分钟</strong>——这就是四部件配合的杠杆。</p>
 
   <h4>四部件横向对比</h4>
 
@@ -253,10 +253,10 @@
       </thead>
       <tbody>
         <tr><td><strong>作用</strong></td><td>长期上下文</td><td>持续输出物</td><td>重复工作流</td><td>外部数据接口</td></tr>
-        <tr><td><strong>粒度</strong></td><td>项目级</td><td>任务级</td><td>团队级(可跨项目)</td><td>应用级</td></tr>
-        <tr><td><strong>生命周期</strong></td><td>跨多次对话长期存在</td><td>一次任务内反复迭代</td><td>跨项目长期复用</td><td>实时,每次重新拉</td></tr>
+        <tr><td><strong>粒度</strong></td><td>项目级</td><td>任务级</td><td>团队级（可跨项目）</td><td>应用级</td></tr>
+        <tr><td><strong>生命周期</strong></td><td>跨多次对话长期存在</td><td>一次任务内反复迭代</td><td>跨项目长期复用</td><td>实时，每次重新拉</td></tr>
         <tr><td><strong>加载方式</strong></td><td>每次新对话自动加载</td><td>对话里显式生成</td><td>触发条件匹配时按需加载</td><td>需要时调用工具</td></tr>
-        <tr><td><strong>谁来配</strong></td><td>用户自己配</td><td>Claude 生成,用户编辑</td><td>团队 / 社区 / 自己写</td><td>Anthropic 官方维护</td></tr>
+        <tr><td><strong>谁来配</strong></td><td>用户自己配</td><td>Claude 生成，用户编辑</td><td>团队 / 社区 / 自己写</td><td>Anthropic 官方维护</td></tr>
         <tr><td><strong>典型规模</strong></td><td>1 人配 5-20 个 Projects</td><td>1 任务 1-3 个 Artifacts</td><td>1 人挂 30-100 个 Skills</td><td>1 人开 5-15 个 Connectors</td></tr>
         <tr><td><strong>对应章节</strong></td><td>本章</td><td>本章</td><td><a href="#s8">第 8 章</a></td><td><a href="#s12">第 12 章</a></td></tr>
       </tbody>
@@ -264,12 +264,12 @@
   </div>
 
   <div class="audio-only">
-    <p>这里有个能帮你建立体感的增量,是四个部件在一个真实用户身上各自的常见数量级。据 Anthropic 自己披露的使用数据,一个人通常配五到二十个 Projects、挂三十到一百个 Skills,而每开一个连接器都意味着一道外部权限,所以连接器一般只开五到十五个;Artifacts 不一样,它是任务级的,一个任务里往往就一两个,随用随建、用完就过去了。记住这个量级差,你大致能判断:哪类部件值得一次配齐长期吃,哪类是临时起意、用完即弃。</p>
+    <p>这里有个能帮你建立体感的增量，是四个部件在一个真实用户身上各自的常见数量级。据 Anthropic 自己披露的使用数据，一个人通常配五到二十个 Projects、挂三十到一百个 Skills，而每开一个连接器都意味着一道外部权限，所以连接器一般只开五到十五个；Artifacts 不一样，它是任务级的，一个任务里往往就一两个，随用随建、用完就过去了。记住这个量级差，你大致能判断：哪类部件值得一次配齐长期吃，哪类是临时起意、用完即弃。</p>
   </div>
 
   <h3><span class="pre">6.7</span>跟 OpenAI / Google 的产品哲学对比 · <span class="en">Different Philosophies</span></h3>
 
-  <p class="lead">最后用一节横向对比 Anthropic、OpenAI、Google 三家在「让 AI 长期协作」这件事上的产品选择。这种对比能让你看清 Anthropic 选「四部件」不是技术限制,是产品哲学的主动选择。</p>
+  <p class="lead">最后用一节横向对比 Anthropic、OpenAI、Google 三家在「让 AI 长期协作」这件事上的产品选择。这种对比能让你看清 Anthropic 选「四部件」不是技术限制，是产品哲学的主动选择。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -277,43 +277,43 @@
         <tr><th>厂商</th><th>长期记忆方案</th><th>外部接入方案</th><th>哲学概括</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Anthropic</strong></td><td>Projects(显式容器)+ Skills(团队知识)</td><td>Connectors(精选 MCP)+ MCP 协议(开放)</td><td>显式 · 可组合 · 用户可见</td></tr>
-        <tr><td><strong>OpenAI</strong></td><td>Memory(全局自动记忆)+ Custom GPTs</td><td>Plugins(已废弃) → GPT Actions(私有协议)</td><td>隐式 · 自动 · 平台主导</td></tr>
-        <tr><td><strong>Google</strong></td><td>Gemini 跟 Workspace 深度耦合(自动调 Gmail / Drive)</td><td>原生绑死 Google 生态,第三方接入弱</td><td>耦合 · 垂直 · 生态封闭</td></tr>
+        <tr><td><strong>Anthropic</strong></td><td>Projects（显式容器）+ Skills（团队知识）</td><td>Connectors（精选 MCP）+ MCP 协议（开放）</td><td>显式 · 可组合 · 用户可见</td></tr>
+        <tr><td><strong>OpenAI</strong></td><td>Memory（全局自动记忆）+ Custom GPTs</td><td>Plugins（已废弃） → GPT Actions（私有协议）</td><td>隐式 · 自动 · 平台主导</td></tr>
+        <tr><td><strong>Google</strong></td><td>Gemini 跟 Workspace 深度耦合（自动调 Gmail / Drive）</td><td>原生绑死 Google 生态，第三方接入弱</td><td>耦合 · 垂直 · 生态封闭</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>这三种哲学没有对错,只有取舍。OpenAI 的「隐式自动」最省心,适合不愿意学习概念的普通用户;Google 的「生态耦合」最丝滑,前提是你已经在 Google 生态里;Anthropic 的「显式容器」最累但最透明,适合愿意为可控性付出学习成本的工程化用户——这跟 Anthropic 的整体用户画像高度一致(回看 <a href="#s5">第 5 章</a>三件套的用户画像分析:Claude 的用户里程序员、知识工作者占比远高于 OpenAI)。</p>
+  <p>这三种哲学没有对错，只有取舍。OpenAI 的「隐式自动」最省心，适合不愿意学习概念的普通用户；Google 的「生态耦合」最丝滑，前提是你已经在 Google 生态里；Anthropic 的「显式容器」最累但最透明，适合愿意为可控性付出学习成本的工程化用户——这跟 Anthropic 的整体用户画像高度一致（回看 <a href="#s5">第 5 章</a>三件套的用户画像分析：Claude 的用户里程序员、知识工作者占比远高于 OpenAI）。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 一个常被忽视的代价 · 「显式容器」对入门用户不友好</div>
-    <p>Anthropic 选「四部件」是有代价的——一个新用户打开 Claude.ai,可能要花几个小时才搞懂 Projects / Artifacts / Skills / Connectors 各是什么、什么时候用哪个。OpenAI 用户开一个 ChatGPT 就能聊,Anthropic 用户要先做产品级理解。这是 Anthropic 在「易用性」上付出的真实成本,也是为什么 Anthropic 的 Skilljar Academy(免费教学平台)、文档、Blog 写得这么细——他们必须靠教育投入弥补产品的认知门槛。<em>显式产品观的代价就是必须配上重投入的用户教育</em>,这一对绑死的设计选择,定义了 Anthropic 的产品风格。</p>
+    <p>Anthropic 选「四部件」是有代价的——一个新用户打开 Claude.ai，可能要花几个小时才搞懂 Projects / Artifacts / Skills / Connectors 各是什么、什么时候用哪个。OpenAI 用户开一个 ChatGPT 就能聊，Anthropic 用户要先做产品级理解。这是 Anthropic 在「易用性」上付出的真实成本，也是为什么 Anthropic 的 Skilljar Academy（免费教学平台）、文档、Blog 写得这么细——他们必须靠教育投入弥补产品的认知门槛。<em>显式产品观的代价就是必须配上重投入的用户教育</em>，这一对绑死的设计选择，定义了 Anthropic 的产品风格。</p>
   </div>
 
   <h3><span class="pre">6.8</span>这一章给你的判断武器</h3>
 
-  <p class="lead">读完这章,你应该带走三件能直接用的东西。</p>
+  <p class="lead">读完这章，你应该带走三件能直接用的东西。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器一 · 用四部件给自己的 Claude 使用场景做体检</div>
-    <p>问自己四个问题:有没有跨对话需要持续的上下文(用 Projects)?有没有需要反复迭代的产物(用 Artifacts)?有没有团队反复要重复的工作流(写 Skills)?有没有外部 SaaS 数据要接(开 Connectors)?四个里只用一个,你的 Claude 用法还在 ChatGPT 时代;四个都用上,才是 Anthropic 设计的产品形态。</p>
+    <p>问自己四个问题：有没有跨对话需要持续的上下文（用 Projects）？有没有需要反复迭代的产物（用 Artifacts）？有没有团队反复要重复的工作流（写 Skills）？有没有外部 SaaS 数据要接（开 Connectors）？四个里只用一个，你的 Claude 用法还在 ChatGPT 时代；四个都用上，才是 Anthropic 设计的产品形态。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器二 · Projects 的三层都要配齐</div>
-    <p>不要把 Projects 当聊天记录夹用。三层必配:System Prompt(项目级指令)、Project Knowledge(背景资料)、Conversations(对话沉淀)。少了任何一层,Projects 的杠杆都被打折。一个最常见的反模式是「建了 Projects 但没写 System Prompt」——等于花了车的钱,买了一辆没有方向盘的车。</p>
+    <p>不要把 Projects 当聊天记录夹用。三层必配：System Prompt（项目级指令）、Project Knowledge（背景资料）、Conversations（对话沉淀）。少了任何一层，Projects 的杠杆都被打折。一个最常见的反模式是「建了 Projects 但没写 System Prompt」——等于花了车的钱，买了一辆没有方向盘的车。</p>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 武器三 · 看到「AI Memory」类产品,先问它是哪种哲学</div>
-    <p>下次遇到任何号称「让 AI 记住你」的产品,先问它是显式还是隐式、是容器还是全局、用户能不能看见和编辑记忆内容。隐式 + 全局 + 不可编辑的「Memory」听起来方便,实际是黑箱;显式 + 容器 + 可编辑的方案麻烦,但你永远知道 AI 在记什么。两者各有适合的人,但产品选哪边,本质是「替用户决定 vs 让用户决定」的哲学分叉。</p>
+    <div class="label">✓ 武器三 · 看到「AI Memory」类产品，先问它是哪种哲学</div>
+    <p>下次遇到任何号称「让 AI 记住你」的产品，先问它是显式还是隐式、是容器还是全局、用户能不能看见和编辑记忆内容。隐式 + 全局 + 不可编辑的「Memory」听起来方便，实际是黑箱；显式 + 容器 + 可编辑的方案麻烦，但你永远知道 AI 在记什么。两者各有适合的人，但产品选哪边，本质是「替用户决定 vs 让用户决定」的哲学分叉。</p>
   </div>
 
-  <p>下一章我们换一个尺度——从「Claude 桌面端有哪些部件」转向「Claude Code 里真正在跑的方法论」:EPCC(Explore · Plan · Code · Commit)。如果说四部件是 Claude 的「记忆架构」,EPCC 就是 Claude Code 的「工作节拍」——它把 Agent 的自主循环切成四个明确节点,让监工模式真正可执行。理解了 EPCC,你才知道为什么 Claude Code 不只是「能写代码的 ChatGPT」,而是 Anthropic 在 Agent 工程化上最重的一次产品下注。</p>
+  <p>下一章我们换一个尺度——从「Claude 桌面端有哪些部件」转向「Claude Code 里真正在跑的方法论」：EPCC(Explore · Plan · Code · Commit)。如果说四部件是 Claude 的「记忆架构」，EPCC 就是 Claude Code 的「工作节拍」——它把 Agent 的自主循环切成四个明确节点，让监工模式真正可执行。理解了 EPCC，你才知道为什么 Claude Code 不只是「能写代码的 ChatGPT」，而是 Anthropic 在 Agent 工程化上最重的一次产品下注。</p>
 
-  <p class="ref">主要参考:<br>
-  Anthropic, <em>Claude 3.5 Sonnet</em> 发布博客(含 Artifacts 首发), 2024-06-25 [Anthropic 2024c] · Anthropic, <em>Projects on Claude.ai</em> 发布博客, 2024-09-30 [Anthropic 2024d] · Anthropic, <em>Introducing Connectors for Claude</em>, 2025-05 [Anthropic 2025a] · Anthropic, <em>Agent Skills: build, share, and reuse expertise</em>, 2025-10 [Anthropic 2025b] · Anthropic, <em>How users actually use Projects</em>, engineering blog, 2025 [Anthropic 2025c] · Anthropic, <em>Connectors expansion update</em>, 2025-11 [Anthropic 2025d] · Anthropic Docs, <em>Projects best practices</em>, 2026 [Anthropic Docs 2026] · Anthropic Skilljar Academy, <em>Claude 101</em> &amp; <em>Introduction to Agent Skills</em> courses, 2025 [Anthropic Academy 2025] · Model Context Protocol 开源规范, 2024-11 起.</p>
+  <p class="ref">主要参考：<br>
+  Anthropic, <em>Claude 3.5 Sonnet</em> 发布博客（含 Artifacts 首发）， 2024-06-25 [Anthropic 2024c] · Anthropic, <em>Projects on Claude.ai</em> 发布博客， 2024-09-30 [Anthropic 2024d] · Anthropic, <em>Introducing Connectors for Claude</em>, 2025-05 [Anthropic 2025a] · Anthropic, <em>Agent Skills: build, share, and reuse expertise</em>, 2025-10 [Anthropic 2025b] · Anthropic, <em>How users actually use Projects</em>, engineering blog, 2025 [Anthropic 2025c] · Anthropic, <em>Connectors expansion update</em>, 2025-11 [Anthropic 2025d] · Anthropic Docs, <em>Projects best practices</em>, 2026 [Anthropic Docs 2026] · Anthropic Skilljar Academy, <em>Claude 101</em> &amp; <em>Introduction to Agent Skills</em> courses, 2025 [Anthropic Academy 2025] · Model Context Protocol 开源规范， 2024-11 起.</p>
 
 </div>
 </section>

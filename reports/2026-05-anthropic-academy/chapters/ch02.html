@@ -3,54 +3,54 @@
 
   <div class="section-tag"><span class="num">02</span>AGENT · 第一篇 / 第二章</div>
   <h1 class="section-h">Agent 跟 Chat 不是一个东西 <span class="en">From Chat to Agent</span></h1>
-  <p class="section-sub">大多数人对 AI 的认知还停在「问问题、它回答」这一层——也就是 Chat。但 Anthropic 真正在推、Claude Code 真正在做的,是另一种东西:Agent。这一章把 Chat 跟 Agent 的边界、Agent 内部的循环结构、以及跟 Agent 协作的正确姿势,讲到你以后看到任何「AI 产品」都能立刻判断它到底属于哪一类。</p>
+  <p class="section-sub">大多数人对 AI 的认知还停在「问问题、它回答」这一层——也就是 Chat。但 Anthropic 真正在推、Claude Code 真正在做的，是另一种东西：Agent。这一章把 Chat 跟 Agent 的边界、Agent 内部的循环结构、以及跟 Agent 协作的正确姿势，讲到你以后看到任何「AI 产品」都能立刻判断它到底属于哪一类。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>Chat 是「你问 → 它答 → 结束」的一次性反射。Agent 是「收集上下文 → 采取行动 → 验证结果 → 回到第一步」的自主循环。Agent 比 Chat 强的地方在于能看现场、能动手、能自我检查;但同样的能力反过来就是危险——它能动手意味着它能搞砸,它能自我检查不等于它真的检得出来。跟 Agent 协作的正确姿势不是「问问题」,是「监工」:你不再是提问者,你是看工人干活、在关键节点拍板的那个人。</p>
+    <p>Chat 是「你问 → 它答 → 结束」的一次性反射。Agent 是「收集上下文 → 采取行动 → 验证结果 → 回到第一步」的自主循环。Agent 比 Chat 强的地方在于能看现场、能动手、能自我检查；但同样的能力反过来就是危险——它能动手意味着它能搞砸，它能自我检查不等于它真的检得出来。跟 Agent 协作的正确姿势不是「问问题」，是「监工」：你不再是提问者，你是看工人干活、在关键节点拍板的那个人。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2024 年 10 月 22 日 · Anthropic 发布会现场</div>
-    <p>2024 年 10 月 22 日,Anthropic 在产品博客上发布了一段 demo 视频。视频里 Claude 3.5 Sonnet 拿到一句话指令:「帮我看一下旧金山的天气,然后规划一下日落看点。」</p>
-    <p>接下来几十秒,屏幕上没有人碰鼠标。光标自己移动,Claude 打开浏览器、搜索「San Francisco weather」、点进 weather.gov、看完数据、关掉标签页、再打开 Google Maps、搜索旧金山观日落的地点、对比几个海角的纬度和当天的太阳方位——所有这些步骤,Claude 都<em>自己决定下一步该干什么</em>。最后它输出一句结论:「Twin Peaks,今天日落 18:42,云量低,推荐 18:00 之前到。」</p>
-    <p>这就是 Claude Computer Use 的首发 demo。它不是一个聊天助手——它是一个能拿你的电脑、自己看屏幕、自己点鼠标、自己打字、自己判断「完没完成」的<strong>Agent</strong>。Anthropic 在博客里把这段 demo 当成 Claude 产品形态的分水岭:在此之前,Claude 是个对话框里的字符流;在此之后,Claude 是个可以被指派一整个任务、然后<em>自己跑完</em>的协作者 [Anthropic 2024]。</p>
-    <p>这场发布会上还藏着一个细节——Anthropic 同时发布了 Claude Code 的内部 alpha 版本。这个细节后来被证明比 Computer Use 本身更重要:Computer Use 让外行第一次看见 Agent,Claude Code 让程序员第一次<em>实际用上</em> Agent。两条线合起来,定义了 2025 年之后 Anthropic 的产品方向。</p>
+    <p>2024 年 10 月 22 日，Anthropic 在产品博客上发布了一段 demo 视频。视频里 Claude 3.5 Sonnet 拿到一句话指令：「帮我看一下旧金山的天气，然后规划一下日落看点。」</p>
+    <p>接下来几十秒，屏幕上没有人碰鼠标。光标自己移动，Claude 打开浏览器、搜索「San Francisco weather」、点进 weather.gov、看完数据、关掉标签页、再打开 Google Maps、搜索旧金山观日落的地点、对比几个海角的纬度和当天的太阳方位——所有这些步骤，Claude 都<em>自己决定下一步该干什么</em>。最后它输出一句结论：「Twin Peaks，今天日落 18:42，云量低，推荐 18:00 之前到。」</p>
+    <p>这就是 Claude Computer Use 的首发 demo。它不是一个聊天助手——它是一个能拿你的电脑、自己看屏幕、自己点鼠标、自己打字、自己判断「完没完成」的<strong>Agent</strong>。Anthropic 在博客里把这段 demo 当成 Claude 产品形态的分水岭：在此之前，Claude 是个对话框里的字符流；在此之后，Claude 是个可以被指派一整个任务、然后<em>自己跑完</em>的协作者 [Anthropic 2024]。</p>
+    <p>这场发布会上还藏着一个细节——Anthropic 同时发布了 Claude Code 的内部 alpha 版本。这个细节后来被证明比 Computer Use 本身更重要：Computer Use 让外行第一次看见 Agent,Claude Code 让程序员第一次<em>实际用上</em> Agent。两条线合起来，定义了 2025 年之后 Anthropic 的产品方向。</p>
   </div>
 
   <h3><span class="pre">2.1</span>Chat 是被动反射 · <span class="en">Chat is a Reflex</span></h3>
 
-  <p class="lead">先把「Chat」这一类产品的形态讲清楚。Chat 的本质,是<strong>一次提问触发一次回答,回答结束,系统等下一次提问</strong>——它跟 LLM 的关系,就是「人按一下键、模型蹦一段字、再等下一次按键」。</p>
+  <p class="lead">先把「Chat」这一类产品的形态讲清楚。Chat 的本质，是<strong>一次提问触发一次回答，回答结束，系统等下一次提问</strong>——它跟 LLM 的关系，就是「人按一下键、模型蹦一段字、再等下一次按键」。</p>
 
-  <p>这种形态在 2022 年 11 月 ChatGPT 发布后被广泛接受。它的好处是显而易见的:</p>
+  <p>这种形态在 2022 年 11 月 ChatGPT 发布后被广泛接受。它的好处是显而易见的：</p>
 
   <ul>
-    <li>✅ <strong>认知模型简单</strong>——跟微信聊天没两样,谁都会用</li>
-    <li>✅ <strong>每一步可控</strong>——你说一句、它答一句,你能看完再决定下一句</li>
-    <li>✅ <strong>错误不会扩散</strong>——它说错了,你不接受就完了,代价是你浪费几秒钟读完</li>
-    <li>✅ <strong>资源消耗小</strong>——只调一次 LLM,不开任何工具,不动外部系统</li>
+    <li>✅ <strong>认知模型简单</strong>——跟微信聊天没两样，谁都会用</li>
+    <li>✅ <strong>每一步可控</strong>——你说一句、它答一句，你能看完再决定下一句</li>
+    <li>✅ <strong>错误不会扩散</strong>——它说错了，你不接受就完了，代价是你浪费几秒钟读完</li>
+    <li>✅ <strong>资源消耗小</strong>——只调一次 LLM，不开任何工具，不动外部系统</li>
   </ul>
 
-  <p>但 Chat 形态的<em>结构性限制</em>同样明显。所有限制,都来自第 1 章讲过的那四个 LLM 性质——回头看 <a href="#s1">第 1 章</a>:LLM 没有真正的工作记忆,没有实时知识,没有动手能力。Chat 是「把 LLM 直接暴露给用户」,因此 LLM 的所有缺陷也被直接暴露:</p>
+  <p>但 Chat 形态的<em>结构性限制</em>同样明显。所有限制，都来自第 1 章讲过的那四个 LLM 性质——回头看 <a href="#s1">第 1 章</a>:LLM 没有真正的工作记忆，没有实时知识，没有动手能力。Chat 是「把 LLM 直接暴露给用户」，因此 LLM 的所有缺陷也被直接暴露：</p>
 
   <div class="callout sharp">
     <div class="label">✕ Chat 的四个结构性硬伤</div>
-    <p><strong>一 · 它只能看你打给它的字</strong>。屏幕上摆着的、文件里写着的、数据库里存着的——它都看不见,除非你手动复制粘贴进对话框。<strong>二 · 它只能给你字</strong>。它能写出「请把这个文件改名」,但不会真去改;它只是输出一段建议,改不改是你的事。<strong>三 · 它不知道自己答得对不对</strong>。它输出一段代码,你跑一下报错,它根本不知道——除非你把报错信息复制回来给它看。<strong>四 · 任何修正都要靠人来回搬运</strong>。一个稍微复杂的任务,你要在 Chat 和真实环境之间来回切换十几次,人变成了胶水。</p>
+    <p><strong>一 · 它只能看你打给它的字</strong>。屏幕上摆着的、文件里写着的、数据库里存着的——它都看不见，除非你手动复制粘贴进对话框。<strong>二 · 它只能给你字</strong>。它能写出「请把这个文件改名」，但不会真去改；它只是输出一段建议，改不改是你的事。<strong>三 · 它不知道自己答得对不对</strong>。它输出一段代码，你跑一下报错，它根本不知道——除非你把报错信息复制回来给它看。<strong>四 · 任何修正都要靠人来回搬运</strong>。一个稍微复杂的任务，你要在 Chat 和真实环境之间来回切换十几次，人变成了胶水。</p>
   </div>
 
-  <p>这四条加起来意味着:<strong>Chat 形态下,任务复杂度的上限就是「你愿意当多少次胶水」</strong>。一个 5 步任务你还能忍,一个 50 步任务你就放弃了——因为前 49 步都是你在搬运信息、第 50 步还可能错。</p>
+  <p>这四条加起来意味着：<strong>Chat 形态下，任务复杂度的上限就是「你愿意当多少次胶水」</strong>。一个 5 步任务你还能忍，一个 50 步任务你就放弃了——因为前 49 步都是你在搬运信息、第 50 步还可能错。</p>
 
-  <p>这就是为什么 ChatGPT 在 2023 年风靡之后,大家发现「真的能用 AI 干活」的场景比预期少很多。不是 LLM 不够聪明——是 Chat 这个壳把 LLM 困住了。</p>
+  <p>这就是为什么 ChatGPT 在 2023 年风靡之后，大家发现「真的能用 AI 干活」的场景比预期少很多。不是 LLM 不够聪明——是 Chat 这个壳把 LLM 困住了。</p>
 
   <h3><span class="pre">2.2</span>Agent 是主动循环 · <span class="en">Agent is a Loop</span></h3>
 
-  <p class="lead">Agent 跟 Chat 最根本的差别只有一句话:<strong>Agent 不等你问下一句,它自己接着干</strong>。给它一个目标,它在一个循环里反复「看现场 → 动手 → 检查 → 看现场 → 动手 → 检查」,直到自己判断目标达成或自己撞死。</p>
+  <p class="lead">Agent 跟 Chat 最根本的差别只有一句话：<strong>Agent 不等你问下一句，它自己接着干</strong>。给它一个目标，它在一个循环里反复「看现场 → 动手 → 检查 → 看现场 → 动手 → 检查」，直到自己判断目标达成或自己撞死。</p>
 
-  <p>Anthropic 在 2024 年 12 月发布的工程博客《Building Effective Agents》里,给出了 Agent 的官方定义:「一个 Agent 是基于 LLM 的系统,它能在循环中<em>自主决定下一步动作</em>、<em>使用工具改变环境</em>、并<em>根据反馈调整策略</em>」[Anthropic 2024b]。这三句话——自主决定、使用工具、根据反馈调整——就是 Agent 跟 Chat 的全部差别。</p>
+  <p>Anthropic 在 2024 年 12 月发布的工程博客《Building Effective Agents》里，给出了 Agent 的官方定义：「一个 Agent 是基于 LLM 的系统，它能在循环中<em>自主决定下一步动作</em>、<em>使用工具改变环境</em>、并<em>根据反馈调整策略</em>」[Anthropic 2024b]。这三句话——自主决定、使用工具、根据反馈调整——就是 Agent 跟 Chat 的全部差别。</p>
 
   <h4>Agentic Loop 三阶段</h4>
 
-  <p>Anthropic 的内部教学材料把这个循环抽成了三个阶段。这三个阶段是理解任何 Agent 产品(Claude Code、Claude Computer Use、Cursor、Devin、Aider……)的统一框架:</p>
+  <p>Anthropic 的内部教学材料把这个循环抽成了三个阶段。这三个阶段是理解任何 Agent 产品（Claude Code、Claude Computer Use、Cursor、Devin、Aider……）的统一框架：</p>
 
   <div class="number-strip no-audio">
     <div class="item">
@@ -71,11 +71,11 @@
     <div class="item">
       <div class="label">→ LOOP</div>
       <div class="num">回到 ①</div>
-      <div class="sub">没完成就再来一轮,直到达标或卡死</div>
+      <div class="sub">没完成就再来一轮，直到达标或卡死</div>
     </div>
   </div>
 
-  <p>把这三阶段套到任何 Agent 任务上,都能找到对应:</p>
+  <p>把这三阶段套到任何 Agent 任务上，都能找到对应：</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -83,80 +83,80 @@
         <tr><th>任务</th><th>Gather Context</th><th>Take Action</th><th>Verify Work</th></tr>
       </thead>
       <tbody>
-        <tr><td>修复一个 bug(Claude Code)</td><td>读相关源文件、搜 git log、看报错栈</td><td>改代码、增加 test 用例</td><td>跑 npm test,看是不是绿了</td></tr>
-        <tr><td>规划日落看点(Computer Use)</td><td>打开浏览器查天气、查地图</td><td>对比纬度、记录时间、整合结论</td><td>核对日落时间是否一致,推荐合理</td></tr>
+        <tr><td>修复一个 bug(Claude Code)</td><td>读相关源文件、搜 git log、看报错栈</td><td>改代码、增加 test 用例</td><td>跑 npm test，看是不是绿了</td></tr>
+        <tr><td>规划日落看点（Computer Use）</td><td>打开浏览器查天气、查地图</td><td>对比纬度、记录时间、整合结论</td><td>核对日落时间是否一致，推荐合理</td></tr>
         <tr><td>整理一份调研报告</td><td>读 12 篇相关论文、提取关键数据</td><td>写章节、画对比表</td><td>检查引用是否真实、数据是否一致</td></tr>
         <tr><td>处理客服工单</td><td>读历史工单、查用户数据</td><td>写回复草稿、决定退款 / 升级</td><td>验证答复是否覆盖用户问题</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>Anthropic 在 Skilljar 上的 Claude Code 课程里反复强调:<strong>不要把 Agent 想成「一个超级聪明的 ChatGPT」,要把它想成「一个能在循环里自己撞墙的实习生」</strong>[Anthropic Academy 2025]。它有体力跑完任务,但每一步是不是对路、是不是高效,要看你的指令和它的工具设计。</p>
+  <p>Anthropic 在 Skilljar 上的 Claude Code 课程里反复强调：<strong>不要把 Agent 想成「一个超级聪明的 ChatGPT」，要把它想成「一个能在循环里自己撞墙的实习生」</strong>[Anthropic Academy 2025]。它有体力跑完任务，但每一步是不是对路、是不是高效，要看你的指令和它的工具设计。</p>
 
   <div class="callout note">
-    <div class="label">i 关键观察 · 循环停不下来怎么办?</div>
-    <p>Agent 自己跑循环,最大的工程风险是「无限循环」——它在一个错误的路径上越走越深,Verify 这一步又不严,自己以为还在进步。Anthropic 的工程实践里有几个标准做法:设<strong>最大循环次数</strong>(Claude Code 默认上限 50 步左右,具体根据任务调整)、设<strong>token 预算</strong>(消耗超过阈值就停)、关键节点<strong>强制问人</strong>(在 EPCC 的 P → C 之间留 checkpoint,详见 <a href="#s7">第 7 章</a>)。这三层防御加起来,让 Agent 不会变成一台烧钱机器。</p>
+    <div class="label">i 关键观察 · 循环停不下来怎么办？</div>
+    <p>Agent 自己跑循环，最大的工程风险是「无限循环」——它在一个错误的路径上越走越深，Verify 这一步又不严，自己以为还在进步。Anthropic 的工程实践里有几个标准做法：设<strong>最大循环次数</strong>（Claude Code 默认上限 50 步左右，具体根据任务调整）、设<strong>token 预算</strong>（消耗超过阈值就停）、关键节点<strong>强制问人</strong>（在 EPCC 的 P → C 之间留 checkpoint，详见 <a href="#s7">第 7 章</a>）。这三层防御加起来，让 Agent 不会变成一台烧钱机器。</p>
   </div>
 
   <h3><span class="pre">2.3</span>Agent 比 Chat 强在哪 · <span class="en">What Agent Unlocks</span></h3>
 
-  <p class="lead">理解了循环结构,Agent 的优势就一目了然——它把 Chat 形态下「人当胶水」的所有环节,都让 LLM 自己接管了。</p>
+  <p class="lead">理解了循环结构，Agent 的优势就一目了然——它把 Chat 形态下「人当胶水」的所有环节，都让 LLM 自己接管了。</p>
 
   <h4>优势一 · 它能看现场</h4>
 
-  <p>Chat 只能看你打的字。Agent 能调工具——读文件、列目录、查数据库、抓网页、看屏幕截图、运行命令行、读 git history。<strong>这意味着 Agent 不需要你「描述」上下文,它自己去取</strong>。</p>
+  <p>Chat 只能看你打的字。Agent 能调工具——读文件、列目录、查数据库、抓网页、看屏幕截图、运行命令行、读 git history。<strong>这意味着 Agent 不需要你「描述」上下文，它自己去取</strong>。</p>
 
-  <p>这一条对程序员的影响最大。在 ChatGPT 时代,一个有经验的程序员每天花 30% 的时间在「跟 AI 描述自己代码库长什么样」——粘贴文件、解释架构、说明依赖。到 Claude Code 时代,这一切被 Agent 自己接管:你说「修一下登录 bug」,Claude Code 自己去读 <code>auth.ts</code>、<code>session.ts</code>、最近的 git log、相关测试文件,然后开始动手。<em>描述上下文的胶水时间被压缩到几乎为零</em>。</p>
+  <p>这一条对程序员的影响最大。在 ChatGPT 时代，一个有经验的程序员每天花 30% 的时间在「跟 AI 描述自己代码库长什么样」——粘贴文件、解释架构、说明依赖。到 Claude Code 时代，这一切被 Agent 自己接管：你说「修一下登录 bug」，Claude Code 自己去读 <code>auth.ts</code>、<code>session.ts</code>、最近的 git log、相关测试文件，然后开始动手。<em>描述上下文的胶水时间被压缩到几乎为零</em>。</p>
 
   <h4>优势二 · 它能动手</h4>
 
-  <p>Chat 输出建议,Agent 改变状态。这是质的差别。一个 Chat 告诉你「你应该把这个函数重命名为 X」,你还得自己去改;一个 Agent 直接改完,然后告诉你「我改了,跑测试也过了」。</p>
+  <p>Chat 输出建议，Agent 改变状态。这是质的差别。一个 Chat 告诉你「你应该把这个函数重命名为 X」，你还得自己去改；一个 Agent 直接改完，然后告诉你「我改了，跑测试也过了」。</p>
 
-  <p>「能动手」在工程语境里有个更专业的名字:<strong>工具调用</strong>(Tool Use)。Anthropic 在 Claude 3 Opus 时代把工具调用标准化,这是 Agent 时代的工程基础——LLM 不再只输出字,它能输出「调用 X 函数、参数是 Y」这种结构化指令,然后由外部系统执行。详见 <a href="#s8">第 8 章</a>「四把刀」。</p>
+  <p>「能动手」在工程语境里有个更专业的名字：<strong>工具调用</strong>(Tool Use)。Anthropic 在 Claude 3 Opus 时代把工具调用标准化，这是 Agent 时代的工程基础——LLM 不再只输出字，它能输出「调用 X 函数、参数是 Y」这种结构化指令，然后由外部系统执行。详见 <a href="#s8">第 8 章</a>「四把刀」。</p>
 
   <h4>优势三 · 它能自我检查</h4>
 
-  <p>Chat 没有「这一步对不对」的概念,它说完就完了。Agent 有 Verify 阶段,它会主动跑测试、对比预期、看 lint 结果、看自己改完之后系统是不是更接近目标。<strong>这一层「机器自己检查机器」的能力,是 Agent 真正能完成长任务的关键</strong>——没有这一层,长任务的错误会指数级累积。</p>
+  <p>Chat 没有「这一步对不对」的概念，它说完就完了。Agent 有 Verify 阶段，它会主动跑测试、对比预期、看 lint 结果、看自己改完之后系统是不是更接近目标。<strong>这一层「机器自己检查机器」的能力，是 Agent 真正能完成长任务的关键</strong>——没有这一层，长任务的错误会指数级累积。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · 用「Verify 强度」给 AI 产品分级</div>
-    <p>下次看到一个号称 Agent 的产品,先问一个问题:它的 Verify 阶段有多硬?三个层级——<strong>L1 它自己说「我做完了」</strong>(不可信,等同于没有 Verify);<strong>L2 它会跑测试 / 看输出</strong>(可信度中等,但要看测试覆盖);<strong>L3 它会在 Verify 失败时自动回滚或重做</strong>(可信度高)。L1 的「Agent」大概率是营销话术,L3 才是工程上能用的 Agent。</p>
+    <p>下次看到一个号称 Agent 的产品，先问一个问题：它的 Verify 阶段有多硬？三个层级——<strong>L1 它自己说「我做完了」</strong>（不可信，等同于没有 Verify）；<strong>L2 它会跑测试 / 看输出</strong>（可信度中等，但要看测试覆盖）；<strong>L3 它会在 Verify 失败时自动回滚或重做</strong>（可信度高）。L1 的「Agent」大概率是营销话术，L3 才是工程上能用的 Agent。</p>
   </div>
 
   <h3><span class="pre">2.4</span>Agent 比 Chat 危险在哪 · <span class="en">What Agent Threatens</span></h3>
 
-  <p class="lead">同样的能力反过来就是风险。Agent 强大的每一面,都对应一个新的失控可能。这一节讲清楚四个层面的危险,然后在 <a href="#s4">第 4 章</a>「幻觉」和 <a href="#s7">第 7 章</a>「EPCC」里会给出具体防御工程。</p>
+  <p class="lead">同样的能力反过来就是风险。Agent 强大的每一面，都对应一个新的失控可能。这一节讲清楚四个层面的危险，然后在 <a href="#s4">第 4 章</a>「幻觉」和 <a href="#s7">第 7 章</a>「EPCC」里会给出具体防御工程。</p>
 
   <h4>危险一 · 能动手意味着能搞砸</h4>
 
-  <p>Chat 输出一段错代码,你不接受就完了,什么都没发生。Agent 输出一段错代码,它已经把这段错代码<em>提交到 git 仓库、推到主分支、触发 CI 部署、把生产环境搞挂了</em>。从「写错」到「搞砸」之间没有任何缓冲。</p>
+  <p>Chat 输出一段错代码，你不接受就完了，什么都没发生。Agent 输出一段错代码，它已经把这段错代码<em>提交到 git 仓库、推到主分支、触发 CI 部署、把生产环境搞挂了</em>。从「写错」到「搞砸」之间没有任何缓冲。</p>
 
-  <p>Anthropic 在 Claude Code 文档里明确警告:<strong>任何 Agent 操作的反面,都应该有「回滚」机制</strong>[Anthropic Docs 2025]。git 是回滚机制(你能 reset);文件备份是回滚机制(你能恢复);staging 环境是回滚机制(它先在不影响生产的地方跑)。如果一个 Agent 操作没有对应的回滚机制,它就不该被允许做这件事——这是工程底线。</p>
+  <p>Anthropic 在 Claude Code 文档里明确警告：<strong>任何 Agent 操作的反面，都应该有「回滚」机制</strong>[Anthropic Docs 2025]。git 是回滚机制（你能 reset）；文件备份是回滚机制（你能恢复）；staging 环境是回滚机制（它先在不影响生产的地方跑）。如果一个 Agent 操作没有对应的回滚机制，它就不该被允许做这件事——这是工程底线。</p>
 
   <h4>危险二 · 自我检查不等于真能检出</h4>
 
-  <p>这是最容易踩的坑。Agent 跑完循环说「我已经完成」,这句话本身是<em>它从概率分布里采样出来的一句话</em>——回头看 <a href="#s1">第 1 章</a> 第 4 条:LLM 的「自信」和「正确」是两件事。</p>
+  <p>这是最容易踩的坑。Agent 跑完循环说「我已经完成」，这句话本身是<em>它从概率分布里采样出来的一句话</em>——回头看 <a href="#s1">第 1 章</a> 第 4 条：LLM 的「自信」和「正确」是两件事。</p>
 
-  <p>Agent 的 Verify 阶段如果设计得弱(比如只是让 LLM「再读一遍自己的代码,看看对不对」),那就是<strong>用幻觉验证幻觉</strong>——同一个会犯错的模型,既写代码又判卷,误差不仅不会减,还会被互相确认放大。Anthropic 在《Building Effective Agents》里专门提到这条陷阱:Verify 必须用<em>跟生成过程不同的信号</em>(跑测试、看真实输出、看外部系统状态),不能用 LLM 自己再问一遍自己 [Anthropic 2024b]。</p>
+  <p>Agent 的 Verify 阶段如果设计得弱（比如只是让 LLM「再读一遍自己的代码，看看对不对」），那就是<strong>用幻觉验证幻觉</strong>——同一个会犯错的模型，既写代码又判卷，误差不仅不会减，还会被互相确认放大。Anthropic 在《Building Effective Agents》里专门提到这条陷阱：Verify 必须用<em>跟生成过程不同的信号</em>（跑测试、看真实输出、看外部系统状态），不能用 LLM 自己再问一遍自己 [Anthropic 2024b]。</p>
 
   <h4>危险三 · 速度快意味着错误也快</h4>
 
-  <p>Agent 一秒钟能做的事,人一天都做不完——这是好处,但也是坏处。一个判断错的 Agent,一秒钟可以把 100 个文件改坏、把 50 张表删空、把整个仓库的注释全部翻译成错的语言。<strong>错误的扩散速度跟生产力的提升速度,是同一个数</strong>。</p>
+  <p>Agent 一秒钟能做的事，人一天都做不完——这是好处，但也是坏处。一个判断错的 Agent，一秒钟可以把 100 个文件改坏、把 50 张表删空、把整个仓库的注释全部翻译成错的语言。<strong>错误的扩散速度跟生产力的提升速度，是同一个数</strong>。</p>
 
   <h4>危险四 · 透明度跟自主度成反比</h4>
 
-  <p>Agent 越自主,你越看不见它在干什么。Chat 时代,每一句它说了什么你都看着;Agent 时代,它跑 30 步,你回过神来它已经做完了 28 步,你看的是结果不是过程。<strong>「黑箱」是 Agent 形态自带的副作用</strong>——这是 <a href="#s7">第 7 章</a>「EPCC」要解决的核心问题:在 Agent 自主跑之前,先把意图、计划、关键决策点都摆出来,让你能在它跑之前就介入。</p>
+  <p>Agent 越自主，你越看不见它在干什么。Chat 时代，每一句它说了什么你都看着；Agent 时代，它跑 30 步，你回过神来它已经做完了 28 步，你看的是结果不是过程。<strong>「黑箱」是 Agent 形态自带的副作用</strong>——这是 <a href="#s7">第 7 章</a>「EPCC」要解决的核心问题：在 Agent 自主跑之前，先把意图、计划、关键决策点都摆出来，让你能在它跑之前就介入。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 一个被反复忽视的事实</div>
-    <p>很多人觉得「Agent 不安全是因为模型还不够好,等模型变强就解决了」——错的。<strong>Agent 的危险来自结构,不来自模型</strong>。一个 100% 准确率的 Agent 仍然能搞砸——因为它对「任务目标」的理解可能跟你想的不一样,执行越准、跑得越偏。模型变强只让单步成功率上升,不让结构性风险消失。所以 Anthropic 一直在推「在 Agent 周围设防御工事」(回滚、checkpoint、可观测性),而不是「等模型变神」——这是工程方向,不是模型方向。</p>
+    <p>很多人觉得「Agent 不安全是因为模型还不够好，等模型变强就解决了」——错的。<strong>Agent 的危险来自结构，不来自模型</strong>。一个 100% 准确率的 Agent 仍然能搞砸——因为它对「任务目标」的理解可能跟你想的不一样，执行越准、跑得越偏。模型变强只让单步成功率上升，不让结构性风险消失。所以 Anthropic 一直在推「在 Agent 周围设防御工事」（回滚、checkpoint、可观测性），而不是「等模型变神」——这是工程方向，不是模型方向。</p>
   </div>
 
   <h3><span class="pre">2.5</span>监工模式 · 跟 Agent 协作的正确姿势 <span class="en">Foreman Mode</span></h3>
 
-  <p class="lead">理解了 Agent 比 Chat 强、也比 Chat 危险之后,你跟 AI 协作的姿势就要换。<strong>Chat 时代你是提问者——你问、AI 答、你判断。Agent 时代你是监工——AI 干活、你看着、你在关键节点拍板</strong>。</p>
+  <p class="lead">理解了 Agent 比 Chat 强、也比 Chat 危险之后，你跟 AI 协作的姿势就要换。<strong>Chat 时代你是提问者——你问、AI 答、你判断。Agent 时代你是监工——AI 干活、你看着、你在关键节点拍板</strong>。</p>
 
-  <p>这个角色切换在程序员社区里被广泛讨论。Karpathy 在 2024 年的 talk 里说过一句被反复引用的话:「在 Claude Code 上,我大部分时间不是在写代码,是在读 AI 写的代码。我的工作从 author 变成了 reviewer。」[Karpathy 2024] 这就是监工的本质——你不再产出,你判断别人产出的对错。</p>
+  <p>这个角色切换在程序员社区里被广泛讨论。Karpathy 在 2024 年的 talk 里说过一句被反复引用的话：「在 Claude Code 上，我大部分时间不是在写代码，是在读 AI 写的代码。我的工作从 author 变成了 reviewer。」[Karpathy 2024] 这就是监工的本质——你不再产出，你判断别人产出的对错。</p>
 
   <h4>监工的四个动作</h4>
 
@@ -169,45 +169,45 @@
     <div class="item">
       <div class="label">WATCH</div>
       <div class="num">看现场</div>
-      <div class="sub">让 Agent 流式输出进度,不是埋头自己跑</div>
+      <div class="sub">让 Agent 流式输出进度，不是埋头自己跑</div>
     </div>
     <div class="item">
       <div class="label">CALL</div>
       <div class="num">拍板</div>
-      <div class="sub">关键节点(改主分支、删数据、付钱)由你点头</div>
+      <div class="sub">关键节点（改主分支、删数据、付钱）由你点头</div>
     </div>
     <div class="item">
       <div class="label">REVIEW</div>
       <div class="num">验收</div>
-      <div class="sub">不只看结果,还要看 diff、看测试、看副作用</div>
+      <div class="sub">不只看结果，还要看 diff、看测试、看副作用</div>
     </div>
   </div>
 
   <div class="audio-only">
-    <p>这套监工动作拆开就是四下,前后是有顺序的。第一下是<strong>立规矩</strong>:动工前先把目标、边界、哪些东西绝对不许碰讲死。第二下是<strong>看现场</strong>:让 Agent 一边干一边把进度报出来,而不是闷头跑完再说。第三下是<strong>拍板</strong>:改主分支、删数据、付钱这种要命的节点,必须停下来等你点头。最后一下是<strong>验收</strong>:别光听它说做完了,得自己核改动、核测试、核有没有连带搞坏别的地方。</p>
+    <p>这套监工动作拆开就是四下，前后是有顺序的。第一下是<strong>立规矩</strong>：动工前先把目标、边界、哪些东西绝对不许碰讲死。第二下是<strong>看现场</strong>：让 Agent 一边干一边把进度报出来，而不是闷头跑完再说。第三下是<strong>拍板</strong>：改主分支、删数据、付钱这种要命的节点，必须停下来等你点头。最后一下是<strong>验收</strong>：别光听它说做完了，得自己核改动、核测试、核有没有连带搞坏别的地方。</p>
   </div>
 
   <h4>好做法 vs 坏做法</h4>
 
   <ul>
-    <li>✅ <strong>给 Agent 一个明确目标,然后让它跑</strong>(比如「修这个 bug,跑通现有测试,不要改无关文件」)</li>
-    <li>❌ <strong>给 Agent 一个开放问题,期待它给你正确答案</strong>(比如「帮我把这个项目变得更好」——这种指令 Agent 会发挥得无边无际,后果不可控)</li>
-    <li>✅ <strong>关键操作前留 checkpoint</strong>,Agent 来问你「我要 push 到主分支,确认吗?」</li>
-    <li>❌ <strong>全程让 Agent 自动执行不停顿</strong>,完事再看——这是 Agent 失控事故的标准剧本</li>
-    <li>✅ <strong>认真读 diff</strong>,把 Agent 当一个会犯错的初级同事 review</li>
-    <li>❌ <strong>对 Agent 输出全盘接受</strong>,因为「它说做完了」</li>
-    <li>✅ <strong>每个 Agent 任务前,先想清楚「最坏情况是什么」</strong>(删库?推错代码?发错邮件?)</li>
-    <li>❌ <strong>不设最坏边界,以为「应该不会出事」</strong>——Agent 出事永远是「不应该」出的那种</li>
+    <li>✅ <strong>给 Agent 一个明确目标，然后让它跑</strong>（比如「修这个 bug，跑通现有测试，不要改无关文件」）</li>
+    <li>❌ <strong>给 Agent 一个开放问题，期待它给你正确答案</strong>（比如「帮我把这个项目变得更好」——这种指令 Agent 会发挥得无边无际，后果不可控）</li>
+    <li>✅ <strong>关键操作前留 checkpoint</strong>,Agent 来问你「我要 push 到主分支，确认吗？」</li>
+    <li>❌ <strong>全程让 Agent 自动执行不停顿</strong>，完事再看——这是 Agent 失控事故的标准剧本</li>
+    <li>✅ <strong>认真读 diff</strong>，把 Agent 当一个会犯错的初级同事 review</li>
+    <li>❌ <strong>对 Agent 输出全盘接受</strong>，因为「它说做完了」</li>
+    <li>✅ <strong>每个 Agent 任务前，先想清楚「最坏情况是什么」</strong>（删库？推错代码？发错邮件？）</li>
+    <li>❌ <strong>不设最坏边界，以为「应该不会出事」</strong>——Agent 出事永远是「不应该」出的那种</li>
   </ul>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · 一句话区分「问题型任务」和「监工型任务」</div>
-    <p>遇到一个新需求,先问自己:这是「我要一个答案」还是「我要一个状态改变」?<strong>要答案就用 Chat,要状态改变就用 Agent</strong>。比如「JavaScript 的 Promise 怎么用」是要答案——Chat 就够。「把这个项目的 Promise 用法重构成 async/await」是要状态改变——上 Agent。判断错了,要么是用 Agent 杀鸡用牛刀(贵+慢),要么是用 Chat 干 Agent 的活(自己当胶水)。</p>
+    <p>遇到一个新需求，先问自己：这是「我要一个答案」还是「我要一个状态改变」？<strong>要答案就用 Chat，要状态改变就用 Agent</strong>。比如「JavaScript 的 Promise 怎么用」是要答案——Chat 就够。「把这个项目的 Promise 用法重构成 async/await」是要状态改变——上 Agent。判断错了，要么是用 Agent 杀鸡用牛刀（贵+慢），要么是用 Chat 干 Agent 的活（自己当胶水）。</p>
   </div>
 
   <h3><span class="pre">2.6</span>什么时候用 Chat · 什么时候用 Agent</h3>
 
-  <p class="lead">现在你有了判断 Chat 跟 Agent 的所有材料,可以把它落成一套判断标准。这套判断不是穷举,但能覆盖 90% 的日常场景。</p>
+  <p class="lead">现在你有了判断 Chat 跟 Agent 的所有材料，可以把它落成一套判断标准。这套判断不是穷举，但能覆盖 90% 的日常场景。</p>
 
   <div class="table-wrap no-audio">
     <table>
@@ -216,48 +216,48 @@
       </thead>
       <tbody>
         <tr><td>问知识 / 概念解释 / 概括</td><td>Chat</td><td>不需要看现场、不需要动手、答完就完</td></tr>
-        <tr><td>写一段独立的文字(邮件 / 文案 / 短文)</td><td>Chat</td><td>输入输出都是字,Agent 反而是浪费</td></tr>
-        <tr><td>改某个具体文件里的某一段</td><td>Chat(把那段贴进去)</td><td>上下文小,人当胶水更快</td></tr>
+        <tr><td>写一段独立的文字（邮件 / 文案 / 短文）</td><td>Chat</td><td>输入输出都是字，Agent 反而是浪费</td></tr>
+        <tr><td>改某个具体文件里的某一段</td><td>Chat（把那段贴进去）</td><td>上下文小，人当胶水更快</td></tr>
         <tr><td>修一个跨多文件的 bug</td><td><strong>Agent</strong></td><td>需要读多个文件、跑测试、可能要改几处</td></tr>
-        <tr><td>重构一个项目结构</td><td><strong>Agent</strong></td><td>规模大,人当胶水会累死</td></tr>
-        <tr><td>整理一份调研报告(从多源数据)</td><td><strong>Agent</strong></td><td>读 + 写 + 验证,正是 Agent 的循环结构</td></tr>
-        <tr><td>规划一次旅行(多步骤 / 跨服务)</td><td><strong>Agent</strong></td><td>查天气、查地图、查机票、对比 — 典型多步</td></tr>
-        <tr><td>一个会影响生产环境的操作</td><td>Chat 出方案 + 人执行</td><td>Agent 直接动生产是大忌,先要方案 review</td></tr>
-        <tr><td>需要稳定可重复的结果</td><td>Chat + 模板</td><td>Agent 每次循环路径可能不同,稳定性弱于 Chat</td></tr>
-        <tr><td>探索性任务(我也不知道要什么)</td><td>Chat 先聊清楚再切 Agent</td><td>目标不清时 Agent 会发散无边</td></tr>
+        <tr><td>重构一个项目结构</td><td><strong>Agent</strong></td><td>规模大，人当胶水会累死</td></tr>
+        <tr><td>整理一份调研报告（从多源数据）</td><td><strong>Agent</strong></td><td>读 + 写 + 验证，正是 Agent 的循环结构</td></tr>
+        <tr><td>规划一次旅行（多步骤 / 跨服务）</td><td><strong>Agent</strong></td><td>查天气、查地图、查机票、对比 — 典型多步</td></tr>
+        <tr><td>一个会影响生产环境的操作</td><td>Chat 出方案 + 人执行</td><td>Agent 直接动生产是大忌，先要方案 review</td></tr>
+        <tr><td>需要稳定可重复的结果</td><td>Chat + 模板</td><td>Agent 每次循环路径可能不同，稳定性弱于 Chat</td></tr>
+        <tr><td>探索性任务（我也不知道要什么）</td><td>Chat 先聊清楚再切 Agent</td><td>目标不清时 Agent 会发散无边</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>这套判断的底层规律只有一条:<strong>Chat 适合「目标清晰、过程短、纯文本」的事;Agent 适合「目标清晰、过程长、要动外部状态」的事</strong>。任何一头不清晰的任务,都不该上 Agent——目标不清晰用 Agent 会失控,过程短用 Agent 是浪费,纯文本任务用 Agent 是杀鸡用牛刀。</p>
+  <p>这套判断的底层规律只有一条：<strong>Chat 适合「目标清晰、过程短、纯文本」的事；Agent 适合「目标清晰、过程长、要动外部状态」的事</strong>。任何一头不清晰的任务，都不该上 Agent——目标不清晰用 Agent 会失控，过程短用 Agent 是浪费，纯文本任务用 Agent 是杀鸡用牛刀。</p>
 
   <div class="callout note">
     <div class="label">i 一个常被忽略的中间形态 · 「Chat 调一次工具」</div>
-    <p>Chat 和 Agent 之间还有一个广义的中间地带——一次性工具调用。比如你问 Claude「现在旧金山天气怎么样」,它调一次 weather API、拿到数据、回答你。这不是循环,只是 Chat 多了一个工具调用,Anthropic 把这种叫 <em>Workflow</em>(工作流)而不是 Agent [Anthropic 2024b]。差别在于:Agent 自己决定下一步;Workflow 是你或开发者预先设计好的固定步骤,LLM 只是填空。<strong>很多号称「Agent」的产品其实是 Workflow</strong>——这不是贬义,Workflow 在「步骤可预测」的场景下比 Agent 更稳;但要分清,你才知道这个产品的能力上限。</p>
+    <p>Chat 和 Agent 之间还有一个广义的中间地带——一次性工具调用。比如你问 Claude「现在旧金山天气怎么样」，它调一次 weather API、拿到数据、回答你。这不是循环，只是 Chat 多了一个工具调用，Anthropic 把这种叫 <em>Workflow</em>（工作流）而不是 Agent [Anthropic 2024b]。差别在于：Agent 自己决定下一步；Workflow 是你或开发者预先设计好的固定步骤，LLM 只是填空。<strong>很多号称「Agent」的产品其实是 Workflow</strong>——这不是贬义，Workflow 在「步骤可预测」的场景下比 Agent 更稳；但要分清，你才知道这个产品的能力上限。</p>
   </div>
 
   <h3><span class="pre">2.7</span>这一章给你的判断武器</h3>
 
-  <p class="lead">读完这章,你应该带走以下几个能直接用的判断武器。</p>
+  <p class="lead">读完这章，你应该带走以下几个能直接用的判断武器。</p>
 
   <div class="callout ops">
-    <div class="label">✓ 武器一 · 看到任何「AI 产品」,先问它属于 Chat / Workflow / Agent 哪一类</div>
-    <p>三类的边界:Chat 没工具调用;Workflow 有工具调用但步骤预设;Agent 自己决定下一步。问清楚这三层,你才能预判这个产品的能力边界和风险边界。不要被「AI Agent」这个营销词冲晕——很多自称 Agent 的实际是 Workflow,反之也有。</p>
+    <div class="label">✓ 武器一 · 看到任何「AI 产品」，先问它属于 Chat / Workflow / Agent 哪一类</div>
+    <p>三类的边界：Chat 没工具调用；Workflow 有工具调用但步骤预设；Agent 自己决定下一步。问清楚这三层，你才能预判这个产品的能力边界和风险边界。不要被「AI Agent」这个营销词冲晕——很多自称 Agent 的实际是 Workflow，反之也有。</p>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 武器二 · 看到 Agent 时,先找它的 Verify 在哪、回滚机制是什么</div>
-    <p>没有 Verify 的 Agent 是赌博,没有回滚的 Agent 是放火。任何严肃的 Agent 产品都会明确告诉你它怎么验证、怎么回滚——Claude Code 用 git diff + test 跑,Computer Use 把所有操作记录可重放。如果一个 Agent 产品对这两个问题答不上来,远离它。</p>
+    <div class="label">✓ 武器二 · 看到 Agent 时，先找它的 Verify 在哪、回滚机制是什么</div>
+    <p>没有 Verify 的 Agent 是赌博，没有回滚的 Agent 是放火。任何严肃的 Agent 产品都会明确告诉你它怎么验证、怎么回滚——Claude Code 用 git diff + test 跑，Computer Use 把所有操作记录可重放。如果一个 Agent 产品对这两个问题答不上来，远离它。</p>
   </div>
 
   <div class="callout ops">
-    <div class="label">✓ 武器三 · 自己当监工,不当甩手掌柜</div>
-    <p>Agent 让你提效,不让你彻底脱手。最赚的姿势是「Agent 干 80%、你监 20%」,不是「Agent 干 100%」——后者要么因为 Agent 出错你没看见而损失大,要么因为你没看 diff 而把垃圾代码引进项目。监工不是不信任,是工程伦理。</p>
+    <div class="label">✓ 武器三 · 自己当监工，不当甩手掌柜</div>
+    <p>Agent 让你提效，不让你彻底脱手。最赚的姿势是「Agent 干 80%、你监 20%」，不是「Agent 干 100%」——后者要么因为 Agent 出错你没看见而损失大，要么因为你没看 diff 而把垃圾代码引进项目。监工不是不信任，是工程伦理。</p>
   </div>
 
-  <p>下一章我们看 Anthropic 教 Claude Code 用户的核心工作框架——<strong>4D</strong>:Discuss(讨论)→ Design(设计)→ Develop(开发)→ Deliver(交付)。这是 EPCC 之前更宏观的一层方法论,告诉你<em>什么时候该开 Agent、什么时候该停下来跟 AI 讨论</em>,把 Agent 模式系统化嵌入到完整工作流里。</p>
+  <p>下一章我们看 Anthropic 教 Claude Code 用户的核心工作框架——<strong>4D</strong>:Discuss（讨论）→ Design（设计）→ Develop（开发）→ Deliver（交付）。这是 EPCC 之前更宏观的一层方法论，告诉你<em>什么时候该开 Agent、什么时候该停下来跟 AI 讨论</em>，把 Agent 模式系统化嵌入到完整工作流里。</p>
 
-  <p class="ref">主要参考:<br>
+  <p class="ref">主要参考：<br>
   Anthropic, <em>Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku</em>, 2024-10-22 [Anthropic 2024] · Anthropic, <em>Building Effective Agents</em>, engineering blog, 2024-12 [Anthropic 2024b] · Anthropic, <em>Claude Code Documentation</em>, 2025 [Anthropic Docs 2025] · Anthropic Skilljar Academy, <em>Claude Code Foundations</em> course, 2025 [Anthropic Academy 2025] · A. Karpathy, <em>Software in the Age of AI</em>, talk, 2024 [Karpathy 2024] · D. Patel &amp; Anthropic interview series, <em>Inside Claude Code</em>, 2025 · OpenAI, <em>Practices for Governing Agentic AI Systems</em>, 2023 · L. Weng, <em>LLM Powered Autonomous Agents</em>, lilianweng.github.io blog, 2023.</p>
 
 </div>

@@ -3,37 +3,37 @@
 
   <div class="section-tag"><span class="num">05</span>PRODUCT · 第三篇 / 第五章</div>
   <h1 class="section-h">Chat / Cowork / Code 三件套 <span class="en">Three Modes, Three Workflows</span></h1>
-  <p class="section-sub">大多数人打开 Claude,只看见一个对话框,以为 Anthropic 的产品就这一个壳。其实桌面端被切成三种模式——Chat、Cowork、Code——分类标准不是「能做什么」,是「人和 AI 怎么协作」。这一章把三个模式的边界、各自的 Agentic Loop 深度、以及最容易踩的「选错模式」陷阱讲透。读完你应该能在三秒内判断:这个任务该开哪一个。</p>
+  <p class="section-sub">大多数人打开 Claude，只看见一个对话框，以为 Anthropic 的产品就这一个壳。其实桌面端被切成三种模式——Chat、Cowork、Code——分类标准不是「能做什么」，是「人和 AI 怎么协作」。这一章把三个模式的边界、各自的 Agentic Loop 深度、以及最容易踩的「选错模式」陷阱讲透。读完你应该能在三秒内判断：这个任务该开哪一个。</p>
 
   <div class="tldr">
     <div class="label">▼ ELEVATOR PITCH</div>
-    <p>Chat 是「你问它答、它不动手」;Cowork 是「它动你电脑上的文件,你看着」;Code 是「它跑你的整个工程仓库,你 review PR」。三个模式跑的是同一个 <a href="#s2">Agentic Loop</a>,差别只在 Loop 的深度和 AI 拿到的权限。选错模式不是小事——用 Chat 干 Cowork 的活,你会变成胶水搬运工;用 Code 干 Chat 的活,你在用 50 美元一小时的 Agent 问一个免费就能回答的概念问题。</p>
+    <p>Chat 是「你问它答、它不动手」；Cowork 是「它动你电脑上的文件，你看着」；Code 是「它跑你的整个工程仓库，你 review PR」。三个模式跑的是同一个 <a href="#s2">Agentic Loop</a>，差别只在 Loop 的深度和 AI 拿到的权限。选错模式不是小事——用 Chat 干 Cowork 的活，你会变成胶水搬运工；用 Code 干 Chat 的活，你在用 50 美元一小时的 Agent 问一个免费就能回答的概念问题。</p>
   </div>
 
   <div class="callout story">
     <div class="label">故事 / 2025 年 8 月 · 一个市场总监的周末</div>
-    <p>朋友 L 是某互联网公司市场总监,她周五下班前接了个任务:整理过去一个月 Slack 里所有跟「品牌升级项目」相关的讨论,提炼出关键决策、悬而未决的争议、以及下周需要她拍板的事项。Slack 导出文件 30 多个频道、加起来 200 多 MB 的 JSON。</p>
-    <p>她那天的工作流大概是这样的——周六上午,她打开 Claude.ai 的对话框,把第一个频道的 JSON 复制进去,问「帮我提炼关键决策」。Claude 给了三条。她切换到下一个频道,再粘贴,再问,又三条。三个小时后,她整理出 20 多个频道,中间还要不停地切窗口、切 Notion 记录、切回 Claude 提下一个问题。腰酸背痛,头昏脑胀,看着剩下的 10 个频道,她崩溃了。</p>
-    <p>周日她抱着孩子来我家。我打开 Claude Desktop,切到 Cowork 模式,把整个 Slack 导出文件夹拖进去,写了一句:「读完这个文件夹里所有的 JSON,按频道分组,每个频道提炼关键决策、悬而未决的争议、需要 L 拍板的事项,写到一个 markdown 文件里。」</p>
-    <p>17 分钟后,文件写好了——27 页 markdown,按频道分章,每个频道有结构化的三段。L 盯着屏幕,看了十几秒,只问了一句:「你为什么不告诉我有这种模式?」</p>
-    <p>这就是「选错模式」的代价。<strong>她不是工具不够用,是用了错的工具</strong>——Chat 的形态强制她当胶水,Cowork 的形态本来就是给她这种任务设计的。</p>
+    <p>朋友 L 是某互联网公司市场总监，她周五下班前接了个任务：整理过去一个月 Slack 里所有跟「品牌升级项目」相关的讨论，提炼出关键决策、悬而未决的争议、以及下周需要她拍板的事项。Slack 导出文件 30 多个频道、加起来 200 多 MB 的 JSON。</p>
+    <p>她那天的工作流大概是这样的——周六上午，她打开 Claude.ai 的对话框，把第一个频道的 JSON 复制进去，问「帮我提炼关键决策」。Claude 给了三条。她切换到下一个频道，再粘贴，再问，又三条。三个小时后，她整理出 20 多个频道，中间还要不停地切窗口、切 Notion 记录、切回 Claude 提下一个问题。腰酸背痛，头昏脑胀，看着剩下的 10 个频道，她崩溃了。</p>
+    <p>周日她抱着孩子来我家。我打开 Claude Desktop，切到 Cowork 模式，把整个 Slack 导出文件夹拖进去，写了一句：「读完这个文件夹里所有的 JSON，按频道分组，每个频道提炼关键决策、悬而未决的争议、需要 L 拍板的事项，写到一个 markdown 文件里。」</p>
+    <p>17 分钟后，文件写好了——27 页 markdown，按频道分章，每个频道有结构化的三段。L 盯着屏幕，看了十几秒，只问了一句：「你为什么不告诉我有这种模式？」</p>
+    <p>这就是「选错模式」的代价。<strong>她不是工具不够用，是用了错的工具</strong>——Chat 的形态强制她当胶水，Cowork 的形态本来就是给她这种任务设计的。</p>
   </div>
 
-  <h3><span class="pre">5.1</span>为什么 Anthropic 按「协作模式」分,不按「功能」分 · <span class="en">Three Modes, Not Three Features</span></h3>
+  <h3><span class="pre">5.1</span>为什么 Anthropic 按「协作模式」分，不按「功能」分 · <span class="en">Three Modes, Not Three Features</span></h3>
 
-  <p class="lead">2024 年到 2025 年,Anthropic 桌面端产品线扩张得很快——Claude Desktop、Claude Code、Claude for Chrome、Computer Use、Skills、Projects、Artifacts。很多人第一次看 Anthropic 官网,会被「这么多产品」搞晕。</p>
+  <p class="lead">2024 年到 2025 年，Anthropic 桌面端产品线扩张得很快——Claude Desktop、Claude Code、Claude for Chrome、Computer Use、Skills、Projects、Artifacts。很多人第一次看 Anthropic 官网，会被「这么多产品」搞晕。</p>
 
-  <p>但只要看 Anthropic 自己的 Skilljar Academy 课程目录,你会发现他们把所有桌面端能力压缩成了三门基础课:<em>Claude 101</em>(Chat)、<em>Introduction to Claude Cowork</em>(Cowork)、<em>Claude Code 101</em>(Code)[Anthropic Academy 2025]。三门课分别对应一种「人和 AI 的关系」,Anthropic 把这个叫做<strong>模式(Mode)</strong>而不是产品(Product)——因为同一个底层引擎(Claude 模型 + Agent Loop),套上不同的「人 AI 关系外壳」,就成了三种完全不同的产品形态。</p>
+  <p>但只要看 Anthropic 自己的 Skilljar Academy 课程目录，你会发现他们把所有桌面端能力压缩成了三门基础课：<em>Claude 101</em>(Chat)、<em>Introduction to Claude Cowork</em>(Cowork)、<em>Claude Code 101</em>(Code)[Anthropic Academy 2025]。三门课分别对应一种「人和 AI 的关系」，Anthropic 把这个叫做<strong>模式（Mode）</strong>而不是产品（Product）——因为同一个底层引擎（Claude 模型 + Agent Loop），套上不同的「人 AI 关系外壳」，就成了三种完全不同的产品形态。</p>
 
   <h4>这种分类法的判断标准是什么</h4>
 
-  <p>不是看 AI 做什么,而是看<strong>AI 跟「你的电脑」的关系</strong>。三个层次:</p>
+  <p>不是看 AI 做什么，而是看<strong>AI 跟「你的电脑」的关系</strong>。三个层次：</p>
 
   <div class="number-strip no-audio">
     <div class="item">
       <div class="label">CHAT</div>
       <div class="num">隔着屏幕</div>
-      <div class="sub">AI 只能看你打的字,只能输出字</div>
+      <div class="sub">AI 只能看你打的字，只能输出字</div>
     </div>
     <div class="item">
       <div class="label">COWORK</div>
@@ -48,50 +48,50 @@
     <div class="item">
       <div class="label">→</div>
       <div class="num">Loop 越来越深</div>
-      <div class="sub">权限越来越大,风险越来越高</div>
+      <div class="sub">权限越来越大，风险越来越高</div>
     </div>
   </div>
 
-  <p>这种分类法的好处,在 Anthropic 内部叫做「<em>能力对齐协作姿态</em>」——它强制你在开任务之前先想清楚:你打算让 AI 在你的工作环境里跑多深?Chat 是「不动你的东西」,Cowork 是「在文件层动」,Code 是「在工程层动」。<strong>这三层是单调递增的,深度每加一档,你的监工责任也加一档</strong>(回头看 <a href="#s2">第 2 章</a> 的「监工模式」)。</p>
+  <p>这种分类法的好处，在 Anthropic 内部叫做「<em>能力对齐协作姿态</em>」——它强制你在开任务之前先想清楚：你打算让 AI 在你的工作环境里跑多深？Chat 是「不动你的东西」，Cowork 是「在文件层动」，Code 是「在工程层动」。<strong>这三层是单调递增的，深度每加一档，你的监工责任也加一档</strong>（回头看 <a href="#s2">第 2 章</a> 的「监工模式」）。</p>
 
   <div class="callout note">
     <div class="label">i 一个容易被忽视的事实</div>
-    <p>Anthropic 内部并没有把 Chat / Cowork / Code 当成三个独立产品来推。看 2025 年的产品页和发布博客,它们经常被并排摆进同一个画面里——一边是 Chat 区(对话框 + Artifact),挨着是 Cowork 区(文件浏览器 + 应用控制),再过去是 Code 区(终端 + 仓库视图)。<strong>底层都是同一个 Claude 模型,UI 壳也越来越融合</strong>。把它们说成「三件套」是教学上的简化,实际产品里它们的边界正在被刻意模糊化——你在 Chat 里聊着聊着发现需要动文件,Claude 会问你「要切到 Cowork 模式吗?」。</p>
+    <p>Anthropic 内部并没有把 Chat / Cowork / Code 当成三个独立产品来推。看 2025 年的产品页和发布博客，它们经常被并排摆进同一个画面里——一边是 Chat 区（对话框 + Artifact），挨着是 Cowork 区（文件浏览器 + 应用控制），再过去是 Code 区（终端 + 仓库视图）。<strong>底层都是同一个 Claude 模型，UI 壳也越来越融合</strong>。把它们说成「三件套」是教学上的简化，实际产品里它们的边界正在被刻意模糊化——你在 Chat 里聊着聊着发现需要动文件，Claude 会问你「要切到 Cowork 模式吗？」。</p>
   </div>
 
   <h3><span class="pre">5.2</span>Chat 模式 · 隔着屏幕的对话型 AI <span class="en">The Reflex</span></h3>
 
-  <p class="lead">Chat 是大多数人最熟悉的形态——也是最容易被低估的形态。它的边界很清楚:<strong>AI 不动你电脑上的任何东西,纯文字进、纯文字出(以及 Artifact 这种「容器化输出」)</strong>。</p>
+  <p class="lead">Chat 是大多数人最熟悉的形态——也是最容易被低估的形态。它的边界很清楚：<strong>AI 不动你电脑上的任何东西，纯文字进、纯文字出（以及 Artifact 这种「容器化输出」）</strong>。</p>
 
   <h4>Chat 模式的真实能力边界</h4>
 
-  <p>Chat 不是「能力弱」,是「权限小」。同一个 Claude Opus 4.7,你在 Chat 里问它「帮我写一个 Python 脚本算斐波那契」,它写得跟在 Code 里一样好。差别在于:Chat 里写完之后,它给你一段代码,你自己复制出去运行;Code 里写完之后,它自己跑了脚本、看到输出、必要时改一改再跑。</p>
+  <p>Chat 不是「能力弱」，是「权限小」。同一个 Claude Opus 4.7，你在 Chat 里问它「帮我写一个 Python 脚本算斐波那契」，它写得跟在 Code 里一样好。差别在于：Chat 里写完之后，它给你一段代码，你自己复制出去运行；Code 里写完之后，它自己跑了脚本、看到输出、必要时改一改再跑。</p>
 
-  <p>这意味着 Chat 的<em>结构性优势</em>有几条,在 Cowork 和 Code 时代依然适用:</p>
+  <p>这意味着 Chat 的<em>结构性优势</em>有几条，在 Cowork 和 Code 时代依然适用：</p>
 
   <ul>
-    <li>✅ <strong>资源消耗最小</strong>——一次提问只调一次 LLM,不开 sandbox、不读文件、不抓网页</li>
-    <li>✅ <strong>响应最快</strong>——没有工具调用,纯流式输出,通常 1-3 秒就开始有字</li>
-    <li>✅ <strong>风险最低</strong>——它什么都没动,你不接受就完了,代价为零</li>
-    <li>✅ <strong>认知模型最简单</strong>——任何人都能用,跟微信聊天没两样</li>
+    <li>✅ <strong>资源消耗最小</strong>——一次提问只调一次 LLM，不开 sandbox、不读文件、不抓网页</li>
+    <li>✅ <strong>响应最快</strong>——没有工具调用，纯流式输出，通常 1-3 秒就开始有字</li>
+    <li>✅ <strong>风险最低</strong>——它什么都没动，你不接受就完了，代价为零</li>
+    <li>✅ <strong>认知模型最简单</strong>——任何人都能用，跟微信聊天没两样</li>
   </ul>
 
   <h4>Chat 最适合的三类任务</h4>
 
-  <p><strong>一 · 知识咨询 / 概念解释</strong>。「什么是 GraphQL」「TCP 跟 UDP 有什么区别」「JavaScript 的事件循环怎么跑」——这些问题不需要 AI 动手,纯靠 LLM 的训练记忆就能答好。开 Cowork 是浪费,开 Code 更是杀鸡用牛刀。</p>
+  <p><strong>一 · 知识咨询 / 概念解释</strong>。「什么是 GraphQL」「TCP 跟 UDP 有什么区别」「JavaScript 的事件循环怎么跑」——这些问题不需要 AI 动手，纯靠 LLM 的训练记忆就能答好。开 Cowork 是浪费，开 Code 更是杀鸡用牛刀。</p>
 
-  <p><strong>二 · 独立文本输出</strong>。写一封邮件、起一篇文案、改一段简历、翻译一段话。输入是字,输出也是字,中间没有任何文件操作——这就是 Chat 的主场。Artifact 容器让 Chat 也能输出富文本(图表、网页 demo、代码 block 等可持续修改的内容),但这仍然是「纯输出」,不动你的本地文件。</p>
+  <p><strong>二 · 独立文本输出</strong>。写一封邮件、起一篇文案、改一段简历、翻译一段话。输入是字，输出也是字，中间没有任何文件操作——这就是 Chat 的主场。Artifact 容器让 Chat 也能输出富文本（图表、网页 demo、代码 block 等可持续修改的内容），但这仍然是「纯输出」，不动你的本地文件。</p>
 
-  <p><strong>三 · 头脑风暴 / 思路碰撞</strong>。「我想做一个 SaaS 产品,卖给中小企业,有几个方向你给我评估一下」——这种开放性讨论,Chat 是最合适的形态。Cowork 和 Code 都是「执行型」,适合目标清晰之后用;目标没清晰之前,Chat 当陪聊更合适。Anthropic 课程里建议:「先用 Chat 把脑子里的事想清楚,再决定要不要切 Cowork / Code 去执行」[Anthropic Academy 2025]。</p>
+  <p><strong>三 · 头脑风暴 / 思路碰撞</strong>。「我想做一个 SaaS 产品，卖给中小企业，有几个方向你给我评估一下」——这种开放性讨论，Chat 是最合适的形态。Cowork 和 Code 都是「执行型」，适合目标清晰之后用；目标没清晰之前，Chat 当陪聊更合适。Anthropic 课程里建议：「先用 Chat 把脑子里的事想清楚，再决定要不要切 Cowork / Code 去执行」[Anthropic Academy 2025]。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · Chat 的「上下文胶水」上限</div>
-    <p>Chat 形态下,一个任务最多能跑多深,取决于你愿意当多少次胶水(回头看 <a href="#s2">第 2 章</a>)。经验值:复制粘贴超过 3 次、来回切窗口超过 5 次、累计耗时超过 15 分钟——这三条任一触发,就该考虑切到 Cowork 或 Code。继续在 Chat 里硬撑,效率会指数级下降。</p>
+    <p>Chat 形态下，一个任务最多能跑多深，取决于你愿意当多少次胶水（回头看 <a href="#s2">第 2 章</a>）。经验值：复制粘贴超过 3 次、来回切窗口超过 5 次、累计耗时超过 15 分钟——这三条任一触发，就该考虑切到 Cowork 或 Code。继续在 Chat 里硬撑，效率会指数级下降。</p>
   </div>
 
   <h4>Chat 不能干的事</h4>
 
-  <p>这是最容易被忽视的部分。很多人以为 Chat「写得出代码」就等于「能干编程任务」——错的。Chat 写得出代码,但跑不了代码、看不到 bug、改不了项目结构。所有「需要 AI 接触真实环境」的事,Chat 都干不了:</p>
+  <p>这是最容易被忽视的部分。很多人以为 Chat「写得出代码」就等于「能干编程任务」——错的。Chat 写得出代码，但跑不了代码、看不到 bug、改不了项目结构。所有「需要 AI 接触真实环境」的事，Chat 都干不了：</p>
 
   <ul>
     <li>❌ 整理本地文件夹里的几十个文件</li>
@@ -101,36 +101,36 @@
     <li>❌ 跑 SQL 查询、看结果、改查询、再跑</li>
   </ul>
 
-  <p>这些场景下硬用 Chat,就是 5.1 节 L 那个故事——你被迫做整个流程里最低价值的环节(信息搬运),AI 只干最高价值但最小份额的环节(动脑)。这种分工反了。</p>
+  <p>这些场景下硬用 Chat，就是 5.1 节 L 那个故事——你被迫做整个流程里最低价值的环节（信息搬运），AI 只干最高价值但最小份额的环节（动脑）。这种分工反了。</p>
 
   <h3><span class="pre">5.3</span>Cowork 模式 · 你旁边的 AI 同事 <span class="en">The Co-Worker</span></h3>
 
-  <p class="lead">Cowork 是 Anthropic 2025 年最重要的产品方向之一,也是被外界严重低估的一类形态。它的关键能力:<strong>AI 拿到了你本地文件系统、本地应用、屏幕的控制权,但默认是「在你看着的前提下」操作</strong>。</p>
+  <p class="lead">Cowork 是 Anthropic 2025 年最重要的产品方向之一，也是被外界严重低估的一类形态。它的关键能力：<strong>AI 拿到了你本地文件系统、本地应用、屏幕的控制权，但默认是「在你看着的前提下」操作</strong>。</p>
 
   <h4>Cowork 跟 Chat 的两个根本差别</h4>
 
-  <p>差别一 · <strong>它能看现场,不只看你打的字</strong>。开 Cowork,你可以把一个文件夹拖进对话区,AI 自己读里面的文件;你可以让它打开 Excel 看一张表;你可以让它截屏看一个网页。这一切都不需要你「描述」——AI 自己去取上下文。这跟 <a href="#s2">第 2 章</a> 讲的「Agent 优势一:能看现场」是同一个概念,只是在 Cowork 里被打磨成了对非程序员友好的形态。</p>
+  <p>差别一 · <strong>它能看现场，不只看你打的字</strong>。开 Cowork，你可以把一个文件夹拖进对话区，AI 自己读里面的文件；你可以让它打开 Excel 看一张表；你可以让它截屏看一个网页。这一切都不需要你「描述」——AI 自己去取上下文。这跟 <a href="#s2">第 2 章</a> 讲的「Agent 优势一：能看现场」是同一个概念，只是在 Cowork 里被打磨成了对非程序员友好的形态。</p>
 
-  <p>差别二 · <strong>它能动手,改你的真实文件</strong>。它不只是输出建议,它直接把建议变成 markdown 文件、Excel 表、PDF 报告写到你电脑上。这是 5.1 节那个故事的核心——L 的 27 页报告不是 Claude 输出的「文本回答」,是 Claude 写进她硬盘的真实文件。</p>
+  <p>差别二 · <strong>它能动手，改你的真实文件</strong>。它不只是输出建议，它直接把建议变成 markdown 文件、Excel 表、PDF 报告写到你电脑上。这是 5.1 节那个故事的核心——L 的 27 页报告不是 Claude 输出的「文本回答」，是 Claude 写进她硬盘的真实文件。</p>
 
   <h4>Cowork 最适合的四类任务</h4>
 
-  <p><strong>一 · 大批量文件整理 / 数据清洗</strong>。导出的 Slack 数据、几十张 Excel 表、上百份 PDF 简历、几年的微信聊天记录——这种「数据量大、规则相对清晰、不需要复杂工程化」的任务,Cowork 是最佳形态。Anthropic 官方在 Cowork 课程里把这类任务列为「典型 Cowork 场景」[Anthropic Academy 2025]。</p>
+  <p><strong>一 · 大批量文件整理 / 数据清洗</strong>。导出的 Slack 数据、几十张 Excel 表、上百份 PDF 简历、几年的微信聊天记录——这种「数据量大、规则相对清晰、不需要复杂工程化」的任务，Cowork 是最佳形态。Anthropic 官方在 Cowork 课程里把这类任务列为「典型 Cowork 场景」[Anthropic Academy 2025]。</p>
 
-  <p><strong>二 · 跨应用工作流</strong>。从邮件抓出客户列表 → 写进 CRM 系统 → 同步到日历 → 发会议邀请。这种跨多个应用的流程,以前要么你自己点 100 次鼠标,要么找工程师写脚本。Cowork 让 AI 直接帮你跨应用操作——Computer Use 这层能力(2024-10 发布)就是 Cowork 的工程基础 [Anthropic 2024]。</p>
+  <p><strong>二 · 跨应用工作流</strong>。从邮件抓出客户列表 → 写进 CRM 系统 → 同步到日历 → 发会议邀请。这种跨多个应用的流程，以前要么你自己点 100 次鼠标，要么找工程师写脚本。Cowork 让 AI 直接帮你跨应用操作——Computer Use 这层能力（2024-10 发布）就是 Cowork 的工程基础 [Anthropic 2024]。</p>
 
-  <p><strong>三 · 研究 / 调研任务</strong>。读 12 篇论文、提炼共识、画对比表、写一篇综述;读一个领域过去一年的 50 篇博客、整理趋势报告;读一个公司的所有公开财报、做 SWOT 分析。这种「读 + 写 + 整合」的工作,Cowork 跑得比人快得多,而且不容易疲劳出错。</p>
+  <p><strong>三 · 研究 / 调研任务</strong>。读 12 篇论文、提炼共识、画对比表、写一篇综述；读一个领域过去一年的 50 篇博客、整理趋势报告；读一个公司的所有公开财报、做 SWOT 分析。这种「读 + 写 + 整合」的工作，Cowork 跑得比人快得多，而且不容易疲劳出错。</p>
 
-  <p><strong>四 · 非编程类的批处理脚本任务</strong>。把 100 张图统一压缩到某个尺寸、批量给 PDF 加水印、把一个文件夹的 markdown 转成 PDF——这些「程序员一行 shell 就能搞定但非程序员不会写」的任务,Cowork 让任何人都能用自然语言指令完成。</p>
+  <p><strong>四 · 非编程类的批处理脚本任务</strong>。把 100 张图统一压缩到某个尺寸、批量给 PDF 加水印、把一个文件夹的 markdown 转成 PDF——这些「程序员一行 shell 就能搞定但非程序员不会写」的任务，Cowork 让任何人都能用自然语言指令完成。</p>
 
   <div class="callout note">
     <div class="label">i Cowork 是「Computer Use + 文件系统」的产品化封装</div>
-    <p>从工程视角看,Cowork 模式底下跑的还是 <em>Computer Use</em> 和 <em>Filesystem MCP</em> 这套能力——AI 通过工具调用拿屏幕、控制鼠标、读写文件。Cowork 的价值不在底层技术,而在「把这套能力做成普通人用得顺手的 UI」。Anthropic 在 2025 年的产品博客里把 Cowork 描述为「让非工程师也能享受 Agent 红利的入口」[Anthropic Cowork 2025]——这句话点明了 Cowork 的产品定位:Code 是给程序员的,Cowork 是给所有其他人的。</p>
+    <p>从工程视角看，Cowork 模式底下跑的还是 <em>Computer Use</em> 和 <em>Filesystem MCP</em> 这套能力——AI 通过工具调用拿屏幕、控制鼠标、读写文件。Cowork 的价值不在底层技术，而在「把这套能力做成普通人用得顺手的 UI」。Anthropic 在 2025 年的产品博客里把 Cowork 描述为「让非工程师也能享受 Agent 红利的入口」[Anthropic Cowork 2025]——这句话点明了 Cowork 的产品定位：Code 是给程序员的，Cowork 是给所有其他人的。</p>
   </div>
 
   <h4>Cowork 的边界 · 它不擅长什么</h4>
 
-  <p>Cowork 强项是「文件层、应用层、屏幕层」的操作,但它<strong>不是工程化协作工具</strong>。有几类任务用 Cowork 也能跑,但效率和正确率都低于 Code:</p>
+  <p>Cowork 强项是「文件层、应用层、屏幕层」的操作，但它<strong>不是工程化协作工具</strong>。有几类任务用 Cowork 也能跑，但效率和正确率都低于 Code:</p>
 
   <ul>
     <li>❌ 在一个 200 文件的代码仓里改一个跨多模块的 bug</li>
@@ -139,60 +139,60 @@
     <li>❌ git 操作、PR review、分支管理</li>
   </ul>
 
-  <p>这些任务不是「能不能做」,是「该不该用 Cowork 做」。Cowork 缺少 Code 模式自带的工程化基础设施(整仓索引、测试感知、git 集成、Claude.md 持续上下文等),硬用就是杀鸡用牛刀的反面——用螺丝刀拧螺母。</p>
+  <p>这些任务不是「能不能做」，是「该不该用 Cowork 做」。Cowork 缺少 Code 模式自带的工程化基础设施（整仓索引、测试感知、git 集成、Claude.md 持续上下文等），硬用就是杀鸡用牛刀的反面——用螺丝刀拧螺母。</p>
 
   <h3><span class="pre">5.4</span>Code 模式 · 给程序员的工程化 Agent <span class="en">The Engineer</span></h3>
 
-  <p class="lead">Code 是 Anthropic 2025 年最高调推的产品形态——Claude Code,在终端里跑的 Agent CLI。它的定位非常窄:<strong>专给开发者,跑得是最深的 Agentic Loop</strong>。Cowork 在文件层动手,Code 在工程层动手——读整个 repo、跑测试、改代码、提 PR、跟 git history 联动、读 Claude.md 长期记忆。</p>
+  <p class="lead">Code 是 Anthropic 2025 年最高调推的产品形态——Claude Code，在终端里跑的 Agent CLI。它的定位非常窄：<strong>专给开发者，跑得是最深的 Agentic Loop</strong>。Cowork 在文件层动手，Code 在工程层动手——读整个 repo、跑测试、改代码、提 PR、跟 git history 联动、读 Claude.md 长期记忆。</p>
 
   <h4>Code 比 Cowork 多了哪些工程化能力</h4>
 
-  <p>这是理解 Code 价值的关键。表面上看 Code 也是「AI 动你的文件」,跟 Cowork 没差别。但深一层,Code 多了五件事:</p>
+  <p>这是理解 Code 价值的关键。表面上看 Code 也是「AI 动你的文件」，跟 Cowork 没差别。但深一层，Code 多了五件事：</p>
 
   <div class="table-wrap">
     <table>
       <thead>
-        <tr><th>能力</th><th>Code 有,Cowork 没有</th><th>意义</th></tr>
+        <tr><th>能力</th><th>Code 有，Cowork 没有</th><th>意义</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>整仓索引</strong></td><td>Code 启动就读整个项目结构,知道每个文件是什么</td><td>跨多文件改代码不漏</td></tr>
-        <tr><td><strong>测试感知</strong></td><td>Code 知道项目跑测试的命令,自动跑 + 看结果</td><td>Verify 阶段有真实信号,不是 LLM 自评</td></tr>
-        <tr><td><strong>git 集成</strong></td><td>读 git log、做 diff、提 PR、写 commit message</td><td>每一步操作可回滚,符合工程伦理</td></tr>
+        <tr><td><strong>整仓索引</strong></td><td>Code 启动就读整个项目结构，知道每个文件是什么</td><td>跨多文件改代码不漏</td></tr>
+        <tr><td><strong>测试感知</strong></td><td>Code 知道项目跑测试的命令，自动跑 + 看结果</td><td>Verify 阶段有真实信号，不是 LLM 自评</td></tr>
+        <tr><td><strong>git 集成</strong></td><td>读 git log、做 diff、提 PR、写 commit message</td><td>每一步操作可回滚，符合工程伦理</td></tr>
         <tr><td><strong>Claude.md 长期记忆</strong></td><td>读项目根目录的 Claude.md 拿到长期约定</td><td>跨会话保持工程上下文</td></tr>
-        <tr><td><strong>命令行原生</strong></td><td>在终端里跑,自然集成进开发者工作流</td><td>不用切 GUI,跟 vim / tmux / ssh 同台</td></tr>
+        <tr><td><strong>命令行原生</strong></td><td>在终端里跑，自然集成进开发者工作流</td><td>不用切 GUI，跟 vim / tmux / ssh 同台</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="audio-only">
-    <p>这五件事——整仓索引、测试感知、git 集成、读 Claude.md 拿长期约定、在终端里原生跑——单看名字容易当成功能差别,真正的分量在它们各自换来什么:测试感知让验证阶段有真实信号,而不是模型自己说改好了;git 集成让每一步都能回滚;Claude.md 让工程上下文跨会话不丢。换句话说,Code 多出来的不是几个按钮,是一整套让 AI 在工程里行得稳、收得住的纪律。</p>
+    <p>这五件事——整仓索引、测试感知、git 集成、读 Claude.md 拿长期约定、在终端里原生跑——单看名字容易当成功能差别，真正的分量在它们各自换来什么：测试感知让验证阶段有真实信号，而不是模型自己说改好了；git 集成让每一步都能回滚；Claude.md 让工程上下文跨会话不丢。换句话说，Code 多出来的不是几个按钮，是一整套让 AI 在工程里行得稳、收得住的纪律。</p>
   </div>
 
-  <p>这五条加起来,就是 Code 跟 Cowork 的根本差别。Anthropic 在 Claude Code 101 课程里强调:「Code 是为<em>有 git 仓库、有测试、有工程化规范</em>的项目设计的——不要拿它当通用文件助手用」[Anthropic Academy 2025]。</p>
+  <p>这五条加起来，就是 Code 跟 Cowork 的根本差别。Anthropic 在 Claude Code 101 课程里强调：「Code 是为<em>有 git 仓库、有测试、有工程化规范</em>的项目设计的——不要拿它当通用文件助手用」[Anthropic Academy 2025]。</p>
 
   <h4>Code 最适合的任务画像</h4>
 
-  <p>Anthropic 官方推荐的 Code 典型任务,有一个共同特征——<strong>跨多文件、需要 Verify、可回滚</strong>:</p>
+  <p>Anthropic 官方推荐的 Code 典型任务，有一个共同特征——<strong>跨多文件、需要 Verify、可回滚</strong>:</p>
 
   <ul>
     <li>✅ 修一个涉及 5+ 文件的 bug</li>
     <li>✅ 给一个模块加全套单元测试</li>
-    <li>✅ 重构一个 API 接口,改完所有调用点</li>
-    <li>✅ 升级依赖版本,改 breaking change</li>
+    <li>✅ 重构一个 API 接口，改完所有调用点</li>
+    <li>✅ 升级依赖版本，改 breaking change</li>
     <li>✅ 把项目从一个框架迁到另一个框架</li>
     <li>✅ 给老项目补文档 / type 标注 / 注释</li>
   </ul>
 
-  <p>这些任务的共性,正是 Anthropic <em>Building Effective Agents</em> 里强调的——「目标明确 + 步骤多 + 有外部 Verify 信号 + 失败可回滚」[Anthropic 2024b]。Code 把这套工程伦理内置到了产品里。</p>
+  <p>这些任务的共性，正是 Anthropic <em>Building Effective Agents</em> 里强调的——「目标明确 + 步骤多 + 有外部 Verify 信号 + 失败可回滚」[Anthropic 2024b]。Code 把这套工程伦理内置到了产品里。</p>
 
   <div class="callout sharp">
     <div class="label">✕ Code 不是「带 IDE 的 Cowork」</div>
-    <p>很多非程序员看 Claude Code 的截图,觉得「也就是 Cowork 加了个代码视图」——错的。Code 比 Cowork 多的不是 UI,是<strong>工程化基础设施</strong>(测试、git、Claude.md、整仓索引)。这些基础设施只对「有工程规范的项目」有意义——你拿 Code 去整理 Slack 导出文件夹,它跟 Cowork 没差别,甚至更难用(Code 默认从 git 仓启动,你的文件夹不是仓库就有摩擦)。<strong>Code 是 Agent 在工程场景的精装版,不是 Cowork 的「升级版」</strong>——它们不是上下位关系,是平行的两条产品线。</p>
+    <p>很多非程序员看 Claude Code 的截图，觉得「也就是 Cowork 加了个代码视图」——错的。Code 比 Cowork 多的不是 UI，是<strong>工程化基础设施</strong>（测试、git、Claude.md、整仓索引）。这些基础设施只对「有工程规范的项目」有意义——你拿 Code 去整理 Slack 导出文件夹，它跟 Cowork 没差别，甚至更难用（Code 默认从 git 仓启动，你的文件夹不是仓库就有摩擦）。<strong>Code 是 Agent 在工程场景的精装版，不是 Cowork 的「升级版」</strong>——它们不是上下位关系，是平行的两条产品线。</p>
   </div>
 
   <h3><span class="pre">5.5</span>三模式横向对比表 · <span class="en">Three Modes at a Glance</span></h3>
 
-  <p class="lead">把三个模式沿着同一组维度并排比一遍,差别就清楚了——下次拿到一个任务,心里过一遍它该落在哪一档。</p>
+  <p class="lead">把三个模式沿着同一组维度并排比一遍，差别就清楚了——下次拿到一个任务，心里过一遍它该落在哪一档。</p>
 
   <div class="table-wrap">
     <table>
@@ -206,13 +206,13 @@
       </thead>
       <tbody>
         <tr><td><strong>AI 拿到的权限</strong></td><td>只读对话框里的字</td><td>读写本地文件 + 控制应用</td><td>整仓读写 + 跑测试 + git 操作</td></tr>
-        <tr><td><strong>Agent Loop 深度</strong></td><td>0(无循环 / 单次反射)</td><td>中(3-15 步循环)</td><td>深(可上 50+ 步)</td></tr>
+        <tr><td><strong>Agent Loop 深度</strong></td><td>0（无循环 / 单次反射）</td><td>中（3-15 步循环）</td><td>深（可上 50+ 步）</td></tr>
         <tr><td><strong>典型任务</strong></td><td>问答 / 写作 / 头脑风暴</td><td>文件批处理 / 研究 / 跨应用</td><td>修 bug / 重构 / 加测试</td></tr>
         <tr><td><strong>主要用户</strong></td><td>所有人</td><td>非程序员 + 程序员的非编码任务</td><td>程序员</td></tr>
         <tr><td><strong>启动入口</strong></td><td>Claude.ai 网页 / Desktop 对话区</td><td>Claude Desktop Cowork 模式</td><td>终端命令 <code>claude</code></td></tr>
-        <tr><td><strong>价格档位(粗估)</strong></td><td>Free / Pro 20$/月覆盖</td><td>Pro 起步,重度需要 Max</td><td>Pro 能用,严肃项目 Max 5x 起</td></tr>
-        <tr><td><strong>风险等级</strong></td><td>低(动不了任何东西)</td><td>中(能改你的文件)</td><td>高(能推到主分支)</td></tr>
-        <tr><td><strong>监工成本</strong></td><td>低(只看输出文字)</td><td>中(看文件 diff)</td><td>高(看 git diff + 跑测试)</td></tr>
+        <tr><td><strong>价格档位（粗估）</strong></td><td>Free / Pro 20$/月覆盖</td><td>Pro 起步，重度需要 Max</td><td>Pro 能用，严肃项目 Max 5x 起</td></tr>
+        <tr><td><strong>风险等级</strong></td><td>低（动不了任何东西）</td><td>中（能改你的文件）</td><td>高（能推到主分支）</td></tr>
+        <tr><td><strong>监工成本</strong></td><td>低（只看输出文字）</td><td>中（看文件 diff）</td><td>高（看 git diff + 跑测试）</td></tr>
         <tr><td><strong>响应时间</strong></td><td>1-3 秒开始</td><td>10 秒-几分钟</td><td>几分钟-几十分钟</td></tr>
         <tr><td><strong>典型耗 token 量</strong></td><td>千-万级</td><td>万-十万级</td><td>十万-百万级</td></tr>
       </tbody>
@@ -220,111 +220,111 @@
   </div>
 
   <div class="audio-only">
-    <p>这套对比里,有几个落地的数字值得单独记一下。入口各不一样:Chat 在网页或桌面端的对话区就能用,Cowork 要在桌面端切到对应模式,Code 是在终端里敲一行 <strong>claude</strong> 起。花费也分档:Chat 基本上 Pro 套餐就够,Cowork 重度用得上 Max,Code 跑严肃项目往往要 Max 的五倍档起步。代价是同向放大的——一次任务消耗的 token,从 Chat 的千到万级,到 Cowork 的万到十万级,再到 Code 的十万到百万级,跨了两三个数量级。</p>
+    <p>这套对比里，有几个落地的数字值得单独记一下。入口各不一样：Chat 在网页或桌面端的对话区就能用，Cowork 要在桌面端切到对应模式，Code 是在终端里敲一行 <strong>claude</strong> 起。花费也分档：Chat 基本上 Pro 套餐就够，Cowork 重度用得上 Max,Code 跑严肃项目往往要 Max 的五倍档起步。代价是同向放大的——一次任务消耗的 token，从 Chat 的千到万级，到 Cowork 的万到十万级，再到 Code 的十万到百万级，跨了两三个数量级。</p>
   </div>
 
-  <p>这里最关键的一点,是「Agent Loop 的深度」——三个模式跑的是同一个 Loop(<a href="#s2">第 2 章</a>讲过的「收集上下文 → 动手 → 验证」),区别只在 Loop 转多少圈、AI 拿到的工具有多少。<strong>Chat 是 0 圈,Cowork 是几圈,Code 是几十圈</strong>。圈数越多,效率越高,但同时风险越大、token 越贵、监工越累。</p>
+  <p>这里最关键的一点，是「Agent Loop 的深度」——三个模式跑的是同一个 Loop（<a href="#s2">第 2 章</a>讲过的「收集上下文 → 动手 → 验证」），区别只在 Loop 转多少圈、AI 拿到的工具有多少。<strong>Chat 是 0 圈，Cowork 是几圈，Code 是几十圈</strong>。圈数越多，效率越高，但同时风险越大、token 越贵、监工越累。</p>
 
   <h3><span class="pre">5.6</span>决策树 · 一个任务该开哪个模式 <span class="en">Pick the Right Mode</span></h3>
 
-  <p class="lead">理论讲完,给你一套可以直接用的决策流程。每次拿到一个任务,按这四个问题问下来:</p>
+  <p class="lead">理论讲完，给你一套可以直接用的决策流程。每次拿到一个任务，按这四个问题问下来：</p>
 
-  <h4>问题 1 · 这个任务需要 AI 动你的电脑吗?</h4>
-
-  <ul>
-    <li>不需要(纯问答 / 纯写作 / 纯讨论) → <strong>Chat</strong>,到此结束</li>
-    <li>需要(动文件 / 动应用 / 动屏幕) → 进入问题 2</li>
-  </ul>
-
-  <h4>问题 2 · 这是一个工程项目里的任务吗?</h4>
+  <h4>问题 1 · 这个任务需要 AI 动你的电脑吗？</h4>
 
   <ul>
-    <li>是(有 git 仓 / 有测试 / 有代码) → <strong>Code</strong></li>
-    <li>不是(就是文件夹 / Excel / PDF / 跨应用) → <strong>Cowork</strong></li>
+    <li>不需要（纯问答 / 纯写作 / 纯讨论） → <strong>Chat</strong>，到此结束</li>
+    <li>需要（动文件 / 动应用 / 动屏幕） → 进入问题 2</li>
   </ul>
 
-  <h4>问题 3 · 任务规模有多大?</h4>
+  <h4>问题 2 · 这是一个工程项目里的任务吗？</h4>
 
   <ul>
-    <li>极小(1-3 步,5 分钟内) → 即使能开 Cowork / Code,Chat 加手动可能更快</li>
-    <li>中等(5-20 步,半小时-1 小时) → Cowork / Code 的甜蜜区</li>
-    <li>很大(20+ 步,几小时) → 一定要 Cowork / Code,人当胶水会累死</li>
+    <li>是（有 git 仓 / 有测试 / 有代码） → <strong>Code</strong></li>
+    <li>不是（就是文件夹 / Excel / PDF / 跨应用） → <strong>Cowork</strong></li>
   </ul>
 
-  <h4>问题 4 · 风险敞口有多大?</h4>
+  <h4>问题 3 · 任务规模有多大？</h4>
+
+  <ul>
+    <li>极小（1-3 步，5 分钟内） → 即使能开 Cowork / Code,Chat 加手动可能更快</li>
+    <li>中等（5-20 步，半小时-1 小时） → Cowork / Code 的甜蜜区</li>
+    <li>很大（20+ 步，几小时） → 一定要 Cowork / Code，人当胶水会累死</li>
+  </ul>
+
+  <h4>问题 4 · 风险敞口有多大？</h4>
 
   <ul>
     <li>动一次性输出 / 沙盒文件 → 放心跑</li>
     <li>动你的真实工作文件 → 先备份再开 Cowork</li>
-    <li>动生产代码 / 主分支 / 数据库 → 开 Code 但<strong>必须开 EPCC 检查点</strong>(详见 <a href="#s7">第 7 章</a>),关键节点强制问人</li>
+    <li>动生产代码 / 主分支 / 数据库 → 开 Code 但<strong>必须开 EPCC 检查点</strong>（详见 <a href="#s7">第 7 章</a>），关键节点强制问人</li>
   </ul>
 
   <h4>三个具体例子走一遍</h4>
 
-  <p><strong>例子一 · 「帮我写一份本周周报」</strong>。问题 1:不需要动电脑(就是输出一段文字) → <strong>Chat</strong>。这种事开 Cowork 是浪费,开 Code 更荒谬——结果它要从 git log 里抓你这周的提交,这是另一个任务了,不是「写周报」本身。</p>
+  <p><strong>例子一 · 「帮我写一份本周周报」</strong>。问题 1：不需要动电脑（就是输出一段文字） → <strong>Chat</strong>。这种事开 Cowork 是浪费，开 Code 更荒谬——结果它要从 git log 里抓你这周的提交，这是另一个任务了，不是「写周报」本身。</p>
 
-  <p><strong>例子二 · 「整理过去一个月所有 Slack 频道的关键讨论」</strong>。问题 1:需要动文件(读导出的 JSON) → 问题 2:不是工程项目(就是文件夹) → <strong>Cowork</strong>。5.1 节那个故事的标准答案。</p>
+  <p><strong>例子二 · 「整理过去一个月所有 Slack 频道的关键讨论」</strong>。问题 1：需要动文件（读导出的 JSON） → 问题 2：不是工程项目（就是文件夹） → <strong>Cowork</strong>。5.1 节那个故事的标准答案。</p>
 
-  <p><strong>例子三 · 「给我的 React 项目加 Jest 测试,覆盖核心组件」</strong>。问题 1:需要动电脑 → 问题 2:是工程项目(有 git 仓 + package.json) → <strong>Code</strong>。这是 Code 的典型主场——需要读所有组件代码、写测试文件、跑 <code>npm test</code> 看结果、必要时改测试再跑。</p>
+  <p><strong>例子三 · 「给我的 React 项目加 Jest 测试，覆盖核心组件」</strong>。问题 1：需要动电脑 → 问题 2：是工程项目（有 git 仓 + package.json） → <strong>Code</strong>。这是 Code 的典型主场——需要读所有组件代码、写测试文件、跑 <code>npm test</code> 看结果、必要时改测试再跑。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器 · 一个错配检测器</div>
-    <p>当你发现自己在 Chat 里反复复制粘贴超过 3 次——切 Cowork。当你发现自己在 Cowork 里频繁跑 <code>git diff</code> / <code>npm test</code> ——切 Code。当你发现自己在 Code 里只是问知识(「TypeScript 的 narrowing 是什么」)——退回 Chat。<strong>每个模式都有最佳工作量区间,在错的区间硬撑就是浪费时间和钱</strong>。这条武器跟 <a href="#s2">第 2 章</a> 「Chat vs Agent 决策表」是同一类工具的不同分辨率版本——第 2 章是粗筛,这一章是细分。</p>
+    <p>当你发现自己在 Chat 里反复复制粘贴超过 3 次——切 Cowork。当你发现自己在 Cowork 里频繁跑 <code>git diff</code> / <code>npm test</code> ——切 Code。当你发现自己在 Code 里只是问知识（「TypeScript 的 narrowing 是什么」）——退回 Chat。<strong>每个模式都有最佳工作量区间，在错的区间硬撑就是浪费时间和钱</strong>。这条武器跟 <a href="#s2">第 2 章</a> 「Chat vs Agent 决策表」是同一类工具的不同分辨率版本——第 2 章是粗筛，这一章是细分。</p>
   </div>
 
   <h3><span class="pre">5.7</span>反共识 · 三个常见的「模式选错」灾难案例</h3>
 
-  <p class="lead">选错模式不是无伤大雅的「效率损失一点」,在某些场景里是<strong>结果质量差一个数量级</strong>或者<strong>钱包破洞</strong>。讲三个真实发生过的反面案例。</p>
+  <p class="lead">选错模式不是无伤大雅的「效率损失一点」，在某些场景里是<strong>结果质量差一个数量级</strong>或者<strong>钱包破洞</strong>。讲三个真实发生过的反面案例。</p>
 
   <h4>灾难一 · 用 Chat 干 Cowork 的活 → 人变胶水搬运工</h4>
 
-  <p>这就是 5.1 节 L 那个故事。Chat 写得出 markdown,但写不进她硬盘——所以她要在 30 个频道之间手动来回切窗口、复制、粘贴、整理。<strong>本来 17 分钟的任务,做了一整天</strong>,而且因为疲劳和重复,中间还漏了好几个频道——质量也比 Cowork 一次性跑出来的差。</p>
+  <p>这就是 5.1 节 L 那个故事。Chat 写得出 markdown，但写不进她硬盘——所以她要在 30 个频道之间手动来回切窗口、复制、粘贴、整理。<strong>本来 17 分钟的任务，做了一整天</strong>，而且因为疲劳和重复，中间还漏了好几个频道——质量也比 Cowork 一次性跑出来的差。</p>
 
-  <p>这类灾难的特征:任务能 Cowork 干完,但用户不知道 Cowork 存在,或者觉得 Chat「能写出代码 / markdown」就够了。教训:<strong>Chat 写得出 ≠ Chat 跑得动</strong>。</p>
+  <p>这类灾难的特征：任务能 Cowork 干完，但用户不知道 Cowork 存在，或者觉得 Chat「能写出代码 / markdown」就够了。教训：<strong>Chat 写得出 ≠ Chat 跑得动</strong>。</p>
 
   <h4>灾难二 · 用 Code 干 Chat 的活 → 钱包破洞</h4>
 
-  <p>另一个朋友 W 是后端工程师,新换了 Claude Max 5x 套餐之后,他开始在 Claude Code 里问各种问题——「我应该用 PostgreSQL 还是 MySQL?」「Redis 跟 Memcached 的根本差别是什么?」每次问,Code 都老老实实读他的项目仓库、看依赖、跑分析,然后给一个「考虑你这个项目的现状,建议……」的答案。</p>
+  <p>另一个朋友 W 是后端工程师，新换了 Claude Max 5x 套餐之后，他开始在 Claude Code 里问各种问题——「我应该用 PostgreSQL 还是 MySQL？」「Redis 跟 Memcached 的根本差别是什么？」每次问，Code 都老老实实读他的项目仓库、看依赖、跑分析，然后给一个「考虑你这个项目的现状，建议……」的答案。</p>
 
-  <p>问题是<strong>这些问题根本不需要看他的仓库</strong>——是通用知识问题,Chat 就能答得一样好,甚至更快。但因为 Code 默认会扫仓,每次问都耗几万到十几万 token。一个月下来,他烧掉了套餐 quota 的 60%,而其中至少一半 token 花在了「Code 把通用问题当工程问题处理」上。<strong>这不是 Code 不好,是用户用错了模式</strong>。</p>
+  <p>问题是<strong>这些问题根本不需要看他的仓库</strong>——是通用知识问题，Chat 就能答得一样好，甚至更快。但因为 Code 默认会扫仓，每次问都耗几万到十几万 token。一个月下来，他烧掉了套餐 quota 的 60%，而其中至少一半 token 花在了「Code 把通用问题当工程问题处理」上。<strong>这不是 Code 不好，是用户用错了模式</strong>。</p>
 
-  <p>这类灾难的特征:用户因为某个模式贵 / 强,就觉得「贵的总比便宜的好」——典型的工具选择失调。教训:<strong>Code 强不等于 Code 适合所有事</strong>;对纯知识问题,Chat 是更好的工具,不只因为便宜,而且因为响应快。</p>
+  <p>这类灾难的特征：用户因为某个模式贵 / 强，就觉得「贵的总比便宜的好」——典型的工具选择失调。教训：<strong>Code 强不等于 Code 适合所有事</strong>；对纯知识问题，Chat 是更好的工具，不只因为便宜，而且因为响应快。</p>
 
-  <h4>灾难三 · 用 Cowork 干 Code 的活 → Verify 缺失,代码改坏不自知</h4>
+  <h4>灾难三 · 用 Cowork 干 Code 的活 → Verify 缺失，代码改坏不自知</h4>
 
-  <p>第三种灾难发生在「半懂技术的产品经理」群体上。他们会 Cowork,知道能让 AI 改文件,于是经常把 Cowork 当 Claude Code 用——「帮我看一下这个 React 项目,把表单 validation 加上」。</p>
+  <p>第三种灾难发生在「半懂技术的产品经理」群体上。他们会 Cowork，知道能让 AI 改文件，于是经常把 Cowork 当 Claude Code 用——「帮我看一下这个 React 项目，把表单 validation 加上」。</p>
 
-  <p>问题在于 Cowork 没有「<em>跑测试看结果</em>」的工程化 Verify 闭环。Cowork 改了代码,它确实改了,但它没办法跑 <code>npm test</code> 看是不是过、没有 git diff 习惯让你 review、不会读项目的 lint config。结果就是改完代码<strong>看起来挺像样,跑起来一片红</strong>,而且因为 PM 没有审 diff 的习惯,他还以为已经做完了。</p>
+  <p>问题在于 Cowork 没有「<em>跑测试看结果</em>」的工程化 Verify 闭环。Cowork 改了代码，它确实改了，但它没办法跑 <code>npm test</code> 看是不是过、没有 git diff 习惯让你 review、不会读项目的 lint config。结果就是改完代码<strong>看起来挺像样，跑起来一片红</strong>，而且因为 PM 没有审 diff 的习惯，他还以为已经做完了。</p>
 
-  <p>这类灾难的特征:Cowork 在文件层确实能动,但缺少 Code 的工程基础设施,导致「能改但不能验证」。教训:<strong>有 git + 有测试 + 跨多文件的代码任务,用 Code 不用 Cowork</strong>——这不是技术歧视,是工程伦理。</p>
+  <p>这类灾难的特征：Cowork 在文件层确实能动，但缺少 Code 的工程基础设施，导致「能改但不能验证」。教训：<strong>有 git + 有测试 + 跨多文件的代码任务，用 Code 不用 Cowork</strong>——这不是技术歧视，是工程伦理。</p>
 
   <div class="callout sharp">
     <div class="label">✕ 三个灾难合起来的底层规律</div>
-    <p>三类错配的共同点:用户没有意识到「<strong>模式选择本身就是一个决策</strong>」,以为「反正都是 Claude,随便开哪个」。但正如这一章反复强调的——三个模式跑的是同一个 LLM,差别在<em>外壳给 AI 的权限和工具</em>。用错壳,要么 AI 拿不到该有的工具(Chat 干 Cowork 活、Cowork 干 Code 活),要么 AI 用了过剩的工具(Code 干 Chat 活)。前两类是「质量差一档」,后一类是「钱包流血」。两种都是真实发生的工程化损失,不是抽象问题。</p>
+    <p>三类错配的共同点：用户没有意识到「<strong>模式选择本身就是一个决策</strong>」，以为「反正都是 Claude，随便开哪个」。但正如这一章反复强调的——三个模式跑的是同一个 LLM，差别在<em>外壳给 AI 的权限和工具</em>。用错壳，要么 AI 拿不到该有的工具（Chat 干 Cowork 活、Cowork 干 Code 活），要么 AI 用了过剩的工具（Code 干 Chat 活）。前两类是「质量差一档」，后一类是「钱包流血」。两种都是真实发生的工程化损失，不是抽象问题。</p>
   </div>
 
   <h3><span class="pre">5.8</span>这一章给你的判断武器</h3>
 
-  <p class="lead">读完这章,合上,你应该带走以下几个能直接用的判断武器。</p>
+  <p class="lead">读完这章，合上，你应该带走以下几个能直接用的判断武器。</p>
 
   <div class="callout ops">
     <div class="label">✓ 武器一 · 拿到任务先问「这要 AI 动我电脑吗」</div>
-    <p>三秒钟回答:不动 → Chat;动文件 / 应用 → Cowork;动代码仓 → Code。这一个问题筛掉 80% 的错配。比绕弯算「该用什么模型 / 套餐 / 工具」直接得多——先选模式,再选模型。</p>
+    <p>三秒钟回答：不动 → Chat；动文件 / 应用 → Cowork；动代码仓 → Code。这一个问题筛掉 80% 的错配。比绕弯算「该用什么模型 / 套餐 / 工具」直接得多——先选模式，再选模型。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器二 · 三个模式的「错配信号」</div>
-    <p>Chat 里:连续复制粘贴 3 次以上 → 切 Cowork。Cowork 里:频繁手跑 git/test → 切 Code。Code 里:你只是在问知识 → 退 Chat。每个模式都有最佳工作区间,在错的区间硬撑就是时间和钱的双重浪费。</p>
+    <p>Chat 里：连续复制粘贴 3 次以上 → 切 Cowork。Cowork 里：频繁手跑 git/test → 切 Code。Code 里：你只是在问知识 → 退 Chat。每个模式都有最佳工作区间，在错的区间硬撑就是时间和钱的双重浪费。</p>
   </div>
 
   <div class="callout ops">
     <div class="label">✓ 武器三 · 风险跟模式深度同向</div>
-    <p>Chat 失败你损失零(它没动东西)。Cowork 失败你损失文件(改备份 / 改副本就能恢复)。Code 失败你损失工程项目状态(必须有 git + EPCC 检查点)。模式越深,监工越要硬——监工成本是模式深度的隐藏代价,选模式时就要把这个算进去。</p>
+    <p>Chat 失败你损失零（它没动东西）。Cowork 失败你损失文件（改备份 / 改副本就能恢复）。Code 失败你损失工程项目状态（必须有 git + EPCC 检查点）。模式越深，监工越要硬——监工成本是模式深度的隐藏代价，选模式时就要把这个算进去。</p>
   </div>
 
-  <p>下一章我们换个尺度,从「三个模式」放大到「桌面端的所有部件」——Artifact、Projects、Skills、Memory、Files、MCP、Computer Use……这些部件怎么在 Chat / Cowork / Code 三个模式里被复用,构成了 Anthropic 桌面端的完整产品图。看完 <a href="#s6">第 6 章</a> 你就知道:每个部件不是孤立功能,是横跨三个模式的能力切片。</p>
+  <p>下一章我们换个尺度，从「三个模式」放大到「桌面端的所有部件」——Artifact、Projects、Skills、Memory、Files、MCP、Computer Use……这些部件怎么在 Chat / Cowork / Code 三个模式里被复用，构成了 Anthropic 桌面端的完整产品图。看完 <a href="#s6">第 6 章</a> 你就知道：每个部件不是孤立功能，是横跨三个模式的能力切片。</p>
 
-  <p class="ref">主要参考:<br>
+  <p class="ref">主要参考：<br>
   Anthropic, <em>Introducing computer use, a new Claude 3.5 Sonnet, and Claude 3.5 Haiku</em>, 2024-10-22 [Anthropic 2024] · Anthropic, <em>Building Effective Agents</em>, engineering blog, 2024-12 [Anthropic 2024b] · Anthropic, <em>Claude for Cowork: bringing AI into your daily workflow</em>, product blog, 2025 [Anthropic Cowork 2025] · Anthropic, <em>Claude Code Documentation</em>, 2025 [Anthropic Docs 2025] · Anthropic Skilljar Academy, <em>Claude 101 / Introduction to Claude Cowork / Claude Code 101</em> courses, 2025 [Anthropic Academy 2025] · Anthropic, <em>Claude Desktop release notes</em>, 2024-2025.</p>
 
 </div>
