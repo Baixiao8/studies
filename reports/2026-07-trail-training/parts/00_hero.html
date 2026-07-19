@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>越野跑进阶训练 · 白笑</title>
+<meta name="description" content="从执行课表，到自我教练。写给严肃进阶越野跑者的训练方法学：自测诊断、负荷会计、强度分配、上下坡与环境的剂量学、周期设计与自我教练——把每一条原则落到剂量、时机与进阶三要素上。">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Shared stylesheet (design tokens + components + layout) -->
+<link rel="stylesheet" href="../../_shared/style.css?v=20260522b">
+<link rel="stylesheet" href="../../_shared/reader-bootstrap.css?v=20260524c">
+<!-- 《越野跑进阶训练》专属调色:岩灰纸底 + olive/volt(承《越野跑科学》同一视觉身份) -->
+<style>
+:root{
+  --bg:#e7e6de; --bg-soft:#e0ded3; --bg-card:#e0ded3; --bg-deep:#d7d5c6;
+  --line:#c3c2b3;
+  --accent:#5f7320; --accent-soft:#4e5f1a; --accent-deep:#38440f;
+  --c-theory:#5f7320; --c-injury:#5f7320; --c-race:#5f7320;
+  --volt:#93b327; --alarm:#b35a2a;
+}
+.bk-hero{ padding:90px 24px 64px; border-bottom:1px solid var(--line); }
+.bk-hero-inner{ max-width:var(--container-max); margin:0 auto; }
+.bk-kicker{ font-family:var(--ff-mono); font-size:12px; letter-spacing:0.14em; color:var(--ink-faint); margin-bottom:22px; }
+.bk-title{ font-family:var(--ff-sans); font-weight:800; font-size:clamp(48px,9vw,92px); line-height:1.02; color:var(--ink); margin:0; letter-spacing:0.02em; }
+.bk-rule{ width:80px; height:5px; background:var(--accent); margin:24px 0 22px; }
+.bk-sub{ font-size:18px; line-height:1.7; color:var(--ink-soft); max-width:640px; margin:0 0 24px; }
+.bk-author{ font-size:15px; color:var(--ink-faint); margin:0; }
+.bk-toc{ max-width:var(--container-max); margin:48px auto 36px; padding:0 24px; }
+.bk-toc-head{ font-family:var(--ff-sans); font-weight:700; font-size:24px; color:var(--ink); margin-bottom:8px; padding-bottom:14px; border-bottom:2px solid var(--accent); }
+.bk-toc-part{ font-family:var(--ff-mono); font-size:13px; letter-spacing:0.1em; color:var(--accent); margin:26px 0 6px; font-weight:600; }
+.bk-toc-item{ display:flex; align-items:baseline; gap:16px; padding:11px 6px; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink); }
+.bk-toc-item:hover{ background:var(--bg-soft); }
+.bk-toc-num{ font-family:var(--ff-serif); font-weight:600; font-size:15px; color:var(--accent); min-width:30px; }
+.bk-toc-title{ font-size:16.5px; line-height:1.4; }
+.bk-ladder{ max-width:var(--container-max); margin:0 auto 44px; padding:0 24px; }
+.bk-ladder-inner{ border:1px solid var(--line); background:var(--bg-soft); padding:26px 28px; }
+.bk-ladder-head{ font-family:var(--ff-mono); font-size:12px; letter-spacing:0.12em; color:var(--accent); margin-bottom:16px; font-weight:600; }
+.bk-ladder-row{ display:flex; gap:14px; align-items:baseline; padding:9px 0; border-bottom:1px dashed var(--line); font-size:15px; line-height:1.55; }
+.bk-ladder-row:last-child{ border-bottom:none; }
+.bk-ladder-lv{ font-family:var(--ff-mono); font-size:12.5px; color:var(--ink-faint); min-width:52px; }
+.bk-ladder-row.on{ background:rgba(147,179,39,0.14); margin:0 -10px; padding-left:10px; padding-right:10px; }
+.bk-ladder-row.on .bk-ladder-lv{ color:var(--accent-deep); font-weight:600; }
+.bk-ladder-note{ font-size:13.5px; color:var(--ink-faint); line-height:1.7; margin:16px 0 0; }
+</style>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header class="bk-hero">
+  <div class="bk-hero-inner">
+    <div class="bk-kicker">诊断 · 负荷 · 剂量 · 设计 — 一本写给严肃进阶越野跑者的训练方法学</div>
+    <h1 class="bk-title">越野跑进阶训练</h1>
+    <div class="bk-rule"></div>
+    <p class="bk-sub">从执行课表，到自我教练。<br>《越野跑科学》把山讲给你听，这一本教你把自己当成一个训练项目来管理。</p>
+    <p class="bk-author">白笑 著</p>
+  </div>
+</header>
+
+<section class="bk-ladder">
+  <div class="bk-ladder-inner">
+    <div class="bk-ladder-head">这本书接你在哪一级，送你到哪一级</div>
+    <div class="bk-ladder-row"><span class="bk-ladder-lv">一 级</span><span><strong>完赛者</strong>——目标是活着到终点，靠通用模板。</span></div>
+    <div class="bk-ladder-row on"><span class="bk-ladder-lv">二 级</span><span><strong>严肃进阶者</strong>——有配速与周期概念，但计划是套来的。<em>本书从这里接你。</em></span></div>
+    <div class="bk-ladder-row on"><span class="bk-ladder-lv">三 级</span><span><strong>自我教练者</strong>——能自我诊断、按赛道设计课表、按反馈迭代。<em>本书把你送到这里。</em></span></div>
+    <div class="bk-ladder-row"><span class="bk-ladder-lv">四 级</span><span><strong>精英 / 职业</strong>——全职结构 + 教练逐日个体化。本书只做参照，不做承诺。</span></div>
+    <p class="bk-ladder-note">为什么不承诺第四级：精英的训练方法并不神秘，也没被藏起来。但「进阶到精英」没有一套独立的方法论——分开两者的是训练量级、年限、天赋与支持系统。缺的不是一本更高级的书，是全职的人生结构。谁卖你「精英秘籍」，那是营销。</p>
+  </div>
+</section>
+
+<nav class="bk-toc">
+  <div class="bk-toc-head">目录</div>
+
+  <div class="bk-toc-part">序</div>
+  <a class="bk-toc-item" href="#s0"><span class="bk-toc-num">序</span><span class="bk-toc-title">从会跑山，到会练山</span></a>
+
+  <div class="bk-toc-part">第一篇 · 引擎的图纸</div>
+  <a class="bk-toc-item" href="#s1"><span class="bk-toc-num">01</span><span class="bk-toc-title">参数表上没有的那一栏</span></a>
+  <a class="bk-toc-item" href="#s2"><span class="bk-toc-num">02</span><span class="bk-toc-title">先给自己开一间校准室</span></a>
+  <a class="bk-toc-item" href="#s3"><span class="bk-toc-num">03</span><span class="bk-toc-title">三张地图，一片没人测绘的山</span></a>
+
+  <div class="bk-toc-part">第二篇 · 负荷的会计学</div>
+  <a class="bk-toc-item" href="#s4"><span class="bk-toc-num">04</span><span class="bk-toc-title">三本账：时长、爬升、离心</span></a>
+  <a class="bk-toc-item" href="#s5"><span class="bk-toc-num">05</span><span class="bk-toc-title">在自己身上建一座气象站</span></a>
+  <a class="bk-toc-item" href="#s6"><span class="bk-toc-num">06</span><span class="bk-toc-title">炉温不够，烧再久也不会硬</span></a>
+
+  <div class="bk-toc-part">第三篇 · 专项的手术刀</div>
+  <a class="bk-toc-item" href="#s7"><span class="bk-toc-num">07</span><span class="bk-toc-title">你那台发动机，缺的是变速箱</span></a>
+  <a class="bk-toc-item" href="#s8"><span class="bk-toc-num">08</span><span class="bk-toc-title">那支疫苗的说明书</span></a>
+  <a class="bk-toc-item" href="#s9"><span class="bk-toc-num">09</span><span class="bk-toc-title">借来的那副血</span></a>
+  <a class="bk-toc-item" href="#s10"><span class="bk-toc-num">10</span><span class="bk-toc-title">你不缺电，你缺一张调度表</span></a>
+
+  <div class="bk-toc-part">第四篇 · 赛季的设计学</div>
+  <a class="bk-toc-item" href="#s11"><span class="bk-toc-num">11</span><span class="bk-toc-title">同一副牌，不同的出法</span></a>
+  <a class="bk-toc-item" href="#s12"><span class="bk-toc-num">12</span><span class="bk-toc-title">赛道是出题人</span></a>
+  <a class="bk-toc-item" href="#s13"><span class="bk-toc-num">13</span><span class="bk-toc-title">拆脚手架的那两周</span></a>
+  <a class="bk-toc-item" href="#s14"><span class="bk-toc-num">14</span><span class="bk-toc-title">计划死于接触，然后你来领航</span></a>
+</nav>
+
+<main>
