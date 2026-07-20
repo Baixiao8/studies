@@ -28,7 +28,7 @@
 |---|---|---|---|---|---|---|
 | **2026-05** | 跑步科学深度调研 · 力学/生理/神经/训练/伤病/极限 | ~70K | 3.5h | 🎧 同步 | 12 张 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-running-science/) |
 | **2026-06** | 越野跑科学 · 写给大众越野跑者 · 上下坡力学/超长供能/补给/海拔/装备/训练/伤病/完赛 | ~130K | 6.2h | 🎧 同步 | 封面 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-06-trail-running/) |
-| **2026-07** | **越野跑进阶训练** · 从执行课表到自我教练 · 诊断/负荷会计/剂量学/赛季设计 · 前作纵深续作 | ~158K | 7.5h | 🎧 同步 | 封面 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-07-trail-training/) |
+| **2026-07** | **越野跑进阶训练** · 从执行课表到自我教练 · 自测诊断/负荷会计/上下坡与环境剂量学/赛季设计 | ~158K | 7.5h | 🎧 同步 | 封面 | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-07-trail-training/) |
 | **2026-05** | 康复科学深度调研 · 组织修复/疼痛/评估/八大伤区/回归赛场 | ~220K | 10.4h | (待生成) | (待生成) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-rehab-science/) |
 | **2026-05** | 野外生存深度调研 · 水/火/食/宿/行/救 · 中国温带山地林区版 | ~120K | 5.7h | (待生成) | (待生成) | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-outdoor-survival/) |
 | **2026-05** | Marathon Manual · 23 周冲击全马 sub-3 · 10 大模块 + ACWR 仪表盘 | (单页 SPA) | — | — | 10 张 hero | [🔗 在线阅读](https://baixiao8.github.io/studies/reports/2026-05-marathon/) |
