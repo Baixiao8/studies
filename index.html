@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDIES · 深度研究档案</title>
+<script>/* 主题早执行 · 防闪白 · 读全局偏好(同源 localStorage,报告页共享同一个键) */(function(){try{var t=localStorage.getItem('studies-theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+<meta name="description" content="一个持续累积的深度研究档案 · 跑步科学 · 康复科学 · Marathon Manual">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #f0ebdd;
+    --paper-soft: #ebe5d3;
+    --paper-deep: #e1d9bf;
+    --ink: #1a1a1a;
+    --ink-soft: #2c2c2c;
+    --ink-mid: #4a4a4a;
+    --ink-tertiary: #6e6e6e;
+    --ink-faint: #888888;
+    --line: #1a1a1a;
+    --line-soft: #c4bca4;
+    --red: #a8423b;
+    --blue: #1f3a5f;
+  }
+
+  /* ─── 暗黑主题 · 全局偏好(localStorage 同源共享,色值取自报告暗色原版)─── */
+  [data-theme="dark"] {
+    --paper: #0e0e0c;
+    --paper-soft: #1a1a17;
+    --paper-deep: #2e2e29;
+    --ink: #e8e4d8;
+    --ink-soft: #c8c4b8;
+    --ink-mid: #a39e8d;
+    --ink-tertiary: #8a8678;
+    --ink-faint: #6a665a;
+    --line: #52524a;
+    --line-soft: #2e2e29;
+    --red: #d57979;
+    --blue: #8fb8df;
+  }
+  [data-theme="dark"] body::before { opacity: 0.3; }
+  [data-theme="dark"] .report-card:hover { background: rgba(255,255,255,0.04); }
+
+  /* 主题切换按钮 */
+  .theme-toggle {
+    background: none; border: none; cursor: pointer;
+    font-size: 13px; padding: 0 0 0 10px; line-height: 1;
+    vertical-align: -1px; opacity: 0.6; transition: opacity 0.15s ease;
+  }
+  .theme-toggle:hover { opacity: 1; }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink-soft);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                 -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* 纸张纹理 · 极淡 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.012) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.012) 1px, transparent 1px);
+    background-size: 4px 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 32px 28px 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .headline {
+    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont,
+                 "PingFang SC", "Helvetica Neue", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+
+  .mono {
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── Masthead ─── */
+  .masthead-mini {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0 10px;
+    margin-bottom: 56px;
+    border-top: 1px solid var(--line);
+    border-bottom: 3px double var(--line);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--ink-mid);
+    text-transform: uppercase;
+  }
+  .masthead-mini .center { color: var(--red); }
+
+  /* ─── Hero ─── */
+  .hero {
+    margin-bottom: 64px;
+    padding-bottom: 36px;
+  }
+  .hero-kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 96px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .hero h1 .em {
+    font-style: italic;
+    font-weight: 700;
+  }
+  .hero-subtitle {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--ink-mid);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin-bottom: 30px;
+    max-width: 900px;
+  }
+  .hero-lede {
+    font-size: 17px;
+    line-height: 1.72;
+    color: var(--ink-soft);
+    max-width: 760px;
+  }
+  .hero-lede em { color: var(--ink); font-style: italic; font-weight: 500; }
+  .hero-lede strong { color: var(--red); font-weight: 700; }
+
+  /* ─── Section divider ─── */
+  .section-divider {
+    border: 0;
+    border-top: 3px double var(--line);
+    margin: 64px 0 36px;
+    position: relative;
+  }
+  .section-divider::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--paper);
+    padding: 0 22px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    color: var(--ink);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ─── Report List ─── */
+  .report-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .report-card {
+    display: grid;
+    grid-template-columns: 180px 1fr 140px;
+    align-items: center;
+    gap: 36px;
+    padding: 32px 8px 32px 0;
+    border-bottom: 1px solid var(--line-soft);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease, padding 0.15s ease;
+  }
+  .report-card:hover { background: rgba(0,0,0,0.025); padding-left: 16px; }
+  .report-card:last-child { border-bottom: 3px double var(--line); }
+
+  .report-meta-left .kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--red);
+    display: inline-block;
+  }
+  .report-meta-left .date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .report-body h2 {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .report-body .subtitle {
+    font-size: 15px;
+    color: var(--ink-mid);
+    line-height: 1.55;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+  .report-body .stats {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink-tertiary);
+  }
+  .report-body .stats .divider { margin: 0 8px; color: var(--ink-faint); }
+
+  .report-cta {
+    align-self: center;
+    text-align: right;
+  }
+  .report-cta .cta-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .report-card:hover .cta-text {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+  .report-cta .external-tag {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 2px 7px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+  .report-cta .epub-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--ink-mid);     /* 比"阅读"主 CTA 浅一档,做层级区分 */
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent;
+    border: none;              /* Ghost · 无边框 */
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+  .report-cta .epub-btn:hover {
+    color: var(--red);         /* hover 变红,跟"阅读"hover 行为一致 */
+  }
+
+  /* ─── WIP placeholder ─── */
+  .wip-card {
+    padding: 36px 8px;
+    border-bottom: 3px double var(--line);
+    text-align: center;
+    color: var(--ink-faint);
+  }
+  .wip-card .wip-kicker {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--ink-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .wip-card .wip-title {
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-mid);
+    margin-bottom: 8px;
+  }
+  .wip-card .wip-note {
+    font-size: 13px;
+    color: var(--ink-tertiary);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .wip-card .wip-tag {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 3px 9px;
+    text-transform: uppercase;
+  }
+
+  /* ─── Colophon ─── */
+  .colophon {
+    text-align: center;
+    padding: 56px 0 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    line-height: 1.9;
+  }
+  .colophon a { color: var(--ink-mid); text-decoration: underline; }
+  .colophon a:hover { color: var(--red); }
+  .colophon .sig {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--ink-mid);
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .page { padding: 20px 16px 40px; }
+    .masthead-mini { font-size: 9px; letter-spacing: 0.1em; gap: 8px; }
+    .hero h1 { font-size: 56px; }
+    .hero-subtitle { font-size: 19px; }
+    .hero-lede { font-size: 15px; }
+    .report-card {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 24px 0;
+    }
+    .report-card:hover { padding-left: 0; }
+    .report-cta { text-align: left; }
+    .report-body h2 { font-size: 26px; }
+    .section-divider::after { font-size: 9px; padding: 0 12px; }
+  }
+
+  /* ─── 封面墙 Cover Grid ─── */
+  .cover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+    gap: 40px 26px;
+    margin-top: 4px;
+  }
+  .cover-item { display: flex; flex-direction: column; }
+  .cover-thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--paper-deep);
+    border: 1px solid rgba(0,0,0,0.10);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.16), 0 8px 18px rgba(0,0,0,0.12);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .cover-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover-item:hover .cover-thumb {
+    transform: translateY(-5px);
+    box-shadow: 0 9px 0 rgba(0,0,0,0.18), 0 14px 26px rgba(0,0,0,0.18);
+  }
+  .cover-title {
+    font-family: "Inter Tight", "PingFang SC", sans-serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+    display: block;
+    margin: 14px 0 8px;
+  }
+  .cover-item:hover .cover-title { color: var(--red); }
+  .cover-epub {
+    margin-top: 9px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-tertiary);
+    text-decoration: none;
+    display: inline-block;
+  }
+  .cover-epub:hover { color: var(--red); }
+  @media (max-width: 600px) {
+    .cover-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+    .cover-title { font-size: 14.5px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- =========== MASTHEAD =========== -->
+  <div class="masthead-mini">
+    <div>STUDIES · DEEP RESEARCH ARCHIVE</div>
+    <div class="center">EST. 2026 · v9.0</div>
+    <div>白笑 · 编 <button class="theme-toggle" id="themeToggle" aria-label="切换深浅主题" title="切换深浅主题">🌙</button></div>
+  </div>
+
+  <!-- =========== HERO =========== -->
+  <header class="hero">
+    <div class="hero-kicker">A LONG-FORM RESEARCH PROJECT</div>
+    <h1 class="headline">深度研究<span class="em">档案</span></h1>
+    <p class="hero-subtitle">
+      Studies — Cross-discipline Research, Slowly Accumulated
+    </p>
+    <p class="hero-lede">
+      一个持续累积的深度研究档案。每份报告都是 <em>知识性视角</em> 下对某个具体主题的深度解构——
+      不是手册,不是清单,是 <strong>研究对象式的全景调查</strong>。
+    </p>
+  </header>
+
+  <!-- =========== I · SPORT SCIENCE =========== -->
+  <hr class="section-divider" data-label="◆ I · Sport Science · 运动科学">
+
+  <!--
+    加新报告步骤:
+    1. 在 reports/ 下新建报告目录 YYYY-MM-<slug>(参考 PRINCIPLES.md)
+    2. 在本版块下复制一个 <a class="report-card"> 卡片块,改 href + kicker + h2 + subtitle + stats + date
+    3. 外链(其他 GitHub Pages 子站 / 别人的站):加 target="_blank" + 在 report-cta 里加 <div class="external-tag">↗ 外站</div>
+    4. 完全新主题(非运动科学):新建 section,从 <hr class="section-divider"> 开始,放 .report-list 容器
+  -->
+
+  <div class="cover-grid">
+
+    <!-- 跑步科学 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-running-science/"><img src="reports/2026-05-running-science/assets/cover.jpg" alt="跑步科学深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-running-science/">跑步科学深度调研</a>
+      <a class="cover-epub" href="reports/2026-05-running-science/2026-05-running-science.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- 越野跑科学 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-06-trail-running/"><img src="reports/2026-06-trail-running/assets/cover.png" alt="越野跑科学" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-06-trail-running/">越野跑科学</a>
+      <a class="cover-epub" href="reports/2026-06-trail-running/2026-06-trail-running.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- 越野跑进阶训练 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-07-trail-training/"><img src="reports/2026-07-trail-training/assets/cover.png" alt="越野跑进阶训练" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-07-trail-training/">越野跑进阶训练</a>
+      <a class="cover-epub" href="reports/2026-07-trail-training/2026-07-trail-training.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- 康复科学 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-rehab-science/"><img src="reports/2026-05-rehab-science/assets/cover.jpg" alt="康复科学深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-rehab-science/">康复科学深度调研</a>
+      <a class="cover-epub" href="reports/2026-05-rehab-science/2026-05-rehab-science.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- 野外生存 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-outdoor-survival/"><img src="reports/2026-05-outdoor-survival/assets/cover.jpg" alt="野外生存深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-outdoor-survival/">野外生存深度调研</a>
+      <a class="cover-epub" href="reports/2026-05-outdoor-survival/2026-05-outdoor-survival.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- Marathon · 全马备战 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-marathon/"><img src="reports/2026-05-marathon/assets/cover.jpg" alt="Marathon Manual" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-marathon/">Marathon Manual</a>
+    </div>
+
+  </div>
+
+  <!-- =========== II · UX & PRODUCT =========== -->
+  <hr class="section-divider" data-label="◆ II · UX &amp; Product · 用户体验与产品">
+
+  <div class="cover-grid">
+
+    <!-- Mailchimp Voice and Tone -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-mailchimp-voice-tone/"><img src="reports/2026-05-mailchimp-voice-tone/assets/cover.jpg" alt="Mailchimp Voice and Tone 深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-mailchimp-voice-tone/">Mailchimp Voice and Tone 深度调研</a>
+    </div>
+
+    <!-- AI UX 之书 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-ai-ux-book/"><img src="reports/2026-05-ai-ux-book/assets/cover.jpg" alt="AI 时代的用户体验之书" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-ai-ux-book/">AI 时代的用户体验之书</a>
+      <a class="cover-epub" href="reports/2026-05-ai-ux-book/2026-05-ai-ux-book.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- 思考进化 · Cognitive Evolution -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-thinking-evolution/"><img src="reports/2026-05-thinking-evolution/assets/cover.jpg" alt="思考进化 · Cognitive Evolution" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-thinking-evolution/">思考进化 · Cognitive Evolution</a>
+    </div>
+
+  </div>
+
+  <!-- =========== III · AI ENGINEERING =========== -->
+  <hr class="section-divider" data-label="◆ III · AI Engineering · AI 工程">
+
+  <div class="cover-grid">
+
+    <!-- 看懂 AI · 入门书 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-06-ai-primer/"><img src="reports/2026-06-ai-primer/assets/cover.jpg" alt="看懂 AI" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-06-ai-primer/">看懂 AI</a>
+      <a class="cover-epub" href="reports/2026-06-ai-primer/2026-06-ai-primer.epub" download>📥 EPUB</a>
+    </div>
+
+    <!-- Anthropic 与 Claude 深度调研 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-anthropic-academy/"><img src="reports/2026-05-anthropic-academy/assets/cover.jpg" alt="Anthropic 与 Claude 深度调研" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-anthropic-academy/">Anthropic 与 Claude 深度调研</a>
+    </div>
+
+    <!-- Skills 构建指南 -->
+    <div class="cover-item">
+      <a class="cover-thumb" href="reports/2026-05-skills-building-guide/"><img src="reports/2026-05-skills-building-guide/assets/cover.jpg" alt="Skills 构建指南 · 中文化对照" loading="lazy"></a>
+      <a class="cover-title" href="reports/2026-05-skills-building-guide/">Skills 构建指南 · 中文化对照</a>
+    </div>
+
+  </div>
+
+  <!-- =========== COLOPHON =========== -->
+  <div class="colophon">
+    Studies · A long-form research archive · 持续累积中<br>
+    <a href="https://github.com/Baixiao8/studies" target="_blank" rel="noopener">github.com/Baixiao8/studies</a>
+    <div class="sig">白笑 · 编 · 2026 年 5 月</div>
+  </div>
+
+</div>
+
+<script>
+  // 卡片整体可点击,但 EPUB 按钮独立 link 不冒泡
+  // (HTML5 不允许 <a> 嵌套 <a>,所以用 JS 模拟卡片 link)
+  document.querySelectorAll('.report-card[data-href]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      // 点 EPUB 按钮(或其内部元素)不触发整卡跳转
+      if (e.target.closest('.epub-btn')) return;
+      var href = card.dataset.href;
+      if (card.dataset.target === '_blank') {
+        window.open(href, '_blank', 'noopener');
+      } else {
+        window.location.href = href;
+      }
+    });
+  });
+
+  // EPUB 下载文件名 · 从卡片 <h2> 自动设 download attribute(=书本名)
+  // URL 保持 slug.epub(稳定),但浏览器保存时用书本名,如「AI 时代的用户体验之书.epub」
+  document.querySelectorAll('.epub-btn').forEach(function(btn) {
+    var card = btn.closest('.report-card');
+    if (!card) return;
+    var h2 = card.querySelector('h2');
+    if (h2 && h2.textContent.trim()) {
+      btn.setAttribute('download', h2.textContent.trim() + '.epub');
+    }
+  });
+
+  // ─── 主题切换 + 持久化 · 全局开关(写 localStorage,报告页读同一个键自动跟随)───
+  (function(){
+    var btn = document.getElementById('themeToggle');
+    function sync(){
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (btn) btn.textContent = dark ? '☀️' : '🌙';
+    }
+    sync();
+    if (btn) btn.addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('studies-theme', next); } catch(e){}
+      sync();
+    });
+  })();
+</script>
+</body>
+</html>
