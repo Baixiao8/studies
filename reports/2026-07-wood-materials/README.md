@@ -2,9 +2,10 @@
 
 > 木板材通识报告：从木材基础（软硬木、Janka 硬度、含水率与胀缩）到常见木种图鉴、人造板与环保等级、按用途选材、加工使用规矩——为白笑后续上手木工与选购板材打底。
 
-- **当前版本**：v0.2
+- **当前版本**：v0.3
 - **最近更新**：2026-07-22
-- **入口**：./index.html（对外分享用 ./index-standalone.html，图片已内嵌）
+- **入口**：[在线阅读](https://baixiao8.github.io/studies/reports/2026-07-wood-materials/) · 本地 ./index.html（对外分享用 ./index-standalone.html，图片已内嵌）
+- **分区**：studies · IV 手作与材料
 
 ## 内容结构
 
