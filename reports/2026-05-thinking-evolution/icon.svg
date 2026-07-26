@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="UX Book App Icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d2240"/>
+      <stop offset="55%" stop-color="#142e54"/>
+      <stop offset="100%" stop-color="#0d1d3a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.25" cy="0.18" r="0.6">
+      <stop offset="0%" stop-color="rgba(212,169,72,0.18)"/>
+      <stop offset="100%" stop-color="rgba(212,169,72,0)"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0d287"/>
+      <stop offset="50%" stop-color="#d4a948"/>
+      <stop offset="100%" stop-color="#a3811f"/>
+    </linearGradient>
+    <filter id="ink" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="6" result="shadow"/>
+      <feFlood flood-color="#0a1b35" flood-opacity="0.55"/>
+      <feComposite in2="shadow" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- rounded square background (iOS-22% radius) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="226" ry="226" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1024" height="1024" rx="226" ry="226" fill="url(#glow)"/>
+
+  <!-- subtle paper-page edge on the right (book hint) -->
+  <path d="M 798 168 Q 822 184 822 218 L 822 806 Q 822 840 798 856" fill="none" stroke="#d4a948" stroke-width="2.2" stroke-opacity="0.35"/>
+  <path d="M 818 200 L 818 824" stroke="#d4a948" stroke-width="1.4" stroke-opacity="0.22"/>
+
+  <!-- monogram U X overlapping, serif Fraunces-like -->
+  <g filter="url(#ink)" font-family="'Fraunces','Noto Serif SC',Georgia,serif" font-weight="700" fill="url(#gold)">
+    <!-- U -->
+    <text x="356" y="650" font-size="540" text-anchor="middle" font-style="italic">U</text>
+    <!-- X overlapping right -->
+    <text x="668" y="650" font-size="540" text-anchor="middle" font-style="italic">X</text>
+  </g>
+
+  <!-- bottom hairline divider (book spine binding) -->
+  <line x1="232" y1="780" x2="792" y2="780" stroke="#d4a948" stroke-width="3" stroke-opacity="0.55"/>
+  <circle cx="512" cy="780" r="7" fill="#d4a948" fill-opacity="0.9"/>
+
+  <!-- top eyebrow text -->
+  <text x="512" y="220" text-anchor="middle"
+        font-family="'Inter','SF Pro','Helvetica Neue',sans-serif" font-size="46"
+        letter-spacing="14" font-weight="600" fill="#d4a948" fill-opacity="0.75">THE UX BOOK</text>
+
+  <!-- bottom subtitle ribbon -->
+  <text x="512" y="900" text-anchor="middle"
+        font-family="'Noto Serif SC','Inter',serif" font-size="64"
+        font-weight="700" fill="#f5efe2">用户体验之书</text>
+
+  <!-- corner sparkles -->
+  <g fill="#d4a948" fill-opacity="0.6">
+    <circle cx="170" cy="170" r="5"/>
+    <circle cx="190" cy="190" r="2.5"/>
+    <circle cx="854" cy="170" r="3"/>
+    <circle cx="160" cy="854" r="3"/>
+  </g>
+</svg>

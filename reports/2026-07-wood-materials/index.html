@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>木板材通识 · 从认识一棵树到选对一块板</title>
+<style>
+  :root{
+    --ink:#292524;        /* 主文字 */
+    --ink-soft:#57534E;   /* 次级文字 */
+    --paper:#FAF7F2;      /* 页面底 */
+    --card:#FFFFFF;
+    --line:#E7E0D8;       /* 描边与硬底阴影 */
+    --indigo:#4F46E5;     /* 锚点色 */
+    --indigo-soft:#EEF2FF;
+    --green:#16A34A;      /* 数据色·正向 */
+    --orange:#EA580C;     /* 数据色·警示 */
+    --wood:#8B5E3C;       /* 木色·仅用于木材相关点缀 */
+    --wood-soft:#F4EDE4;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Nunito","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:21px;
+    line-height:1.85;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px;}
+  p{margin:0 0 22px;}
+  strong{font-weight:800;}
+  em{font-style:normal;font-weight:800;color:var(--indigo);}
+
+  /* ---------- 头部 ---------- */
+  header{padding:96px 0 56px;}
+  .kicker{
+    display:inline-block;background:var(--indigo);color:#fff;
+    font-size:18px;font-weight:800;letter-spacing:2px;
+    padding:6px 18px;border-radius:999px;margin-bottom:28px;
+  }
+  h1{
+    font-size:clamp(48px,9vw,86px);
+    line-height:1.15;font-weight:900;letter-spacing:1px;
+  }
+  .subtitle{font-size:24px;color:var(--ink-soft);margin-top:22px;max-width:640px;}
+  .meta{font-size:18px;color:var(--ink-soft);margin-top:30px;}
+
+  /* ---------- 章节 ---------- */
+  section{padding:48px 0 24px;}
+  h2{
+    font-size:40px;font-weight:900;line-height:1.3;
+    margin:24px 0 12px;
+  }
+  h2 .no{
+    display:inline-block;background:var(--wood);color:#fff;border-radius:12px;
+    font-size:24px;padding:2px 16px;margin-right:14px;vertical-align:6px;
+  }
+  h3{font-size:27px;font-weight:900;margin:44px 0 16px;}
+  .lede{font-size:22px;color:var(--ink-soft);margin-bottom:34px;max-width:700px;}
+
+  /* ---------- 卡片 ---------- */
+  .card{
+    background:var(--card);border:2px solid var(--line);border-radius:18px;
+    box-shadow:0 5px 0 var(--line);
+    padding:28px 30px;margin:0 0 26px;
+  }
+  .callout{
+    background:var(--wood-soft);border:2px solid var(--wood);
+    border-radius:18px;box-shadow:0 5px 0 var(--wood);
+    padding:22px 28px;margin:30px 0;
+  }
+  .callout .tag{
+    display:inline-block;font-size:18px;font-weight:900;color:#fff;
+    background:var(--wood);border-radius:8px;padding:1px 12px;margin-bottom:10px;
+  }
+  .callout p:last-child{margin-bottom:0;}
+
+  /* ---------- TL;DR 与目录 ---------- */
+  .tldr{background:var(--indigo-soft);border:2px solid var(--indigo);
+    box-shadow:0 5px 0 var(--indigo);border-radius:18px;padding:30px 32px;margin:12px 0 40px;}
+  .tldr h3{margin:0 0 14px;font-size:24px;color:var(--indigo);}
+  .tldr ol{padding-left:26px;}
+  .tldr li{margin-bottom:10px;}
+  .toc{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 20px;}
+  .toc a{
+    display:inline-block;text-decoration:none;color:var(--ink);
+    background:var(--card);border:2px solid var(--line);box-shadow:0 4px 0 var(--line);
+    border-radius:999px;padding:8px 20px;font-size:19px;font-weight:800;
+  }
+  .toc a:hover{border-color:var(--indigo);color:var(--indigo);}
+
+  /* ---------- 表格 ---------- */
+  .tbl-scroll{overflow-x:auto;margin:26px 0;}
+  table{border-collapse:collapse;width:100%;min-width:640px;background:var(--card);
+    border:2px solid var(--line);border-radius:14px;overflow:hidden;font-size:19px;}
+  th{background:var(--indigo);color:#fff;font-weight:800;text-align:left;padding:12px 16px;font-size:19px;}
+  td{padding:12px 16px;border-top:1px solid var(--line);vertical-align:top;line-height:1.7;}
+  tr:nth-child(even) td{background:#FCFAF7;}
+  .tbl-note{font-size:18px;color:var(--ink-soft);margin:-14px 0 30px;}
+
+  /* ---------- 数据条(Janka 图) ---------- */
+  .chart{margin:30px 0 10px;}
+  .chart-title{font-size:24px;font-weight:900;margin-bottom:4px;}
+  .chart-sub{font-size:18px;color:var(--ink-soft);margin-bottom:22px;}
+  .bar-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+  .bar-name{flex:0 0 128px;font-size:19px;font-weight:800;text-align:right;}
+  .bar-track{flex:1;background:#F1ECE4;border-radius:8px;height:30px;position:relative;}
+  .bar-fill{height:100%;border-radius:8px;background:var(--wood);}
+  .bar-fill.soft{background:var(--green);}
+  .bar-fill.hard{background:var(--indigo);}
+  .bar-val{position:absolute;right:10px;top:0;line-height:30px;font-size:18px;font-weight:800;color:var(--ink-soft);}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;font-size:18px;color:var(--ink-soft);margin:16px 0 8px;}
+  .legend span{display:inline-flex;align-items:center;gap:8px;}
+  .dot{width:14px;height:14px;border-radius:4px;display:inline-block;}
+  .chart-foot{font-size:18px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:12px;margin-top:14px;}
+  .chart-insight{font-size:19px;font-weight:800;margin-top:10px;}
+
+  /* ---------- 木种卡 ---------- */
+  .wood-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:28px 0;}
+  @media(max-width:760px){.wood-grid{grid-template-columns:1fr;}}
+  .wood-card{
+    background:var(--card);border:2px solid var(--line);border-radius:18px;
+    box-shadow:0 5px 0 var(--line);padding:24px 26px;
+  }
+  .wood-head{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+  .swatch{width:44px;height:44px;border-radius:12px;border:2px solid var(--line);flex:0 0 44px;}
+  .wood-name{font-size:24px;font-weight:900;line-height:1.3;}
+  .wood-en{font-size:18px;color:var(--ink-soft);font-weight:700;}
+  .tree-photo{width:100%;height:auto;border-radius:12px;border:2px solid var(--line);margin:2px 0 6px;display:block;}
+  .photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2px 0 12px;}
+  .photo-pair figure{margin:0;}
+  .photo-pair img{width:100%;height:auto;border-radius:12px;border:2px solid var(--line);display:block;}
+  .photo-pair figcaption{font-size:18px;color:var(--ink-soft);margin-top:4px;text-align:center;}
+  .origin{font-size:19px;color:var(--ink-soft);margin:0 0 12px;padding-left:12px;border-left:4px solid var(--wood);}
+  .stat-line{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px;}
+  .stat{
+    font-size:18px;font-weight:800;background:var(--wood-soft);
+    border-radius:8px;padding:2px 12px;color:var(--ink);
+  }
+  .stat.price{background:var(--indigo-soft);color:var(--indigo);}
+  .wood-card p{font-size:19px;margin-bottom:10px;}
+  .use{color:var(--green);font-weight:800;}
+  .avoid{color:var(--orange);font-weight:800;}
+
+  /* ---------- 示意图与实物图 ---------- */
+  .figure{margin:28px 0;}
+  .figure svg{width:100%;height:auto;display:block;}
+  .fig-cap{font-size:18px;color:var(--ink-soft);margin-top:10px;line-height:1.6;}
+  .wood-photo{width:100%;height:auto;border-radius:12px;border:2px solid var(--line);margin:2px 0 14px;display:block;background:var(--wood-soft);}
+  .card-photo{float:right;width:36%;max-width:300px;margin:4px 0 14px 22px;border-radius:12px;border:2px solid var(--line);background:var(--wood-soft);}
+  .card::after{content:"";display:block;clear:both;}
+  .warp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0 8px;}
+  @media(max-width:760px){.warp-grid{grid-template-columns:repeat(2,1fr);}}
+  .warp-item{text-align:center;background:var(--card);border:2px solid var(--line);border-radius:14px;box-shadow:0 4px 0 var(--line);padding:16px 10px 12px;}
+  .warp-item svg{width:100%;height:64px;display:block;}
+  .warp-name{font-weight:900;font-size:19px;margin-top:8px;}
+  .warp-note{font-size:18px;color:var(--ink-soft);line-height:1.55;}
+
+  /* ---------- 板材剖面示意 ---------- */
+  .board-demo{display:flex;flex-direction:column;gap:4px;margin:18px 0 8px;}
+  .ply{height:22px;border-radius:6px;border:1px solid var(--line);}
+  .demo-label{font-size:18px;color:var(--ink-soft);margin-bottom:18px;}
+
+  footer{padding:56px 0 90px;color:var(--ink-soft);font-size:19px;}
+  footer .card p{font-size:19px;}
+  .footline{margin-top:34px;font-size:18px;border-top:1px dashed var(--line);padding-top:20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">报告库 · 木材知识 v0.2</div>
+    <h1>木板材通识</h1>
+    <p class="subtitle">从认识一棵树，到选对一块板，再到别把它用坏——写给准备真正上手木头的白笑。</p>
+    <p class="meta">2026-07-20 初版 · 2026-07-22 可视化升级 · 阅读约 40 分钟 · 硬度与密度数据取自 The Wood Database 等通行参考值，价格档为国内市场粗略分档</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="tldr">
+    <h3>先给结论（急用先看这五条）</h3>
+    <ol>
+      <li><strong>软木硬木不是按手感分的</strong>——针叶树出软木、阔叶树出硬木，真要比硬度看 Janka 数值：松木约 <strong>500</strong>，硬枫约 <strong>1450</strong>，差近三倍。</li>
+      <li><strong>木头永远在动</strong>。含水率随环境湿度变，宽度方向能胀缩百分之几，长度方向几乎不动——开裂变形十有八九是设计没给它留活路，不是木头「质量差」。</li>
+      <li><strong>做面选硬稳（白蜡、白橡、黑胡桃），做柜体选人造板（多层板、ENF 级颗粒板），做砧板选硬枫或竹</strong>——没有万能木，只有对号入座。</li>
+      <li><strong>人造板的核心变量是胶</strong>。环保等级认 GB/T 39600 的 ENF ＜ E0 ＜ E1，数字越小越好；「无醛添加」指胶不加甲醛，不是零甲醛。</li>
+      <li>三个高频坑：<strong>橡胶木不是橡木</strong>、<strong>南美胡桃木不是黑胡桃</strong>、<strong>红橡导管是开放的，别拿它碰水</strong>。</li>
+    </ol>
+  </div>
+
+  <nav class="toc">
+    <a href="#ch1">① 木材基础</a>
+    <a href="#ch2">② 常见木种图鉴</a>
+    <a href="#ch3">③ 人造板材</a>
+    <a href="#ch4">④ 怎么选</a>
+    <a href="#ch5">⑤ 怎么用</a>
+    <a href="#src">来源与局限</a>
+  </nav>
+
+  <!-- ================= 第一章 ================= -->
+  <section id="ch1">
+    <h2><span class="no">①</span>木材基础：先弄懂它是个什么东西</h2>
+    <p class="lede">这一章解决一个问题：木头为什么会硬、会翘、会裂。弄懂了，后面所有「怎么选、怎么用」都是推论。</p>
+
+    <h3>1.1 一根树干的横截面</h3>
+    <p>把一根树干锯断，从外往里依次是：树皮、形成层（cambium，负责长粗的活细胞层）、<strong>边材</strong>（sapwood，还在运水的浅色外圈）、<strong>心材</strong>（heartwood，已经退休的深色内芯），最中间是髓心。</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="树干横截面示意">
+        <circle cx="215" cy="180" r="158" fill="#5C4A3D"/>
+        <circle cx="215" cy="180" r="146" fill="#E8DCC8"/>
+        <circle cx="215" cy="180" r="132" fill="none" stroke="#BFA88C" stroke-width="3"/>
+        <circle cx="215" cy="180" r="118" fill="none" stroke="#BFA88C" stroke-width="3"/>
+        <circle cx="215" cy="180" r="100" fill="#A5816C"/>
+        <circle cx="215" cy="180" r="82" fill="none" stroke="#8B5E3C" stroke-width="3"/>
+        <circle cx="215" cy="180" r="62" fill="none" stroke="#8B5E3C" stroke-width="3"/>
+        <circle cx="215" cy="180" r="40" fill="none" stroke="#8B5E3C" stroke-width="3"/>
+        <circle cx="215" cy="180" r="7" fill="#5C4A3D"/>
+        <line x1="215" y1="28" x2="452" y2="52" stroke="#57534E" stroke-width="2"/>
+        <text x="462" y="58" font-size="19" fill="#292524" font-weight="700">树皮＋形成层：负责长粗</text>
+        <line x1="330" y1="112" x2="452" y2="112" stroke="#57534E" stroke-width="2"/>
+        <text x="462" y="118" font-size="19" fill="#292524" font-weight="700">边材：浅色，还在运水，易蛀</text>
+        <line x1="285" y1="180" x2="452" y2="180" stroke="#57534E" stroke-width="2"/>
+        <text x="462" y="186" font-size="19" fill="#292524" font-weight="700">心材：深色，耐腐更稳定</text>
+        <line x1="222" y1="184" x2="452" y2="244" stroke="#57534E" stroke-width="2"/>
+        <text x="462" y="250" font-size="19" fill="#292524" font-weight="700">髓心：最中心，做料要避开</text>
+        <line x1="248" y1="271" x2="452" y2="310" stroke="#57534E" stroke-width="2"/>
+        <text x="462" y="316" font-size="19" fill="#292524" font-weight="700">年轮：一深一浅为一年</text>
+      </svg>
+      <div class="fig-cap">树干横截面的五个部位。示意图来源：本报告按木材学通行结构自绘。</div>
+    </div>
+    <p>对做东西的人来说，这里面只有两个词要记：<em>心材</em>和<em>边材</em>。心材细胞停止工作后，会沉积树脂、单宁这类填充物，所以颜色更深、更耐腐、更稳定——黑胡桃那种巧克力色、白橡的耐水，都是心材的功劳。边材颜色浅、含水多、容易被虫蛀。买黑胡桃板时看到板边缘有一条发白的窄带，那就是边材，正经桌面料会把它裁掉或压低价格。</p>
+    <p>年轮则是「一年长一圈」的产物：春天长得快、细胞壁薄，叫早材，颜色浅；夏秋长得慢、细胞壁厚，叫晚材，颜色深。一深一浅，就是你看到的纹理。年轮越密，通常意味着这棵树长得越慢、材质越紧实——同是松木，慢生长的樟子松就比速生的辐射松紧实一些。</p>
+
+    <h3>1.2 软木和硬木，不是按软硬分的</h3>
+    <p>这是木材知识里第一个反直觉的点。<strong>软木（softwood）＝针叶树的木材</strong>，松、杉、云杉、雪松都算；<strong>硬木（hardwood）＝阔叶树的木材</strong>，橡木、枫木、胡桃木、榉木都算。这是植物学分类，不是硬度分级。</p>
+    <p>大多数时候硬木确实更硬，但反例不少：轻木（balsa，全世界最软的商用木材）是正经「硬木」，而有些针叶材比部分阔叶材还硬。所以判断一块木头到底硬不硬，别看它叫什么，看数据——也就是下一节的 Janka 硬度。</p>
+
+    <h3>1.3 Janka 硬度：木材界的通用考分</h3>
+    <p>Janka 硬度（Janka hardness，把一颗直径约 11.3 毫米的钢球压进木面一半深度所需要的力）是全世界通用的木材硬度指标，常用单位是磅力（lbf）。数字越大越抗压、越抗划。</p>
+    <p>给你几个锚点建立体感：松木大约 <strong>400 到 700</strong>，属于指甲用力能掐出印的级别；橡胶木、黑胡桃在 <strong>1000</strong> 上下，日常家具够用；红橡、白蜡、白橡挤在 <strong>1200 到 1400</strong> 一档，是桌面和地板的主力区间；硬枫 <strong>1450</strong>，所以 NBA 球场和砧板都用它。第二章的图鉴里每种木头都标了这个数。</p>
+    <p>但硬度不是越高越好。越硬通常越重、越难加工、越贵，钉子进去也越费劲。做抽屉内胆用 300 分的桐木恰到好处，用 1450 分的硬枫属于炫技。</p>
+
+    <h3>1.4 含水率：木头一辈子都在呼吸</h3>
+    <p>木头是吸湿性材料——它会不停地和空气交换水分，直到跟环境湿度打平，这个平衡点叫<strong>平衡含水率</strong>（EMC，equilibrium moisture content）。国内室内环境的平衡含水率大致在 <strong>8% 到 15%</strong> 之间浮动：北方冬天供暖季能干到 6% 上下，南方梅雨季能湿到 15% 以上。</p>
+    <p>麻烦在于：含水率变，尺寸就变。而且三个方向变得极不均匀——</p>
+    <div class="card">
+      <p style="margin-bottom:8px"><strong>顺纹方向（沿树干长度）</strong>：几乎不动，胀缩约 <strong>0.1%</strong>，可以忽略。</p>
+      <p style="margin-bottom:8px"><strong>径向（沿半径、垂直年轮）</strong>：胀缩约 <strong>3% 到 5%</strong>。</p>
+      <p style="margin-bottom:0"><strong>弦向（沿年轮切线）</strong>：最能折腾，胀缩约 <strong>6% 到 10%</strong>，大约是径向的两倍。</p>
+    </div>
+
+    <div class="figure">
+      <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="木板三个方向的胀缩示意">
+        <defs>
+          <marker id="ah" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#EA580C"/>
+          </marker>
+        </defs>
+        <path d="M110,190 L520,190 L610,120 L200,120 Z" fill="#E8DCC8" stroke="#8B5E3C" stroke-width="2"/>
+        <path d="M110,190 L520,190 L520,228 L110,228 Z" fill="#D7C4AE" stroke="#8B5E3C" stroke-width="2"/>
+        <path d="M520,190 L610,120 L610,158 L520,228 Z" fill="#BFA88C" stroke="#8B5E3C" stroke-width="2"/>
+        <path d="M225,183 L610,127" stroke="#BFA88C" stroke-width="2" fill="none"/>
+        <path d="M155,185 L340,127 M420,183 L560,124" stroke="#BFA88C" stroke-width="2" fill="none" opacity="0.7"/>
+        <line x1="130" y1="266" x2="500" y2="266" stroke="#EA580C" stroke-width="3" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text x="315" y="298" font-size="19" fill="#292524" font-weight="800" text-anchor="middle">长度 · 顺纹 ≈ 0.1%（忽略不计）</text>
+        <line x1="120" y1="158" x2="185" y2="107" stroke="#EA580C" stroke-width="3" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text x="150" y="66" font-size="19" fill="#292524" font-weight="800">宽度 · 弦向 6–10%</text>
+        <text x="150" y="90" font-size="18" fill="#57534E">变形开裂的主战场</text>
+        <line x1="648" y1="120" x2="648" y2="160" stroke="#EA580C" stroke-width="3" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text x="712" y="105" font-size="19" fill="#292524" font-weight="800" text-anchor="end">厚度 · 径向 3–5%</text>
+      </svg>
+      <div class="fig-cap">一块弦切板的三向胀缩：宽度方向是长度方向的几十倍——所有「留活路」的设计都冲着宽度去。数字为生材到全干的总干缩率通行区间，来源：木材科学教科书常见值；示意图自绘。</div>
+    </div>
+    <p>这组数字是全部木工设计的地基。一块 800 毫米宽的实木桌面，从梅雨季到供暖季，宽度方向真实变化能有好几毫米——你把它四边框死、跟横向的木条硬粘，它胀的时候就顶裂框，缩的时候就自己拉裂自己。<em>木头开裂多数不是木头的错，是设计没给它留活路。</em>第五章讲具体怎么留。</p>
+
+    <h3>1.5 弦切、径切：同一根木头锯出两种性格</h3>
+    <p>同一根原木，下锯方式不同，出来的板性格完全不同。<strong>弦切板</strong>（plain sawn，刀路沿年轮切线）出材率高、便宜，板面是山峰状的「大花纹」，但因为板面正对弦向，最容易杯翘变形。<strong>径切板</strong>（quarter sawn，刀路穿过圆心）板面是平行的直纹，尺寸稳定得多，但出材率低、价格高，常用在乐器、高档地板和讲究的桌面上。</p>
+    <div class="figure">
+      <svg viewBox="0 0 720 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="弦切与径切的下锯方式与纹理对比">
+        <circle cx="170" cy="120" r="95" fill="#E8DCC8" stroke="#8B5E3C" stroke-width="3"/>
+        <circle cx="170" cy="120" r="66" fill="none" stroke="#BFA88C" stroke-width="2"/>
+        <circle cx="170" cy="120" r="38" fill="none" stroke="#BFA88C" stroke-width="2"/>
+        <line x1="80" y1="76" x2="260" y2="76" stroke="#57534E" stroke-width="2.5"/>
+        <line x1="76" y1="106" x2="264" y2="106" stroke="#57534E" stroke-width="2.5"/>
+        <line x1="76" y1="136" x2="264" y2="136" stroke="#57534E" stroke-width="2.5"/>
+        <line x1="82" y1="166" x2="258" y2="166" stroke="#57534E" stroke-width="2.5"/>
+        <text x="170" y="252" font-size="20" fill="#292524" font-weight="800" text-anchor="middle">弦切：一刀到底，出材率高</text>
+        <path d="M85,272 L255,272 L255,306 L85,306 Z" fill="#E8DCC8" stroke="#8B5E3C" stroke-width="2"/>
+        <path d="M100,306 Q135,272 170,306 M130,306 Q170,258 210,306 M160,306 Q200,272 240,306" stroke="#A5816C" stroke-width="2.5" fill="none"/>
+        <text x="170" y="328" font-size="18" fill="#57534E" text-anchor="middle">板面是山峰大花纹 · 易杯翘</text>
+        <circle cx="550" cy="120" r="95" fill="#E8DCC8" stroke="#8B5E3C" stroke-width="3"/>
+        <circle cx="550" cy="120" r="66" fill="none" stroke="#BFA88C" stroke-width="2"/>
+        <circle cx="550" cy="120" r="38" fill="none" stroke="#BFA88C" stroke-width="2"/>
+        <line x1="550" y1="25" x2="550" y2="215" stroke="#57534E" stroke-width="2.5"/>
+        <line x1="484" y1="52" x2="616" y2="188" stroke="#57534E" stroke-width="2.5"/>
+        <line x1="484" y1="188" x2="616" y2="52" stroke="#57534E" stroke-width="2.5"/>
+        <line x1="455" y1="120" x2="645" y2="120" stroke="#57534E" stroke-width="2.5"/>
+        <text x="550" y="252" font-size="20" fill="#292524" font-weight="800" text-anchor="middle">径切：刀路过圆心，出材率低</text>
+        <path d="M465,272 L635,272 L635,306 L465,306 Z" fill="#E8DCC8" stroke="#8B5E3C" stroke-width="2"/>
+        <line x1="485" y1="272" x2="485" y2="306" stroke="#A5816C" stroke-width="2.5"/>
+        <line x1="510" y1="272" x2="510" y2="306" stroke="#A5816C" stroke-width="2.5"/>
+        <line x1="535" y1="272" x2="535" y2="306" stroke="#A5816C" stroke-width="2.5"/>
+        <line x1="560" y1="272" x2="560" y2="306" stroke="#A5816C" stroke-width="2.5"/>
+        <line x1="585" y1="272" x2="585" y2="306" stroke="#A5816C" stroke-width="2.5"/>
+        <line x1="610" y1="272" x2="610" y2="306" stroke="#A5816C" stroke-width="2.5"/>
+        <text x="550" y="328" font-size="18" fill="#57534E" text-anchor="middle">板面是平行直纹 · 稳定贵价</text>
+      </svg>
+      <div class="fig-cap">同一根原木的两种下锯方式，决定了板子的纹理和脾气。示意图来源：本报告按制材学通行画法自绘。</div>
+    </div>
+
+    <p>买板时认纹路就能分辨：大山纹＝弦切，密直纹＝径切。同一批板里挑直纹多的，稳定性白赚一截。</p>
+
+    <div class="callout">
+      <span class="tag">避坑</span>
+      <p>「实木不如人造板稳定」这句话是真的，而且不丢人。实木在动，人造板用交叉结构或碎料互相锁死了这种运动。所以大平面（柜体侧板、门板芯）工业界几乎都用人造板，实木负责露脸的桌面、腿脚和框架。<strong>全屋纯实木不是消费升级，很多时候是给自己埋变形的雷。</strong></p>
+    </div>
+  </section>
+
+  <!-- ================= 第二章 ================= -->
+  <section id="ch2">
+    <h2><span class="no">②</span>常见木种图鉴：十二张身份证</h2>
+    <p class="lede">国内市面上你真会碰到的木头就这十来种。每张卡给四个数：Janka 硬度、密度、价格档（¥ 到 ¥¥¥¥）、稳定性，再加一句「适合」和一句「别拿它」。</p>
+
+    <div class="chart">
+      <div class="chart-title">Janka 硬度一览：从桐木到硬枫，差近五倍</div>
+      <div class="chart-sub">单位：磅力（lbf）· 数值为通行参考值，同种木头因产地批次会有约 ±10% 浮动</div>
+      <div class="bar-row"><div class="bar-name">桐木</div><div class="bar-track"><div class="bar-fill soft" style="width:21%"></div><span class="bar-val">约 300</span></div></div>
+      <div class="bar-row"><div class="bar-name">杉木</div><div class="bar-track"><div class="bar-fill soft" style="width:24%"></div><span class="bar-val">约 340</span></div></div>
+      <div class="bar-row"><div class="bar-name">樟子松</div><div class="bar-track"><div class="bar-fill soft" style="width:37%"></div><span class="bar-val">约 540</span></div></div>
+      <div class="bar-row"><div class="bar-name">樱桃木</div><div class="bar-track"><div class="bar-fill" style="width:66%"></div><span class="bar-val">约 950</span></div></div>
+      <div class="bar-row"><div class="bar-name">橡胶木</div><div class="bar-track"><div class="bar-fill" style="width:69%"></div><span class="bar-val">约 1000</span></div></div>
+      <div class="bar-row"><div class="bar-name">黑胡桃</div><div class="bar-track"><div class="bar-fill" style="width:70%"></div><span class="bar-val">约 1010</span></div></div>
+      <div class="bar-row"><div class="bar-name">红橡</div><div class="bar-track"><div class="bar-fill hard" style="width:84%"></div><span class="bar-val">约 1220</span></div></div>
+      <div class="bar-row"><div class="bar-name">榉木</div><div class="bar-track"><div class="bar-fill hard" style="width:90%"></div><span class="bar-val">约 1300</span></div></div>
+      <div class="bar-row"><div class="bar-name">白蜡木</div><div class="bar-track"><div class="bar-fill hard" style="width:91%"></div><span class="bar-val">约 1320</span></div></div>
+      <div class="bar-row"><div class="bar-name">白橡</div><div class="bar-track"><div class="bar-fill hard" style="width:94%"></div><span class="bar-val">约 1360</span></div></div>
+      <div class="bar-row"><div class="bar-name">重组竹</div><div class="bar-track"><div class="bar-fill hard" style="width:95%"></div><span class="bar-val">约 1380↑</span></div></div>
+      <div class="bar-row"><div class="bar-name">硬枫</div><div class="bar-track"><div class="bar-fill hard" style="width:100%"></div><span class="bar-val">约 1450</span></div></div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--green)"></i>软木区（好加工、易留痕）</span>
+        <span><i class="dot" style="background:var(--wood)"></i>中硬区（家具主力）</span>
+        <span><i class="dot" style="background:var(--indigo)"></i>硬木区（桌面、地板、砧板）</span>
+      </div>
+      <div class="chart-insight">一句洞察：1000 上下就够做绝大多数家具，1300 以上才值得为「耐造」掏钱——硬度买多了是浪费，买少了是桌面上的划痕。</div>
+      <div class="chart-foot">来源：The Wood Database 木种档案（wood-database.com）之通行 Janka 参考值，竹为重组竹行业常见标称区间。</div>
+    </div>
+
+    <h3>2.1 软木三兄弟：便宜、轻、别指望耐造</h3>
+    <div class="wood-grid">
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">桐木</div><div class="wood-en">Paulownia · 泡桐</div></div></div>
+        <div class="photo-pair"><figure><img src="img/paulownia.jpg" alt="桐木木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_paulownia.jpg" alt="泡桐的花芽（春季先花后叶，叶大如掌）" loading="lazy"><figcaption>泡桐的花芽（春季先花后叶，叶大如掌）</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 300</span><span class="stat">密度约 0.28</span><span class="stat price">¥</span><span class="stat">稳定性 好</span></div>
+        <p class="origin">产地：中国原产，华北到长江流域遍布，河南、山东为主产区；日本、北美有引种。</p><p>轻得离谱（大约是水的四分之一重），却出奇地不爱变形，日本人拿它做和服柜有几百年了。防潮防虫也不错。</p>
+        <p class="use">适合：抽屉侧板与内胆、收纳盒、轻量层板、桐木拼板置物。</p>
+        <p class="avoid">别拿它：做承重结构和桌面——指甲一掐一个印。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div class="swatch" style="background:#E3CDA8"></div><div><div class="wood-name">杉木</div><div class="wood-en">China Fir</div></div><img class="tree-photo" src="img/tree_fir.jpg" alt="杉木的针叶与球果（针叶硬挺螺旋排列）" loading="lazy"><div class="fig-cap" style="margin:0 0 10px">杉木的针叶与球果（针叶硬挺螺旋排列）</div></div>
+        <div class="stat-line"><span class="stat">Janka 约 340</span><span class="stat">密度约 0.36</span><span class="stat price">¥</span><span class="stat">稳定性 中</span></div>
+        <p class="origin">产地：中国特有速生用材树种，南方十几个省份都种，福建、江西、湖南为主产区。</p><p>国产速生材的代表，有股清香（杉木醇），便宜大碗。床板、桑拿板、吊顶说的基本都是它。节疤多，质地松。</p>
+        <p class="use">适合：床板、隐蔽衬板、阳台吊顶、不讲究的搁板。</p>
+        <p class="avoid">别拿它：做桌面和外露家具——软、起毛刺、节疤观感廉价。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">松木</div><div class="wood-en">Pine · 樟子松／辐射松</div></div></div>
+        <img class="wood-photo" src="img/pine.jpg" alt="松木板面纹理实照" loading="lazy">
+        <div class="stat-line"><span class="stat">Janka 约 400–700</span><span class="stat">密度约 0.45</span><span class="stat price">¥</span><span class="stat">稳定性 中下</span></div>
+        <p class="origin">产地：樟子松产中国东北与俄罗斯；辐射松产新西兰、智利；欧洲赤松产北欧俄罗斯。</p><p>入门 DIY 的国民木材，指接板、儿童家具、宜家低价线的主力。好锯好钉，但软、有松脂、爱变形，节疤日久会发黄凸出。</p>
+        <p class="use">适合：练手项目、儿童房家具、画框、搁架、做旧风。</p>
+        <p class="avoid">别拿它：做需要体面五年以上的桌面——凹痕和黄变躲不掉。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">橡胶木</div><div class="wood-en">Rubberwood</div></div></div>
+        <div class="photo-pair"><figure><img src="img/rubberwood.jpg" alt="橡胶木木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_rubberwood.jpg" alt="橡胶树的三出复叶" loading="lazy"><figcaption>橡胶树的三出复叶</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1000</span><span class="stat">密度约 0.60</span><span class="stat price">¥¥</span><span class="stat">稳定性 较好</span></div>
+        <p class="origin">产地：原产亚马逊，现主产泰国、马来西亚、印尼；中国海南、云南西双版纳有种植。</p><p>割完乳胶退役的橡胶树，东南亚供应量巨大，是「实木性价比」三个字的化身。颜色浅、纹理平淡，特别吃染色，很多深色「实木家具」其实是它染的。</p>
+        <p class="use">适合：桌椅框架、台面、预算有限但想要真实木的一切。</p>
+        <p class="avoid">别拿它：当橡木买——<strong>橡胶木不是橡木</strong>，差一个字差两三倍价钱，商详页爱混着写。</p>
+      </div>
+    </div>
+
+    <h3>2.2 家具主力：中坚四将</h3>
+    <div class="wood-grid">
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">榉木</div><div class="wood-en">Beech · 欧洲榉／国产榉</div></div></div>
+        <div class="photo-pair"><figure><img src="img/beech.jpg" alt="榉木木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_beech.jpg" alt="榉树的芽苞与新叶（叶缘微波）" loading="lazy"><figcaption>榉树的芽苞与新叶（叶缘微波）</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1300</span><span class="stat">密度约 0.71</span><span class="stat price">¥¥</span><span class="stat">稳定性 中下</span></div>
+        <p class="origin">产地：欧洲榉产德国、罗马尼亚一带；国产榉（榉树）产长江流域，明清家具用的就是它。</p><p>质地细腻均匀、没有大导管孔，掉渣少、手感光滑，所以是欧洲儿童玩具和椅子的标配材，蒸汽弯曲性能一流（曲木椅多用它）。缺点是干缩大，干燥不到位就变形开裂。</p>
+        <p class="use">适合：儿童玩具与家具、椅子、弯曲部件、厨具柄。</p>
+        <p class="avoid">别拿它：做大幅面整板桌面——它是十二将里最爱动的一个。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">白蜡木／水曲柳</div><div class="wood-en">Ash</div></div></div>
+        <div class="photo-pair"><figure><img src="img/ash.jpg" alt="白蜡木／水曲柳木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_ash.jpg" alt="白蜡树的羽状复叶" loading="lazy"><figcaption>白蜡树的羽状复叶</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1320</span><span class="stat">密度约 0.67</span><span class="stat price">¥¥¥</span><span class="stat">稳定性 中</span></div>
+        <p class="origin">产地：白蜡木主产北美东部与欧洲；同属的水曲柳产中国东北、俄罗斯远东，价更亲民。</p><p>纹理粗犷大气、韧性和抗冲击性突出——棒球棒、锤柄、雪橇都是它。北欧风和日式原木风桌面的头号选手。水曲柳是它的东北亲戚，同属不同种，性格接近、价格更亲民。</p>
+        <p class="use">适合：餐桌书桌面、椅子、球棒工具柄、一切要「弹性＋颜值」的地方。</p>
+        <p class="avoid">别拿它：追求细腻无孔手感的场景——它的导管纹摸得出来。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">红橡</div><div class="wood-en">Red Oak</div></div></div>
+        <div class="photo-pair"><figure><img src="img/redoak.jpg" alt="红橡木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_redoak.jpg" alt="红栎的叶——裂片尖端带刺芒，这是认它的关键" loading="lazy"><figcaption>红栎的叶——裂片尖端带刺芒，这是认它的关键</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1220</span><span class="stat">密度约 0.70</span><span class="stat price">¥¥¥</span><span class="stat">稳定性 中</span></div>
+        <p class="origin">产地：北美东部，美国中北部产量最大；国内红橡基本都是美国进口。</p><p>北美家具与地板的传统主力，纹理开放豪迈，价格比白橡友好。但它的导管是贯通的——一块红橡端头对着肥皂水吹气，另一头真能冒泡。</p>
+        <p class="use">适合：室内家具、地板、门、楼梯。</p>
+        <p class="avoid">别拿它：碰水的一切——户外、浴室、砧板。水顺着导管往里灌。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">白橡</div><div class="wood-en">White Oak</div></div></div>
+        <div class="photo-pair"><figure><img src="img/whiteoak.jpg" alt="白橡木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_whiteoak.jpg" alt="白栎新叶——裂片圆钝，与红橡最直观的区别" loading="lazy"><figcaption>白栎新叶——裂片圆钝，与红橡最直观的区别</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1360</span><span class="stat">密度约 0.75</span><span class="stat price">¥¥¥¥</span><span class="stat">稳定性 较好</span></div>
+        <p class="origin">产地：北美东部；欧洲的夏栎为近亲，法国橡木桶用的是它。</p><p>红橡的贵价兄弟，导管被侵填体（tylose，心材里长出的堵塞物）封死了，所以耐水耐腐——威士忌酒桶和船板选它不是情怀，是物理。径切面还有漂亮的虎斑纹。</p>
+        <p class="use">适合：高档桌面、地板、户外家具、一切「橡木质感＋要耐用」的场景。</p>
+        <p class="avoid">别拿它：省预算的项目——红橡能干的活别多花这份钱。</p>
+      </div>
+    </div>
+
+    <h3>2.3 高端与特长生</h3>
+    <div class="wood-grid">
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">黑胡桃</div><div class="wood-en">Black Walnut</div></div></div>
+        <div class="photo-pair"><figure><img src="img/walnut.jpg" alt="黑胡桃木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_walnut.jpg" alt="黑胡桃的羽状复叶" loading="lazy"><figcaption>黑胡桃的羽状复叶</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1010</span><span class="stat">密度约 0.61</span><span class="stat price">¥¥¥¥</span><span class="stat">稳定性 好</span></div>
+        <p class="origin">产地：北美东部特产，美国中西部（密苏里、印第安纳一带）质量最好；国内全靠进口。</p><p>北美硬木里的门面担当：巧克力色心材、稳定性顶级、加工性温顺，是「中产桌面」的默认答案。注意它其实不算特别硬——比红橡白蜡都软，桌面会留下生活痕迹。</p>
+        <p class="use">适合：桌面、电视柜、工艺品、一切想要高级感的地方。</p>
+        <p class="avoid">别拿它：当硬度买——买它买的是颜色和稳定。另外<strong>「南美胡桃木」是豆科的另一种树</strong>，不是黑胡桃，认准 Black Walnut。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">樱桃木</div><div class="wood-en">Black Cherry</div></div></div>
+        <div class="photo-pair"><figure><img src="img/cherry.jpg" alt="樱桃木木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_cherry.jpg" alt="黑樱桃的花序（总状花序，非果园樱桃）" loading="lazy"><figcaption>黑樱桃的花序（总状花序，非果园樱桃）</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 950</span><span class="stat">密度约 0.56</span><span class="stat price">¥¥¥¥</span><span class="stat">稳定性 好</span></div>
+        <p class="origin">产地：北美东部，宾夕法尼亚州产的公认最优；注意它不是结樱桃的果树品种。</p><p>刚做好时是不起眼的浅粉棕，见光氧化几个月后转成温润的红棕色，是少数「越用越好看」的木头。质地细腻，刀感顺滑，木匠普遍偏爱。</p>
+        <p class="use">适合：书柜、小家具、盒子、饰面——能陪你变老的东西。</p>
+        <p class="avoid">别拿它：新做好就摆固定物件——盖住的地方晒不到，会留下一块浅色印子。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">硬枫</div><div class="wood-en">Hard Maple · 糖枫</div></div></div>
+        <div class="photo-pair"><figure><img src="img/maple.jpg" alt="硬枫木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_maple.jpg" alt="糖枫的叶（掌状分裂，加拿大国旗那款）" loading="lazy"><figcaption>糖枫的叶（掌状分裂，加拿大国旗那款）</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1450</span><span class="stat">密度约 0.71</span><span class="stat price">¥¥¥</span><span class="stat">稳定性 中</span></div>
+        <p class="origin">产地：北美东北部与加拿大东部；枫糖与硬枫木出自同一棵树。</p><p>十二将里的硬度榜首，质地致密到近乎无孔，奶白色干净清爽。NBA 球场地板、保龄球道、吉他琴颈、专业砧板，全是它。</p>
+        <p class="use">适合：砧板（尤其端面纹砧板）、案板、乐器、高磨损台面。</p>
+        <p class="avoid">别拿它：染深色——极易染花，浅色直接用才是正解。</p>
+      </div>
+      <div class="wood-card">
+        <div class="wood-head"><div><div class="wood-name">竹（集成材／重组竹）</div><div class="wood-en">Bamboo</div></div></div>
+        <div class="photo-pair"><figure><img src="img/bamboo.jpg" alt="竹（集成材／重组竹）木材实照" loading="lazy"><figcaption>木材</figcaption></figure><figure><img src="img/tree_bamboo.jpg" alt="毛竹林（最主要的成材竹种）" loading="lazy"><figcaption>毛竹林（最主要的成材竹种）</figcaption></figure></div>
+        <div class="stat-line"><span class="stat">Janka 约 1380↑</span><span class="stat">密度约 0.7–1.0</span><span class="stat price">¥¥</span><span class="stat">稳定性 好</span></div>
+        <p class="origin">产地：中国是绝对主产国，福建、浙江、江西的毛竹林撑起全球竹产业。</p><p>严格说是草不是木，但以板材身份到处出场。竹条＋胶压成板，硬度耐磨都出色，重组竹更是能硬过多数硬木。国产供应链成熟，价格厚道。</p>
+        <p class="use">适合：砧板、桌面板（宜家很多桌面）、地板、收纳。</p>
+        <p class="avoid">别拿它：忽略胶水——竹板本质是「竹＋胶」，环保等级照人造板的标准问。</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="tag">避坑</span>
+      <p>木材市场的话术陷阱基本是「攀亲戚」：橡胶木攀橡木、南美胡桃木攀黑胡桃、「金丝檀木」之类的美名多半是普通木头起的艺名。防坑只有一招：<strong>让商家写清楚英文名或拉丁学名</strong>，Rubberwood 冒充不了 Oak。写不出来的，按最便宜的那种估价。</p>
+    </div>
+
+    <div class="chart">
+      <div class="chart-title">性价比地图：硬度 × 价格，一眼看清谁在替你省钱</div>
+      <div class="chart-sub">横轴：Janka 硬度（磅力 lbf）· 纵轴：国内市场价格档（¥ 最低 → ¥¥¥¥ 最高）</div>
+      <svg viewBox="0 0 720 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="十二种木材的硬度与价格散点图">
+        <rect x="430" y="215" width="260" height="165" fill="#F4EDE4" rx="10"/>
+        <text x="675" y="245" font-size="18" fill="#8B5E3C" font-weight="800" text-anchor="end">性价比区</text>
+        <line x1="60" y1="360" x2="690" y2="360" stroke="#E7E0D8" stroke-width="2" stroke-dasharray="6,6"/>
+        <line x1="60" y1="260" x2="690" y2="260" stroke="#E7E0D8" stroke-width="2" stroke-dasharray="6,6"/>
+        <line x1="60" y1="160" x2="690" y2="160" stroke="#E7E0D8" stroke-width="2" stroke-dasharray="6,6"/>
+        <line x1="60" y1="60" x2="690" y2="60" stroke="#E7E0D8" stroke-width="2" stroke-dasharray="6,6"/>
+        <line x1="60" y1="30" x2="60" y2="380" stroke="#57534E" stroke-width="2"/>
+        <line x1="60" y1="380" x2="690" y2="380" stroke="#57534E" stroke-width="2"/>
+        <text x="52" y="366" font-size="18" fill="#57534E" text-anchor="end">¥</text>
+        <text x="52" y="266" font-size="18" fill="#57534E" text-anchor="end">¥¥</text>
+        <text x="52" y="166" font-size="18" fill="#57534E" text-anchor="end">¥¥¥</text>
+        <text x="52" y="66" font-size="18" fill="#57534E" text-anchor="end">¥¥¥¥</text>
+        <text x="215" y="408" font-size="18" fill="#57534E" text-anchor="middle">400</text>
+        <text x="370" y="408" font-size="18" fill="#57534E" text-anchor="middle">800</text>
+        <text x="525" y="408" font-size="18" fill="#57534E" text-anchor="middle">1200</text>
+        <text x="680" y="408" font-size="18" fill="#57534E" text-anchor="middle">1600 lbf</text>
+        <circle cx="176" cy="360" r="9" fill="#4F46E5"/><text x="176" y="336" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">桐木</text>
+        <circle cx="192" cy="360" r="9" fill="#4F46E5"/><text x="196" y="392" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">杉木</text>
+        <circle cx="269" cy="360" r="9" fill="#4F46E5"/><text x="278" y="336" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">樟子松</text>
+        <circle cx="448" cy="260" r="9" fill="#16A34A"/><text x="448" y="236" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">橡胶木</text>
+        <circle cx="564" cy="260" r="9" fill="#16A34A"/><text x="552" y="236" font-size="18" fill="#292524" font-weight="700" text-anchor="end">榉木</text>
+        <circle cx="595" cy="260" r="9" fill="#16A34A"/><text x="604" y="292" font-size="18" fill="#292524" font-weight="700" text-anchor="start">重组竹</text>
+        <circle cx="533" cy="160" r="9" fill="#4F46E5"/><text x="525" y="136" font-size="18" fill="#292524" font-weight="700" text-anchor="end">红橡</text>
+        <circle cx="572" cy="160" r="9" fill="#4F46E5"/><text x="572" y="192" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">白蜡木</text>
+        <circle cx="622" cy="160" r="9" fill="#4F46E5"/><text x="630" y="136" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">硬枫</text>
+        <circle cx="428" cy="60" r="9" fill="#4F46E5"/><text x="428" y="36" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">樱桃木</text>
+        <circle cx="451" cy="60" r="9" fill="#4F46E5"/><text x="455" y="92" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">黑胡桃</text>
+        <circle cx="587" cy="60" r="9" fill="#4F46E5"/><text x="587" y="36" font-size="18" fill="#292524" font-weight="700" text-anchor="middle">白橡</text>
+      </svg>
+      <div class="legend">
+        <span><i class="dot" style="background:#16A34A"></i>绿点＝硬度过千且价格不超 ¥¥（性价比区）</span>
+        <span><i class="dot" style="background:#4F46E5"></i>蓝点＝其余木种</span>
+      </div>
+      <div class="chart-insight">一句洞察：右下角的榉木、重组竹、橡胶木是「花小钱买硬度」的答案；左上角是空的——市场上不存在又软又贵的木头，贵出来的部分买的是颜色、稳定性和稀缺，不是硬度。</div>
+      <div class="chart-foot">来源：Janka 硬度取 The Wood Database 通行参考值；价格档为 2026 年国内市场粗略相对分档，只用于横向比较。</div>
+    </div>
+
+    <h3>2.4 红木为什么不在这份图鉴里</h3>
+    <p>紫檀、黄花梨、大红酸枝这些红木类名贵硬木，这份报告刻意绕开了。三个理由：它们按公斤计价，跟「做东西」的逻辑不在一个市场；染色做假、白皮充心材的水深到老玩家都常交学费；而且做家具的性能维度上，它们并不比白橡黑胡桃强多少——溢价买的是收藏属性，不是使用属性。学做东西阶段碰它，等于用学费练手。真到想收藏那天，那是另一份报告的活。</p>
+  </section>
+
+  <!-- ================= 第三章 ================= -->
+  <section id="ch3">
+    <h2><span class="no">③</span>人造板材：现代家具的真正主角</h2>
+    <p class="lede">你家里的柜子，九成概率不是实木做的。人造板不是「劣质替代品」，它解决的是实木解决不了的问题：大幅面、不变形、便宜。这一章讲清楚每种板是怎么拼出来的，以及绕不开的甲醛问题。</p>
+
+    <h3>3.1 七种板，各自的出身</h3>
+
+    <div class="card">
+      <img class="card-photo" src="img/plywood.jpg" alt="胶合板表面纹理实照" loading="lazy">
+      <p style="margin-bottom:6px"><strong>多层实木板／胶合板（plywood）</strong>——单板旋切成大薄片，一层横一层竖地奇数层胶压。</p>
+      <div class="board-demo">
+        <div class="ply" style="background:#D7C4AE"></div>
+        <div class="ply" style="background:#C9BBA8;background-image:repeating-linear-gradient(90deg,#C9BBA8 0 6px,#BEB09E 6px 8px)"></div>
+        <div class="ply" style="background:#D7C4AE"></div>
+        <div class="ply" style="background:#C9BBA8;background-image:repeating-linear-gradient(90deg,#C9BBA8 0 6px,#BEB09E 6px 8px)"></div>
+        <div class="ply" style="background:#D7C4AE"></div>
+      </div>
+      <p class="demo-label">相邻层纹理互相垂直——你顶我的胀缩，我锁你的翘曲，这就是它稳定的全部原理。</p>
+      <p>人造板里的六边形战士：强度高、握钉力好、耐潮性在人造板里最强。柜体、床箱、需要受力的一切，闭眼选它。其中<strong>桦木多层板</strong>（俗称波罗的海桦，层多芯实、切面像千层饼）是柜体和 DIY 界公认的天花板。坑在低价货：芯层有空洞、重叠，切开才知道。</p>
+    </div>
+
+    <div class="card">
+      <img class="card-photo" src="img/fingerjoint.jpg" alt="指接集成材板面实照" loading="lazy">
+      <p style="margin-bottom:6px"><strong>指接板／集成材</strong>——实木短料开出锯齿状指榫，纵向接长、横向拼宽。</p>
+      <p>「最像实木的人造板」，表面就是真实木，能刨能磨能开榫。用胶量比颗粒板密度板少得多。松木、橡胶木指接板是 DIY 打柜子的高性价比之选。注意它保留了实木的脾气——会变形，尤其是松木指接板做的长层板。</p>
+      <p>买拼板认三个词：<strong>直拼</strong>（整条长料侧边胶拼，板面干净无接缝痕，最贵）、<strong>有节指接／明齿</strong>（板面能看到锯齿状接痕，便宜）、<strong>无节指接／暗齿</strong>（齿藏在侧面，板面较干净，居中）。做桌面这种天天看的面，多花的那点钱买直拼，值。</p>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom:6px"><strong>细木工板／大芯板（blockboard）</strong>——木条拼芯，上下贴单板。</p>
+      <p>装修现场木工打柜子的传统主力，轻、好切、握钉不错。质量全看芯：好板芯条排得密，差板芯里全是缝，隔着面板敲一敲听声就能筛掉一批。</p>
+    </div>
+
+    <div class="card">
+      <img class="card-photo" src="img/particle.jpg" alt="颗粒板横切面实照" loading="lazy">
+      <p style="margin-bottom:6px"><strong>刨花板／颗粒板（particleboard）</strong>——木材打成刨花颗粒，拌胶热压。</p>
+      <p>定制柜行业的绝对主流（爱格、克诺斯邦这些进口板都是它），原因很实际：平整度极好、便宜、适合机器开孔封边。缺点同样鲜明：<strong>怕水</strong>（泡了就发胀酥掉）、<strong>握钉力差</strong>——螺丝拧第二次就滑丝，所以定制柜全靠预埋件和三合一连接件。</p>
+    </div>
+
+    <div class="card">
+      <img class="card-photo" src="img/mdf.jpg" alt="MDF 密度板实照" loading="lazy">
+      <p style="margin-bottom:6px"><strong>密度板／中纤板（MDF）</strong>——木材磨成纤维粉末再压实。</p>
+      <p>表面细腻到没有任何纹理，是雕花门板、烤漆板、白色家具的不二之选——铣刀怎么走都不崩边。但它是所有板里最怕水的（受潮鼓包不可逆）、最重的，且纤维越细用胶越多，环保等级要盯紧。</p>
+    </div>
+
+    <div class="card">
+      <img class="card-photo" src="img/osb.jpg" alt="欧松板表面实照" loading="lazy">
+      <p style="margin-bottom:6px"><strong>欧松板（OSB，定向刨花板）</strong>——大片刨花定向交叉铺装压制。</p>
+      <p>结构强度高，国外木结构房屋的墙板屋面板就是它。主流欧松板用 MDI 胶（一种不含甲醛的聚氨酯类胶），环保口碑好。表面粗犷，工业风爱直接裸用，精致路线需要贴面。</p>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom:6px"><strong>生态板／免漆板</strong>——不是一种板，是「基材＋三聚氰胺浸渍纸饰面」的统称。</p>
+      <p>买它等于买两样东西：面上那层耐磨免漆纸，和里面的基材（可能是细木工板、颗粒板或多层板）。<strong>问价先问基材</strong>，「生态」两个字本身不含任何环保承诺。</p>
+    </div>
+
+    <h3>3.2 甲醛与环保等级：认标准，别认形容词</h3>
+    <p>人造板的甲醛来自胶——传统脲醛胶（尿素＋甲醛缩合的胶，便宜好用）会持续缓慢释放甲醛，周期以年计。国标 GB/T 39600-2021 按 1 立方米气候箱法把释放量分了三级：</p>
+    <div class="tbl-scroll">
+      <table>
+        <tr><th>等级</th><th>甲醛释放限量</th><th>怎么理解</th></tr>
+        <tr><td><strong>ENF 级</strong></td><td>≤ 0.025 mg/m³</td><td>目前最严的一档，接近木材本底释放水平，儿童房闭眼选</td></tr>
+        <tr><td><strong>E0 级</strong></td><td>≤ 0.050 mg/m³</td><td>室内家具的安心线，主流品牌板基本都到这级</td></tr>
+        <tr><td><strong>E1 级</strong></td><td>≤ 0.124 mg/m³</td><td>国标合格底线——合格，但大面积用在密闭卧室要掂量总量</td></tr>
+      </table>
+    </div>
+    <p class="tbl-note">限量值来源：GB/T 39600-2021《人造板及其制品甲醛释放量分级》。</p>
+    <p>四个实用判断：一，<strong>「无醛添加」指的是胶里不加甲醛</strong>（用 MDI 胶或豆胶），不等于零甲醛——木材天然含微量甲醛，这个说法本身是诚实的，怕的是被吹成「绝对零醛」。二，环保看的是<strong>总量</strong>：一屋子 E1 板的累积释放可能超过一柜子 E0，小空间大用量时等级要往上买。三，别信鼻子，<strong>要检测报告</strong>——甲醛无味，你闻到的刺激气味多半是别的挥发物。四，新柜子进屋后的头几个月<strong>勤开柜门通风</strong>——甲醛释放随温度湿度升高而加快，夏天尤其别闷着。</p>
+
+    <div class="callout">
+      <span class="tag">避坑</span>
+      <p>板材选购的优先级排序：<strong>先胶后板</strong>。同样的颗粒板，MDI 胶的 ENF 级和脲醛胶的 E1 级是两种商品；而「进口板」「实木颗粒」「生态」这些词都不改变胶的化学成分。「实木颗粒板」就是刨花板，加「实木」两个字不加一分钱成本。</p>
+    </div>
+  </section>
+
+  <!-- ================= 第四章 ================= -->
+  <section id="ch4">
+    <h2><span class="no">④</span>怎么选：按用途对号入座</h2>
+    <p class="lede">选材的正确姿势不是「哪种木头最好」，而是「这个东西最怕什么」。桌面怕划、砧板怕菌、层板怕弯、户外怕水——先找到主要矛盾，材料自己就浮出来了。</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <tr><th>要做什么</th><th>首选</th><th>省钱之选</th><th>避开</th><th>为什么</th></tr>
+        <tr><td><strong>餐桌／书桌桌面</strong></td><td>白蜡木、白橡、黑胡桃</td><td>橡胶木拼板、竹板</td><td>松木、颗粒板</td><td>桌面的主要矛盾是抗划＋抗水渍，硬度 1000 以上再谈颜值</td></tr>
+        <tr><td><strong>书架层板</strong></td><td>桦木多层板</td><td>松木指接板（跨度短时）</td><td>颗粒板、MDF 长跨</td><td>层板怕的是常年载书后下垂；单跨尽量控制在 <strong>80 厘米</strong>以内</td></tr>
+        <tr><td><strong>衣柜／柜体</strong></td><td>ENF 级颗粒板、多层板</td><td>E0 级颗粒板</td><td>劣质大芯板</td><td>柜体要的是平整稳定＋封边工艺，实木在这儿纯属浪费还爱变形</td></tr>
+        <tr><td><strong>造型柜门</strong></td><td>MDF（烤漆／膜压）</td><td>生态板平板门</td><td>——</td><td>要铣造型只有 MDF 不崩边；平板门什么板都行</td></tr>
+        <tr><td><strong>床架</strong></td><td>榉木、白蜡木</td><td>松木（预算款）</td><td>颗粒板承重件</td><td>床架要的是韧性和连接件握持力，响不响全看这两样</td></tr>
+        <tr><td><strong>砧板</strong></td><td>硬枫（端面纹最佳）</td><td>竹砧板、榉木</td><td>红橡、松杉、一切人造板</td><td>要致密无孔（藏不住菌）＋够硬（少掉渣）；红橡的开放导管是细菌高速路</td></tr>
+        <tr><td><strong>儿童玩具／家具</strong></td><td>榉木、硬枫</td><td>橡胶木</td><td>密度板、低等级颗粒板</td><td>啃得着摸得着的东西，要细腻无刺＋水性漆或无涂装，欧洲玩具默认榉木不是巧合</td></tr>
+        <tr><td><strong>户外／花园</strong></td><td>柚木、菠萝格</td><td>防腐樟子松</td><td>红橡、一切普通人造板</td><td>户外拼的是天然油性和耐腐，普通板材一个雨季就报废</td></tr>
+        <tr><td><strong>浴室置物</strong></td><td>柚木、竹（做好封闭）</td><td>防水多层板贴面</td><td>MDF、颗粒板</td><td>长期高湿，密度板类进去就是倒计时</td></tr>
+        <tr><td><strong>工具柄／运动器械</strong></td><td>白蜡木、山核桃木</td><td>榉木</td><td>脆性硬木</td><td>抗冲击要的是韧不是硬——球棒用白蜡不用硬枫是有讲究的</td></tr>
+        <tr><td><strong>攀岩指力板</strong></td><td>鹅掌楸木、白蜡木</td><td>榉木、多层桦木板</td><td>开放大孔材（红橡）、松木</td><td>指皮天天磨，要细腻无孔还不能太滑；主流厂牌 Beastmaker 用的就是鹅掌楸木（tulipwood）</td></tr>
+      </table>
+    </div>
+    <p class="tbl-note">「首选」按效果排，「省钱之选」按性价比排；避开列只列真会出问题的，不是鄙视链。</p>
+
+    <div class="figure" style="max-width:560px">
+      <img src="img/endgrain.jpg" alt="端面纹砧板特写实照" loading="lazy" style="width:100%;border-radius:14px;border:2px solid var(--line);display:block">
+      <div class="fig-cap">决策表里反复出现的「端面纹砧板」长这样：无数根木料立起来拼接，刀刃切进的是纤维断面——刀口能自我闭合、刀也钝得慢，所以它是砧板的天花板做法。图片来源：Wikimedia Commons · Hu Nhu · CC BY-SA 4.0。</div>
+    </div>
+
+    <h3>4.1 到了板材市场，五个动作</h3>
+    <div class="card">
+      <p style="margin-bottom:8px"><strong>一看平整</strong>：把板立起来沿对角线瞄一眼。变形有四种形态，看的方向不同——<strong>弓弯</strong>（沿长度方向拱起）、<strong>杯翘</strong>（宽度方向卷成瓦片，弦切板最常见）、<strong>扭曲</strong>（四角不在一个平面，最难救）、<strong>侧弯</strong>（板边缘弯成弧）。扭曲的直接放弃，轻微弓弯尚可压平。多层板另看侧面芯层，层层实心不重叠的是好货。</p>
+      <p style="margin-bottom:8px"><strong>二问含水率</strong>：实木板问一句「窑干到多少」，回答 <strong>8% 到 12%</strong> 区间的靠谱；支支吾吾说「自然干」的，做家具慎买。</p>
+      <p style="margin-bottom:8px"><strong>三查端头和节疤</strong>：实木开裂多从端头开始，端头有细裂的板，裂纹只会往里走。节疤分两种——<strong>活节</strong>（与周围木质长在一起、色泽相近）无伤大雅甚至算风格，<strong>死节</strong>（四周有黑圈、界限分明）日后会松动脱落，留下一个洞。</p>
+      <p style="margin-bottom:8px"><strong>四认名字</strong>：让写英文名或拉丁名进单据，「胡桃色」和「胡桃木」是两个世界。</p>
+      <p style="margin-bottom:0"><strong>五要报告</strong>：人造板索要甲醛检测报告，对着 GB/T 39600 的等级买，别对着导购的形容词买。</p>
+    </div>
+
+    <div class="warp-grid">
+      <div class="warp-item">
+        <svg viewBox="0 0 130 64" xmlns="http://www.w3.org/2000/svg" aria-label="弓弯示意">
+          <path d="M12,44 Q65,18 118,44" stroke="#8B5E3C" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <path d="M12,58 L118,58" stroke="#E7E0D8" stroke-width="3" stroke-dasharray="5,5"/>
+        </svg>
+        <div class="warp-name">弓弯</div>
+        <div class="warp-note">侧面看 · 沿长度拱起<br>轻微可压平</div>
+      </div>
+      <div class="warp-item">
+        <svg viewBox="0 0 130 64" xmlns="http://www.w3.org/2000/svg" aria-label="杯翘示意">
+          <path d="M20,26 Q65,52 110,26" stroke="#8B5E3C" stroke-width="9" fill="none" stroke-linecap="round"/>
+          <path d="M12,58 L118,58" stroke="#E7E0D8" stroke-width="3" stroke-dasharray="5,5"/>
+        </svg>
+        <div class="warp-name">杯翘</div>
+        <div class="warp-note">端头看 · 卷成瓦片<br>弦切板高发</div>
+      </div>
+      <div class="warp-item">
+        <svg viewBox="0 0 130 64" xmlns="http://www.w3.org/2000/svg" aria-label="扭曲示意">
+          <path d="M14,48 C40,44 55,20 82,18 L116,14 C95,24 78,50 46,52 Z" fill="#BFA88C" stroke="#8B5E3C" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <div class="warp-name">扭曲</div>
+        <div class="warp-note">四角不共面<br><strong>直接放弃</strong></div>
+      </div>
+      <div class="warp-item">
+        <svg viewBox="0 0 130 64" xmlns="http://www.w3.org/2000/svg" aria-label="侧弯示意">
+          <path d="M14,40 Q65,22 116,40" stroke="#8B5E3C" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M12,58 L118,58" stroke="#E7E0D8" stroke-width="3" stroke-dasharray="5,5"/>
+        </svg>
+        <div class="warp-name">侧弯</div>
+        <div class="warp-note">俯视看 · 板边成弧<br>短料可裁掉</div>
+      </div>
+    </div>
+    <p class="tbl-note">四种翘曲的观察角度不同：弓弯看侧面、杯翘看端头、侧弯看板边。示意图自绘，来源：制材缺陷通行分类。</p>
+
+    <h3>4.2 规格与计价：开口不露怯的几个数</h3>
+    <p>人造板的标准幅面是 <strong>1220 × 2440 毫米</strong>（行话「4 尺 × 8 尺」，一张刚好裁一个双人床头柜柜体）。常用厚度里记住三个就够：<strong>18 毫米</strong>是柜体和层板的主力，<strong>9 毫米</strong>做背板和抽屉底，<strong>3 毫米</strong>做柜背的经济款。人造板按<strong>张</strong>计价，实木大料按<strong>材积</strong>（立方米）计价，网购实木拼板则按你报的长宽厚定制计价——同一种木头三种问法，报价单位对不上就容易被绕晕。</p>
+    <p>还有一个新手最该知道的服务：板材店和网店基本都提供<strong>代裁 + 封边</strong>——你出一张切割清单（每块板的长宽和数量），他们裁好封好边发给你。这意味着没有台锯也能打柜子，你的活只剩打孔和组装。第一个柜子项目，强烈建议这么起步。</p>
+
+    <h3>4.3 预算观：钱花在露脸和上手的地方</h3>
+    <p>一个够用的分配逻辑：<strong>手天天摸的、眼天天看的，用好实木；藏在里面的、靠墙贴地的，用对等级的人造板。</strong>一张桌子，白蜡木桌面配橡胶木或钢制腿，成本砍三分之一，体验几乎不损失。全黑胡桃打一屋家具不是审美，是预算的错配——同样的钱，不如把桌面从红橡升到白橡，再给儿童房的板材从 E0 升到 ENF。</p>
+  </section>
+
+  <!-- ================= 第五章 ================= -->
+  <section id="ch5">
+    <h2><span class="no">⑤</span>怎么用：让木头顺着性子干活</h2>
+    <p class="lede">第一章说过，木头一直在动。用木头的全部技术，说穿了就一句话：顺着它的纹理和胀缩来，别跟物理较劲。</p>
+
+    <h3>5.1 先让它适应你家</h3>
+    <p>板材买回来别急着开工。实木板在你家室内<strong>平放架空静置一到两周</strong>，让含水率跟环境打平——木材市场的仓库和你家客厅是两种气候，跳过这一步，做完的东西头一个换季就给你演变形。人造板可以缩短到两三天。</p>
+
+    <h3>5.2 认纹理：顺纹、逆纹、端面</h3>
+    <p>沿着纤维方向刨削叫顺纹，刨出来光滑；顶着纤维方向走叫逆纹，会撕出毛茬——手刨或修边机走一刀就知道方向对不对，起毛就掉头。<strong>端面</strong>（木板两端露出纤维断口的面）是另一回事：它吸水的速度是侧面的十几倍，也最容易开裂，所以老木匠给端面上蜡封油从不偷懒。锯切端面时垫一块废木再锯，出口不崩茬。</p>
+
+    <h3>5.3 给胀缩留活路</h3>
+    <p>三条落地规则，能避开绝大多数开裂：</p>
+    <div class="card">
+      <p style="margin-bottom:8px"><strong>宽面别锁死</strong>：实木桌面固定到桌架，用能滑动的伸缩件（8 字扣、Z 形扣），别四角打死螺丝——要允许桌面宽度方向自由伸缩几毫米。</p>
+      <p style="margin-bottom:8px"><strong>横竖别硬粘</strong>：长距离把两块纹理方向垂直的实木胶死（比如给桌面横着粘一根挡条），等于让两套胀缩打架，输的是木头，裂给你看。</p>
+      <p style="margin-bottom:0"><strong>面板要浮装</strong>：柜门里的实木芯板要插在框槽里悬浮，不涂胶——传统攒边打槽装板的智慧全在这，芯板能在槽里自己胀缩。</p>
+    </div>
+
+    <h3>5.4 连接：胶、螺丝、榫，各管一段</h3>
+    <p>木工胶（白胶／黄胶这类聚醋酸乙烯酯胶）有个反直觉的事实：<strong>顺纹面对顺纹面的胶合，强度超过木材本身</strong>——拉力测试时裂的是木头不是胶缝。但端面吸胶严重，端面对接的胶合强度很弱，所以端面连接必须借助螺丝、木销或榫头。</p>
+    <p>螺丝进硬木<strong>必须预钻孔</strong>（钻头直径约等于螺丝去掉螺纹的芯径），省这一步的代价是板子当场劈裂。连接方式的进阶阶梯大致是：螺丝＋胶 → 木销／饼干榫 → 传统榫卯，强度和工时同步上升，家用项目做到第二级已经很体面。</p>
+
+    <h3>5.5 表面处理：按「怕什么」选涂层</h3>
+    <div class="tbl-scroll">
+      <table>
+        <tr><th>涂层</th><th>手感与观感</th><th>防护力</th><th>适合</th><th>代价</th></tr>
+        <tr><td><strong>木蜡油</strong></td><td>开放毛孔、原木手感最好</td><td>弱（防泼溅不防泡）</td><td>桌面、家具、想摸到木头的一切</td><td>半年到一年要补涂，好在补起来极简单，局部打磨直接涂</td></tr>
+        <tr><td><strong>水性木器漆</strong></td><td>薄膜、低气味</td><td>中</td><td>儿童家具、室内门窗套</td><td>耐磨耐热一般</td></tr>
+        <tr><td><strong>聚氨酯清漆</strong></td><td>成膜厚、亮或哑可选</td><td>强（防水耐磨）</td><td>餐桌面、吧台、高频水渍区</td><td>膜破了没法局部补，得整面重做</td></tr>
+        <tr><td><strong>食品级矿物油＋蜂蜡</strong></td><td>无膜、可入口接触</td><td>弱</td><td>砧板、餐具、儿童啃咬件</td><td>一两个月一补，好在成本几块钱</td></tr>
+        <tr><td><strong>不处理</strong></td><td>最原始</td><td>无</td><td>隐蔽件、试验品</td><td>水渍手汗直接吃进木头，基本不可逆</td></tr>
+      </table>
+    </div>
+    <p class="tbl-note">通用手序：180 目 → 240 目砂纸打磨，除尘，薄涂多遍优于厚涂一遍；砧板绝不用普通清漆——膜会被刀切碎混进食物。</p>
+
+    <h3>5.6 日常伺候</h3>
+    <p>实木家具的养护只有三件事：<strong>远离剧变</strong>（别贴着暖气片和空调出风口放）、<strong>挡住紫外线</strong>（阳光直晒半年，樱桃木深一号、胡桃木褪一号）、<strong>热和湿垫一下</strong>（热锅垫隔热垫、水杯垫杯垫）。做到这三条，一张好桌面陪十年起步。</p>
+
+    <div class="callout">
+      <span class="tag">避坑</span>
+      <p>新手最常见的翻车不是手艺，是顺序：先买了木头才想做什么。正确顺序永远是<strong>先定物件 → 找到它最怕什么 → 按第四章的表选材 → 再按这一章的规矩加工</strong>。木头是耐心的材料，它只惩罚跳步的人。</p>
+    </div>
+  </section>
+
+  <!-- ================= 来源与局限 ================= -->
+  <section id="src">
+    <h2><span class="no">＊</span>来源与局限</h2>
+    <div class="card">
+      <p><strong>数据来源</strong>：各木种 Janka 硬度与密度取自 The Wood Database（wood-database.com）的通行参考值；甲醛限量取自 GB/T 39600-2021；干缩率区间为木材科学教科书的常见范围。这些属于已查证的稳定知识。</p>
+      <p><strong>标注为约值的部分</strong>：杉木、桐木、重组竹的硬度因产地与工艺差异较大，取的是行业常见标称区间；价格档（¥ 到 ¥¥¥¥）是 2026 年国内市场的粗略相对分档，只用于横向比价，不构成报价依据。</p>
+      <p><strong>我的局限</strong>：这份报告没有做实测，全部来自文献与通行参考值的整理；同一木种不同批次的脾气差异，只有上手刨过才真正知道。等你开始做第一个东西，拿实物反馈回来修订它——这份报告的下一版应该由锯末参与撰写。</p>
+      <p style="margin-bottom:0"><strong>图片来源</strong>：全部实物照片取自 Wikimedia Commons（维基共享资源，图片带自由授权可复用），存于本项目 img/ 目录。逐张署名：白蜡木与黑胡桃标本（Roger Culos·CC BY-SA）、桐木（Agnieszka Kwiecień, Nova·CC BY-SA 4.0）、樱桃木（Böhringer·CC BY-SA 2.5）、硬枫（Stephen Ondich·CC BY-SA 3.0）、竹砧板（Julian Herzog·CC BY 4.0）、橡胶木（DXLINH·CC BY-SA 3.0）、端面砧板（Hu Nhu·CC BY-SA 4.0）、指接板（Pk0001·CC BY-SA 4.0）、胶合板（Riverswim16·CC0）、颗粒板（MatthiasKabel·CC BY-SA 3.0）、MDF（Vaderluck·CC BY-SA 3.0）、欧松板（Lionel Allorge·CC BY-SA 3.0）、松木（Kiefer Holz·CC BY-SA 3.0）、榉木（Fagus sylvatica 木质部研究图·CC BY-SA 4.0）、红橡横切面（公有领域）、白橡（Famartin·CC BY-SA 4.0）。杉木未找到质量合格的自由授权木材实照，以色块代替。<strong>树木实照</strong>取自 Commons 各物种分类目录：桐木（Hladac·CC BY-SA 4.0）、杉木（Franz Xaver·CC BY-SA 3.0）、橡胶木（OTIS Archive·CC BY 2.0）、榉木（Marianne Cornelissen-Kuyt·CC BY-SA 4.0）、白蜡木与黑胡桃与樱桃木（AnRo0002·CC0）、红橡（Hladac·CC BY-SA 4.0）、白橡（Famartin·CC BY-SA 3.0）、硬枫（Gilles Ayotte·CC BY-SA 4.0）、毛竹（Jules Verne Times·CC BY-SA 4.0）；松木的树照同样未找到合格图，该卡只有木材照。示意图（树干截面、三向胀缩、弦切径切、翘曲四形态、两张数据图）均为本报告自绘。</p>
+    </div>
+    <div class="footline">
+      报告库 · 木材知识 v0.2 · 2026-07-22 · 写作与视觉遵循 _shared/voice 宪法 · 如需检索原始数据，从 The Wood Database 与 GB/T 39600-2021 入手
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>下一步建议：想动手时，从「松木指接板＋螺丝胶＋木蜡油」的小件开始（一个书立、一块搁板），一次项目就能把第五章全部走一遍。</p>
+  </div>
+</footer>
+</body>
+</html>

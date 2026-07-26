@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{width:1600px;height:2400px;}
+  body{
+    background:#5f7320;
+    font-family:"PingFang SC","Hiragino Sans GB","Noto Sans SC","Heiti SC",sans-serif;
+    position:relative;overflow:hidden;
+  }
+
+  /* 外描边框（家族语言：内嵌一圈细框） */
+  .frame{position:absolute;top:44px;left:44px;right:44px;bottom:44px;
+         border:7px solid #e9e4d4;}
+  .frame2{position:absolute;top:60px;left:60px;right:60px;bottom:60px;
+          border:2px solid rgba(233,228,212,0.45);}
+
+  /* 标题区：米白底块，超粗黑体压满 */
+  .head{position:absolute;top:60px;left:60px;right:60px;height:760px;
+        background:#efeade;display:flex;flex-direction:column;
+        justify-content:center;padding:0 62px;}
+  .title{font-size:250px;font-weight:900;color:#141414;line-height:1.0;
+         letter-spacing:0.005em;white-space:nowrap;}
+
+  /* 印章 */
+  .seal{position:absolute;top:880px;right:150px;width:104px;height:150px;
+        background:#9d3630;border:5px solid #efeade;}
+  .seal i{position:absolute;inset:16px;border:3px solid rgba(239,234,222,0.85);
+          font-style:normal;color:#efeade;font-size:56px;font-weight:800;
+          display:flex;align-items:center;justify-content:center;letter-spacing:0;}
+
+  /* 插画：山脊剖面 + 周期化柱群（丝网印双色） */
+  .art{position:absolute;top:900px;left:60px;right:60px;height:1000px;overflow:hidden;}
+
+  /* 底部信息条 */
+  .foot{position:absolute;bottom:60px;left:60px;right:60px;height:440px;
+        background:#efeade;padding:56px 62px 0;}
+  .sub{font-size:62px;font-weight:800;color:#141414;line-height:1.25;letter-spacing:0.01em;}
+  .sub2{margin-top:22px;font-size:38px;font-weight:400;color:#4a4a44;line-height:1.5;}
+  .rule{margin-top:34px;width:150px;height:11px;background:#5f7320;}
+  .byline{position:absolute;bottom:44px;left:62px;font-size:44px;font-weight:700;color:#141414;}
+  .byline span{color:#8a877c;font-weight:400;font-size:34px;margin-left:12px;}
+  .en{position:absolute;bottom:52px;right:62px;font-size:26px;letter-spacing:0.2em;
+      color:#9a978b;font-family:"JetBrains Mono","SF Mono",monospace;}
+</style></head>
+<body>
+
+<div class="head">
+  <div class="title">越野跑</div>
+  <div class="title">进阶训练</div>
+</div>
+
+<div class="seal"><i>训</i></div>
+
+<div class="art">
+  <svg width="1480" height="1000" viewBox="0 0 1480 1000" xmlns="http://www.w3.org/2000/svg">
+    <!-- 远山（深色剪影） -->
+    <path d="M0 560 L190 360 L330 470 L520 250 L700 430 L860 300 L1030 470 L1200 330 L1340 450 L1480 380 L1480 1000 L0 1000 Z"
+          fill="#3d4c14"/>
+    <!-- 近山（更深） -->
+    <path d="M0 720 L230 560 L430 690 L620 520 L820 670 L1010 560 L1230 700 L1480 590 L1480 1000 L0 1000 Z"
+          fill="#2b360e"/>
+
+    <!-- 周期化柱群：书的核心意象（剂量 · 时机 · 进阶） -->
+    <g>
+      <rect x="248"  y="700" width="86" height="180" fill="#93b327"/>
+      <rect x="378"  y="640" width="86" height="240" fill="#93b327"/>
+      <rect x="508"  y="586" width="86" height="294" fill="#93b327"/>
+      <rect x="638"  y="500" width="86" height="380" fill="#efeade"/>
+      <rect x="768"  y="726" width="86" height="154" fill="#93b327"/>
+      <rect x="898"  y="612" width="86" height="268" fill="#93b327"/>
+      <rect x="1028" y="452" width="86" height="428" fill="#efeade"/>
+      <rect x="1158" y="742" width="86" height="138" fill="#93b327"/>
+    </g>
+    <!-- 峰值标记点 -->
+    <circle cx="681"  cy="452" r="19" fill="#efeade"/>
+    <circle cx="1071" cy="404" r="19" fill="#efeade"/>
+    <!-- 基线 -->
+    <rect x="210" y="880" width="1070" height="8" fill="#efeade"/>
+  </svg>
+</div>
+
+<div class="foot">
+  <div class="sub">从执行课表，到自我教练</div>
+  <div class="sub2">写给严肃进阶跑者的训练方法学 · 剂量 · 时机 · 进阶</div>
+  <div class="rule"></div>
+  <div class="byline">白笑 <span>著</span></div>
+  <div class="en">TRAIL TRAINING · ADVANCED</div>
+</div>
+
+<div class="frame"></div>
+<div class="frame2"></div>
+</body></html>
